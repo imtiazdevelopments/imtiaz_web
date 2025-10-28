@@ -8,24 +8,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   useEffect(() => {
-ScrollTrigger.create({
-  trigger: contentRef.current,
-  start: "bottom top",
-  end: "bottom top",
-  scrub: true,
-  onUpdate: (self) => {
-    // when overlay is more than 50% visible, switch to dark header
-    if (self.progress > 0.3) {
-      window.dispatchEvent(new CustomEvent("headerThemeChange", { detail: "dark" }));
-    } else {
-      window.dispatchEvent(new CustomEvent("headerThemeChange", { detail: "light" }));
-    }
-  },
-});
-
-
+    ScrollTrigger.create({
+      trigger: contentRef.current,
+      start: "bottom top",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: (self) => {
+        // when overlay is more than 50% visible, switch to dark header
+        if (self.progress > 0.3) {
+          window.dispatchEvent(
+            new CustomEvent("headerThemeChange", { detail: "dark" })
+          );
+        } else {
+          window.dispatchEvent(
+            new CustomEvent("headerThemeChange", { detail: "light" })
+          );
+        }
+      },
+    });
   }, []);
-  
+
   const sectionRef = useRef(null);
   const logoRef = useRef(null);
   const overlayRef = useRef(null);
@@ -34,7 +36,7 @@ ScrollTrigger.create({
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Set initial states
-      gsap.set(logoRef.current, { opacity: 0, scale: 1, y:1200 });
+      gsap.set(logoRef.current, { opacity: 0, scale: 1, y: 1200 });
       gsap.set(overlayRef.current, { opacity: 0 });
       gsap.set(contentRef.current, { opacity: 0, y: 50 });
 
@@ -56,7 +58,7 @@ ScrollTrigger.create({
         scale: 0.7,
         duration: 1,
         ease: "power3.out",
-      })
+      });
       tl.to(logoRef.current, {
         opacity: 0.7,
         y: 0,
@@ -64,19 +66,19 @@ ScrollTrigger.create({
         duration: 1,
         ease: "power3.out",
       })
-      .to(logoRef.current, {
-        scale: 1.5,
-        opacity: 0.7,
-        duration: 1,
-        ease: "power3.out",
-      })
-      .to(logoRef.current, {
-        scale: 8,
-        opacity: 0,
-        duration: 2.5,
-         y: -1200,
-        ease: "power3.out",
-      })
+        .to(logoRef.current, {
+          scale: 1.5,
+          opacity: 0.7,
+          duration: 1,
+          ease: "power3.out",
+        })
+        .to(logoRef.current, {
+          scale: 6,
+          opacity: 0,
+          duration: 1.3,
+          y: -1200,
+          ease: "power3.out",
+        })
         .to(
           overlayRef.current,
           {
@@ -84,7 +86,7 @@ ScrollTrigger.create({
             duration: 1.2,
             ease: "power2.out",
           },
-          "-=2.2"
+          "-=1.2"
         )
         .to(
           contentRef.current,
@@ -97,8 +99,6 @@ ScrollTrigger.create({
           "-=0.8"
         );
     }, sectionRef);
-
-
 
     return () => ctx.revert();
   }, []);
