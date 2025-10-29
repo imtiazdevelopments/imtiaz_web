@@ -13,7 +13,7 @@ const HeroTwo = () => {
       start: "bottom center",
       end: "bottom 300",
       scrub: true,
-      markers: true,
+      markers: false,
       onUpdate: (self) => {
         // when overlay is more than 50% visible, switch to dark header
         if (self.progress > 0.3) {
@@ -49,7 +49,7 @@ const HeroTwo = () => {
           end: "bottom center",
           scrub: 1,
           pin: true,
-          markers: true,
+          markers: false,
         },
       });
 
