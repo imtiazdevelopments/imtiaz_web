@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const HeroTwo = () => {
   useEffect(() => {
     ScrollTrigger.create({
       trigger: contentRef.current,
@@ -52,33 +52,21 @@ const Hero = () => {
       });
 
       // Sequence
-      tl.to(logoRef.current, {
-        opacity: 0.7,
-        y: 200,
-        scale: 0.7,
-        duration: 1,
+      tl .fromTo(
+            logoRef.current,
+            { opacity: 0.4,
+        y: 800,
+      scale:0.3 },
+            {
+        y: -300,
+           scale: 2,
+        duration: 2.5,
+         opacity: 0.6,
         ease: "power3.out",
-      });
-      tl.to(logoRef.current, {
-        opacity: 0.7,
-        y: 0,
-        scale: 1,
-        duration: 1,
-        ease: "power3.out",
-      })
-        .to(logoRef.current, {
-          scale: 1.5,
-          opacity: 0.7,
-          duration: 1,
-          ease: "power3.out",
-        })
-        .to(logoRef.current, {
-          scale: 6,
-          opacity: 0,
-          duration: 1.3,
-          y: -1200,
-          ease: "power3.out",
-        })
+            }
+          )
+   
+       
         .to(
           overlayRef.current,
           {
@@ -160,4 +148,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroTwo;
