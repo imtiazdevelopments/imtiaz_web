@@ -56,20 +56,20 @@ const Hero = () => {
         opacity: 0.7,
         y: 200,
         scale: 0.7,
-        duration: 1,
+        duration: 0.8,
         ease: "power3.out",
       });
       tl.to(logoRef.current, {
         opacity: 0.7,
         y: 0,
         scale: 1,
-        duration: 1,
+        duration: 0.8,
         ease: "power3.out",
       })
         .to(logoRef.current, {
           scale: 1.5,
           opacity: 0.7,
-          duration: 1,
+          duration: 0.8,
           ease: "power3.out",
         })
         .to(logoRef.current, {
