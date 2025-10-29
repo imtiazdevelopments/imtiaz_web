@@ -10,9 +10,10 @@ const HeroTwo = () => {
   useEffect(() => {
     ScrollTrigger.create({
       trigger: contentRef.current,
-      start: "bottom top",
-      end: "bottom top",
+      start: "bottom center",
+      end: "bottom 300",
       scrub: true,
+      markers: true,
       onUpdate: (self) => {
         // when overlay is more than 50% visible, switch to dark header
         if (self.progress > 0.3) {
@@ -45,9 +46,10 @@ const HeroTwo = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "bottom top",
+          end: "bottom center",
           scrub: 1,
           pin: true,
+          markers: true,
         },
       });
 
@@ -60,7 +62,7 @@ const HeroTwo = () => {
             {
         y: -300,
            scale: 2,
-        duration: 2.5,
+        duration: 1.5,
          opacity: 0.6,
         ease: "power3.out",
             }
@@ -71,7 +73,7 @@ const HeroTwo = () => {
           overlayRef.current,
           {
             opacity: 1,
-            duration: 1.2,
+            duration: 0.7,
             ease: "power2.out",
           },
           "-=1.2"
@@ -81,7 +83,7 @@ const HeroTwo = () => {
           {
             opacity: 1,
             y: 0,
-            duration: 1.2,
+            duration: 0.5,
             ease: "power3.out",
           },
           "-=0.8"
