@@ -56,6 +56,17 @@
 }
 
 
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1360px;
+  --breakpoint-3xl: 1540px;
+}
+
+
 /* ---------- Variables ---------- */
 :root {
   --background: #ffffff;
@@ -188,11 +199,70 @@ body {
 .properties-pagination .swiper-pagination-bullet-active {
   width: 40px;
 }
+
 .lgoicon.sectw {
-     position:absolute;
-    left:50%;
-    top:100%;
-    transform:translate(-50%,0) scale(0.1);
-    opacity:0.1;
-    z-index:3;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0) scale(0.1);
+  opacity: 0.1;
+  z-index: 3;
+}
+
+
+/* ---------------------------------------
+   HERO SLIDER – BUILT-IN PAGINATION STYLES
+-----------------------------------------*/
+.hero-pro-slider .swiper-pagination {
+  bottom: 238px !important;
+}
+
+
+.hero-pro-slider .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  opacity: 1 !important;
+}
+
+.hero-pro-slider .swiper-pagination-bullet-active {
+  background: #7A253A !important;
+  border: 1px solid #7A253A !important;
+}
+
+.swiper-fade .swiper-slide {
+  opacity: 0 !important;
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.swiper-fade .swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.btn-fill-blur {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-fill-blur::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.btn-fill-blur:hover::before {
+  transform: translateX(0);
+}
+
+.btn-fill-blur>span {
+  position: relative;
+  z-index: 10;
 }
