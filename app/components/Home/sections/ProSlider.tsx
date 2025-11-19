@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import type { Swiper as SwiperType } from "swiper";
 
 import { moveUp, moveUpExit } from "../../motionVariants";
 
@@ -39,7 +40,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
 
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   // detect arrow click → trigger exit animation early
   useEffect(() => {
@@ -72,8 +73,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         pagination={{ clickable: true }}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade"
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        onAutoplayTimeLeft={(swiper, timeLeft) => {
+        onSlideChange={(swiper: SwiperType) => setActiveIndex(swiper.realIndex)}
+        onAutoplayTimeLeft={(_, timeLeft) => {
           // Trigger exit animation slightly before slide fades
           if (timeLeft < 150 && !isExiting) {
             setIsExiting(true);
