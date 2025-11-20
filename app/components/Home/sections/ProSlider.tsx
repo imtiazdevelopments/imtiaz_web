@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import type { Swiper as SwiperType } from "swiper";
 
-import { moveUp, moveUpExit } from "../../motionVariants";
+import { moveUpExit } from "../../motionVariants";
 
 export interface feats {
   icon: string;
