@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
+// import Header from "./components/common/Header";
+import Header2 from "./components/common/Header2";
+// import Footer from "./components/common/Footer";
 import SmoothScroll from "./components/common/SmoothScroll";
 
 export const metadata: Metadata = {
@@ -18,10 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-              <SmoothScroll/>
-        <Header />
+        <SmoothScroll />
+        {/* <Header /> */}
+        <Header2 />
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
