@@ -131,16 +131,12 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         {slide.title}
                       </motion.h1>
 
-                      <motion.span
-                        variants={moveUp(0.4)}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true }}
-                        className="text-white font-[avenir] font-[800] uppercase
+                      <span
+                        className="text-white font-[avenirHeavy] font-[800] uppercase
                         text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
                       >
                         {RightLabel}
-                      </motion.span>
+                      </span>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -153,7 +149,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       initial="hidden"
                       animate="show"
                       exit="exit"
-                      className="flex gap-4 mt-[20px] 2xl:mt-[30px] 3xl:mt-[40px]"
+                      className="flex gap-4 mt-[20px] 2xl:mt-[30px] 3xl:mt-[40px] font-[avenirRoman]"
                     >
                       <motion.a
                         variants={{
@@ -254,7 +250,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               height={20}
                               alt={f.label}
                             />
-                            <span className="text-white text-[14px] md:text-[17px] font-[avenir] uppercase">
+                            <span className="text-white text-[14px] md:text-[17px] font-[avenirRoman] uppercase">
                               {f.label}
                             </span>
                           </motion.div>

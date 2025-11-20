@@ -55,6 +55,42 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "AvenirRoman";
+  src: url("/fonts/AvenirLTStd-Roman.woff2") format("woff2"),
+    url("/fonts/AvenirLTStd-Roman.woff") format("woff");
+  font-weight: 400;
+  font-style: unset;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirHeavy";
+  src: url("/fonts/Avenir_Heavy.woff2") format("woff2"),
+    url("/fonts/Avenir_Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: unset;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirBook";
+  src: url("/fonts/Avenir_Book.woff2") format("woff2"),
+    url("/fonts/Avenir_Book.woff") format("woff");
+  font-weight: 200;
+  font-style: unset;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirLight";
+  src: url("/fonts/Avenir_Light.woff2") format("woff2"),
+    url("/fonts/Avenir_Light.woff") format("woff");
+  font-weight: 200;
+  font-style: unset;
+  font-display: swap;
+}
+
 
 @theme {
   --breakpoint-*: initial;
@@ -79,6 +115,10 @@
   --color-foreground: var(--foreground);
   --font-sans: "Avenir", system-ui, sans-serif;
   --font-heading: "Optima", sans-serif;
+  --font-avenirRoman: "AvenirRoman", sans-serif;
+  --font-avenirHeavy: "AvenirHeavy", sans-serif;
+  --font-avenirBook: "AvenirBook", sans-serif;
+  --font-avenirLight: "AvenirLight", sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
   --breakpoint-3xl: 113.125rem;

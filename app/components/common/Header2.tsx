@@ -23,7 +23,7 @@ const Header2: React.FC = () => {
         <header className="overflow-hidden 3xl:h-[80px] w-full">
           <div className="bg-white/10 backdrop-blur-[30px] w-full flex items-center justify-between rounded-[150px] py-[15px] !px-4 lg:!px-[25px] 2xl:!px-[31px]">
             {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
-            <div className="hidden lg:flex gap-[32px] text-white uppercase text-[16px] font-[400] font-[avenir] w-[33.33%]">
+            <div className="hidden lg:flex gap-[32px] text-white uppercase text-[16px] font-[avenirRoman] w-[33.33%]">
               {menuItems.map((item) => (
                 <Link key={item.name} href={item.href}>
                   {item.name}
