@@ -2,23 +2,19 @@
 
 import Link from "next/link";
 
-interface AboutSectionProps {
+interface DubaiIslandProps {
   data: {
     tag: string;
     title: string;
     subtitle: string;
     description: string;
-    button: {
-      link: string;
-      label: string;
-    };
   };
 }
 
-const AboutSection = ({ data }: AboutSectionProps) => {
+const DubaiIsland = ({ data }: DubaiIslandProps) => {
   return (
     <section
-      className={`bg-primary py-24 md:py-32 2xl:py-[170px] 3xl:py-[207px] overflow-hidden flex items-center justify-center`}
+      className={`bg-primary py-24 md:py-32 2xl:py-[190px] 3xl:py-[258px] xl:h-[100vh] overflow-hidden `}
     >
       <div className="container mx-auto text-center px-4">
         <p className="text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-16 2xl:mb-[120px] uppercase">
@@ -36,16 +32,9 @@ const AboutSection = ({ data }: AboutSectionProps) => {
         <p className="text-[#FFD8E1] text-[19px] font-[avenirRoman] font-[400] leading-[1.3] mb-[50px] max-w-[75ch] mx-auto  text-center">
           {data.description}
         </p>
-
-        <Link
-          href={data.button.link}
-          className="inline-block px-9 py-[19.5px] rounded-full border border-white text-white text-[17px] leading-[1] font-[avenirRoman] font-[400]"
-        >
-          {data.button.label}
-        </Link>
       </div>
     </section>
   );
 };
 
-export default AboutSection;
+export default DubaiIsland;

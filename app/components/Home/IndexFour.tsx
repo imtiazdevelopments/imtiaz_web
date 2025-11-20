@@ -1,8 +1,16 @@
 import AboutJourney from "./sections/AboutJourney";
-import { aboutSectionJourney } from "../Home/data";
+import {
+  aboutSectionJourney,
+  DubaiIslandData,
+  ConstructionProgressData,
+  imtiazPropertiesData,
+} from "../Home/data";
 import ProSlider from "./sections/ProSlider";
 import { heroSlides } from "../Home/data";
 import HeroFour from "./sections/HeroFour";
+import DubaiIsland from "./sections/DubaiIsland";
+import ImtiazProperties from "./sections/ImtiazPropsSlider";
+import ConstructionProgress2 from "./sections/ConstructionProgress2";
 
 export default function Home() {
   return (
@@ -14,6 +22,9 @@ export default function Home() {
         slides={heroSlides.slice().reverse()}
         RightLabel="Coming Soon"
       />
+      <DubaiIsland data={DubaiIslandData} />
+      <ImtiazProperties data={imtiazPropertiesData} />
+      <ConstructionProgress2 data={ConstructionProgressData} />
     </>
   );
 }
