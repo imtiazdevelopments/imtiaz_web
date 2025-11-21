@@ -5,8 +5,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import ProSlider from "../components/Home/sections/ProSlider";
-import { heroSlides, aboutSectionJourney } from "../components/Home/data";
+import { heroSlides, aboutSectionJourney,   DubaiIslandData,
+  ConstructionProgressData,
+  imtiazPropertiesData,
+  pressSpotlightData, } from "../components/Home/data";
 import AbtJour from "../components/Home/sections/AbtJour";
+
+import DubaiIsland from "../components/Home/sections/DubaiIsland";
+import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
+import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
+import PressSpotlight from "../components/Home/sections/PressSpotlight";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,36 +98,36 @@ export default function Home() {
       });
 
       tlSec1
-        .to(bar, { height: '20px' })
-        .to(bar, { width: "100%" })
-        .to(bar, { height: "100vh" })
-        .to(img1, { scale: 1, duration: 0.8 }, "-=0.2")
-        .to(img2, { scale: 1, duration: 0.8 }, "-=0.3")
-        .to(img3, { scale: 1, duration: 0.8 }, "-=0.3")
+        .to(bar, { height: '20px', duration: 2.5 })
+        .to(bar, { width: "100%", duration: 2.5 })
+        .to(bar, { height: "100vh", duration: 1.5 })
+        .to(img1, { scale: 1, duration: 4 }, "-=0.8")
+        .to(img2, { scale: 1, duration: 4 }, "-=1.2")
+        .to(img3, { scale: 1, duration: 4 }, "-=1.2")
         .to(
           ".split-section",
           {
             scale: 1,
             ease: "power3.out",
-            duration: 1,
+            duration: 5,
           },
-          "-=0.3"
+          "-=0.8"
         )
 
         .to([leftBg, leftText], {
           x: "-100%",
-          duration: 1.2,
+          duration: 6,
         },"+=0.5")
 
         .to(
           [rightBg, rightText],
           {
             x: "100%",
-            duration: 1.2,
+            duration: 6,
           },
           "<"
         )
-        .to(sec3Ref.current, { opacity: 1, duration: 1 }, "-=2");
+        .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<");
     });
 
     gsap.fromTo(
@@ -153,7 +162,8 @@ export default function Home() {
           {/* Background Video */}
           <video
             className="absolute top-0 left-0 w-full   object-cover h-[99.9%]"
-            src="/videos/WWH_for_Website_Final.mp4"
+            src="/videos/banner_vide.mp4"
+             poster="/videos/banner-vid.jpg"
             autoPlay
             loop
             muted
@@ -253,12 +263,15 @@ export default function Home() {
         </div>
       </section>
       {/* SPLIT SECTION */}
-        <div className="">
+       
              <ProSlider
                     slides={heroSlides.slice().reverse()}
                     RightLabel="Coming Soon"
                   />
-        </div>
+          <DubaiIsland data={DubaiIslandData} />
+      <ImtiazProperties data={imtiazPropertiesData} />
+      <ConstructionProgress2 data={ConstructionProgressData} />
+      <PressSpotlight data={pressSpotlightData} />
     </div>
   );
 }
