@@ -307,10 +307,6 @@ body {
   z-index: 10;
 }
 
-.pressspotlight-pagination .swiper-pagination {
-  position: absolute !important;
-  bottom: 0px !important;
-}
 
 
 .pressspotlight-pagination .swiper-pagination-bullet {
