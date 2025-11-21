@@ -96,8 +96,8 @@ type FooterV2Data = {
 // data.ts
 export const footerV2Data: FooterV2Data = {
   top: {
-    bgImage: "/images/footer-bg.jpg",
-    logo: "/images/sample-logo.svg",
+    bgImage: "/images/footer_bg.jpg",
+    logo: "/images/footer_logo.svg",
     placeholderEmail: "Enter your email address",
     sendText: "Send",
   },
@@ -150,10 +150,10 @@ export const footerV2Data: FooterV2Data = {
     left: ["Privacy Policy", "Terms & Conditions", "Cookie Policy"],
     center: "©2025 Imtiaz Development. All Rights Reserved",
     icons: [
-      "/icons/instagram.svg",
-      "/icons/facebook.svg",
-      "/icons/linkedin.svg",
-      "/icons/youtube.svg",
+      "/icons/footer/instagram.svg",
+      "/icons/footer/fb.svg",
+      "/icons/footer/linkedin.svg",
+      "/icons/footer/yt.svg",
     ],
   },
 };
