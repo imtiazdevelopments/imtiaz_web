@@ -419,3 +419,72 @@ export const appSectionData = {
     appStore: "/images/home/app/appleV2.svg",
   },
 };
+
+export const communityYardData = [
+  {
+    id: "s1",
+    title: "A COASTAL PARADISE",
+    subtitle:
+      "Dubai Islands offers 20 km of coastline and a unique metropolitan lifestyle surrounded by nature—set to become the region's top entertainment, dining, and leisure hub.",
+    features: [
+      {
+        id: "f1",
+        title: "ISLAND LIFE",
+        bgImage: "/images/home/community/f1.jpg",
+        link: "/features/island-life",
+      },
+      {
+        id: "f2",
+        title: "MOST SOUGHT-OUT COMMUNITY",
+        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        link: "/features/sought-out",
+      },
+      {
+        id: "f3",
+        title: "MARINA-SIDE BLISS",
+        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        link: "/features/marina",
+      },
+      {
+        id: "f4",
+        title: "HUB FOR HIGH-END SHOPPING",
+        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        link: "/features/shopping",
+      },
+    ],
+  },
+  {
+    id: "s2",
+    title: "WATERFRONT LUXURY LIVING",
+    subtitle:
+      "Experience serene waterfront views blended with modern architecture — the perfect balance of elegance, comfort, and premium living by the sea.",
+    heroImage: "/images/hero/waterfront-luxury.jpg",
+
+    features: [
+      {
+        id: "f1",
+        title: "BEACHFRONT RETREATS",
+        bgImage: "/images/features/beachfront-retreats.jpg",
+        link: "/features/beachfront-retreats",
+      },
+      {
+        id: "f2",
+        title: "VIBRANT LIFESTYLE DESTINATIONS",
+        bgImage: "/images/features/lifestyle-destinations.jpg",
+        link: "/features/lifestyle",
+      },
+      {
+        id: "f3",
+        title: "ICONIC SKYLINE VIEWS",
+        bgImage: "/images/features/skyline-views.jpg",
+        link: "/features/skyline-views",
+      },
+      {
+        id: "f4",
+        title: "FINE DINING & NIGHTLIFE",
+        bgImage: "/images/features/dining-nightlife.jpg",
+        link: "/features/dining",
+      },
+    ],
+  },
+];

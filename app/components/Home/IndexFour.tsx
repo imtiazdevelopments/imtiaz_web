@@ -6,7 +6,9 @@ import {
   imtiazPropertiesData,
   pressSpotlightData,
   appSectionData,
+  communityYardData,
 } from "../Home/data";
+import CommunitySlider from "./sections/CommunitySlider";
 import ProSlider from "./sections/ProSlider";
 import { heroSlides } from "../Home/data";
 import HeroFour from "./sections/HeroFour";
@@ -27,6 +29,7 @@ export default function Home() {
         RightLabel="Coming Soon"
       />
       <DubaiIsland data={DubaiIslandData} />
+      <CommunitySlider slides={communityYardData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
       <PressSpotlight data={pressSpotlightData} />

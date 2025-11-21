@@ -46,7 +46,7 @@ const Footer = () => {
       </div>
 
       {/* ================= MENU COLUMNS ================= */}
-      <div className="bg-primary pt-[114px] pb-[120px]">
+      <div className="bg-primary py-10 md:py-15 xl:py-20 2xl:py-25 3xl:pt-[114px] 3xl:pb-[120px]">
         <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
           {footerV2Data.columns.map((col, i) => (
             <div key={i}>
