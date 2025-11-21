@@ -72,3 +72,88 @@ export const footerData = {
     playStore: "https://play.google.com",
   },
 };
+
+type FooterV2Column = {
+  heading: string;
+  items: string[];
+};
+
+type FooterV2Data = {
+  top: {
+    bgImage: string;
+    logo: string;
+    placeholderEmail: string;
+    sendText: string;
+  };
+  columns: FooterV2Column[];
+  bottom: {
+    left: string[];
+    center: string;
+    icons: string[];
+  };
+};
+
+// data.ts
+export const footerV2Data: FooterV2Data = {
+  top: {
+    bgImage: "/images/footer-bg.jpg",
+    logo: "/images/sample-logo.svg",
+    placeholderEmail: "Enter your email address",
+    sendText: "Send",
+  },
+
+  columns: [
+    {
+      heading: "COMMUNITIES",
+      items: [
+        "Dubai Islands",
+        "Meydan Horizon Community",
+        "JVC Community",
+        "Al Furjan Community",
+        "Jumeirah Garden City",
+        "Dubai Land Residence Complex",
+      ],
+    },
+    {
+      heading: "NEW LAUNCHES",
+      items: [
+        "Cove Edition 6",
+        "Wynwood",
+        "Cove Edition 5",
+        "Cove Grand",
+        "Sunset Bay 4",
+        "Beach Walk 4",
+      ],
+    },
+    {
+      heading: "COMING SOON",
+      items: [
+        "Le Blanc",
+        "Sunset Bay Grand",
+        "Wynwood Horizon",
+        "Sunset Bay 5",
+        "Pearl House 4",
+        "Beach Walk Grand 2",
+      ],
+    },
+    {
+      heading: "WORLD OF IMTIAZ",
+      items: ["About", "Leadership", "Vision Mission", "Careers", "Contact"],
+    },
+    {
+      heading: "MEDIA CENTER",
+      items: ["News & Press Releases", "Blogs", "Events"],
+    },
+  ],
+
+  bottom: {
+    left: ["Privacy Policy", "Terms & Conditions", "Cookie Policy"],
+    center: "©2025 Imtiaz Development. All Rights Reserved",
+    icons: [
+      "/icons/instagram.svg",
+      "/icons/facebook.svg",
+      "/icons/linkedin.svg",
+      "/icons/youtube.svg",
+    ],
+  },
+};

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,15 +34,16 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   const [textSwiper, setTextSwiper] = useState<SwiperType | null>(null);
   const [imageSwiper, setImageSwiper] = useState<SwiperType | null>(null);
 
-  // Sync two swipers
-  if (textSwiper && imageSwiper) {
-    textSwiper.controller.control = imageSwiper;
-    imageSwiper.controller.control = textSwiper;
-  }
+  useEffect(() => {
+    if (textSwiper && imageSwiper) {
+      textSwiper.controller.control = imageSwiper;
+      imageSwiper.controller.control = textSwiper;
+    }
+  }, [textSwiper, imageSwiper]);
 
   return (
     <section className="w-full py-[80px] md:py-[120px] lg:py-[150px] 2xl:py-[170px] bg-white container pressspotlight-pagination overflow-hidden">
-      <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-10 xl:gap-0">
+      <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-10 3xl:gap-0">
         {/* LEFT SECTION */}
         <div className="flex flex-col items-center justify-center relative ">
           {/* STATIC HEADING */}
@@ -55,7 +56,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             modules={[Pagination, Controller, Autoplay]}
             fadeEffect={{ crossFade: true }}
             slidesPerView={1}
-            loop
+            // loop
             onSwiper={setTextSwiper}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{
@@ -67,6 +68,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                 <div className="flex flex-col items-center">
                   {/* Date */}
                   <motion.p
+                    key={`date-${item.id}`}
                     variants={moveUp(0.1)}
                     initial="hidden"
                     animate="show"
@@ -78,10 +80,10 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
                   {/* Title */}
                   <motion.h3
+                    key={`title-${item.id}`}
                     variants={moveUp(0.2)}
                     initial="hidden"
                     animate="show"
-                    exit="hidden"
                     className="text-[22px] md:text-[30px] font-[optima] text-center leading-[1.15] uppercase max-w-[28ch] xl:max-w-[36ch] pb-[30px] xl:pb-[50px]"
                   >
                     {item.title}
@@ -89,10 +91,10 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
                   {/* Button */}
                   <motion.div
+                    key={`btn-${item.id}`}
                     variants={moveUp(0.3)}
                     initial="hidden"
                     animate="show"
-                    exit="hidden"
                   >
                     <Link
                       href={item.link}
@@ -114,14 +116,14 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
         </div>
 
         {/* ================= RIGHT IMAGE SWIPER ================= */}
-        <div className="relative w-full lg:w-[858px] h-[420px] md:h-[520px] lg:h-[600px] 2xl:h-[600px] 3xl:h-[680px]">
+        <div className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[600px] 2xl:h-[600px] 3xl:h-[680px]">
           <Swiper
             modules={[EffectFade, Controller, Autoplay]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             slidesPerView={1}
-            loop
-            allowTouchMove={true}
+            // loop
+            // allowTouchMove={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             onSwiper={setImageSwiper}
             className="w-full h-full"
