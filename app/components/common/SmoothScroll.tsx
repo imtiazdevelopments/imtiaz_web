@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { ReactLenis } from "@studio-freight/react-lenis";
 
@@ -10,8 +10,8 @@ const SmoothScroll = ({ children }) => {
   );
 };
 
-export default SmoothScroll;
-/* "use client";
+export default SmoothScroll; */
+"use client";
 
 import { useEffect } from "react";
 import Lenis from "lenis";
@@ -39,5 +39,4 @@ const SmoothScroll = () => {
   return null;
 };
 
-export default SmoothScroll;
- */
+export default SmoothScroll; 

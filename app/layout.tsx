@@ -20,13 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <SmoothScroll >
+        <SmoothScroll />
         {/* <Header /> */}
         <Header2 />
         {children}
         {/* <Footer /> */}
         <FooterV2 />
-        </SmoothScroll>
       </body>
     </html>
   );
