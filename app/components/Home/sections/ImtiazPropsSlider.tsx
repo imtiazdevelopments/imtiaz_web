@@ -32,7 +32,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const [activeSlide, setActiveSlide] = useState<number>(1);
 
   return (
-    <section className="w-full py-[80px] bg-white container">
+    <section className="w-full py-[80px] md:py-[120px] lg:py-[150px] 2xl:py-[170px] bg-white container">
       {/* ================= TITLE ================= */}
       <h2 className="text-center text-[42px] md:text-[55px] font-[optima] mb-[50px]">
         {data.sectionTitle}
@@ -66,7 +66,6 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 4 },
           }}
-          className="w-full"
         >
           {data.properties.map((item, idx) => {
             const isActiveMobile = idx === activeSlide;
@@ -115,7 +114,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center text-center px-[50px]">
                       {/* Logo */}
                       <div
-                        className={`transition-all duration-500 translate-y-18 ${
+                        className={`transition-all duration-400 translate-y-25 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
@@ -132,7 +131,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                       {/* Title */}
                       <h3
-                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[190px] transition-all duration-500 translate-y-12 ${
+                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[190px] transition-all duration-500 translate-y-18 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
@@ -143,7 +142,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                       {/* Read More Btn */}
                       <span
-                        className={`inline-block border border-white px-6 py-2 rounded-full text-[14px] tracking-wide text-white transition-all duration-500 translate-y-6 ${
+                        className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-700 translate-y-6 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
@@ -177,24 +176,36 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
       <div className="flex items-center justify-center gap-6 mt-10">
         <Link
           href="/properties"
-          className="border border-[#7A253A] text-[#7A253A] py-2 px-6 rounded-full 
-          hover:bg-[#7A253A] hover:text-white transition-colors duration-300"
+          className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full 
+          hover:bg-primary hover:text-white transition-colors duration-300"
         >
           View All
         </Link>
 
         <button
           ref={prevRef}
-          className="w-[36px] h-[36px] border border-gray-400 rounded-full flex items-center justify-center hover:bg-gray-200"
+          className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
         >
-          <span className="text-xl text-gray-700">{`<`}</span>
+          <Image
+            src="/icons/left_arrow_slider_primary.svg"
+            alt="Arrow Left"
+            width={28}
+            height={28}
+            className="object-contain w-[28px] h-[28px]"
+          />
         </button>
 
         <button
           ref={nextRef}
-          className="w-[36px] h-[36px] border border-gray-400 rounded-full flex items-center justify-center hover:bg-gray-200"
+          className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
         >
-          <span className="text-xl text-gray-700">{`>`}</span>
+          <Image
+            src="/icons/left_arrow_slider_primary.svg"
+            alt="Arrow Right"
+            width={28}
+            height={28}
+            className="object-contain rotate-180 w-[28px] h-[28px]"
+          />
         </button>
       </div>
     </section>

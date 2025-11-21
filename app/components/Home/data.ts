@@ -364,3 +364,30 @@ export const imtiazPropertiesData = {
     },
   ],
 };
+
+export const pressSpotlightData = {
+  sectionTitle: "Press Spotlight",
+  items: [
+    {
+      id: 1,
+      date: "15-10-2025",
+      title: "THE IMTIAZ GROWTH STORY: REDEFINING LUXURY, ELEVATING DUBAI",
+      image: "/images/home/pressSpotlight/ps1.jpg",
+      link: "/press/imtiaz-growth-story",
+    },
+    {
+      id: 2,
+      date: "02-12-2025",
+      title: "IMTIAZ LAUNCHES NEW LUXURY TOWER IN DUBAI",
+      image: "/images/home/imtiaz-properties/2.png",
+      link: "/press/new-tower",
+    },
+    {
+      id: 3,
+      date: "01-01-2026",
+      title: "IMTIAZ ACHIEVES RECORD-BREAKING GROWTH",
+      image: "/images/home/imtiaz-properties/1.png",
+      link: "/press/record-growth",
+    },
+  ],
+};
