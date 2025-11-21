@@ -29,7 +29,7 @@ export default function Home() {
         RightLabel="Coming Soon"
       />
       <DubaiIsland data={DubaiIslandData} />
-      <CommunitySlider slides={communityYardData} />
+      {/* <CommunitySlider slides={communityYardData} /> */}
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
       <PressSpotlight data={pressSpotlightData} />
