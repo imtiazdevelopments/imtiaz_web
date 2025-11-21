@@ -204,9 +204,6 @@ export const heroSlides = [
   {
     title: "SUNSET BAY 2 BY IMTIAZ",
     video: "/videos/sunset_bay.mp4",
-    registerLink: "/register/sunset-bay",
-    exploreLink: "/projects/sunset-bay",
-    rightLabel: "NEW LAUNCHES",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
       features: [
@@ -227,9 +224,6 @@ export const heroSlides = [
   {
     title: "Cotier House 2 by Imtiaz",
     video: "/videos/slidervdo-2.mp4",
-    registerLink: "/register/ocean-park",
-    exploreLink: "/projects/ocean-park",
-    rightLabel: "Coming Soon",
     pillFeatures: {
       title: "/icons/pro_slider/cotier.svg",
       features: [
@@ -250,9 +244,6 @@ export const heroSlides = [
   {
     title: "SUNSET BAY 2 BY IMTIAZ",
     video: "/videos/sunset_bay.mp4",
-    registerLink: "/register/sunset-bay",
-    exploreLink: "/projects/sunset-bay",
-    rightLabel: "NEW LAUNCHES",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
       features: [
@@ -273,9 +264,6 @@ export const heroSlides = [
   {
     title: "Cotier House 2 by Imtiaz",
     video: "/videos/slidervdo-2.mp4",
-    registerLink: "/register/ocean-park",
-    exploreLink: "/projects/ocean-park",
-    rightLabel: "Coming Soon",
     pillFeatures: {
       title: "/icons/pro_slider/cotier.svg",
       features: [
@@ -293,3 +281,113 @@ export const heroSlides = [
     },
   },
 ];
+
+export const DubaiIslandData = {
+  tag: "Dubai Islands",
+  title: "A Coastal Paradise",
+  subtitle: "A Rising Haven of Leisure & Luxury",
+  description:
+    "Dubai Islands features 20 km of coastline to explore, offering a unique metropolitan lifestyle surrounded by nature. The fast-growing location is set to become the premier entertainment, dining and leisure destination.",
+};
+
+export const ConstructionProgressData = {
+  title: "CONSTRUCTION PROGRESS",
+  videoSrc: "/images/home/work-progress/progress.mp4",
+  posterSrc: "/images/home/work-progress/progress.jpg",
+  description:
+    "Watch our projects turn from concept to reality and witness the future of real estate unfold at every milestone.",
+  button: {
+    label: "Construction Updates",
+    link: "/home2",
+  },
+};
+
+export const imtiazPropertiesData = {
+  sectionTitle: "IMTIAZ PROPERTIES",
+
+  properties: [
+    {
+      id: 1,
+      title: "LE BLANC BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p1.jpg",
+      link: "/properties/le-blanc",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 2,
+      title: "SUNSET BAY GRAND BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p2.jpg",
+      link: "/properties/sunset-bay-grand",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 3,
+      title: "WYNWOOD HORIZON BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p3.jpg",
+      link: "/properties/wynwood-horizon",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 4,
+      title: "SUNSET BAY 5 BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p4.jpg",
+      link: "/properties/sunset-bay-5",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 5,
+      title: "LE BLANC BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p1.jpg",
+      link: "/properties/le-blanc",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 6,
+      title: "SUNSET BAY GRAND BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p2.jpg",
+      link: "/properties/sunset-bay-grand",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 7,
+      title: "WYNWOOD HORIZON BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p3.jpg",
+      link: "/properties/wynwood-horizon",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+    {
+      id: 8,
+      title: "SUNSET BAY 5 BY IMTIAZ",
+      image: "/images/home/imtiaz-properties/p4.jpg",
+      link: "/properties/sunset-bay-5",
+      logo: "/images/home/imtiaz-properties/p1_logo.svg",
+    },
+  ],
+};
+
+export const pressSpotlightData = {
+  sectionTitle: "Press Spotlight",
+  items: [
+    {
+      id: 1,
+      date: "15-10-2025",
+      title: "THE IMTIAZ GROWTH STORY: REDEFINING LUXURY, ELEVATING DUBAI",
+      image: "/images/home/pressSpotlight/ps1.jpg",
+      link: "/press/imtiaz-growth-story",
+    },
+    {
+      id: 2,
+      date: "02-12-2025",
+      title: "IMTIAZ LAUNCHES NEW LUXURY TOWER IN DUBAI",
+      image: "/images/home/imtiaz-properties/2.png",
+      link: "/press/new-tower",
+    },
+    {
+      id: 3,
+      date: "01-01-2026",
+      title: "IMTIAZ ACHIEVES RECORD-BREAKING GROWTH",
+      image: "/images/home/imtiaz-properties/1.png",
+      link: "/press/record-growth",
+    },
+  ],
+};

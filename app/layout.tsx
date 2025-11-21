@@ -5,6 +5,7 @@ import "./globals.css";
 import Header2 from "./components/common/Header2";
 // import Footer from "./components/common/Footer";
 import SmoothScroll from "./components/common/SmoothScroll";
+import FooterV2 from "./components/common/FooterV2";
 
 export const metadata: Metadata = {
   title: "IMTIAZ",
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Header2 />
         {children}
         {/* <Footer /> */}
+        <FooterV2 />
       </body>
     </html>
   );

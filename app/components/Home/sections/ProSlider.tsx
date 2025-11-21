@@ -20,11 +20,7 @@ export interface feats {
 
 export interface SlideData {
   title: string;
-  description?: string;
   video: string;
-  registerLink: string;
-  exploreLink: string;
-  rightLabel?: string;
   pillFeatures: {
     title: string;
     features: feats[];

@@ -306,3 +306,23 @@ body {
   position: relative;
   z-index: 10;
 }
+
+.pressspotlight-pagination .swiper-pagination {
+  position: absolute !important;
+  bottom: 0px !important;
+}
+
+
+.pressspotlight-pagination .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  border: 1px solid #404040 !important;
+  opacity: 1 !important;
+}
+
+.pressspotlight-pagination .swiper-pagination-bullet-active {
+  background: #7A253A !important;
+  border: 1px solid #7A253A !important;
+}

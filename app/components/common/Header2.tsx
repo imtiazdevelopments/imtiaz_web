@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +8,27 @@ import { ChevronDown } from "lucide-react";
 
 const Header2: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScroll = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+
+      // hide when scrolling down past 50px
+      if (current > lastScroll.current && current > 300) {
+        setShowHeader(false);
+      } else {
+        // show when scrolling up
+        setShowHeader(true);
+      }
+
+      lastScroll.current = current;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const menuItems = [
     { name: "About", href: "/#" },
@@ -19,7 +40,14 @@ const Header2: React.FC = () => {
   return (
     <>
       {/* ========================= HEADER ========================= */}
-      <div className="fixed top-[20px] w-full z-[999] left-1/2 -translate-x-1/2 container">
+      <div
+        className={clsx(
+          "fixed top-[20px] w-full z-[999] left-1/2 -translate-x-1/2 container transition-all duration-500",
+          showHeader
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-10 pointer-events-none"
+        )}
+      >
         <header className="overflow-hidden 3xl:h-[80px] w-full">
           <div className="bg-white/10 backdrop-blur-[30px] w-full flex items-center justify-between rounded-[150px] py-[15px] !px-4 lg:!px-[25px] 2xl:!px-[31px]">
             {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
