@@ -5,17 +5,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import ProSlider from "../components/Home/sections/ProSlider";
-import { heroSlides, aboutSectionJourney,   DubaiIslandData,
+import {
+  heroSlides,
+  aboutSectionJourney,
+  DubaiIslandData,
   ConstructionProgressData,
   imtiazPropertiesData,
-  pressSpotlightData, } from "../components/Home/data";
+  pressSpotlightData,
+} from "../components/Home/data";
 import AbtJour from "../components/Home/sections/AbtJour";
 
 import DubaiIsland from "../components/Home/sections/DubaiIsland";
 import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
 import PressSpotlight from "../components/Home/sections/PressSpotlight";
-
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +30,7 @@ export default function Home() {
   const rightTextRef = useRef<HTMLDivElement>(null);
   const sec3Ref = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const sec3TitleRef = useRef<HTMLHeadingElement>(null);
+  /* const sec3TitleRef = useRef<HTMLHeadingElement>(null); */
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -44,94 +47,97 @@ export default function Home() {
       gsap.set([leftBg, leftText], { x: 0 });
       gsap.set([rightBg, rightText], { x: 0 });
 
-      if (!bar || !img1 || !img2 || !img3) return; // <-- PREVENT ERROR
+      if (!bar || !img1 || !img2 || !img3) return;
 
       gsap.set(bar, { height: 0, width: "0%" });
       gsap.set([img1, img2, img3], { scale: 0 });
 
-       const sec1 = gsap.timeline();
+      const sec1 = gsap.timeline();
 
       sec1
-    
+
         .to(".whtbx", {
-       
-          width: '20%',
-    /* x: "10%", */
-    duration: 0.5,
-    ease: "power4.inOut",
-  })
-  .to(".whtbx", {
-    x: "40%",
-    duration: 0.3,
-        ease: "power4.inOut",
-  })
-  .to(".whtbx", {
-    width: "100%",
-    duration: 1,
-     ease: "power4.inOut",
-  })
-  .to(".whtbx", {
-    width: "0%",
-    duration: 0.5,
-    ease: "power4.inOut",
-  })
-      .fromTo(
-        titleRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          delay: 0.3,
-        }, "-=0.5"
-      );
+          width: "20%",
+          /* x: "10%", */
+          duration: 0.5,
+          ease: "power4.inOut",
+        })
+        .to(".whtbx", {
+          x: "40%",
+          duration: 0.3,
+          ease: "power4.inOut",
+        })
+        .to(".whtbx", {
+          width: "100%",
+          duration: 1,
+          ease: "power4.inOut",
+        })
+        .to(".whtbx", {
+          width: "0%",
+          duration: 0.5,
+          ease: "power4.inOut",
+        })
+        .fromTo(
+          titleRef.current,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: 0.3,
+          },
+          "-=0.5"
+        );
 
       const tlSec1 = gsap.timeline({
         scrollTrigger: {
           trigger: "#sec1",
           start: "end top",
-          end: "+=150%",
+          end: "+=280%",
           pin: true,
           scrub: 1,
+          markers: true,
         },
       });
 
       tlSec1
-        .to(bar, { height: '20px', duration: 10 })
-        .to(bar, { width: "100%", duration: 10 })
-        .to(bar, { height: "100vh", duration: 10})
-        .to(img1, { scale: 1, duration: 15 }, "-=5")
-        .to(img2, { scale: 1, duration: 15 }, "-=8")
-        .to(img3, { scale: 1, duration: 15 }, "-=8")
-    
+        .to(bar, { height: "20px", duration: 0.8})
+        .to(bar, { width: "100%", duration: 0.8 })
+        .to(bar, { height: "100vh", duration: 0.8 })
+        .to(img1, { scale: 1, duration: 2,  }, "-=0.4")
+        .to(img2, { scale: 1, duration: 2,  }, "-=0.8")
+        .to(img3, { scale: 1, duration: 2,  }, "-=0.8")
+
         .to(
           ".split-section",
           {
             scale: 1,
             ease: "power3.out",
-            duration: 25,
+            duration: 3,
           },
-          "-=10"
+          "-=0.3"
         )
 
         .to([leftBg, leftText], {
           x: "-100%",
-          duration: 25,
-        },"+=5")
+          duration: 2,
+          delay: 3,
+        })
 
         .to(
           [rightBg, rightText],
           {
             x: "100%",
-            duration: 25,
+            duration: 2,
           },
           "<"
         )
-        .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<");
+        .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<")
+        .to(sec3Ref.current, { opacity: 1, duration: 1 });
     });
 
-    gsap.fromTo(
+    /*  gsap.fromTo(
       sec3TitleRef.current,
       { y: 50, opacity: 0 },
       {
@@ -145,14 +151,13 @@ export default function Home() {
           toggleActions: "play none none reverse",
         },
       }
-    );
+    ); */
 
     return () => ctx.revert(); // cleanup on route change
   }, []);
 
   return (
-    <div className="overflow-x-hidden"
-    >
+    <div className="overflow-x-hidden">
       {/* SECTION 1 */}
 
       <section
@@ -164,7 +169,7 @@ export default function Home() {
           <video
             className="absolute top-0 left-0 w-full   object-cover h-[99.9%]"
             src="/videos/banner_vide.mp4"
-             poster="/videos/banner-vid.jpg"
+            poster="/videos/banner-vid.jpg"
             autoPlay
             loop
             muted
@@ -176,12 +181,12 @@ export default function Home() {
           {/* Text and icon*/}
           <div className="absolute bottom-[110px] 3xl:bottom-[80px] max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
             <div className="relative overflow-hidden">
-            <h1
-              ref={titleRef}
-              className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
-            >
-              Redefining Spaces Elevating Lives
-            </h1>
+              <h1
+                ref={titleRef}
+                className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
+              >
+                Redefining Spaces Elevating Lives
+              </h1>
               <div className="whtbx absolute w-0 h-full  inset-0 bg-white top-0"></div>
             </div>
             <Image alt="" src="/icons/mouse.svg" width={50} height={50} />
@@ -221,7 +226,7 @@ export default function Home() {
             height={100}
           />
         </div>
-       
+
         <div className="split-section h-screen w-screen bg-transparent overflow-hidden flex items-center justify-center absolute z-50 scale-0">
           {/* LEFT BG */}
           <div
@@ -238,11 +243,11 @@ export default function Home() {
           {/* TEXT SPLIT → LEFT */}
           <div
             ref={leftTextRef}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-auto overflow-hidden flex justify-end pr-4 z-20" 
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-auto overflow-hidden flex justify-end pr-4 z-20"
           >
             <div className="transform translate-x-1/2">
-           <AbtJour data={aboutSectionJourney} />
-           </div>
+              <AbtJour data={aboutSectionJourney} />
+            </div>
           </div>
 
           {/* TEXT SPLIT → RIGHT */}
@@ -250,26 +255,25 @@ export default function Home() {
             ref={rightTextRef}
             className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-auto overflow-hidden flex justify-start pl-4 z-20"
           >
-             <div className="transform -translate-x-[53.4%]">
-           <AbtJour data={aboutSectionJourney} />
-           </div>
+            <div className="transform -translate-x-[53.2%]">
+              <AbtJour data={aboutSectionJourney} />
+            </div>
           </div>
         </div>
-         <div
+        <div
           ref={sec3Ref}
           className="h-screen w-screen bg-gray-900 text-white flex items-center justify-center absolute z-40 opacity-0"
         >
-            <ProSlider slides={heroSlides} RightLabel="New Launches"/>
-           
+          <ProSlider slides={heroSlides} RightLabel="New Launches" />
         </div>
       </section>
       {/* SPLIT SECTION */}
-       
-             <ProSlider
-                    slides={heroSlides.slice().reverse()}
-                    RightLabel="Coming Soon"
-                  />
-          <DubaiIsland data={DubaiIslandData} />
+
+      <ProSlider
+        slides={heroSlides.slice().reverse()}
+        RightLabel="Coming Soon"
+      />
+      <DubaiIsland data={DubaiIslandData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
       <PressSpotlight data={pressSpotlightData} />
