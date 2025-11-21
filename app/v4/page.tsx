@@ -98,32 +98,33 @@ export default function Home() {
       });
 
       tlSec1
-        .to(bar, { height: '20px', duration: 2.5 })
-        .to(bar, { width: "100%", duration: 2.5 })
-        .to(bar, { height: "100vh", duration: 1.5 })
-        .to(img1, { scale: 1, duration: 4 }, "-=0.8")
-        .to(img2, { scale: 1, duration: 4 }, "-=1.2")
-        .to(img3, { scale: 1, duration: 4 }, "-=1.2")
+        .to(bar, { height: '20px', duration: 10 })
+        .to(bar, { width: "100%", duration: 10 })
+        .to(bar, { height: "100vh", duration: 10})
+        .to(img1, { scale: 1, duration: 15 }, "-=5")
+        .to(img2, { scale: 1, duration: 15 }, "-=8")
+        .to(img3, { scale: 1, duration: 15 }, "-=8")
+    
         .to(
           ".split-section",
           {
             scale: 1,
             ease: "power3.out",
-            duration: 5,
+            duration: 25,
           },
-          "-=0.8"
+          "-=10"
         )
 
         .to([leftBg, leftText], {
           x: "-100%",
-          duration: 6,
-        },"+=0.5")
+          duration: 25,
+        },"+=5")
 
         .to(
           [rightBg, rightText],
           {
             x: "100%",
-            duration: 6,
+            duration: 25,
           },
           "<"
         )
