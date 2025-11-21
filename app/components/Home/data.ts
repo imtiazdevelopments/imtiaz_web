@@ -372,7 +372,7 @@ export const pressSpotlightData = {
       id: 1,
       date: "15-10-2025",
       title: "THE IMTIAZ GROWTH STORY: REDEFINING LUXURY, ELEVATING DUBAI",
-      image: "/images/home/pressSpotlight/ps1.jpg",
+      image: "/images/home/PressSpotlight/ps1.jpg",
       link: "/press/imtiaz-growth-story",
     },
     {
@@ -390,4 +390,32 @@ export const pressSpotlightData = {
       link: "/press/record-growth",
     },
   ],
+};
+
+export const appSectionData = {
+  heading: "YOUR ALL-IN-ONE APP FOR EVERY PROPERTY NEED",
+  subtitle:
+    "The Imtiaz App empowers homeowners and tenants to manage their property anytime, anywhere—from their phone.",
+  mobileImage: "/images/home/app/phoneV2.png",
+
+  leftCircles: [
+    { title: "CONSTRUCTION UPDATES", icon: "/images/home/app/icons/1.svg" },
+    { title: "OWNERSHIP UPDATES", icon: "/images/home/app/icons/2.svg" },
+    { title: "ACCESS CARD REQUESTS", icon: "/images/home/app/icons/3.svg" },
+  ],
+
+  rightCircles: [
+    {
+      title: "PROPERTY-RELATED TRANSFERS",
+      icon: "/images/home/app/icons/6.svg",
+    },
+    { title: "MOVE IN/OUT REQUESTS", icon: "/images/home/app/icons/5.svg" },
+    { title: "ACCESS CARD REQUESTS", icon: "/images/home/app/icons/6.svg" },
+  ],
+
+  download: {
+    text: "DOWNLOAD IMTIAZ APP",
+    googlePlay: "/images/home/app/playstoreV2.svg",
+    appStore: "/images/home/app/appleV2.svg",
+  },
 };

@@ -5,6 +5,7 @@ import {
   ConstructionProgressData,
   imtiazPropertiesData,
   pressSpotlightData,
+  appSectionData,
 } from "../Home/data";
 import ProSlider from "./sections/ProSlider";
 import { heroSlides } from "../Home/data";
@@ -13,6 +14,7 @@ import DubaiIsland from "./sections/DubaiIsland";
 import ImtiazProperties from "./sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "./sections/ConstructionProgress2";
 import PressSpotlight from "./sections/PressSpotlight";
+import AppSection from "./sections/AppSectionV2";
 
 export default function Home() {
   return (
@@ -28,6 +30,7 @@ export default function Home() {
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
       <PressSpotlight data={pressSpotlightData} />
+      <AppSection data={appSectionData} />
     </>
   );
 }
