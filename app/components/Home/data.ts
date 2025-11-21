@@ -372,7 +372,7 @@ export const pressSpotlightData = {
       id: 1,
       date: "15-10-2025",
       title: "THE IMTIAZ GROWTH STORY: REDEFINING LUXURY, ELEVATING DUBAI",
-      image: "/images/home/pressSpotlight/ps1.jpg",
+      image: "/images/home/PressSpotlight/ps1.jpg",
       link: "/press/imtiaz-growth-story",
     },
     {
