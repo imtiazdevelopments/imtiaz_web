@@ -12,6 +12,7 @@ import {
   ConstructionProgressData,
   imtiazPropertiesData,
   pressSpotlightData,
+  appSectionData,
 } from "../components/Home/data";
 import AbtJour from "../components/Home/sections/AbtJour";
 
@@ -19,6 +20,7 @@ import DubaiIsland from "../components/Home/sections/DubaiIsland";
 import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
 import PressSpotlight from "../components/Home/sections/PressSpotlight";
+import AppSection from "../components/Home/sections/AppSectionV2";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -275,8 +277,9 @@ export default function Home() {
       />
       <DubaiIsland data={DubaiIslandData} />
       <ImtiazProperties data={imtiazPropertiesData} />
+            <PressSpotlight data={pressSpotlightData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
-      <PressSpotlight data={pressSpotlightData} />
+         <AppSection data={appSectionData} />
     </div>
   );
 }
