@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 interface DubaiIslandProps {
   data: {
     tag: string;
