@@ -22,7 +22,7 @@ const Hero = () => {
         <h1 className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white">
           Redefining Spaces Elevating Lives
         </h1>
-        <Image src="/icons/mouse.svg" alt="Mouse" fill />
+        <Image src="/icons/mouse.svg" alt="Mouse" width={32} height={53} />
       </div>
     </section>
   );
