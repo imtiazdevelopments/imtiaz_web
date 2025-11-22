@@ -98,7 +98,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
         }}
         className="w-full"
       >
-        {slides.map((slide, slideIndex) => (
+        {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="relative w-full min-h-[520px] md:min-h-[680px]">
               {/* -------- BACKGROUND LAYERS -------- */}

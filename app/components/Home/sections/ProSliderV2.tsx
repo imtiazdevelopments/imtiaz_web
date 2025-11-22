@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
@@ -35,8 +35,6 @@ type HeroSliderProps = {
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-
-  const swiperRef = useRef<SwiperType | null>(null);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   // detect arrow click → trigger exit animation early
