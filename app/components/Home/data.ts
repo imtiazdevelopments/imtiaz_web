@@ -419,3 +419,70 @@ export const appSectionData = {
     appStore: "/images/home/app/appleV2.svg",
   },
 };
+
+export const communityYardData = [
+  {
+    id: "s1",
+    title: "A COASTAL PARADISE",
+    subtitle:
+      "Dubai Islands offers 20 km of coastline and a unique metropolitan lifestyle surrounded by nature—set to become the region's top entertainment, dining, and leisure hub.",
+    features: [
+      {
+        id: "f1",
+        title: "ISLAND LIFE",
+        bgImage: "/images/home/community/1.jpg",
+        link: "/features/island-life",
+      },
+      {
+        id: "f2",
+        title: "MOST SOUGHT-OUT COMMUNITY",
+        bgImage: "/images/home/community/f2.jpg",
+        link: "/features/sought-out",
+      },
+      {
+        id: "f3",
+        title: "MARINA-SIDE BLISS",
+        bgImage: "/images/home/community/1.jpg",
+        link: "/features/marina",
+      },
+      {
+        id: "f4",
+        title: "HUB FOR HIGH-END SHOPPING",
+        bgImage: "/images/home/community/f2.jpg",
+        link: "/features/shopping",
+      },
+    ],
+  },
+  {
+    id: "s2",
+    title: "WATERFRONT LUXURY LIVING",
+    subtitle:
+      "Experience serene waterfront views blended with modern architecture — the perfect balance of elegance, comfort, and premium living by the sea.",
+    features: [
+      {
+        id: "f1",
+        title: "BEACHFRONT RETREATS",
+        bgImage: "/images/home/community/1.jpg",
+        link: "/features/beachfront-retreats",
+      },
+      {
+        id: "f2",
+        title: "VIBRANT LIFESTYLE DESTINATIONS",
+        bgImage: "/images/home/community/f2.jpg",
+        link: "/features/lifestyle",
+      },
+      {
+        id: "f3",
+        title: "ICONIC SKYLINE VIEWS",
+        bgImage: "/images/home/community/1.jpg",
+        link: "/features/skyline-views",
+      },
+      {
+        id: "f4",
+        title: "FINE DINING & NIGHTLIFE",
+        bgImage: "/images/home/community/f2.jpg",
+        link: "/features/dining",
+      },
+    ],
+  },
+];
