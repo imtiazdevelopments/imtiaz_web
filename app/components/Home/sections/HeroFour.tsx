@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const Hero = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
@@ -20,7 +22,7 @@ const Hero = () => {
         <h1 className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white">
           Redefining Spaces Elevating Lives
         </h1>
-        <img src="/icons/mouse.svg" alt="Mouse" />
+        <Image src="/icons/mouse.svg" alt="Mouse" fill />
       </div>
     </section>
   );
