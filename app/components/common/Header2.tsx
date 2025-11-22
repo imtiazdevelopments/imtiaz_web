@@ -121,10 +121,10 @@ const Header2: React.FC = () => {
   },"<") 
 
 
-.add(() => {
-    // Dispatch event
-    window.dispatchEvent(new Event("logoAnimationComplete"));
-  });
+ .add(() => {
+        window.dispatchEvent(new Event("headerAnimationComplete"));
+      });
+
   
 }, []);
 
@@ -176,13 +176,13 @@ const Header2: React.FC = () => {
                   xmlns="http://www.w3.org/2000/svg"
              
                   viewBox="0 0 183 50"
-                  shape-rendering="geometricPrecision"
-                  text-rendering="geometricPrecision"
+                 shapeRendering="geometricPrecision"
+                  textRendering="geometricPrecision"
                   project-id="1b9e9c8c7e8940c6a5e9634ed0e26e37"
                   export-id="63f0341249714b0f8c20b33a3ec98203"
             
                 >
-                  <g clip-path="url(#ekcavZ6yIE927)">
+               <g clipPath="url(#ekcavZ6yIE927)">
                     <g>
                       <g >
                         <g className="logo-group group-1" mask="url(#ekcavZ6yIE912)">
@@ -230,7 +230,7 @@ const Header2: React.FC = () => {
                               ry="0"
                               transform="translate(0 0.105377)"
                               fill="#d2dbed"
-                              stroke-width="0"
+                                strokeWidth="0"
                             />
                           </mask>
                         </g>
