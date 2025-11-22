@@ -32,9 +32,12 @@ export default function Home() {
   const rightTextRef = useRef<HTMLDivElement>(null);
   const sec3Ref = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const scrollRef = useRef(null)
   /* const sec3TitleRef = useRef<HTMLHeadingElement>(null); */
 
-  useEffect(() => {
+ useEffect(() => {
+  document.body.style.overflow = "hidden";
+  const startHomeAnimations = () => {
     const ctx = gsap.context(() => {
       const bar = document.getElementById("bar");
       const img1 = document.querySelector(".img1-1");
@@ -54,71 +57,79 @@ export default function Home() {
       gsap.set(bar, { height: 0, width: "0%" });
       gsap.set([img1, img2, img3], { scale: 0 });
 
-      const sec1 = gsap.timeline();
+      
 
-      sec1
-
-        .to(".whtbx", {
-          width: "20%",
-          /* x: "10%", */
-          duration: 0.5,
-          ease: "power4.inOut",
-        })
-        .to(".whtbx", {
-          x: "40%",
-          duration: 0.3,
-          ease: "power4.inOut",
-        })
-        .to(".whtbx", {
-          width: "100%",
-          duration: 1,
-          ease: "power4.inOut",
-        })
-        .to(".whtbx", {
-          width: "0%",
-          duration: 0.5,
-          ease: "power4.inOut",
-        })
-        .fromTo(
-          titleRef.current,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            delay: 0.3,
-          },
-          "-=0.5"
-        );
+ const t2 = gsap.timeline({
+   /*  defaults: {  ease: "power3.out" } */
+  });
+      t2.fromTo(
+        titleRef.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,/* 
+          ease: "power3.out", */
+          /*  onComplete: () => {
+            document.body.style.overflow = "";
+          } */
+        }
+      )
+      .fromTo(scrollRef.current, 
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,/* 
+          ease: "power3.out", */
+          /*  onComplete: () => {
+            document.body.style.overflow = "";
+          } */
+        }, "-=0.3")
+      ;
 
       const tlSec1 = gsap.timeline({
         scrollTrigger: {
           trigger: "#sec1",
           start: "end top",
-          end: "+=280%",
+          end: "+=260%",
           pin: true,
           scrub: 1,
-          markers: true,
+        /*   markers: true, */
         },
       });
 
       tlSec1
-        .to(bar, { height: "20px", duration: 0.8})
+        .to(bar, { height: "20px", duration: 0.8 })
         .to(bar, { width: "100%", duration: 0.8 })
         .to(bar, { height: "100vh", duration: 0.8 })
-        .to(img1, { scale: 1, duration: 2,  }, "-=0.4")
-        .to(img2, { scale: 1, duration: 2,  }, "-=0.8")
-        .to(img3, { scale: 1, duration: 2,  }, "-=0.8")
+        .to(img1, { scale: 1, duration: 2 }, "-=0.6")
+       .fromTo(".img1-im", 
+  { y: "-25vh" },
+  { y: "25vh", duration: 2, ease: "none" },
+  "<"
+)
+        .to(img2, { scale: 1, duration: 2 }, "-=1")
+            .fromTo(".img2-im", 
+  { y: "-25vh" },
+  { y: "25vh", duration: 2, ease: "none" },
+  "<"
+)
+        .to(img3, { scale: 1, duration: 2 }, "-=1")
+           .fromTo(".img3-im", 
+  { y: "-25vh" },
+  { y: "25vh", duration: 2, ease: "none" },
+  "<"
+)
 
         .to(
           ".split-section",
           {
             scale: 1,
             ease: "power3.out",
-            duration: 3,
+            duration: 2,
           },
-          "-=0.3"
+          "-=1"
         )
 
         .to([leftBg, leftText], {
@@ -136,8 +147,20 @@ export default function Home() {
           "<"
         )
         .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<")
-        .to(sec3Ref.current, { opacity: 1, duration: 1 });
+        .to(sec3Ref.current, { opacity: 1, zIndex: 70, duration: 1, delay: 1 });
     });
+
+    return () => ctx.revert();
+  };
+
+  // Wait for the logo animation finish event
+  window.addEventListener("logoAnimationComplete", startHomeAnimations);
+
+  return () => {
+    window.removeEventListener("logoAnimationComplete", startHomeAnimations);
+  };
+}, []);
+
 
     /*  gsap.fromTo(
       sec3TitleRef.current,
@@ -155,8 +178,6 @@ export default function Home() {
       }
     ); */
 
-    return () => ctx.revert(); // cleanup on route change
-  }, []);
 
   return (
     <div className="overflow-x-hidden">
@@ -189,9 +210,10 @@ export default function Home() {
               >
                 Redefining Spaces Elevating Lives
               </h1>
-              <div className="whtbx absolute w-0 h-full  inset-0 bg-white top-0"></div>
             </div>
-            <Image alt="" src="/icons/mouse.svg" width={50} height={50} />
+            <div className="overflow-hidden">
+            <Image ref={scrollRef} className="opacity-0" alt="" src="/icons/mouse.svg" width={50} height={50} />
+            </div>
           </div>
         </div>
         {/* ANIMATED BAR */}
@@ -201,27 +223,27 @@ export default function Home() {
           className="bg-primary absolute left-0 right-0 mx-auto z-10"
         ></div>
 
-        <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0]">
+        <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="w-full h-full object-cover object-center absolute"
+            className="img1-im w-full h-full object-cover object-center absolute scale-[1.5]"
             src="/images/home/imtiaz-properties/1.png"
             alt=""
             width={1500}
             height={100}
           />
         </div>
-        <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0]">
+        <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="w-full h-full object-cover object-center absolute"
+            className="img2-im w-full h-full object-cover object-center absolute scale-[1.5]"
             src="/images/home/imtiaz-properties/3.png"
             alt=""
             width={1500}
             height={100}
           />
         </div>
-        <div className="img1-3 absolute w-full h-full z-40 inset-0 scale-[0]">
+        <div className="img1-3 absolute w-full h-full z-40 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="w-full h-full object-cover object-center absolute"
+            className="img3-im w-full h-full object-cover object-center absolute scale-[1.5] "
             src="/images/home/imtiaz-properties/2.png"
             alt=""
             width={1500}
