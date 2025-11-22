@@ -39,9 +39,9 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({ data }) => 
       /* --- PARALLAX VIDEO --- */
       gsap.fromTo(
         video,
-        { y: "20vh" },
+        { y: "25vh" },
         {
-          y: "-20vh",
+          y: "-25vh",
           ease: "none",
           scrollTrigger: {
             trigger: section,
@@ -55,17 +55,18 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({ data }) => 
       /* --- TEXT FADE IN --- */
       gsap.fromTo(
         items,
-        { y: 40, opacity: 0 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 1.2,
-          stagger: 0.35,
+          stagger: 0.4,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 75%",
-           toggleActions: "play none none reverse"
+       start: "top center",
+           toggleActions: "play none none reverse",
+           markers: false,
           },
         }
       );
