@@ -35,13 +35,14 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   return (
-    <section className="w-full py-[80px] md:py-[120px] lg:py-[150px] 2xl:py-[170px] bg-white container overflow-hidden">
+    <section className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden">
       {/* MAIN SWIPER */}
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        allowTouchMove={true}
+        autoplay={{ delay: 3000, disableOnInteraction: true }}
         slidesPerView={1}
         speed={600}
         onSwiper={setSwiperInstance}
@@ -54,9 +55,10 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
               {/* LEFT SECTION */}
               <div className="flex flex-col items-center">
                 <motion.h2
-                  variants={moveUp(0)}
+                  variants={moveUp(0.2)}
                   initial="hidden"
-                  animate="show"
+                  whileInView="show"
+                  viewport={{ once: true }}
                   className="text-[38px] md:text-[70px] font-[optima] uppercase pb-[70px] 2xl:pb-[90px]"
                 >
                   {data.sectionTitle}
@@ -117,7 +119,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     <button
                       key={idx}
                       onClick={() => swiperInstance?.slideTo(idx)}
-                      className={`w-[10px] h-[10px] rounded-full transition-all ${
+                      className={`w-[10px] h-[10px] rounded-full transition-all cursor-pointer ${
                         activeIndex === idx
                           ? "bg-primary"
                           : "bg-white border border-[#404040]"
@@ -128,7 +130,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
               </div>
 
               {/* RIGHT IMAGE */}
-              <div className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[600px] 2xl:h-[600px] 3xl:h-[680px]">
+              <div className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px]">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -142,14 +144,20 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
       </Swiper>
 
       {/* VIEW ALL */}
-      <div className="flex justify-center mt-[50px]">
+      <motion.div
+        variants={moveUp(0.3)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: true }}
+        className="flex justify-center mt-[50px] cursor-pointer"
+      >
         <Link
           href="/press"
           className="border border-primary text-primary px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] hover:bg-primary hover:text-white transition-colors"
         >
           View All
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 };

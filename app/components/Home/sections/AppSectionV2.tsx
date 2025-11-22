@@ -101,7 +101,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   const d = data;
 
   return (
-    <section className="w-full py-10 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
+    <section className="w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
       <div className="container">
         {/* Heading */}
         <h2 className="text-[26px] md:text-[40px] xl:text-[45px] 2xl:text-[58px] 3xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
@@ -178,7 +178,6 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         </div>
 
         {/* ----- DOWNLOAD SECTION ----- */}
-        {/* ----- DOWNLOAD SECTION ----- */}
         <div className="text-center mt-8 lg:mt-[50px] 2xl:mt-[70px] 3xl:mt-[80px]">
           <p className="uppercase text-[24px] sm:text-[28px] md:text-[32px] leading-[1] font-[optima] mb-6 sm:mb-8">
             {d.download.text}
@@ -191,13 +190,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="google play"
               width={241}
               height={74}
-              className="
-        w-[150px]           /* mobile */
-        sm:w-[180px]
-        md:w-[200px]
-        xl:w-[241px]       /* keep original at xl+ */
-        h-auto
-      "
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
             />
 
             {/* APP STORE */}
@@ -206,13 +199,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="app store"
               width={241}
               height={74}
-              className="
-        w-[150px]
-        sm:w-[180px]
-        md:w-[200px]
-        xl:w-[241px]
-        h-auto
-      "
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
             />
           </div>
         </div>
