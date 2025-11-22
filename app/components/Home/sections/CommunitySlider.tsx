@@ -318,9 +318,9 @@
 
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 import Image from "next/image";
@@ -349,9 +349,6 @@ export type Slide = {
 };
 
 export default function HeroFeatureSlider({ slides }: Props) {
-  const prevRef = useRef<HTMLButtonElement | null>(null);
-  const nextRef = useRef<HTMLButtonElement | null>(null);
-
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeFeat, setActiveFeat] = useState(1);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
