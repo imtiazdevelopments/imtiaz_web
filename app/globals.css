@@ -328,3 +328,11 @@ body {
   background: #7A253A !important;
   border: 1px solid #7A253A !important;
 }
+.group-1 path {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.group-2 path {
+  opacity: 0;
+  transform: translateY(40px);
+}
