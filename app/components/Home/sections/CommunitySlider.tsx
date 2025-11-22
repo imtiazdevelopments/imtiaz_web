@@ -320,7 +320,7 @@
 
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 import Image from "next/image";
@@ -330,7 +330,6 @@ import { textFade, bgFadeAnim } from "../../motionVariants";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 type Props = { slides: Slide[] };
 
@@ -380,24 +379,15 @@ export default function HeroFeatureSlider({ slides }: Props) {
   return (
     <section className="w-full relative overflow-hidden">
       <Swiper
-        modules={[Navigation, Pagination]}
+        // modules={[Navigation, Pagination]}
         slidesPerView={1}
-        loop={false} // 🔥 MUST disable to stop sliding animation
-        speed={0} // no animation
-        allowTouchMove={false} // stop touch sliding animation
-        simulateTouch={false} // stop ghost sliding
+        loop
+        modules={[Navigation, Pagination]}
+        speed={1}
+        allowTouchMove={false}
+        // simulateTouch={false}
         onSwiper={setSwiper}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
-        onBeforeInit={(s) => {
-          const nav = s.params.navigation;
-          if (nav && typeof nav !== "boolean") {
-            nav.prevEl = prevRef.current;
-            nav.nextEl = nextRef.current;
-          }
-        }}
+        navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         onSlideChange={(s) => {
           const i = s.realIndex;
           setActiveSlide(i);
@@ -441,14 +431,10 @@ export default function HeroFeatureSlider({ slides }: Props) {
               />
 
               {/* ===== PILL HEADER ===== */}
-              {/* ===== PILL HEADER ===== */}
               <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32">
                 <div className="flex items-center justify-center relative">
                   {/* Prev Button */}
-                  <button
-                    ref={prevRef}
-                    className="absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
-                  >
+                  <button className="swiper-btn-prev  absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center cursor-pointer">
                     <Image
                       src="/icons/left_slider_arrow.svg"
                       width={34}
@@ -492,10 +478,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                   </div>
 
                   {/* Next Button */}
-                  <button
-                    ref={nextRef}
-                    className="absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
-                  >
+                  <button className="swiper-btn-next absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center cursor-pointer justify-center">
                     <Image
                       src="/icons/left_slider_arrow.svg"
                       width={34}
@@ -512,7 +495,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                     <button
                       key={i}
                       onClick={() => swiper?.slideTo(i)}
-                      className={`w-[10px] h-[10px] rounded-full transition-all ${
+                      className={`w-[10px] h-[10px] rounded-full cursor-pointer transition-all ${
                         activeSlide === i ? "bg-primary" : "border border-white"
                       }`}
                     />
@@ -564,7 +547,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                                   ease: [0.25, 0.1, 0.25, 1],
                                 }}
                                 className="text-white font-[optima] uppercase text-center
-      text-[22px] md:text-[25px] xl:text-[30px]"
+      text-[22px] md:text-[25px] xl:text-[30px] px-4"
                               >
                                 {f.title}
                               </motion.h3>
