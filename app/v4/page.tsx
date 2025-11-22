@@ -4,23 +4,23 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import ProSlider from "../components/Home/sections/ProSlider";
+import ProSliderV2 from "../components/Home/sections/ProSlider";
 import {
   heroSlides,
   aboutSectionJourney,
-  DubaiIslandData,
   ConstructionProgressData,
   imtiazPropertiesData,
   pressSpotlightData,
   appSectionData,
+  communityYardData,
 } from "../components/Home/data";
 import AbtJour from "../components/Home/sections/AbtJour";
 
-import DubaiIsland from "../components/Home/sections/DubaiIsland";
 import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
 import PressSpotlight from "../components/Home/sections/PressSpotlight";
 import AppSection from "../components/Home/sections/AppSectionV2";
+import CommunitySlider from "../components/Home/sections/CommunitySlider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -288,20 +288,22 @@ export default function Home() {
           ref={sec3Ref}
           className="h-screen w-screen bg-gray-900 text-white flex items-center justify-center absolute z-40 opacity-0"
         >
-          <ProSlider slides={heroSlides} RightLabel="New Launches" />
+         <ProSliderV2 slides={heroSlides} RightLabel="New Launches" />
         </div>
       </section>
       {/* SPLIT SECTION */}
 
-      <ProSlider
+      <ProSliderV2
         slides={heroSlides.slice().reverse()}
         RightLabel="Coming Soon"
       />
-      <DubaiIsland data={DubaiIslandData} />
+
+         <CommunitySlider slides={communityYardData} />
       <ImtiazProperties data={imtiazPropertiesData} />
             <PressSpotlight data={pressSpotlightData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
          <AppSection data={appSectionData} />
+        
     </div>
   );
 }

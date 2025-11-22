@@ -94,7 +94,7 @@ const Header2: React.FC = () => {
   })
     .to(".ovrlyabg", {
     opacity: "0",
-    zIndex: 0,
+    zIndex: "-1",
 
   })
  
