@@ -32,7 +32,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const [activeSlide, setActiveSlide] = useState<number>(1);
 
   return (
-    <section className="w-full py-[80px] md:py-[120px] lg:py-[150px] 2xl:py-[170px] bg-white container">
+    <section className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
       {/* ================= TITLE ================= */}
       <h2 className="text-center text-[42px] md:text-[55px] font-[optima] mb-[50px]">
         {data.sectionTitle}
@@ -74,7 +74,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
               <SwiperSlide key={item.id}>
                 <Link href={item.link}>
                   <div
-                    className="relative group h-[520px] md:h-[600px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
+                    className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
                     onMouseEnter={() => swiperRef.current?.autoplay.stop()}
                     onMouseLeave={() => swiperRef.current?.autoplay.start()}
                   >
@@ -131,7 +131,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                       {/* Title */}
                       <h3
-                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[190px] transition-all duration-500 translate-y-18 ${
+                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-500 translate-y-18 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
@@ -154,13 +154,16 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                     {/* ================= DEFAULT BOTTOM TITLE ================= */}
                     <h4
-                      className={`absolute bottom-5 left-1/2 -translate-x-1/2 z-[4] 
-                          text-center text-white text-[18px] md:text-[20px]
-                          font-[optima] uppercase tracking-wide transition-all duration-500 ${
-                            isActiveMobile
-                              ? "opacity-0 translate-y-3"
-                              : "group-hover:opacity-0 group-hover:translate-y-3"
-                          }`}
+                      className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
+      flex px-6 z-[4] text-center text-white
+      text-[18px] md:text-[20px] lg:text-[25px] 2xl:text-[27px] 3xl:text-[30px]
+      font-[optima] uppercase tracking-wide 
+      transition-all duration-500
+      ${
+        isActiveMobile
+          ? "opacity-0 translate-y-3"
+          : "group-hover:opacity-0 group-hover:translate-y-3"
+      }`}
                     >
                       {item.title}
                     </h4>

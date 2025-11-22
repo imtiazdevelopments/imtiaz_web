@@ -46,11 +46,11 @@ const Circle = ({
         {/* RESPONSIVE INNER GRADIENT CIRCLE */}
         <div
           className="
-            rounded-full 
+            rounded-full
             flex items-center justify-center
-            w-[130px] h-[130px]     
-            sm:w-[150px] sm:h-[150px] 
-            md:w-[170px] md:h-[170px] 
+            w-[130px] h-[130px]
+            sm:w-[150px] sm:h-[150px]
+            md:w-[170px] md:h-[170px]
             xl:w-[201px] xl:h-[201px]
           "
           style={{
@@ -69,7 +69,7 @@ const Circle = ({
               width={32}
               height={32}
               className="
-                w-[22px] h-[22px]       
+                w-[22px] h-[22px]
                 sm:w-[26px] sm:h-[26px]
                 md:w-[30px] md:h-[30px]
                 xl:w-[32px] xl:h-[32px]
@@ -78,13 +78,13 @@ const Circle = ({
 
             <p
               className="
-                mt-3 text-[#404040] 
-                text-[12px] 
-                sm:text-[14px] 
+                mt-3 text-[#404040]
+                text-[12px]
+                sm:text-[14px]
                 md:text-[16px]
-                xl:text-[19px] 
-                font-avenirRoman 
-                leading-[1.2] 
+                xl:text-[19px]
+                font-avenirRoman
+                leading-[1.2]
                 uppercase
               "
             >
@@ -101,7 +101,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   const d = data;
 
   return (
-    <section className="w-full py-10 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
+    <section className="w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
       <div className="container">
         {/* Heading */}
         <h2 className="text-[26px] md:text-[40px] xl:text-[45px] 2xl:text-[58px] 3xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
@@ -114,16 +114,16 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         {/* ----- MAIN LAYOUT ----- */}
         <div
           className="
-  grid 
-  grid-cols-1 
-  lg:grid-cols-[2fr_350px_2fr] 
-  place-items-center 
-  place-content-center 
+  grid
+  grid-cols-1
+  lg:grid-cols-[2fr_350px_2fr]
+  place-items-center
+  place-content-center
   gap-8
-  xl:gap-10 
-  2xl:gap-28 
-  relative 
-  mt-[50px] 
+  xl:gap-10
+  2xl:gap-28
+  relative
+  mt-[50px]
   3xl:mt-[70px]
 "
         >
@@ -148,9 +148,9 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               width={337}
               height={650}
               className="
-        w-[260px] 
-        md:w-[300px] 
-        xl:w-[337px] 
+        w-[260px]
+        md:w-[300px]
+        xl:w-[337px]
         xl:h-[650px]
       "
             />
@@ -178,7 +178,6 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         </div>
 
         {/* ----- DOWNLOAD SECTION ----- */}
-        {/* ----- DOWNLOAD SECTION ----- */}
         <div className="text-center mt-8 lg:mt-[50px] 2xl:mt-[70px] 3xl:mt-[80px]">
           <p className="uppercase text-[24px] sm:text-[28px] md:text-[32px] leading-[1] font-[optima] mb-6 sm:mb-8">
             {d.download.text}
@@ -191,13 +190,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="google play"
               width={241}
               height={74}
-              className="
-        w-[150px]           /* mobile */
-        sm:w-[180px] 
-        md:w-[200px]
-        xl:w-[241px]       /* keep original at xl+ */
-        h-auto
-      "
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
             />
 
             {/* APP STORE */}
@@ -206,13 +199,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="app store"
               width={241}
               height={74}
-              className="
-        w-[150px]
-        sm:w-[180px]
-        md:w-[200px]
-        xl:w-[241px]
-        h-auto
-      "
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
             />
           </div>
         </div>
