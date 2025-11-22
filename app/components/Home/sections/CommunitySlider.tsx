@@ -1,21 +1,338 @@
+// "use client";
+
+// import React, { useRef, useState } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Navigation, Pagination, EffectFade } from "swiper/modules";
+// import type { Swiper as SwiperType } from "swiper";
+
+// import Image from "next/image";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import "swiper/css/effect-fade";
+
+// type Props = { slides: Slide[] };
+
+// export type Feature = {
+//   id: string | number;
+//   title: string;
+//   subtitle?: string;
+//   bgImage: string;
+//   link?: string;
+// };
+
+// export type Slide = {
+//   id: string | number;
+//   title: string;
+//   subtitle?: string;
+//   features: Feature[];
+// };
+
+// /* ===========================================================
+//    Ultra Smooth Fade (No Blank Screen)
+//    =========================================================== */
+// const bgFadeAnim = {
+//   initial: { opacity: 0, scale: 1.03, filter: "blur(4px)" },
+//   animate: {
+//     opacity: 1,
+//     scale: 1,
+//     filter: "blur(0px)",
+//     transition: {
+//       duration: 0.85,
+//       ease: [0.22, 1, 0.36, 1],
+//     },
+//   },
+//   exit: {
+//     opacity: 0,
+//     transition: {
+//       duration: 0.01,
+//     },
+//   },
+// };
+
+// const textFade = {
+//   initial: { opacity: 0, y: 40 },
+//   animate: {
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+//   },
+//   exit: {
+//     opacity: 0,
+//     y: -40,
+//     transition: { duration: 0.35, ease: [0.4, 0.0, 1, 1] },
+//   },
+// };
+
+// export default function HeroFeatureSlider({ slides }: Props) {
+//   const prevRef = useRef<HTMLButtonElement | null>(null);
+//   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+//   const [activeSlide, setActiveSlide] = useState(0);
+//   const [activeFeat, setActiveFeat] = useState(1);
+//   const [swiper, setSwiper] = useState<SwiperType | null>(null);
+
+//   /* Base visible background */
+//   const [bgBase, setBgBase] = useState(
+//     slides[0]?.features?.[1]?.bgImage ?? null
+//   );
+
+//   /* Overlay background for fading */
+//   const [bgFade, setBgFade] = useState<string | null>(null);
+
+//   /* Safe fade (no blank) */
+//   const switchBg = (newBg: string) => {
+//     if (!newBg || newBg === bgBase) return;
+
+//     setBgFade(newBg); // fade ON TOP
+
+//     setTimeout(() => {
+//       setBgBase(newBg); // update base after fade
+//       setBgFade(null); // remove fade layer
+//     }, 850); // EXACT duration of animation
+//   };
+
+//   return (
+//     <section className="w-full relative overflow-hidden">
+//       <Swiper
+//         modules={[Navigation, Pagination, EffectFade]}
+//         effect="fade"
+//         fadeEffect={{ crossFade: true }}
+//         slidesPerView={1}
+//         loop
+//         onSwiper={setSwiper}
+//         navigation={{
+//           prevEl: prevRef.current,
+//           nextEl: nextRef.current,
+//         }}
+//         onBeforeInit={(s) => {
+//           const nav = s.params.navigation;
+//           if (nav && typeof nav !== "boolean") {
+//             nav.prevEl = prevRef.current;
+//             nav.nextEl = nextRef.current;
+//           }
+//         }}
+//         onSlideChange={(s) => {
+//           const i = s.realIndex;
+//           setActiveSlide(i);
+//           setActiveFeat(1);
+//           switchBg(slides[i].features[1].bgImage);
+//         }}
+//         pagination={{ el: ".hero-pagination", clickable: true }}
+//         className="w-full"
+//       >
+//         {slides.map((slide) => (
+//           <SwiperSlide key={slide.id}>
+//             <div className="relative w-full min-h-[520px] md:min-h-[680px]">
+//               {/* ===== BASE BACKGROUND (never removed) ===== */}
+//               <div
+//                 className="absolute inset-0 -z-20 bg-cover bg-center"
+//                 style={{ backgroundImage: `url('${bgBase}')` }}
+//               />
+
+//               {/* ===== FADING OVERLAY ===== */}
+//               <AnimatePresence mode="wait">
+//                 {bgFade && (
+//                   <motion.div
+//                     key={bgFade}
+//                     variants={bgFadeAnim}
+//                     initial="initial"
+//                     animate="animate"
+//                     exit="exit"
+//                     className="absolute inset-0 -z-10 bg-cover bg-center"
+//                     style={{ backgroundImage: `url('${bgFade}')` }}
+//                   />
+//                 )}
+//               </AnimatePresence>
+
+//               {/* Top Gradient */}
+//               <div
+//                 className="absolute inset-0 -z-[5]"
+//                 style={{
+//                   background:
+//                     "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)",
+//                 }}
+//               />
+
+//               {/* ===== PILL HEADER ===== */}
+//               {/* ===== PILL HEADER ===== */}
+//               <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32">
+//                 <div className="flex items-center justify-center relative">
+//                   {/* Prev Button */}
+//                   <button
+//                     ref={prevRef}
+//                     className="absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
+//                   >
+//                     <Image
+//                       src="/icons/left_slider_arrow.svg"
+//                       width={30}
+//                       height={30}
+//                       alt="prev"
+//                     />
+//                   </button>
+
+//                   {/* STATIC pill wrapper */}
+//                   <div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full">
+//                     {/* Animated title */}
+//                     <AnimatePresence mode="wait">
+//                       <motion.h1
+//                         key={`title-${activeSlide}`}
+//                         variants={textFade}
+//                         initial="initial"
+//                         animate="animate"
+//                         exit="exit"
+//                         className="text-white font-[optima] text-[30px] md:text-[45px] lg:text-[60px] leading-[1]"
+//                       >
+//                         {slide.title}
+//                       </motion.h1>
+//                     </AnimatePresence>
+
+//                     {/* Animated subtitle */}
+//                     {slide.subtitle && (
+//                       <AnimatePresence mode="wait">
+//                         <motion.p
+//                           key={`sub-${activeSlide}`}
+//                           variants={textFade}
+//                           initial="initial"
+//                           animate="animate"
+//                           exit="exit"
+//                           className="text-white/90 text-[18px] mt-4 max-w-[85ch] mx-auto"
+//                         >
+//                           {slide.subtitle}
+//                         </motion.p>
+//                       </AnimatePresence>
+//                     )}
+//                   </div>
+
+//                   {/* Next Button */}
+//                   <button
+//                     ref={nextRef}
+//                     className="absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
+//                   >
+//                     <Image
+//                       src="/icons/left_slider_arrow.svg"
+//                       width={30}
+//                       height={30}
+//                       className="rotate-180"
+//                       alt="next"
+//                     />
+//                   </button>
+//                 </div>
+
+//                 {/* Pagination */}
+//                 <div className="mt-8 flex gap-3 justify-center">
+//                   {slides.map((_, i) => (
+//                     <button
+//                       key={i}
+//                       onClick={() => swiper?.slideTo(i)}
+//                       className={`w-[10px] h-[10px] rounded-full transition-all ${
+//                         activeSlide === i ? "bg-primary" : "border border-white"
+//                       }`}
+//                     />
+//                   ))}
+//                 </div>
+//               </div>
+
+//               {/* ===== FEATURES ===== */}
+//               <div className="mt-[26px]">
+//                 <div className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
+//                   {slide.features.map((f, i) => {
+//                     const active = activeFeat === i;
+
+//                     return (
+//                       <div key={f.id} className="relative flex flex-1">
+//                         <div
+//                           className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[618px]
+//                           flex justify-center items-end px-4 group transition-all"
+//                           onMouseEnter={() => {
+//                             setActiveFeat(i);
+//                             switchBg(f.bgImage);
+//                           }}
+//                           onMouseLeave={() =>
+//                             switchBg(slide.features[activeFeat].bgImage)
+//                           }
+//                         >
+//                           <div
+//                             className={`absolute inset-0 transition-opacity duration-400 ${
+//                               active ? "opacity-100" : "opacity-0"
+//                             }`}
+//                             style={{
+//                               background:
+//                                 "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.66) 100%)",
+//                             }}
+//                           />
+
+//                           <div className="relative z-20 w-full flex justify-center">
+//                             <div className="flex flex-col items-center absolute bottom-[40px] xl:bottom-[60px] 3xl:bottom-[100px]">
+//                               <h3
+//                                 className={`text-white font-[optima] uppercase text-center text-[22px] md:text-[25px] xl:text-[30px] transition-all duration-400 ${
+//                                   active
+//                                     ? "translate-y-[-70px] 3xl:translate-y-[-85px]"
+//                                     : "translate-y-0"
+//                                 }`}
+//                               >
+//                                 {f.title}
+//                               </h3>
+
+//                               <div
+//                                 className={`transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+//                                   active
+//                                     ? "opacity-100 pointer-events-auto translate-y-0"
+//                                     : "opacity-0 pointer-events-none absolute translate-y-[40px] xl:translate-y-[60px] 3xl:translate-y-[100px]"
+//                                 }`}
+//                               >
+//                                 <a
+//                                   href={f.link ?? "#"}
+//                                   className="inline-block border border-white px-[23px] py-[19.5px] rounded-[50px] text-white text-sm"
+//                                 >
+//                                   Read More
+//                                 </a>
+//                               </div>
+//                             </div>
+//                           </div>
+//                         </div>
+
+//                         {i < slide.features.length - 1 && (
+//                           <div
+//                             className="hidden lg:block absolute top-0 right-0 h-full w-[1px]"
+//                             style={{
+//                               background:
+//                                 "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%)",
+//                             }}
+//                           />
+//                         )}
+//                       </div>
+//                     );
+//                   })}
+//                 </div>
+//               </div>
+//             </div>
+//           </SwiperSlide>
+//         ))}
+//       </Swiper>
+//     </section>
+//   );
+// }
+
 "use client";
 
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, EffectFade } from "swiper/modules";
-
+import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { textFade, bgFadeAnim } from "../../motionVariants";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { motion, AnimatePresence } from "framer-motion";
 
-type Props = {
-  slides: Slide[];
-};
+type Props = { slides: Slide[] };
 
 export type Feature = {
   id: string | number;
@@ -36,51 +353,40 @@ export default function HeroFeatureSlider({ slides }: Props) {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
-  const [activeFeatureIndex, setActiveFeatureIndex] = useState<number>(1);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeFeat, setActiveFeat] = useState(1);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  /* Base visible background */
+  const [bgBase, setBgBase] = useState(
+    slides[0]?.features?.[1]?.bgImage ?? null
+  );
 
-  const [hoveredBg, setHoveredBg] = useState<string | null>(null);
+  /* Overlay background for fading */
+  const [bgFade, setBgFade] = useState<string | null>(null);
 
-  const [displayBg, setDisplayBg] = useState<string | null>(null);
-  const [animBg, setAnimBg] = useState<string | null>(null);
-
-  const currentSlide = slides[activeSlideIndex];
-
-  const baseBg =
-    hoveredBg ?? currentSlide.features[activeFeatureIndex]?.bgImage ?? "";
-
-  // Background switch system (cinematic fade)
+  /* Safe fade (no blank) */
   const switchBg = (newBg: string) => {
-    if (!newBg) return;
-    setDisplayBg(baseBg);
-    setAnimBg(newBg);
+    if (!newBg || newBg === bgBase) return;
+
+    setBgFade(newBg); // fade ON TOP
 
     setTimeout(() => {
-      setDisplayBg(newBg);
-      setAnimBg(null);
-    }, 650);
+      setBgBase(newBg); // update base after fade
+      setBgFade(null); // remove fade layer
+    }, 850); // EXACT duration of animation
   };
 
   return (
     <section className="w-full relative overflow-hidden">
       <Swiper
-        modules={[Navigation, Pagination, EffectFade]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
+        modules={[Navigation, Pagination]}
         slidesPerView={1}
-        speed={700}
-        loop
-        onSwiper={setSwiperInstance}
-        onSlideChange={(s: SwiperType) => {
-          setActiveSlideIndex(s.realIndex);
-          setActiveFeatureIndex(1);
-          setHoveredBg(null);
-
-          const newBg = slides[s.realIndex].features[1].bgImage;
-          switchBg(newBg);
-        }}
+        loop={false} // 🔥 MUST disable to stop sliding animation
+        speed={0} // no animation
+        allowTouchMove={false} // stop touch sliding animation
+        simulateTouch={false} // stop ghost sliding
+        onSwiper={setSwiper}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
@@ -92,99 +398,109 @@ export default function HeroFeatureSlider({ slides }: Props) {
             nav.nextEl = nextRef.current;
           }
         }}
-        pagination={{
-          el: ".hero-pagination",
-          clickable: true,
+        onSlideChange={(s) => {
+          const i = s.realIndex;
+          setActiveSlide(i);
+          setActiveFeat(1);
+          switchBg(slides[i].features[1].bgImage);
         }}
+        pagination={{ el: ".hero-pagination", clickable: true }}
         className="w-full"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="relative w-full min-h-[520px] md:min-h-[680px]">
-              {/* -------- BACKGROUND LAYERS -------- */}
-              <div className="absolute inset-0 -z-20">
-                {displayBg && (
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url('${displayBg}')` }}
+              {/* ===== BASE BACKGROUND (never removed) ===== */}
+              <div
+                className="absolute inset-0 -z-20 bg-cover bg-center"
+                style={{ backgroundImage: `url('${bgBase}')` }}
+              />
+
+              {/* ===== FADING OVERLAY ===== */}
+              <AnimatePresence mode="wait">
+                {bgFade && (
+                  <motion.div
+                    key={bgFade}
+                    variants={bgFadeAnim}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="absolute inset-0 -z-10 bg-cover bg-center"
+                    style={{ backgroundImage: `url('${bgFade}')` }}
                   />
                 )}
+              </AnimatePresence>
 
-                <AnimatePresence mode="wait">
-                  {animBg && (
-                    <motion.div
-                      key={animBg}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 bg-cover bg-center"
-                      style={{ backgroundImage: `url('${animBg}')` }}
-                    />
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Gradient Overlay */}
+              {/* Top Gradient */}
               <div
-                className="absolute inset-0 -z-10"
+                className="absolute inset-0 -z-[5]"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)",
                 }}
               />
 
-              {/* -------- PILL HEADER WITH ENTER/EXIT ANIMATION -------- */}
+              {/* ===== PILL HEADER ===== */}
+              {/* ===== PILL HEADER ===== */}
               <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32">
                 <div className="flex items-center justify-center relative">
-                  {/* Left Arrow */}
+                  {/* Prev Button */}
                   <button
                     ref={prevRef}
                     className="absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
                   >
                     <Image
                       src="/icons/left_slider_arrow.svg"
-                      width={30}
-                      height={30}
+                      width={34}
+                      height={34}
+                      className="w-[34px] h-[34px]"
                       alt="prev"
                     />
                   </button>
 
-                  {/* Animated Pill */}
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeSlideIndex}
-                      initial={{ opacity: 0, y: 40 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -40 }}
-                      transition={{
-                        duration: 0.6,
-                        ease: [0.25, 0.1, 0.25, 1],
-                      }}
-                      className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full"
-                    >
-                      <h1 className="text-white font-[optima] text-[30px] md:text-[45px] lg:text-[60px] leading-[1]">
+                  {/* STATIC pill wrapper */}
+                  <div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full">
+                    {/* Animated title */}
+                    <AnimatePresence mode="wait">
+                      <motion.h1
+                        key={`title-${activeSlide}`}
+                        variants={textFade}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        className="text-white font-[optima] text-[30px] md:text-[45px] lg:text-[60px] leading-[1]"
+                      >
                         {slide.title}
-                      </h1>
+                      </motion.h1>
+                    </AnimatePresence>
 
-                      {slide.subtitle && (
-                        <p className="text-white/90 text-[18px] mt-4 max-w-[85ch] mx-auto">
+                    {/* Animated subtitle */}
+                    {slide.subtitle && (
+                      <AnimatePresence mode="wait">
+                        <motion.p
+                          key={`sub-${activeSlide}`}
+                          variants={textFade}
+                          initial="initial"
+                          animate="animate"
+                          exit="exit"
+                          className="text-white/90 text-[18px] mt-4 max-w-[85ch] mx-auto"
+                        >
                           {slide.subtitle}
-                        </p>
-                      )}
-                    </motion.div>
-                  </AnimatePresence>
+                        </motion.p>
+                      </AnimatePresence>
+                    )}
+                  </div>
 
-                  {/* Right Arrow */}
+                  {/* Next Button */}
                   <button
                     ref={nextRef}
                     className="absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center"
                   >
                     <Image
                       src="/icons/left_slider_arrow.svg"
-                      width={30}
-                      height={30}
-                      className="rotate-180"
+                      width={34}
+                      height={34}
+                      className="rotate-180 w-[34px] h-[34px]"
                       alt="next"
                     />
                   </button>
@@ -195,97 +511,100 @@ export default function HeroFeatureSlider({ slides }: Props) {
                   {slides.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => swiperInstance?.slideTo(i)}
+                      onClick={() => swiper?.slideTo(i)}
                       className={`w-[10px] h-[10px] rounded-full transition-all ${
-                        activeSlideIndex === i
-                          ? "bg-primary"
-                          : "border border-white"
-                      } `}
+                        activeSlide === i ? "bg-primary" : "border border-white"
+                      }`}
                     />
-                  ))}{" "}
+                  ))}
                 </div>
               </div>
 
-              {/* ---------- FEATURES ---------- */}
+              {/* ===== FEATURES ===== */}
               <div className="mt-[26px]">
                 <div className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
-                  {slide.features.map((feat, i) => {
-                    const isActive = activeFeatureIndex === i;
+                  {slide.features.map((f, i) => {
+                    const active = activeFeat === i;
 
                     return (
-                      <div key={feat.id} className="relative flex flex-1">
+                      <div key={f.id} className="relative flex flex-1">
                         <div
                           className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[618px]
-                          flex justify-center items-end px-4 group transition-all"
+          flex justify-center items-end px-4 group transition-all"
                           onMouseEnter={() => {
-                            setActiveFeatureIndex(i);
-                            setHoveredBg(feat.bgImage);
-                            switchBg(feat.bgImage);
+                            setActiveFeat(i);
+                            switchBg(f.bgImage);
                           }}
-                          onMouseLeave={() => {
-                            setHoveredBg(null);
-                            const stayBg =
-                              slide.features[activeFeatureIndex].bgImage;
-                            switchBg(stayBg);
-                          }}
+                          onMouseLeave={() =>
+                            switchBg(slide.features[activeFeat].bgImage)
+                          }
                         >
-                          {/* Card gradient */}
+                          {/* Gradient */}
                           <div
-                            className={`absolute inset-0 transition-opacity duration-400
-                              ${isActive ? "opacity-100" : "opacity-0"}`}
+                            className={`absolute inset-0 transition-opacity duration-400 ${
+                              active ? "opacity-100" : "opacity-0"
+                            }`}
                             style={{
                               background:
                                 "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.66) 100%)",
                             }}
                           />
 
-                          {/* Card Text */}
+                          {/* === CONTENT WRAPPER === */}
                           <div className="relative z-20 w-full flex justify-center">
-                            <div
-                              className="
-      flex flex-col items-center absolute
-      bottom-[40px] xl:bottom-[60px] 3xl:bottom-[100px]
-    "
-                            >
-                              {/* Title */}
-                              <h3
-                                className={`
-        text-white font-[optima] uppercase text-center
-        text-[22px] md:text-[25px] xl:text-[30px]
-        transition-all duration-400
-        ${
-          isActive
-            ? "translate-y-[-70px] 3xl:translate-y-[-85px]"
-            : "translate-y-0"
-        }
-      `}
+                            <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
+                              {/* === SMOOTH TITLE === */}
+                              <motion.h3
+                                key={`feat-title-${activeSlide}-${i}-${active}`}
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -40 }}
+                                transition={{
+                                  duration: 0.55,
+                                  ease: [0.25, 0.1, 0.25, 1],
+                                }}
+                                className="text-white font-[optima] uppercase text-center
+      text-[22px] md:text-[25px] xl:text-[30px]"
                               >
-                                {feat.title}
-                              </h3>
+                                {f.title}
+                              </motion.h3>
 
-                              {/* Button */}
-                              <div
+                              {/* === SMOOTH BUTTON === */}
+                              <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{
+                                  opacity: active ? 1 : 0,
+                                  y: active ? 0 : 30,
+                                  marginTop: active
+                                    ? "var(--gap-active)" // dynamic responsive spacing
+                                    : "0px",
+                                }}
+                                transition={{
+                                  duration: 0.55,
+                                  ease: [0.25, 0.1, 0.25, 1],
+                                }}
+                                style={
+                                  {
+                                    "--gap-active": "50px",
+                                  } as React.CSSProperties
+                                }
                                 className={`
-        transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)]
-        ${
-          isActive
-            ? "opacity-100 pointer-events-auto translate-y-[0px]"
-            : "opacity-0 pointer-events-none absolute translate-y-[40px] xl:translate-y-[60px] 3xl:translate-y-[100px]"
-        }
+        ${active ? "pointer-events-auto" : "pointer-events-none absolute"}
+        gap-responsive
       `}
                               >
                                 <a
-                                  href={feat.link ?? "#"}
-                                  className="inline-block border border-white px-[23px] py-[19.5px] rounded-[50px] text-white text-sm"
+                                  href={f.link ?? "#"}
+                                  className="inline-block border border-white px-[23px] py-[19.5px]
+        rounded-[50px] text-white text-sm"
                                 >
                                   Read More
                                 </a>
-                              </div>
+                              </motion.div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Divider */}
                         {i < slide.features.length - 1 && (
                           <div
                             className="hidden lg:block absolute top-0 right-0 h-full w-[1px]"
