@@ -430,25 +430,25 @@ export const communityYardData = [
       {
         id: "f1",
         title: "ISLAND LIFE",
-        bgImage: "/images/home/community/f1.jpg",
+        bgImage: "/images/home/community/1.jpg",
         link: "/features/island-life",
       },
       {
         id: "f2",
         title: "MOST SOUGHT-OUT COMMUNITY",
-        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        bgImage: "/images/home/community/f2.jpg",
         link: "/features/sought-out",
       },
       {
         id: "f3",
         title: "MARINA-SIDE BLISS",
-        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        bgImage: "/images/home/community/1.jpg",
         link: "/features/marina",
       },
       {
         id: "f4",
         title: "HUB FOR HIGH-END SHOPPING",
-        bgImage: "/mnt/data/764efd5e-0dd8-4020-b1f1-671a6f09892f.png",
+        bgImage: "/images/home/community/f2.jpg",
         link: "/features/shopping",
       },
     ],
@@ -458,31 +458,29 @@ export const communityYardData = [
     title: "WATERFRONT LUXURY LIVING",
     subtitle:
       "Experience serene waterfront views blended with modern architecture — the perfect balance of elegance, comfort, and premium living by the sea.",
-    heroImage: "/images/hero/waterfront-luxury.jpg",
-
     features: [
       {
         id: "f1",
         title: "BEACHFRONT RETREATS",
-        bgImage: "/images/features/beachfront-retreats.jpg",
+        bgImage: "/images/home/community/1.jpg",
         link: "/features/beachfront-retreats",
       },
       {
         id: "f2",
         title: "VIBRANT LIFESTYLE DESTINATIONS",
-        bgImage: "/images/features/lifestyle-destinations.jpg",
+        bgImage: "/images/home/community/f2.jpg",
         link: "/features/lifestyle",
       },
       {
         id: "f3",
         title: "ICONIC SKYLINE VIEWS",
-        bgImage: "/images/features/skyline-views.jpg",
+        bgImage: "/images/home/community/1.jpg",
         link: "/features/skyline-views",
       },
       {
         id: "f4",
         title: "FINE DINING & NIGHTLIFE",
-        bgImage: "/images/features/dining-nightlife.jpg",
+        bgImage: "/images/home/community/f2.jpg",
         link: "/features/dining",
       },
     ],

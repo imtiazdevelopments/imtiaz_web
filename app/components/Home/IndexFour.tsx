@@ -9,7 +9,8 @@ import {
   communityYardData,
 } from "../Home/data";
 import CommunitySlider from "./sections/CommunitySlider";
-import ProSlider from "./sections/ProSlider";
+// import ProSlider from "./sections/ProSlider";
+import ProSliderV2 from "./sections/ProSliderV2";
 import { heroSlides } from "../Home/data";
 import HeroFour from "./sections/HeroFour";
 import DubaiIsland from "./sections/DubaiIsland";
@@ -23,8 +24,13 @@ export default function Home() {
     <>
       <HeroFour />
       <AboutJourney data={aboutSectionJourney} />
-      <ProSlider slides={heroSlides} RightLabel="New Launches" />
-      <ProSlider
+      {/* <ProSlider slides={heroSlides} RightLabel="New Launches" /> */}
+      {/* <ProSlider
+        slides={heroSlides.slice().reverse()}
+        RightLabel="Coming Soon"
+      /> */}
+      <ProSliderV2 slides={heroSlides} RightLabel="New Launches" />
+      <ProSliderV2
         slides={heroSlides.slice().reverse()}
         RightLabel="Coming Soon"
       />

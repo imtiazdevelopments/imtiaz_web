@@ -254,7 +254,13 @@ body {
    HERO SLIDER – BUILT-IN PAGINATION STYLES
 -----------------------------------------*/
 .hero-pro-slider .swiper-pagination {
-  bottom: 238px !important;
+  bottom: 170px !important;
+}
+
+@media (min-width:1560px) {
+  .hero-pro-slider .swiper-pagination {
+    bottom: 238px !important;
+  }
 }
 
 
