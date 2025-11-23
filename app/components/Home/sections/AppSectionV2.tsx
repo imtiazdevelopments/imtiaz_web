@@ -190,7 +190,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="google play"
               width={241}
               height={74}
-              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer hover:scale-[1.04] transition-all duration-300"
             />
 
             {/* APP STORE */}
@@ -199,7 +199,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               alt="app store"
               width={241}
               height={74}
-              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer"
+              className="w-[150px] sm:w-[180px] md:w-[200px] xl:w-[241px] h-auto cursor-pointer hover:scale-[1.04] transition-all duration-300"
             />
           </div>
         </div>

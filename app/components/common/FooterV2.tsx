@@ -37,7 +37,7 @@ const Footer = () => {
                 placeholder={footerV2Data.top.placeholderEmail}
                 className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirRoman] text-[17px] text-white placeholder-white/60 focus:outline-none"
               />
-              <button className="bg-white/25 backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] font-[avenirRoman] text-[17px]">
+              <button className="bg-white/25 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] font-[avenirRoman] text-[17px]">
                 {footerV2Data.top.sendText}
               </button>
             </div>
