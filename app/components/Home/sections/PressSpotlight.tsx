@@ -40,6 +40,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
+        loop
         fadeEffect={{ crossFade: true }}
         allowTouchMove={true}
         autoplay={{ delay: 3000, disableOnInteraction: true }}

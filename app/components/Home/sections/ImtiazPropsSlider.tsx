@@ -10,6 +10,8 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import type { Swiper as SwiperType } from "swiper";
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVariants";
 
 type ImtiazPropertiesData = {
   data: {
@@ -44,9 +46,10 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           modules={[Navigation, Autoplay]}
           spaceBetween={8}
           slidesPerView={1}
+          loop
           autoplay={{
             delay: 3000,
-            disableOnInteraction: false,
+            disableOnInteraction: true,
           }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
@@ -73,7 +76,11 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
             return (
               <SwiperSlide key={item.id}>
                 <Link href={item.link}>
-                  <div
+                  <motion.div
+                    variants={moveUp(idx * 0.12)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
                     className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
                     onMouseEnter={() => swiperRef.current?.autoplay.stop()}
                     onMouseLeave={() => swiperRef.current?.autoplay.start()}
@@ -167,7 +174,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     >
                       {item.title}
                     </h4>
-                  </div>
+                  </motion.div>
                 </Link>
               </SwiperSlide>
             );
@@ -177,39 +184,60 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
       {/* ================= BOTTOM BUTTONS ================= */}
       <div className="flex items-center justify-center gap-6 mt-10">
-        <Link
-          href="/properties"
-          className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full 
-          hover:bg-primary hover:text-white transition-colors duration-300"
+        <motion.div
+          variants={moveUp(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
         >
-          View All
-        </Link>
+          <Link
+            href="/properties"
+            className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full
+            hover:bg-primary hover:text-white transition-colors duration-300"
+          >
+            View All
+          </Link>
+        </motion.div>
 
-        <button
-          ref={prevRef}
-          className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
         >
-          <Image
-            src="/icons/left_arrow_slider_primary.svg"
-            alt="Arrow Left"
-            width={28}
-            height={28}
-            className="object-contain w-[28px] h-[28px]"
-          />
-        </button>
+          <button
+            ref={prevRef}
+            className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
+          >
+            <Image
+              src="/icons/left_arrow_slider_primary.svg"
+              alt="Arrow Left"
+              width={28}
+              height={28}
+              className="object-contain w-[28px] h-[28px]"
+            />
+          </button>
+        </motion.div>
 
-        <button
-          ref={nextRef}
-          className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
+        <motion.div
+          variants={moveUp(0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
         >
-          <Image
-            src="/icons/left_arrow_slider_primary.svg"
-            alt="Arrow Right"
-            width={28}
-            height={28}
-            className="object-contain rotate-180 w-[28px] h-[28px]"
-          />
-        </button>
+          <button
+            ref={nextRef}
+            className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center cursor-pointer"
+          >
+            <Image
+              src="/icons/left_arrow_slider_primary.svg"
+              alt="Arrow Right"
+              width={28}
+              height={28}
+              className="object-contain rotate-180 w-[28px] h-[28px]"
+            />
+          </button>
+        </motion.div>
       </div>
     </section>
   );
