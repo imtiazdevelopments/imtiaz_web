@@ -66,9 +66,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
         gsap.fromTo(
           img,
-          { y: "-25vh" },
+          { y: "25vh" },
           {
-            y: "25vh",
+            y: "-25vh",
             ease: "none",
             scrollTrigger: {
               trigger: wrapper,
