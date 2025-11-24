@@ -265,12 +265,16 @@
 
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import type { Swiper as SwiperType } from "swiper";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -321,6 +325,61 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const inView = useInView(rootRef, { once: true, amount: 0.8 });
 
 
+//   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // per-slide refs
+  const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const imgRefs = useRef<HTMLVideoElement[]>([]);
+
+  const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) wrapRefs.current[i] = el;
+  };
+
+  const setImgRef = (el: HTMLVideoElement | null, i: number) => {
+    if (el) imgRefs.current[i] = el;
+  };
+
+  const initGSAP = () => {
+    const section = rootRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      wrapRefs.current.forEach((wrapper, i) => {
+        const img = imgRefs.current[i];
+
+        console.log(img);
+        if (!wrapper || !img) return;
+
+        gsap.fromTo(
+          img,
+          { y: "-25vh" },
+          {
+            y: "25vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              scrub: true,
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+      });
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  // Wait for "homeAnimationsReady"
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
+
+
+
   return (
     <div className="w-full relative" ref={rootRef}>
       <Swiper
@@ -339,14 +398,15 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           <SwiperSlide key={index}>
             <div className="relative w-full flex flex-col justify-center items-center">
               {/* -------------------------------- VIDEO BG -------------------------------- */}
-              <div className="absolute inset-0 -z-10 overflow-hidden">
+              <div className="absolute inset-0 -z-10 overflow-hidden" ref={(el) => setWrapRef(el, index)}>
                 <video
+                  ref={(el) => setImgRef(el as HTMLVideoElement, index)}
                   src={slide.video}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover scale-[1.5]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
