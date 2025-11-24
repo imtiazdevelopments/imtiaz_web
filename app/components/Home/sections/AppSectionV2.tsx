@@ -103,191 +103,202 @@ const Circle = ({
 );
 
 const AppSection = ({ data }: { data: AppSectionData }) => {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const section5Ref = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
-const imageRef = useRef<HTMLDivElement>(null);
-    const section5Ref = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLDivElement>(null);
+  const initGSAP = () => {
+    const image = imageRef.current;
+    const section = section5Ref.current;
+    const textBox = textRef.current;
 
+    if (!image || !section || !textBox) return;
 
-const initGSAP = () => {
-  const image = imageRef.current;
-  const section = section5Ref.current;
-  const textBox = textRef.current;
+    const items = textBox.querySelectorAll(".anim-item");
 
-  if (!image || !section || !textBox) return;
+    const ctx = gsap.context(() => {
+      /* --- PARALLAX --- */
+      gsap.fromTo(
+        image,
+        { y: "12vh" },
+        {
+          y: "-35vh",
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+          },
+        }
+      );
 
-  const items = textBox.querySelectorAll(".anim-item");
+      /* --- TEXT FADE IN --- */
+      gsap.fromTo(
+        items,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.4,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
 
-  const ctx = gsap.context(() => {
+      // SLIDE FIRST LEFT CIRCLE FROM -right-100 TO right-0
+      // SLIDE FIRST LEFT CIRCLE: start 400px right (off-screen) → final (right:0)
 
-    /* --- PARALLAX --- */
-    gsap.fromTo(
-      image,
-      { y: "12vh" },
-      {
-        y: "-35vh",
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          scrub: true,
-          start: "top bottom",
-          end: "bottom top",
-        },
-      }
-    );
-
-    /* --- TEXT FADE IN --- */
-    gsap.fromTo(
-      items,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.4,
-        ease: "power3.out",
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top 60%",
-          toggleActions: "play none none reverse",
+          toggleActions: "restart none none reverse",
         },
-      }
-    );
+      });
 
-    // SLIDE FIRST LEFT CIRCLE FROM -right-100 TO right-0
-// SLIDE FIRST LEFT CIRCLE: start 400px right (off-screen) → final (right:0)
-
-const tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: section,
-    start: "top 60%",
-    toggleActions: "restart none none reverse",
-  },
-});
-
-/* -------------------------------------
+      /* -------------------------------------
    PHASE 1 — right animation (1 & 3)
 ------------------------------------- */
-tl.fromTo(
-  ".left-circle-1",
-  { right: -400, opacity: 0, scale: 0, y: 200 },
-  { right: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out",delay:0.5 },
-  "phase1"
-);
+      tl.fromTo(
+        ".left-circle-1",
+        { right: -400, opacity: 0, scale: 0, y: 200 },
+        {
+          right: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.5,
+        },
+        "phase1"
+      );
 
-tl.fromTo(
-  ".left-circle-3",
-  { right: -400, opacity: 0, scale: 0, y: -125 },
-  { right: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out",delay:0.5 },
-  "phase1"
-);
+      tl.fromTo(
+        ".left-circle-3",
+        { right: -400, opacity: 0, scale: 0, y: -125 },
+        {
+          right: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.5,
+        },
+        "phase1"
+      );
 
-
-/* -------------------------------------
+      /* -------------------------------------
    PHASE 2 — y(1&3) + right(2) TOGETHER
 ------------------------------------- */
-tl.to(
-  [".left-circle-1", ".left-circle-3"],
-  {
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out",
-  },
-  "phase2"   // label for phase 2
-);
+      tl.to(
+        [".left-circle-1", ".left-circle-3"],
+        {
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "phase2" // label for phase 2
+      );
 
-// circle 2 joins phase 2:
-tl.fromTo(
-  ".left-circle-2",
-  { right: -100, opacity: 0, scale: 0 },
-  {
-    right: "192px",
-    opacity: 1,
-    scale: 1,
-    duration: 0.8,
-    ease: "power3.out",
-  },
-  "phase2"   // SAME LABEL → runs together
-);
+      // circle 2 joins phase 2:
+      tl.fromTo(
+        ".left-circle-2",
+        { right: -100, opacity: 0, scale: 0 },
+        {
+          right: "192px",
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "phase2" // SAME LABEL → runs together
+      );
 
-// start phase2 immediately after phase1 ends
-tl.addLabel("phase2", "phase1+=1.2");
+      // start phase2 immediately after phase1 ends
+      tl.addLabel("phase2", "phase1+=1.2");
 
-
-
-
-/* ==========================================================
+      /* ==========================================================
    RIGHT CIRCLES — EXACT SAME LOGIC MIRRORED
 ========================================================== */
 
-const tlRight = gsap.timeline({
-  scrollTrigger: {
-    trigger: section,
-    start: "top 60%",
-    toggleActions: "restart none none reverse",
-  },
-});
+      const tlRight = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 60%",
+          toggleActions: "restart none none reverse",
+        },
+      });
 
-/* -------------------------------------
+      /* -------------------------------------
    PHASE 1 — right animation (1 & 3)
 ------------------------------------- */
-tlRight.fromTo(
-  ".right-circle-1",
-  { left: -400, opacity: 0, scale: 0, y: 200 },
-  { left: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out", delay: 0.5 },
-  "phase1-right"
-);
+      tlRight.fromTo(
+        ".right-circle-1",
+        { left: -400, opacity: 0, scale: 0, y: 200 },
+        {
+          left: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.5,
+        },
+        "phase1-right"
+      );
 
-tlRight.fromTo(
-  ".right-circle-3",
-  { left: -400, opacity: 0, scale: 0, y: -125 },
-  { left: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out", delay: 0.5 },
-  "phase1-right"
-);
+      tlRight.fromTo(
+        ".right-circle-3",
+        { left: -400, opacity: 0, scale: 0, y: -125 },
+        {
+          left: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.5,
+        },
+        "phase1-right"
+      );
 
-/* -------------------------------------
+      /* -------------------------------------
    PHASE 2 — y(1&3) + right(2)
 ------------------------------------- */
-tlRight.to(
-  [".right-circle-1", ".right-circle-3"],
-  {
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out",
-  },
-  "phase2-right"
-);
+      tlRight.to(
+        [".right-circle-1", ".right-circle-3"],
+        {
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "phase2-right"
+      );
 
-// circle 2 right animation
-tlRight.fromTo(
-  ".right-circle-2",
-  { left: -100, opacity: 0, scale: 0 },
-  {
-    left: "192px",
-    opacity: 1,
-    scale: 1,
-    duration: 0.8,
-    ease: "power3.out",
-  },
-  "phase2-right"
-);
+      // circle 2 right animation
+      tlRight.fromTo(
+        ".right-circle-2",
+        { left: -100, opacity: 0, scale: 0 },
+        {
+          left: "192px",
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "phase2-right"
+      );
 
-// phase2 starts after phase1
-tlRight.addLabel("phase2-right", "phase1-right+=1.2");
+      // phase2 starts after phase1
+      tlRight.addLabel("phase2-right", "phase1-right+=1.2");
+    });
 
-
-
-
-
-  });
-
-  return () => ctx.revert();
-};
-
-
-
-
-
+    return () => ctx.revert();
+  };
 
   useEffect(() => {
     const listener = () => initGSAP();
@@ -299,8 +310,15 @@ tlRight.addLabel("phase2-right", "phase1-right+=1.2");
   const d = data;
 
   return (
-    <section ref={section5Ref} className="w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
-      <div className="container" ref={textRef} style={{ perspective: "1200px", transformStyle: "preserve-3d" }}>
+    <section
+      ref={section5Ref}
+      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]"
+    >
+      <div
+        className="container"
+        ref={textRef}
+        style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
+      >
         {/* Heading */}
         <h2 className="anim-item text-[26px] md:text-[40px] xl:text-[45px] 2xl:text-[58px] 3xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
           {d.heading}
@@ -340,21 +358,27 @@ tlRight.addLabel("phase2-right", "phase1-right+=1.2");
 
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center w-fit">
-       <div  className="relative w-[350px] h-[650px] overflow-hidden phone-wrapper z-[100]">
-            <Image className="absolute z-10 h-full w-full" src={"/images/home/app/phone.png"} alt="phone" width={900} height={900} />
-            <div className="left-[25px] right-[25px] absolute" ref={imageRef}>
-            <Image
-              src={d.mobileImage}
-              alt="mobile"
-              width={1500}
-              height={2000}
-              className=" absolute
+            <div className="relative w-[350px] h-[650px] overflow-hidden phone-wrapper z-[100]">
+              <Image
+                className="absolute z-10 h-full w-full"
+                src={"/images/home/app/phone.png"}
+                alt="phone"
+                width={900}
+                height={900}
+              />
+              <div className="left-[25px] right-[25px] absolute" ref={imageRef}>
+                <Image
+                  src={d.mobileImage}
+                  alt="mobile"
+                  width={1500}
+                  height={2000}
+                  className=" absolute
        w-full
         
       "
-            />
+                />
+              </div>
             </div>
-          </div>
           </div>
 
           {/* RIGHT CIRCLES (visible only on lg+) */}
