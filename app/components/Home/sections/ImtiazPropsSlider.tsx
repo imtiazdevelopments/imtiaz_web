@@ -199,7 +199,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           viewport={{ once: true }}
         >
           <Link
-            href="/properties"
+            href="/#"
             className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full
             hover:bg-primary hover:text-white transition-colors duration-300"
           >

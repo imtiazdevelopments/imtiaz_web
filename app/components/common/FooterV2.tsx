@@ -9,13 +9,14 @@ import { useRef } from "react";
 const Footer = () => {
   const heroRef = useRef(null);
 
-  // Track scroll progress of this specific section
+  // Track scroll for this footer section
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start 0.9", "end start"],
+    offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+  // Convert scroll → Y movement (-25vh → 25vh)
+  const y = useTransform(scrollYProgress, [0, 1], ["-25vh", "25vh"]);
   return (
     <footer className="w-full text-white">
       {/* ================= TOP HERO SECTION ================= */}
@@ -25,7 +26,7 @@ const Footer = () => {
       >
         {/* BG IMAGE WITH SCROLL ZOOM */}
         <motion.div
-          style={{ scale }}
+          style={{ y }}
           className="absolute inset-0 z-0 will-change-transform"
         >
           <Image
@@ -33,7 +34,7 @@ const Footer = () => {
             alt="footer background"
             fill
             priority
-            className="object-cover"
+            className="object-cover scale-[1.5]"
           />
         </motion.div>
 
