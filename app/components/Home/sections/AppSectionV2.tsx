@@ -123,9 +123,9 @@ const initGSAP = () => {
     /* --- PARALLAX --- */
     gsap.fromTo(
       image,
-      { y: "25vh" },
+      { y: "12vh" },
       {
-        y: "-25vh",
+        y: "-35vh",
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -340,19 +340,20 @@ tlRight.addLabel("phase2-right", "phase1-right+=1.2");
 
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center w-fit">
-       <div ref={imageRef} className="phone-wrapper z-[100]">
+       <div  className="relative w-[350px] h-[650px] overflow-hidden phone-wrapper z-[100]">
+            <Image className="absolute z-10 h-full w-full" src={"/images/home/app/phone.png"} alt="phone" width={900} height={900} />
+            <div className="left-[25px] right-[25px] absolute" ref={imageRef}>
             <Image
               src={d.mobileImage}
               alt="mobile"
-              width={337}
-              height={650}
-              className="
-        w-[260px]
-        md:w-[300px]
-        xl:w-[337px]
-        xl:h-[650px]
+              width={1500}
+              height={2000}
+              className=" absolute
+       w-full
+        
       "
             />
+            </div>
           </div>
           </div>
 
