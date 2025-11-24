@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { moveUp, fadeUp } from "../../motionVariants";
+import { moveUp } from "../../motionVariants";
 
 import type { Swiper as SwiperType } from "swiper";
 
