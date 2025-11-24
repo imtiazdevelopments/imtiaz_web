@@ -7,74 +7,79 @@ export default function FloatingRightIcons() {
   const [darkHeader, setDarkHeader] = useState(false);
 
   useEffect(() => {
-    const sections = document.querySelectorAll(
-      "[data-header], .make-header-black"
-    );
+    const checkBackground = () => {
+      const floating = document.querySelector(".floating-icons") as HTMLElement;
+      if (!floating) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const isDark = entry.target.classList.contains("make-header-black");
-            setDarkHeader(isDark);
-          }
-        });
-      },
-      {
-        threshold: 0.3,
-        rootMargin: "-100px 0px 0px 0px", // adjust for header height if needed
+      const prevPE = floating.style.pointerEvents;
+      floating.style.pointerEvents = "none";
+
+      const posY = window.innerHeight / 2;
+      const posX = window.innerWidth - 75;
+
+      const el = document.elementFromPoint(posX, posY);
+      floating.style.pointerEvents = prevPE;
+
+      if (!el) return;
+
+      let node: HTMLElement | null = el as HTMLElement;
+      let isDark = false;
+
+      while (node && node !== document.body) {
+        if (node.classList.contains("make-header-black")) {
+          isDark = true;
+          break;
+        }
+        node = node.parentElement;
       }
-    );
 
-    sections.forEach((section) => observer.observe(section));
+      setDarkHeader(isDark);
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", checkBackground);
+    window.addEventListener("resize", checkBackground);
+    checkBackground();
+
+    return () => {
+      window.removeEventListener("scroll", checkBackground);
+      window.removeEventListener("resize", checkBackground);
+    };
   }, []);
 
+  const bgColor = darkHeader ? "bg-black/50" : "bg-white/25";
+
   return (
-    <div className="fixed right-[50px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
-      {/* ICON 1 */}
+    <div className="floating-icons fixed right-[50px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-          darkHeader ? "bg-black" : "bg-white/25"
-        }`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/phone.svg"
-          alt="icon1"
+          alt="phone"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
         />
       </div>
 
-      {/* ICON 2 */}
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-          darkHeader ? "bg-black" : "bg-white/25"
-        }`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/whatsapp.svg"
-          alt="icon2"
+          alt="whatsapp"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
         />
       </div>
 
-      {/* ICON 3 */}
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-          darkHeader ? "bg-black" : "bg-white/25"
-        }`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/message.svg"
-          alt="icon3"
+          alt="message"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
         />
       </div>
     </div>
