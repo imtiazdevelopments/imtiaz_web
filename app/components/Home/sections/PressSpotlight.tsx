@@ -135,8 +135,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     >
                       <div className="overflow-hidden">
                         <motion.p
-                          variants={fadeUp}
-                          custom={0.1}
+                          variants={moveUp(0.1)}
+                          // custom={0.1}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
                           exit="exit"
@@ -147,20 +147,20 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                       </div>
                       <div className="overflow-hidden">
                         <motion.h3
-                          variants={fadeUp}
-                          custom={0.3}
+                          variants={moveUp(0.3)}
+                          // custom={0.3}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
                           exit="exit"
-                          className="text-[22px] md:text-[30px] font-[optima] text-center leading-[1.15] uppercase max-w-[28ch] xl:max-w-[36ch] pb-[30px] xl:pb-[50px]"
+                          className="text-[22px] md:text-[30px] font-[optima] text-center leading-[1.15] uppercase max-w-[28ch] xl:max-w-[36ch] mb-[30px] xl:mb-[50px] line-clamp-2"
                         >
                           {item.title}
                         </motion.h3>
                       </div>
                       <div className="overflow-hidden">
                         <motion.div
-                          variants={fadeUp}
-                          custom={0.45}
+                          variants={moveUp(0.45)}
+                          // custom={0.45}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
                           exit="exit"
@@ -228,7 +228,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             className="flex justify-center mt-[50px]"
           >
             <Link
-              href="/press"
+              href="/#"
               className="border border-primary text-primary px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] hover:bg-primary hover:text-white transition-colors"
             >
               View All

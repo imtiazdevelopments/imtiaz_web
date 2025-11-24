@@ -373,21 +373,23 @@ export const pressSpotlightData = {
       date: "15-10-2025",
       title: "THE IMTIAZ GROWTH STORY: REDEFINING LUXURY, ELEVATING DUBAI",
       image: "/images/home/PressSpotlight/ps1.jpg",
-      link: "/press/imtiaz-growth-story",
+      link: "/#",
     },
     {
       id: 2,
       date: "02-12-2025",
-      title: "IMTIAZ LAUNCHES NEW LUXURY TOWER IN DUBAI",
+      title:
+        "IMTIAZ and Zaha Hadid Architects Set the Stage for Dubai’s Next Ultra-Luxury Landmark",
       image: "/images/home/imtiaz-properties/2.png",
-      link: "/press/new-tower",
+      link: "/#",
     },
     {
       id: 3,
       date: "01-01-2026",
-      title: "IMTIAZ ACHIEVES RECORD-BREAKING GROWTH",
+      title:
+        "Imtiaz Developments hands over Pearl House II in JVC three months early, reinforcing record delivery pace across Dubai",
       image: "/images/home/imtiaz-properties/1.png",
-      link: "/press/record-growth",
+      link: "/#",
     },
   ],
 };
