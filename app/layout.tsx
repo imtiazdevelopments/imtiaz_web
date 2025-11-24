@@ -4,7 +4,7 @@ import "./globals.css";
 // import Header from "./components/common/Header";
 import Header2 from "./components/common/Header2";
 // import Footer from "./components/common/Footer";
-import SmoothScroll from "./components/common/SmoothScroll";
+/* import SmoothScroll from "./components/common/SmoothScroll"; */
 import FooterV2 from "./components/common/FooterV2";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <SmoothScroll />
+{/*         <SmoothScroll /> */}
         {/* <Header /> */}
         <Header2 />
         {children}
