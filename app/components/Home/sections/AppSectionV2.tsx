@@ -232,7 +232,6 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
           trigger: section,
           start: "top 10%",
           toggleActions: "restart none none reverse",
-          markers: true
         },
       });
 
