@@ -396,7 +396,7 @@ export const appSectionData = {
   heading: "YOUR ALL-IN-ONE APP FOR EVERY PROPERTY NEED",
   subtitle:
     "The Imtiaz App empowers homeowners and tenants to manage their property anytime, anywhere—from their phone.",
-  mobileImage: "/images/home/app/phoneV2.png",
+  mobileImage: "/images/home/app/Imtiaz_Mobile_APP.png",
 
   leftCircles: [
     { title: "CONSTRUCTION UPDATES", icon: "/images/home/app/icons/1.svg" },

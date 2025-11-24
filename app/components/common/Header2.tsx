@@ -95,7 +95,7 @@ const Header2: React.FC = () => {
     .to(".ovrlyabg", {
     opacity: "0",
     zIndex: "-1",
-
+      height: "0%",
   })
  
 
@@ -134,7 +134,7 @@ const Header2: React.FC = () => {
       {/* ========================= HEADER =========================   3xl:h-[80px] backdrop-blur-[30px]  */}
       <div
         className={clsx(
-          "mnhdr fixed  w-full z-[999] left-1/2 -translate-x-1/2  transition-all duration-500 h-full",
+          "mnhdr fixed  w-full z-[999] left-1/2 -translate-x-1/2  transition-all duration-500",
           showHeader
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-10 pointer-events-none"
@@ -146,7 +146,7 @@ const Header2: React.FC = () => {
             <div className="hdrcnts   flex items-center justify-between rounded-[150px] py-[15px] !px-4 lg:!px-[25px] 2xl:!px-[31px]  w-full  relative h-screen">
               <div className="bckbg bg-white/10 backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2  absolute  rounded-[150px] z-[-1]"></div>
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
-              <div className="mnhmns hidden lg:flex gap-[32px] text-white uppercase text-[16px] font-[avenirRoman] w-[33.33%] overflow-hidden">
+              <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 {menuItems.map((item) => (
                   <Link key={item.name} href={item.href} className="opacity-0">
                     {item.name}
@@ -302,7 +302,7 @@ const Header2: React.FC = () => {
               </div>
 
               {/* ------- RIGHT SIDE ICONS (DESKTOP ONLY) ------- */}
-              <div className="w-[33.33%] flex justify-end ">
+              <div className="w-[40%] 2xl:w-[33.33%] flex justify-end ">
                 <div className="flex items-center gap-[10px] overflow-hidden rgtbtn">
                   <button className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0">
                     <Image
