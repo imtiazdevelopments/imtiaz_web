@@ -1,7 +1,7 @@
 // context/SearchContext.tsx
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import SmoothScroll from "../components/common/SmoothScroll";
 
 const SmoothScrollContext = createContext<{
