@@ -95,7 +95,7 @@ const Header2: React.FC = () => {
     .to(".ovrlyabg", {
     opacity: "0",
     zIndex: "-1",
-
+      height: "0%",
   })
  
 
@@ -134,7 +134,7 @@ const Header2: React.FC = () => {
       {/* ========================= HEADER =========================   3xl:h-[80px] backdrop-blur-[30px]  */}
       <div
         className={clsx(
-          "mnhdr fixed  w-full z-[999] left-1/2 -translate-x-1/2  transition-all duration-500 h-full",
+          "mnhdr fixed  w-full z-[999] left-1/2 -translate-x-1/2  transition-all duration-500",
           showHeader
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-10 pointer-events-none"
