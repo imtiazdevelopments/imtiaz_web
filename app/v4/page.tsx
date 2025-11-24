@@ -22,6 +22,7 @@ import ConstructionProgress2 from "../components/Home/sections/ConstructionProgr
 import PressSpotlight from "../components/Home/sections/PressSpotlight";
 import AppSection from "../components/Home/sections/AppSectionV2";
 import CommunitySlider from "../components/Home/sections/CommunitySlider";
+import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +35,8 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
 
+  const {setSmoothScrollActive} = useSmoothScrollContext();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
   }, []);
@@ -45,7 +48,8 @@ export default function Home() {
 
   const startAnimations = () => {
     // ENABLE scroll now
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = "hidden";
+    setSmoothScrollActive(true);
 
     const ctx = gsap.context(() => {
       const bar = document.getElementById("bar");
