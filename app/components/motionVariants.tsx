@@ -9,17 +9,27 @@ export const containerStagger = {
     },
   },
 };
-export const moveUp = (delay: number = 0) => ({
+
+export const moveUp = (delay = 0): Variants => ({
   hidden: { opacity: 0, y: 50 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: delay,
+      delay,
       duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+  reset: { opacity: 0, y: 50 },
 });
 
 export const moveDown = (delay: number = 0) => ({
@@ -198,4 +208,14 @@ export const textFade: Variants = {
       ease: easeExit, // ☑ typed, no any
     },
   },
+};
+
+export const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: (d: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: d },
+  }),
+  reset: { opacity: 0, y: 40 }, // ⭐ NEW
 };

@@ -1,4 +1,5 @@
-<svg width="32" height="53" viewBox="0 0 32 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="0.5" y="0.5" width="31" height="52" rx="15.5" stroke="white"/>
-<line x1="16.5" y1="14.5" x2="16.5" y2="27.5" stroke="white" stroke-linecap="round"/>
-</svg>
+<svg id="efYK7HIj9yD1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 53" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" project-id="0bd1da3a58dc436a88aaa359efaccf38" export-id="fc4127ac07464951b82c2c0490b3baca" cached="false">
+<style><![CDATA[
+#efYK7HIj9yD5_to {animation: efYK7HIj9yD5_to__to 2000ms linear infinite normal forwards}@keyframes efYK7HIj9yD5_to__to { 0% {transform: translate(16.5px,7px)} 100% {transform: translate(16.5px,46.5px)}}
+]]></style>
+<g mask="url(#efYK7HIj9yD4)"><rect width="2.469473" height="29.207905" rx="0" ry="0" transform="matrix(1 0 0 0.860056 15.276197 13.939783)" fill="#fff" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/><mask id="efYK7HIj9yD4" mask-type="luminance" x="-150%" y="-150%" height="400%" width="400%"><g id="efYK7HIj9yD5_to" transform="translate(16.5,7)"><line x1="16.5" y1="14.5" x2="16.5" y2="27.5" transform="translate(-16.5,-21)" fill="none" stroke="#fff" stroke-linecap="round"/></g></mask></g><rect width="31" height="52" rx="15.5" ry="15.5" transform="translate(.5 0.5)" fill="none" stroke="#fff"/></svg>

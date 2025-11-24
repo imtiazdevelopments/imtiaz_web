@@ -13,6 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Header2: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
+  const [darkHeader, setDarkHeader] = useState(false);
+
   const lastScroll = useRef(0);
 
   useEffect(() => {
@@ -41,93 +43,133 @@ const Header2: React.FC = () => {
     { name: "Media Center", href: "/#" },
   ];
 
-
   useEffect(() => {
- 
-  const tl = gsap.timeline({
-   /*  defaults: {  ease: "power3.out" } */
-  });
+    const tl = gsap.timeline({
+      /*  defaults: {  ease: "power3.out" } */
+    });
 
-
-  tl.to(".group-1 path", {
-    y: 0,
-    opacity: 1,
-    stagger: 0.15,
-    duration: 0.8,
-
-  })
-    .to(".group-2 path", {
+    tl.to(".group-1 path", {
       y: 0,
       opacity: 1,
       stagger: 0.15,
-      duration: 1,
-    }) 
+      duration: 0.8,
+    })
+      .to(".group-2 path", {
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 1,
+      })
 
-  
-    .to(".hdrcnts", {
-    height: "80px",
-    duration: 0.5,
-   marginTop: '20px',
+      .to(".hdrcnts", {
+        height: "80px",
+        duration: 0.5,
+        marginTop: "20px",
+      })
+      .to(
+        ".hdrlgs svg",
+        {
+          height: "50px",
+          duration: 0.5,
+        },
+        "<"
+      )
 
-  })
-    .to(".hdrlgs svg", {
-    height: "50px",
-    duration: 0.5,
-
-  },"<")
-
-    .to(".ovrlyabg", {
-    opacity: "0",
-    duration: 0.6,
-
-  })
+      .to(".ovrlyabg", {
+        opacity: "0",
+        duration: 0.6,
+      })
+      .to(
+        ".bckbg",
+        {
+          height: "100%",
+          duration: 0.6,
+        },
+        "-=2"
+      )
       .to(".bckbg", {
-    height: "100%",
-    duration: 0.6,
+        height: "100%",
+        width: "100%",
+        duration: 0.8,
+      })
+      .to(".ovrlyabg", {
+        opacity: "0",
+        zIndex: "-1",
+        height: "0%",
+      })
 
-  }, "-=2")
-      .to(".bckbg", {
-    height: "100%",
-    width: "100%",
-    duration: 0.8,
+      .fromTo(
+        ".mnhmns a",
+        {
+          y: 40,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.2,
+          duration: 1,
+        },
+        "-=0.8"
+      )
+      .fromTo(
+        ".rgtbtn button",
+        {
+          y: 40,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.2,
+          duration: 1,
+        },
+        "<"
+      )
 
-  })
-    .to(".ovrlyabg", {
-    opacity: "0",
-    zIndex: "-1",
-      height: "0%",
-  })
- 
-
-      .fromTo(".mnhmns a", {
-      y: 40
-  
-    },
-  {
-       y: 0,
-      opacity: 1,
-    stagger: 0.2,
-      duration: 1,
-  },"-=0.8") 
-      .fromTo(".rgtbtn button", {
-      y: 40
-  
-    },
-  {
-       y: 0,
-      opacity: 1,
-    stagger: 0.2,
-      duration: 1,
-  },"<") 
-
-
- .add(() => {
+      .add(() => {
         window.dispatchEvent(new Event("headerAnimationComplete"));
       });
+  }, []);
 
-  
-}, []);
+  useEffect(() => {
+    const check = () => {
+      const header = document.querySelector(".mnhdr") as HTMLElement;
+      if (!header) return;
 
+      // temporarily disable pointer-events to read behind header
+      const old = header.style.pointerEvents;
+      header.style.pointerEvents = "none";
+
+      const el = document.elementFromPoint(window.innerWidth / 2, 80);
+
+      header.style.pointerEvents = old;
+
+      if (!el) return;
+
+      // check if this element OR any parent has the class
+      let node: HTMLElement | null = el as HTMLElement;
+
+      let shouldBeBlack = false;
+
+      while (node && node !== document.body) {
+        if (node.classList.contains("make-header-black")) {
+          shouldBeBlack = true;
+          break;
+        }
+        node = node.parentElement;
+      }
+
+      setDarkHeader(shouldBeBlack);
+    };
+
+    window.addEventListener("scroll", check);
+    window.addEventListener("resize", check);
+    check();
+
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, []);
 
   return (
     <>
@@ -144,9 +186,16 @@ const Header2: React.FC = () => {
         <header className="overflow-hidden  w-full ">
           <div className="container flex justify-center">
             <div className="hdrcnts   flex items-center justify-between rounded-[150px] py-[15px] !px-4 lg:!px-[25px] 2xl:!px-[31px]  w-full  relative h-screen">
-              <div className="bckbg bg-white/10 backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2  absolute  rounded-[150px] z-[-1]"></div>
+              {/* <div className="bckbg bg-white/10 backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2  absolute  rounded-[150px] z-[-1]"></div> */}
+              <div
+                className={clsx(
+                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2  absolute  rounded-[150px] z-[-1] transition-colors duration-500",
+                  darkHeader ? "bg-black/50" : "bg-white/10"
+                )}
+              ></div>
+
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
-              <div className="mnhmns hidden lg:flex gap-[32px] text-white uppercase text-[16px] font-[avenirRoman] w-[33.33%] overflow-hidden">
+              <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 {menuItems.map((item) => (
                   <Link key={item.name} href={item.href} className="opacity-0">
                     {item.name}
@@ -171,44 +220,41 @@ const Header2: React.FC = () => {
               {/* ------- CENTER LOGO ------- */}
 
               <div className="hdrlgs">
-                <svg className="h-[80px]"
+                <svg
+                  className="h-[80px]"
                   id="ekcavZ6yIE91"
                   xmlns="http://www.w3.org/2000/svg"
-             
                   viewBox="0 0 183 50"
-                 shapeRendering="geometricPrecision"
+                  shapeRendering="geometricPrecision"
                   textRendering="geometricPrecision"
                   project-id="1b9e9c8c7e8940c6a5e9634ed0e26e37"
                   export-id="63f0341249714b0f8c20b33a3ec98203"
-            
                 >
-               <g clipPath="url(#ekcavZ6yIE927)">
+                  <g clipPath="url(#ekcavZ6yIE927)">
                     <g>
-                      <g >
-                        <g className="logo-group group-1" mask="url(#ekcavZ6yIE912)">
+                      <g>
+                        <g
+                          className="logo-group group-1"
+                          mask="url(#ekcavZ6yIE912)"
+                        >
                           <path
                             d="M59.3311,0.105377L58.543,5.10916l.549-.12513c2.7667-.62733,5.6075-.97968,8.4467-1.04719h4.2011v23.27526c-.0033,1.7338-.2407,3.4001-.6859,4.8177l-.155.494h8.206l-.1566-.494c-.4452-1.416-.6826-3.0823-.6859-4.816v-23.27696h4.2027c2.8376.06751,5.6801.41986,8.4468,1.04719l.549.12513-.7881-5.003783h-31.3401-.0016Z"
-                          
                             fill="#fff"
                           />
                           <path
                             d="M104.833,31.2691l-.02-.0642c-.097-.2947-.174-.5977-.231-.9023l-.158-2.0021v-23.77421l.158-2.00217c.057-.30461.134-.60921.231-.90394l.004-.00823c.099-.32601.201-.665199.303-1.020848l.14-.485725h-8.2388l.1401.485725c.1039.357296.2077.701418.3034,1.020848l.0033.00823c.0973.29473.1731.59769.2292.90394l.1582,2.00053v23.77585l-.1582,2.0021c-.0561.3063-.1336.6109-.2292.904l-.0066.0197c-.0775.2552-.183.6027-.2506.7064l-.3924.5911h8.6446l-.391-.5911c-.064-.0988-.161-.41-.239-.6652"
-                         
                             fill="#fff"
                           />
                           <path
                             d="M60.1012,28.6347c-.6727-1.1904-1.3356-2.483-1.972-3.843l-3.6834-8.5339-1.4229-3.3952L47.427,0.019756l-.6463.011526h-5.9258L42.662,4.5016l.0033.00987c.5441,1.24313.5771,2.68713.0907,3.96154L37.6645,23.1831L28.306,0.042808l-7.0617-.011526L23.3432,4.73869c.5491,1.2316.5936,2.66902.1237,3.94178-.0198.05269-.038.10538-.0561.15313-.0198.05598-.0396.10867-.0577.15807-1.3504,3.65203-2.9546,7.75843-4.7699,12.20073l-1.7444,4.1641-.0083.0247c-.1236.3622-.2704.7179-.432,1.057l-.2423.5434c-.1798.4034-.3215.7228-.4304.955l-.0049.0115c-.3594.8513-.7749,1.6811-1.23,2.4616-.4105.6849-.6941,1.164-.9002,1.5592l-.2919.5565h7.6702l-.9217-1.5395c-.0577-.382-.061-.7705-.0115-1.1542.2687-1.4489.6941-2.855,1.2646-4.1772l.0082-.0198c1.8302-5.0038,3.3751-9.204,4.9661-13.4307.0099-.0181.0182-.0378.0248-.0576.1319-.3523.2654-.7047.399-1.0554.0412-.112.0841-.2223.1253-.3326l8.0164,21.7687h3.7592l7.1178-21.2797c.2687.6257.5342,1.2382.7947,1.8309.5161,1.1905,1.0288,2.3809,1.5416,3.573.5293,1.23,1.0783,2.5011,1.6191,3.7508l.3743.8628c.6298,1.4555,1.2811,2.9604,1.9274,4.434l.1154.2816.094.3293.0165.0313c.0659.1301.1302.2684.1978.4231l.0033.0083c.2177.4692.4419,1.0077.6876,1.6482l.0049.0115c.249.5944.4749,1.2135.6711,1.8342.0841.2783,0,.6767-.1171,1.2283-.0362.1745-.0775.3721-.1187.5845l-.0857.4512h9.1804l-.4221-.601c-.8112-1.1509-1.4971-2.2278-2.0972-3.2898"
-                          
                             fill="#fff"
                           />
                           <path
                             d="M7.52309,2.49448c.05606-.30296.1319-.60592.22918-.89735l.0033-.00823c.10057-.33425.1995-.663553.30172-1.014262l.1418-.485725h-8.199394l.140146.485725c.102225.354002.206098.696482.301727,1.014262v.00823c.098927.29308.174771.59604.23083.899l.158283,1.989v23.63587l-.158283,1.9923c-.056059.3029-.133552.6059-.229181.8973l-.003298.0083c-.095629.3178-.199502.6602-.301727,1.0142l-.140146.4858h8.196093L8.054,32.0331c-.07585-.2634-.15169-.517-.23578-.7969l.00659-.0066-.07419-.2223c-.09563-.293-.17312-.5943-.22918-.8973l-.15828-1.9907v-23.63581l.15828-1.99065.00165.00164Z"
-                         
                             fill="#fff"
                           />
                           <path
                             d="M142.903,28.4322c-1.686-2.7118-3-5.6822-4.27-8.5554-.265-.6009-.537-1.2102-.8-1.798-.468-1.0439-.934-2.0878-1.401-3.1333-.234-.5236-.468-1.0472-.702-1.5708-.274-.6125-.549-1.2266-.823-1.8392-.427-.9549-.854-1.90992-1.283-2.8682-.313-.6866-.626-1.39131-.931-2.07297l-.179-.39846c-.338-.76069-.689-1.54773-1.038-2.3216L129.871,0h-7.793l1.055,1.11305c.351.36718.374.44456.412.57464l.008.02963c.047.20911.068.41164.063.59934-.015.39023-.081.77881-.196,1.15915l-.035.11197c-.028.09549-.058.19429-.087.27826-3.88,8.91926-10.104,23.20446-10.308,23.61116-.422.8578-.906,1.6844-1.436,2.4566-.39.5631-.706,1.0126-.965,1.3798l-.819,1.1707h8.985l-1.408-1.9166c-.051-.3178-.051-.6454,0-.9714.038-.1367.368-1.0736,2.922-7.2826.907-.2387,1.822-.3804,2.722-.4182l6.935-.0033c.918.0411,1.845.1844,2.755.4281.491,1.0175,2.659,5.5307,3.664,8.091.023.354-.104.7031-.353.9649l-1.064,1.1147l10.958-.0198-.866-1.0686c-.774-.9566-1.488-1.9561-2.121-2.972M130.854,17.9817h-8.78c.968-2.3397,3.168-7.6514,4.216-10.1673l4.564,10.1673Z"
-                           
                             fill="#fff"
                           />
                           <path
@@ -230,7 +276,7 @@ const Header2: React.FC = () => {
                               ry="0"
                               transform="translate(0 0.105377)"
                               fill="#d2dbed"
-                                strokeWidth="0"
+                              strokeWidth="0"
                             />
                           </mask>
                         </g>
@@ -302,7 +348,7 @@ const Header2: React.FC = () => {
               </div>
 
               {/* ------- RIGHT SIDE ICONS (DESKTOP ONLY) ------- */}
-              <div className="w-[33.33%] flex justify-end ">
+              <div className="w-[40%] 2xl:w-[33.33%] flex justify-end ">
                 <div className="flex items-center gap-[10px] overflow-hidden rgtbtn">
                   <button className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0">
                     <Image
