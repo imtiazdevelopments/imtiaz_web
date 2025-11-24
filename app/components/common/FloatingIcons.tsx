@@ -51,35 +51,38 @@ export default function FloatingRightIcons() {
   return (
     <div className="floating-icons fixed right-[50px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/phone.svg"
           alt="phone"
           width={27}
           height={27}
+          className="w-[27px] h-[27px]"
         />
       </div>
 
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/whatsapp.svg"
           alt="whatsapp"
           width={27}
           height={27}
+          className="w-[27px] h-[27px]"
         />
       </div>
 
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 ${bgColor}`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/message.svg"
           alt="message"
           width={27}
           height={27}
+          className="w-[27px] h-[27px]"
         />
       </div>
     </div>

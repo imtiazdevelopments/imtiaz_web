@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,6 +32,29 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [activeSlide, setActiveSlide] = useState<number>(1);
+
+  // Autoplay only when section is in viewport
+  useEffect(() => {
+    const section = document.querySelector(".make-header-black");
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          swiperRef.current?.autoplay.start();
+        } else {
+          swiperRef.current?.autoplay.stop();
+        }
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
