@@ -161,10 +161,12 @@ const imageRef = useRef<HTMLDivElement>(null);
     return () => ctx.revert();
   };
 
-useEffect(() => {
-  initGSAP();
-}, []);
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
 
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
 
   const d = data;
 
