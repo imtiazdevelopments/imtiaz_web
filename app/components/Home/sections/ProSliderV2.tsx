@@ -265,12 +265,15 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Swiper as SwiperType } from "swiper";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -316,6 +319,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const [startAnim, setStartAnim] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+
+
 
 
 useEffect(() => {
@@ -332,6 +339,57 @@ useEffect(() => {
 }, []);
 
 
+//  const wrapRefs = useRef<HTMLDivElement[]>([]);
+//   const imgRefs = useRef<HTMLImageElement[]>([]);
+
+//   const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+//     if (el) wrapRefs.current[i] = el;
+//   };
+
+//   const setImgRef = (el: HTMLImageElement | null, i: number) => {
+//     if (el) imgRefs.current[i] = el;
+//   };
+
+//   const initGSAP = () => {
+//     const section = sectionRef.current;
+//     if (!section) return;
+
+//     console.log(section)
+
+//     const ctx = gsap.context(() => {
+//       wrapRefs.current.forEach((wrapper, i) => {
+//         const img = imgRefs.current[i];
+
+//         console.log(img);
+//         if (!wrapper || !img) return;
+
+//         gsap.fromTo(
+//           img,
+//           { y: "-25vh" },
+//           {
+//             y: "25vh",
+//             ease: "none",
+//             scrollTrigger: {
+//               trigger: wrapper,
+             
+//               start: "top bottom",
+//               end: "bottom top",
+//             },
+//           }
+//         );
+//       });
+//     });
+
+//     ScrollTrigger.refresh();
+//     return () => ctx.revert();
+//   };
+
+//   // Wait for "homeAnimationsReady"
+//   useEffect(() => {
+//     const listener = () => initGSAP();
+//     window.addEventListener("homeAnimationsReady", listener);
+//     return () => window.removeEventListener("homeAnimationsReady", listener);
+//   }, []);
 
 
 
@@ -344,7 +402,7 @@ useEffect(() => {
 
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative" ref={sectionRef}>
       <Swiper
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -356,6 +414,7 @@ useEffect(() => {
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade"
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -368,7 +427,7 @@ useEffect(() => {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover absolute"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
