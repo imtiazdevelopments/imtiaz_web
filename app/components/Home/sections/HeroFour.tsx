@@ -19,7 +19,7 @@ const Hero = () => {
 
       {/* Text and icon*/}
       <div className="absolute bottom-[110px] 3xl:bottom-[80px] 2xl:max-w-[125ch] 3xl:max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
-        <h1 className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white">
+        <h1 className="text-[35px] md:text-[50px] 2xl:text-[164px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white">
           Redefining Spaces Elevating Lives
         </h1>
         <Image src="/icons/mouse.svg" alt="Mouse" width={32} height={53} />
