@@ -380,7 +380,7 @@ export const pressSpotlightData = {
       date: "02-12-2025",
       title:
         "IMTIAZ and Zaha Hadid Architects Set the Stage for Dubai’s Next Ultra-Luxury Landmark",
-      image: "/images/home/imtiaz-properties/2.png",
+      image: "/images/home/PressSpotlight/1.jpg",
       link: "/#",
     },
     {
@@ -388,7 +388,7 @@ export const pressSpotlightData = {
       date: "01-01-2026",
       title:
         "Imtiaz Developments hands over Pearl House II in JVC three months early, reinforcing record delivery pace across Dubai",
-      image: "/images/home/imtiaz-properties/1.png",
+      image: "/images/home/PressSpotlight/2.jpg",
       link: "/#",
     },
   ],
