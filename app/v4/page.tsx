@@ -90,7 +90,7 @@ export default function Home() {
           scrollTrigger: {
             trigger: "#sec1",
             start: "end top",
-            end: "+=420%",
+            end: "+=450%",
             pin: true,
             scrub: 1,
           },
@@ -244,20 +244,20 @@ export default function Home() {
         <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
           <Image
             className="img1-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/imtiaz-properties/1.png"
+            src="/images/home/img01.jpg"
             alt=""
-            width={1500}
-            height={100}
+            width={2500}
+            height={1000}
           />
         </div>
 
         <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0] overflow-hidden">
           <Image
             className="img2-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/imtiaz-properties/3.png"
+            src="/images/home/img02.jpg"
             alt=""
-            width={1500}
-            height={100}
+            width={2500}
+            height={1000}
           />
         </div>
 
@@ -266,8 +266,8 @@ export default function Home() {
             className="img3-im w-full h-full object-cover object-center absolute scale-[1.5]"
             src="/images/home/imtiaz-properties/2.png"
             alt=""
-            width={1500}
-            height={100}
+            width={2500}
+            height={1000}
           />
         </div>
 
