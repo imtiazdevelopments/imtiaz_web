@@ -34,20 +34,12 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-  }, []);
-
 
   useEffect(() => {
-  // Disable scroll until header animation is finished
-  document.body.style.overflow = "hidden";
-
   const startAnimations = () => {
-    // ENABLE scroll now
-    document.body.style.overflow = "auto";
+   /*  document.body.style.overflow = "auto"; // ENABLE SCROLL */
 
-    const ctx = gsap.context(() => {
+   const ctx = gsap.context(() => {
       const bar = document.getElementById("bar");
       const img1 = document.querySelector(".img1-1");
       const img2 = document.querySelector(".img1-2");
@@ -66,20 +58,21 @@ export default function Home() {
       gsap.set(bar, { height: 0, width: "0%" });
       gsap.set([img1, img2, img3], { scale: 0 });
 
-      // Initial fade-in
+      // Initial text fade-in
       const t2 = gsap.timeline();
       t2.fromTo(
         titleRef.current,
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.2 }
-      ).fromTo(
-        scrollRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.3"
-      );
+      )
+        .fromTo(
+          scrollRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 },
+          "-=0.3"
+        );
 
-      // Scroll animation timeline
+      // Section 1 scroll animation
       const tlSec1 = gsap.timeline({
         scrollTrigger: {
           trigger: "#sec1",
@@ -95,29 +88,63 @@ export default function Home() {
         .to(bar, { width: "100%", duration: 0.8 })
         .to(bar, { height: "100vh", duration: 0.8 })
         .to(img1, { scale: 1, duration: 2 }, "-=0.6")
-        .fromTo(".img1-im", { y: "-25vh" }, { y: "25vh", duration: 2 }, "<")
+        .fromTo(
+          ".img1-im",
+          { y: "-25vh" },
+          { y: "25vh", duration: 2, ease: "none" },
+          "<"
+        )
         .to(img2, { scale: 1, duration: 2 }, "-=1")
-        .fromTo(".img2-im", { y: "-25vh" }, { y: "25vh", duration: 2 }, "<")
+        .fromTo(
+          ".img2-im",
+          { y: "-25vh" },
+          { y: "25vh", duration: 2, ease: "none" },
+          "<"
+        )
         .to(img3, { scale: 1, duration: 2 }, "-=1")
-        .fromTo(".img3-im", { y: "-25vh" }, { y: "25vh", duration: 2 }, "<")
-        .to(".split-section", { scale: 1, duration: 2 }, "-=1")
-        .to([leftBg, leftText], { x: "-100%", duration: 2, delay: 3 })
-        .to([rightBg, rightText], { x: "100%", duration: 2 }, "<")
+        .fromTo(
+          ".img3-im",
+          { y: "-25vh" },
+          { y: "25vh", duration: 2, ease: "none" },
+          "<"
+        )
+        .to(
+          ".split-section",
+          {
+            scale: 1,
+            duration: 2,
+          },
+          "-=1"
+        )
+        .to([leftBg, leftText], {
+          x: "-100%",
+          duration: 2,
+          delay: 3,
+        })
+        .to(
+          [rightBg, rightText],
+          {
+            x: "100%",
+            duration: 2,
+          },
+          "<"
+        )
         .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<")
         .to(sec3Ref.current, { opacity: 1, zIndex: 70, duration: 1, delay: 1 });
     });
 
-    setTimeout(() => ScrollTrigger.refresh(), 200);
+  window.dispatchEvent(new Event("homeAnimationsReady"));
+
+    setTimeout(() => ScrollTrigger.refresh(), 50);
 
     return () => ctx.revert();
   };
 
-  // WAIT for header animation event
-  window.addEventListener("headerAnimationComplete", startAnimations);
+   window.addEventListener("headerAnimationComplete", startAnimations);
 
-  return () => {
-    window.removeEventListener("headerAnimationComplete", startAnimations);
-  };
+    return () => {
+      window.removeEventListener("headerAnimationComplete", startAnimations);
+    };
 }, []);
 
 /*   useEffect(() => {
