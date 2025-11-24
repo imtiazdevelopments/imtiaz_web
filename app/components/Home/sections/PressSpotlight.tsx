@@ -39,41 +39,39 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
+  const imageRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  /*     const textRef = useRef<HTMLDivElement>(null); */
 
-   const imageRef = useRef<HTMLVideoElement>(null);
-    const sectionRef = useRef<HTMLDivElement>(null);
-/*     const textRef = useRef<HTMLDivElement>(null); */
-  
-   
-    const initGSAP = () => {
-      const image = imageRef.current;
-      const section = sectionRef.current;
-/*       const textBox = textRef.current; */
-  
-   /*    if (!video || !section || !textBox) return; */
-  
-      // Select only animatable items
-  /*     const items = textBox.querySelectorAll(".anim-item"); */
-  
-      const ctx = gsap.context(() => {
-        /* --- PARALLAX VIDEO --- */
-        gsap.fromTo(
-          image,
-          { y: "25vh" },
-          {
-            y: "-25vh",
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              scrub: true,
-              start: "top bottom",
-              end: "bottom top",
-            },
-          }
-        );
-  
-        /* --- TEXT FADE IN --- */
-        /* gsap.fromTo(
+  const initGSAP = () => {
+    const image = imageRef.current;
+    const section = sectionRef.current;
+    /*       const textBox = textRef.current; */
+
+    /*    if (!video || !section || !textBox) return; */
+
+    // Select only animatable items
+    /*     const items = textBox.querySelectorAll(".anim-item"); */
+
+    const ctx = gsap.context(() => {
+      /* --- PARALLAX VIDEO --- */
+      gsap.fromTo(
+        image,
+        { y: "25vh" },
+        {
+          y: "-25vh",
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+          },
+        }
+      );
+
+      /* --- TEXT FADE IN --- */
+      /* gsap.fromTo(
           items,
           { y: 50, opacity: 0 },
           {
@@ -90,25 +88,27 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             },
           }
         ); */
-      });
-  
-      ScrollTrigger.refresh();
-      return () => ctx.revert();
-    };
-  
-    /* -----------------------------
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  /* -----------------------------
        WAIT FOR main page READY event
     ----------------------------- */
-    useEffect(() => {
-      const listener = () => initGSAP();
-      window.addEventListener("homeAnimationsReady", listener);
-  
-      return () => window.removeEventListener("homeAnimationsReady", listener);
-    }, []);
-  
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden"
+    >
       {/* MAIN SWIPER */}
       <Swiper
         modules={[EffectFade, Autoplay]}
@@ -127,10 +127,10 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
           <SwiperSlide key={index}>
             <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-10 3xl:gap-0">
               {/* LEFT SECTION */}
-              
+
               <div className="flex flex-col items-center">
                 <motion.h2
-                  variants={moveUp(0.2)}
+                  variants={moveUp(0.35)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -150,7 +150,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                   >
                     {/* Date */}
                     <motion.p
-                      variants={moveUp(0.1)}
+                      variants={moveUp(0.15)}
                       className="text-[17px] font-[avenirRoman] text-[#404040] pb-[30px]"
                     >
                       {item.date}
@@ -158,14 +158,14 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
                     {/* Title */}
                     <motion.h3
-                      variants={moveUp(0.2)}
+                      variants={moveUp(0.3)}
                       className="text-[22px] md:text-[30px] font-[optima] text-center leading-[1.15] uppercase max-w-[28ch] xl:max-w-[36ch] pb-[30px] xl:pb-[50px]"
                     >
                       {item.title}
                     </motion.h3>
 
                     {/* Button */}
-                    <motion.div variants={moveUp(0.3)} className="mb-[20px]">
+                    <motion.div variants={moveUp(0.45)} className="mb-[20px]">
                       <Link
                         href={item.link}
                         className="flex items-center justify-center text-primary hover:text-white group hover:bg-primary p-2 rounded-full transition-colors"
@@ -205,9 +205,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
               </div>
 
               {/* RIGHT IMAGE */}
-              <div  className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px] overflow-hidden">
+              <div className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px] overflow-hidden">
                 <Image
-                  
                   src={item.image}
                   alt={item.title}
                   fill

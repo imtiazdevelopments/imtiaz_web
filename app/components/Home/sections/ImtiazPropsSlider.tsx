@@ -36,9 +36,17 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   return (
     <section className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
       {/* ================= TITLE ================= */}
-      <h2 className="text-center text-[42px] md:text-[55px] font-[optima] mb-[50px]">
-        {data.sectionTitle}
-      </h2>
+      <div className="overflow-hidden">
+        <motion.h2
+          variants={moveUp(0.35)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="text-center text-[42px] md:text-[55px] font-[optima] mb-[50px]"
+        >
+          {data.sectionTitle}
+        </motion.h2>
+      </div>
 
       {/* ================= SWIPER ================= */}
       <div className="relative">
@@ -77,7 +85,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
               <SwiperSlide key={item.id}>
                 <Link href={item.link}>
                   <motion.div
-                    variants={moveUp(idx * 0.12)}
+                    variants={moveUp(idx * 0.13)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
@@ -138,7 +146,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                       {/* Title */}
                       <h3
-                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-500 translate-y-18 ${
+                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-600 translate-y-18 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
@@ -149,7 +157,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                       {/* Read More Btn */}
                       <span
-                        className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-700 translate-y-6 ${
+                        className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-800 translate-y-6 ${
                           isActiveMobile
                             ? "!opacity-100 !translate-y-0"
                             : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"

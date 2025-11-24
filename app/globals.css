@@ -3,6 +3,7 @@
 body {
   overflow: hidden;
 }
+
 /* ---------- Custom Font Faces ---------- */
 @font-face {
   font-family: "Optima";
@@ -101,8 +102,8 @@ body {
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1360px;
-  --breakpoint-3xl: 1540px;
+  --breakpoint-2xl: 1560px;
+  /* --breakpoint-3xl: 1540px; */
 }
 
 
@@ -111,6 +112,28 @@ body {
   --background: #ffffff;
   --foreground: #171717;
   --primary: #7A253A;
+
+
+  /* 80px (Headings / Hero) */
+  --text-80: clamp(2.4rem, 6vw + 1rem, 80px);
+
+  /* 70px */
+  --text-70: clamp(2.2rem, 5.4vw + 0.8rem, 70px);
+
+  /* 30px */
+  --text-30: clamp(1.1rem, 2.5vw + 0.3rem, 30px);
+
+  /* 25px */
+  --text-25: clamp(1rem, 2vw + 0.25rem, 25px);
+
+  /* 19px */
+  --text-19: clamp(0.9rem, 1.4vw + 0.15rem, 19px);
+
+  /* 17px */
+  --text-17: clamp(0.85rem, 1.2vw + 0.12rem, 17px);
+
+  /* 15px */
+  --text-15: clamp(0.78rem, 1vw + 0.1rem, 15px);
 }
 
 @theme inline {
@@ -125,6 +148,14 @@ body {
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
   --breakpoint-3xl: 113.125rem;
+
+  --text-80: var(--text-80);
+  --text-70: var(--text-70);
+  --text-30: var(--text-30);
+  --text-25: var(--text-25);
+  --text-19: var(--text-19);
+  --text-17: var(--text-17);
+  --text-15: var(--text-15);
 }
 
 /* ---------- Dark Mode ---------- */
