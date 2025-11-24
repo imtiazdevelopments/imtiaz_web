@@ -40,6 +40,18 @@ export default function Home() {
   let collapseCount = 0;
 
 
+function ScrollToTopOnReload() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return null; // no UI needed
+}
+
+ScrollToTopOnReload();
+
+
+
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
   useEffect(() => {
