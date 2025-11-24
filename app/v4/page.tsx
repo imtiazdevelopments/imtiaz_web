@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 import ProSliderV2 from "../components/Home/sections/ProSliderV2";
+import ProSliderV2ComingSoon from "../components/Home/sections/ProSliderV2ComingSoon";
 import {
   heroSlides,
   /*   aboutSectionJourney, */
@@ -36,6 +37,8 @@ export default function Home() {
   const sec3Ref = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
+  let collapseCount = 0;
+
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
@@ -96,6 +99,7 @@ export default function Home() {
           },
         });
 
+
         tlSec1
           .to(bar, { height: "20px", duration: 0.8 })
           .to(bar, { width: "100%", duration: 0.8 })
@@ -154,6 +158,14 @@ export default function Home() {
           .to([leftBg, leftText], {
             x: "-100%",
             duration: 2,
+              onComplete:()=>{
+                collapseCount++;
+                if (collapseCount === 2) window.dispatchEvent(new Event("bgCollapseComplete"));
+              },
+              onReverseComplete:()=>{
+                collapseCount--;
+                if (collapseCount === 0) window.dispatchEvent(new Event("bgCollapseReset"));
+              }
               
           })
           .to(
@@ -161,6 +173,14 @@ export default function Home() {
             {
               x: "100%",
               duration: 2,
+              onComplete:()=>{
+                collapseCount++;
+                if (collapseCount === 2) window.dispatchEvent(new Event("bgCollapseComplete"));
+              },
+              onReverseComplete:()=>{
+                collapseCount--;
+                if (collapseCount === 0) window.dispatchEvent(new Event("bgCollapseReset"));
+              }
             },
             "<"
           )
@@ -171,6 +191,9 @@ export default function Home() {
             duration: 1,
             delay: 1,
           });
+
+
+          
       });
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
@@ -349,7 +372,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ProSliderV2
+      <ProSliderV2ComingSoon
         slides={heroSlides.slice().reverse()}
         RightLabel="Coming Soon"
       />

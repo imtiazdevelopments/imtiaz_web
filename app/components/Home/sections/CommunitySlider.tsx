@@ -318,13 +318,13 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   textFade,
   bgFadeAnim,
@@ -336,6 +336,7 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { cubicBezier } from "framer-motion";
 
 type Props = { slides: Slide[] };
 
@@ -378,6 +379,41 @@ export default function HeroFeatureSlider({ slides }: Props) {
       setBgFade(null); // remove fade layer
     }, 850); // EXACT duration of animation
   };
+
+  const featureStagger = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.15,   // delay between each feature item
+    },
+  },
+}
+
+
+const featureItem = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
+
+
+const dropWrapper = {
+  hidden: { opacity: 0, y: -60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: cubicBezier(0.16, 1, 0.3, 1), // proper type-safe easing
+    },
+  },
+};
+
+
+const sectionRef = useRef<HTMLDivElement>(null);
+const isHalfInView = useInView(sectionRef, { margin: "-50% 0px -50% 0px", once: true });
+
+
+
 
   return (
     <section className="w-full relative overflow-hidden">
@@ -435,7 +471,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
 
               {/* ===== PILL HEADER ===== */}
               <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32">
-                <div className="flex items-center justify-center relative">
+                <motion.div className="flex items-center justify-center relative">
                   {/* Prev Button */}
                   <div className="overflow-hidden">
                     <motion.button
@@ -457,7 +493,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                   </div>
 
                   {/* STATIC pill wrapper */}
-                  <div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full">
+                  <motion.div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full"  variants={dropWrapper} initial="hidden" whileInView="visible" exit="exit">
                     {/* Animated title */}
                     {/* <AnimatePresence mode="wait"> */}
                     <div className="overflow-hidden">
@@ -467,6 +503,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                         custom={0.25}
                         initial="initial"
                         whileInView="animate"
+                        animate={isHalfInView ? "animate" : "initial"}
                         exit="exit"
                         viewport={{ once: true }}
                         className="text-white font-[optima] text-[30px] md:text-[45px] lg:text-[60px] leading-[1]"
@@ -485,6 +522,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                           variants={textFade}
                           initial="initial"
                           whileInView="animate"
+                          animate={isHalfInView ? "animate" : "initial"}
                           exit="exit"
                           custom={0.4}
                           viewport={{ once: true }}
@@ -495,7 +533,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                         // {/* </AnimatePresence> */}
                       )}
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Next Button */}
                   <div className="overflow-hidden">
@@ -515,7 +553,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                       />
                     </motion.button>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Pagination */}
                 <motion.div
@@ -540,13 +578,14 @@ export default function HeroFeatureSlider({ slides }: Props) {
 
               {/* ===== FEATURES ===== */}
               <div className="mt-[26px]">
-                <div className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
+                <motion.div variants={featureStagger} initial="initial"
+  whileInView="animate" className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
                   {slide.features.map((f, i) => {
                     const active = activeFeat === i;
 
                     return (
                       <div key={f.id} className="relative flex flex-1">
-                        <div
+                        <motion.div
                           className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[618px]
           flex justify-center items-end px-4 group transition-all"
                           onMouseEnter={() => {
@@ -556,6 +595,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                           onMouseLeave={() =>
                             switchBg(slide.features[activeFeat].bgImage)
                           }
+                          variants={featureItem}
                         >
                           {/* Gradient */}
                           <div
@@ -580,6 +620,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                                 transition={{
                                   duration: 0.7,
                                   ease: [0.25, 0.1, 0.25, 1],
+                                  delay: i * 0.3,
                                 }}
                                 className="text-white font-[optima] uppercase text-center
       text-[22px] md:text-[25px] xl:text-[30px] px-4"
@@ -621,7 +662,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                               </motion.div>
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
 
                         {i < slide.features.length - 1 && (
                           <div
@@ -635,7 +676,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                       </div>
                     );
                   })}
-                </div>
+                </motion.div>
               </div>
             </div>
           </SwiperSlide>
