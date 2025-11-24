@@ -1,6 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type FeatureCircle = {
   title: string;
@@ -98,10 +103,75 @@ const Circle = ({
 );
 
 const AppSection = ({ data }: { data: AppSectionData }) => {
+
+const imageRef = useRef<HTMLDivElement>(null);
+    const section5Ref = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
+
+
+ const initGSAP = () => {
+    const image = imageRef.current;
+    const section = section5Ref.current;
+    const textBox = textRef.current;
+
+    if (!image || !section || !textBox) return;
+
+    // Select only animatable items
+    const items = textBox.querySelectorAll(".anim-item");
+
+    const ctx = gsap.context(() => {
+      /* --- PARALLAX VIDEO --- */
+      gsap.fromTo(
+        image,
+        { y: "25vh" },
+        {
+          y: "-25vh",
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+            markers: true,
+          },
+        }
+      );
+
+      /* --- TEXT FADE IN --- */
+      gsap.fromTo(
+        items,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.4,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+       start: "top center",
+           toggleActions: "play none none reverse",
+           markers: false,
+          },
+        }
+      );
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
+
   const d = data;
 
   return (
-    <section className="w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
+    <section ref={section5Ref} className="w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]">
       <div className="container">
         {/* Heading */}
         <h2 className="text-[26px] md:text-[40px] xl:text-[45px] 2xl:text-[58px] 3xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
@@ -142,7 +212,9 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
 
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center w-fit">
+       <div ref={imageRef} className="phone-wrapper">
             <Image
+        
               src={d.mobileImage}
               alt="mobile"
               width={337}
@@ -154,6 +226,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         xl:h-[650px]
       "
             />
+          </div>
           </div>
 
           {/* RIGHT CIRCLES (visible only on lg+) */}

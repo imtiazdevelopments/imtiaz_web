@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,6 +14,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 
 import type { Swiper as SwiperType } from "swiper";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type PressItem = {
   id: number;
@@ -34,8 +39,76 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
+
+   const imageRef = useRef<HTMLVideoElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+/*     const textRef = useRef<HTMLDivElement>(null); */
+  
+   
+    const initGSAP = () => {
+      const image = imageRef.current;
+      const section = sectionRef.current;
+/*       const textBox = textRef.current; */
+  
+   /*    if (!video || !section || !textBox) return; */
+  
+      // Select only animatable items
+  /*     const items = textBox.querySelectorAll(".anim-item"); */
+  
+      const ctx = gsap.context(() => {
+        /* --- PARALLAX VIDEO --- */
+        gsap.fromTo(
+          image,
+          { y: "25vh" },
+          {
+            y: "-25vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              scrub: true,
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+  
+        /* --- TEXT FADE IN --- */
+        /* gsap.fromTo(
+          items,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.4,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+         start: "top center",
+             toggleActions: "play none none reverse",
+             markers: false,
+            },
+          }
+        ); */
+      });
+  
+      ScrollTrigger.refresh();
+      return () => ctx.revert();
+    };
+  
+    /* -----------------------------
+       WAIT FOR main page READY event
+    ----------------------------- */
+    useEffect(() => {
+      const listener = () => initGSAP();
+      window.addEventListener("homeAnimationsReady", listener);
+  
+      return () => window.removeEventListener("homeAnimationsReady", listener);
+    }, []);
+  
+
   return (
-    <section className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden">
+    <section ref={sectionRef} className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden">
       {/* MAIN SWIPER */}
       <Swiper
         modules={[EffectFade, Autoplay]}
@@ -54,6 +127,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
           <SwiperSlide key={index}>
             <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-10 3xl:gap-0">
               {/* LEFT SECTION */}
+              
               <div className="flex flex-col items-center">
                 <motion.h2
                   variants={moveUp(0.2)}
@@ -131,12 +205,13 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
               </div>
 
               {/* RIGHT IMAGE */}
-              <div className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px]">
+              <div  className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px] overflow-hidden">
                 <Image
+                  
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover"
+                  className="object-cover absolute scale-[1.5]"
                 />
               </div>
             </div>

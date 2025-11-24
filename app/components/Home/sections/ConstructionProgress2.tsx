@@ -56,7 +56,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
       /* --- TEXT FADE IN --- */
       gsap.fromTo(
         items,
-        { y: 50, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
