@@ -390,8 +390,8 @@ ScrollToTopOnReload();
       />
       <CommunitySlider slides={communityYardData} />
       <ImtiazProperties data={imtiazPropertiesData} />
-      <PressSpotlight data={pressSpotlightData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
+      <PressSpotlight data={pressSpotlightData} />
       <AppSection data={appSectionData} />
     </>
   );
