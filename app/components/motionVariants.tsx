@@ -1,3 +1,6 @@
+import type { Variants } from "framer-motion";
+import type { Easing } from "framer-motion";
+
 // motionVariants.ts
 export const containerStagger = {
   show: {
@@ -168,16 +171,31 @@ export const bgFadeAnim = {
   },
 } as const;
 
-export const textFade = {
-  initial: { opacity: 0, y: 50 },
-  animate: {
+const easeInOutCubic: Easing = [0.25, 0.1, 0.25, 1];
+const easeExit: Easing = [0.4, 0.0, 1, 1];
+
+export const textFade: Variants = {
+  initial: {
+    opacity: 0,
+    y: 50,
+  },
+
+  animate: (custom: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-  },
+    transition: {
+      duration: 0.6,
+      delay: custom,
+      ease: easeInOutCubic, // ☑ typed, no any
+    },
+  }),
+
   exit: {
     opacity: 0,
     y: -25,
-    transition: { duration: 0.35, ease: [0.4, 0.0, 1, 1] },
+    transition: {
+      duration: 0.5,
+      ease: easeExit, // ☑ typed, no any
+    },
   },
-} as const;
+};

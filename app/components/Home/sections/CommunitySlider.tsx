@@ -325,7 +325,13 @@ import type { Swiper as SwiperType } from "swiper";
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { textFade, bgFadeAnim } from "../../motionVariants";
+import {
+  textFade,
+  bgFadeAnim,
+  moveLeft,
+  moveRight,
+  moveUp,
+} from "../../motionVariants";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -431,63 +437,95 @@ export default function HeroFeatureSlider({ slides }: Props) {
               <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32">
                 <div className="flex items-center justify-center relative">
                   {/* Prev Button */}
-                  <button className="swiper-btn-prev  absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center cursor-pointer">
-                    <Image
-                      src="/icons/left_slider_arrow.svg"
-                      width={34}
-                      height={34}
-                      className="w-[34px] h-[34px]"
-                      alt="prev"
-                    />
-                  </button>
+                  <div className="overflow-hidden">
+                    <motion.button
+                      variants={moveRight(0.3)}
+                      initial="hidden"
+                      whileInView="show"
+                      exit="exit"
+                      viewport={{ once: true }}
+                      className="swiper-btn-prev  absolute left-0 -translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center justify-center cursor-pointer"
+                    >
+                      <Image
+                        src="/icons/left_slider_arrow.svg"
+                        width={34}
+                        height={34}
+                        className="w-[34px] h-[34px]"
+                        alt="prev"
+                      />
+                    </motion.button>
+                  </div>
 
                   {/* STATIC pill wrapper */}
                   <div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full">
                     {/* Animated title */}
-                    <AnimatePresence mode="wait">
+                    {/* <AnimatePresence mode="wait"> */}
+                    <div className="overflow-hidden">
                       <motion.h1
                         key={`title-${activeSlide}`}
                         variants={textFade}
+                        custom={0.25}
                         initial="initial"
-                        animate="animate"
+                        whileInView="animate"
                         exit="exit"
+                        viewport={{ once: true }}
                         className="text-white font-[optima] text-[30px] md:text-[45px] lg:text-[60px] leading-[1]"
                       >
                         {slide.title}
                       </motion.h1>
-                    </AnimatePresence>
+                    </div>
+                    {/* </AnimatePresence> */}
 
                     {/* Animated subtitle */}
-                    {slide.subtitle && (
-                      <AnimatePresence mode="wait">
+                    <div className="overflow-hidden">
+                      {slide.subtitle && (
+                        // <AnimatePresence mode="wait">
                         <motion.p
                           key={`sub-${activeSlide}`}
                           variants={textFade}
                           initial="initial"
-                          animate="animate"
+                          whileInView="animate"
                           exit="exit"
+                          custom={0.4}
+                          viewport={{ once: true }}
                           className="text-white/90 text-[18px] mt-4 max-w-[85ch] mx-auto"
                         >
                           {slide.subtitle}
                         </motion.p>
-                      </AnimatePresence>
-                    )}
+                        // {/* </AnimatePresence> */}
+                      )}
+                    </div>
                   </div>
 
                   {/* Next Button */}
-                  <button className="swiper-btn-next absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center cursor-pointer justify-center">
-                    <Image
-                      src="/icons/left_slider_arrow.svg"
-                      width={34}
-                      height={34}
-                      className="rotate-180 w-[34px] h-[34px]"
-                      alt="next"
-                    />
-                  </button>
+                  <div className="overflow-hidden">
+                    <motion.button
+                      variants={moveLeft(0.3)}
+                      initial="hidden"
+                      whileInView={"show"}
+                      viewport={{ once: true }}
+                      className="swiper-btn-next absolute right-0 translate-x-6 top-1/2 -mt-6 w-10 h-10 z-20 flex items-center cursor-pointer justify-center"
+                    >
+                      <Image
+                        src="/icons/left_slider_arrow.svg"
+                        width={34}
+                        height={34}
+                        className="rotate-180 w-[34px] h-[34px]"
+                        alt="next"
+                      />
+                    </motion.button>
+                  </div>
                 </div>
 
                 {/* Pagination */}
-                <div className="mt-8 flex gap-3 justify-center">
+                <motion.div
+                  variants={moveUp(0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  exit="exit"
+                  className="mt-8 flex gap-3 justify-center"
+                  viewport={{ once: true }}
+                >
                   {slides.map((_, i) => (
                     <button
                       key={i}
@@ -497,7 +535,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                       }`}
                     />
                   ))}
-                </div>
+                </motion.div>
               </div>
 
               {/* ===== FEATURES ===== */}
@@ -540,7 +578,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -40 }}
                                 transition={{
-                                  duration: 0.55,
+                                  duration: 0.7,
                                   ease: [0.25, 0.1, 0.25, 1],
                                 }}
                                 className="text-white font-[optima] uppercase text-center
@@ -560,7 +598,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                                     : "0px",
                                 }}
                                 transition={{
-                                  duration: 0.55,
+                                  duration: 0.75,
                                   ease: [0.25, 0.1, 0.25, 1],
                                 }}
                                 style={

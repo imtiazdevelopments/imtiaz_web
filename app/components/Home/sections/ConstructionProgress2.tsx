@@ -19,12 +19,13 @@ interface ConstructionProgressProps {
   };
 }
 
-const ConstructionProgress: React.FC<ConstructionProgressProps> = ({ data }) => {
+const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
+  data,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
- 
   const initGSAP = () => {
     const video = videoRef.current;
     const section = sectionRef.current;
@@ -64,9 +65,9 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({ data }) => 
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-       start: "top center",
-           toggleActions: "play none none reverse",
-           markers: false,
+            start: "top center",
+            toggleActions: "play none none reverse",
+            markers: false,
           },
         }
       );
@@ -107,23 +108,26 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({ data }) => 
       <div className="absolute inset-0 z-[2] bg-black/50" />
 
       {/* ---------------- TEXT ---------------- */}
-      <div ref={textRef} className="relative z-[5] text-center px-6 max-w-[900px]">
+      <div
+        ref={textRef}
+        className="relative z-[5] text-center px-6 max-w-[900px]"
+      >
         <div className="overflow-hidden">
-        <h2 className="anim-item text-white text-[40px] md:text-[55px] 2xl:text-[64px] 3xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
-          {data.title}
-        </h2>
-</div>
- <div className="overflow-hidden">
-        <p className="anim-item text-white text-[19px] font-[avenirRoman] font-[400] leading-[1.3] max-w-[60ch] mx-auto mb-[50px]">
-          {data.description}
-        </p>
-</div>
- <div className="overflow-hidden">
-        <Link href={data.button.link}>
-          <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
-            {data.button.label}
-          </button>
-        </Link>
+          <h2 className="anim-item text-white text-[40px] md:text-[55px] 2xl:text-[64px] 3xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
+            {data.title}
+          </h2>
+        </div>
+        <div className="overflow-hidden">
+          <p className="anim-item text-white text-[19px] font-[avenirRoman] font-[400] leading-[1.3] max-w-[60ch] mx-auto mb-[50px]">
+            {data.description}
+          </p>
+        </div>
+        <div className="overflow-hidden">
+          <Link href={data.button.link}>
+            <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
+              {data.button.label}
+            </button>
+          </Link>
         </div>
       </div>
     </section>
