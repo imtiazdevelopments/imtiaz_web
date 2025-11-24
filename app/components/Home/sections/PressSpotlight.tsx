@@ -66,9 +66,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
         gsap.fromTo(
           img,
-          { y: "25vh" },
+          { y: "-25vh" },
           {
-            y: "-25vh",
+            y: "25vh",
             ease: "none",
             scrollTrigger: {
               trigger: wrapper,
@@ -212,7 +212,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover absolute scale-[1.1]"
+                    className="object-cover absolute scale-[1.4]"
                   />
                 </div>
               </div>
