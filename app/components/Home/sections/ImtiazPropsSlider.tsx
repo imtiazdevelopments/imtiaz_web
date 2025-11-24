@@ -34,7 +34,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const [activeSlide, setActiveSlide] = useState<number>(1);
 
   return (
-    <section className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
+    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
       {/* ================= TITLE ================= */}
       <div className="overflow-hidden">
         <motion.h2

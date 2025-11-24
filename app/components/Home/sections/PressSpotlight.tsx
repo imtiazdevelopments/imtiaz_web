@@ -66,9 +66,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
         gsap.fromTo(
           img,
-          { scale: 1.1 },
+          { y: "-25vh" },
           {
-            scale: 1.3,
+            y: "25vh",
             ease: "none",
             scrollTrigger: {
               trigger: wrapper,
@@ -95,7 +95,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden"
+      className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden"
     >
       <div ref={rootRef}>
         <Swiper
