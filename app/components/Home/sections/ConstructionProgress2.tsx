@@ -123,7 +123,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
           </p>
         </div>
         <div className="overflow-hidden">
-          <Link href={data.button.link}>
+          <Link href="/#">
             <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
               {data.button.label}
             </button>
