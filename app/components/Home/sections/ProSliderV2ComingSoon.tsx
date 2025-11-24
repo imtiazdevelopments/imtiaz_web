@@ -265,11 +265,11 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
@@ -315,36 +315,14 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
-  const [startAnim, setStartAnim] = useState(false);
-
-
-useEffect(() => {
-  const start = () => setStartAnim(true);
-  const reset = () => setStartAnim(false);
-
-  window.addEventListener("bgCollapseComplete", start);
-  window.addEventListener("bgCollapseReset", reset);
-
-  return () => {
-    window.removeEventListener("bgCollapseComplete", start);
-    window.removeEventListener("bgCollapseReset", reset);
-  };
-}, []);
-
-
-
-
-
-
 
   // -------- VIEWPORT TRIGGER --------
-  // const rootRef = useRef(null);
-  // const inView = useInView(rootRef, { once: true, amount: 0.2 });
-
+  const rootRef = useRef(null);
+  const inView = useInView(rootRef, { once: true, amount: 0.8 });
 
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative" ref={rootRef}>
       <Swiper
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -379,7 +357,7 @@ useEffect(() => {
                   <motion.div
                     key={`top-${activeIndex}`}
                     initial="hidden"
-                    animate={startAnim ? "show" : "hidden"}
+                    animate={inView ? "show" : "hidden"}
                     exit="exit"
                     className="flex flex-col justify-between items-center"
                   >
@@ -389,7 +367,7 @@ useEffect(() => {
                         variants={fadeUp}
                         custom={0.15}
                         initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
+                        animate={inView ? "show" : "hidden"}
                       >
                         <span
                           className="text-white font-[avenirHeavy] font-[800] uppercase
@@ -406,7 +384,7 @@ useEffect(() => {
                         variants={fadeUp}
                         custom={0.3}
                         initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
+                        animate={inView ? "show" : "hidden"}
                         className="text-white font-[optima] uppercase leading-[1]
                           text-[36px] md:text-[58px] lg:text-[58px] 2xl:text-[64px] 3xl:text-[70px]
                           text-center mb-[22px]"
@@ -421,7 +399,7 @@ useEffect(() => {
                         variants={fadeUp}
                         custom={0.45}
                         initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
+                        animate={inView ? "show" : "hidden"}
                       >
                         <Image
                           alt="logo"
@@ -440,7 +418,7 @@ useEffect(() => {
                   <motion.div
                     key={`btns-${activeIndex}`}
                     initial="hidden"
-                    animate={startAnim ? "show" : "hidden"}
+                    animate={inView ? "show" : "hidden"}
                     exit="exit"
                     className="flex gap-4 mt-[40px] 2xl:mt-[60px] 3xl:mt-[73px] font-[avenirRoman] overflow-hidden"
                   >
@@ -468,14 +446,14 @@ useEffect(() => {
               </div>
 
               {/* -------------------------------- PILL SECTION -------------------------------- */}
-              <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={startAnim ? "show" : "hidden"} exit="exit" className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] pb-[50px] overflow-hidden`}>
+              <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={inView ? "show" : "hidden"} exit="exit" className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] pb-[50px] overflow-hidden`}>
                 <AnimatePresence mode="wait">
                   <div className="relative">
                   <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-full pointer-events-none" />
                   <motion.div
                     key={`pill-${activeIndex}`}
                     initial="hidden"
-                    animate={startAnim ? "show" : "hidden"}
+                    animate={inView ? "show" : "hidden"}
                     exit="exit"
                     className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6 pr-8"
                   >
@@ -488,7 +466,7 @@ useEffect(() => {
                         variants={fadeUp}
                         custom={0.35}
                         initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
+                        animate={inView ? "show" : "hidden"}
                       >
                         <Image
                           src={slide.pillFeatures.title}
@@ -499,6 +477,7 @@ useEffect(() => {
                         />
                       </motion.div>
                     </motion.div>
+
                     
 
                     {/* Features */}
@@ -509,7 +488,7 @@ useEffect(() => {
                           variants={fadeUp}
                           custom={0.25 + idx * 0.12}
                           initial="hidden"
-                          animate={startAnim ? "show" : "hidden"}
+                          animate={inView ? "show" : "hidden"}
                           className="flex items-center gap-2 md:gap-3"
                         >
                           <Image
@@ -533,8 +512,10 @@ useEffect(() => {
         ))}
       </Swiper>
 
+
+
       {/* -------------------------------- ARROWS + PAGINATION -------------------------------- */}
-      <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={startAnim ? "show" : "hidden"} exit="exit" className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]">
+      <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={inView ? "show" : "hidden"} exit="exit" className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]">
         <div className="container flex items-center justify-between">
           {/* Prev */}
           <button

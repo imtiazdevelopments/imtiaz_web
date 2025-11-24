@@ -157,7 +157,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 60%",
+          start: "top 10%",
           toggleActions: "restart none none reverse",
         },
       });
@@ -230,7 +230,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
       const tlRight = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 60%",
+          start: "top 10%",
           toggleActions: "restart none none reverse",
         },
       });
