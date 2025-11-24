@@ -388,7 +388,7 @@ export const pressSpotlightData = {
       date: "01-01-2026",
       title:
         "Imtiaz Developments hands over Pearl House II in JVC three months early, reinforcing record delivery pace across Dubai",
-      image: "/images/home/PressSpotlight/2.jpg",
+      image: "/images/home/PressSpotlight/2a.jpg",
       link: "/#",
     },
   ],
