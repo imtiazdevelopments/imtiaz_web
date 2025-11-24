@@ -410,9 +410,7 @@ const dropWrapper = {
 
 
 const sectionRef = useRef<HTMLDivElement>(null);
-const isHalfInView = useInView(sectionRef, { margin: "-50% 0px -50% 0px", once: true });
-
-
+const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: true });
 
 
   return (
