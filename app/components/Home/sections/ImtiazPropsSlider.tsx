@@ -12,6 +12,10 @@ import "swiper/css/navigation";
 import type { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type ImtiazPropertiesData = {
   data: {
@@ -32,28 +36,80 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [activeSlide, setActiveSlide] = useState<number>(1);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   // Autoplay only when section is in viewport
   useEffect(() => {
     const section = document.querySelector(".make-header-black");
     if (!section) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          swiperRef.current?.autoplay.start();
-        } else {
-          swiperRef.current?.autoplay.stop();
-        }
-      },
-      {
-        threshold: 0.3,
-      }
-    );
+    // const observer = new IntersectionObserver(
+    //   ([entry]) => {
+    //     if (entry.isIntersecting) {
+    //       swiperRef.current?.autoplay.start();
+    //     } else {
+    //       swiperRef.current?.autoplay.stop();
+    //     }
+    //   },
+    //   {
+    //     threshold: 0.3,
+    //   }
+    // );
 
-    observer.observe(section);
+    // observer.observe(section);
 
-    return () => observer.disconnect();
+    // return () => observer.disconnect();
+  }, []);
+
+
+    const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const imgRefs = useRef<HTMLImageElement[]>([]);
+
+  const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) wrapRefs.current[i] = el;
+  };
+
+  const setImgRef = (el: HTMLImageElement | null, i: number) => {
+    if (el) imgRefs.current[i] = el;
+  };
+
+  const initGSAP = () => {
+    const section = rootRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      wrapRefs.current.forEach((wrapper, i) => {
+        const img = imgRefs.current[i];
+
+        console.log(img);
+        if (!wrapper || !img) return;
+
+        gsap.fromTo(
+          img,
+          { y: "-5vh" },
+          {
+            y: "5vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              scrub: true,
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+      });
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  // Wait for "homeAnimationsReady"
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+    return () => window.removeEventListener("homeAnimationsReady", listener);
   }, []);
 
   return (
@@ -72,16 +128,12 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
       </div>
 
       {/* ================= SWIPER ================= */}
-      <div className="relative">
+      <div className="relative" ref={rootRef}>
         <Swiper
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation]}
           spaceBetween={8}
           slidesPerView={1}
           loop
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: true,
-          }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           navigation={{
@@ -113,15 +165,18 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     whileInView="show"
                     viewport={{ once: true }}
                     className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
-                    onMouseEnter={() => swiperRef.current?.autoplay.stop()}
-                    onMouseLeave={() => swiperRef.current?.autoplay.start()}
+                    // onMouseEnter={() => swiperRef.current?.autoplay.stop()}
+                    // onMouseLeave={() => swiperRef.current?.autoplay.start()}
+                    ref={(el) => setWrapRef(el, idx)}
                   >
                     {/* Background Image */}
                     <Image
+                    ref={(el) => setImgRef(el, idx)}
                       src={item.image}
                       alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                   width={1000}
+                   height={1200}
+                      className="absolute object-cover group-hover:scale-105 scale-[1.1]"
                     />
 
                     {/* DEFAULT GRADIENT */}
