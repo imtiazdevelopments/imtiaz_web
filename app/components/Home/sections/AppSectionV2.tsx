@@ -320,7 +320,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* Heading */}
-        <h2 className="anim-item text-[26px] md:text-[40px] xl:text-[45px] 2xl:text-[58px] 3xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
+        <h2 className="anim-item text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] uppercase text-center leading-[1.2] max-w-[30ch] mx-auto">
           {d.heading}
         </h2>
         {/* Subtitle */}

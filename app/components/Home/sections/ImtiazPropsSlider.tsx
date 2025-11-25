@@ -466,7 +466,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center text-[42px] md:text-[55px] font-[optima] mb-[50px]"
+          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] mb-[50px]"
         >
           {data.sectionTitle}
         </motion.h2>

@@ -1039,7 +1039,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                         animate={isHalfInView ? "animate" : "initial"}
                         exit="exit"
                         viewport={{ once: true }}
-                        className="text-white font-[optima] text-[30px] md:text-[45px] 2xl:text-60 leading-[1]"
+                        className="text-white font-[optima] text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] leading-[1]"
                       >
                         {slide.title}
                       </motion.h1>

@@ -121,7 +121,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-[38px] md:text-[70px] font-[optima] uppercase pb-[70px] 2xl:pb-[90px]"
+                    className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] uppercase pb-[70px] 2xl:pb-[90px]"
                   >
                     {data.sectionTitle}
                   </motion.h2>
@@ -192,7 +192,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     {data.items.map((_, idx) => (
                       <button
                         key={idx}
-                        onClick={() => swiperInstance?.slideTo(idx)}
+                        onClick={() => swiperInstance?.slideToLoop(idx)}
                         className={`w-[10px] h-[10px] rounded-full transition-all cursor-pointer ${
                           activeIndex === idx
                             ? "bg-primary"
