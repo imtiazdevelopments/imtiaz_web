@@ -292,7 +292,7 @@ export const DubaiIslandData = {
 
 export const ConstructionProgressData = {
   title: "CONSTRUCTION PROGRESS",
-  videoSrc: "/images/home/work-progress/progress.mp4",
+  videoSrc: "/videos/Construction_Update.mp4",
   posterSrc: "/images/home/work-progress/progress.jpg",
   description:
     "Watch our projects turn from concept to reality and witness the future of real estate unfold at every milestone.",
@@ -412,7 +412,7 @@ export const appSectionData = {
       icon: "/images/home/app/icons/6.svg",
     },
     { title: "MOVE IN/OUT REQUESTS", icon: "/images/home/app/icons/5.svg" },
-    { title: "ACCESS CARD REQUESTS", icon: "/images/home/app/icons/6.svg" },
+    { title: "ECM & Home services", icon: "/images/home/app/icons/6.svg" },
   ],
 
   download: {
