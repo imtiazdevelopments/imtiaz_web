@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import "../globals.css";
 // import Header from "./components/common/Header";
-import Header2 from "../components/common/Header2";
+import HeaderWithHamburger from "../components/common/HeaderWithHamburger";
 // import Footer from "./components/common/Footer";
 /* import SmoothScroll from "./components/common/SmoothScroll"; */
 import FooterV2 from "../components/common/FooterV2";
@@ -28,7 +28,7 @@ export default function RootLayout({
         {/* <Header /> */}
         <ScrollToTopReload />
         <SmoothScrollProvider>
-          <Header2 />
+          <HeaderWithHamburger />
           <FloatingIcons />
           {children}
           {/* <Footer /> */}
