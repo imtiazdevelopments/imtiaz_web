@@ -45,7 +45,7 @@ export default function Home() {
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, -1);
     document.body.style.overflow = "hidden";
   }, []);
 
