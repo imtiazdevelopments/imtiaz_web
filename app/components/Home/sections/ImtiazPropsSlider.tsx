@@ -631,14 +631,18 @@ ${
         >
           <button
             ref={prevRef}
-            className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center"
+            className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
           >
+            {/* FILL ANIMATION */}
+            <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+
+            {/* ICON */}
             <Image
               src="/icons/left_arrow_slider_primary.svg"
-              alt="Arrow Left"
+              alt="Arrow Right"
               width={28}
               height={28}
-              className="object-contain w-[28px] h-[28px]"
+              className="relative z-10  object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
             />
           </button>
         </motion.div>
@@ -651,14 +655,18 @@ ${
         >
           <button
             ref={nextRef}
-            className="w-[62px] h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center"
+            className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
           >
+            {/* FILL ANIMATION */}
+            <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+
+            {/* ICON */}
             <Image
               src="/icons/left_arrow_slider_primary.svg"
               alt="Arrow Right"
               width={28}
               height={28}
-              className="rotate-180 object-contain w-[28px] h-[28px]"
+              className="relative z-10 rotate-180 object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
             />
           </button>
         </motion.div>

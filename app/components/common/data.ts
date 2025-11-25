@@ -176,12 +176,12 @@ export const menuItems: MenuItem[] = [
   {
     id: "communities",
     label: "COMMUNITIES",
-    bgImage: "/images/home/imtiaz-properties/1.png",
+    bgImage: "/images/navpage/2.jpg",
   },
   {
     id: "properties",
     label: "PROPERTIES",
-    bgImage: "/images/home/imtiaz-properties/2.png",
+    bgImage: "/images/navpage/3.jpg",
   },
   {
     id: "media",
