@@ -45,14 +45,14 @@ export default function Home() {
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
   useEffect(() => {
-    window.scrollTo(0, -1);
-    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+    // document.body.style.overflow = "hidden";
   }, []);
 
   useEffect(() => {
     const startAnimations = () => {
       // ENABLE scroll now
-      document.body.style.overflow = "hidden";
+      // document.body.style.overflow = "hidden";
       setSmoothScrollActive(true);
 
       const ctx = gsap.context(() => {
