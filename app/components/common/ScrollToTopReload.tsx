@@ -8,11 +8,16 @@ export default function ScrollToTopReload() {
       window.history.scrollRestoration = "manual";
     }
 
-    const timer = setTimeout(() => {
+    // 1. After hydration
+    setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 200); // small delay so hydration finishes first
+    }, 200);
 
-    return () => clearTimeout(timer);
+    // 2. After page fully loads
+    const onLoad = () => window.scrollTo(0, 0);
+    window.addEventListener("load", onLoad);
+
+    return () => window.removeEventListener("load", onLoad);
   }, []);
 
   return null;
