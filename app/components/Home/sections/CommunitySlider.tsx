@@ -467,7 +467,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
   }, []);
 
   return (
-    <section className="w-full relative overflow-hidden" ref={sectionRef}>
+    <section className="w-full relative overflow-hidden h-screen" ref={sectionRef}>
       <Swiper
         // modules={[Navigation, Pagination]}
         slidesPerView={1}
@@ -489,17 +489,15 @@ export default function HeroFeatureSlider({ slides }: Props) {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id}>
-            <div
-              className="relative w-full min-h-[520px] md:min-h-[680px]"
-              ref={(el) => setWrapRef(el, index)}
-            >
+            <div className="relative w-full h-screen" ref={(el) => setWrapRef(el, index)}>
               {/* ===== BASE BACKGROUND (never removed) ===== */}
+              <div className="absolute w-full h-full" ref={(el) => setImgRef(el, index)}>
               <div
-                className="absolute inset-0 -z-20 bg-cover bg-center"
+                className="absolute w-full h-full inset-0 -z-20 bg-cover bg-center transition-transform duration-300 "
                 style={{ backgroundImage: `url('${bgBase}')` }}
-                ref={(el) => setImgRef(el, index)}
+               
               />
-
+</div>
               {/* ===== FADING OVERLAY ===== */}
               <AnimatePresence mode="wait">
                 {bgFade && (
@@ -517,7 +515,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
 
               {/* Top Gradient */}
               <div
-                className="absolute inset-0 -z-[5]"
+                className="absolute  w-full h-full inset-0 z-[0]"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)",
@@ -638,21 +636,17 @@ export default function HeroFeatureSlider({ slides }: Props) {
               </div>
 
               {/* ===== FEATURES ===== */}
-              <div className="mt-[26px]">
-                <motion.div
-                  variants={featureStagger}
-                  initial="initial"
-                  whileInView="animate"
-                  className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative"
-                >
+              <div className="absolute bottom-0 w-full">
+                <motion.div variants={featureStagger} initial="initial"
+  whileInView="animate" className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
                   {slide.features.map((f, i) => {
                     const active = activeFeat === i;
 
                     return (
                       <div key={f.id} className="relative flex flex-1">
                         <motion.div
-                          className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[618px]
-          flex justify-center items-end px-4 group transition-all"
+                          className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px]
+          flex justify-center items-end px-4 group transition-all cursor-pointer"
                           onMouseEnter={() => {
                             setActiveFeat(i);
                             switchBg(f.bgImage);
