@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -39,6 +39,7 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
   let collapseCount = 0;
+  const tlSec1Ref = useRef<gsap.core.Timeline>(null);
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
@@ -100,6 +101,8 @@ export default function Home() {
           },
         });
 
+        tlSec1Ref.current = tlSec1;
+
         tlSec1
           .to(bar, { height: "20px", duration: 0.8 })
           .to(bar, { width: "100%", duration: 0.8 })
@@ -133,6 +136,7 @@ export default function Home() {
             },
             "-=1"
           )
+          
           .from(
             centerItems,
             {
@@ -144,6 +148,7 @@ export default function Home() {
             },
             "-=1"
           )
+          .addLabel("afterCenterText")
           .to(centerItems, {
             y: 40,
             opacity: 0,
@@ -216,6 +221,47 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
  */
+
+// useEffect(() => {
+//   const el = scrollRef.current;
+
+//   const jump = () => {
+//     const tl = tlSec1Ref.current;
+//     if (!tl) return;
+
+//     const st = tl.scrollTrigger;
+//     if (!st) return;
+
+//     tl.tweenTo("afterCenterText", {
+//       onUpdate: () => {
+//         const newScroll = st.start + st.progress * (st.end - st.start);
+
+//         console.log(newScroll)
+
+//         // Replace this:
+//         // ScrollTrigger.scroll(newScroll)
+
+//         // Use THIS:
+//         window.scrollTo(0, newScroll);
+//         // gsap.to(window, { scrollTo: newScroll, duration: 0 });
+//       },
+
+//       // onComplete: () => {
+//       //   ScrollTrigger.refresh();
+//       // }
+//     });
+//   };
+
+//   el?.addEventListener("click", jump);
+//   return () => el?.removeEventListener("click", jump);
+// }, []);
+
+
+
+// const [scrollButtonClicked, setScrollButtonClicked] = useState(false);
+
+
+
   return (
     <>
       <section
@@ -260,7 +306,8 @@ export default function Home() {
 
         <div
           id="bar"
-          className="bg-primary absolute left-0 right-0 mx-auto z-10"
+          className="bg-primary absolute left-0 right-0 mx-auto z-10 pointer-events-none"
+
         ></div>
 
         <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
