@@ -198,7 +198,11 @@ export const menuItems: MenuItem[] = [
     label: "CHANNEL PARTNER",
     bgImage: "/images/home/imtiaz-properties/4.png",
   },
-  { id: "paynow", label: "PAY NOW", bgImage: "/images/navpage/paynow_bg.jpg" },
+  {
+    id: "paynow",
+    label: "PAY NOW",
+    bgImage: "/images/home/imtiaz-properties/3.png",
+  },
 ];
 
 // Submenus mapped to parent menu ID
