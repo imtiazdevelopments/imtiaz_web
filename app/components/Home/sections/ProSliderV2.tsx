@@ -339,57 +339,57 @@ useEffect(() => {
 }, []);
 
 
-//  const wrapRefs = useRef<HTMLDivElement[]>([]);
-//   const imgRefs = useRef<HTMLImageElement[]>([]);
+ const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const imgRefs = useRef<HTMLVideoElement[]>([]);
 
-//   const setWrapRef = (el: HTMLDivElement | null, i: number) => {
-//     if (el) wrapRefs.current[i] = el;
-//   };
+  const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) wrapRefs.current[i] = el;
+  };
 
-//   const setImgRef = (el: HTMLImageElement | null, i: number) => {
-//     if (el) imgRefs.current[i] = el;
-//   };
+  const setImgRef = (el: HTMLVideoElement | null, i: number) => {
+    if (el) imgRefs.current[i] = el;
+  };
 
-//   const initGSAP = () => {
-//     const section = sectionRef.current;
-//     if (!section) return;
+  const initGSAP = () => {
+    const section = sectionRef.current;
+    if (!section) return;
 
-//     console.log(section)
+    console.log(section)
 
-//     const ctx = gsap.context(() => {
-//       wrapRefs.current.forEach((wrapper, i) => {
-//         const img = imgRefs.current[i];
+    const ctx = gsap.context(() => {
+      wrapRefs.current.forEach((wrapper, i) => {
+        const img = imgRefs.current[i];
 
-//         console.log(img);
-//         if (!wrapper || !img) return;
+        console.log(img);
+        if (!wrapper || !img) return;
 
-//         gsap.fromTo(
-//           img,
-//           { y: "-25vh" },
-//           {
-//             y: "25vh",
-//             ease: "none",
-//             scrollTrigger: {
-//               trigger: wrapper,
+        gsap.fromTo(
+          img,
+          { y: "-25vh" },
+          {
+            y: "25vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
              
-//               start: "top bottom",
-//               end: "bottom top",
-//             },
-//           }
-//         );
-//       });
-//     });
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+      });
+    });
 
-//     ScrollTrigger.refresh();
-//     return () => ctx.revert();
-//   };
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
 
-//   // Wait for "homeAnimationsReady"
-//   useEffect(() => {
-//     const listener = () => initGSAP();
-//     window.addEventListener("homeAnimationsReady", listener);
-//     return () => window.removeEventListener("homeAnimationsReady", listener);
-//   }, []);
+  // Wait for "homeAnimationsReady"
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
 
 
 
@@ -418,16 +418,17 @@ useEffect(() => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-screen flex flex-col justify-center items-center">
+            <div className="relative w-full  max-2xl:h-screen flex flex-col justify-center items-center">
               {/* -------------------------------- VIDEO BG -------------------------------- */}
-              <div className="absolute h-full inset-0 -z-10 overflow-hidden">
+              <div className="absolute inset-0 -z-10 overflow-hidden" ref={(el) => setWrapRef(el, index)}>
                 <video
+                ref={(el) => setImgRef(el, index)}
                   src={slide.video}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover absolute"
+                  className="w-full h-full object-cover scale-[1.5]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
@@ -501,7 +502,7 @@ useEffect(() => {
                     initial="hidden"
                     animate={startAnim ? "show" : "hidden"}
                     exit="exit"
-                    className="flex gap-4 mt-[40px] 2xl:mt-[60px] 3xl:mt-[73px] font-[avenirRoman] overflow-hidden"
+                    className="flex gap-4 mt-[40px] 2xl:mt-[60px] 3xl:mt-[86px] font-[avenirRoman] overflow-hidden"
                   >
                     <motion.a
                       variants={fadeUp}

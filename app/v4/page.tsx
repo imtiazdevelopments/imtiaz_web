@@ -371,6 +371,8 @@ export default function Home() {
         </div>
       </section>
 
+      
+
       <ProSliderV2ComingSoon
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
