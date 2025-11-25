@@ -8,6 +8,7 @@ import Header2 from "./components/common/Header2";
 import FooterV2 from "./components/common/FooterV2";
 import { SmoothScrollProvider } from "./contexts/smoothScrollContext";
 import FloatingIcons from "./components/common/FloatingIcons";
+import ScrollToTopReload from "./components/common/ScrollToTopReload";
 
 export const metadata: Metadata = {
   title: "IMTIAZ",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         {/*         <SmoothScroll /> */}
         {/* <Header /> */}
+        <ScrollToTopReload />
         <SmoothScrollProvider>
           <Header2 />
           <FloatingIcons />
@@ -31,6 +33,7 @@ export default function RootLayout({
           {/* <Footer /> */}
           <FooterV2 />
         </SmoothScrollProvider>
+        <ScrollToTopReload />
       </body>
     </html>
   );
