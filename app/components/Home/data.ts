@@ -398,7 +398,7 @@ export const appSectionData = {
       icon: "/images/home/app/icons/6.svg",
     },
     { title: "MOVE IN/OUT REQUESTS", icon: "/images/home/app/icons/5.svg" },
-    { title: "ECM & Home services", icon: "/images/home/app/icons/6.svg" },
+    { title: "ECM & Home services", icon: "/images/home/app/icons/4.svg" },
   ],
 
   download: {
