@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper/modules";
@@ -66,9 +66,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
         gsap.fromTo(
           img,
-          { y: "-25vh" },
+          { y: "-15vh" },
           {
-            y: "25vh",
+            y: "15vh",
             ease: "none",
             scrollTrigger: {
               trigger: wrapper,
@@ -166,10 +166,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                           exit="exit"
                           className="mb-[20px]"
                         >
-                          <Link
-                            href={item.link}
-                            className="flex items-center justify-center text-primary hover:text-white group hover:bg-primary p-2 rounded-full transition-colors"
-                          >
+                          {/* <Link */}
+                          {/* href={item.link} */}
+                          <button className="flex items-center justify-center text-primary hover:text-white group hover:bg-primary p-2 rounded-full transition-colors">
                             <Image
                               src="/icons/left_arrow_slider_primary.svg"
                               alt="next"
@@ -177,7 +176,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                               height={28}
                               className="rotate-180 w-[28px] h-[28px] group-hover:invert group-hover:brightness-0"
                             />
-                          </Link>
+                          </button>
+                          {/* </Link> */}
                         </motion.div>
                       </div>
                     </motion.div>
@@ -212,7 +212,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover absolute scale-[1.4]"
+                    className="object-cover absolute scale-[1.3]"
                   />
                 </div>
               </div>
@@ -227,12 +227,12 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             viewport={{ once: true }}
             className="flex justify-center mt-[50px]"
           >
-            <Link
-              href="/#"
-              className="border border-primary text-primary px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] hover:bg-primary hover:text-white transition-colors"
-            >
+            {/* <Link
+              href="/#" */}
+            <button className="border cursor-pointer border-primary text-primary px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] hover:bg-primary hover:text-white transition-colors">
               View All
-            </Link>
+            </button>
+            {/* </Link> */}
           </motion.div>
         </div>
       </div>

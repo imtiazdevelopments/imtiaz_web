@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -61,8 +61,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
     // return () => observer.disconnect();
   }, []);
 
-
-    const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const wrapRefs = useRef<HTMLDivElement[]>([]);
   const imgRefs = useRef<HTMLImageElement[]>([]);
 
   const setWrapRef = (el: HTMLDivElement | null, i: number) => {
@@ -158,110 +157,110 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
             return (
               <SwiperSlide key={item.id}>
-                <Link href={item.link}>
-                  <motion.div
-                    variants={moveUp(idx * 0.13)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
-                    // onMouseEnter={() => swiperRef.current?.autoplay.stop()}
-                    // onMouseLeave={() => swiperRef.current?.autoplay.start()}
-                    ref={(el) => setWrapRef(el, idx)}
-                  >
-                    {/* Background Image */}
-                    <Image
+                {/* <Link href={item.link}> */}
+                <motion.div
+                  variants={moveUp(idx * 0.13)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
+                  // onMouseEnter={() => swiperRef.current?.autoplay.stop()}
+                  // onMouseLeave={() => swiperRef.current?.autoplay.start()}
+                  ref={(el) => setWrapRef(el, idx)}
+                >
+                  {/* Background Image */}
+                  <Image
                     ref={(el) => setImgRef(el, idx)}
-                      src={item.image}
-                      alt={item.title}
-                   width={1000}
-                   height={1200}
-                      className="absolute object-cover w-full h-full group-hover:scale-105 scale-[1.1]"
-                    />
+                    src={item.image}
+                    alt={item.title}
+                    width={1000}
+                    height={1200}
+                    className="absolute object-cover w-full h-full scale-[1.1]"
+                  />
 
-                    {/* DEFAULT GRADIENT */}
-                    <div
-                      className={`absolute inset-0 z-[2] transition-all duration-500 ${
-                        isActiveMobile ? "opacity-0" : "group-hover:opacity-0"
-                      }`}
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0) 47.23%, rgba(0,0,0,0.7) 100%)",
-                      }}
-                    />
+                  {/* DEFAULT GRADIENT */}
+                  <div
+                    className={`absolute inset-0 z-[2] transition-all duration-500 ${
+                      isActiveMobile ? "opacity-0" : "group-hover:opacity-0"
+                    }`}
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(0,0,0,0) 47.23%, rgba(0,0,0,0.7) 100%)",
+                    }}
+                  />
 
-                    {/* HOVER GRADIENT */}
+                  {/* HOVER GRADIENT */}
+                  <div
+                    className={`absolute inset-0 z-[3] transition-opacity duration-500 ${
+                      isActiveMobile
+                        ? "opacity-100"
+                        : "opacity-0 group-hover:opacity-100"
+                    }`}
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%)",
+                    }}
+                  />
+
+                  {/* ================= HOVER CONTENT ================= */}
+                  <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center text-center px-[50px]">
+                    {/* Logo */}
                     <div
-                      className={`absolute inset-0 z-[3] transition-opacity duration-500 ${
+                      className={`transition-all duration-400 translate-y-25 ${
                         isActiveMobile
-                          ? "opacity-100"
-                          : "opacity-0 group-hover:opacity-100"
-                      }`}
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%)",
-                      }}
-                    />
-
-                    {/* ================= HOVER CONTENT ================= */}
-                    <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center text-center px-[50px]">
-                      {/* Logo */}
-                      <div
-                        className={`transition-all duration-400 translate-y-25 ${
-                          isActiveMobile
-                            ? "!opacity-100 !translate-y-0"
-                            : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                        } mb-[50px]`}
-                      >
-                        <Image
-                          src={item.logo}
-                          alt="Project Logo"
-                          width={207}
-                          height={50}
-                          className="object-contain"
-                        />
-                      </div>
-
-                      {/* Title */}
-                      <h3
-                        className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-600 translate-y-18 ${
-                          isActiveMobile
-                            ? "!opacity-100 !translate-y-0"
-                            : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                        }`}
-                      >
-                        {item.title}
-                      </h3>
-
-                      {/* Read More Btn */}
-                      <span
-                        className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-800 translate-y-6 ${
-                          isActiveMobile
-                            ? "!opacity-100 !translate-y-0"
-                            : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                        }`}
-                      >
-                        Read More
-                      </span>
+                          ? "!opacity-100 !translate-y-0"
+                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
+                      } mb-[50px]`}
+                    >
+                      <Image
+                        src={item.logo}
+                        alt="Project Logo"
+                        width={207}
+                        height={50}
+                        className="object-contain"
+                      />
                     </div>
 
-                    {/* ================= DEFAULT BOTTOM TITLE ================= */}
-                    <h4
-                      className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
+                    {/* Title */}
+                    <h3
+                      className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-600 translate-y-18 ${
+                        isActiveMobile
+                          ? "!opacity-100 !translate-y-0"
+                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
+                      }`}
+                    >
+                      {item.title}
+                    </h3>
+
+                    {/* Read More Btn */}
+                    <span
+                      className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-800 translate-y-6 ${
+                        isActiveMobile
+                          ? "!opacity-100 !translate-y-0"
+                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
+                      }`}
+                    >
+                      Read More
+                    </span>
+                  </div>
+
+                  {/* ================= DEFAULT BOTTOM TITLE ================= */}
+                  <h4
+                    className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
       flex px-6 z-[4] text-center text-white
       text-[18px] md:text-[20px] lg:text-[25px] 2xl:text-[27px] 3xl:text-[30px]
-      font-[optima] uppercase tracking-wide 
+      font-[optima] uppercase tracking-wide
       transition-all duration-500
       ${
         isActiveMobile
           ? "opacity-0 translate-y-3"
           : "group-hover:opacity-0 group-hover:translate-y-3"
       }`}
-                    >
-                      {item.title}
-                    </h4>
-                  </motion.div>
-                </Link>
+                  >
+                    {item.title}
+                  </h4>
+                </motion.div>
+                {/* </Link> */}
               </SwiperSlide>
             );
           })}
@@ -276,13 +275,15 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <Link
-            href="/#"
+          {/* <Link
+            href="/#" */}
+          <button
             className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full
             hover:bg-primary hover:text-white transition-colors duration-300"
           >
             View All
-          </Link>
+          </button>
+          {/* </Link> */}
         </motion.div>
 
         <motion.div
