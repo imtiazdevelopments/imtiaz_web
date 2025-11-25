@@ -28,7 +28,7 @@ export default function RootLayout({
         {/* <Header /> */}
         <ScrollToTopReload />
         <SmoothScrollProvider>
-          {/* <Header2 /> */}
+          <Header2 />
           <FloatingIcons />
           {children}
           {/* <Footer /> */}
