@@ -33,7 +33,6 @@ export default function RootLayout({
           {/* <Footer /> */}
           <FooterV2 />
         </SmoothScrollProvider>
-        <ScrollToTopReload />
       </body>
     </html>
   );
