@@ -175,6 +175,7 @@ const Header2: React.FC = () => {
     <>
       {/* ========================= HEADER =========================   3xl:h-[80px] backdrop-blur-[30px]  */}
       <div
+      id="header"
         className={clsx(
           "mnhdr fixed  w-full z-[999] left-1/2 -translate-x-1/2  transition-all duration-500",
           showHeader
