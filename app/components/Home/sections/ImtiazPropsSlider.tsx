@@ -5,13 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import type { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type ImtiazPropertiesData = {
   data: {
@@ -31,39 +35,85 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const [activeSlide, setActiveSlide] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [activeSlide, setActiveSlide] = useState<number>(1);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  // Detect mobile
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  // Autoplay only when section in viewport
+  // Autoplay only when section is in viewport
   useEffect(() => {
     const section = document.querySelector(".make-header-black");
     if (!section) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          swiperRef.current?.autoplay.start();
-        } else {
-          swiperRef.current?.autoplay.stop();
-        }
-      },
-      { threshold: 0.3 }
-    );
+    // const observer = new IntersectionObserver(
+    //   ([entry]) => {
+    //     if (entry.isIntersecting) {
+    //       swiperRef.current?.autoplay.start();
+    //     } else {
+    //       swiperRef.current?.autoplay.stop();
+    //     }
+    //   },
+    //   {
+    //     threshold: 0.3,
+    //   }
+    // );
 
-    observer.observe(section);
-    return () => observer.disconnect();
+    // observer.observe(section);
+
+    // return () => observer.disconnect();
+  }, []);
+
+  const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const imgRefs = useRef<HTMLImageElement[]>([]);
+
+  const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) wrapRefs.current[i] = el;
+  };
+
+  const setImgRef = (el: HTMLImageElement | null, i: number) => {
+    if (el) imgRefs.current[i] = el;
+  };
+
+  const initGSAP = () => {
+    const section = rootRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      wrapRefs.current.forEach((wrapper, i) => {
+        const img = imgRefs.current[i];
+
+        console.log(img);
+        if (!wrapper || !img) return;
+
+        gsap.fromTo(
+          img,
+          { y: "-5vh" },
+          {
+            y: "5vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              scrub: true,
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+      });
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  // Wait for "homeAnimationsReady"
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+    return () => window.removeEventListener("homeAnimationsReady", listener);
   }, []);
 
   return (
     <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
+      {/* ================= TITLE ================= */}
       <div className="overflow-hidden">
         <motion.h2
           variants={moveUp(0.35)}
@@ -77,20 +127,14 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
       </div>
 
       {/* ================= SWIPER ================= */}
-      <div className="relative">
+      <div className="relative" ref={rootRef}>
         <Swiper
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation]}
           spaceBetween={8}
           slidesPerView={1}
           loop
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: true,
-          }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onSlideChange={(swiper) => {
-            if (isMobile) setActiveSlide(swiper.realIndex); // mobile only
-          }}
+          onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
@@ -109,9 +153,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           }}
         >
           {data.properties.map((item, idx) => {
-            const isActive = isMobile
-              ? activeSlide === idx // mobile active slide
-              : false; // desktop no auto-active
+            const isActiveMobile = idx === activeSlide;
 
             return (
               <SwiperSlide key={item.id}>
@@ -122,25 +164,24 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                   whileInView="show"
                   viewport={{ once: true }}
                   className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px] w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
-                  onMouseEnter={() =>
-                    !isMobile && swiperRef.current?.autoplay.stop()
-                  }
-                  onMouseLeave={() =>
-                    !isMobile && swiperRef.current?.autoplay.start()
-                  }
+                  // onMouseEnter={() => swiperRef.current?.autoplay.stop()}
+                  // onMouseLeave={() => swiperRef.current?.autoplay.start()}
+                  ref={(el) => setWrapRef(el, idx)}
                 >
                   {/* Background Image */}
                   <Image
+                    ref={(el) => setImgRef(el, idx)}
                     src={item.image}
                     alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    width={1000}
+                    height={1200}
+                    className="absolute object-cover w-full h-full scale-[1.1]"
                   />
 
                   {/* DEFAULT GRADIENT */}
                   <div
                     className={`absolute inset-0 z-[2] transition-all duration-500 ${
-                      isActive ? "opacity-0" : "group-hover:opacity-0"
+                      isActiveMobile ? "opacity-0" : "group-hover:opacity-0"
                     }`}
                     style={{
                       background:
@@ -151,7 +192,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                   {/* HOVER GRADIENT */}
                   <div
                     className={`absolute inset-0 z-[3] transition-opacity duration-500 ${
-                      isActive
+                      isActiveMobile
                         ? "opacity-100"
                         : "opacity-0 group-hover:opacity-100"
                     }`}
@@ -166,7 +207,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     {/* Logo */}
                     <div
                       className={`transition-all duration-400 translate-y-25 ${
-                        isActive
+                        isActiveMobile
                           ? "!opacity-100 !translate-y-0"
                           : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
                       } mb-[50px]`}
@@ -183,7 +224,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     {/* Title */}
                     <h3
                       className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px] transition-all duration-600 translate-y-18 ${
-                        isActive
+                        isActiveMobile
                           ? "!opacity-100 !translate-y-0"
                           : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
                       }`}
@@ -194,7 +235,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                     {/* Read More Btn */}
                     <span
                       className={`inline-block border border-white px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] leading-[1] text-white transition-all duration-800 translate-y-6 ${
-                        isActive
+                        isActiveMobile
                           ? "!opacity-100 !translate-y-0"
                           : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
                       }`}
@@ -205,11 +246,16 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                   {/* ================= DEFAULT BOTTOM TITLE ================= */}
                   <h4
-                    className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center flex px-6 z-[4] text-center text-white text-[18px] md:text-[20px] lg:text-[25px] 2xl:text-[27px] 3xl:text-[30px] font-[optima] uppercase tracking-wide transition-all duration-500 ${
-                      isActive
-                        ? "opacity-0 translate-y-3"
-                        : "group-hover:opacity-0 group-hover:translate-y-3"
-                    }`}
+                    className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
+      flex px-6 z-[4] text-center text-white
+      text-[18px] md:text-[20px] lg:text-[25px] 2xl:text-[27px] 3xl:text-[30px]
+      font-[optima] uppercase tracking-wide
+      transition-all duration-500
+      ${
+        isActiveMobile
+          ? "opacity-0 translate-y-3"
+          : "group-hover:opacity-0 group-hover:translate-y-3"
+      }`}
                   >
                     {item.title}
                   </h4>
@@ -229,9 +275,15 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <button className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full cursor-pointer hover:bg-primary hover:text-white transition-colors duration-300">
+          {/* <Link
+            href="/#" */}
+          <button
+            className="border border-primary text-[#404040] py-[19.5px] px-[36px] font-[avenirRoman] text-[17px] rounded-full
+            hover:bg-primary hover:text-white transition-colors duration-300"
+          >
             View All
           </button>
+          {/* </Link> */}
         </motion.div>
 
         <motion.div

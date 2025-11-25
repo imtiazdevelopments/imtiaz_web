@@ -37,10 +37,10 @@ const Header2: React.FC = () => {
   }, []);
 
   const menuItems = [
-    { name: "About", href: "/#" },
-    { name: "Communities", href: "/#" },
-    { name: "Properties", href: "/#" },
-    { name: "Media Center", href: "/#" },
+    { name: "About", href: "#" },
+    { name: "Communities", href: "#" },
+    { name: "Properties", href: "#" },
+    { name: "Media Center", href: "#" },
   ];
 
   useEffect(() => {
