@@ -13,11 +13,11 @@ export default function ScrollToTopReload() {
 
     // 1. After hydration
     setTimeout(() => {
-      document.getElementById("sec1")?.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo(0, 0);
     }, 200);
 
     // 2. After page fully loads
-    const onLoad = () => document.getElementById("sec1")?.scrollIntoView({ behavior: "smooth" });
+    const onLoad = () => window.scrollTo(0, 0);
     window.addEventListener("load", onLoad);
     // setSmoothScrollActive(true)
 
