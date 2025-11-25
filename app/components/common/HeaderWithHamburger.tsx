@@ -2,11 +2,12 @@
 
 import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import NavPage from "./NavPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,12 +37,12 @@ const Header2: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
-    { name: "About", href: "#" },
-    { name: "Communities", href: "#" },
-    { name: "Properties", href: "#" },
-    { name: "Media Center", href: "#" },
-  ];
+//   const menuItems = [
+//     { name: "About", href: "#" },
+//     { name: "Communities", href: "#" },
+//     { name: "Properties", href: "#" },
+//     { name: "Media Center", href: "#" },
+//   ];
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -214,7 +215,6 @@ const Header2: React.FC = () => {
               {/* ------- MOBILE HAMBURGER ------- */}
               <button
                 className="lg:hidden p-2 flex items-center justify-center w-[40px] h-[40px] bg-white/20 rounded-full"
-                onClick={() => setIsMenuOpen(true)}
               >
                 <Image
                   src="/images/hamburger.svg"
@@ -389,14 +389,15 @@ const Header2: React.FC = () => {
 
       {/* DARK BACKDROP */}
       {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]"
-          onClick={() => setIsMenuOpen(false)}
-        />
+        // <div
+        //   className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]"
+        //   onClick={() => setIsMenuOpen(false)}
+        // />
+        <NavPage setIsMenuOpen={setIsMenuOpen}/>
       )}
 
       {/* SLIDE-IN MENU */}
-      <div
+      {/* <div
         className={clsx(
           "fixed top-0 left-0 h-full w-[350px] bg-black/80 backdrop-blur-md transition-transform duration-500 z-[999] flex flex-col justify-center pl-[60px] p-10",
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -425,7 +426,7 @@ const Header2: React.FC = () => {
             </Link>
           ))}
         </nav>
-      </div>
+      </div> */}
     </>
   );
 };
