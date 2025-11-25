@@ -176,29 +176,33 @@ export const menuItems: MenuItem[] = [
   {
     id: "communities",
     label: "COMMUNITIES",
-    bgImage: "/images/navpage/communities_bg.jpg",
+    bgImage: "/images/home/imtiaz-properties/1.png",
   },
   {
     id: "properties",
     label: "PROPERTIES",
-    bgImage: "/images/navpage/properties_bg.jpg",
+    bgImage: "/images/home/imtiaz-properties/2.png",
   },
   {
     id: "media",
     label: "MEDIA CENTER",
-    bgImage: "/images/navpage/media_bg.jpg",
+    bgImage: "/images/home/imtiaz-properties/3.png",
   },
   {
     id: "partnership",
     label: "PARTNERSHIP",
-    bgImage: "/images/navpage/partnership_bg.jpg",
+    bgImage: "/images/home/imtiaz-properties/3.png",
   },
   {
     id: "channel",
     label: "CHANNEL PARTNER",
-    bgImage: "/images/navpage/channel_bg.jpg",
+    bgImage: "/images/home/imtiaz-properties/4.png",
   },
-  { id: "paynow", label: "PAY NOW", bgImage: "/images/navpage/paynow_bg.jpg" },
+  {
+    id: "paynow",
+    label: "PAY NOW",
+    bgImage: "/images/home/imtiaz-properties/3.png",
+  },
 ];
 
 // Submenus mapped to parent menu ID

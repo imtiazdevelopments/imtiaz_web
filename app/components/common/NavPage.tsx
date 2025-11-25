@@ -1,38 +1,60 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data";
 import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
 import InfiniteSlider from "./InfiniteSlider";
 
-export default function MegaMenu() {
+export default function MegaMenu({
+  setIsMenuOpen,
+}: {
+  setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
+}) {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
   const currentSubmenu = subMenuItems[activeMenu.id];
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden z-1000">
       {/* Background Image */}
-      <Image
-        src={activeMenu.bgImage}
-        alt="background"
-        fill
-        className="object-cover"
-      />
+      <motion.div
+        key={`prev-${activeMenu.bgImage}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+      >
+        <Image
+          src={activeMenu.bgImage}
+          alt="background"
+          fill
+          className="object-cover"
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-black/75" />
+      {/* LEFT EDGE OVERLAY */}
+      <div
+        className="absolute inset-0 w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 18%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 77%, rgba(0,0,0,1) 100%)",
+        }}
+      />
 
       {/* Content wrapper */}
-      <div className="relative z-10 flex h-full w-full container pb-50 pt-30">
+      <div className="relative z-20 flex h-full w-full container pb-40 xl:pb-45 2xl:pb-55 pt-30">
         {/* LEFT SIDE MENU */}
-        <div className="w-1/4 flex items-center">
+        <div className="w-1/2 lg:w-1/4 flex items-center">
           <div className="flex flex-col justify-center gap-[25px] w-fit text-white">
             {menuItems.map((item) => {
               const isActive = activeMenu.id === item.id;
               return (
                 <div
                   key={item.id}
-                  className="flex gap-[21px] items-center cursor-pointer"
+                  className="flex gap-[18px] items-center cursor-pointer"
                   onMouseEnter={() => setActiveMenu(item)}
                 >
                   {/* ARROW */}
@@ -93,8 +115,9 @@ export default function MegaMenu() {
 
         {/* CLOSE BTN */}
         <button
-          className="absolute top-14 left-[25.3%] -translate-x-1/2 
+          className="absolute top-14 left-[48%] xl:left-[25.3%] -translate-x-1/2 
           bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center"
+          onClick={() => (setIsMenuOpen ? setIsMenuOpen(false) : null)}
         >
           <Image
             src={"/icons/close_nav.svg"}
@@ -106,7 +129,7 @@ export default function MegaMenu() {
         </button>
 
         {/* RIGHT CONTACT INFO */}
-        <div className="flex flex-col text-white text-sm w-1/4 self-end mb-23 items-end">
+        <div className="flex flex-col text-white text-sm w-1/4 self-end mb-23 items-end hidden lg:block">
           <div>
             <div className="mb-4 font-[avenir] font-[900] text-[16px] opacity-70">
               CONTACT US
@@ -150,7 +173,7 @@ export default function MegaMenu() {
 
       {/* BOTTOM DIVIDER */}
       <div
-        className="absolute left-0 bottom-50 w-full h-[1px]"
+        className="absolute left-0 bottom-40 xl:bottom-45 2xl:bottom-55 w-full h-[1px] z-20"
         style={{
           background:
             "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
