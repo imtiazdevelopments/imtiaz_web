@@ -105,7 +105,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
       />
 
       {/* ---------------- OVERLAY ---------------- */}
-      <div className="absolute inset-0 z-[2] bg-black/50" />
+      <div className="absolute inset-0 z-[2] bg-black/60" />
 
       {/* ---------------- TEXT ---------------- */}
       <div
