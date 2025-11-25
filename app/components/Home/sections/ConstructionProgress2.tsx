@@ -113,7 +113,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
         className="relative z-[5] text-center px-6 max-w-[900px]"
       >
         <div className="overflow-hidden">
-          <h2 className="anim-item text-white text-[40px] md:text-[55px] 2xl:text-[64px] 3xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
+          <h2 className="anim-item text-white text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
             {data.title}
           </h2>
         </div>
