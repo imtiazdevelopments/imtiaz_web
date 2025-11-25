@@ -198,7 +198,7 @@ const Header2: React.FC = () => {
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
               <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 {menuItems.map((item) => (
-                  <Link key={item.name} href={""} className="opacity-0">
+                  <Link key={item.name} href={"#"} className="opacity-0">
                     {item.name}
                   </Link>
                 ))}
@@ -351,7 +351,7 @@ const Header2: React.FC = () => {
               {/* ------- RIGHT SIDE ICONS (DESKTOP ONLY) ------- */}
               <div className="w-[40%] 2xl:w-[33.33%] flex justify-end ">
                 <div className="flex items-center gap-[10px] overflow-hidden rgtbtn">
-                  <button className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0">
+                  <button className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0 cursor-pointer">
                     <Image
                       src="/images/account.svg"
                       alt="account"
@@ -361,7 +361,7 @@ const Header2: React.FC = () => {
                     />
                   </button>
 
-                  <button className="flex items-center justify-center w-[61px] gap-[8px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0">
+                  <button className="flex items-center justify-center w-[61px] gap-[8px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0 cursor-pointer">
                     <Image
                       src="/images/map.svg"
                       alt="map"
