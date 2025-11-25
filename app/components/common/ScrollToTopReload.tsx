@@ -2,18 +2,18 @@
 
 import { useEffect } from "react";
 
-const ScrollToTopReload = () => {
+export default function ScrollToTopReload() {
   useEffect(() => {
-    // Disable browser's automatic scroll restore
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
 
-    // Then scroll to the top
-    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 200); // small delay so hydration finishes first
+
+    return () => clearTimeout(timer);
   }, []);
 
   return null;
-};
-
-export default ScrollToTopReload;
+}
