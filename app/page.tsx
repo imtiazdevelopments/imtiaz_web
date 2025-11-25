@@ -249,7 +249,7 @@ export default function Home() {
             <div className="relative overflow-hidden">
               <h1
                 ref={titleRef}
-                className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
+                className="text-[35px] md:text-[50px] 2xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
               >
                 Redefining Spaces Elevating Lives
               </h1>
@@ -321,12 +321,12 @@ export default function Home() {
             <div className="container">
               <div className=" mx-auto text-center px-4">
                 <div className="overflow-hidden">
-                  <p className="anim-item  text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-25 2xl:mb-[170px] uppercase">
+                  <p className="anim-item  text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-16 2xl:mb-[170px] uppercase">
                     ABOUT
                   </p>
                 </div>
                 <div className="overflow-hidden">
-                  <h2 className="anim-item  text-[40px] md:text-[50px] lg:text-[60px] 3xl:text-[70px] font-[400] font-[optima] text-white leading-[1] mb-[25px] uppercase">
+                  <h2 className="anim-item  text-[40px] md:text-[50px] 2xl:text-[64px] 3xl:text-[70px] font-[400] font-[optima] text-white leading-[1] mb-[25px] uppercase">
                     A JOURNEY TO PERFECTION
                   </h2>
                 </div>
