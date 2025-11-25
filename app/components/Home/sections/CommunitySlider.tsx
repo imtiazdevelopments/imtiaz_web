@@ -318,7 +318,7 @@
 
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -337,6 +337,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { cubicBezier } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = { slides: Slide[] };
 
@@ -413,8 +417,59 @@ const sectionRef = useRef<HTMLDivElement>(null);
 const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: true });
 
 
+  const wrapRefs = useRef<HTMLDivElement[]>([]);
+  const imgRefs = useRef<HTMLDivElement[]>([]);
+
+  const setWrapRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) wrapRefs.current[i] = el;
+  };
+
+  const setImgRef = (el: HTMLDivElement | null, i: number) => {
+    if (el) imgRefs.current[i] = el;
+  };
+
+  const initGSAP = () => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      wrapRefs.current.forEach((wrapper, i) => {
+        const img = imgRefs.current[i];
+
+        console.log(img);
+        if (!wrapper || !img) return;
+
+        gsap.fromTo(
+          img,
+          { y: "-25vh" },
+          {
+            y: "25vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              scrub: true,
+              start: "top bottom",
+              end: "bottom top",
+            },
+          }
+        );
+      });
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  };
+
+  // Wait for "homeAnimationsReady"
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+    return () => window.removeEventListener("homeAnimationsReady", listener);
+  }, []);
+
+
   return (
-    <section className="w-full relative overflow-hidden">
+    <section className="w-full relative overflow-hidden" ref={sectionRef}>
       <Swiper
         // modules={[Navigation, Pagination]}
         slidesPerView={1}
@@ -434,13 +489,14 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
         pagination={{ el: ".hero-pagination", clickable: true }}
         className="w-full"
       >
-        {slides.map((slide) => (
+        {slides.map((slide,index) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative w-full min-h-[520px] md:min-h-[680px]">
+            <div className="relative w-full min-h-[520px] md:min-h-[680px]" ref={(el) => setWrapRef(el, index)}>
               {/* ===== BASE BACKGROUND (never removed) ===== */}
               <div
                 className="absolute inset-0 -z-20 bg-cover bg-center"
                 style={{ backgroundImage: `url('${bgBase}')` }}
+                ref={(el) => setImgRef(el, index)}
               />
 
               {/* ===== FADING OVERLAY ===== */}
