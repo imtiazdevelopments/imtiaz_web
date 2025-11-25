@@ -157,3 +157,97 @@ export const footerV2Data: FooterV2Data = {
     ],
   },
 };
+
+// data.ts
+
+export interface MenuItem {
+  id: string;
+  label: string;
+  bgImage: string;
+}
+
+export interface SubMenuItem {
+  id: string;
+  label: string;
+}
+
+export const menuItems: MenuItem[] = [
+  { id: "about", label: "ABOUT", bgImage: "/images/navpage/about_bg.jpg" },
+  {
+    id: "communities",
+    label: "COMMUNITIES",
+    bgImage: "/images/navpage/communities_bg.jpg",
+  },
+  {
+    id: "properties",
+    label: "PROPERTIES",
+    bgImage: "/images/navpage/properties_bg.jpg",
+  },
+  {
+    id: "media",
+    label: "MEDIA CENTER",
+    bgImage: "/images/navpage/media_bg.jpg",
+  },
+  {
+    id: "partnership",
+    label: "PARTNERSHIP",
+    bgImage: "/images/navpage/partnership_bg.jpg",
+  },
+  {
+    id: "channel",
+    label: "CHANNEL PARTNER",
+    bgImage: "/images/navpage/channel_bg.jpg",
+  },
+  { id: "paynow", label: "PAY NOW", bgImage: "/images/navpage/paynow_bg.jpg" },
+];
+
+// Submenus mapped to parent menu ID
+export const subMenuItems: Record<string, SubMenuItem[]> = {
+  about: [
+    { id: "Overview", label: "OVERVIEW" },
+    { id: "mission", label: "MISSION & VISION" },
+    { id: "team", label: "OUR TEAM" },
+    { id: "careers", label: "CAREERS" },
+  ],
+  communities: [
+    { id: "community-list", label: "COMMUNITY LIST" },
+    { id: "lifestyle", label: "LIFESTYLE" },
+  ],
+  properties: [
+    { id: "all", label: "ALL PROPERTIES" },
+    { id: "offplan", label: "OFF-PLAN PROJECTS" },
+    { id: "ready", label: "READY PROJECTS" },
+  ],
+  media: [
+    { id: "news", label: "NEWS & PRESS" },
+    { id: "events", label: "EVENTS" },
+    { id: "blogs", label: "BLOGS" },
+    { id: "investor", label: "INVESTOR RELATIONS" },
+  ],
+  partnership: [
+    { id: "corp", label: "CORPORATE PARTNERSHIP" },
+    { id: "invest", label: "INVEST WITH US" },
+  ],
+  channel: [
+    { id: "agent", label: "AGENT PORTAL" },
+    { id: "register", label: "REGISTER AS PARTNER" },
+  ],
+  paynow: [
+    { id: "online", label: "PAY ONLINE" },
+    { id: "methods", label: "PAYMENT METHODS" },
+  ],
+};
+
+// Right side contact section
+export const contactInfo = {
+  email: "sales@imtiaz.ae",
+  phone: "+971 800 468429",
+};
+
+// Social icons (replace with your icons)
+export const socialLinks = [
+  "/icons/footer/instagram.svg",
+  "/icons/footer/fb.svg",
+  "/icons/footer/linkedin.svg",
+  "/icons/footer/yt.svg",
+];
