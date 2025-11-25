@@ -318,7 +318,7 @@ export default function Home() {
             <div className="container">
               <div className=" mx-auto text-center px-4">
                 <div className="overflow-hidden">
-                  <p className="anim-item  text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-16 2xl:mb-[120px] uppercase">
+                  <p className="anim-item  text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-16 2xl:mb-[170px] uppercase">
                     ABOUT
                   </p>
                 </div>
