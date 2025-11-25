@@ -401,3 +401,53 @@ body {
     --gap-active: 85px;
   }
 }
+
+.text-blur-edges {
+  position: relative;
+  filter: blur(0px); /* keep container itself sharp */
+}
+
+.text-blur-edges > div {
+  filter: blur(0px); /* text fully sharp before masking */
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent 0,
+    transparent 8%,
+    black 25%,
+    black 75%,
+    transparent 92%,
+    transparent 100%
+  );
+          mask-image: radial-gradient(
+    farthest-side,
+    transparent 0,
+    transparent 8%,
+    black 25%,
+    black 75%,
+    transparent 92%,
+    transparent 100%
+  );
+}
+
+.text-blur-edges::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: blur(12px); /* <-- actual blur strength */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+  z-index: 3;
+}
