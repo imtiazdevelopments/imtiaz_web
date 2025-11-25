@@ -15,8 +15,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
-import ProSliderV2 from "./components/Home/sections/ProSliderV2";
-import ProSliderV2ComingSoon from "./components/Home/sections/ProSliderV2ComingSoon";
+import ProSliderV2 from "../components/Home/sections/ProSliderV2";
+import ProSliderV2ComingSoon from "../components/Home/sections/ProSliderV2ComingSoon";
 import {
   heroSlides,
   /*   aboutSectionJourney, */
@@ -26,15 +26,15 @@ import {
   appSectionData,
   communityYardData,
   heroSlidesComingSoon,
-} from "./components/Home/data";
+} from "../components/Home/data";
 
 /* import AbtJour from "../components/Home/sections/AbtJour"; */
-import ImtiazProperties from "./components/Home/sections/ImtiazPropsSlider";
-import ConstructionProgress2 from "./components/Home/sections/ConstructionProgress2";
-import PressSpotlight from "./components/Home/sections/PressSpotlight";
-import AppSection from "./components/Home/sections/AppSectionV2";
-import CommunitySlider from "./components/Home/sections/CommunitySlider";
-import { useSmoothScrollContext } from "./contexts/smoothScrollContext";
+import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
+import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
+import PressSpotlight from "../components/Home/sections/PressSpotlight";
+import AppSection from "../components/Home/sections/AppSectionV2";
+import CommunitySlider from "../components/Home/sections/CommunitySlider";
+import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
 // import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
