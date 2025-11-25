@@ -495,7 +495,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   
                        
                         {/* Features */}
-                        <div className="flex gap-6 md:gap-16 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 md:px-[68px]">
+                        <div className="flex gap-6 md:gap-10 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 lg:px-[30px] 2xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               key={`${idx}-${activeIndex}`}
