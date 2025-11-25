@@ -117,22 +117,22 @@ export default function Home() {
           .to(img1, { scale: 1, duration: 2 }, "-=0.6")
           .fromTo(
             ".img1-im",
-            { y: "-25vh" },
-            { y: "25vh", duration: 2, ease: "none" },
+            { y: "-20vh" },
+            { y: "20vh", duration: 2, ease: "none" },
             "<"
           )
           .to(img2, { scale: 1, duration: 2 }, "-=1")
           .fromTo(
             ".img2-im",
-            { y: "-25vh" },
-            { y: "25vh", duration: 2, ease: "none" },
+            { y: "-20vh" },
+            { y: "20vh", duration: 2, ease: "none" },
             "<"
           )
           .to(img3, { scale: 1, duration: 2 }, "-=1")
           .fromTo(
             ".img3-im",
-            { y: "-25vh" },
-            { y: "25vh", duration: 2, ease: "none" },
+            { y: "-20vh" },
+            { y: "20vh", duration: 2, ease: "none" },
             "<"
           )
           .to(
@@ -275,8 +275,8 @@ export default function Home() {
 
         <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="img1-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/img01.jpg"
+            className="img1-im w-full h-full object-cover object-center absolute scale-[1.4]"
+            src="/images/home/Wynwood-1.jpg"
             alt=""
             width={2500}
             height={1000}
@@ -285,8 +285,8 @@ export default function Home() {
 
         <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="img2-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/img02.jpg"
+            className="img2-im w-full h-full object-cover object-center absolute scale-[1.4]"
+            src="/images/home/Wynwood-2.jpg"
             alt=""
             width={2500}
             height={1000}
@@ -295,8 +295,8 @@ export default function Home() {
 
         <div className="img1-3 absolute w-full h-full z-40 inset-0 scale-[0] overflow-hidden">
           <Image
-            className="img3-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/imtiaz-properties/2.png"
+            className="img3-im w-full h-full object-cover object-center absolute scale-[1.4]"
+            src="/images/home/Wynwood-3.jpg"
             alt=""
             width={2500}
             height={1000}

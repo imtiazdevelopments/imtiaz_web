@@ -1022,14 +1022,14 @@ export default function HeroFeatureSlider({ slides }: Props) {
 
                   {/* STATIC pill wrapper */}
                   <motion.div
-                    className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full"
+                    className=" max-w-[1150px] w-full text center"
                     variants={dropWrapper}
                     initial="hidden"
                     whileInView="visible"
                     exit="exit"
                   >
                     {/* Animated title */}
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden text-center">
                       <motion.h1
                         key={`title-${activeSlide}`}
                         variants={textFade}
@@ -1039,13 +1039,14 @@ export default function HeroFeatureSlider({ slides }: Props) {
                         animate={isHalfInView ? "animate" : "initial"}
                         exit="exit"
                         viewport={{ once: true }}
-                        className="text-white font-[optima] text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] leading-[1]"
+                        className="text-white font-[optima] text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] leading-none"
                       >
                         {slide.title}
                       </motion.h1>
                     </div>
 
                     {/* Animated subtitle */}
+                    <div className="px-[60px] py-[30px] rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 mt-[30px]">
                     <div className="overflow-hidden">
                       {slide.subtitle && (
                         // <AnimatePresence mode="wait">
@@ -1058,12 +1059,13 @@ export default function HeroFeatureSlider({ slides }: Props) {
                           exit="exit"
                           custom={0.4}
                           viewport={{ once: true }}
-                          className="text-white/90 text-[18px] mt-4 max-w-[85ch] mx-auto"
+                          className="text-white/90 text-[18px]  mx-auto"
                         >
                           {slide.subtitle}
                         </motion.p>
                         // {/* </AnimatePresence> */}
                       )}
+                    </div>
                     </div>
                   </motion.div>
 
