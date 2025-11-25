@@ -313,19 +313,15 @@ const fadeUp = {
   exit: moveUpExit.exit,
 };
 
-
-
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-
 
   // -------- VIEWPORT TRIGGER --------
   const rootRef = useRef(null);
   const inView = useInView(rootRef, { once: true, amount: 0.8 });
 
-
-//   const sectionRef = useRef<HTMLDivElement>(null);
+  //   const sectionRef = useRef<HTMLDivElement>(null);
 
   // per-slide refs
   const wrapRefs = useRef<HTMLDivElement[]>([]);
@@ -378,8 +374,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
     return () => window.removeEventListener("homeAnimationsReady", listener);
   }, []);
 
-
-
   return (
     <div className="w-full relative" ref={rootRef}>
       <Swiper
@@ -398,7 +392,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           <SwiperSlide key={index}>
             <div className="relative w-full flex flex-col justify-center items-center">
               {/* -------------------------------- VIDEO BG -------------------------------- */}
-              <div className="absolute inset-0 -z-10 overflow-hidden" ref={(el) => setWrapRef(el, index)}>
+              <div
+                className="absolute inset-0 -z-10 overflow-hidden"
+                ref={(el) => setWrapRef(el, index)}
+              >
                 <video
                   ref={(el) => setImgRef(el as HTMLVideoElement, index)}
                   src={slide.video}
@@ -406,7 +403,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover scale-[1.5]"
+                  className="w-full h-full object-cover "
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
@@ -506,64 +503,69 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               </div>
 
               {/* -------------------------------- PILL SECTION -------------------------------- */}
-              <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={inView ? "show" : "hidden"} exit="exit" className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] pb-[50px] overflow-hidden`}>
+              <motion.div
+                variants={fadeUp}
+                custom={0.5}
+                initial="hidden"
+                animate={inView ? "show" : "hidden"}
+                exit="exit"
+                className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] pb-[50px] overflow-hidden`}
+              >
                 <AnimatePresence mode="wait">
                   <div className="relative">
-                  <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-full pointer-events-none" />
-                  <motion.div
-                    key={`pill-${activeIndex}`}
-                    initial="hidden"
-                    animate={inView ? "show" : "hidden"}
-                    exit="exit"
-                    className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6 pr-8"
-                  >
-                    {/* Pill Logo */}
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-full pointer-events-none" />
                     <motion.div
-                      className="px-6 md:px-[68px] bg-white/10 backdrop-blur-[30px] rounded-full 
-                      h-[70px] md:h-[90px] flex items-center justify-center overflow-hidden"
+                      key={`pill-${activeIndex}`}
+                      initial="hidden"
+                      animate={inView ? "show" : "hidden"}
+                      exit="exit"
+                      className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6 pr-8"
                     >
+                      {/* Pill Logo */}
                       <motion.div
-                        variants={fadeUp}
-                        custom={0.35}
-                        initial="hidden"
-                        animate={inView ? "show" : "hidden"}
+                        className="px-6 md:px-[68px] bg-white/10 backdrop-blur-[30px] rounded-full 
+                      h-[70px] md:h-[90px] flex items-center justify-center overflow-hidden"
                       >
-                        <Image
-                          src={slide.pillFeatures.title}
-                          alt={slide.pillFeatures.title}
-                          width={140}
-                          height={40}
-                          className="object-contain w-[140px] h-[40px]"
-                        />
-                      </motion.div>
-                    </motion.div>
-
-                    
-
-                    {/* Features */}
-                    <div className="flex gap-6 md:gap-16 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden">
-                      {slide.pillFeatures.features.map((f, idx) => (
                         <motion.div
-                          key={`${idx}-${activeIndex}`}
                           variants={fadeUp}
-                          custom={0.25 + idx * 0.12}
+                          custom={0.35}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
-                          className="flex items-center gap-2 md:gap-3"
                         >
                           <Image
-                            src={f.icon}
-                            width={20}
-                            height={20}
-                            alt={f.label}
+                            src={slide.pillFeatures.title}
+                            alt={slide.pillFeatures.title}
+                            width={140}
+                            height={40}
+                            className="object-contain w-[140px] h-[40px]"
                           />
-                          <span className="text-white text-[14px] md:text-[17px] font-[avenirRoman] uppercase">
-                            {f.label}
-                          </span>
                         </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
+                      </motion.div>
+
+                      {/* Features */}
+                      <div className="flex gap-6 md:gap-16 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden">
+                        {slide.pillFeatures.features.map((f, idx) => (
+                          <motion.div
+                            key={`${idx}-${activeIndex}`}
+                            variants={fadeUp}
+                            custom={0.25 + idx * 0.12}
+                            initial="hidden"
+                            animate={inView ? "show" : "hidden"}
+                            className="flex items-center gap-2 md:gap-3"
+                          >
+                            <Image
+                              src={f.icon}
+                              width={20}
+                              height={20}
+                              alt={f.label}
+                            />
+                            <span className="text-white text-[14px] md:text-[17px] font-[avenirRoman] uppercase">
+                              {f.label}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   </div>
                 </AnimatePresence>
               </motion.div>
@@ -572,10 +574,15 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         ))}
       </Swiper>
 
-
-
       {/* -------------------------------- ARROWS + PAGINATION -------------------------------- */}
-      <motion.div variants={fadeUp} custom={0.5} initial="hidden" animate={inView ? "show" : "hidden"} exit="exit" className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]">
+      <motion.div
+        variants={fadeUp}
+        custom={0.5}
+        initial="hidden"
+        animate={inView ? "show" : "hidden"}
+        exit="exit"
+        className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]"
+      >
         <div className="container flex items-center justify-between">
           {/* Prev */}
           <button

@@ -350,46 +350,46 @@ useEffect(() => {
     if (el) imgRefs.current[i] = el;
   };
 
-  const initGSAP = () => {
-    const section = sectionRef.current;
-    if (!section) return;
+  // const initGSAP = () => {
+  //   const section = sectionRef.current;
+  //   if (!section) return;
 
-    console.log(section)
+  //   console.log(section)
 
-    const ctx = gsap.context(() => {
-      wrapRefs.current.forEach((wrapper, i) => {
-        const img = imgRefs.current[i];
+  //   const ctx = gsap.context(() => {
+  //     wrapRefs.current.forEach((wrapper, i) => {
+  //       const img = imgRefs.current[i];
 
-        console.log(img);
-        if (!wrapper || !img) return;
+  //       console.log(img);
+  //       if (!wrapper || !img) return;
 
-        gsap.fromTo(
-          img,
-          { y: "-25vh" },
-          {
-            y: "25vh",
-            ease: "none",
-            scrollTrigger: {
-              trigger: wrapper,
+  //       gsap.fromTo(
+  //         img,
+  //         { y: "-25vh" },
+  //         {
+  //           y: "25vh",
+  //           ease: "none",
+  //           scrollTrigger: {
+  //             trigger: wrapper,
              
-              start: "top bottom",
-              end: "bottom top",
-            },
-          }
-        );
-      });
-    });
+  //             start: "top bottom",
+  //             end: "bottom top",
+  //           },
+  //         }
+  //       );
+  //     });
+  //   });
 
-    ScrollTrigger.refresh();
-    return () => ctx.revert();
-  };
+  //   ScrollTrigger.refresh();
+  //   return () => ctx.revert();
+  // };
 
-  // Wait for "homeAnimationsReady"
-  useEffect(() => {
-    const listener = () => initGSAP();
-    window.addEventListener("homeAnimationsReady", listener);
-    return () => window.removeEventListener("homeAnimationsReady", listener);
-  }, []);
+  // // Wait for "homeAnimationsReady"
+  // useEffect(() => {
+  //   const listener = () => initGSAP();
+  //   window.addEventListener("homeAnimationsReady", listener);
+  //   return () => window.removeEventListener("homeAnimationsReady", listener);
+  // }, []);
 
 
 
@@ -428,7 +428,7 @@ useEffect(() => {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover scale-[1.5]"
+                  className="w-full h-full object-cover ]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
