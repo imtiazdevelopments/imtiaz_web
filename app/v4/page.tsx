@@ -46,6 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
