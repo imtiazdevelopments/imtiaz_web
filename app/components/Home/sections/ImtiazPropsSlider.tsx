@@ -176,7 +176,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                       alt={item.title}
                    width={1000}
                    height={1200}
-                      className="absolute object-cover group-hover:scale-105 scale-[1.1]"
+                      className="absolute object-cover w-full h-full group-hover:scale-105 scale-[1.1]"
                     />
 
                     {/* DEFAULT GRADIENT */}

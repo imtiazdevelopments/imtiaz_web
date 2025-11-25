@@ -409,7 +409,7 @@ useEffect(() => {
         slidesPerView={1}
         loop
         modules={[EffectFade, Autoplay, Navigation]}
-        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        autoplay={{ delay:8000, disableOnInteraction: false }}
         onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade"
@@ -418,9 +418,9 @@ useEffect(() => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full flex flex-col justify-center items-center">
+            <div className="relative w-full h-screen flex flex-col justify-center items-center">
               {/* -------------------------------- VIDEO BG -------------------------------- */}
-              <div className="absolute inset-0 -z-10 overflow-hidden">
+              <div className="absolute h-full inset-0 -z-10 overflow-hidden">
                 <video
                   src={slide.video}
                   autoPlay
