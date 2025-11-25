@@ -25,7 +25,7 @@ import PressSpotlight from "../components/Home/sections/PressSpotlight";
 import AppSection from "../components/Home/sections/AppSectionV2";
 import CommunitySlider from "../components/Home/sections/CommunitySlider";
 import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
-import Link from "next/link";
+// import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
