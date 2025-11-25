@@ -15,6 +15,7 @@ import {
   pressSpotlightData,
   appSectionData,
   communityYardData,
+  heroSlidesComingSoon,
 } from "../components/Home/data";
 
 /* import AbtJour from "../components/Home/sections/AbtJour"; */
@@ -24,7 +25,7 @@ import PressSpotlight from "../components/Home/sections/PressSpotlight";
 import AppSection from "../components/Home/sections/AppSectionV2";
 import CommunitySlider from "../components/Home/sections/CommunitySlider";
 import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
-import Link from "next/link";
+// import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,9 +39,6 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
   let collapseCount = 0;
-
-
-
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
@@ -67,8 +65,8 @@ export default function Home() {
         const rightText = rightTextRef.current!;
 
         const centerItems = centerTextRef.current
-  ? centerTextRef.current.querySelectorAll(".anim-item")
-  : [];
+          ? centerTextRef.current.querySelectorAll(".anim-item")
+          : [];
 
         gsap.set([leftBg, leftText], { x: 0 });
         gsap.set([rightBg, rightText], { x: 0 });
@@ -101,7 +99,6 @@ export default function Home() {
             scrub: 1,
           },
         });
-
 
         tlSec1
           .to(bar, { height: "20px", duration: 0.8 })
@@ -143,47 +140,47 @@ export default function Home() {
               opacity: 0,
               duration: 1.2,
               stagger: 0.25,
-           /*    ease: "power3.out", */
+              /*    ease: "power3.out", */
             },
             "-=1"
           )
-          .to(
-            centerItems,
-            {
-              y: 40,
-              opacity: 0,
-              duration: 0.8,
-              stagger: 0.25,
-             /*  ease: "power3.out", */
-              delay: 2
-            }
-          )
+          .to(centerItems, {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.25,
+            /*  ease: "power3.out", */
+            delay: 2,
+          })
           .to([leftBg, leftText], {
             x: "-100%",
             duration: 2,
-              onComplete:()=>{
-                collapseCount++;
-                if (collapseCount === 2) window.dispatchEvent(new Event("bgCollapseComplete"));
-              },
-              onReverseComplete:()=>{
-                collapseCount--;
-                if (collapseCount === 0) window.dispatchEvent(new Event("bgCollapseReset"));
-              }
-              
+            onComplete: () => {
+              collapseCount++;
+              if (collapseCount === 2)
+                window.dispatchEvent(new Event("bgCollapseComplete"));
+            },
+            onReverseComplete: () => {
+              collapseCount--;
+              if (collapseCount === 0)
+                window.dispatchEvent(new Event("bgCollapseReset"));
+            },
           })
           .to(
             [rightBg, rightText],
             {
               x: "100%",
               duration: 2,
-              onComplete:()=>{
+              onComplete: () => {
                 collapseCount++;
-                if (collapseCount === 2) window.dispatchEvent(new Event("bgCollapseComplete"));
+                if (collapseCount === 2)
+                  window.dispatchEvent(new Event("bgCollapseComplete"));
               },
-              onReverseComplete:()=>{
+              onReverseComplete: () => {
                 collapseCount--;
-                if (collapseCount === 0) window.dispatchEvent(new Event("bgCollapseReset"));
-              }
+                if (collapseCount === 0)
+                  window.dispatchEvent(new Event("bgCollapseReset"));
+              },
             },
             "<"
           )
@@ -194,17 +191,13 @@ export default function Home() {
             duration: 1,
             delay: 1,
           });
-
-
-          
       });
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
 
       setTimeout(() => {
-  ScrollTrigger.refresh();
-}, 300);
-
+        ScrollTrigger.refresh();
+      }, 300);
 
       return () => ctx.revert();
     };
@@ -341,12 +334,12 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="overflow-hidden">
-                  <Link
-                    href=""
-                    className="anim-item inline-block px-9 py-[19.5px] rounded-full border border-white text-white text-[17px] leading-[1] font-[avenirRoman] font-[400]"
-                  >
+                  {/* <Link
+                    href="" */}
+                  <button className="anim-item inline-block px-9 py-[19.5px] rounded-full border border-white text-white text-[17px] leading-[1] font-[avenirRoman] font-[400]">
                     About Imtiaz
-                  </Link>
+                  </button>
+                  {/* </Link> */}
                 </div>
               </div>
             </div>
@@ -379,7 +372,7 @@ export default function Home() {
       </section>
 
       <ProSliderV2ComingSoon
-        slides={heroSlides.slice().reverse()}
+        slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       />
       <CommunitySlider slides={communityYardData} />

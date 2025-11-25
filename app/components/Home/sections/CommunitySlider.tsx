@@ -385,37 +385,36 @@ export default function HeroFeatureSlider({ slides }: Props) {
   };
 
   const featureStagger = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.15,   // delay between each feature item
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.15, // delay between each feature item
+      },
     },
-  },
-}
+  };
 
+  const featureItem = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
-const featureItem = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
-
-
-const dropWrapper = {
-  hidden: { opacity: 0, y: -60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: cubicBezier(0.16, 1, 0.3, 1), // proper type-safe easing
+  const dropWrapper = {
+    hidden: { opacity: 0, y: -60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: cubicBezier(0.16, 1, 0.3, 1), // proper type-safe easing
+      },
     },
-  },
-};
+  };
 
-
-const sectionRef = useRef<HTMLDivElement>(null);
-const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: true });
-
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isHalfInView = useInView(sectionRef, {
+    margin: "-70% 0px -70% 0px",
+    once: true,
+  });
 
   const wrapRefs = useRef<HTMLDivElement[]>([]);
   const imgRefs = useRef<HTMLDivElement[]>([]);
@@ -467,7 +466,6 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
     return () => window.removeEventListener("homeAnimationsReady", listener);
   }, []);
 
-
   return (
     <section className="w-full relative overflow-hidden h-screen" ref={sectionRef}>
       <Swiper
@@ -489,7 +487,7 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
         pagination={{ el: ".hero-pagination", clickable: true }}
         className="w-full"
       >
-        {slides.map((slide,index) => (
+        {slides.map((slide, index) => (
           <SwiperSlide key={slide.id}>
             <div className="relative w-full h-screen" ref={(el) => setWrapRef(el, index)}>
               {/* ===== BASE BACKGROUND (never removed) ===== */}
@@ -548,7 +546,13 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
                   </div>
 
                   {/* STATIC pill wrapper */}
-                  <motion.div className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full"  variants={dropWrapper} initial="hidden" whileInView="visible" exit="exit">
+                  <motion.div
+                    className="px-10 py-8 rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 max-w-[1150px] w-full"
+                    variants={dropWrapper}
+                    initial="hidden"
+                    whileInView="visible"
+                    exit="exit"
+                  >
                     {/* Animated title */}
                     {/* <AnimatePresence mode="wait"> */}
                     <div className="overflow-hidden">
@@ -632,7 +636,7 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
               </div>
 
               {/* ===== FEATURES ===== */}
-              <div className="mt-[26px] absolute bottom-0 w-full">
+              <div className="mt-[26px]">
                 <motion.div variants={featureStagger} initial="initial"
   whileInView="animate" className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
                   {slide.features.map((f, i) => {
@@ -707,13 +711,12 @@ const isHalfInView = useInView(sectionRef, { margin: "-70% 0px -70% 0px", once: 
         gap-responsive
       `}
                               >
-                                <a
-                                  href={f.link ?? "#"}
-                                  className="inline-block border border-white px-[23px] py-[19.5px]
+                                <button
+                                  className="inline-block border border-white px-[23px] py-[19.5px] cursor-pointer
         rounded-[50px] text-white text-sm"
                                 >
                                   Read More
-                                </a>
+                                </button>
                               </motion.div>
                             </div>
                           </div>
