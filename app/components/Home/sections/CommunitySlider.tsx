@@ -1092,7 +1092,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                   initial="hidden"
                   whileInView="show"
                   exit="exit"
-                  className="mt-8 flex gap-3 justify-center z-[999] absolute -bottom-12 left-1/2 -translate-x-1/2"
+                  className="mt-8 flex gap-3 justify-center z-[999] absolute -bottom-12 left-1/2 -translate-x-1/2 hidden"
                   viewport={{ once: true }}
                 >
                   {slides.map((_, i) => (

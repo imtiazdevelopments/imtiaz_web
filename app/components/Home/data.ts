@@ -261,7 +261,7 @@ export const heroSlidesComingSoon = [
       ],
     },
   },
-    {
+  {
     title: "Cotier House 2 by Imtiaz",
     video: "/videos/slidervdo-2.mp4",
     pillFeatures: {
@@ -451,38 +451,6 @@ export const communityYardData = [
         id: "f4",
         title: "HUB FOR HIGH-END SHOPPING",
         bgImage: "/images/home/community/Hub_for_High-End_Shopping.jpg",
-        link: "#",
-      },
-    ],
-  },
-  {
-    id: "s2",
-    title: "WATERFRONT LUXURY LIVING",
-    subtitle:
-      "Experience serene waterfront views blended with modern architecture — the perfect balance of elegance, comfort, and premium living by the sea.",
-    features: [
-      {
-        id: "f1",
-        title: "BEACHFRONT RETREATS",
-        bgImage: "/images/home/community/1.jpg",
-        link: "#",
-      },
-      {
-        id: "f2",
-        title: "VIBRANT LIFESTYLE DESTINATIONS",
-        bgImage: "/images/home/community/f2.jpg",
-        link: "#",
-      },
-      {
-        id: "f3",
-        title: "ICONIC SKYLINE VIEWS",
-        bgImage: "/images/home/community/1.jpg",
-        link: "#",
-      },
-      {
-        id: "f4",
-        title: "FINE DINING & NIGHTLIFE",
-        bgImage: "/images/home/community/f2.jpg",
         link: "#",
       },
     ],
