@@ -1,14 +1,19 @@
-"use client"
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 const ScrollToTopReload = () => {
   useEffect(() => {
-    console.log("scrolled to top")
+    // Disable browser's automatic scroll restore
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    // Then scroll to the top
     window.scrollTo(0, 0);
   }, []);
 
-  return null; // no UI needed
-}
+  return null;
+};
 
-export default ScrollToTopReload
+export default ScrollToTopReload;
