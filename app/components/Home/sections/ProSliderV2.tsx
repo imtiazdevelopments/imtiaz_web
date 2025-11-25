@@ -340,13 +340,13 @@ useEffect(() => {
 
 
  const wrapRefs = useRef<HTMLDivElement[]>([]);
-  const imgRefs = useRef<HTMLImageElement[]>([]);
+  const imgRefs = useRef<HTMLVideoElement[]>([]);
 
   const setWrapRef = (el: HTMLDivElement | null, i: number) => {
     if (el) wrapRefs.current[i] = el;
   };
 
-  const setImgRef = (el: HTMLImageElement | null, i: number) => {
+  const setImgRef = (el: HTMLVideoElement | null, i: number) => {
     if (el) imgRefs.current[i] = el;
   };
 
