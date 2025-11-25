@@ -40,21 +40,12 @@ export default function Home() {
   let collapseCount = 0;
 
 
-function ScrollToTopOnReload() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return null; // no UI needed
-}
-
-ScrollToTopOnReload();
-
 
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
   useEffect(() => {
+    // window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
   }, []);
 
@@ -210,7 +201,10 @@ ScrollToTopOnReload();
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
 
-      setTimeout(() => ScrollTrigger.refresh(), 50);
+      setTimeout(() => {
+  ScrollTrigger.refresh();
+}, 300);
+
 
       return () => ctx.revert();
     };
