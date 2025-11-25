@@ -18,6 +18,7 @@ import ImtiazProperties from "./sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "./sections/ConstructionProgress2";
 import PressSpotlight from "./sections/PressSpotlight";
 import AppSection from "./sections/AppSectionV2";
+import NavPage from "../common/NavPage";
 
 export default function Home() {
   return (
