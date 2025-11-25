@@ -122,6 +122,10 @@ body {
   /* 70px */
   --text-70: clamp(2.2rem, 5.4vw + 0.8rem, 70px);
 
+  /* 60px */
+  --text-60: clamp(1.9rem, 4.8vw + 0.7rem, 60px);
+
+
   /* 30px */
   --text-30: clamp(1.1rem, 2.5vw + 0.3rem, 30px);
 
@@ -133,6 +137,10 @@ body {
 
   /* 17px */
   --text-17: clamp(0.85rem, 1.2vw + 0.12rem, 17px);
+
+  /* 16px */
+  --text-16: clamp(0.82rem, 1.1vw + 0.11rem, 16px);
+
 
   /* 15px */
   --text-15: clamp(0.78rem, 1vw + 0.1rem, 15px);
@@ -153,10 +161,12 @@ body {
 
   --text-80: var(--text-80);
   --text-70: var(--text-70);
+  --text-60: var(--text-60);
   --text-30: var(--text-30);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
   --text-17: var(--text-17);
+  --text-16: var(--text-16);
   --text-15: var(--text-15);
 }
 
