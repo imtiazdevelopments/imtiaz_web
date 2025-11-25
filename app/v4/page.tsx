@@ -46,13 +46,13 @@ export default function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
   }, []);
 
   useEffect(() => {
     const startAnimations = () => {
       // ENABLE scroll now
-      // document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
       setSmoothScrollActive(true);
 
       const ctx = gsap.context(() => {
