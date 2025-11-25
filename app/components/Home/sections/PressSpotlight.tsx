@@ -66,9 +66,9 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
 
         gsap.fromTo(
           img,
-          { y: "-25vh" },
+          { y: "-15vh" },
           {
-            y: "25vh",
+            y: "15vh",
             ease: "none",
             scrollTrigger: {
               trigger: wrapper,
@@ -212,7 +212,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover absolute scale-[1.4]"
+                    className="object-cover absolute scale-[1.3]"
                   />
                 </div>
               </div>
@@ -228,7 +228,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             className="flex justify-center mt-[50px]"
           >
             <Link
-              href="/#"
+              href=""
               className="border border-primary text-primary px-[36px] py-[19.5px] rounded-full font-[avenirRoman] text-[17px] hover:bg-primary hover:text-white transition-colors"
             >
               View All
