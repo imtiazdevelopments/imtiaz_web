@@ -201,7 +201,10 @@ export default function Home() {
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
 
-      setTimeout(() => ScrollTrigger.refresh(), 50);
+      setTimeout(() => {
+  ScrollTrigger.refresh();
+}, 300);
+
 
       return () => ctx.revert();
     };
