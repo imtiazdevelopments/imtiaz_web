@@ -235,7 +235,7 @@ export default function Home() {
         <div className="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%]"
-            src="/videos/banner_vide.mp4"
+            src="/videos/BNR01.mp4"
             poster="/videos/banner-vid.jpg"
             autoPlay
             loop

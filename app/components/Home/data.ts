@@ -292,7 +292,7 @@ export const DubaiIslandData = {
 
 export const ConstructionProgressData = {
   title: "CONSTRUCTION PROGRESS",
-  videoSrc: "/images/home/work-progress/progress.mp4",
+  videoSrc: "/video/Construction_Update.mp4",
   posterSrc: "/images/home/work-progress/progress.jpg",
   description:
     "Watch our projects turn from concept to reality and witness the future of real estate unfold at every milestone.",
