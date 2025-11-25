@@ -636,7 +636,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
               </div>
 
               {/* ===== FEATURES ===== */}
-              <div className="mt-[26px]">
+              <div className="absolute bottom-0 w-full">
                 <motion.div variants={featureStagger} initial="initial"
   whileInView="animate" className="grid grid-cols-2 lg:grid-cols-4 rounded overflow-hidden relative">
                   {slide.features.map((f, i) => {
