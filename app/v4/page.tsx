@@ -42,6 +42,7 @@ export default function Home() {
 
 function ScrollToTopOnReload() {
   useEffect(() => {
+    console.log("scrolled to top")
     window.scrollTo(0, 0);
   }, []);
 
