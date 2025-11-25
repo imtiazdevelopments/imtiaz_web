@@ -7,19 +7,33 @@ import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
 import InfiniteSlider from "./InfiniteSlider";
 
-export default function MegaMenu({setIsMenuOpen}:{setIsMenuOpen?:Dispatch<SetStateAction<boolean>>}) {
+export default function MegaMenu({
+  setIsMenuOpen,
+}: {
+  setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
+}) {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
   const currentSubmenu = subMenuItems[activeMenu.id];
 
   return (
     <div className="relative w-full h-screen overflow-hidden z-1000">
       {/* Background Image */}
-      <Image
-        src={activeMenu.bgImage}
-        alt="background"
-        fill
-        className="object-cover"
-      />
+      <motion.div
+        key={`prev-${activeMenu.bgImage}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+      >
+        <Image
+          src={activeMenu.bgImage}
+          alt="background"
+          fill
+          className="object-cover"
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-black/75" />
       {/* LEFT EDGE OVERLAY */}
       <div
@@ -103,7 +117,7 @@ export default function MegaMenu({setIsMenuOpen}:{setIsMenuOpen?:Dispatch<SetSta
         <button
           className="absolute top-14 left-[48%] xl:left-[25.3%] -translate-x-1/2 
           bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center"
-          onClick={()=>setIsMenuOpen ? setIsMenuOpen(false) : null}
+          onClick={() => (setIsMenuOpen ? setIsMenuOpen(false) : null)}
         >
           <Image
             src={"/icons/close_nav.svg"}
