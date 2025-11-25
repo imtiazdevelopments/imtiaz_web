@@ -948,7 +948,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                       initial={{ opacity: 1, filter: "blur(0px)" }}
                       animate={{ opacity: 0, filter: "blur(1px)" }}
                       transition={{
-                        duration: 0.8,
+                        duration: 0.4,
                         ease: "easeInOut",
                       }}
                       className="absolute w-full h-full bg-cover bg-center will-change-opacity will-change-filter"
@@ -962,7 +962,7 @@ export default function HeroFeatureSlider({ slides }: Props) {
                     initial={{ opacity: 0, filter: "blur(1px)" }}
                     animate={{ opacity: 1, filter: "blur(0px)" }}
                     transition={{
-                      duration: 0.8,
+                      duration: 0.4,
                       ease: "easeInOut",
                     }}
                     className="absolute w-full h-full bg-cover bg-center will-change-opacity will-change-filter"
