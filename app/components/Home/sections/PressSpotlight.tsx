@@ -113,7 +113,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
         >
           {data.items.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-10 3xl:gap-0 overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-10 3xl:gap-0 overflow-hidden">
                 {/* LEFT SECTION */}
                 <div className="flex flex-col items-center">
                   <motion.h2
