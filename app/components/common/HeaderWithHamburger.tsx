@@ -201,7 +201,7 @@ const Header2: React.FC = () => {
               <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 <button
                   className="flex items-center justify-center w-[40px] h-[40px] opacity-0 cursor-pointer"
-                  // onClick={() => setIsMenuOpen(true)}
+                  onClick={() => setIsMenuOpen(true)}
                 >
                   <Image
                     src="/images/hamburger-desktop.svg"
@@ -216,7 +216,7 @@ const Header2: React.FC = () => {
               {/* ------- MOBILE HAMBURGER ------- */}
               <button
                 className="lg:hidden p-2 flex items-center justify-center w-[40px] h-[40px] bg-white/20 rounded-full"
-                // onClick={() => setIsMenuOpen(true)}
+                onClick={() => setIsMenuOpen(true)}
               >
                 <Image
                   src="/images/hamburger.svg"
