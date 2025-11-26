@@ -196,7 +196,7 @@ export default function MegaMenu({
                 variants={moveUp(0.2)}
                 initial="hidden"
                 animate="show"
-                className="mb-4 font-[avenir] font-[900] text-[16px] opacity-70"
+                className="mb-4 font-[avenir] font-[900] text-[20px] opacity-70"
               >
                 CONTACT US
               </motion.div>
@@ -206,7 +206,7 @@ export default function MegaMenu({
                   variants={moveUp(0.25)}
                   initial="hidden"
                   animate="show"
-                  className="text-[16px] leading-[2.2]"
+                  className="text-[18px] leading-[2.2]"
                 >
                   {contactInfo.email}
                 </motion.div>
@@ -217,7 +217,7 @@ export default function MegaMenu({
                   variants={moveUp(0.2)}
                   initial="hidden"
                   animate="show"
-                  className="text-[16px] leading-[2.2]"
+                  className="text-[18px] leading-[2.2]"
                 >
                   {contactInfo.phone}
                 </motion.div>
