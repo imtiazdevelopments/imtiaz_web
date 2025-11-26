@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { moveRight, moveUp } from "../motionVariants";
 import InfiniteSlider from "./InfiniteSlider";
 
