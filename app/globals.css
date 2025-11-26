@@ -157,6 +157,8 @@ body {
   --font-avenirLight: "AvenirLight", sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
+  --breakpoint-xl: 84.375rem;
+  --breakpoint-2xl: 96.25rem;
   --breakpoint-3xl: 113.125rem;
 
   --text-80: var(--text-80);
