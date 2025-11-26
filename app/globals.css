@@ -157,6 +157,7 @@ body {
   --font-avenirLight: "AvenirLight", sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
+  --breakpoint-lg: 75.25rem;
   --breakpoint-xl: 84.375rem;
   --breakpoint-2xl: 96.25rem;
   --breakpoint-3xl: 113.125rem;
@@ -408,29 +409,27 @@ body {
 
 .text-blur-edges {
   position: relative;
-  filter: blur(0px); /* keep container itself sharp */
+  filter: blur(0px);
+  /* keep container itself sharp */
 }
 
-.text-blur-edges > div {
-  filter: blur(0px); /* text fully sharp before masking */
-  -webkit-mask-image: radial-gradient(
-    farthest-side,
-    transparent 0,
-    transparent 8%,
-    black 25%,
-    black 75%,
-    transparent 92%,
-    transparent 100%
-  );
-          mask-image: radial-gradient(
-    farthest-side,
-    transparent 0,
-    transparent 8%,
-    black 25%,
-    black 75%,
-    transparent 92%,
-    transparent 100%
-  );
+.text-blur-edges>div {
+  filter: blur(0px);
+  /* text fully sharp before masking */
+  -webkit-mask-image: radial-gradient(farthest-side,
+      transparent 0,
+      transparent 8%,
+      black 25%,
+      black 75%,
+      transparent 92%,
+      transparent 100%);
+  mask-image: radial-gradient(farthest-side,
+      transparent 0,
+      transparent 8%,
+      black 25%,
+      black 75%,
+      transparent 92%,
+      transparent 100%);
 }
 
 .text-blur-edges::after {
@@ -438,20 +437,17 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  filter: blur(12px); /* <-- actual blur strength */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 20%,
-    black 80%,
-    transparent 100%
-  );
-          mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 20%,
-    black 80%,
-    transparent 100%
-  );
+  filter: blur(12px);
+  /* <-- actual blur strength */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
   z-index: 3;
 }

@@ -171,7 +171,7 @@ export default function MegaMenu({
 
           {/* CLOSE BTN */}
           <button
-            className="absolute top-8 2xl:top-14 left-[49.5%] xl:left-[25.6%] 2xl:left-[25.3%] -translate-x-1/2 
+            className="absolute top-8 2xl:top-14 left-[49.5%] lg:left-[25.6%] 2xl:left-[25.3%] -translate-x-1/2 
             bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center cursor-pointer"
             onClick={() => (setIsMenuOpen ? setIsMenuOpen(false) : null)}
           >
