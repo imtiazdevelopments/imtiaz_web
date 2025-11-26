@@ -9,14 +9,14 @@ const MarqueeText = () => {
         animate={{ x: ["0%", "-100%"] }} // Moves seamlessly
         transition={{ repeat: Infinity, duration: 80, ease: "linear" }} // Increased duration for slower speed
       >
-        {[...Array(20)].map((_, i) => (
+        {[...Array(40)].map((_, i) => (
           /*  <motion.h1
           key={i}
             className="text-[300px] font-light text-transparent bg-clip-text bg-gradient-to-r from-gray-500 via-white to-gray-500 whitespace-nowrap leading-none"
 > */
           <motion.h1
             key={i}
-            className="text-[100px] 2xl:text-[130px] font-light text-white font-[optima]"
+            className="text-[60px] xl:text-[85px] 2xl:text-[130px] font-light text-white font-[optima]"
           >
             IMTIAZ .
           </motion.h1>
