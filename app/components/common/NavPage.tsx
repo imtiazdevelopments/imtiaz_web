@@ -65,7 +65,7 @@ export default function MegaMenu({
       />
 
       {/* Content wrapper */}
-      <div className="relative z-20 flex h-full w-full container pb-40 xl:pb-45 2xl:pb-55 pt-30">
+      <div className="relative z-20 flex h-full w-full container pb-40 xl:pb-45 2xl:pb-[218px] pt-30">
         {/* LEFT SIDE MENU */}
         <div className="w-1/2 lg:w-1/4 flex items-center">
           <div className="flex flex-col justify-center gap-[25px] w-full text-white overflow-hidden">
@@ -222,7 +222,7 @@ export default function MegaMenu({
 
       {/* BOTTOM DIVIDER */}
       <div
-        className="absolute left-0 bottom-40 xl:bottom-45 2xl:bottom-55 w-full h-[1px] z-20"
+        className="absolute left-0 bottom-40 xl:bottom-45 2xl:bottom-[218px] w-full h-[1px] z-20"
         style={{
           background:
             "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",

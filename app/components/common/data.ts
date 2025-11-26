@@ -191,17 +191,17 @@ export const menuItems: MenuItem[] = [
   {
     id: "partnership",
     label: "PARTNERSHIP",
-    bgImage: "/images/home/imtiaz-properties/3.png",
+    bgImage: "/images/home/imtiaz-properties/4.png",
   },
   {
     id: "channel",
     label: "CHANNEL PARTNER",
-    bgImage: "/images/home/imtiaz-properties/4.png",
+    bgImage: "/images/home/imtiaz-properties/5.png",
   },
   {
     id: "paynow",
     label: "PAY NOW",
-    bgImage: "/images/home/imtiaz-properties/3.png",
+    bgImage: "/images/home/imtiaz-properties/1.png",
   },
 ];
 
