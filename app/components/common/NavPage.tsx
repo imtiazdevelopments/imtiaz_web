@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data";
 import { motion } from "framer-motion";
-import { moveUp } from "../motionVariants";
+import { moveRight, moveUp } from "../motionVariants";
 import InfiniteSlider from "./InfiniteSlider";
 
 export default function MegaMenu({
@@ -14,33 +14,53 @@ export default function MegaMenu({
 }) {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
   const currentSubmenu = subMenuItems[activeMenu.id];
+  const [prevImage, setPrevImage] = useState(menuItems[0].bgImage);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPrevImage(activeMenu.bgImage);
+    }, 300); // match fade duration
+
+    return () => clearTimeout(timer);
+  }, [activeMenu]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden z-1000">
+    <div className="relative w-full h-screen overflow-hidden z-1000 bg-white">
       {/* Background Image */}
+      {/* STATIC PREVIOUS IMAGE */}
+      <Image
+        key={`prev-${prevImage}`}
+        src={prevImage}
+        alt="background-prev"
+        fill
+        className="object-cover absolute inset-0 z-0"
+        priority
+      />
+
+      {/* FADING-IN NEW IMAGE */}
       <motion.div
-        key={`prev-${activeMenu.bgImage}`}
+        key={`active-${activeMenu.bgImage}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.3,
-          ease: "easeInOut",
-        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="absolute inset-0 z-0"
       >
         <Image
           src={activeMenu.bgImage}
-          alt="background"
+          alt="background-active"
           fill
           className="object-cover"
+          priority
         />
       </motion.div>
+
       <div className="absolute inset-0 bg-black/75" />
       {/* LEFT EDGE OVERLAY */}
       <div
-        className="absolute inset-0 w-full"
+        className="absolute inset-0 z-10 w-full"
         style={{
           background:
-            "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 18%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 77%, rgba(0,0,0,1) 100%)",
+            "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 2%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%)",
         }}
       />
 
@@ -48,13 +68,17 @@ export default function MegaMenu({
       <div className="relative z-20 flex h-full w-full container pb-40 xl:pb-45 2xl:pb-55 pt-30">
         {/* LEFT SIDE MENU */}
         <div className="w-1/2 lg:w-1/4 flex items-center">
-          <div className="flex flex-col justify-center gap-[25px] w-fit text-white">
-            {menuItems.map((item) => {
+          <div className="flex flex-col justify-center gap-[25px] w-full text-white overflow-hidden">
+            {menuItems.map((item, index) => {
               const isActive = activeMenu.id === item.id;
               return (
-                <div
+                <motion.div
+                  variants={moveRight(index * 0.13)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
                   key={item.id}
-                  className="flex gap-[18px] items-center cursor-pointer"
+                  className="flex gap-2 lg:gap-[18px] items-center cursor-pointer"
                   onMouseEnter={() => setActiveMenu(item)}
                 >
                   {/* ARROW */}
@@ -74,7 +98,7 @@ export default function MegaMenu({
                   {/* TITLE */}
                   <span
                     className={`
-              text-30 font-[optmia] leading-[1.2] uppercase duration-300 transition-all
+               text-17 lg:text-30 font-[optima] leading-[1.2] uppercase duration-500 transition-all
               ${
                 isActive
                   ? "translate-x-1 bg-gradient-to-r from-[#7A253A] to-white bg-clip-text text-transparent"
@@ -84,14 +108,14 @@ export default function MegaMenu({
                   >
                     {item.label}
                   </span>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
         {/* MIDDLE DIVIDER */}
-        <div className="relative w-[1px] mr-[70px]">
+        <div className="relative w-[1px] mr-10 lg:mr-[70px]">
           <div
             className="absolute left-0 top-0 h-full w-[1px]"
             style={{
@@ -102,21 +126,26 @@ export default function MegaMenu({
         </div>
 
         {/* RIGHT SIDE SUBMENU */}
-        <div className="flex flex-col gap-4 text-white w-1/3 justify-center">
-          {currentSubmenu.map((item) => (
-            <div
-              key={item.id}
-              className="text-[16px] font-[avenirRoman] leading-[2.2] uppercase cursor-pointer hover:translate-x-2 transition-all duration-300"
+        <div className="flex flex-col gap-2 lg:gap-4  text-white w-1/3 justify-center overflow-hidden">
+          {currentSubmenu.map((item, idx) => (
+            <motion.div
+              key={`menu-${item.id}-${idx}`}
+              variants={moveRight(idx * 0.16)}
+              initial="hidden"
+              animate="show"
+              viewport={{ once: true }}
             >
-              {item.label}
-            </div>
+              <div className="text-17 font-[avenirRoman] leading-[2.2] uppercase cursor-pointer hover:translate-x-2 transition-all duration-300">
+                {item.label}
+              </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CLOSE BTN */}
         <button
-          className="absolute top-14 left-[48%] xl:left-[25.3%] -translate-x-1/2 
-          bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center"
+          className="absolute top-14 left-[49.5%] xl:left-[25.3%] -translate-x-1/2 
+          bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center cursor-pointer"
           onClick={() => (setIsMenuOpen ? setIsMenuOpen(false) : null)}
         >
           <Image
@@ -124,27 +153,47 @@ export default function MegaMenu({
             alt="close"
             width={21}
             height={19}
-            className="w-[21px] h-[19px]"
+            className="w-[21px] h-[19px] hover:scale-[1.2] transition-all duration-300"
           />
         </button>
 
         {/* RIGHT CONTACT INFO */}
-        <div className="flex flex-col text-white text-sm w-1/4 self-end mb-23 items-end hidden lg:block">
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col text-white text-sm w-1/4 self-end mb-23 items-end hidden lg:block"
+        >
           <div>
-            <div className="mb-4 font-[avenir] font-[900] text-[16px] opacity-70">
+            <motion.div
+              variants={moveUp(0.2)}
+              initial="hidden"
+              animate="show"
+              className="mb-4 font-[avenir] font-[900] text-[16px] opacity-70"
+            >
               CONTACT US
-            </div>
+            </motion.div>
             <div className="flex items-center font-[avenirRoman] gap-4 text-white opacity-70">
-              <div className="text-[16px] leading-[2.2]">
+              <motion.div
+                variants={moveUp(0.25)}
+                initial="hidden"
+                animate="show"
+                className="text-[16px] leading-[2.2]"
+              >
                 {contactInfo.email}
-              </div>
+              </motion.div>
 
               {/* VERTICAL DIVIDER */}
               <div className="w-[1px] h-[13px] bg-white" />
 
-              <div className="text-[16px] leading-[2.2]">
+              <motion.div
+                variants={moveUp(0.2)}
+                initial="hidden"
+                animate="show"
+                className="text-[16px] leading-[2.2]"
+              >
                 {contactInfo.phone}
-              </div>
+              </motion.div>
             </div>
 
             <div className="flex gap-[5px] w-full mt-[46px]">
@@ -168,7 +217,7 @@ export default function MegaMenu({
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* BOTTOM DIVIDER */}

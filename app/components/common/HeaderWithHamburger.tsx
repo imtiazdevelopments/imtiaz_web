@@ -8,6 +8,7 @@ import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import NavPage from "./NavPage";
+import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -199,7 +200,7 @@ const Header2: React.FC = () => {
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
               <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 <button
-                  className="flex items-center justify-center w-[40px] h-[40px] opacity-0"
+                  className="flex items-center justify-center w-[40px] h-[40px] opacity-0 cursor-pointer"
                   // onClick={() => setIsMenuOpen(true)}
                 >
                   <Image
@@ -213,7 +214,10 @@ const Header2: React.FC = () => {
               </div>
 
               {/* ------- MOBILE HAMBURGER ------- */}
-              <button className="lg:hidden p-2 flex items-center justify-center w-[40px] h-[40px] bg-white/20 rounded-full">
+              <button
+                className="lg:hidden p-2 flex items-center justify-center w-[40px] h-[40px] bg-white/20 rounded-full"
+                // onClick={() => setIsMenuOpen(true)}
+              >
                 <Image
                   src="/images/hamburger.svg"
                   alt="menu"
@@ -386,13 +390,34 @@ const Header2: React.FC = () => {
       {/* ========================= MOBILE SIDEBAR ========================= */}
 
       {/* DARK BACKDROP */}
-      {isMenuOpen && (
-        // <div
-        //   className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]"
-        //   onClick={() => setIsMenuOpen(false)}
-        // />
-        <NavPage setIsMenuOpen={setIsMenuOpen} />
-      )}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* BACKDROP */}
+            <motion.div
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* MENU PANEL */}
+            <motion.div
+              className="fixed inset-0 z-[999]"
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 1, 0.5, 1],
+              }}
+            >
+              <NavPage setIsMenuOpen={setIsMenuOpen} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* SLIDE-IN MENU */}
       {/* <div
