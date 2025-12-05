@@ -1047,25 +1047,25 @@ export default function HeroFeatureSlider({ slides }: Props) {
 
                     {/* Animated subtitle */}
                     <div className="px-[60px] py-[30px] rounded-[140px] text-center backdrop-blur-[30px] bg-black/20 mt-[30px]">
-                    <div className="overflow-hidden">
-                      {slide.subtitle && (
-                        // <AnimatePresence mode="wait">
-                        <motion.p
-                          key={`sub-${activeSlide}`}
-                          variants={textFade}
-                          initial="initial"
-                          whileInView="animate"
-                          animate={isHalfInView ? "animate" : "initial"}
-                          exit="exit"
-                          custom={0.4}
-                          viewport={{ once: true }}
-                          className="text-white/90 text-[18px]  mx-auto"
-                        >
-                          {slide.subtitle}
-                        </motion.p>
-                        // {/* </AnimatePresence> */}
-                      )}
-                    </div>
+                      <div className="overflow-hidden">
+                        {slide.subtitle && (
+                          // <AnimatePresence mode="wait">
+                          <motion.p
+                            key={`sub-${activeSlide}`}
+                            variants={textFade}
+                            initial="initial"
+                            whileInView="animate"
+                            animate={isHalfInView ? "animate" : "initial"}
+                            exit="exit"
+                            custom={0.4}
+                            viewport={{ once: true }}
+                            className="text-white/90 text-[18px]  mx-auto"
+                          >
+                            {slide.subtitle}
+                          </motion.p>
+                          // {/* </AnimatePresence> */}
+                        )}
+                      </div>
                     </div>
                   </motion.div>
 
@@ -1223,3 +1223,5 @@ export default function HeroFeatureSlider({ slides }: Props) {
     </section>
   );
 }
+
+

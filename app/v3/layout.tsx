@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 
 import "../globals.css";
 // import Header from "./components/common/Header";
-import Header2 from "../components/common/Header2";
+// import Header2 from "../components/common/Header2";
 // import Footer from "./components/common/Footer";
 /* import SmoothScroll from "./components/common/SmoothScroll"; */
+import HeaderWithHamburger from "../components/common/HeaderWithHamburger";
 import FooterV2 from "../components/common/FooterV2";
 import { SmoothScrollProvider } from "../contexts/smoothScrollContext";
 import FloatingIcons from "../components/common/FloatingIcons";
@@ -20,7 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
       <body className={`antialiased`}>
@@ -28,7 +28,8 @@ export default function RootLayout({
         {/* <Header /> */}
         <ScrollToTopReload />
         <SmoothScrollProvider>
-          <Header2 />
+          {/* <Header2 /> */}
+          <HeaderWithHamburger />
           <FloatingIcons />
           {children}
           {/* <Footer /> */}
