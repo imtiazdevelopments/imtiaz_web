@@ -327,7 +327,7 @@ export const imtiazPropertiesData = {
       link: "#",
       logo: "/images/home/imtiaz-properties/p2_logo.png",
     },
-        {
+    {
       id: 4,
       title: "LE BLANC BY IMTIAZ",
       image: "/images/home/imtiaz-properties/p1.jpg",
@@ -442,3 +442,45 @@ export const communityYardData = [
     ],
   },
 ];
+
+export const communityNamesData = {
+  heading: "IMTIAZ COMMUNITIES",
+  communities: [
+    {
+      id: "f1",
+      name: "JVC Community",
+      bgImage: "/images/home/community/ÔüáIsland_Life.jpg",
+      link: "#",
+    },
+    {
+      id: "f2",
+      name: "Al Furjan Community Guide",
+      bgImage: "/images/home/community/ÔüáMost_Sought-After-Community.jpg",
+      link: "#",
+    },
+    {
+      id: "f3",
+      name: "Jumeirah Garden City",
+      bgImage: "/images/home/community/ÔüáMarina-Side Bliss.jpg",
+      link: "#",
+    },
+    {
+      id: "f4",
+      name: "Dubai Land Residence Complex",
+      bgImage: "/images/home/community/Hub_for_High-End_Shopping.jpg",
+      link: "#",
+    },
+    {
+      id: "f5",
+      name: "Dubai Islands",
+      bgImage: "/images/home/community/ÔüáMarina-Side Bliss.jpg",
+      link: "#",
+    },
+    {
+      id: "f6",
+      name: "Meydan Horizon Community",
+      bgImage: "/images/home/community/Hub_for_High-End_Shopping.jpg",
+      link: "#",
+    },
+  ],
+};

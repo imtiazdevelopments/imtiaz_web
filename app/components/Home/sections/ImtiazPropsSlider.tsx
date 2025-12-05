@@ -611,65 +611,64 @@ ${
       </div>
 
       {/* BOTTOM BUTTONS */}
-      <div className="flex items-center justify-center gap-6 mt-10">
+      <div className="flex items-center justify-center mt-10">
         <motion.div
           variants={moveUp(0.1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
-          <button className="border border-primary text-[#404040] py-[19.5px] px-[36px] rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
+          <button className="border border-primary text-[#404040] py-[19.5px] px-[36px] max-h-[62px] rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
             View All
           </button>
         </motion.div>
 
-        <motion.div
-          variants={moveUp(0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <button
-            ref={prevRef}
-            className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+        <div className="flex gap-[15px] ml-[30px]">
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
           >
-            {/* FILL ANIMATION */}
-            <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
-
-            {/* ICON */}
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Arrow Right"
-              width={28}
-              height={28}
-              className="relative z-10  object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
-            />
-          </button>
-        </motion.div>
-
-        <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <button
-            ref={nextRef}
-            className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+            <button
+              ref={prevRef}
+              className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              {/* FILL ANIMATION */}
+              <span className="absolute right-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+              {/* ICON */}
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Arrow Right"
+                width={28}
+                height={28}
+                className="relative z-10  object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+              />
+            </button>
+          </motion.div>
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
           >
-            {/* FILL ANIMATION */}
-            <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
-
-            {/* ICON */}
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Arrow Right"
-              width={28}
-              height={28}
-              className="relative z-10 rotate-180 object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
-            />
-          </button>
-        </motion.div>
+            <button
+              ref={nextRef}
+              className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              {/* FILL ANIMATION */}
+              <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+              {/* ICON */}
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Arrow Right"
+                width={28}
+                height={28}
+                className="relative z-10 rotate-180 object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+              />
+            </button>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

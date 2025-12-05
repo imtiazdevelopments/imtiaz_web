@@ -3,7 +3,7 @@ import FeaturedProperty from "./sections/FeaturedProperty";
 import VerticalSlider from "./sections/VerticalSlider";
 import ConstructionProgress from "./sections/ConstructionProgress";
 import SpotlightsSlider from "./sections/SpotlightsSlider";
-import AppSection from "./sections/AppSection";
+// import AppSection from "./sections/AppSection";
 import ImtiazProperties from "./sections/ImtiazProperties";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
       <ImtiazProperties />
       <ConstructionProgress />
       <SpotlightsSlider />
-      <AppSection />
+      {/* <AppSection /> */}
     </>
   );
 }

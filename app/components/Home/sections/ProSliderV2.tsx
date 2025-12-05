@@ -602,7 +602,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       >
         <div className="container flex items-center justify-center">
           {/* Prev */}
-       
 
           {/* Pagination Dots */}
           <div className="flex gap-3 justify-center items-center z-[50]">
@@ -620,7 +619,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           </div>
 
           {/* Next */}
-        
         </div>
       </motion.div>
       <motion.div
@@ -647,7 +645,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           </button>
 
           {/* Pagination Dots */}
-        
 
           {/* Next */}
           <button

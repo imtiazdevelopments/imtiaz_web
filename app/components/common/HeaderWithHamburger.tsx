@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import NavPage from "./NavPage";
+import NavPageV3 from "./NavPageV3";
 import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -413,7 +413,7 @@ const Header2: React.FC = () => {
                 ease: [0.25, 1, 0.5, 1],
               }}
             >
-              <NavPage setIsMenuOpen={setIsMenuOpen} />
+              <NavPageV3 setIsMenuOpen={setIsMenuOpen} />
             </motion.div>
           </>
         )}
