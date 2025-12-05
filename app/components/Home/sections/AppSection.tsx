@@ -30,8 +30,6 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
 
     if (!image || !section || !textBox) return;
 
-    const items = textBox.querySelectorAll(".anim-item");
-
     const ctx = gsap.context(() => {
       /* --- PARALLAX --- */
       gsap.fromTo(

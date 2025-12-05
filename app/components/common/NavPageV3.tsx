@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data";
 import { motion } from "framer-motion";
 import { moveRight, moveUp } from "../motionVariants";
-import InfiniteSlider from "./InfiniteSlider";
+// import InfiniteSlider from "./InfiniteSlider";
 
 export default function MegaMenu({
   setIsMenuOpen,

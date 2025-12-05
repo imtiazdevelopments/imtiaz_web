@@ -347,9 +347,11 @@ export default function HeroFeatureSlider({
                             duration: 0.75,
                             ease: [0.25, 0.1, 0.25, 1],
                           }}
-                          style={{
-                            ["--gap-active" as any]: "50px",
-                          }}
+                          style={
+                            {
+                              ["--gap-active"]: "50px",
+                            } as unknown as React.CSSProperties
+                          }
                           className={`${
                             active
                               ? "pointer-events-auto"
