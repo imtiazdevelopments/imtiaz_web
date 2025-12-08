@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
 import ProSliderComingSoonV3 from "../components/Home/sections/ProSliderComingSoonV3";
-import ProSliderV2 from "../components/Home/sections/ProSliderV2";
+import ProSliderV3 from "../components/Home/sections/ProsliderV3";
 // import ProSliderLaunchV3 from "../components/Home/sections/ProSliderLaunchV3";
 import {
   heroSlides,
@@ -36,10 +36,8 @@ import AboutJourneyV3 from "../components/Home/sections/AboutJourneyV3";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
- 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
-
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
@@ -55,13 +53,6 @@ export default function Home() {
       setSmoothScrollActive(true);
 
       const ctx = gsap.context(() => {
-
-       
-
-      
-
-     
-
         // Initial text fade-in
         const t2 = gsap.timeline();
         t2.fromTo(
@@ -76,15 +67,12 @@ export default function Home() {
         );
 
         ScrollTrigger.create({
-     trigger: "#sec1",
-     start: "top top",
-     end: "bottom top",
-     pin: true,
-     pinSpacing: false,  // optional
-   });
-   
-       
-       
+          trigger: "#sec1",
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false, // optional
+        });
       });
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
@@ -135,7 +123,8 @@ export default function Home() {
                 ref={titleRef}
                 className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
               >
-                Redefining Spaces <br/>Elevating Lives
+                Redefining Spaces <br />
+                Elevating Lives
               </h1>
             </div>
 
@@ -188,7 +177,6 @@ export default function Home() {
         </div>
 
         <div className="split-section h-screen w-screen bg-transparent overflow-hidden flex items-center justify-center absolute z-50 scale-0">
-         
           {/* 
           <div
             ref={centerTextRef}
@@ -248,7 +236,7 @@ export default function Home() {
       </section>
 
       <AboutJourneyV3 />
-      <ProSliderV2 slides={heroSlides} RightLabel="New Launches" />
+      <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       {/* <ProSliderLaunchV3 slides={heroSlides} RightLabel="New Launches" /> */}
       {/* <ProSliderV2ComingSoon
         slides={heroSlidesComingSoon}
