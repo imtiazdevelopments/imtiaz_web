@@ -54,7 +54,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
   // -------- VIEWPORT TRIGGER --------
   const rootRef = useRef(null);
-  const inView = useInView(rootRef, { once: true, amount: 0.8 });
+  const inView = useInView(rootRef, { once: true, amount: 0.4 });
 
   //   const sectionRef = useRef<HTMLDivElement>(null);
 

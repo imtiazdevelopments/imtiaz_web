@@ -135,7 +135,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               >
                 <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
-                    src="/images/home/app/asv3.svg"
+                    src="/images/home/app/plv3.svg"
                     alt="Download on App Store"
                     width={194}
                     height={65}
@@ -152,7 +152,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               >
                 <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
-                    src="/images/home/app/plv3.svg"
+                    src="/images/home/app/asv3.svg"
                     alt="Get it on Google Play"
                     width={194}
                     height={65}

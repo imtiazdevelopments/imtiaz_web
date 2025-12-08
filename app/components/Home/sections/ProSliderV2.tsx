@@ -265,7 +265,7 @@
 
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
@@ -274,8 +274,6 @@ import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-import { useInView } from "framer-motion";
-
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -318,11 +316,22 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
- 
-const sectionRef = useRef(null);
-const startAnim = useInView(sectionRef, { once: true, amount: 0.3 });
+  const [startAnim, setStartAnim] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
- 
+  useEffect(() => {
+    const start = () => setStartAnim(true);
+    const reset = () => setStartAnim(false);
+
+    window.addEventListener("bgCollapseComplete", start);
+    window.addEventListener("bgCollapseReset", reset);
+
+    return () => {
+      window.removeEventListener("bgCollapseComplete", start);
+      window.removeEventListener("bgCollapseReset", reset);
+    };
+  }, []);
+
   const wrapRefs = useRef<HTMLDivElement[]>([]);
   const imgRefs = useRef<HTMLVideoElement[]>([]);
 

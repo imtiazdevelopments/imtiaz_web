@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
@@ -9,6 +9,7 @@ import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import { useInView } from "framer-motion";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -50,7 +51,9 @@ const fadeUp = {
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const sectionRef = useRef(null);
+  const startAnim = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const wrapRefs = useRef<HTMLDivElement[]>([]);
   const imgRefs = useRef<HTMLVideoElement[]>([]);
@@ -137,7 +140,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover ]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>
@@ -148,9 +151,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   <motion.div
                     key={`top-${activeIndex}`}
                     initial="hidden"
-                    // animate={startAnim ? "show" : "hidden"}
-                    whileInView="show"
-                    viewport={{ once: true }}
+                    animate={startAnim ? "show" : "hidden"}
                     exit="exit"
                     className="flex flex-col justify-between items-center pb-[250px]"
                   >
@@ -160,8 +161,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         variants={fadeUp}
                         custom={0.15}
                         initial="hidden"
-                        viewport={{ once: true }}
-                        whileInView="show"
+                        animate={startAnim ? "show" : "hidden"}
                       >
                         <span
                           className="text-white font-[avenirHeavy] font-[800] uppercase
@@ -176,12 +176,9 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     <div className="overflow-hidden">
                       <motion.h1
                         variants={fadeUp}
-                        custom={0.3}
+                        custom={0.35}
                         initial="hidden"
-                        // animate={startAnim ? "show" : "hidden"}
-                        whileInView="show"
-                        exit="exit"
-                        viewport={{ once: true }}
+                        animate={startAnim ? "show" : "hidden"}
                         className="text-white font-[optima] uppercase leading-[1]
                           text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px]
                           text-center mb-[22px]"
@@ -194,12 +191,9 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     <div className="overflow-hidden">
                       <motion.div
                         variants={fadeUp}
-                        custom={0.45}
+                        custom={0.5}
                         initial="hidden"
-                        // animate={startAnim ? "show" : "hidden"}
-                        whileInView="show"
-                        exit="exit"
-                        viewport={{ once: true }}
+                        animate={startAnim ? "show" : "hidden"}
                       >
                         <Image
                           alt="logo"
@@ -222,9 +216,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   variants={fadeUp}
                   custom={0.5}
                   initial="hidden"
-                  //   animate={startAnim ? "show" : "hidden"}
-                  animate="show"
-                  viewport={{ once: true }}
+                  animate={startAnim ? "show" : "hidden"}
+                  exit="exit"
                   className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
                 >
                   <AnimatePresence mode="wait">
@@ -233,9 +226,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       <motion.div
                         key={`pill-${activeIndex}`}
                         initial="hidden"
-                        // animate={startAnim ? "show" : "hidden"}
-                        animate="show"
-                        viewport={{ once: true }}
+                        animate={startAnim ? "show" : "hidden"}
+                        exit="exit"
                         className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6  h-[70px] md:h-[90px]"
                       >
                         {/* Pill Logo */}
@@ -248,10 +240,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               variants={fadeUp}
                               custom={0.25 + idx * 0.12}
                               initial="hidden"
-                              // animate={startAnim ? "show" : "hidden"}
-                              animate="show"
-                              viewport={{ amount: 0.8 }}
-                              exit="exit"
+                              animate={startAnim ? "show" : "hidden"}
                               className="flex items-center gap-2 md:gap-3"
                             >
                               <Image
@@ -275,17 +264,12 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                             <motion.div
                               key={`btns-${activeIndex}`}
                               initial="hidden"
-                              //   animate={startAnim ? "show" : "hidden"}
-                              whileInView="show"
-                              viewport={{ once: true }}
+                              animate={startAnim ? "show" : "hidden"}
                               exit="exit"
                               className="flex gap-4 font-[avenirRoman] overflow-hidden"
                             >
                               <motion.a
                                 variants={fadeUp}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
                                 custom={0.38}
                                 className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
@@ -296,10 +280,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
                               <motion.a
                                 variants={fadeUp}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-                                custom={0.48}
+                                custom={0.5}
                                 className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
                       text-[15px] md:text-[17px] cursor-pointer"
@@ -338,9 +319,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         variants={fadeUp}
         custom={0.5}
         initial="hidden"
-        // animate={startAnim ? "show" : "hidden"}
-        whileInView="show"
-        viewport={{ once: true }}
+        animate={startAnim ? "show" : "hidden"}
         exit="exit"
         className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]"
       >
@@ -369,10 +348,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         variants={fadeUp}
         custom={0.5}
         initial="hidden"
-        // animate={startAnim ? "show" : "hidden"}
-        whileInView="show"
+        animate={startAnim ? "show" : "hidden"}
         exit="exit"
-        viewport={{ once: true }}
         className="absolute top-[40%] left-0 w-full z-[60]"
       >
         <div className="container flex items-center justify-between">
