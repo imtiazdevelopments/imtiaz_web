@@ -77,7 +77,7 @@ const AboutJourneyV3 = () => {
       {/* VIDEO */}
       <video
         ref={videoRef}
-        src="/videos/Construction_Update.mp4"
+        src="/videos/imtiaz-about.mp4"
         poster="/images/home/work-progress/progress.jpg"
         autoPlay
         muted
@@ -87,7 +87,7 @@ const AboutJourneyV3 = () => {
       />
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/40"></div>
 
       {/* CONTENT */}
       <div
