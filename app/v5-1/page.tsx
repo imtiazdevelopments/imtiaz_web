@@ -1,3 +1,25 @@
+// import IndexTwo from "../components/Home/IndexTwo";
+
+
+// export default function Home() {
+//   return (
+//     <>
+//       <IndexTwo />
+//     </>
+//   );
+// }
+
+
+// import Index from "./components/Home/Index";
+
+// export default function Home() {
+//   return (
+//     <>
+//       <Index />
+//     </>
+//   );
+// }
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -5,9 +27,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
-import ProSliderComingSoonV3 from "../components/Home/sections/ProSliderComingSoonV3";
 import ProSliderV2 from "../components/Home/sections/ProSliderV2";
-// import ProSliderLaunchV3 from "../components/Home/sections/ProSliderLaunchV3";
+import ProSliderV2ComingSoon from "../components/Home/sections/ProSliderV2ComingSoon";
 import {
   heroSlides,
   /*   aboutSectionJourney, */
@@ -15,31 +36,31 @@ import {
   imtiazPropertiesData,
   pressSpotlightData,
   appSectionData,
-  // communityYardData,
-  communityNamesData,
+  communityYardData,
   heroSlidesComingSoon,
 } from "../components/Home/data";
 
 /* import AbtJour from "../components/Home/sections/AbtJour"; */
 import ImtiazProperties from "../components/Home/sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "../components/Home/sections/ConstructionProgress2";
-// import PressSpotlight from "../components/Home/sections/PressSpotlight";
-import PressSpotlightV3 from "../components/Home/sections/PressSpotlightV3";
-// import AppSection from "../components/Home/sections/AppSectionV2";
-import AppSectionV2 from "../components/Home/sections/AppSection";
-// import CommunitySlider from "../components/Home/sections/CommunitySlider";
-import CommunityNamesSlider from "../components/Home/sections/CommunityNamesSlider";
+import PressSpotlight from "../components/Home/sections/PressSpotlight";
+import AppSection from "../components/Home/sections/AppSectionV2";
+import CommunitySlider from "../components/Home/sections/CommunitySlider";
 import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
-import AboutJourneyV3 from "../components/Home/sections/AboutJourneyV3";
 // import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
- 
+  const leftBgRef = useRef<HTMLDivElement>(null);
+  const rightBgRef = useRef<HTMLDivElement>(null);
+  const leftTextRef = useRef<HTMLDivElement>(null);
+  const rightTextRef = useRef<HTMLDivElement>(null);
+  const centerTextRef = useRef<HTMLDivElement>(null);
+  const sec3Ref = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
-
+  let collapseCount = 0;
 
   const { setSmoothScrollActive } = useSmoothScrollContext();
 
@@ -55,12 +76,27 @@ export default function Home() {
       setSmoothScrollActive(true);
 
       const ctx = gsap.context(() => {
+        const bar = document.getElementById("bar");
+        const img1 = document.querySelector(".img1-1");
+        const img2 = document.querySelector(".img1-2");
+        const img3 = document.querySelector(".img1-3");
 
-       
+        const leftBg = leftBgRef.current!;
+        const rightBg = rightBgRef.current!;
+        const leftText = leftTextRef.current!;
+        const rightText = rightTextRef.current!;
 
-      
+        const centerItems = centerTextRef.current
+          ? centerTextRef.current.querySelectorAll(".anim-item")
+          : [];
 
-     
+        gsap.set([leftBg, leftText], { x: 0 });
+        gsap.set([rightBg, rightText], { x: 0 });
+
+        if (!bar || !img1 || !img2 || !img3) return;
+
+        gsap.set(bar, { height: 0, width: "0%" });
+        gsap.set([img1, img2, img3], { scale: 0 });
 
         // Initial text fade-in
         const t2 = gsap.timeline();
@@ -75,16 +111,108 @@ export default function Home() {
           "-=0.3"
         );
 
-        ScrollTrigger.create({
-     trigger: "#sec1",
-     start: "top top",
-     end: "bottom top",
-     pin: true,
-     pinSpacing: false,  // optional
-   });
-   
-       
-       
+        // Section 1 scroll animation
+        const tlSec1 = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#sec1",
+            start: "end top",
+            end: "+=450%",
+            pin: true,
+            scrub: 1,
+          },
+        });
+
+        tlSec1
+          .to(bar, { height: "20px", duration: 0.8 })
+          .to(bar, { width: "100%", duration: 0.8 })
+          .to(bar, { height: "100vh", duration: 0.8 })
+          .to(img1, { scale: 1, duration: 2 }, "-=0.6")
+          .fromTo(
+            ".img1-im",
+            { y: "-25vh" },
+            { y: "25vh", duration: 2, ease: "none" },
+            "<"
+          )
+          .to(img2, { scale: 1, duration: 2 }, "-=1")
+          .fromTo(
+            ".img2-im",
+            { y: "-25vh" },
+            { y: "25vh", duration: 2, ease: "none" },
+            "<"
+          )
+          .to(img3, { scale: 1, duration: 2 }, "-=1")
+          .fromTo(
+            ".img3-im",
+            { y: "-25vh" },
+            { y: "25vh", duration: 2, ease: "none" },
+            "<"
+          )
+          .to(
+            ".split-section",
+            {
+              scale: 1,
+              duration: 2,
+            },
+            "-=1"
+          )
+          .from(
+            centerItems,
+            {
+              y: 40,
+              opacity: 0,
+              duration: 1.2,
+              stagger: 0.25,
+              /*    ease: "power3.out", */
+            },
+            "-=1"
+          )
+          .to(centerItems, {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.25,
+            /*  ease: "power3.out", */
+            delay: 2,
+          })
+          .to([leftBg, leftText], {
+            x: "-100%",
+            duration: 2,
+            onComplete: () => {
+              collapseCount++;
+              if (collapseCount === 2)
+                window.dispatchEvent(new Event("bgCollapseComplete"));
+            },
+            onReverseComplete: () => {
+              collapseCount--;
+              if (collapseCount === 0)
+                window.dispatchEvent(new Event("bgCollapseReset"));
+            },
+          })
+          .to(
+            [rightBg, rightText],
+            {
+              x: "100%",
+              duration: 2,
+              onComplete: () => {
+                collapseCount++;
+                if (collapseCount === 2)
+                  window.dispatchEvent(new Event("bgCollapseComplete"));
+              },
+              onReverseComplete: () => {
+                collapseCount--;
+                if (collapseCount === 0)
+                  window.dispatchEvent(new Event("bgCollapseReset"));
+              },
+            },
+            "<"
+          )
+          .to(sec3Ref.current, { opacity: 1, duration: 1 }, "<")
+          .to(sec3Ref.current, {
+            opacity: 1,
+            zIndex: 70,
+            duration: 1,
+            delay: 1,
+          });
       });
 
       window.dispatchEvent(new Event("homeAnimationsReady"));
@@ -135,7 +263,7 @@ export default function Home() {
                 ref={titleRef}
                 className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
               >
-                Redefining Spaces <br/>Elevating Lives
+                Redefining Spaces Elevating Lives
               </h1>
             </div>
 
@@ -188,8 +316,16 @@ export default function Home() {
         </div>
 
         <div className="split-section h-screen w-screen bg-transparent overflow-hidden flex items-center justify-center absolute z-50 scale-0">
-         
-          {/* 
+          <div
+            ref={leftBgRef}
+            className="absolute left-0 top-0 w-1/2 h-full bg-primary z-10"
+          />
+
+          <div
+            ref={rightBgRef}
+            className="absolute right-0 top-0 w-1/2 h-full bg-primary z-10"
+          />
+
           <div
             ref={centerTextRef}
             className="absolute  top-1/2 -translate-y-1/2 w-full h-auto overflow-hidden flex justify-end pr-4 z-20"
@@ -220,13 +356,16 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="overflow-hidden">
+                  {/* <Link
+                    href="" */}
                   <button className="anim-item cursor-pointer inline-block px-9 py-[19.5px] rounded-full border border-white text-white text-[17px] leading-[1] font-[avenirRoman] font-[400]">
                     About Imtiaz
                   </button>
+                  {/* </Link> */}
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           {/* <div
             ref={leftTextRef}
             className="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-auto overflow-hidden flex justify-end pr-4 z-20"
@@ -245,27 +384,25 @@ export default function Home() {
             </div>
           </div> */}
         </div>
+
+        <div
+          ref={sec3Ref}
+          className="h-screen w-screen bg-gray-900 text-white flex items-center justify-center absolute z-40 opacity-0"
+        >
+          <ProSliderV2 slides={heroSlides} RightLabel="New Launches" />
+        </div>
       </section>
 
-      <AboutJourneyV3 />
-      <ProSliderV2 slides={heroSlides} RightLabel="New Launches" />
-      {/* <ProSliderLaunchV3 slides={heroSlides} RightLabel="New Launches" /> */}
-      {/* <ProSliderV2ComingSoon
-        slides={heroSlidesComingSoon}
-        RightLabel="Coming Soon"
-      /> */}
-      <ProSliderComingSoonV3
+      <ProSliderV2ComingSoon
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       />
-      {/* <CommunitySlider slides={communityYardData} /> */}
-      <CommunityNamesSlider slides={communityNamesData} />
+      <CommunitySlider slides={communityYardData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
-      {/* <PressSpotlight data={pressSpotlightData} /> */}
-      <PressSpotlightV3 data={pressSpotlightData} />
-      {/* <AppSection data={appSectionData} /> */}
-      <AppSectionV2 data={appSectionData} />
+      <PressSpotlight data={pressSpotlightData} />
+      <AppSection data={appSectionData} />
     </>
   );
 }
+
