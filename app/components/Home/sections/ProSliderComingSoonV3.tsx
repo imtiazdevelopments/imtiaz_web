@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import type { Swiper as SwiperType } from "swiper";
+// import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -50,7 +50,7 @@ const fadeUp = {
 
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  // const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   // -------- VIEWPORT TRIGGER --------
   const rootRef = useRef(null);
@@ -118,7 +118,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         loop
         modules={[EffectFade, Autoplay, Navigation]}
         autoplay={{ delay: 3500, disableOnInteraction: false }}
-        onSwiper={setSwiperInstance}
+        // onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade h-full"
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -241,7 +241,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           {/* Prev */}
 
           {/* Pagination Dots */}
-          <div className="flex gap-3 justify-center items-center z-[50]">
+          {/* <div className="flex gap-3 justify-center items-center z-[50]">
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -253,50 +253,52 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                 }`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </motion.div>
 
-      <motion.div
-        variants={fadeUp}
-        custom={0.5}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
-        exit="exit"
-        className="absolute top-[46%] left-0 w-full z-[60]"
-      >
-        <div className="container flex items-center justify-between">
-          {/* Prev */}
-          <button
-            aria-label="Previous slide"
-            className="swiper-btn-prev relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
-          >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Next"
-              width={28}
-              height={28}
-              className="relative z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-          {/* Pagination Dots */}
-          {/* Next */}
-          <button
-            aria-label="Next slide"
-            className="swiper-btn-next relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
-          >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Next"
-              width={28}
-              height={28}
-              className="relative rotate-180 z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-        </div>
-      </motion.div>
+      {slides.length > 1 && (
+        <motion.div
+          variants={fadeUp}
+          custom={0.5}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          exit="exit"
+          className="absolute top-[46%] left-0 w-full z-[60]"
+        >
+          <div className="container flex items-center justify-between">
+            {/* Prev */}
+            <button
+              aria-label="Previous slide"
+              className="swiper-btn-prev relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Next"
+                width={28}
+                height={28}
+                className="relative z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+            {/* Pagination Dots */}
+            {/* Next */}
+            <button
+              aria-label="Next slide"
+              className="swiper-btn-next relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Next"
+                width={28}
+                height={28}
+                className="relative rotate-180 z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
