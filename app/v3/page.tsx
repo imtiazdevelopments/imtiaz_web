@@ -1,23 +1,3 @@
-// import IndexTwo from "../components/Home/IndexTwo";
-
-// export default function Home() {
-//   return (
-//     <>
-//       <IndexTwo />
-//     </>
-//   );
-// }
-
-// import Index from "./components/Home/Index";
-
-// export default function Home() {
-//   return (
-//     <>
-//       <Index />
-//     </>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useRef } from "react";
