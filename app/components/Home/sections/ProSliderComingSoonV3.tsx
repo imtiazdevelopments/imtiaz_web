@@ -50,7 +50,7 @@ const fadeUp = {
 
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  // const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   // -------- VIEWPORT TRIGGER --------
   const rootRef = useRef(null);
@@ -118,7 +118,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         loop
         modules={[EffectFade, Autoplay, Navigation]}
         autoplay={{ delay: 3500, disableOnInteraction: false }}
-        onSwiper={setSwiperInstance}
+        // onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade h-full"
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
