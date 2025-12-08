@@ -261,25 +261,25 @@ export const heroSlidesComingSoon = [
       ],
     },
   },
-  {
-    title: "Cotier House 2 by Imtiaz",
-    video: "/videos/slidervdo-2.mp4",
-    pillFeatures: {
-      title: "/icons/pro_slider/cotier.svg",
-      features: [
-        { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
-        { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
-        {
-          icon: "/icons/pro_slider/sunset_icons/3.svg",
-          label: "FULLY EQUIPPED GYM",
-        },
-        {
-          icon: "/icons/pro_slider/sunset_icons/4.svg",
-          label: "SAUNA & STEAM",
-        },
-      ],
-    },
-  },
+  // {
+  //   title: "Cotier House 2 by Imtiaz",
+  //   video: "/videos/slidervdo-2.mp4",
+  //   pillFeatures: {
+  //     title: "/icons/pro_slider/cotier.svg",
+  //     features: [
+  //       { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
+  //       { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/3.svg",
+  //         label: "FULLY EQUIPPED GYM",
+  //       },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/4.svg",
+  //         label: "SAUNA & STEAM",
+  //       },
+  //     ],
+  //   },
+  // },
 ];
 
 export const DubaiIslandData = {
