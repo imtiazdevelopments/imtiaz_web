@@ -8,25 +8,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutJourneyV3 = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoWrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const initGSAP = () => {
     const section = sectionRef.current;
-    const videoWrap = videoWrapRef.current;
+    const video = videoRef.current;
     const textBox = textRef.current;
 
-    if (!section || !videoWrap || !textBox) return;
+    if (!section || !video || !textBox) return;
 
     const items = textBox.querySelectorAll(".anim-item");
 
     const ctx = gsap.context(() => {
       /* --- PARALLAX VIDEO --- */
       gsap.fromTo(
-        videoWrap,
-        { y: "20vh" },
+        video,
+        { y: "25vh" },
         {
-          y: "-20vh",
+          y: "-25vh",
           ease: "none",
           scrollTrigger: {
             trigger: section,
@@ -44,12 +44,12 @@ const AboutJourneyV3 = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 3.2,
+          duration: 1.2,
           stagger: 0.35,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 70%",
+            start: "top center",
             toggleActions: "play none none reverse",
           },
         }
@@ -58,28 +58,33 @@ const AboutJourneyV3 = () => {
 
     ScrollTrigger.refresh();
     return () => ctx.revert();
+  };
+
+  // MATCH WORKING COMPONENT BEHAVIOR (CRITICAL)
+  useEffect(() => {
+    const listener = () => initGSAP();
+    window.addEventListener("homeAnimationsReady", listener);
+
+    return () => window.removeEventListener("homeAnimationsReady", listener);
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex justify-center items-center overflow-hidden"
+      className="relative h-screen overflow-hidden flex justify-center items-center"
+      // ↑ Added bottom padding like working component so section actually scrolls
     >
-      {/* VIDEO WRAPPER (for smooth GSAP transform) */}
-      <div
-        ref={videoWrapRef}
-        className="absolute inset-0 w-full h-full will-change-transform"
-      >
-        <video
-          src="/videos/Construction_Update.mp4"
-          poster="/images/home/work-progress/progress.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover scale-[1.4]"
-        />
-      </div>
+      {/* VIDEO */}
+      <video
+        ref={videoRef}
+        src="/videos/Construction_Update.mp4"
+        poster="/images/home/work-progress/progress.jpg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover scale-[1.5]"
+      />
 
       {/* OVERLAY */}
       <div className="absolute inset-0 bg-black/60"></div>

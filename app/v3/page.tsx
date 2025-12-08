@@ -267,7 +267,7 @@ export default function Home() {
                 ref={titleRef}
                 className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
               >
-                Redefining Spaces Elevating Lives
+                Redefining Spaces <br/>Elevating Lives
               </h1>
             </div>
 
