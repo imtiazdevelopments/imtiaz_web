@@ -448,13 +448,13 @@ export const communityNamesData = {
   communities: [
     {
       id: "f1",
-      name: "JVC Community",
+      name: "JVC",
       bgImage: "/images/home/community/ÔüáIsland_Life.jpg",
       link: "#",
     },
     {
       id: "f2",
-      name: "Al Furjan Community Guide",
+      name: "Al Furjan",
       bgImage: "/images/home/community/ÔüáMost_Sought-After-Community.jpg",
       link: "#",
     },
@@ -478,7 +478,7 @@ export const communityNamesData = {
     },
     {
       id: "f6",
-      name: "Meydan Horizon Community",
+      name: "Meydan Horizon",
       bgImage: "/images/home/community/Hub_for_High-End_Shopping.jpg",
       link: "#",
     },

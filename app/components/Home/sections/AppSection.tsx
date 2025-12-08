@@ -4,6 +4,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { fadeUp } from "../../motionVariants";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,34 +97,68 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
           </div>
 
           <div className="flex flex-col h-full justify-center items-center">
-            <h2 className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]">
-              Download Imtiaz App
-            </h2>
+            <div className="overflow-hidden">
+              <motion.h2
+                variants={fadeUp}
+                custom={0.5}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]"
+              >
+                Download Imtiaz App
+              </motion.h2>
+            </div>
 
-            <p className="text-[20px] font-[avenirHeavy] text-[#404040] mb-[60px] max-w-[58ch] leading-[110%] text-center">
-              Imtiaz Developments delivers a total solution to all kinds of Real
-              Estate projects, from initial concept through completion and
-              handover to after sale maintenance and support.
-            </p>
+            <div className="overflow-hidden">
+              <motion.p
+                variants={fadeUp}
+                custom={0.6}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="text-[20px] font-[avenirHeavy] text-[#404040] mb-[60px] max-w-[58ch] leading-[110%] text-center"
+              >
+                Imtiaz Developments delivers a total solution to all kinds of
+                Real Estate projects, from initial concept through completion
+                and handover to after sale maintenance and support.
+              </motion.p>
+            </div>
 
             <div className="flex gap-[14px]">
-              <a className="bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300">
-                <Image
-                  src="/images/home/app/asv3.svg"
-                  alt="Download on App Store"
-                  width={194}
-                  height={65}
-                />
-              </a>
+              <motion.div
+                variants={fadeUp}
+                custom={0.7}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                  <Image
+                    src="/images/home/app/plv3.svg"
+                    alt="Download on App Store"
+                    width={194}
+                    height={65}
+                  />
+                </a>
+              </motion.div>
 
-              <a className="bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300">
-                <Image
-                  src="/images/home/app/plv3.svg"
-                  alt="Get it on Google Play"
-                  width={194}
-                  height={65}
-                />
-              </a>
+              <motion.div
+                variants={fadeUp}
+                custom={0.8}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                  <Image
+                    src="/images/home/app/asv3.svg"
+                    alt="Get it on Google Play"
+                    width={194}
+                    height={65}
+                  />
+                </a>
+              </motion.div>
             </div>
           </div>
         </div>
