@@ -63,7 +63,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   return (
     <section
       ref={section5Ref}
-      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:pb-[150px] 3xl:pt-[136px] bg-[#F4F2F2]"
+      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:py-[141px] bg-[#F4F2F2]"
     >
       <div
         className="container"
@@ -71,10 +71,10 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* ----- MAIN LAYOUT ----- */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-center items-center gap-20">
           {/* PHONE - ALWAYS CENTERED */}
-          <div className="flex justify-center w-1/3">
-            <div className="relative w-[350px] h-[650px] overflow-hidden phone-wrapper z-[100]">
+          <div className="flex justify-center">
+            <div className="relative w-[394px] h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
                 src={"/images/home/app/phone.png"}
@@ -94,21 +94,21 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             </div>
           </div>
 
-          <div className="flex flex-col h-full justify-center w-2/3 pl-20 ">
-            <h2 className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] mb-[24px] font-[optima] uppercase text-primary leading-[1.2]">
+          <div className="flex flex-col h-full justify-center items-center">
+            <h2 className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]">
               Download Imtiaz App
             </h2>
 
-            <p className="text-[20px] font-[avenir] text-black/80 mb-[24px] max-w-[55ch] leading-[110%]">
+            <p className="text-[20px] font-[avenirHeavy] text-[#404040] mb-[60px] max-w-[58ch] leading-[110%] text-center">
               Imtiaz Developments delivers a total solution to all kinds of Real
               Estate projects, from initial concept through completion and
               handover to after sale maintenance and support.
             </p>
 
-            <div className="flex gap-[25px]">
+            <div className="flex gap-[14px]">
               <a className="bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300">
                 <Image
-                  src="/images/icons/appstore.svg"
+                  src="/images/home/app/asv3.svg"
                   alt="Download on App Store"
                   width={194}
                   height={65}
@@ -117,7 +117,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
 
               <a className="bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300">
                 <Image
-                  src="/images/icons/playstore.svg"
+                  src="/images/home/app/plv3.svg"
                   alt="Get it on Google Play"
                   width={194}
                   height={65}
