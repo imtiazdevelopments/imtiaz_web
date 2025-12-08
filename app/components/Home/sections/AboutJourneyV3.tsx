@@ -72,7 +72,7 @@ const AboutJourneyV3 = () => {
     <section
       ref={sectionRef}
       className="relative h-screen overflow-hidden flex justify-center items-center"
-      // ↑ Added bottom padding like working component so section actually scrolls
+      // Added bottom padding like working component so section actually scrolls
     >
       {/* VIDEO */}
       <video
