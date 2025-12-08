@@ -72,9 +72,9 @@ export default function MegaMenu({
         /> */}
 
         {/* ---------------- CONTENT WRAPPER ---------------- */}
-        <div className="relative z-20 flex h-full w-full container pt-24 2xl:pt-30">
+        <div className="relative z-20 flex h-full w-full container pt-24 2xl:pt-32">
           {/* LEFT MENU */}
-          <div className="w-1/2 lg:w-1/5 flex  pb-12 2xl:pb-[92px] flex-col xl:mr-4">
+          <div className="w-1/2 lg:w-1/5 flex flex-col xl:mr-4">
             <div className="flex flex-col justify-center gap-[22px] w-full text-white relative mb-[120px]">
               {menuItems.map((item, index) => {
                 const isActive = activeMenu.id === item.id;
@@ -215,7 +215,7 @@ export default function MegaMenu({
           </div>
 
           {/* RIGHT SUBMENU */}
-          <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/3 justify-center overflow-hidden pb-12 2xl:pb-[92px]">
+          <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/3 justify-start mt-[8%] overflow-hidden">
             {currentSubmenu.map((item, idx) => (
               <motion.div
                 key={`menu-${item.id}-${idx}`}

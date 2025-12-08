@@ -1,23 +1,3 @@
-// import IndexTwo from "../components/Home/IndexTwo";
-
-// export default function Home() {
-//   return (
-//     <>
-//       <IndexTwo />
-//     </>
-//   );
-// }
-
-// import Index from "./components/Home/Index";
-
-// export default function Home() {
-//   return (
-//     <>
-//       <Index />
-//     </>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -267,7 +247,7 @@ export default function Home() {
                 ref={titleRef}
                 className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
               >
-                Redefining Spaces Elevating Lives
+                Redefining Spaces <br/>Elevating Lives
               </h1>
             </div>
 

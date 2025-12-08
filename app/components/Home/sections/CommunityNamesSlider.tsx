@@ -319,8 +319,7 @@ export default function HeroFeatureSlider({
                           "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.66) 100%)",
                       }}
                     />
-
-                    <div className="relative z-20 w-full flex justify-center">
+                    <div className="relative z-20 w-full flex justify-center pointer-events-none">
                       <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
                         <motion.h3
                           key={`feat-title-${i}-${active}`}
