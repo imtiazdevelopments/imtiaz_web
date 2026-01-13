@@ -250,7 +250,8 @@ export default function HeroFeatureSlider({
               <motion.h1
                 key={`title-communities`}
                 variants={textFade}
-                custom={0.25}
+                // custom={0.25}
+                custom={0.7}
                 initial="initial"
                 whileInView="animate"
                 animate={isHalfInView ? "animate" : "initial"}
@@ -285,8 +286,8 @@ export default function HeroFeatureSlider({
           speed={600}
           breakpoints={{
             0: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 },
           }}
           onSwiper={setSwiper}
           onSlideChange={(s) => {
@@ -308,7 +309,11 @@ export default function HeroFeatureSlider({
                       setActiveFeat(i);
                       switchBg(c.bgImage);
                     }}
-                    variants={featureItem}
+                    // variants={featureItem}
+                    variants={moveUp(i * 0.3)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.3 }}
                   >
                     <div
                       className={`absolute inset-0 transition-opacity duration-400 ${

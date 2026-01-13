@@ -117,7 +117,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                 {/* LEFT SECTION */}
                 <div className="flex flex-col items-center">
                   <motion.h2
-                    variants={moveUp(0.2)}
+                    // variants={moveUp(0.2)}
+                    variants={moveUp(0.7)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
@@ -135,7 +136,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     >
                       <div className="overflow-hidden">
                         <motion.p
-                          variants={moveUp(0.1)}
+                          // variants={moveUp(0.1)}
+                          variants={moveUp(0.9)}
                           // custom={0.1}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
@@ -147,7 +149,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                       </div>
                       <div className="overflow-hidden">
                         <motion.h3
-                          variants={moveUp(0.3)}
+                          // variants={moveUp(0.3)}
+                          variants={moveUp(1.1)}
                           // custom={0.3}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
@@ -159,7 +162,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                       </div>
                       <div className="overflow-hidden">
                         <motion.div
-                          variants={moveUp(0.45)}
+                          // variants={moveUp(0.45)}
+                          variants={moveUp(1.5)}
                           // custom={0.45}
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
@@ -187,7 +191,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     </motion.div>
                   </AnimatePresence>
                   <motion.div
-                    variants={moveUp(0.4)}
+                    // variants={moveUp(0.4)}
+                    variants={moveUp(1.7)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
@@ -225,7 +230,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
         </Swiper>
         <div className="overflow-hidden">
           <motion.div
-            variants={moveUp(0.3)}
+            // variants={moveUp(0.3)}
+            variants={moveUp(2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -238,7 +244,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
             {/* NEW PREV/NEXT BUTTONS */}
             <div className="flex items-center gap-[15px] ml-[30px]">
               <motion.div
-                variants={moveUp(0.2)}
+                // variants={moveUp(0.2)}
+                variants={moveUp(0.4)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -262,7 +269,8 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
               </motion.div>
 
               <motion.div
-                variants={moveUp(0.3)}
+                // variants={moveUp(0.3)}
+                variants={moveUp(0.6)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
