@@ -9,15 +9,15 @@ import ProSliderComingSoonV3 from "../components/Home/sections/ProSliderComingSo
 import ProSliderV3 from "../components/Home/sections/ProsliderV3";
 // import ProSliderLaunchV3 from "../components/Home/sections/ProSliderLaunchV3";
 import {
-  heroSlides,
-  /*   aboutSectionJourney, */
-  ConstructionProgressData,
-  imtiazPropertiesData,
-  pressSpotlightData,
-  appSectionData,
-  // communityYardData,
-  communityNamesData,
-  heroSlidesComingSoon,
+    heroSlides,
+    /*   aboutSectionJourney, */
+    ConstructionProgressData,
+    imtiazPropertiesData,
+    pressSpotlightData,
+    appSectionData,
+    // communityYardData,
+    communityNamesData,
+    heroSlidesComingSoon,
 } from "../components/Home/data";
 
 /* import AbtJour from "../components/Home/sections/AbtJour"; */
@@ -36,148 +36,141 @@ import AboutJourneyV3 from "../components/Home/sections/AboutJourneyV3";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const scrollRef = useRef<HTMLImageElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const scrollRef = useRef<HTMLImageElement>(null);
 
-  const { setSmoothScrollActive } = useSmoothScrollContext();
+    const { setSmoothScrollActive } = useSmoothScrollContext();
 
-  useEffect(() => {
-    // window.scrollTo(0, 0);
-    document.body.style.overflow = "hidden";
-  }, []);
+    useEffect(() => {
+        // window.scrollTo(0, 0);
+        document.body.style.overflow = "hidden";
+    }, []);
 
-  useEffect(() => {
-    const startAnimations = () => {
-      // ENABLE scroll now
-      document.body.style.overflow = "hidden";
-      setSmoothScrollActive(true);
+    useEffect(() => {
+        const startAnimations = () => {
+            // ENABLE scroll now
+            document.body.style.overflow = "hidden";
+            setSmoothScrollActive(true);
 
-      const ctx = gsap.context(() => {
-        // Initial text fade-in
-        const t2 = gsap.timeline();
-        t2.fromTo(
-          titleRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2 }
-        ).fromTo(
-          scrollRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1 },
-          "-=0.3"
-        );
+            const ctx = gsap.context(() => {
+                // Initial text fade-in
+                const t2 = gsap.timeline();
+                t2.fromTo(titleRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2 }).fromTo(
+                    scrollRef.current,
+                    { y: 40, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1 },
+                    "-=0.3"
+                );
 
-        ScrollTrigger.create({
-          trigger: "#sec1",
-          start: "top top",
-          end: "bottom top",
-          pin: true,
-          pinSpacing: false, // optional
-        });
-      });
+                ScrollTrigger.create({
+                    trigger: "#sec1",
+                    start: "top top",
+                    end: "bottom top",
+                    pin: true,
+                    pinSpacing: false, // optional
+                });
+            });
 
-      window.dispatchEvent(new Event("homeAnimationsReady"));
+            window.dispatchEvent(new Event("homeAnimationsReady"));
 
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 300);
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 300);
 
-      return () => ctx.revert();
-    };
+            return () => ctx.revert();
+        };
 
-    window.addEventListener("headerAnimationComplete", startAnimations);
+        window.addEventListener("headerAnimationComplete", startAnimations);
 
-    return () => {
-      window.removeEventListener("headerAnimationComplete", startAnimations);
-    };
-  }, []);
+        return () => {
+            window.removeEventListener("headerAnimationComplete", startAnimations);
+        };
+    }, []);
 
-  /*   useEffect(() => {
+    /*   useEffect(() => {
     document.body.style.overflow = "hidden";
 
     
     return () => ctx.revert();
   }, []);
  */
-  return (
-    <>
-      <section
-        id="sec1"
-        className="h-screen bg-black text-white flex items-center justify-center relative text-center"
-      >
-        <div className="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
-          <video
-            className="absolute top-0 left-0 w-full object-cover h-[99.9%]"
-            src="/videos/BNR01.mp4"
-            poster="/videos/banner-vid.jpg"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+    return (
+        <>
+            <section
+                id="sec1"
+                className="h-screen bg-black text-white flex items-center justify-center relative text-center"
+            >
+                <div className="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
+                    <video
+                        className="absolute top-0 left-0 w-full object-cover h-[99.9%]"
+                        src="/videos/BNR01.mp4"
+                        poster="/videos/banner-vid.jpg"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    />
 
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_1.12%,rgba(0,0,0,0.15)_40.24%,rgba(0,0,0,0.75)_100%)] pointer-events-none" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_1.12%,rgba(0,0,0,0.15)_40.24%,rgba(0,0,0,0.75)_100%)] pointer-events-none" />
 
-          <div className="absolute bottom-[110px] 3xl:bottom-[80px] max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
-            <div className="relative overflow-hidden">
-              <h1
-                ref={titleRef}
-                className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
-              >
-                Redefining Spaces <br />
-                Elevating Lives
-              </h1>
-            </div>
+                    <div className="absolute bottom-[110px] 3xl:bottom-[80px] max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
+                        <div className="relative overflow-hidden">
+                            <h1
+                                ref={titleRef}
+                                className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
+                            >
+                                Redefining Spaces <br />
+                                Elevating Lives
+                            </h1>
+                        </div>
 
-            <div className="overflow-hidden">
-              <Image
-                ref={scrollRef}
-                className="opacity-0 w-[30px]"
-                alt=""
-                src="/icons/mouse.svg"
-                width={50}
-                height={50}
-              />
-            </div>
-          </div>
-        </div>
+                        <div className="overflow-hidden">
+                            <Image
+                                ref={scrollRef}
+                                className="opacity-0 w-[30px]"
+                                alt=""
+                                src="/icons/mouse.svg"
+                                width={50}
+                                height={50}
+                            />
+                        </div>
+                    </div>
+                </div>
 
-        <div
-          id="bar"
-          className="bg-primary absolute left-0 right-0 mx-auto z-10"
-        ></div>
+                <div id="bar" className="bg-primary absolute left-0 right-0 mx-auto z-10"></div>
 
-        <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
-          <Image
-            className="img1-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/img01.jpg"
-            alt=""
-            width={2500}
-            height={1000}
-          />
-        </div>
+                <div className="img1-1 absolute w-full h-full z-20 inset-0 scale-[0] overflow-hidden">
+                    <Image
+                        className="img1-im w-full h-full object-cover object-center absolute scale-[1.5]"
+                        src="/images/home/img01.jpg"
+                        alt=""
+                        width={2500}
+                        height={1000}
+                    />
+                </div>
 
-        <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0] overflow-hidden">
-          <Image
-            className="img2-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/img02.jpg"
-            alt=""
-            width={2500}
-            height={1000}
-          />
-        </div>
+                <div className="img1-2 absolute w-full h-full z-30 inset-0 scale-[0] overflow-hidden">
+                    <Image
+                        className="img2-im w-full h-full object-cover object-center absolute scale-[1.5]"
+                        src="/images/home/img02.jpg"
+                        alt=""
+                        width={2500}
+                        height={1000}
+                    />
+                </div>
 
-        <div className="img1-3 absolute w-full h-full z-40 inset-0 scale-[0] overflow-hidden">
-          <Image
-            className="img3-im w-full h-full object-cover object-center absolute scale-[1.5]"
-            src="/images/home/imtiaz-properties/2.png"
-            alt=""
-            width={2500}
-            height={1000}
-          />
-        </div>
+                <div className="img1-3 absolute w-full h-full z-40 inset-0 scale-[0] overflow-hidden">
+                    <Image
+                        className="img3-im w-full h-full object-cover object-center absolute scale-[1.5]"
+                        src="/images/home/imtiaz-properties/2.png"
+                        alt=""
+                        width={2500}
+                        height={1000}
+                    />
+                </div>
 
-        <div className="split-section h-screen w-screen bg-transparent overflow-hidden flex items-center justify-center absolute z-50 scale-0">
-          {/* 
+                <div className="split-section h-screen w-screen bg-transparent overflow-hidden flex items-center justify-center absolute z-50 scale-0">
+                    {/* 
           <div
             ref={centerTextRef}
             className="absolute  top-1/2 -translate-y-1/2 w-full h-auto overflow-hidden flex justify-end pr-4 z-20"
@@ -215,7 +208,7 @@ export default function Home() {
               </div>
             </div>
           </div> */}
-          {/* <div
+                    {/* <div
             ref={leftTextRef}
             className="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-auto overflow-hidden flex justify-end pr-4 z-20"
           >
@@ -232,28 +225,25 @@ export default function Home() {
               <AbtJour data={aboutSectionJourney} />
             </div>
           </div> */}
-        </div>
-      </section>
+                </div>
+            </section>
 
-      <AboutJourneyV3 />
-      <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
-      {/* <ProSliderLaunchV3 slides={heroSlides} RightLabel="New Launches" /> */}
-      {/* <ProSliderV2ComingSoon
+            <AboutJourneyV3 />
+            <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
+            {/* <ProSliderLaunchV3 slides={heroSlides} RightLabel="New Launches" /> */}
+            {/* <ProSliderV2ComingSoon
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       /> */}
-      <ProSliderComingSoonV3
-        slides={heroSlidesComingSoon}
-        RightLabel="Coming Soon"
-      />
-      {/* <CommunitySlider slides={communityYardData} /> */}
-      <CommunityNamesSlider slides={communityNamesData} />
-      <ImtiazProperties data={imtiazPropertiesData} />
-      <ConstructionProgress2 data={ConstructionProgressData} />
-      {/* <PressSpotlight data={pressSpotlightData} /> */}
-      <PressSpotlightV3 data={pressSpotlightData} />
-      {/* <AppSection data={appSectionData} /> */}
-      <AppSectionV2 data={appSectionData} />
-    </>
-  );
+            <ProSliderComingSoonV3 slides={heroSlidesComingSoon} RightLabel="Coming Soon" />
+            {/* <CommunitySlider slides={communityYardData} /> */}
+            <CommunityNamesSlider slides={communityNamesData} />
+            <ImtiazProperties data={imtiazPropertiesData} />
+            <ConstructionProgress2 data={ConstructionProgressData} />
+            {/* <PressSpotlight data={pressSpotlightData} /> */}
+            <PressSpotlightV3 data={pressSpotlightData} />
+            {/* <AppSection data={appSectionData} /> */}
+            <AppSectionV2 data={appSectionData} />
+        </>
+    );
 }

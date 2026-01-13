@@ -462,7 +462,8 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
     <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
       <div className="overflow-hidden">
         <motion.h2
-          variants={moveUp(0.35)}
+          // variants={moveUp(0.35)}
+          variants={moveUp(0.7)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -502,7 +503,8 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
             return (
               <SwiperSlide key={item.id}>
                 <motion.div
-                  variants={moveUp(idx * 0.13)}
+                  // variants={moveUp(idx * 0.13)}
+                  variants={moveUp(idx * 0.55)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -613,7 +615,8 @@ ${
       {/* BOTTOM BUTTONS */}
       <div className="flex items-center justify-center mt-10">
         <motion.div
-          variants={moveUp(0.1)}
+          // variants={moveUp(0.1)}
+          variants={moveUp(0.6)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -625,7 +628,8 @@ ${
 
         <div className="flex gap-[15px] ml-[30px]">
           <motion.div
-            variants={moveUp(0.2)}
+            // variants={moveUp(0.2)}
+            variants={moveUp(0.8)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -647,7 +651,8 @@ ${
             </button>
           </motion.div>
           <motion.div
-            variants={moveUp(0.3)}
+            // variants={moveUp(0.3)}
+            variants={moveUp(0.95)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}

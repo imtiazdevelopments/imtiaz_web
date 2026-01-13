@@ -45,7 +45,7 @@ const AboutJourneyV3 = () => {
           y: 0,
           opacity: 1,
           duration: 1.2,
-          stagger: 0.35,
+          stagger: 0.55,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,

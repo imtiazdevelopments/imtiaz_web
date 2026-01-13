@@ -14,7 +14,7 @@ import { useInView } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { moveUpExit } from "../../motionVariants";
+import { moveUpExit, moveUp } from "../../motionVariants";
 
 export interface feats {
   icon: string;
@@ -158,11 +158,12 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     {/* Right Label */}
                     <div className="overflow-hidden mb-10 lg-mb-15 2xl:mb-25 3xl:mb-[130px]">
                       <motion.div
-                        variants={fadeUp}
-                        custom={0.15}
+                        // variants={fadeUp}
+                        variants={moveUp(1)}
+                        // custom={0.15}
+                        // custom={0.5}
                         initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
-                      >
+                        animate={startAnim ? "show" : "hidden"}                      >
                         <span
                           className="text-white font-[avenirHeavy] font-[800] uppercase
       text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
@@ -175,8 +176,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     {/* Title */}
                     <div className="overflow-hidden">
                       <motion.h1
-                        variants={fadeUp}
-                        custom={0.35}
+                        // variants={fadeUp}
+                        variants={moveUp(2)}
+                        // custom={0.35}
+                        // custom={0.8}
                         initial="hidden"
                         animate={startAnim ? "show" : "hidden"}
                         className="text-white font-[optima] uppercase leading-[1]
@@ -190,8 +193,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     {/* Logo */}
                     <div className="overflow-hidden">
                       <motion.div
-                        variants={fadeUp}
-                        custom={0.5}
+                        // variants={fadeUp}
+                        variants={moveUp(2.6)}
+                        // custom={0.5}
+                        // custom={0.9}
                         initial="hidden"
                         animate={startAnim ? "show" : "hidden"}
                       >
@@ -213,21 +218,23 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               {/* -------------------------------- PILL SECTION -------------------------------- */}
               <div className="absolute w-full bottom-[50px]">
                 <motion.div
-                  variants={fadeUp}
-                  custom={0.5}
+                  // variants={fadeUp}
+                  variants={moveUp(3.5)}
+                  // custom={0.5}
+                  // custom={1.2}
                   initial="hidden"
                   animate={startAnim ? "show" : "hidden"}
                   exit="exit"
                   className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
                 >
-                  <AnimatePresence mode="wait">
+                  {/* <AnimatePresence mode="wait"> */}
                     <div className="relative">
                       <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-full pointer-events-none" />
                       <motion.div
                         key={`pill-${activeIndex}`}
-                        initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
-                        exit="exit"
+                        // initial="hidden"
+                        // animate={startAnim ? "show" : "hidden"}
+                        // exit="exit"
                         className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6  h-[70px] md:h-[90px]"
                       >
                         {/* Pill Logo */}
@@ -237,10 +244,12 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               key={`${idx}-${activeIndex}`}
-                              variants={fadeUp}
-                              custom={0.25 + idx * 0.12}
+                              // variants={fadeUp}
+                              // custom={0.25 + idx * 0.12}
+                              variants={moveUp(idx * 0.4)}
                               initial="hidden"
-                              animate={startAnim ? "show" : "hidden"}
+                              // animate={startAnim ? "show" : "hidden"}
+                              animate="show"
                               className="flex items-center gap-2 md:gap-3"
                             >
                               <Image
@@ -263,14 +272,16 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           <AnimatePresence mode="wait">
                             <motion.div
                               key={`btns-${activeIndex}`}
+                              variants={moveUp(1)}
                               initial="hidden"
                               animate={startAnim ? "show" : "hidden"}
                               exit="exit"
                               className="flex gap-4 font-[avenirRoman] overflow-hidden"
                             >
                               <motion.a
-                                variants={fadeUp}
-                                custom={0.38}
+                                // variants={fadeUp}
+                                // custom={0.38} 
+                                variants={moveUp(1.4)}
                                 className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
                       text-[15px] md:text-[17px] cursor-pointer"
@@ -279,8 +290,9 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               </motion.a>
 
                               <motion.a
-                                variants={fadeUp}
-                                custom={0.5}
+                                // variants={fadeUp}
+                                // custom={0.5}
+                                variants={moveUp(1.8)}
                                 className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
                       text-[15px] md:text-[17px] cursor-pointer"
@@ -306,7 +318,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         </motion.div>
                       </motion.div>
                     </div>
-                  </AnimatePresence>
+                  {/* </AnimatePresence> */}
                 </motion.div>
               </div>
             </div>

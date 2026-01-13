@@ -174,7 +174,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     <div className="overflow-hidden">
                       <motion.h1
                         variants={fadeUp}
-                        custom={0.3}
+                        // custom={0.3}
+                        custom={0.7}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
                         className="text-white font-[optima] uppercase leading-[1] text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] text-center"
@@ -192,7 +193,8 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     >
                       <motion.a
                         variants={fadeUp}
-                        custom={0.3}
+                        // custom={0.3}
+                        custom={1.3}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
                         className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]

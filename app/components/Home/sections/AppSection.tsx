@@ -100,7 +100,8 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="overflow-hidden">
               <motion.h2
                 variants={fadeUp}
-                custom={0.5}
+                // custom={0.5}
+                custom={1}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -113,7 +114,8 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="overflow-hidden">
               <motion.p
                 variants={fadeUp}
-                custom={0.6}
+                // custom={0.6}
+                custom={1.5}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -128,7 +130,8 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="flex gap-[14px]">
               <motion.div
                 variants={fadeUp}
-                custom={0.7}
+                // custom={0.7}
+                custom={1.8}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -145,7 +148,8 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
 
               <motion.div
                 variants={fadeUp}
-                custom={0.8}
+                // custom={0.8}
+                custom={2.2}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}

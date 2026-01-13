@@ -46,7 +46,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="overflow-hidden">
             <motion.div
-              variants={moveUp(0.2)}
+              variants={moveUp(0.4)}
               initial="hidden"
               whileInView="show"
               viewport={{ amount: 0.2, once: true }}
@@ -65,7 +65,7 @@ const Footer = () => {
           {/* Stay Updated */}
           <div className="flex flex-col mt-12 lg:mt-0 lg:flex-row gap-5 xl:gap-10 items-center">
             <motion.div
-              variants={moveUp(0.35)}
+              variants={moveUp(0.7)}
               initial="hidden"
               whileInView="show"
               viewport={{ amount: 0.2, once: true }}
@@ -78,7 +78,7 @@ const Footer = () => {
 
             <div className="overflow-hidden">
               <motion.div
-                variants={moveUp(0.5)}
+                variants={moveUp(0.9)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.2, once: true }}
@@ -104,7 +104,7 @@ const Footer = () => {
         <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 xl:gap-10">
           {footerV2Data.columns.map((col, i) => (
             <motion.div
-              variants={moveUp(i * 0.2)}
+              variants={moveUp(i * 0.25)}
               initial="hidden"
               whileInView="show"
               viewport={{ amount: 0.2, once: true }}
