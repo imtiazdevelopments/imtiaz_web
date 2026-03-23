@@ -451,3 +451,41 @@ body {
       transparent 100%);
   z-index: 3;
 }
+.heading-50 {
+  @apply text-[32px] md:text-[40px] xl:text-[45px] 2xl:text-[50px] font-[optima] font-[500] leading-[1.2];
+}
+.spacing-y-160{
+  @apply py-[50px] lg:py-[80px] xl:py-[100px] 3xl:py-[160px];
+}
+.spacing-y-130{
+  @apply py-[50px] lg:py-[80px] xl:py-[100px] 3xl:py-[130px];
+}
+.spacing-t-130{
+  @apply pt-[50px] lg:pt-[80px] xl:pt-[100px] 3xl:pt-[130px];
+}
+.spacing-b-130{
+  @apply pb-[50px] lg:pb-[80px] xl:pb-[100px] 3xl:pb-[130px];
+}
+.list-breadcrumb li::after{ 
+  content: "";
+  width: 7px;
+  height: 7px;
+  background-color: white;
+  opacity: .5;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+}
+.list-breadcrumb li{
+  @apply text-white text-[16px] leading-[1.2] opacity-50 font-[800];
+}
+
+.list-breadcrumb li:last-child::after{
+  @apply hidden;
+}
+.list-breadcrumb li:last-child{
+  @apply opacity-100;
+}
+.list-breadcrumb li:nth-child(2)::after {
+  @apply opacity-100;
+}
