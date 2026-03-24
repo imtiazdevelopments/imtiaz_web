@@ -6,17 +6,20 @@ import Lenis from "lenis";
 type LenisContextType = {
   lock: () => void;
   unlock: () => void;
+  scrollTo: (target: number, options?: { duration?: number }) => void;
 };
 
 const LenisContext = createContext<LenisContextType>({
   lock: () => {},
   unlock: () => {},
+  scrollTo: () => {},
 });
 
 export const useLenis = () => useContext(LenisContext);
 
 export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   const lenisRef = useRef<Lenis | null>(null);
+  const pendingRef = useRef<(() => void)[]>([]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -28,14 +31,15 @@ export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
     lenisRef.current = lenis;
     lenis.stop();
 
+    pendingRef.current.forEach((fn) => fn());
+    pendingRef.current = [];
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
       rafId = requestAnimationFrame(raf);
     }
     rafId = requestAnimationFrame(raf);
-
-    window.dispatchEvent(new Event("lenisReady"));
 
     return () => {
       cancelAnimationFrame(rafId);
@@ -49,12 +53,18 @@ export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
     if (lenisRef.current) {
       lenisRef.current.start();
     } else {
-      window.addEventListener("lenisReady", () => lenisRef.current?.start(), { once: true });
+      pendingRef.current.push(() => lenisRef.current?.start());
+    }
+  };
+
+  const scrollTo = (target: number, options?: { duration?: number }) => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(target, options);
     }
   };
 
   return (
-    <LenisContext.Provider value={{ lock, unlock }}>
+    <LenisContext.Provider value={{ lock, unlock, scrollTo }}>
       {children}
     </LenisContext.Provider>
   );

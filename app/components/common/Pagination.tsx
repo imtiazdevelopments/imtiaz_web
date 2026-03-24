@@ -1,6 +1,6 @@
 "use client";
 
-import { lenisInstance } from "../common/SmoothScroll";
+import { useLenis } from "../../contexts/LenisContext";
 
 interface PaginationProps {
   totalPages: number;
@@ -15,6 +15,7 @@ const Pagination = ({
   onPageChange,
   scrollToId,
 }: PaginationProps) => {
+  const { scrollTo } = useLenis();
 
   const handleClick = (page: number) => {
     onPageChange(page);
@@ -26,12 +27,7 @@ const Pagination = ({
 
     const top = el.getBoundingClientRect().top + window.scrollY - 100;
 
-    // ✅ Use lenis if available, fallback to window.scrollTo
-    if (lenisInstance) {
-      lenisInstance.scrollTo(top, { duration: 1.2 });
-    } else {
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    scrollTo(top, { duration: 1.2 });
   };
 
   const getPages = (): (number | "...")[] => {
