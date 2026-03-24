@@ -1,22 +1,14 @@
-/* "use client";
-
-import { ReactLenis } from "@studio-freight/react-lenis";
-
-const SmoothScroll = ({ children }) => {
-  return (
-    <ReactLenis root options={{ duration: 1.8, smoothWheel: true }}>
-      {children}
-    </ReactLenis>
-  );
-};
-
-export default SmoothScroll; */
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
+export let lenisInstance: Lenis | null = null;
+
 const SmoothScroll = () => {
+  const pathname = usePathname();
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.5,
@@ -24,19 +16,33 @@ const SmoothScroll = () => {
       smoothWheel: true,
     });
 
+    lenisInstance = lenis;
+
+    let rafId: number;
+
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy(); // Cleanup to prevent memory leaks
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      lenisInstance = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisInstance) {
+      lenisInstance.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   return null;
 };
 
-export default SmoothScroll; 
+export default SmoothScroll;

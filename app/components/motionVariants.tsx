@@ -219,3 +219,21 @@ export const fadeUp = {
   }),
   reset: { opacity: 0, y: 40 }, // ⭐ NEW
 };
+
+export const itemVariants = {
+  hidden: (_i: number) => ({ opacity: 0, y: 24 }),
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: [0.62, 0.05, 0.01, 0.99] as [number, number, number, number],
+    },
+  }),
+  exit: (_i: number) => ({
+    opacity: 0,
+    y: -16,
+    transition: { duration: 0.25, ease: easeInOutCubic },
+  }),
+};

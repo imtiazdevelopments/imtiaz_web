@@ -113,37 +113,76 @@ body {
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foreground-light: #404040;
   --primary: #7A253A;
+  --primary-2: #490905;
 
 
-  /* 80px (Headings / Hero) */
-  --text-80: clamp(2.4rem, 6vw + 1rem, 80px);
+/* 50px */
+--text-50: clamp(1.6rem, 3.8vw + 0.6rem, 50px);
 
-  /* 70px */
-  --text-70: clamp(2.2rem, 5.4vw + 0.8rem, 70px);
+/* 25px */
+--text-25: clamp(1rem, 2vw + 0.25rem, 25px);
 
-  /* 60px */
-  --text-60: clamp(1.9rem, 4.8vw + 0.7rem, 60px);
+/* 19px */
+--text-19: clamp(0.9rem, 1.4vw + 0.15rem, 19px);
 
+/* 18px */
+--text-18: clamp(0.88rem, 1.3vw + 0.13rem, 18px);
 
-  /* 30px */
-  --text-30: clamp(1.1rem, 2.5vw + 0.3rem, 30px);
+/* 16px */
+--text-16: clamp(0.82rem, 1.1vw + 0.11rem, 16px);
 
-  /* 25px */
-  --text-25: clamp(1rem, 2vw + 0.25rem, 25px);
+/* 20px */
+--space-20: clamp(12px, 0.8vw + 8px, 20px);
 
-  /* 19px */
-  --text-19: clamp(0.9rem, 1.4vw + 0.15rem, 19px);
+/* 25px */
+--space-25: clamp(14px, 0.8vw + 11px, 25px);
 
-  /* 17px */
-  --text-17: clamp(0.85rem, 1.2vw + 0.12rem, 17px);
+/* 30px */
+--space-30: clamp(20px, 1.2vw + 10px, 30px);
 
-  /* 16px */
-  --text-16: clamp(0.82rem, 1.1vw + 0.11rem, 16px);
+/* 40px */
+--space-40: clamp(24px, 1.5vw + 12px, 40px);
 
+/* 50px */
+--space-50: clamp(28px, 2vw + 14px, 50px);
 
-  /* 15px */
-  --text-15: clamp(0.78rem, 1vw + 0.1rem, 15px);
+/* 60px */
+--space-60: clamp(30px, 2.4vw + 16px, 60px);
+
+/* 70px */
+--space-70: clamp(35px, 2.8vw + 18px, 70px);
+
+/* 80px */
+--space-80: clamp(40px, 3.2vw + 20px, 80px);
+
+/* 90px */
+--space-90: clamp(43px, 3.5vw + 22px, 90px);
+
+/* 100px */
+--space-100: clamp(44px, 4vw + 22px, 100px);
+
+/* 120px */
+--space-120: clamp(50px, 5vw + 24px, 120px);
+
+/* 130px */
+--space-130: clamp(52px, 5.7vw + 31px, 130px);
+
+/* 150px */
+--space-150: clamp(60px, 6vw + 28px, 150px);
+
+/* 160px */
+--space-160: clamp(65px, 6.5vw + 30px, 160px);
+
+/* 180px */
+--space-180: clamp(72px, 7.5vw + 32px, 180px);
+
+/* 200px */
+--space-200: clamp(80px, 8.7vw + 47px, 200px);
+
+/* 230px */
+--space-250: clamp(100px, 10vw + 54px, 250px);
 }
 
 @theme inline {
@@ -157,29 +196,46 @@ body {
   --font-avenirLight: "AvenirLight", sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
+  --color-primary-2: var(--primary-2);
+  --color-foreground-light: var(--foreground-light);
   --breakpoint-lg: 75.25rem;
   --breakpoint-xl: 84.375rem;
   --breakpoint-2xl: 96.25rem;
   --breakpoint-3xl: 113.125rem;
 
-  --text-80: var(--text-80);
-  --text-70: var(--text-70);
-  --text-60: var(--text-60);
-  --text-30: var(--text-30);
+  --text-50: var(--text-50);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
-  --text-17: var(--text-17);
+  --text-18: var(--text-18);
   --text-16: var(--text-16);
-  --text-15: var(--text-15);
+
+  --spacing-20: var(--space-20);
+  --spacing-25: var(--space-25);
+  --spacing-30: var(--space-30);
+  --spacing-40: var(--space-40);
+  --spacing-50: var(--space-50);
+  --spacing-60: var(--space-60);
+  --spacing-70: var(--space-70);
+  --spacing-80: var(--space-80);
+  --spacing-90: var(--space-90);
+  --spacing-100: var(--space-100);
+  --spacing-120: var(--space-120);
+  --spacing-130: var(--space-130);
+  --spacing-150: var(--space-150);
+  --spacing-160: var(--space-160);
+  --spacing-180: var(--space-180);
+  --spacing-200: var(--space-200);
+  --spacing-250: var(--space-250);
 }
 
-/* ---------- Dark Mode ---------- */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+@utility text-heading {
+  @apply font-[optima] font-[550] uppercase text-50 leading-[1.2];
+}
+
+@utility text-description {
+  @apply font-[avenirHeavy]  text-16 leading-[1.54];
+}
+
 
 /* ---------- Base Styles ---------- */
 body {
@@ -451,41 +507,97 @@ body {
       transparent 100%);
   z-index: 3;
 }
-.heading-50 {
-  @apply text-[32px] md:text-[40px] xl:text-[45px] 2xl:text-[50px] font-[optima] font-[500] leading-[1.2];
-}
-.spacing-y-160{
-  @apply py-[50px] lg:py-[80px] xl:py-[100px] 3xl:py-[160px];
-}
-.spacing-y-130{
-  @apply py-[50px] lg:py-[80px] xl:py-[100px] 3xl:py-[130px];
-}
-.spacing-t-130{
-  @apply pt-[50px] lg:pt-[80px] xl:pt-[100px] 3xl:pt-[130px];
-}
-.spacing-b-130{
-  @apply pb-[50px] lg:pb-[80px] xl:pb-[100px] 3xl:pb-[130px];
-}
-.list-breadcrumb li::after{ 
-  content: "";
-  width: 7px;
-  height: 7px;
-  background-color: white;
-  opacity: .5;
-  border-radius: 50%;
-  display: inline-block;
-  margin-left: 10px;
-}
-.list-breadcrumb li{
-  @apply text-white text-[16px] leading-[1.2] opacity-50 font-[800];
+
+
+/************************ Blog Content ************************/
+/* Single enter — base gap between all elements */
+.blog-content > * + * {
+  margin-top: var(--space-20);
 }
 
-.list-breadcrumb li:last-child::after{
-  @apply hidden;
+/* Double enter — empty <p> becomes a spacer block */
+.blog-content p:empty,
+.blog-content p:has(> br:only-child) {
+  display: block;
+  height: var(--space-50);
+  margin: 0 !important;
 }
-.list-breadcrumb li:last-child{
-  @apply opacity-100;
+
+/* Cancel top margin on element immediately after the spacer */
+.blog-content p:empty + *,
+.blog-content p:has(> br:only-child) + * {
+  margin-top: 0 !important;
 }
-.list-breadcrumb li:nth-child(2)::after {
-  @apply opacity-100;
+
+/* Paragraphs */
+.blog-content p {
+  font-size: var(--text-16);
+  font-family: var(--font-avenirHeavy);
+  line-height: 1.54;
+  color: var(--foreground-light);
+}
+
+/* H2 — main section heading */
+.blog-content h2 {
+  font-size: var(--text-25);
+  font-family: var(--font-heading);
+  line-height: 1.4;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 2%;
+}
+
+/* H3 — subheading with square indicator */
+.blog-content h3 {
+  font-size: var(--text-18);
+  line-height: 1.666;
+  font-family: var(--font-heading);
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 2%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: -5px;
+}
+
+.blog-content h3::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  margin-bottom: 5px;
+  background-color: var(--primary-2);
+}
+
+/* UL — bullet list */
+.blog-content ul {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-content ul li {
+  list-style-type: disc;
+  font-size: var(--text-16);
+  font-family: var(--font-avenirHeavy);
+  line-height: 1.54;
+  color: var(--foreground-light);
+}
+
+/* Blog content Images */
+.blog-content img {
+  width: 100%;
+  height: auto;
+  max-height: 572px;
+  object-fit: cover;
+  display: block;
+}
+
+/* links */
+.blog-content a {
+  color: var(--primary-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
