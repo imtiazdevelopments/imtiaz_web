@@ -27,37 +27,84 @@
 //   return null;
 // }
 
+
+
+
+
+// "use client";
+
+// import { useEffect } from "react";
+// import { useSmoothScrollContext } from "../../contexts/smoothScrollContext";
+
+// export default function ScrollToTopReload() {
+//   const { setSmoothScrollActive } = useSmoothScrollContext();
+
+//   useEffect(() => {
+//     setSmoothScrollActive(false);
+
+//     // Disable default scroll restore
+//     if ("scrollRestoration" in history) {
+//       history.scrollRestoration = "manual";
+//     }
+
+//     // 1️⃣ Prevent Chrome from saving scroll position
+//     const stopSave = () => {
+//       history.scrollRestoration = "manual";
+//       window.scrollTo(0, 0);
+//     };
+//     window.addEventListener("beforeunload", stopSave);
+
+//     // 2️⃣ Force scroll reset AFTER Chrome’s restore
+//     requestAnimationFrame(() => {
+//       requestAnimationFrame(() => {
+//         window.scrollTo(0, 0);
+//       });
+//     });
+
+//     // 3️⃣ One more on full load
+//     const onLoad = () => window.scrollTo(0, 0);
+//     window.addEventListener("load", onLoad);
+
+//     return () => {
+//       window.removeEventListener("beforeunload", stopSave);
+//       window.removeEventListener("load", onLoad);
+//     };
+//   }, []);
+
+//   return null;
+// }
+
+
+
+
+
 "use client";
 
 import { useEffect } from "react";
-import { useSmoothScrollContext } from "../../contexts/smoothScrollContext";
+import { useLenis } from "../../contexts/LenisContext";
 
 export default function ScrollToTopReload() {
-  const { setSmoothScrollActive } = useSmoothScrollContext();
+  const { lock } = useLenis();
 
   useEffect(() => {
-    setSmoothScrollActive(false);
+    lock(); // lock scroll on home page load
 
-    // Disable default scroll restore
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
 
-    // 1️⃣ Prevent Chrome from saving scroll position
     const stopSave = () => {
       history.scrollRestoration = "manual";
       window.scrollTo(0, 0);
     };
     window.addEventListener("beforeunload", stopSave);
 
-    // 2️⃣ Force scroll reset AFTER Chrome’s restore
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo(0, 0);
       });
     });
 
-    // 3️⃣ One more on full load
     const onLoad = () => window.scrollTo(0, 0);
     window.addEventListener("load", onLoad);
 
