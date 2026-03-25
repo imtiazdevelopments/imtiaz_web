@@ -54,19 +54,18 @@ export function SearchableDropdown({
       {/* Entire trigger area — label + field row — is one clickable block */}
       <div className="cursor-pointer" onClick={() => setOpen((o) => !o)}>
         {label && (
-          <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light select-none">
+          <span className="block text-description mt-25 text-foreground-light/50 select-none">
             {label}
           </span>
         )}
+        {/* mirrors inputClass exactly: mt-20, same text style */}
         <div
-          className={[
-            "w-full flex items-center justify-between border-b mt-40 pb-1 text-description bg-transparent outline-none transition-colors p-0",
-            "border-foreground-light/50",
-            value ? "text-foreground-light" : "text-foreground-light/30",
-          ].join(" ")}
+          className={`w-full mt-20 text-description p-0 truncate ${value ? "text-foreground-light" : "text-transparent"}`}
         >
-          <span className="truncate">{value || ""}</span>
+          {value || "‎"}
         </div>
+        {/* mirrors FieldLine */}
+        <div className="h-px w-full bg-foreground-light/50" />
       </div>
 
       {open && (
