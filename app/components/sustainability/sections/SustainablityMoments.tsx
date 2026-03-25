@@ -2,14 +2,10 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import "swiper/css";
 import { momentsOfSustainability } from "../data";
 
 export default function SustainablityMoments() {
-  const swiperRef = useRef<SwiperType | null>(null);
+  const slides = momentsOfSustainability.slides;
 
   return (
     <section className="w-full py-160 overflow-hidden">
@@ -23,31 +19,15 @@ export default function SustainablityMoments() {
         </p>
       </div>
 
-      {/* Slider */}
-      <Swiper
-        modules={[Autoplay]}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-        slidesPerView="auto"
-        loop={true}
-        speed={8000}
-        autoplay={{
-          delay: 0,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        allowTouchMove={true}
-        grabCursor={true}
-        className="cursor-grab"
-      >
-        {[
-          ...momentsOfSustainability.slides,
-          ...momentsOfSustainability.slides,
-        ].map((slide, idx) => (
-          <SwiperSlide key={`${slide.id}-${idx}`} style={{ width: "auto" }}>
-            <div className="flex items-end h-[615px] gap-40 pr-40">
-
+      {/* Infinite scroll track */}
+      <div className="relative overflow-hidden">
+        <div className="flex w-max marquee-track-sustainability">
+          {/* Render slides twice — second set is the seamless loop */}
+          {[...slides, ...slides].map((slide, idx) => (
+            <div
+              key={`${slide.id}-${idx}`}
+              className="flex items-end h-[615px] gap-40 pr-40 flex-shrink-0"
+            >
               {/* Col A — two stacked images, full height */}
               <div className="flex flex-col flex-shrink-0 gap-40 h-[615px]">
                 {slide.cols[0].images.map((img) => (
@@ -56,12 +36,7 @@ export default function SustainablityMoments() {
                     className="relative flex-shrink-0 overflow-hidden"
                     style={{ width: `${img.width}px`, height: `${img.height}px` }}
                   >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover object-center"
-                    />
+                    <Image src={img.src} alt={img.alt} fill className="object-cover object-center pointer-events-none" />
                   </div>
                 ))}
               </div>
@@ -74,12 +49,7 @@ export default function SustainablityMoments() {
                     className="relative flex-shrink-0 overflow-hidden"
                     style={{ width: `${img.width}px`, height: `${img.height}px` }}
                   >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover object-center"
-                    />
+                    <Image src={img.src} alt={img.alt} fill className="object-cover object-center pointer-events-none" />
                   </div>
                 ))}
               </div>
@@ -92,12 +62,7 @@ export default function SustainablityMoments() {
                     className="relative flex-shrink-0 overflow-hidden"
                     style={{ width: `${img.width}px`, height: `${img.height}px` }}
                   >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover object-center"
-                    />
+                    <Image src={img.src} alt={img.alt} fill className="object-cover object-center pointer-events-none" />
                   </div>
                 ))}
               </div>
@@ -106,24 +71,15 @@ export default function SustainablityMoments() {
               <div className="flex flex-col justify-center flex-shrink-0 h-[615px]">
                 <div
                   className="relative overflow-hidden"
-                  style={{
-                    width: `${slide.peekImage.width}px`,
-                    height: `${slide.peekImage.height}px`,
-                  }}
+                  style={{ width: `${slide.peekImage.width}px`, height: `${slide.peekImage.height}px` }}
                 >
-                  <Image
-                    src={slide.peekImage.src}
-                    alt={slide.peekImage.alt}
-                    fill
-                    className="object-cover object-center"
-                  />
+                  <Image src={slide.peekImage.src} alt={slide.peekImage.alt} fill className="object-cover object-center pointer-events-none" />
                 </div>
               </div>
-
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

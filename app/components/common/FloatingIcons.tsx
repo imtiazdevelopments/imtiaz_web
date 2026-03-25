@@ -58,7 +58,7 @@ export default function FloatingRightIcons() {
           alt="phone"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
 
@@ -70,7 +70,7 @@ export default function FloatingRightIcons() {
           alt="whatsapp"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
 
@@ -82,7 +82,7 @@ export default function FloatingRightIcons() {
           alt="message"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
     </div>

@@ -118,71 +118,74 @@ body {
   --primary-2: #490905;
 
 
-/* 50px */
---text-50: clamp(1.6rem, 3.8vw + 0.6rem, 50px);
+/* 50px → 28px at 390px, 50px at 1810px */
+--text-50: clamp(28px, 1.55vw + 22px, 50px);
 
-/* 25px */
---text-25: clamp(1rem, 2vw + 0.25rem, 25px);
+/* 25px → 16px at 390px, 25px at 1810px */
+--text-25: clamp(16px, 0.63vw + 13.5px, 25px);
 
-/* 19px */
---text-19: clamp(0.9rem, 1.4vw + 0.15rem, 19px);
+/* 19px → 13px at 390px, 19px at 1810px */
+--text-19: clamp(13px, 0.42vw + 11.4px, 19px);
 
-/* 18px */
---text-18: clamp(0.88rem, 1.3vw + 0.13rem, 18px);
+/* 18px → 13px at 390px, 18px at 1810px */
+--text-18: clamp(13px, 0.35vw + 11.6px, 18px);
 
-/* 16px */
---text-16: clamp(0.82rem, 1.1vw + 0.11rem, 16px);
+/* 16px → 12px at 390px, 16px at 1810px */
+--text-16: clamp(12px, 0.28vw + 10.9px, 16px);
 
-/* 20px */
---space-20: clamp(12px, 0.8vw + 8px, 20px);
+/* 20px → 12px at 390px, 20px at 1810px */
+--space-20: clamp(12px, 0.56vw + 9.8px, 20px);
 
-/* 25px */
---space-25: clamp(14px, 0.8vw + 11px, 25px);
+/* 25px → 14px at 390px, 25px at 1810px */
+--space-25: clamp(14px, 0.77vw + 11px, 25px);
 
-/* 30px */
---space-30: clamp(20px, 1.2vw + 10px, 30px);
+/* 30px → 18px at 390px, 30px at 1810px */
+--space-30: clamp(18px, 0.84vw + 14.7px, 30px);
 
-/* 40px */
---space-40: clamp(24px, 1.5vw + 12px, 40px);
+/* 34px → 20px at 390px, 34px at 1810px */
+--space-34: clamp(20px, 0.98vw + 16.2px, 34px);
 
-/* 50px */
---space-50: clamp(28px, 2vw + 14px, 50px);
+/* 40px → 24px at 390px, 40px at 1810px */
+--space-40: clamp(24px, 1.12vw + 19.6px, 40px);
 
-/* 60px */
---space-60: clamp(30px, 2.4vw + 16px, 60px);
+/* 50px → 28px at 390px, 50px at 1810px */
+--space-50: clamp(28px, 1.55vw + 21.9px, 50px);
 
-/* 70px */
---space-70: clamp(35px, 2.8vw + 18px, 70px);
+/* 60px → 32px at 390px, 60px at 1810px */
+--space-60: clamp(32px, 1.97vw + 24.3px, 60px);
 
-/* 80px */
---space-80: clamp(40px, 3.2vw + 20px, 80px);
+/* 70px → 36px at 390px, 70px at 1810px */
+--space-70: clamp(36px, 2.39vw + 26.7px, 70px);
 
-/* 90px */
---space-90: clamp(43px, 3.5vw + 22px, 90px);
+/* 80px → 40px at 390px, 80px at 1810px */
+--space-80: clamp(40px, 2.81vw + 29px, 80px);
 
-/* 100px */
---space-100: clamp(44px, 4vw + 22px, 100px);
+/* 90px → 43px at 390px, 90px at 1810px */
+--space-90: clamp(43px, 3.31vw + 30px, 90px);
 
-/* 120px */
---space-120: clamp(50px, 5vw + 24px, 120px);
+/* 100px → 44px at 390px, 100px at 1810px */
+--space-100: clamp(44px, 3.94vw + 28.6px, 100px);
 
-/* 130px */
---space-130: clamp(52px, 5.7vw + 31px, 130px);
+/* 120px → 50px at 390px, 120px at 1810px */
+--space-120: clamp(50px, 4.93vw + 30.8px, 120px);
 
-/* 150px */
---space-150: clamp(60px, 6vw + 28px, 150px);
+/* 130px → 52px at 390px, 130px at 1810px */
+--space-130: clamp(52px, 5.49vw + 30.6px, 130px);
 
-/* 160px */
---space-160: clamp(65px, 6.5vw + 30px, 160px);
+/* 150px → 60px at 390px, 150px at 1810px */
+--space-150: clamp(60px, 6.34vw + 35.3px, 150px);
 
-/* 180px */
---space-180: clamp(72px, 7.5vw + 32px, 180px);
+/* 160px → 65px at 390px, 160px at 1810px */
+--space-160: clamp(65px, 6.69vw + 38.9px, 160px);
 
-/* 200px */
---space-200: clamp(80px, 8.7vw + 47px, 200px);
+/* 180px → 72px at 390px, 180px at 1810px */
+--space-180: clamp(72px, 7.6vw + 42.3px, 180px);
 
-/* 230px */
---space-250: clamp(100px, 10vw + 54px, 250px);
+/* 200px → 80px at 390px, 200px at 1810px */
+--space-200: clamp(80px, 8.45vw + 47px, 200px);
+
+/* 250px → 100px at 390px, 250px at 1810px */
+--space-250: clamp(100px, 10.56vw + 58.8px, 250px);
 }
 
 @theme inline {
@@ -212,6 +215,7 @@ body {
   --spacing-20: var(--space-20);
   --spacing-25: var(--space-25);
   --spacing-30: var(--space-30);
+  --spacing-34: var(--space-34);
   --spacing-40: var(--space-40);
   --spacing-50: var(--space-50);
   --spacing-60: var(--space-60);
@@ -600,4 +604,34 @@ body {
   color: var(--primary-2);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* sustainability moments slider */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track-sustainability {
+  animation: marquee 90s linear infinite;
+}
+
+
+.field-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s ease-out;
+  background: var(--foreground-light);
+}
+
+.group:focus-within .field-line::after {
+  transform: scaleX(1);
+}
+
+.field-line.error::after {
+  transform: scaleX(1);
+  background: #c0392b;
 }
