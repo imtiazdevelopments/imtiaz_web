@@ -459,7 +459,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container">
+    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 3xl:py-[170px] bg-white container">
       <div className="overflow-hidden">
         <motion.h2
           // variants={moveUp(0.35)}
@@ -467,7 +467,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] mb-[50px]"
+          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] mb-[50px]"
         >
           {data.sectionTitle}
         </motion.h2>
@@ -567,7 +567,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
 
                     <h3
                       className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase
-                      mb-[100px] xl:mb-[130px] 2xl:mb-[150px] 3xl:mb-[190px]
+                      mb-[100px] xl:mb-[130px]  3xl:mb-[190px]
                       transition-all duration-600 translate-y-18 ${
                         isActive
                           ? "!opacity-100 !translate-y-0"
@@ -594,7 +594,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                   <h4
                     className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
 flex px-6 z-[4] text-center text-white
-text-[18px] md:text-[20px] lg:text-[25px] 2xl:text-[27px] 3xl:text-[30px]
+text-[18px] md:text-[20px] lg:text-[25px] 3xl:text-[30px]
 font-[optima] uppercase tracking-wide
 transition-all duration-500
 ${

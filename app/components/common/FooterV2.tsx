@@ -22,7 +22,7 @@ const Footer = () => {
       {/* ================= TOP HERO SECTION ================= */}
       <div
         ref={heroRef}
-        className="relative w-full overflow-hidden py-12 md:py-[70px] lg:py-25 2xl:py-30 3xl:py-[150px]"
+        className="relative w-full overflow-hidden py-12 md:py-[70px] lg:py-[100px] 3xl:py-[150px]"
       >
         {/* BG IMAGE WITH SCROLL ZOOM */}
         <motion.div
@@ -34,7 +34,7 @@ const Footer = () => {
             alt="footer background"
             fill
             priority
-            className="object-cover scale-[1.5]"
+            className="object-cover scale-[1.74] 3xl:scale-[1.56]"
           />
         </motion.div>
 
@@ -100,7 +100,7 @@ const Footer = () => {
       </div>
 
       {/* ================= MENU COLUMNS ================= */}
-      <div className="bg-primary py-10 md:py-15 xl:py-20 2xl:py-20 3xl:pt-[114px] 3xl:pb-[120px]">
+      <div className="bg-primary py-10 md:py-15 xl:py-[80px] 3xl:pt-[114px] 3xl:pb-[120px]">
         <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 xl:gap-10">
           {footerV2Data.columns.map((col, i) => (
             <motion.div

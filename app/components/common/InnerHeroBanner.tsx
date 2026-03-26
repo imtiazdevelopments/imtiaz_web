@@ -10,7 +10,7 @@ interface InnerHeroProps {
 
 const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) => {
   return (
-    <section className="relative w-full h-[89vh] overflow-hidden">
+    <section className="relative w-full h-[70vh] 2xl:h-[89.5vh] overflow-hidden">
       <Image
         src={image}
         alt={title}
@@ -20,15 +20,15 @@ const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) =>
         priority
       />
 
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/54" />
 
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="max-w-[887px] w-full px-6 text-center">
+      <div className="container absolute inset-0 flex items-center justify-center">
+        <div className="w-full text-center">
           <h1 className="text-white text-heading mb-20">
             {title}
           </h1>
           {description && (
-            <p className={`text-white/80 text-description ${maxW} mx-auto`}>
+            <p className={`text-white/80 text-description ${maxW} mx-auto 3xl:h-[54px] text-center flex items-center justify-center`}>
               {description}
             </p>
           )}
@@ -36,7 +36,7 @@ const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) =>
       </div>
 
       {/* Breadcrumb — bottom-60 */}
-      <div className="absolute bottom-[60px] left-0 right-0 flex justify-center">
+      <div className="absolute bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center">
         <Breadcrumb />
       </div>
     </section>

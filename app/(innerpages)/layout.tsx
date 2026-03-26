@@ -20,20 +20,23 @@
 //   );
 // }
 
-
 "use client";
 
 import { useEffect } from "react";
 import { useLenis } from "../contexts/LenisContext";
 import InnerFooter from "../components/common/InnerFooter";
 
-export default function InnerLayout({ children }: { children: React.ReactNode }) {
+export default function InnerLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { unlock } = useLenis();
 
-useEffect(() => {
-  console.log("unlock called", unlock);
-  unlock();
-}, [unlock]);
+  useEffect(() => {
+    console.log("unlock called", unlock);
+    unlock();
+  }, [unlock]);
 
   return (
     <>

@@ -117,7 +117,7 @@ export default function Home() {
                         <div className="relative overflow-hidden">
                             <h1
                                 ref={titleRef}
-                                className="text-[35px] xl:text-[64px] 2xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
+                                className="text-[35px] xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
                             >
                                 Redefining Spaces <br />
                                 Elevating Lives

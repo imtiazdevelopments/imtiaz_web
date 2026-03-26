@@ -178,7 +178,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         custom={0.7}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
-                        className="text-white font-[optima] uppercase leading-[1] text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] text-center"
+                        className="text-white font-[optima] uppercase leading-[1] text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] text-center"
                       >
                         {RightLabel}
                       </motion.h1>

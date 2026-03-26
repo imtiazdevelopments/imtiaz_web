@@ -105,7 +105,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]"
+                className="text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]"
               >
                 Download Imtiaz App
               </motion.h2>

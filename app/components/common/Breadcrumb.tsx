@@ -31,7 +31,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
         <div key={i} className="flex items-center gap-[10px]">
           {i > 0 && (
             <span
-              className={`text-[7px] ${
+              className={`text-[9px] ${
                 crumb.isLast
                   ? isBlack
                     ? "text-foreground-light"
@@ -46,7 +46,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
           )}
           {crumb.isLast ? (
             <span
-              className={`font-[avenirHeavy] text-16 ${
+              className={`text-description ${
                 isBlack ? "text-foreground-light" : "text-white"
               }`}
             >
@@ -55,7 +55,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
           ) : (
             <Link
               href={crumb.href}
-              className={`font-[avenirHeavy] text-16 transition-colors duration-300 ${
+              className={`text-description transition-colors duration-300 ${
                 isBlack
                   ? "text-foreground-light/30 hover:text-foreground-light/60"
                   : "text-white/50 hover:text-white/75"

@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-body {
-  overflow: hidden;
-}
-
-
 
 /* ---------- Custom Font Faces ---------- */
 @font-face {
@@ -104,8 +99,8 @@ body {
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1560px;
-  /* --breakpoint-3xl: 1540px; */
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1560px;
 }
 
 
@@ -122,22 +117,25 @@ body {
 --text-50: clamp(28px, 1.55vw + 22px, 50px);
 
 /* 25px → 16px at 390px, 25px at 1810px */
---text-25: clamp(16px, 0.63vw + 13.5px, 25px);
+--text-25: clamp(19px, 0.63vw + 13.5px, 25px);
 
 /* 19px → 13px at 390px, 19px at 1810px */
---text-19: clamp(13px, 0.42vw + 11.4px, 19px);
+--text-19: clamp(14.5px, 0.42vw + 11.4px, 19px);
 
 /* 18px → 13px at 390px, 18px at 1810px */
---text-18: clamp(13px, 0.35vw + 11.6px, 18px);
+--text-18: clamp(14.2px, 0.35vw + 11.6px, 18px);
 
 /* 16px → 12px at 390px, 16px at 1810px */
---text-16: clamp(12px, 0.28vw + 10.9px, 16px);
+--text-16: clamp(13.5px, 0.28vw + 10.9px, 16px);
+
+
+
 
 /* 20px → 12px at 390px, 20px at 1810px */
---space-20: clamp(12px, 0.56vw + 9.8px, 20px);
+--space-20: clamp(14px, 0.56vw + 9.8px, 20px);
 
 /* 25px → 14px at 390px, 25px at 1810px */
---space-25: clamp(14px, 0.77vw + 11px, 25px);
+--space-25: clamp(15px, 0.77vw + 11px, 25px);
 
 /* 30px → 18px at 390px, 30px at 1810px */
 --space-30: clamp(18px, 0.84vw + 14.7px, 30px);
@@ -201,10 +199,6 @@ body {
   --color-primary: var(--primary);
   --color-primary-2: var(--primary-2);
   --color-foreground-light: var(--foreground-light);
-  --breakpoint-lg: 75.25rem;
-  --breakpoint-xl: 84.375rem;
-  --breakpoint-2xl: 96.25rem;
-  --breakpoint-3xl: 113.125rem;
 
   --text-50: var(--text-50);
   --text-25: var(--text-25);
@@ -237,7 +231,7 @@ body {
 }
 
 @utility text-description {
-  @apply font-[avenirHeavy]  text-16 leading-[1.54];
+  @apply font-[avenirHeavy]  text-16 leading-[1.54375];
 }
 
 
@@ -249,8 +243,55 @@ body {
 }
 
 .container {
-  @apply px-[15px] mx-auto;
+  @apply mx-auto w-full px-[15px];
+}
 
+@media (min-width: 640px) {
+  .container { max-width: 600px; }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: 740px; }
+}
+
+@media (min-width: 820px) {
+  .container { max-width: 790px; }
+}
+
+@media (min-width: 960px) {
+  .container { max-width: 900px; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 960px; }
+}
+
+@media (min-width: 1140px) {
+  .container { max-width: 1100px; }
+}
+
+@media (min-width: 1280px) {
+  .container { max-width: 1200px; }
+}
+
+@media (min-width: 1440px) {
+  .container { max-width: 1350px; }
+}
+
+@media (min-width: 1600px) {
+  .container { max-width: 1520px; }
+}
+
+@media (min-width: 1700px) {
+  .container { max-width: 1620px; }
+}
+
+@media (min-width: 1800px) {
+  .container { max-width: 1720px; }
+}
+
+@media (min-width: 1920px) {
+  .container { max-width: 1810px; }
 }
 
 /* Base: light text (over dark background) */

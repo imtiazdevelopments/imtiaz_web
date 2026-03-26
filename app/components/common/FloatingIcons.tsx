@@ -52,7 +52,7 @@ export default function FloatingRightIcons() {
     // <div className="floating-icons fixed right-[15px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
     <div className="floating-icons hidden lg:flex opacity-0 lg:opacity-100 transition-opacity duration-300 fixed right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[9px] z-[900]">
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-700 cursor-pointer ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/phone.svg"
@@ -64,7 +64,7 @@ export default function FloatingRightIcons() {
       </div>
 
       <div
-        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
+        className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-700 cursor-pointer ${bgColor}`}
       >
         <Image
           src="/icons/layout_icons/whatsapp.svg"

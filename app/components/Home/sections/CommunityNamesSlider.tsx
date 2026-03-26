@@ -256,7 +256,7 @@ export default function HeroFeatureSlider({
                 whileInView="animate"
                 animate={isHalfInView ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="text-white font-[optima] text-[36px] md:text-[58px] lg:text-[60px] 2xl:text-[70px] leading-none"
+                className="text-white font-[optima] text-[36px] md:text-[58px] lg:text-[60px] 3xl:text-[70px] leading-none"
               >
                 {heading}
               </motion.h1>

@@ -90,7 +90,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden pb-[200px] md:pb-[250px] lg:pb-[300px] xl:pb-[350px] 3xl:pb-[432px] flex justify-center pt-10 xl:pt-[140px] 2xl:pt-[160px] 3xl:pt-[196px] h-screen"
+      className="relative w-full overflow-hidden pb-[200px] md:pb-[250px] lg:pb-[300px] xl:pb-[350px] 3xl:pb-[432px] flex justify-center pt-10 xl:pt-[140px] 3xl:pt-[196px] h-screen"
     >
       {/* ---------------- BACKGROUND VIDEO ---------------- */}
       <video
@@ -113,7 +113,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
         className="relative z-[5] text-center px-6 max-w-[900px]"
       >
         <div className="overflow-hidden">
-          <h2 className="anim-item text-white text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
+          <h2 className="anim-item text-white text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
             {data.title}
           </h2>
         </div>
