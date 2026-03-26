@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CommunityCard as CommunityCardType } from "../data";
 import OutlineButton from "@/app/components/common/CustomOutlineButton";
 
@@ -14,13 +13,21 @@ const TAG_ICONS = [
 ];
 
 const CommunityCard = ({ card }: { card: CommunityCardType }) => {
-  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsTouch(window.matchMedia("(hover: none)").matches);
+    }
+  }, []);
 
   return (
     <div
-      className="relative w-full h-[340px] lg:h-[579px] overflow-hidden cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="relative w-full h-[340px] lg:h-[520px] 3xl:h-[579px] overflow-hidden cursor-pointer select-none"
+      onMouseEnter={() => !isTouch && setActive(true)}
+      onMouseLeave={() => !isTouch && setActive(false)}
+      onClick={() => isTouch && setActive((prev) => !prev)}
     >
       {/* Background Image */}
       <Image
@@ -28,42 +35,67 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         alt={card.title}
         fill
         sizes="100vw"
-        className="object-cover object-center"
-        style={{
-          transform: hovered ? "scale(1.06)" : "scale(1)",
-          transition: "transform 0.5s ease-out",
-        }}
+        className="object-cover object-center transition-transform duration-500 ease-out"
+        style={{ transform: active ? "scale(1.06)" : "scale(1)" }}
       />
 
-      {/* Base gradient — always present */}
+      {/* Base gradient — desktop */}
       <div
-        className="absolute inset-0"
+        className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
           background: `linear-gradient(180deg, rgba(0,0,0,0) 50.09%, #000000 100%)`,
         }}
       />
 
-      {/* Hover overlay — framer fade */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+      {/* Base overlay — mobile */}
+      <div className="md:hidden absolute inset-0 bg-black/50 pointer-events-none" />
+
+      {/* Active overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-in-out"
         style={{
+          opacity: active ? 1 : 0,
           background: `linear-gradient(180deg, rgba(0,0,0,0) 35.92%, #000000 100%), linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5))`,
         }}
       />
 
       {/* DEFAULT STATE */}
-      <motion.div
-        className="absolute inset-0 flex flex-col justify-end gap-3 p-5"
-        animate={{ opacity: hovered ? 0 : 1 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
+      <div
+        className="absolute inset-0 flex flex-col justify-end gap-3 px-40 pb-40 transition-opacity duration-300 ease-in-out pointer-events-none"
+        style={{ opacity: active ? 0 : 1 }}
       >
-        <h3 className="text-white font-[optima] font-[400] text-25 leading-[1.4] tracking-[2%] text-center mb-20">
+        <h3 className="text-white font-[optima] text-25 text-center mb-[40px] md:mb-20 px-10 md:px-4">
           {card.title}
         </h3>
 
-        <div className="flex items-center justify-between bg-[#FFFFFF0D] backdrop-blur-[30px] rounded-full px-[30px] 3xl:px-[57px] py-[14px] 3xl:py-[34px] w-full">
+        <div className="grid grid-cols-1 2xl:grid-cols-2 3xl:hidden gap-3 w-full">
+          {card.tags.map((tag, i) => {
+            const isLastOdd =
+              card.tags.length % 2 !== 0 && i === card.tags.length - 1;
+
+            return (
+              <div
+                key={i}
+                className={`flex items-center gap-[10px] bg-[#FFFFFF0D] backdrop-blur-[20px] border border-[#FFFFFF0D] rounded-full px-3 py-[10px] ${
+                  isLastOdd ? "2xl:col-span-2 2xl:w-fit 2xl:mx-auto" : "w-full"
+                }`}
+              >
+                <Image
+                  src={TAG_ICONS[i] ?? TAG_ICONS[0]}
+                  alt={tag.label}
+                  width={25}
+                  height={25}
+                  className="h-[14px] w-auto"
+                />
+                <span className="text-white font-[avenirHeavy] text-16 uppercase">
+                  {tag.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="hidden 3xl:flex justify-between bg-[#FFFFFF0D] backdrop-blur-[30px] rounded-full px-[30px] py-[14px] w-full">
           {card.tags.map((tag, i) => (
             <div key={i} className="flex items-center gap-[10px]">
               <Image
@@ -71,7 +103,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
                 alt={tag.label}
                 width={25}
                 height={25}
-                className="h-[18px] w-auto object-contain"
+                className="h-[18px] w-auto"
               />
               <span className="text-white font-[avenirHeavy] text-16 uppercase">
                 {tag.label}
@@ -79,25 +111,27 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
-      {/* HOVERED STATE */}
-      <motion.div
-        className="absolute inset-0 flex flex-col items-center justify-center gap-5"
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut", delay: hovered ? 0.14 : 0 }}
+      {/* ACTIVE STATE */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center gap-5 transition-opacity duration-300 ease-in-out"
+        style={{
+          opacity: active ? 1 : 0,
+          pointerEvents: active ? "auto" : "none",
+        }}
       >
-        <h3 className="text-white font-[optima] font-[400] text-25 leading-[1.4] tracking-[2%] text-center mb-[120px]">
+        <h3 className="text-white font-[optima] text-25 text-center mb-120">
           {card.title}
         </h3>
-        <Link href={card.href}>
+        <Link href={card.href} onClick={(e) => e.stopPropagation()}>
           <OutlineButton
             text="View Community"
             borderColor="rgba(255,255,255,0.9)"
             px="px-10"
           />
         </Link>
-      </motion.div>
+      </div>
     </div>
   );
 };

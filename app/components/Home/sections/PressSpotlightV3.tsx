@@ -95,7 +95,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
   return (
     <section
       ref={sectionRef}
-      className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 2xl:py-[150px] 3xl:py-[170px] bg-white container overflow-hidden"
+      className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 3xl:py-[170px] bg-white container overflow-hidden"
     >
       <div ref={rootRef}>
         <Swiper
@@ -122,7 +122,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px] font-[optima] uppercase pb-[70px] 2xl:pb-[90px]"
+                    className="text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] uppercase pb-[70px] 3xl:pb-[90px]"
                   >
                     {data.sectionTitle}
                   </motion.h2>
@@ -214,7 +214,7 @@ const PressSpotlight = ({ data }: PressSpotlightProps) => {
                 {/* RIGHT IMAGE — ZOOM PER SLIDE */}
                 <div
                   ref={(el) => setWrapRef(el, index)}
-                  className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 2xl:h-[580px] 3xl:h-[680px] overflow-hidden"
+                  className="relative w-full 3xl:w-[858px] h-[420px] md:h-[520px] lg:h-[560px] 3xl:h-[680px] overflow-hidden"
                 >
                   <Image
                     ref={(el) => setImgRef(el as HTMLImageElement, index)}

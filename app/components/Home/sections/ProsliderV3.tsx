@@ -156,7 +156,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     className="flex flex-col justify-between items-center pb-[250px]"
                   >
                     {/* Right Label */}
-                    <div className="overflow-hidden mb-10 lg-mb-15 2xl:mb-25 3xl:mb-[130px]">
+                    <div className="overflow-hidden mb-10 3xl:mb-[130px]">
                       <motion.div
                         // variants={fadeUp}
                         variants={moveUp(1)}
@@ -183,7 +183,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         initial="hidden"
                         animate={startAnim ? "show" : "hidden"}
                         className="text-white font-[optima] uppercase leading-[1]
-                          text-[36px] md:text-[58px]  lg:text-[60px] 2xl:text-[70px]
+                          text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px]
                           text-center mb-[22px]"
                       >
                         {slide.title}
@@ -240,7 +240,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         {/* Pill Logo */}
 
                         {/* Features */}
-                        <div className="flex gap-6 md:gap-10 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 lg:px-[30px] 2xl:px-[68px]">
+                        <div className="flex gap-6 md:gap-10 3xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 lg:px-[30px] 3xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               key={`${idx}-${activeIndex}`}

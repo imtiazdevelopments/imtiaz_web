@@ -5,7 +5,7 @@ const CommunitiesSection = () => {
   const { title, description, cards } = communitySectionData;
 
   return (
-    <section className="w-full py-160">
+    <section className="make-header-black w-full py-120 3xl:py-160">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center mb-50">
@@ -18,7 +18,7 @@ const CommunitiesSection = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-40 gap-y-60">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-30 md:gap-x-40 md:gap-y-60">
           {cards.map((card) => (
             <CommunityCard key={card.id} card={card} />
           ))}
