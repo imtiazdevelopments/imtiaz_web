@@ -28,7 +28,7 @@ const InnerFooter = () => {
               <input
                 type="email"
                 placeholder={footerV2Data.top.placeholderEmail}
-                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirHeavy] font-[800] text-16 text-white placeholder-white/60 focus:outline-none"
+                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirHeavy] font-[800] text-16 xl:text-[16px] text-white placeholder-white/60 focus:outline-none"
               />
               <button className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] font-[avenirRoman] text-17">
                 {footerV2Data.top.sendText}
