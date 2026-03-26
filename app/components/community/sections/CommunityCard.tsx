@@ -24,7 +24,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
   return (
     <div
-      className="relative w-full h-[340px] lg:h-[520px] 3xl:h-[579px] overflow-hidden cursor-pointer select-none"
+      className="relative w-full h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden cursor-pointer select-none"
       onMouseEnter={() => !isTouch && setActive(true)}
       onMouseLeave={() => !isTouch && setActive(false)}
       onClick={() => isTouch && setActive((prev) => !prev)}
@@ -40,8 +40,17 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
       />
 
       {/* Base gradient — desktop */}
+      {/* below 3xl */}
       <div
-        className="hidden md:block absolute inset-0 pointer-events-none"
+        className="hidden md:block 3xl:hidden absolute inset-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(180deg, rgba(0,0,0,0) 35.09%, #000000 100%)`,
+        }}
+      />
+
+      {/* 3xl */}
+      <div
+        className="hidden 3xl:block absolute inset-0 pointer-events-none"
         style={{
           background: `linear-gradient(180deg, rgba(0,0,0,0) 50.09%, #000000 100%)`,
         }}
@@ -61,41 +70,77 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
       {/* DEFAULT STATE */}
       <div
-        className="absolute inset-0 flex flex-col justify-end gap-3 px-40 pb-40 transition-opacity duration-300 ease-in-out pointer-events-none"
+        className="absolute inset-0 flex flex-col justify-end gap-3 px-30 pb-30 lg:px-40 lg:pb-40 transition-opacity duration-300 ease-in-out pointer-events-none"
         style={{ opacity: active ? 0 : 1 }}
       >
-        <h3 className="text-white font-[optima] text-25 text-center mb-[40px] md:mb-20 px-10 md:px-4">
+        <h3 className="text-white font-[optima] text-25 text-center mb-[10px] lg:mb-20 px-10 md:px-4">
           {card.title}
         </h3>
 
-        <div className="grid grid-cols-1 2xl:grid-cols-2 3xl:hidden gap-3 w-full">
+        <div className="3xl:hidden grid grid-cols-1 2xl:grid-cols-2 bg-[#FFFFFF0D] backdrop-blur-[20px] border border-[#FFFFFF0D] rounded-[20px] w-full overflow-hidden">
           {card.tags.map((tag, i) => {
             const isLastOdd =
               card.tags.length % 2 !== 0 && i === card.tags.length - 1;
 
+            const showHorizontal = i > 0;
+            const hideHorizontalAt2xl = i === 1;
+            const isLeftCol = i % 2 === 0 && !isLastOdd;
+            const isRightCol = i % 2 !== 0;
+
             return (
               <div
                 key={i}
-                className={`flex items-center gap-[10px] bg-[#FFFFFF0D] backdrop-blur-[20px] border border-[#FFFFFF0D] rounded-full px-3 py-[10px] ${
-                  isLastOdd ? "2xl:col-span-2 2xl:w-fit 2xl:mx-auto" : "w-full"
-                }`}
+                className={`flex flex-col ${isLastOdd ? "2xl:col-span-2" : ""}`}
               >
-                <Image
-                  src={TAG_ICONS[i] ?? TAG_ICONS[0]}
-                  alt={tag.label}
-                  width={25}
-                  height={25}
-                  className="h-[14px] w-auto"
-                />
-                <span className="text-white font-[avenirHeavy] text-16 uppercase">
-                  {tag.label}
-                </span>
+                {/* Horizontal separator */}
+                {showHorizontal && (
+                  <div
+                    className={`h-px w-full ${hideHorizontalAt2xl ? "2xl:hidden" : ""}`}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)",
+                    }}
+                  />
+                )}
+
+                {/* Cell content */}
+                <div
+                  className={`
+            relative flex items-center gap-[10px] py-[10px] lg:py-[20px]
+            justify-center px-5
+            ${isLeftCol ? "2xl:justify-end 2xl:pr-80 2xl:pl-5" : ""}
+            ${isRightCol ? "2xl:justify-start 2xl:pl-80 2xl:pr-5" : ""}
+            ${isLastOdd ? "2xl:justify-center 2xl:px-5" : ""}
+          `}
+                >
+                  <Image
+                    src={TAG_ICONS[i] ?? TAG_ICONS[0]}
+                    alt={tag.label}
+                    width={25}
+                    height={25}
+                    className="h-[14px] w-auto"
+                  />
+                  <span className="text-white font-[avenirHeavy] text-16 uppercase">
+                    {tag.label}
+                  </span>
+
+                  {/* Vertical separator — fixed at right edge of left column */}
+                  {isLeftCol && (
+                    <div
+                      className="hidden 2xl:block absolute right-0 top-[15%] h-[70%] w-px"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)",
+                      }}
+                    />
+                  )}
+                </div>
               </div>
             );
           })}
         </div>
 
-        <div className="hidden 3xl:flex justify-between bg-[#FFFFFF0D] backdrop-blur-[30px] rounded-full px-[30px] py-[14px] w-full">
+        <div className="hidden 3xl:flex bg-[#FFFFFF0D] justify-center backdrop-blur-[30px] rounded-full px-[30px] py-[34px] w-full gap-50">
           {card.tags.map((tag, i) => (
             <div key={i} className="flex items-center gap-[10px]">
               <Image
