@@ -49,7 +49,8 @@ export default function FloatingRightIcons() {
   const bgColor = darkHeader ? "bg-black/50" : "bg-white/25";
 
   return (
-    <div className="floating-icons fixed right-[15px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
+    // <div className="floating-icons fixed right-[15px] top-1/2 -translate-y-1/2 flex flex-col gap-[9px] z-[900]">
+    <div className="floating-icons hidden lg:flex opacity-0 lg:opacity-100 transition-opacity duration-300 fixed right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[9px] z-[900]">
       <div
         className={`w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center transition-colors duration-300 cursor-pointer ${bgColor}`}
       >
@@ -58,7 +59,7 @@ export default function FloatingRightIcons() {
           alt="phone"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
 
@@ -70,7 +71,7 @@ export default function FloatingRightIcons() {
           alt="whatsapp"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
 
@@ -82,7 +83,7 @@ export default function FloatingRightIcons() {
           alt="message"
           width={27}
           height={27}
-          className="w-[27px] h-[27px]"
+          className="w-[27px] h-[27px] pointer-events-none"
         />
       </div>
     </div>

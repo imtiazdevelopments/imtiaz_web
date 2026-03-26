@@ -1,0 +1,57 @@
+import Image from "next/image";
+import Link from "next/link";
+
+type Blog = {
+  id: number;
+  title: string;
+  image: string;
+  category: string;
+  date: string;
+  slug: string;
+}
+
+interface BlogCardProps {
+blog: Blog;
+}
+
+const BlogCard = ({ blog }: BlogCardProps) => {
+  const formatted = new Date(blog.date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  return (
+    <Link href={`/media-center/blogs/${blog.slug}`} className="group block">
+      <div className="relative w-full h-[340px] lg:h-[522px] overflow-hidden">
+        <Image
+          src={blog.image}
+          alt={blog.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+        {/* Overlay */}
+        <div
+          className="absolute inset-0"
+          style={{background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)"}}
+        />
+
+        {/* Content */}
+        <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50">
+          <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] uppercase">
+            {blog.category} - {formatted}
+          </p>
+          <h3 className="text-white uppercase text-25 leading-[1.4] mb-40 text-center">
+            {blog.title}
+          </h3>
+          <span className="text-white font-[avenirHeavy] text-19 leading-[100%] border-b border-white/40 group-hover:border-white transition-all duration-300">
+            Read More
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default BlogCard;

@@ -1,16 +1,3 @@
-/* "use client";
-
-import { ReactLenis } from "@studio-freight/react-lenis";
-
-const SmoothScroll = ({ children }) => {
-  return (
-    <ReactLenis root options={{ duration: 1.8, smoothWheel: true }}>
-      {children}
-    </ReactLenis>
-  );
-};
-
-export default SmoothScroll; */
 "use client";
 
 import { useEffect } from "react";
