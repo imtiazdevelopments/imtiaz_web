@@ -33,8 +33,13 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         />
         {/* Overlay */}
         <div
-          className="absolute inset-0"
+          className="hidden md:block absolute inset-0"
           style={{background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)"}}
+        />
+
+                <div
+          className="md:hidden absolute inset-0"
+          style={{background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 15.48%, #000000 98.07%)"}}
         />
 
         {/* Content */}
@@ -42,7 +47,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] uppercase">
             {blog.category} - {formatted}
           </p>
-          <h3 className="text-white uppercase text-25 leading-[1.4] mb-40 text-center">
+          <h3 className="text-white uppercase text-25 leading-[1.5] md:leading-[1.4] mb-40 text-center">
             {blog.title}
           </h3>
           <span className="text-white font-[avenirHeavy] text-19 leading-[100%] border-b border-white/40 group-hover:border-white transition-all duration-300">

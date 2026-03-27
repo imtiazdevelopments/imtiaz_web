@@ -3,16 +3,18 @@ import Link from "next/link";
 import { PressItem } from "../data";
 
 const EventCard = ({ item }: { item: PressItem }) => {
-  const formatted = new Date(item.date).toLocaleDateString("en-US", {
-    month: "2-digit",
-    day: "2-digit",
-    year: "numeric",
-  }).replace(/\//g, "-");
+  const formatted = new Date(item.date)
+    .toLocaleDateString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    })
+    .replace(/\//g, "-");
 
   return (
     <Link href={`/media-center/events/${item.slug}`} className="group block">
       {/* Image + Category Bar */}
-      <div className="relative w-full h-[280px] md:h-[333px] overflow-hidden">
+      <div className="relative w-full h-[250px] xl:h-[333px] overflow-hidden">
         <Image
           src={item.image}
           alt={item.title}
@@ -21,7 +23,13 @@ const EventCard = ({ item }: { item: PressItem }) => {
           className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
         />
 
-        <div className="absolute inset-0" style={{background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 61.41%, #000000 100%)"}} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 61.41%, #000000 100%)",
+          }}
+        />
 
         {/* Category & Date Bar — pinned to bottom of image */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/30 backdrop-blur-[30px] py-[12px] flex items-center justify-center">
