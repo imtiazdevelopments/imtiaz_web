@@ -15,12 +15,15 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const formatted = (date: string) =>
-    new Date(date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-    });
+const formatted = (date: string) => {
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${month}-${day}-${year}`;
+};
 
   return (
     <div className="relative w-full">
@@ -65,7 +68,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
                 </span>
               </div>
               <div className="absolute inset-0 flex flex-col items-center justify-end py-50 px-20 sm:px-40 md:px-50 text-center">
-                <p className="text-white/80 text-description mb-20 uppercase">
+                <p className="text-white/80 text-description mb-20 capitalize">
                   {blog.category} · {formatted(blog.date)}
                 </p>
                 <h2 className="text-heading text-white max-w-[1000px] mb-20 line-clamp-2 lg:line-clamp-3">
