@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PressItem } from "../data";
+import { EventItem } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 
-const EventCard = ({ item }: { item: PressItem }) => {
+const EventCard = ({ item }: { item: EventItem }) => {
   const formatted = new Date(item.date).toLocaleDateString("en-US", {
     month: "short",
     day: "2-digit",
@@ -12,7 +12,7 @@ const EventCard = ({ item }: { item: PressItem }) => {
 
   return (
     <Link href={`/media-center/events/${item.slug}`} className="group block">
-      <div className="relative w-full h-[340px] lg:h-[522px] overflow-hidden">
+      <div className="relative w-full h-[400px] lg:h-[522px] overflow-hidden">
         <Image
           src={item.image}
           alt={item.title}
@@ -25,10 +25,10 @@ const EventCard = ({ item }: { item: PressItem }) => {
           style={{ background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)" }}
         />
         <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50">
-          <h3 className="text-white uppercase text-25 leading-[1.4] mb-40 text-center">
+          <h3 className="text-white uppercase text-25 font-[optima] tracking-[2%] leading-[1.4] mb-40 text-center line-clamp-2">
             {item.title}
           </h3>
-          <CustomOutlineButton text="Read More" px="px-[26px] md:px-[37px]" />
+          <CustomOutlineButton text="Read More" px="px-[26px] lg:px-[37px]" />
         </div>
       </div>
     </Link>

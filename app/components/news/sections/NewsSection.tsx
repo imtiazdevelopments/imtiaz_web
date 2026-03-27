@@ -15,7 +15,7 @@ import LatestNewsSlider from "./LatestNewsSlider";
 import NewsCard from "./NewsCard";
 import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
-import { Plus, X } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const NEWS_PER_PAGE = 6;
 
@@ -227,7 +227,7 @@ const NewsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-50 md:mt-60 2xl:mt-100 w-full flex justify-center">
+          <div className="w-full flex justify-center">
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}

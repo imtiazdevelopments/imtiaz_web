@@ -13,7 +13,7 @@ const OtherEvents = () => {
                 ))}
             </div>
             <div className='flex justify-center mt-50'>
-              <CustomOutlineButton text='View All' borderColor='border-primary-2' textColor='foreground-light' px='px-[26px] md:px-[37px]' />
+              <CustomOutlineButton text='View All' borderColor='border-primary-2' textColor='foreground-light' px='px-[26px] lg:px-[37px]' />
             </div>
         </div>
     </section>

@@ -34,7 +34,7 @@ const CustomOutlineButton = ({
       onClick={onClick}
       onMouseDown={handlePress}
       onTouchStart={handlePress}
-      className={`cursor-pointer group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] md:py-5 rounded-full border ${borderColor} ${textColor} font-[avenirRoman] text-19 leading-[100%]`}
+      className={`cursor-pointer group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] lg:py-5 rounded-full border ${borderColor} ${textColor} font-[avenirRoman] text-19 leading-[100%]`}
       style={{ transform: pressed ? "scale(0.95)" : "scale(1)" }}
     >
 {/* Left fill */}

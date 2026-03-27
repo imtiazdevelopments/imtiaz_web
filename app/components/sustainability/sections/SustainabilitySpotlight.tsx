@@ -236,7 +236,7 @@ export default function SustainabilitySpotlight() {
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              px="px-[26px] md:px-[37px]"
+              px="px-[26px] lg:px-[37px]"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton onClick={goPrev} direction="prev" variant="dark" />
