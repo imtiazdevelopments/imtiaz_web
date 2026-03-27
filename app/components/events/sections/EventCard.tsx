@@ -4,11 +4,6 @@ import { EventItem } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 const EventCard = ({ item }: { item: EventItem }) => {
-  const formatted = new Date(item.date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
 
   return (
     <Link href={`/media-center/events/${item.slug}`} className="group block">
