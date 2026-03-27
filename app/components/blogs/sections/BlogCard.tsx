@@ -15,11 +15,16 @@ blog: Blog;
 }
 
 const BlogCard = ({ blog }: BlogCardProps) => {
-  const formatted = new Date(blog.date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
+
+const formatted = (date: string) => {
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${month}-${day}-${year}`;
+};
 
   return (
     <Link href={`/media-center/blogs/${blog.slug}`} className="group block">
@@ -44,8 +49,8 @@ const BlogCard = ({ blog }: BlogCardProps) => {
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50">
-          <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] uppercase">
-            {blog.category} - {formatted}
+          <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] capitalize">
+            {blog.category} - {formatted(blog.date)}
           </p>
           <h3 className="text-white uppercase text-25 leading-[1.5] md:leading-[1.4] mb-40 text-center">
             {blog.title}
