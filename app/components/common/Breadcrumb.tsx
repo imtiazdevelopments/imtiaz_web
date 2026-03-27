@@ -50,7 +50,18 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
                 isBlack ? "text-foreground-light" : "text-white"
               }`}
             >
-              {crumb.label}
+              {/* mobile */}
+              <span className="lg:hidden">
+                {crumb.label.length > 10
+                  ? crumb.label.slice(0, 10) + "..."
+                  : crumb.label}
+              </span>
+              {/* lg+ */}
+              <span className="hidden lg:inline">
+                {crumb.label.length > 20
+                  ? crumb.label.slice(0, 20) + "..."
+                  : crumb.label}
+              </span>
             </span>
           ) : (
             <Link

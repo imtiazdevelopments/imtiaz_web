@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 interface OutlineButtonProps {
   text: string;
   borderColor?: string;
@@ -18,23 +22,32 @@ const CustomOutlineButton = ({
   variant = "light",
 }: OutlineButtonProps) => {
   const fillColor = variant === "dark" ? "bg-primary-2" : "bg-white/10";
+  const [pressed, setPressed] = useState(false);
+
+  const handlePress = () => {
+    setPressed(true);
+    setTimeout(() => setPressed(false), 200); // hold scale for 200ms even on quick tap
+  };
 
   return (
     <button
       onClick={onClick}
-      className={`cursor-pointer group relative ${className} overflow-hidden ${px} py-5 rounded-full border ${borderColor} ${textColor} font-[avenirRoman] text-19 leading-[100%] transition-colors duration-300`}
+      onMouseDown={handlePress}
+      onTouchStart={handlePress}
+      className={`cursor-pointer group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] md:py-5 rounded-full border ${borderColor} ${textColor} font-[avenirRoman] text-19 leading-[100%]`}
+      style={{ transform: pressed ? "scale(0.95)" : "scale(1)" }}
     >
-      {/* Left fill */}
-      <span
-        className={`absolute inset-y-0 left-0 w-1/2 ${fillColor} transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
-      />
-      {/* Right fill */}
-      <span
-        className={`absolute inset-y-0 right-0 w-1/2 ${fillColor} transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
-      />
+{/* Left fill */}
+<span
+  className={`absolute inset-y-0 left-0 w-[50%] ${fillColor} transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
+/>
+{/* Right fill */}
+<span
+  className={`absolute inset-y-0 right-0 w-[50.1%] ${fillColor} transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
+/>
       <span className={`relative z-10 transition-colors duration-300 ${variant === "dark" ? "group-hover:text-white" : ""}`}>
-  {text}
-</span>
+        {text}
+      </span>
     </button>
   );
 };

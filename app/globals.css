@@ -116,14 +116,17 @@
 /* 50px → 28px at 390px, 50px at 1810px */
 --text-50: clamp(28px, 1.55vw + 22px, 50px);
 
+/* 32px → 24px at 390px, 32px at 1810px */
+--text-32: clamp(23px, 0.81vw + 17.3px, 32px);
+
 /* 25px → 16px at 390px, 25px at 1810px */
---text-25: clamp(19px, 0.63vw + 13.5px, 25px);
+--text-25: clamp(16px, 0.63vw + 13.5px, 25px);
 
 /* 19px → 13px at 390px, 19px at 1810px */
 --text-19: clamp(14.5px, 0.42vw + 11.4px, 19px);
 
 /* 18px → 13px at 390px, 18px at 1810px */
---text-18: clamp(14.2px, 0.35vw + 11.6px, 18px);
+--text-18: clamp(15px, 0.35vw + 11.6px, 18px);
 
 /* 16px → 12px at 390px, 16px at 1810px */
 --text-16: clamp(13.5px, 0.28vw + 10.9px, 16px);
@@ -132,7 +135,7 @@
 
 
 /* 20px → 12px at 390px, 20px at 1810px */
---space-20: clamp(14px, 0.56vw + 9.8px, 20px);
+--space-20: clamp(17px, 0.56vw + 9.8px, 20px);
 
 /* 25px → 14px at 390px, 25px at 1810px */
 --space-25: clamp(15px, 0.77vw + 11px, 25px);
@@ -183,7 +186,7 @@
 --space-200: clamp(80px, 8.45vw + 47px, 200px);
 
 /* 250px → 100px at 390px, 250px at 1810px */
---space-250: clamp(100px, 10.56vw + 58.8px, 250px);
+--space-250: clamp(100px, 18vw + 29.8px, 250px);
 }
 
 @theme inline {
@@ -201,6 +204,7 @@
   --color-foreground-light: var(--foreground-light);
 
   --text-50: var(--text-50);
+  --text-32: var(--text-32);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
   --text-18: var(--text-18);
@@ -227,11 +231,22 @@
 }
 
 @utility text-heading {
-  @apply font-[optima] font-[550] uppercase text-50 leading-[1.2];
+  @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-32 md:text-50;
 }
 
 @utility text-description {
   @apply font-[avenirHeavy]  text-16 leading-[1.54375];
+}
+
+@utility container-spacing-details-page {
+  @apply xl:!px-200 3xl:!px-250;
+}
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 
@@ -259,7 +274,7 @@ body {
 }
 
 @media (min-width: 820px) {
-  .container { max-width: 790px; }
+  .container { max-width: 800px; }
 }
 
 @media (min-width: 920px) {
@@ -621,7 +636,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2%;
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 10px;
   margin-bottom: -5px;
 }
@@ -632,7 +647,7 @@ body {
   width: 7px;
   height: 7px;
   min-width: 7px;
-  margin-bottom: 5px;
+  margin-top: 9px;
   background-color: var(--primary-2);
 }
 
@@ -655,6 +670,7 @@ body {
 .blog-content img {
   width: 100%;
   height: auto;
+  min-height: 260px;
   max-height: 572px;
   object-fit: cover;
   display: block;

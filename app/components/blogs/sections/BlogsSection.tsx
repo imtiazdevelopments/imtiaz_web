@@ -13,6 +13,7 @@ import LatestBlogSlider from "./LatestBlogSlider";
 import BlogCard from "./BlogCard";
 import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 const BLOGS_PER_PAGE = 4;
 
@@ -80,11 +81,11 @@ const BlogsSection = () => {
   };
 
   return (
-    <section className="w-full bg-white pt-70 pb-160">
+    <section className="w-full bg-white pt-70 pb-120 3xl:pb-160">
       <div className="container">
         {/* Filters Row */}
-        <div className="flex items-center justify-between mb-70">
-          <div className="flex items-center gap-30">
+        <div className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70">
+          <div className="flex flex-col md:flex-row items-center gap-30 w-full md:w-auto">
             <FilterDropdown
               placeholder="Topic"
               options={blogTopics}
@@ -100,12 +101,15 @@ const BlogsSection = () => {
           </div>
 
           {hasFilter && (
-            <button
+            <CustomOutlineButton
+              text="Clear Filters"
               onClick={clearFilters}
-              className="cursor-pointer px-60 3xl:px-[62px] py-5 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-19 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
-            >
-              Clear Filter
-            </button>
+              variant="dark"
+              px="px-60"
+              borderColor="border-primary-2"
+              textColor="text-foreground-light"
+              className="w-full md:w-auto !py-[17px] md:!py-5"
+            />
           )}
         </div>
 
@@ -126,7 +130,7 @@ const BlogsSection = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-black/40 font-[avenirRoman] text-[16px] py-20">
+            <p className="text-center text-foreground-light text-description py-20">
               No blogs found for selected filters.
             </p>
           )}
@@ -134,7 +138,7 @@ const BlogsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-100 w-full flex justify-center">
+          <div className="mt-50 md:mt-60 2xl:mt-100 w-full flex justify-center">
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}

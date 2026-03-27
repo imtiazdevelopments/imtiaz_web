@@ -25,7 +25,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
   return (
     <div className="relative w-full">
       {/* Swiper */}
-      <div className="relative w-full h-[420px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px]">
+      <div className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px]">
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
@@ -46,10 +46,17 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
                 priority={i === 0}
               />
               <div
-                className="absolute inset-0"
+                className="hidden md:block absolute inset-0"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(0, 0, 0, 0) 32.99%, #000000 104.8%)",
+                }}
+              />
+              <div
+                className="block md:hidden absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(0, 0, 0, 0) 20.99%, #000000 104.8%)",
                 }}
               />
               <div className="absolute top-50 3xl:top-[55px] left-1/2 -translate-x-1/2">
@@ -57,15 +64,15 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
                   Latest Blog
                 </span>
               </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-end pb-50 text-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-end py-50 px-20 sm:px-40 md:px-50 text-center">
                 <p className="text-white/80 text-description mb-20 uppercase">
                   {blog.category} · {formatted(blog.date)}
                 </p>
-                <h2 className="text-heading text-white max-w-[1000px] mb-20">
+                <h2 className="text-heading text-white max-w-[1000px] mb-20 line-clamp-2 lg:line-clamp-3">
                   {blog.title}
                 </h2>
                 <Link href={`/media-center/${blog.slug}`}>
-                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[37px]" />
+                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[26px] md:px-[37px]" />
                 </Link>
               </div>
             </SwiperSlide>
