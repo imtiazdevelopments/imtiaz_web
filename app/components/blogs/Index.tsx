@@ -5,12 +5,12 @@ import { Suspense } from "react";
 
 const Index = () => {
   return (
-    <>
+    <div>
       <InnerHeroBanner {...bannerData} maxW="max-w-[580px]" />
       <Suspense fallback={<div>Loading...</div>}>
         <BlogsSection />
       </Suspense>
-    </>
+    </div>
   );
 };
 

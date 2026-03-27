@@ -198,9 +198,17 @@ const NewsSection = () => {
         <div className="w-full h-px bg-black/10 mb-50" />
 
         {/* Slider — top 3 latest News items, unaffected by filters */}
-        <LatestNewsSlider news={latestNews.slice(0, 3)} />
-
-        <div className="w-full h-px bg-black/10 my-50" />
+        <div
+          className="transition-all duration-500 ease-in-out overflow-hidden"
+          style={{
+            maxHeight: hasFilter ? "0px" : "1000px",
+            opacity: hasFilter ? 0 : 1,
+            marginBottom: hasFilter ? "0px" : undefined,
+          }}
+        >
+          <LatestNewsSlider news={latestNews.slice(0, 3)} />
+          <div className="w-full h-px bg-black/10 my-50" />
+        </div>
 
         {/* News Cards Grid */}
         <div id="news-list" className="scroll-mt-20">
