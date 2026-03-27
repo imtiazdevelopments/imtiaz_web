@@ -16,7 +16,7 @@ const RelatedBlogs = () => {
           <CustomOutlineButton
             text="View All"
             borderColor="border-primary-2"
-            textColor="foreground-light"
+            textColor="text-foreground-light"
             px="px-[26px] lg:px-[37px]"
           />
         </div>
