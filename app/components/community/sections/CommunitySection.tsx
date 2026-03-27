@@ -5,7 +5,7 @@ const CommunitiesSection = () => {
   const { title, description, cards } = communitySectionData;
 
   return (
-    <section className="make-header-black w-full py-120 3xl:py-160">
+    <section className="w-full py-120 3xl:py-160">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center mb-50">

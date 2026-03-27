@@ -24,9 +24,8 @@ const BlogsSection = () => {
 
   const selectedTopic = (searchParams.get("topic") as BlogTopic) || "";
   const selectedCategory = (searchParams.get("category") as BlogCategory) || "";
-  const currentPage = Number(searchParams.get("page") || "1"); // ✅ declared here
+  const currentPage = Number(searchParams.get("page") || "1");
 
-  // ✅ Sync page=1 in URL on initial load
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
     if (!params.get("page")) {
@@ -42,7 +41,7 @@ const BlogsSection = () => {
     } else {
       params.delete(key);
     }
-    params.set("page", "1"); // ✅ reset to page 1 on filter change
+    params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
@@ -115,11 +114,20 @@ const BlogsSection = () => {
 
         <div className="w-full h-px bg-black/10 mb-50" />
 
-        {/* Hero Slider */}
-        <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
+        {/* Hero Slider — hidden when filters active */}
+        <div
+          className="transition-all duration-500 ease-in-out overflow-hidden"
+          style={{
+            maxHeight: hasFilter ? "0px" : "1000px",
+            opacity: hasFilter ? 0 : 1,
+            marginBottom: hasFilter ? "0px" : undefined,
+          }}
+        >
+          <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
+          {/* Divider */}
+          <div className="w-full h-px bg-black/10 my-50" />
+        </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-black/10 my-50" />
 
         {/* Blog Cards Grid */}
         <div id="blog-list" className="scroll-mt-20">

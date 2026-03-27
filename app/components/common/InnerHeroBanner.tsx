@@ -16,7 +16,7 @@ const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) =>
         alt={title}
         fill
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-cover object-center  2xl:object-bottom"
         priority
       />
 
