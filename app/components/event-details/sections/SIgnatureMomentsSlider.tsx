@@ -23,7 +23,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
     gsap.fromTo(
       el,
       { scale: 0, opacity: 1, transformOrigin: "center center" },
-      { scale: 1, opacity: 1, duration: 1.2, ease: "power3.out" }
+      { scale: 1, opacity: 1, duration: 1.2, ease: "power3.out" },
     );
   }, []);
 
@@ -43,7 +43,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
       animateSlideIn(current);
       setActiveIndex(current);
     },
-    [animateSlideIn, animateSlideOut, images]
+    [animateSlideIn, animateSlideOut, images],
   );
 
   const handleSwiper = useCallback(
@@ -51,7 +51,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
       swiperRef.current = swiper;
       animateSlideIn(0);
     },
-    [animateSlideIn]
+    [animateSlideIn],
   );
 
   return (
@@ -64,7 +64,6 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
 
       {/* Slider wrapper — all layers stack here */}
       <div className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen">
-
         {/* z-0 — background image (previous slide) */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -92,7 +91,9 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
             {images.map((src, i) => (
               <SwiperSlide key={i} className="relative w-full h-full">
                 <div
-                  ref={(el) => { slideRefs.current[i] = el; }}
+                  ref={(el) => {
+                    slideRefs.current[i] = el;
+                  }}
                   className="w-full h-full"
                   style={{
                     transform: "scale(0)",
@@ -115,10 +116,18 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
 
         {/* z-20 — gradient overlay */}
         <div
-          className="absolute inset-0 z-20 pointer-events-none"
+          className="hidden lg:block absolute inset-0 z-20 pointer-events-none"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 0, 0, 0) 64.27%, rgba(0, 0, 0, 0.8) 100%)",
+          }}
+        />
+
+        <div
+          className="lg:hidden absolute inset-0 z-20 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 55.27%, rgba(0, 0, 0, 1) 100%)",
           }}
         />
 
@@ -128,7 +137,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute left-70 top-1/2 -translate-y-1/2 z-30"
+          className="absolute left-20 lg:left-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30"
         >
           <button
             onClick={() => swiperRef.current?.slidePrev()}
@@ -151,7 +160,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute right-70 top-1/2 -translate-y-1/2 z-30"
+          className="absolute right-20 lg:right-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30"
         >
           <button
             onClick={() => swiperRef.current?.slideNext()}

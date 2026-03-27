@@ -1,7 +1,7 @@
 const EventContent = ({ content }: { content: string }) => {
   return (
-    <section className="w-full bg-white pt-20 pb-160">
-      <div className="container !px-250">
+    <section className="w-full bg-white pt-20 pb-120 3xl:pb-160">
+      <div className="container container-spacing-details-page">
         <div
           className="blog-content"
           dangerouslySetInnerHTML={{ __html: content }}

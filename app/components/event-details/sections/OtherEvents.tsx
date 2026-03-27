@@ -4,7 +4,7 @@ import CustomOutlineButton from '../../common/CustomOutlineButton'
 
 const OtherEvents = () => {
   return (
-    <section className='pb-160 container'>
+    <section className='pb-120 3xl:pb-160 container'>
         <div className='border-t border-black/10 pt-50'>
             <h2 className='text-heading text-center uppercase'>Other Events</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-40 mt-50'>
