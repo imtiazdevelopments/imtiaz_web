@@ -146,7 +146,7 @@ const BlogsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-50 md:mt-60 2xl:mt-100 w-full flex justify-center">
+          <div className="w-full flex justify-center">
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}

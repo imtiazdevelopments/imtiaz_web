@@ -57,7 +57,7 @@ const Pagination = ({
   const pages = getPages();
 
   return (
-    <div className="flex items-end">
+    <div className="flex items-end mt-50 md:mt-60 2xl:mt-100">
       {pages.map((page, i) => {
         const isEllipsis = page === "...";
         const isActive = page === currentPage;

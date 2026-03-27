@@ -13,7 +13,7 @@ const EventHero = ({ event }: Props) => {
 
   return (
     <section className="w-full pt-200">
-      <div className="container flex flex-col items-center !px-250">
+      <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <Breadcrumb variant="black" />
 
@@ -23,7 +23,7 @@ const EventHero = ({ event }: Props) => {
         </h1>
 
         {/* Image with overlay and meta bar */}
-        <div className="w-full h-[300px] md:h-[500px] lg:h-[640px] 2xl:h-[722px] mt-50 relative">
+        <div className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative">
           <Image
             src={event.heroImage}
             alt={event.title}
@@ -35,18 +35,26 @@ const EventHero = ({ event }: Props) => {
 
           {/* Gradient overlay */}
           <div
-            className="absolute inset-0"
+            className="hidden lg:block absolute inset-0"
             style={{
               background:
                 "linear-gradient(180deg, rgba(0, 0, 0, 0) 75.44%, #000000 100%)",
             }}
           />
 
+                    <div
+            className="lg:hidden absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0, 0, 0, 0) 60.44%, #000000 100%)",
+            }}
+          />
+
           {/* Meta bar */}
-          <div className="absolute bottom-0 left-0 right-0 flex py-20 items-end justify-center bg-white/20 backdrop-blur-[30px]">
-            <div className="flex items-center gap-60">
+          <div className="absolute bottom-0 left-0 right-0 flex py-[10px] md:py-20 items-end justify-center bg-white/20 backdrop-blur-[30px]">
+            <div className="flex items-center gap-x-50">
               {/* Date */}
-              <div className="flex flex-col items-center gap-[6px]">
+              <div className="flex flex-col items-center gap-1 lg:gap-[6px]">
                 <div className="flex items-center gap-[10px]">
                   <Image
                     src="/images/icons/date.svg"
@@ -55,18 +63,18 @@ const EventHero = ({ event }: Props) => {
                     height={26}
                     className="h-[15px] w-auto mb-1"
                   />
-                  <span className="text-white font-[avenirHeavy] leading-[1.54] uppercase">
+                  <span className="text-white text-description leading-[1.54] uppercase">
                     Date
                   </span>
                 </div>
-                <span className="text-white font-[avenirHeavy] text-16 leading-[1.54]">
+                <span className="text-white/80 text-description leading-[1.54]">
                   {formattedDate}
                 </span>
               </div>
 
               {/* Divider */}
               <div
-                className="w-px h-[72px]"
+                className="w-px h-[50px] lg:h-[72px]"
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)",
@@ -74,7 +82,7 @@ const EventHero = ({ event }: Props) => {
               />
 
               {/* Location */}
-              <div className="flex flex-col items-center gap-[6px]">
+              <div className="flex flex-col items-center gap-1 lg:gap-[6px]">
                 <div className="flex items-center gap-[10px]">
                   <Image
                     src="/images/icons/map.svg"
@@ -83,11 +91,11 @@ const EventHero = ({ event }: Props) => {
                     height={26}
                     className="h-[15px] w-auto mb-1"
                   />
-                  <span className="text-white font-[avenirHeavy] leading-[1.54] uppercase">
+                  <span className="text-white text-description leading-[1.54] uppercase">
                     Location
                   </span>
                 </div>
-                <span className="text-white font-[avenirHeavy] text-16 leading-[1.54]">
+                <span className="text-white/80 text-description leading-[1.54]">
                   {event.location}
                 </span>
               </div>

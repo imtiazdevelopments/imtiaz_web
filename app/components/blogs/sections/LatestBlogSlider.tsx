@@ -71,11 +71,11 @@ const formatted = (date: string) => {
                 <p className="text-white/80 text-description mb-20 capitalize">
                   {blog.category} · {formatted(blog.date)}
                 </p>
-                <h2 className="text-heading text-white max-w-[1000px] mb-20 line-clamp-2 lg:line-clamp-3">
+                <h2 className="text-heading text-white max-w-[1000px] mb-20 line-clamp-2">
                   {blog.title}
                 </h2>
                 <Link href={`/media-center/${blog.slug}`}>
-                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[26px] md:px-[37px]" />
+                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[26px] lg:px-[37px]" />
                 </Link>
               </div>
             </SwiperSlide>

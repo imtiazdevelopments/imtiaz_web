@@ -4,25 +4,25 @@ export const bannerData = {
     description: "Browse upcoming events with key dates and details all in one place."
 }
 
-export type PressCategory = "News" | "Press Release" | "Event";
-export type PressYear = "2026" | "2025" | "2024";
-export type PressMonth =
+export type EventCategory = "News" | "Press Release" | "Event";
+export type EventYear = "2026" | "2025" | "2024";
+export type EventMonth =
   | "January" | "February" | "March" | "April"
   | "May" | "June" | "July" | "August"
   | "September" | "October" | "November" | "December";
 
-export interface PressItem {
+export interface EventItem {
   id: number;
   title: string;
   image: string;
-  category: PressCategory;
+  category: EventCategory;
   date: string; // ISO: "2026-03-15"
   slug: string;
   tag?: string; // e.g. "UPCOMING SESSION"
   topic?: string;
 }
 
-export const pressItems: PressItem[] = [
+export const eventItems: EventItem[] = [
   {
     id: 1,
     title: "Imtiaz Launches Sea Cliff, Adding One More Landmark to Its Growing Portfolio at Dubai Islands",
@@ -74,10 +74,10 @@ export const pressItems: PressItem[] = [
   },
 ];
 
-export const pressYears: PressYear[] = ["2026", "2025", "2024"];
-export const pressMonths: PressMonth[] = [
+export const eventYears: EventYear[] = ["2026", "2025", "2024"];
+export const eventMonths: EventMonth[] = [
   "January", "February", "March", "April",
   "May", "June", "July", "August",
   "September", "October", "November", "December",
 ];
-export const pressCategories: PressCategory[] = ["News", "Press Release", "Event"];
+export const eventCategories: EventCategory[] = ["News", "Press Release", "Event"];
