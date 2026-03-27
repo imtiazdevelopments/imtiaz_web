@@ -69,7 +69,7 @@ const formatted = (date: string) => {
                 <h2 className="text-heading text-white max-w-[1638px] mb-20 line-clamp-2">
                   {item.title}
                 </h2>
-                <Link href={`/media-center/${item.slug}`}>
+                <Link href={`/media-center/news/${item.slug}`}>
                 <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[26px] lg:px-[37px]" />
                 </Link>
               </div>
