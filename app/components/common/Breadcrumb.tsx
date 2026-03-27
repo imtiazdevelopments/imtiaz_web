@@ -56,10 +56,18 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
                   ? crumb.label.slice(0, 10) + "..."
                   : crumb.label}
               </span>
-              {/* lg+ */}
-              <span className="hidden lg:inline">
-                {crumb.label.length > 20
-                  ? crumb.label.slice(0, 20) + "..."
+
+              {/* lg → xl */}
+              <span className="hidden lg:inline 2xl:hidden">
+                {crumb.label.length > 40
+                  ? crumb.label.slice(0, 40) + "..."
+                  : crumb.label}
+              </span>
+
+              {/* 2xl+ */}
+              <span className="hidden 2xl:inline">
+                {crumb.label.length > 60
+                  ? crumb.label.slice(0, 60) + "..."
                   : crumb.label}
               </span>
             </span>
