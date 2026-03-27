@@ -325,7 +325,7 @@ body {
   .container { max-width: 1720px; }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1850px) {
   .container { max-width: 1810px; }
 }
 

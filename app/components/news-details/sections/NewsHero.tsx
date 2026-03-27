@@ -10,7 +10,7 @@ interface Props {
 const NewsHero = ({ news }: Props) => {
   return (
     <section className="w-full pt-200">
-      <div className="container flex flex-col items-center !px-250">
+      <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <Breadcrumb variant="black" />
 
@@ -21,7 +21,7 @@ const NewsHero = ({ news }: Props) => {
 
         {/* Meta row */}
         <div className="mt-20 flex items-center justify-between w-full">
-          <div className="flex items-center gap-[10px] text-foreground font-[avenirHeavy] text-16">
+          <div className="flex items-center gap-[10px] text-foreground-light font-[avenirHeavy] text-16">
             <div>
               <span>{news.category}</span>
               <span> - </span>
@@ -35,14 +35,14 @@ const NewsHero = ({ news }: Props) => {
 
           {/* Share button */}
           <button
-            className="text-foreground cursor-pointer hover:scale-110 transition-all duration-300"
+            className="text-foreground-light cursor-pointer hover:scale-110 transition-all duration-300"
             aria-label="Share"
           >
             <GoShareAndroid size={32} />
           </button>
         </div>
         {/* Full-width Hero Image */}
-        <div className="w-full h-[300px] md:h-[500px] lg:h-[640px] 2xl:h-[722px] mt-50 relative">
+        <div className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative">
           <Image
             src={news.image}
             alt={news.title}

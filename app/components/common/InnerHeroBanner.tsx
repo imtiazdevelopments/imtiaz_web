@@ -10,7 +10,7 @@ interface InnerHeroProps {
 
 const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) => {
   return (
-    <section className="relative w-full h-[70vh] 2xl:h-[89.5vh] overflow-hidden">
+    <section className="relative w-full h-[70vh] 2xl:h-[89.5dvh] overflow-hidden">
       <Image
         src={image}
         alt={title}
