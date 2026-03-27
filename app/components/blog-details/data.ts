@@ -54,6 +54,7 @@ export const blogDetails: BlogDetail[] = [
 <figure><img src="/images/blogs/blog-detail-2.jpg" alt="Sunset Bay by Imtiaz"></figure>
 <p><br></p>
 <p>Dubai's offplan property market continues to grow, offering endless opportunities for investors and homeowners. With a strong regulatory framework, high rental yields, and world-class infrastructure, Dubai remains one of the best cities globally to invest in real estate.</p>
+<p><br></p>
 <p>For those seeking premium offplan projects in Dubai, Imtiaz Developments stands as a beacon of trust, innovation, and excellence. Whether you're looking for a beachfront home, a vibrant urban apartment, or a high-growth investment, Imtiaz has the perfect project for you.</p>`,
   },
 ];
