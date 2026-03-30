@@ -13,5 +13,5 @@ export default function Index() {
       <Faq />
       <EnquirySection />
     </>
-  );
+  ); 
 }

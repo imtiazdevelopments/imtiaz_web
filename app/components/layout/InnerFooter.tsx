@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { footerV2Data } from "./data";
+import { footerV2Data } from "../common/data";
 
 const InnerFooter = () => {
   return (

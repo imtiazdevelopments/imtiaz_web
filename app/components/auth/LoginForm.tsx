@@ -19,13 +19,17 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
   />
 );
 
-const errorMessageClass =
-  "text-[14px] text-[#c0392b] pt-2 h-20";
+const errorMessageClass = "text-[14px] text-[#c0392b] pt-2 h-20";
 
 const inputClass =
-  "w-full mt-25 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
 
-export default function LoginForm() {
+interface LoginFormProps {
+  onClose: () => void;
+  onSwitch: () => void;
+}
+
+export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -43,21 +47,28 @@ export default function LoginForm() {
       {/* Close btn */}
       <button
         aria-label="Close"
-        className="absolute top-70 3xl:top-90 right-70 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
+        className="absolute top-40 lg:top-50 xl:top-70 3xl:top-90 right-40 lg:right-50 xl:right-70 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
+        onClick={onClose}
       >
-        <span className="group-hover:scale-110 transition-transform duration-300 ease-out">
+        <span className="group-hover:scale-110 transition-transform duration-300 ease-out text-16 2xl:text-25 !leading-none">
           ✕
         </span>
       </button>
 
       <div className="w-full max-w-[562px] flex flex-col items-center justify-center">
-        <h1 className="text-heading text-primary-2 mb-20">MEMBERS LOGIN</h1>
-        <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light">
-          Please fill out the form below so we can understand your requirements
-          and assist you better.
-        </p>
+        <div className="flex flex-col items-center px-50 sm:px-0">
+          <h1 className="text-heading text-primary-2 mb-20">MEMBERS LOGIN</h1>
+          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50">
+            Please fill out the form below so we can understand your
+            requirements and assist you better.
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="w-[80%] xl:w-full"
+        >
           {/* Email */}
           <label htmlFor="email" className="group cursor-text block">
             <span className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
@@ -140,8 +151,8 @@ export default function LoginForm() {
           </label>
 
           {/* Remember me + Forgot password */}
-          <div className="flex items-center justify-between mb-50">
-            <label className="flex items-center gap-[10px] text-description text-foreground-light cursor-pointer">
+          <div className="flex flex-col sm:flex-row gap-20 sm:gap-0 sm:items-center justify-between mb-50">
+            <label className="flex items-center gap-[10px] text-description text-foreground-light cursor-pointer order-2 sm:order-1">
               <div className="relative w-[18px] h-[18px] flex-shrink-0 mb-[2px]">
                 <input
                   type="checkbox"
@@ -162,25 +173,41 @@ export default function LoginForm() {
             </label>
             <Link
               href="/forgot-password"
-              className="text-description text-primary-2 no-underline hover:underline"
+              className="text-description text-primary-2 no-underline hover:underline order-1 sm:order-2"
             >
               Forgot your password?
             </Link>
           </div>
 
           {/* Submit */}
-          <CustomOutlineButton className="w-full" text="LOG IN" borderColor="border-primary-2" textColor="text-foreground-light" variant="dark" />
+          <CustomOutlineButton
+            className="w-full"
+            text="LOG IN"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
         </form>
+
+        <p className="block 2xl:hidden mt-120 text-center text-description">
+          Don&apos;t have an account?{" "}
+          <button
+            onClick={onSwitch}
+            className="text-primary-2 hover:opacity-70 underline underline-offset-2"
+          >
+            Sign up here
+          </button>
+        </p>
       </div>
 
-      <p className="absolute bottom-80 left-0 right-0 text-center text-description">
+      <p className="hidden 2xl:block absolute bottom-80 left-0 right-0 text-center text-description">
         Don&apos;t have an account?{" "}
-        <Link
-          href="/signup"
+        <button
+          onClick={onSwitch}
           className="text-primary-2 hover:opacity-70 underline underline-offset-2"
         >
           Sign up here
-        </Link>
+        </button>
       </p>
     </>
   );

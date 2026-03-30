@@ -114,7 +114,7 @@ const NewsSection = () => {
   };
 
   return (
-    <section className="w-full bg-white pt-70 pb-160">
+    <section className="w-full bg-white pt-70 pb-160" data-header="dark">
       <div className="container">
         {/* Filters Row */}
         {/* ── Desktop (lg+) ── */}

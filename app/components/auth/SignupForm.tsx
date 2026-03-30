@@ -34,7 +34,12 @@ const ErrorSlot = ({ msg }: { msg?: string }) => (
   <p className="text-[14px] text-[#c0392b] pt-2 h-20">{msg ?? "\u00A0"}</p>
 );
 
-export default function SignupForm() {
+interface SignupFormProps {
+  onClose: () => void;
+  onSwitch: () => void;
+}
+
+export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -57,23 +62,26 @@ export default function SignupForm() {
       {/* Close btn */}
       <button
         aria-label="Close"
-        className="absolute top-50 3xl:top-90 right-50 3xl:right-70 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
+        className="absolute top-50 xl:top-70 3xl:top-90 right-50 xl:right-70 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
+        onClick={onClose}
       >
-        <span className="group-hover:scale-110 transition-transform duration-300 ease-out">
+        <span className="group-hover:scale-110 transition-transform duration-300 ease-out text-16 2xl:text-25 !leading-none">
           ✕
         </span>
       </button>
 
       <div className="w-full px-60 3xl:px-0 max-w-[700px] flex flex-col items-center justify-center">
-        <h1 className="text-heading text-primary-2 mb-20">MEMBERS SIGN UP</h1>
-        <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light">
-          Please fill out the form below so we can understand your requirements
-          and assist you better.
-        </p>
+        <div className="flex flex-col items-center justify-center px-50 sm:px-0">
+          <h1 className="text-heading text-primary-2 mb-20">MEMBERS SIGN UP</h1>
+          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50">
+            Please fill out the form below so we can understand your
+            requirements and assist you better.
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full">
           {/* First + Last name */}
-          <div className="grid grid-cols-2 gap-70 3xl:gap-100">
+          <div className="grid grid-cols-2 gap-40 sm:gap-70 3xl:gap-100">
             <label htmlFor="firstName" className="group cursor-text block">
               <span className={labelClass}>Enter First Name</span>
               <input
@@ -100,7 +108,7 @@ export default function SignupForm() {
           </div>
 
           {/* Email + Phone */}
-          <div className="grid grid-cols-2 gap-70 3xl:gap-100">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-40 lg:gap-x-70 3xl:gap-x-100">
             <label htmlFor="email" className="group cursor-text block">
               <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                 Enter Email
@@ -173,13 +181,27 @@ export default function SignupForm() {
                 className="absolute right-0 bottom-2 text-foreground-light/50 hover:text-foreground-light bg-transparent border-none p-0 cursor-pointer"
               >
                 {showPassword ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  >
                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                     <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
                     <line x1="1" y1="1" x2="23" y2="23" />
                   </svg>
                 ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  >
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
@@ -219,18 +241,33 @@ export default function SignupForm() {
           </div>
 
           {/* Submit */}
-          <CustomOutlineButton className="w-full" text="SIGN UP" borderColor="border-primary-2" textColor="text-foreground-light" variant="dark" />
+          <CustomOutlineButton
+            className="w-full"
+            text="SIGN UP"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
         </form>
+        <p className="block 2xl:hidden mt-120 text-center text-description">
+          Already have an account?{" "}
+          <button
+            onClick={onSwitch}
+            className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out"
+          >
+            Sign in here
+          </button>
+        </p>
       </div>
 
-      <p className="absolute bottom-80 left-0 right-0 text-center text-description">
+      <p className="hidden 2xl:block absolute bottom-80 left-0 right-0 text-center text-description">
         Already have an account?{" "}
-        <Link
-          href="/login"
+        <button
+          onClick={onSwitch}
           className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out"
         >
           Sign in here
-        </Link>
+        </button>
       </p>
     </>
   );
