@@ -41,10 +41,6 @@ export function SearchableDropdown({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [open]);
 
   return (
     <div ref={ref} className="relative">
@@ -54,7 +50,9 @@ export function SearchableDropdown({
             {label}
           </span>
         )}
-        <div className={`w-full mt-20 text-description p-0 truncate ${value ? "text-foreground-light" : "text-transparent"}`}>
+        <div
+          className={`w-full mt-20 text-description p-0 truncate ${value ? "text-foreground-light" : "text-transparent"}`}
+        >
           {value || "‎"}
         </div>
         <div className="h-px w-full bg-foreground-light/50" />
@@ -62,7 +60,7 @@ export function SearchableDropdown({
 
       {open && (
         <div
-          className="absolute top-[calc(100%+8px)] h-[250px] left-0 min-w-[250px] w-full bg-white border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
+          className="absolute top-[calc(100%+8px)] h-[250px] left-0 min-w-[250px] w-full bg-white/50 backdrop-blur-md border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
           onWheel={(e) => e.stopPropagation()}
         >
           <div className="px-3 py-2 border-b border-black/5">
@@ -75,27 +73,32 @@ export function SearchableDropdown({
             />
           </div>
 
-          <div className="max-h-[220px] overflow-y-auto">
+          <div className="max-h-[220px] overflow-y-auto scrollbar-hide">
             {filtered.length === 0 && (
-              <p className="px-5 py-3 text-description text-foreground-light/40">No results</p>
+              <p className="px-5 py-3 text-description text-foreground-light/40">
+                No results
+              </p>
             )}
             {filtered.map((c, i) => (
               <div key={`${c.name}-${i}`}>
                 {i !== 0 && <div className="w-full h-px bg-black/5" />}
                 <button
                   type="button"
-                  onClick={() => { onChange(c.name); setOpen(false); setSearch(""); }}
+                  onClick={() => {
+                    onChange(c.name);
+                    setOpen(false);
+                    setSearch("");
+                  }}
                   className={`w-full text-left px-5 py-3 text-description transition-colors duration-150 hover:bg-black/5 flex items-center gap-2 ${
-                    value === c.name ? "text-primary-2 font-[avenirHeavy]" : "text-foreground-light"
+                    value === c.name
+                      ? "text-primary-2 font-[avenirHeavy]"
+                      : "text-foreground-light"
                   }`}
                 >
                   {c.iso && (
-                    <img
-                      src={`https://flagcdn.com/w20/${c.iso}.png`}
-                      alt={c.name}
-                      width={20}
-                      height={15}
-                      className="w-[20px] h-auto object-contain flex-shrink-0"
+                    <span
+                      className={`fi fi-${c.iso.toLowerCase()} mb-1`}
+                      style={{ width: "22px", fontSize: "22px" }}
                     />
                   )}
                   <span className="truncate">{c.name}</span>

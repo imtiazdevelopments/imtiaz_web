@@ -10,16 +10,19 @@ const countries = countryCodes.customArray({
   name: "{countryNameEn}",
 });
 
-const unique = Array.from(
-  new Map(countries.map((c) => [c.code, c])).values()
-);
+const unique = Array.from(new Map(countries.map((c) => [c.code, c])).values());
 
 type Props = {
   value: string;
   onChange: (val: string) => void;
+  dropdownWidth?: number; // ← accept parent width
 };
 
-export default function CountryCodeSelect({ value, onChange }: Props) {
+export default function CountryCodeSelect({
+  value,
+  onChange,
+  dropdownWidth,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const ref = useRef<HTMLDivElement>(null);
@@ -29,7 +32,7 @@ export default function CountryCodeSelect({ value, onChange }: Props) {
   const filtered = unique.filter(
     (c) =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
-      c.code.includes(search)
+      c.code.includes(search),
   );
 
   useEffect(() => {
@@ -49,14 +52,11 @@ export default function CountryCodeSelect({ value, onChange }: Props) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 text-description text-foreground-light bg-transparent -mb-[1px] border-b border-foreground-light cursor-pointer"
+        className="flex items-center gap-[10px] text-description text-foreground-light bg-transparent pb-[6px] -mb-[1px] border-b border-foreground-light cursor-pointer"
       >
-        <img
-          src={`https://flagcdn.com/w20/${selected.iso.toLowerCase()}.png`}
-          alt={selected.name}
-          width={20}
-          height={15}
-          className="w-auto h-[13px] object-contain flex-shrink-0 mb-[5px]"
+        <span
+          className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block`}
+          style={{ width: "27px", height: "20px" }}
         />
         <span>{selected.code}</span>
         <Image
@@ -71,7 +71,8 @@ export default function CountryCodeSelect({ value, onChange }: Props) {
       {/* Dropdown */}
       {open && (
         <div
-          className="absolute top-[calc(100%+8px)] left-0 w-[300px] bg-white border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
+          style={{ width: dropdownWidth ? `${dropdownWidth}px` : "280px" }}
+          className="absolute top-[calc(100%+8px)] h-[250px] left-0 bg-white/50 backdrop-blur-md border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
           onWheel={(e) => e.stopPropagation()}
         >
           {/* Search */}
@@ -86,29 +87,36 @@ export default function CountryCodeSelect({ value, onChange }: Props) {
           </div>
 
           {/* List */}
-          <div className="max-h-[220px] overflow-y-auto">
+          <div className="max-h-[220px] overflow-y-auto scrollbar-hide">
             {filtered.length === 0 && (
-              <p className="px-5 py-3 text-description text-foreground-light/40">No results</p>
+              <p className="px-5 py-3 text-description text-foreground-light/40">
+                No results
+              </p>
             )}
             {filtered.map((c, i) => (
               <div key={`${c.code}-${i}`}>
                 {i !== 0 && <div className="w-full h-px bg-black/5" />}
                 <button
                   type="button"
-                  onClick={() => { onChange(c.code); setOpen(false); setSearch(""); }}
+                  onClick={() => {
+                    onChange(c.code);
+                    setOpen(false);
+                    setSearch("");
+                  }}
                   className={`w-full text-left px-5 py-3 text-description transition-colors duration-150 hover:bg-black/5 flex items-center gap-2 ${
-                    value === c.code ? "text-primary-2 font-[avenirHeavy]" : "text-foreground-light"
+                    value === c.code
+                      ? "text-primary-2 font-[avenirHeavy]"
+                      : "text-foreground-light"
                   }`}
                 >
-                  <img
-                    src={`https://flagcdn.com/w20/${c.iso.toLowerCase()}.png`}
-                    alt={c.name}
-                    width={20}
-                    height={15}
-                    className="w-[20px] h-auto object-contain flex-shrink-0"
+                  <span
+                    className={`fi fi-${c.iso.toLowerCase()} inline-block flex-shrink-0`}
+                    style={{ width: "22px", fontSize: "22px" }}
                   />
                   <span>{c.code}</span>
-                  <span className="text-foreground-light/50 text-[11px] truncate">{c.name}</span>
+                  <span className="text-foreground-light/50 text-[11px] truncate">
+                    {c.name}
+                  </span>
                 </button>
               </div>
             ))}

@@ -89,7 +89,7 @@ const InnerFooter = () => {
 
           {/* CENTER TEXT */}
           <div className="text-white/45 text-16 font-[avenirHeavy] leading-[2.1] text-center w-full">
-            {footerV2Data.bottom.center}
+            ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
           </div>
 
           {/* ICONS */}
