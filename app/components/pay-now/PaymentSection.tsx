@@ -22,7 +22,7 @@ type PaymentValues = {
 
 const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
   <p
-    className={`pt-1 h-20 ${msg ? "text-[#c0392b] text-[13px]" : "text-foreground-light/50 text-description"}`}
+    className={`pt-1 h-20 ${msg ? "text-[#c0392b] text-[14px]" : "text-foreground-light/50 text-description"}`}
   >
     {msg ?? hint ?? "\u00A0"}
   </p>
@@ -67,10 +67,10 @@ export default function PaymentForm() {
 
   return (
     <section className="w-full min-h-screen py-130 bg-[#EBEBEC]">
-      <div className="container flex">
+      <div className="container flex flex-col lg:flex-row gap-80 lg:gap-50 2xl:gap-0">
         {/* Left col — 49% */}
-        <div className="w-[48.5%] flex-shrink-0 flex flex-col">
-          <h1 className="text-heading text-foreground mb-20 max-w-[10ch]">
+        <div className="w-full lg:w-[48.5%] flex-shrink-0 flex flex-col">
+          <h1 className="text-heading text-foreground mb-20 lg:max-w-[10ch]">
             PAY WITH CONFIDENCE
           </h1>
           <p className="text-description text-foreground-light/80 max-w-[473px] mb-50">
@@ -99,11 +99,11 @@ export default function PaymentForm() {
         </div>
 
         {/* Right col — 51% */}
-        <div className="w-[51.5%] flex-shrink-0 flex flex-col justify-center">
+        <div className="w-full lg:w-[51.5%] flex flex-col justify-center">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
             {/* Row 1 — First + Last name */}
-            <div className="grid grid-cols-2 gap-90">
+            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
               <div className="group">
                 <label htmlFor="firstName" className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                   Enter First Last Name
@@ -123,9 +123,9 @@ export default function PaymentForm() {
             </div>
 
             {/* Row 2 — Email + EID */}
-            <div className="grid grid-cols-2 gap-90">
+            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
               <div className="group">
-                <label htmlFor="email" className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                <label htmlFor="email" className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                   Enter Your Email
                 </label>
                 <input id="email" type="email" className={inputClass}
@@ -138,7 +138,7 @@ export default function PaymentForm() {
                 <ErrorSlot msg={errors.email?.message} />
               </div>
               <div className="group">
-                <label htmlFor="eid" className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                <label htmlFor="eid" className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                   Enter your EID / Passport Number
                 </label>
                 <input id="eid" type="text" className={inputClass} {...register("eid", { required: "EID / Passport is required" })} />
@@ -148,9 +148,9 @@ export default function PaymentForm() {
             </div>
 
             {/* Row 3 — Phone + Country */}
-            <div className="grid grid-cols-2 gap-70 3xl:gap-100">
+            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
               <div className="group">
-                <label htmlFor="phone" className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                <label htmlFor="phone" className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                   Enter Phone no
                 </label>
                 <div className="flex items-end mt-20 gap-2">
@@ -173,8 +173,8 @@ export default function PaymentForm() {
               </div>
 
               {/* Country dropdown */}
-              <div className="group relative">
-                <Image src="/images/icons/down-tip-arrow.svg" alt="arrow-down" width={20} height={10} className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0" />
+              <div className="group relative flex flex-col self-end">
+                <Image src="/images/icons/down-tip-arrow.svg" alt="arrow-down" width={20} height={10} className="h-[7px] w-auto mb-[6px] absolute top-40 sm:top-30 -mt-1 right-0" />
                 <SearchableDropdown
                   label="Select country"
                   items={allCountries}
@@ -187,9 +187,9 @@ export default function PaymentForm() {
             </div>
 
             {/* Row 4 — Project + Unit */}
-            <div className="grid grid-cols-2 gap-90">
-              <div className="group relative">
-                <Image src="/images/icons/down-tip-arrow.svg" alt="arrow-down" width={20} height={10} className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0" />
+            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
+              <div className="group relative flex flex-col self-end">
+                <Image src="/images/icons/down-tip-arrow.svg" alt="arrow-down" width={20} height={10} className="h-[7px] w-auto mb-[6px] absolute top-40 sm:top-30 -mt-1 right-0" />
                 <SearchableDropdown
                   label="Select Project"
                   items={projects.map((p) => ({ name: p }))}
@@ -201,7 +201,7 @@ export default function PaymentForm() {
               </div>
 
               <div className="group">
-                <label htmlFor="unit" className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                <label htmlFor="unit" className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                   Enter unit number
                 </label>
                 <input id="unit" type="text" className={inputClass} {...register("unit", { required: "Unit number is required" })} />
@@ -212,7 +212,7 @@ export default function PaymentForm() {
 
             {/* Row 5 — Amount */}
             <div className="group">
-              <label htmlFor="amount" className="block text-description mt-20 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+              <label htmlFor="amount" className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                 Amount AED
               </label>
               <input
@@ -230,13 +230,13 @@ export default function PaymentForm() {
 
             {/* Row 6 — Message */}
             <div className="group">
-              <label htmlFor="message" className="block text-description mt-60 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+              <label htmlFor="message" className="block text-description mt-120 sm:mt-60 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                 Type your message here...
               </label>
               <textarea
                 id="message"
                 rows={1}
-                className="w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 resize-none"
+                className="w-full mt-40 text-description text-foreground-light bg-transparent outline-none p-0 resize-none"
                 {...register("message")}
               />
               <FieldLine hasError={false} />

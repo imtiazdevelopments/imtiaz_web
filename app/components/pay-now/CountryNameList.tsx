@@ -70,7 +70,7 @@ export function SearchableDropdown({
 
       {open && (
         <div
-          className="absolute top-[calc(100%+8px)] left-0 w-[300px] bg-white border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
+          className="absolute top-[calc(100%+8px)] h-[250px] left-0 min-w-[250px] w-full bg-white border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
           onWheel={(e) => e.stopPropagation()}
         >
           <div className="px-3 py-2 border-b border-black/5">
