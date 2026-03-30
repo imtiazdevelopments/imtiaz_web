@@ -75,7 +75,7 @@ const formatted = (date: string) => {
                   {blog.title}
                 </h2>
                 <Link href={`/media-center/blog/${blog.slug}`}>
-                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[26px] lg:px-[37px]" />
+                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[18px] sm:px-[26px] lg:px-[37px]" />
                 </Link>
               </div>
             </SwiperSlide>
