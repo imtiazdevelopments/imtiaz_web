@@ -41,11 +41,25 @@ const NewsSection = () => {
   }, [pathname]);
 
   const updateParam = (key: string, value: string) => {
+    // Save the position of the news grid, not the page top
+    const newsGrid = document.getElementById("news-list");
+    const gridTop = newsGrid?.getBoundingClientRect().top ?? 0;
+    const absoluteGridTop = window.scrollY + gridTop;
+
     const params = new URLSearchParams(searchParams.toString());
     if (value) params.set(key, value);
     else params.delete(key);
     params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+    // After the slider collapses, keep the news grid in the same visual position
+    requestAnimationFrame(() => {
+      const newGridTop =
+        document.getElementById("news-list")?.getBoundingClientRect().top ?? 0;
+      const newAbsoluteGridTop = window.scrollY + newGridTop;
+      const diff = newAbsoluteGridTop - absoluteGridTop;
+      window.scrollBy({ top: -diff, behavior: "instant" });
+    });
   };
 
   const clearFilters = () => {
@@ -199,11 +213,14 @@ const NewsSection = () => {
 
         {/* Slider — top 3 latest News items, unaffected by filters */}
         <div
-          className="transition-all duration-500 ease-in-out overflow-hidden"
+          className="transition-all duration-500 ease-in-out"
           style={{
             maxHeight: hasFilter ? "0px" : "1000px",
             opacity: hasFilter ? 0 : 1,
+            overflow: "hidden",
             marginBottom: hasFilter ? "0px" : undefined,
+            // 👇 This prevents the collapse from affecting scroll position
+            willChange: "max-height",
           }}
         >
           <LatestNewsSlider news={latestNews.slice(0, 3)} />

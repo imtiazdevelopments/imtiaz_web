@@ -35,14 +35,23 @@ const BlogsSection = () => {
   }, [pathname]);
 
   const updateParam = (key: string, value: string) => {
+    const newsGrid = document.getElementById("blog-list");
+    const gridTop = newsGrid?.getBoundingClientRect().top ?? 0;
+    const absoluteGridTop = window.scrollY + gridTop;
+
     const params = new URLSearchParams(searchParams.toString());
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
+    if (value) params.set(key, value);
+    else params.delete(key);
     params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+    requestAnimationFrame(() => {
+      const newGridTop =
+        document.getElementById("blog-list")?.getBoundingClientRect().top ?? 0;
+      const newAbsoluteGridTop = window.scrollY + newGridTop;
+      const diff = newAbsoluteGridTop - absoluteGridTop;
+      window.scrollBy({ top: -diff, behavior: "instant" });
+    });
   };
 
   const clearFilters = () => {
@@ -121,13 +130,13 @@ const BlogsSection = () => {
             maxHeight: hasFilter ? "0px" : "1000px",
             opacity: hasFilter ? 0 : 1,
             marginBottom: hasFilter ? "0px" : undefined,
+            willChange: "max-height",
           }}
         >
           <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
           {/* Divider */}
           <div className="w-full h-px bg-black/10 my-50" />
         </div>
-
 
         {/* Blog Cards Grid */}
         <div id="blog-list" className="scroll-mt-20">
