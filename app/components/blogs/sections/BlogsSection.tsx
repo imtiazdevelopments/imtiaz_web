@@ -107,7 +107,7 @@ const BlogsSection = () => {
               px="px-60"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              className="w-full md:w-auto !py-[17px] md:!py-5"
+              className="w-full md:w-auto !py-[17px] md:!py-5 uppercase"
             />
           )}
         </div>

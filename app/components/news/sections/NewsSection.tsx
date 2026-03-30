@@ -129,7 +129,7 @@ const NewsSection = () => {
           {hasFilter && (
             <button
               onClick={clearFilters}
-              className="cursor-pointer px-60 3xl:px-[62px] py-5 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-19 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
+              className="cursor-pointer uppercase px-60 3xl:px-[62px] py-5 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-19 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
             >
               Clear Filter
             </button>
@@ -186,7 +186,7 @@ const NewsSection = () => {
               {hasFilter && (
                 <button
                   onClick={clearFilters}
-                  className="w-full cursor-pointer py-4 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-16 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
+                  className="w-full cursor-pointer uppercase py-4 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-16 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
                 >
                   Clear Filter
                 </button>

@@ -235,7 +235,7 @@
 }
 
 @utility text-description {
-  @apply font-[avenirRoman] font-[800]  text-16 leading-[1.54375];
+  @apply font-[avenirHeavy] text-16 leading-[1.54375];
 }
 
 @utility container-spacing-details-page {
@@ -275,6 +275,10 @@ body {
 
 @media (min-width: 820px) {
   .container { max-width: 800px; }
+}
+
+@media (min-width: 860px) {
+  .container { max-width: 840px; }
 }
 
 @media (min-width: 920px) {

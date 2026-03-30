@@ -36,7 +36,7 @@ export const impactAreas = {
 export const momentsOfSustainability = {
   title: "Moments of Sustainability",
   description:
-    "Explore how thoughtful planning and green solutions come together to build spaces that care for both people and the planet.Discover projects built on sustainable principles that create value today while protecting tomorrow.",
+    'Explore how thoughtful planning and green solutions come together to build spaces that care for both people and the planet. Discover projects built on sustainable principles that create value \n today while protecting tomorrow.',
   slides: [
     {
       id: "slide-1",
