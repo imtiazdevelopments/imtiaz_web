@@ -141,7 +141,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                 <input
                   id="phone"
                   type="tel"
-                  className="flex-1 border-none outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
+                  className="flex-1 border-none pb-[10px] outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
                   {...register("phone", {
                     required: "Phone is required",
                     pattern: {

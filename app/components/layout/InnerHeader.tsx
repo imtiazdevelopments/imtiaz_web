@@ -168,6 +168,9 @@ const InnerHeader: React.FC = () => {
                 </div>
 
                 <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden">
+                  <div className="absolute bottom-0 left-0">
+                    <Image src="/icons/layout_icons/m-icon.svg" alt="Icon" width={534} height={704} />
+                  </div>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={authView}

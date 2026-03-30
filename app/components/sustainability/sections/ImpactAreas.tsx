@@ -29,7 +29,7 @@ const ColItem = ({
   >
     {showDivider && (
       <div
-        className="absolute left-0 top-0 h-full w-px"
+        className="absolute left-0 top-0 h-full w-[1px] -translate-x-1/2"
         style={{
           background:
             "linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)",
@@ -37,8 +37,8 @@ const ColItem = ({
       />
     )}
 
-    <motion.div
-      className="absolute inset-0"
+<motion.div
+  className="absolute inset-0 -left-[1px] -right-[1px]"
       initial={false}
       animate={{ opacity: isActive ? 1 : 0 }}
       transition={{ duration: 0.9, ease: [0.62, 0.05, 0.01, 0.99] }}
