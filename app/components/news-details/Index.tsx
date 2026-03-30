@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <>
       <NewsHero news={newsDetails[0]} />
-      <NewsContent content={newsDetails[0].content} />
+      <NewsContent content={newsDetails[0].content}/>
       <RelatedNews />
     </>
   );

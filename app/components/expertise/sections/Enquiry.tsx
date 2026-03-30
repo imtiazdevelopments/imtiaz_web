@@ -349,7 +349,7 @@ export default function EnquirySection() {
   };
 
   return (
-    <section className="w-full">
+    <section className="w-full" data-header="light">
       <div className="relative">
         <Image
           src="/images/expertise/m.svg"

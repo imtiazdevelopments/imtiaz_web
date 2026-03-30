@@ -20,14 +20,14 @@ export const impactAreas = {
       title: "CSR Awareness",
       description:
         "We actively promote corporate social responsibility across our communities, fostering a culture of care and conscious living.",
-      image: "/images/sustainability/banner.jpg",
+      image: "/images/expertise/banner.jpg",
     },
     {
       id: "sustainable-development",
       title: "Sustainable Development",
       description:
         "Every project we build is designed with sustainability at its core — reducing impact while elevating quality of life.",
-      image: "/images/expertise/banner.jpg",
+      image: "/images/sustainability/banner.jpg",
     },
   ],
 };

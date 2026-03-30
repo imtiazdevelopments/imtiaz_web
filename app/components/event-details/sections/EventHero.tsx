@@ -12,7 +12,7 @@ const EventHero = ({ event }: Props) => {
   const formattedDate = event.date.replace(/-/g, " - ");
 
   return (
-    <section className="w-full pt-200">
+    <section className="w-full pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <Breadcrumb variant="black" />
@@ -30,7 +30,6 @@ const EventHero = ({ event }: Props) => {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
           />
 
           {/* Gradient overlay */}

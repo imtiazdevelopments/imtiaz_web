@@ -12,7 +12,7 @@ const EventCard = ({ item }: { item: PressItem }) => {
     .replace(/\//g, "-");
 
   return (
-    <Link href={`/media-center/events/${item.slug}`} className="group block">
+    <Link href={`/media-center/news/${item.slug}`} className="group block">
       {/* Image + Category Bar */}
       <div className="relative w-full h-[250px] xl:h-[333px] overflow-hidden">
         <Image

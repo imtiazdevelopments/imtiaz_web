@@ -55,7 +55,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
   );
 
   return (
-    <section className="w-full bg-white pb-100 border-b border-black/10">
+    <section className="w-full bg-white pb-100 border-b border-black/10" data-header="light">
       <div className="container">
         <h2 className="text-heading text-center mb-50 text-foreground">
           Signature Moments

@@ -11,7 +11,7 @@ export default function Faq() {
   };
 
   return (
-    <section className="w-full bg-[#EBEBEC] py-130">
+    <section className="w-full bg-[#EBEBEC] py-130" data-header="dark">
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[10px]">

@@ -4,7 +4,7 @@ import { thinkingThatDelivers } from "../data";
 
 export default function ThinkingThatDelivers() {
   return (
-    <section className="w-full py-160 ">
+    <section className="w-full py-160 " data-header="dark">
       <div className="container">
         <div className="relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[auto_882px] 2xl:grid-cols-[auto_1082px] gap-3 2xl:gap-[84px]">
           {/* Left: Text Block */}

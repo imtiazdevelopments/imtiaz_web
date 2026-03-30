@@ -24,7 +24,8 @@
 
 import { useEffect } from "react";
 import { useLenis } from "../contexts/LenisContext";
-import InnerFooter from "../components/common/InnerFooter";
+import InnerFooter from "../components/layout/InnerFooter";
+import InnerHeader from "../components/layout/InnerHeader";
 
 export default function InnerLayout({
   children,
@@ -40,6 +41,7 @@ export default function InnerLayout({
 
   return (
     <>
+      <InnerHeader />
       {children}
       <InnerFooter />
     </>

@@ -9,7 +9,7 @@ interface Props {
 
 const BlogHero = ({ blog }: Props) => {
   return (
-    <section className="w-full pt-200">
+    <section className="w-full pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <Breadcrumb variant="black" />
@@ -49,7 +49,6 @@ const BlogHero = ({ blog }: Props) => {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
           />
         </div>
       </div>

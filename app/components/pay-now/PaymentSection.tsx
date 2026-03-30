@@ -66,7 +66,7 @@ export default function PaymentForm() {
   const selectedCountry = watch("country");
 
   return (
-    <section className="w-full min-h-screen py-130 bg-[#EBEBEC]">
+    <section className="w-full min-h-screen py-130 bg-[#EBEBEC]" data-header="dark">
       <div className="container flex flex-col lg:flex-row gap-80 lg:gap-50 2xl:gap-0">
         {/* Left col — 49% */}
         <div className="w-full lg:w-[48.5%] flex-shrink-0 flex flex-col">

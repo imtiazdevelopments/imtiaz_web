@@ -4,7 +4,7 @@ import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 const RelatedNews = () => {
   return (
-    <section className="pb-120 3xl:pb-160 container">
+    <section className="pb-120 3xl:pb-160 container" data-header="dark">
       <div className="border-t border-black/10 pt-50">
         <h2 className="text-heading text-center uppercase">Related News</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-25 mt-50">
