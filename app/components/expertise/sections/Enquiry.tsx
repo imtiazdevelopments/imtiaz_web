@@ -38,7 +38,9 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
   <div className="relative h-px w-full bg-white/30">
     <div
       className={`absolute inset-y-0 left-0 transition-all duration-[420ms] ease-out ${
-        hasError ? "bg-[#c0392b] w-full" : "w-0 group-focus-within:w-full bg-white"
+        hasError
+          ? "bg-[#c0392b] w-full"
+          : "w-0 group-focus-within:w-full bg-white"
       }`}
     />
   </div>
@@ -110,6 +112,7 @@ export default function EnquirySection() {
   const [phoneRowWidth, setPhoneRowWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = useContainerInset(containerRef);
+  const [belowLg, setBelowLg] = useState(false);
 
   useEffect(() => {
     if (!phoneRowRef.current) return;
@@ -125,6 +128,13 @@ export default function EnquirySection() {
   const labelClass =
     "block text-description text-white/50 transition-colors group-focus-within:text-white";
 
+  useEffect(() => {
+    const check = () => setBelowLg(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section className="w-full" data-header="light">
       <ContainerAnchor ref={containerRef} />
@@ -134,37 +144,51 @@ export default function EnquirySection() {
           alt="M"
           width={1066}
           height={704}
-          className="!w-[1066px] h-[704px] absolute bottom-0 left-0 z-[1] select-none pointer-events-none"
+          className="!w-[1066px] h-[650px] 3xl:h-[734px] absolute bottom-0 left-0 z-[1] select-none pointer-events-none"
         />
 
         <div className="flex flex-col lg:flex-row">
           {/* ── Left Panel ── */}
           <div
-            style={{ paddingLeft: containerWidth }}
+            style={{
+              paddingLeft: containerWidth,
+              paddingRight: belowLg ? containerWidth : "",
+            }}
             className="relative w-full lg:w-[43.65%] bg-primary-2 flex flex-col spacing-y-130 overflow-hidden py-120 3xl:py-130"
           >
             <div className="absolute inset-0 bg-black/20 z-1" />
-            <h2 className="text-heading text-white mb-20">
-              {enquiryData.heading}
-            </h2>
-            <p className="text-description text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]">
-              {enquiryData.subheading}
-            </p>
-            <div className="flex flex-col gap-40">
-              {enquiryData.contacts.map((c) => (
-                <Link
-                  key={c.id}
-                  href={c.href}
-                  className="flex items-center gap-20 group"
-                >
-                  <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
-                    {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
-                  </span>
-                  <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
-                    {c.label}
-                  </span>
-                </Link>
-              ))}
+            <div className="lg:hidden absolute bottom-0 right-0 z-10">
+              <Image
+                src="/images/expertise/m.svg"
+                alt="M"
+                width={200}
+                height={200}
+                className="w-auto h-[200px] sm:h-[225px] md:h-[300px] lg:h-[500px] z-[1] select-none pointer-events-none"
+              />
+            </div>
+            <div>
+              <h2 className="text-heading text-white mb-20">
+                {enquiryData.heading}
+              </h2>
+              <p className="text-description text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]">
+                {enquiryData.subheading}
+              </p>
+              <div className="flex flex-col gap-40">
+                {enquiryData.contacts.map((c) => (
+                  <Link
+                    key={c.id}
+                    href={c.href}
+                    className="flex items-center gap-20 group"
+                  >
+                    <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                      {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
+                    </span>
+                    <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
+                      {c.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -173,6 +197,7 @@ export default function EnquirySection() {
             className="flex-1 relative flex items-center justify-center lg:pl-80 overflow-hidden py-120 3xl:py-130"
             style={{
               paddingRight: containerWidth,
+              paddingLeft: belowLg ? containerWidth : "",
               background:
                 "linear-gradient(135deg, #0d0d0d 0%, #1a1008 50%, #0d0a06 100%)",
             }}
@@ -227,7 +252,7 @@ export default function EnquirySection() {
                 </div>
 
                 {/* Row 2 — Email + Phone */}
-                <div className="grid grid-cols-2 gap-x-100 mb-40">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40">
                   <div className="group">
                     <label htmlFor="email" className={labelClass}>
                       Enter Your Email*
@@ -248,7 +273,7 @@ export default function EnquirySection() {
                     <ErrorSlot msg={errors.email?.message} />
                   </div>
 
-                  <div className="group">
+                  <div className="group mt-40 md:mt-0">
                     <label htmlFor="phone" className={labelClass}>
                       Enter Phone no*
                     </label>
@@ -308,10 +333,9 @@ export default function EnquirySection() {
                   <label htmlFor="message" className={labelClass}>
                     Type your message here...*
                   </label>
-                  <textarea
+                  <input
                     id="message"
-                    rows={3}
-                    className="w-full text-description text-white bg-transparent outline-none p-0 resize-none"
+                    className="w-full text-description mt-40 text-white bg-transparent outline-none p-0 resize-none"
                     {...register("message", {
                       required: "Message is required",
                     })}
@@ -321,97 +345,57 @@ export default function EnquirySection() {
                 </div>
 
                 {/* Preferred Mode of Contact */}
-                <div className="mb-30">
-                  <p className="text-25 font-[optima] leading-[1.4] uppercase text-white mb-20">
-                    Preferred Mode of Contact
-                  </p>
-                  <Controller
-                    name="contactMode"
-                    control={control}
-                    render={({ field }) => (
-                      <div className="flex items-center gap-40">
-                        {enquiryData.contactModes.map((mode) => (
-                          <label
-                            key={mode}
-                            className="flex items-center gap-[10px] cursor-pointer group"
-                            onClick={() => field.onChange(mode)}
-                          >
-                            <span
-                              className={`w-[20px] h-[20px] rounded-full border flex items-center justify-center transition-colors duration-200 mb-1 ${
-                                field.value === mode
-                                  ? "border-white"
-                                  : "border-white/40"
-                              }`}
-                            >
-                              {field.value === mode && (
-                                <span className="w-[14px] h-[14px] rounded-full bg-white block" />
-                              )}
-                            </span>
-                            <span className="text-description text-white">
-                              {mode}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  />
-                </div>
-
-                {/* Checkboxes */}
-                <div className="flex flex-wrap items-center gap-90 mb-40">
-                  <Controller
-                    name="news"
-                    control={control}
-                    render={({ field }) => (
-                      <label
-                        className="flex items-center gap-[10px] cursor-pointer group"
-                        onClick={() => field.onChange(!field.value)}
-                      >
-                        <span
-                          className={`w-5 mb-1 h-5 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
-                            field.value
-                              ? "bg-white border-white"
-                              : "border-white/40"
-                          }`}
-                        >
-                          {field.value && (
-                            <svg
-                              viewBox="0 0 12 12"
-                              fill="none"
-                              stroke="#000"
-                              strokeWidth="2"
-                              className="w-2.5 h-2.5"
-                            >
-                              <polyline points="1,6 4.5,9.5 11,2" />
-                            </svg>
-                          )}
-                        </span>
-                        <span className="text-description text-white">
-                          {enquiryData.checkboxes[0].label}
-                        </span>
-                      </label>
-                    )}
-                  />
-
-                  <div>
+                <div className="flex gap-2 md:gap-90 flex-col md:flex-row lg:flex-col lg:gap-0 items-start">
+                  <div className="mb-30">
+                    <p className="text-25 font-[optima] leading-[1.4] uppercase text-white mb-20">
+                      Preferred Mode of Contact
+                    </p>
                     <Controller
-                      name="privacy"
+                      name="contactMode"
                       control={control}
-                      rules={{
-                        required: "You must agree to the Privacy Policy",
-                      }}
+                      render={({ field }) => (
+                        <div className="flex items-center gap-40">
+                          {enquiryData.contactModes.map((mode) => (
+                            <label
+                              key={mode}
+                              className="flex items-center gap-[10px] cursor-pointer group"
+                              onClick={() => field.onChange(mode)}
+                            >
+                              <span
+                                className={`w-[20px] h-[20px] rounded-full border flex items-center justify-center transition-colors duration-200 mb-1 ${
+                                  field.value === mode
+                                    ? "border-white"
+                                    : "border-white/40"
+                                }`}
+                              >
+                                {field.value === mode && (
+                                  <span className="w-[14px] h-[14px] rounded-full bg-white block" />
+                                )}
+                              </span>
+                              <span className="text-description text-white">
+                                {mode}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    />
+                  </div>
+                  {/* Checkboxes */}
+                  <div className="flex flex-col 2xl:flex-row 2xl:items-center items-start justify-between 3xl:justify-start gap-20 3xl:gap-90 mb-80 2xl:mb-40 ">
+                    <Controller
+                      name="news"
+                      control={control}
                       render={({ field }) => (
                         <label
-                          className="flex items-center gap-2.5 cursor-pointer group"
+                          className="flex items-center gap-[10px] cursor-pointer group"
                           onClick={() => field.onChange(!field.value)}
                         >
                           <span
-                            className={`w-5 h-5 mb-1 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
+                            className={`w-5 mb-1 h-5 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
                               field.value
                                 ? "bg-white border-white"
-                                : errors.privacy
-                                  ? "border-[#c0392b]"
-                                  : "border-white/40"
+                                : "border-white/40"
                             }`}
                           >
                             {field.value && (
@@ -427,11 +411,54 @@ export default function EnquirySection() {
                             )}
                           </span>
                           <span className="text-description text-white">
-                            {enquiryData.checkboxes[1].label}
+                            {enquiryData.checkboxes[0].label}
                           </span>
                         </label>
                       )}
                     />
+                    <div className="relative">
+                      <Controller
+                        name="privacy"
+                        control={control}
+                        rules={{
+                          required: "You must agree to the Privacy Policy",
+                        }}
+                        render={({ field }) => (
+                          <label
+                            className="flex items-center gap-2.5 cursor-pointer group"
+                            onClick={() => field.onChange(!field.value)}
+                          >
+                            <span
+                              className={`w-5 h-5 mb-1 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
+                                field.value
+                                  ? "bg-white border-white"
+                                  : errors.privacy
+                                    ? "border-[#c0392b]"
+                                    : "border-white/40"
+                              }`}
+                            >
+                              {field.value && (
+                                <svg
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="#000"
+                                  strokeWidth="2"
+                                  className="w-2.5 h-2.5"
+                                >
+                                  <polyline points="1,6 4.5,9.5 11,2" />
+                                </svg>
+                              )}
+                            </span>
+                            <span className="text-description text-white">
+                              {enquiryData.checkboxes[1].label}
+                            </span>
+                          </label>
+                        )}
+                      />
+                      <div className="absolute top-7 left-0 w-full text-[#c0392b] text-[14px]">
+                        {errors.privacy?.message}
+                      </div>
+                    </div>
                   </div>
                 </div>
 

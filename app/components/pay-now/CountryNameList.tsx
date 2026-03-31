@@ -74,31 +74,31 @@ export function SearchableDropdown({
                 ? "text-white"
                 : "text-foreground-light"
               : "text-transparent"
-          }`} 
+          }`}
         >
           {value || "‎"}
         </div>
 
-{/* Animated field line */}
-<div className={`relative h-px w-full overflow-hidden ${isLight ? "bg-white/30" : "bg-foreground-light/50"}`}>
-  <div
-    className={`absolute inset-0 origin-left transition-transform duration-[420ms] ease-out ${
-      hasError
-        ? "bg-[#c0392b] scale-x-100"
-        : open
-          ? `${isLight ? "bg-white" : "bg-foreground-light"} scale-x-100`
-          : "scale-x-0"
-    }`}
-  />
-</div>
+        {/* Animated field line */}
+        <div
+          className={`relative h-px w-full overflow-hidden ${isLight ? "bg-white/30" : "bg-foreground-light/50"}`}
+        >
+          <div
+            className={`absolute inset-0 origin-left transition-transform duration-[420ms] ease-out ${
+              hasError
+                ? "bg-[#c0392b] scale-x-100"
+                : open
+                  ? `${isLight ? "bg-white" : "bg-foreground-light"} scale-x-100`
+                  : "scale-x-0"
+            }`}
+          />
+        </div>
       </div>
 
       {open && (
         <div
           className={`absolute top-[calc(100%+8px)] h-[250px] left-0 min-w-[250px] w-full backdrop-blur-md border rounded-2xl shadow-lg overflow-hidden z-50 ${
-            isLight
-              ? "bg-white border-white/50"
-              : "bg-white/50 border-black/10"
+            isLight ? "bg-white border-white/50" : "bg-white/50 border-black/10"
           }`}
           onWheel={(e) => e.stopPropagation()}
         >
