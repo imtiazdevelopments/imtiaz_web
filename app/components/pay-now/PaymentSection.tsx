@@ -80,7 +80,7 @@ export default function PaymentForm() {
 
   return (
     <section
-      className="w-full min-h-screen py-130 bg-[#EBEBEC]"
+      className="w-full min-h-screen py-120 3xl:py-130 bg-[#EBEBEC]"
       data-header="dark"
     >
       <div className="container flex flex-col lg:flex-row gap-80 lg:gap-50 2xl:gap-0">
@@ -148,7 +148,7 @@ export default function PaymentForm() {
                   htmlFor="firstName"
                   className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter First Last Name
+                  Enter Your First Name
                 </label>
                 <input
                   id="firstName"

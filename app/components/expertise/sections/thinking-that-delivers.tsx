@@ -1,51 +1,95 @@
 "use client";
 
+import Image from "next/image";
 import { thinkingThatDelivers } from "../data";
+import { useEffect, useRef } from "react";
 
 export default function ThinkingThatDelivers() {
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const activeCardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Deactivate previous
+            if (
+              activeCardRef.current &&
+              activeCardRef.current !== entry.target
+            ) {
+              activeCardRef.current.classList.remove("is-active");
+            }
+            // Activate current
+            entry.target.classList.add("is-active");
+            activeCardRef.current = entry.target as HTMLDivElement;
+          } else {
+            entry.target.classList.remove("is-active");
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+        rootMargin: "-10% 0px -10% 0px",
+      },
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="w-full py-160 " data-header="dark">
+    <section
+      className="thinking-delivers w-full py-120 3xl:py-160"
+      data-header="dark"
+    >
       <div className="container">
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[auto_882px] 2xl:grid-cols-[auto_1082px] gap-3 2xl:gap-[84px]">
-          {/* Left: Text Block */}
-          <div className="pt-180">
+        <div className="relative grid w-full grid-cols-1 lg:grid-cols-[30%_minmax(0,70%)] 2xl:grid-cols-[auto_minmax(0,882px)] 3xl:grid-cols-[auto_minmax(0,1082px)] gap-40 lg:gap-80 3xl:gap-[84px]">
+          {/* Left: Text Block — sticky */}
+          <div className="self-start lg:sticky lg:top-0 lg:pt-190">
             <h1 className="text-heading text-foreground max-w-[15ch] uppercase mb-20">
               {thinkingThatDelivers.heading}
             </h1>
-            <p className="text-16 text-foreground-light leading-[1.54] font-[avenirHeavy] max-w-[53ch]">
+            <p className="text-description text-foreground-light max-w-[53ch]">
               {thinkingThatDelivers.description}
             </p>
           </div>
 
-          {/* Right: First service image + dark panel — flush right */}
-          <div>
-            {thinkingThatDelivers.services.map((service) => (
+          {/* Right: services */}
+          <div className="min-w-0 overflow-hidden">
+            {thinkingThatDelivers.services.map((service, index) => (
               <div key={service.id} className="relative flex mb-50 last:mb-0">
-                {/* Left: black spacer aligned with hero left column */}
-                <div className=" bg-black" />
-
-                {/* Right: image + light panel */}
-                <div className="flex flex-1 group">
+                <div className="bg-black" />
+                <div
+                  ref={(el) => {
+                    cardsRef.current[index] = el;
+                  }}
+                  className="service-card flex flex-col md:flex-row flex-1"
+                >
                   {/* Image */}
-                  <div className="relative w-[42.7%] overflow-hidden">
-                    <img
+                  <div className="relative w-full md:w-[42.7%] overflow-hidden shrink-0">
+                    <Image
                       src={service.image}
                       alt={service.alt}
-                      className="w-full h-full object-cover"
-                      style={{ minHeight: "320px" }}
+                      width={500}
+                      height={500}
+                      className="w-full object-cover h-[220px] md:h-full lg:min-h-[320px]"
                     />
                   </div>
 
-                  {/* Light content panel */}
-                  <div className="flex-1 bg-[#F0EDE8] flex flex-col justify-between p-50 group-hover:bg-primary-2 transition-colors duration-300">
-                    <span className="text-heading text-primary-2 group-hover:text-white ">
+                  {/* Content panel */}
+                  <div className="service-panel flex-1 min-w-0 bg-[#F0EDE8] flex flex-col justify-between p-30 lg:p-50 transition-colors duration-400">
+                    <span className="service-number text-heading text-primary-2 transition-colors duration-400">
                       {service.number}
                     </span>
                     <div>
-                      <h2 className="text-25 font-[optima] uppercase text-primary-2 group-hover:text-white mb-20 max-w-[424px]">
+                      <h2 className="service-title text-25 font-[optima] uppercase text-primary-2 transition-colors duration-400 mb-40 max-w-[424px]">
                         {service.title}
                       </h2>
-                      <p className="text-16 text-foreground-light group-hover:text-white leading-[1.5] font-[avenirHeavy]">
+                      <p className="service-desc text-foreground-light transition-colors duration-400 text-description">
                         {service.description}
                       </p>
                     </div>

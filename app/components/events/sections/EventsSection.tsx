@@ -86,7 +86,7 @@ const EventsSection = () => {
   };
 
   return (
-    <section className="w-full bg-white pt-70 pb-160" data-header="dark">
+    <section className="w-full bg-white pt-70 pb-120 3xl:pb-160" data-header="dark">
       <div className="container">
         {/* Filters Row */}
         {/* ── Desktop (lg+) ── */}

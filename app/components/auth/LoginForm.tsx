@@ -19,7 +19,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
   />
 );
 
-const errorMessageClass = "text-[14px] text-[#c0392b] pt-2 h-20";
+const errorMessageClass = "text-[14px] text-[#c0392b] pt-[5px] h-20";
 
 const inputClass =
   "w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
@@ -58,7 +58,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
       <div className="w-full max-w-[562px] flex flex-col items-center justify-center">
         <div className="flex flex-col items-center px-50 sm:px-0">
           <h1 className="text-heading text-primary-2 mb-20">MEMBERS LOGIN</h1>
-          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50">
+          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 2xl:px-0">
             Please fill out the form below so we can understand your
             requirements and assist you better.
           </p>
@@ -116,32 +116,39 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
                 aria-label="Toggle password"
                 className="absolute right-0 bottom-2 text-foreground-light/50 hover:text-foreground-light bg-transparent border-none p-0 cursor-pointer"
               >
-                {showPassword ? (
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                  </svg>
-                ) : (
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                )}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  {/* Always visible: eye paths */}
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                  {/* Slash — only visible when password is shown */}
+                  <line
+                    x1="1"
+                    y1="1"
+                    x2="23"
+                    y2="23"
+                    style={{
+                      opacity: showPassword ? 1 : 0,
+                      transition: "opacity 0.2s ease",
+                    }}
+                  />
+                  {/* Hide the eye circle when slashed */}
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    style={{
+                      opacity: showPassword ? 0 : 1,
+                      transition: "opacity 0.2s ease",
+                    }}
+                  />
+                </svg>
               </button>
             </div>
             <FieldLine hasError={!!errors.password} />
@@ -151,7 +158,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
           </label>
 
           {/* Remember me + Forgot password */}
-          <div className="flex flex-col sm:flex-row gap-20 sm:gap-0 sm:items-center justify-between mb-50">
+          <div className="flex flex-col sm:flex-row gap-[8px] sm:gap-0 sm:items-center justify-between mb-50 mt-[12px]">
             <label className="flex items-center gap-[10px] text-description text-foreground-light cursor-pointer order-2 sm:order-1">
               <div className="relative w-[18px] h-[18px] flex-shrink-0 mb-[2px]">
                 <input

@@ -89,7 +89,7 @@ export default function SustainablityMoments() {
   };
 
   return (
-    <section ref={sectionRef} className="w-full py-160 overflow-hidden" data-header="dark">
+    <section ref={sectionRef} className="w-full py-120 3xl:py-160 overflow-hidden" data-header="dark">
       {/* Header */}
       <div className="container text-center mb-60">
         <h2 className="text-heading font-[optima] uppercase text-foreground mb-20">
