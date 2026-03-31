@@ -197,7 +197,7 @@ export default function SustainabilitySpotlight() {
               >
                 <Link
                   href={slide.href}
-                  className="text-primary-2 text-16 font-[avenirHeavy] hover:opacity-70 transition-opacity duration-300"
+                  className="text-primary-2 text-19 leading-[100%] font-[avenirHeavy] hover:opacity-70 transition-opacity duration-300"
                 >
                   Read More...
                 </Link>
@@ -312,7 +312,7 @@ export default function SustainabilitySpotlight() {
                     >
                       <Link
                         href={slide.href}
-                        className="text-primary-2 text-16 font-[avenirHeavy] hover:opacity-70 transition-opacity duration-300"
+                        className="text-primary-2 text-19 font-[avenirHeavy] leading-[100%] hover:opacity-70 transition-opacity duration-300"
                       >
                         Read More...
                       </Link>
@@ -371,7 +371,7 @@ export default function SustainabilitySpotlight() {
                 text="View All"
                 borderColor="border-primary-2"
                 textColor="text-foreground-light"
-                px="px-[26px] 3xl:px-[37px]"
+                px="px-[26px] 3xl:px-[36.6px]"
               />
               <div className="flex items-center gap-[10px] 3xl:gap-[15px]">
                 <SliderArrowButton

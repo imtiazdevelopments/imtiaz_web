@@ -241,7 +241,7 @@ export default function PaymentForm() {
                   />
                   <input
                     id="phone"
-                    type="tel"
+                    type="number"
                     className="flex-1 border-none border-b pb-[10px] border-foreground-light outline-none bg-transparent text-description text-foreground-light"
                     {...register("phone", {
                       required: "Phone is required",
@@ -380,6 +380,7 @@ export default function PaymentForm() {
             <div className="mt-30">
               <CustomOutlineButton
                 text="Next"
+                minWidth={false}
                 onClick={() => {}}
                 variant="dark"
                 textColor="text-foreground-light"

@@ -35,7 +35,6 @@ const FilterDropdown = ({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Check if scrollable after open
   useEffect(() => {
     if (open && listRef.current) {
       const el = listRef.current;
@@ -51,6 +50,16 @@ const FilterDropdown = ({
     setIsAtBottom(scrollTop + clientHeight >= scrollHeight - 4);
   };
 
+  const handleToggle = () => {
+    if (!open && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      const targetScrollY =
+        window.scrollY + rect.top - window.innerHeight * 0.4;
+      window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+    }
+    setOpen((prev) => !prev);
+  };
+
   return (
     <div
       ref={ref}
@@ -58,7 +67,7 @@ const FilterDropdown = ({
     >
       {/* Trigger */}
       <button
-        onClick={() => setOpen(!open)}
+        onClick={handleToggle}
         className="w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirHeavy] text-16 text-foreground-light cursor-pointer"
       >
         <span className={value ? "text-foreground" : "text-foreground-light"}>
@@ -111,13 +120,13 @@ const FilterDropdown = ({
             ))}
           </div>
 
-          {/* Scroll hint — fades out when at bottom or no scroll needed */}
+          {/* Scroll hint */}
           {hasScroll && !isAtBottom && (
             <div className="absolute bottom-0 left-0 w-full pointer-events-none rounded-b-2xl overflow-hidden">
               <div className="w-full py-2 flex items-center justify-center bg-gradient-to-t from-white/90 to-transparent">
                 <MdOutlineKeyboardDoubleArrowDown
                   size={18}
-                  className="text-foreground-light/70 "
+                  className="text-foreground-light/70"
                 />
               </div>
             </div>
