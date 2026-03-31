@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import Image from "next/image";
 import { SearchableDropdown, allCountries } from "./CountryNameList";
@@ -23,7 +23,7 @@ type PaymentValues = {
 
 const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
   <p
-    className={`pt-1 h-20 ${msg ? "text-[#c0392b] text-[14px]" : "text-foreground-light/50 text-description"}`}
+    className={`pt-[5px] h-20 ${msg ? "text-[#c0392b] text-[14px]" : "text-foreground-light/50 text-description"}`}
   >
     {msg ?? hint ?? "\u00A0"}
   </p>
@@ -53,6 +53,7 @@ export default function PaymentForm() {
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<PaymentValues>({
     mode: "onTouched",
@@ -62,9 +63,6 @@ export default function PaymentForm() {
   const onSubmit = (data: PaymentValues) => {
     console.log("Payment:", data);
   };
-
-  const selectedProject = watch("project");
-  const selectedCountry = watch("country");
 
   const phoneRowRef = useRef<HTMLDivElement>(null);
   const [phoneRowWidth, setPhoneRowWidth] = useState(0);
@@ -148,7 +146,7 @@ export default function PaymentForm() {
                   htmlFor="firstName"
                   className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Your First Name
+                  Enter First Name*
                 </label>
                 <input
                   id="firstName"
@@ -164,7 +162,7 @@ export default function PaymentForm() {
                   htmlFor="lastName"
                   className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Your Last Name
+                  Enter Last Name*
                 </label>
                 <input
                   id="lastName"
@@ -184,7 +182,7 @@ export default function PaymentForm() {
                   htmlFor="email"
                   className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Your Email
+                  Enter Email*
                 </label>
                 <input
                   id="email"
@@ -206,7 +204,7 @@ export default function PaymentForm() {
                   htmlFor="eid"
                   className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter your EID / Passport Number
+                  Enter EID / Passport Number*
                 </label>
                 <input
                   id="eid"
@@ -228,7 +226,7 @@ export default function PaymentForm() {
                   htmlFor="phone"
                   className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Phone no
+                  Enter Phone no*
                 </label>
                 <div ref={phoneRowRef} className="flex items-end pt-20 gap-2">
                   <CountryCodeSelect
@@ -262,12 +260,20 @@ export default function PaymentForm() {
                   height={10}
                   className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0"
                 />
-                <SearchableDropdown
-                  label="Select country"
-                  items={allCountries}
-                  value={selectedCountry}
-                  onChange={(val) => setValue("country", val)}
-                  placeholder="country"
+                <Controller
+                  name="country"
+                  control={control}
+                  rules={{ required: "Country is required" }}
+                  render={({ field }) => (
+                    <SearchableDropdown
+                      label="Select country*"
+                      items={allCountries}
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                      placeholder="country"
+                      hasError={!!errors.country}
+                    />
+                  )}
                 />
                 <ErrorSlot msg={errors.country?.message} />
               </div>
@@ -283,12 +289,20 @@ export default function PaymentForm() {
                   height={10}
                   className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0"
                 />
-                <SearchableDropdown
-                  label="Select Project"
-                  items={projects.map((p) => ({ name: p }))}
-                  value={selectedProject}
-                  onChange={(val) => setValue("project", val)}
-                  placeholder="project"
+                <Controller
+                  name="project"
+                  control={control}
+                  rules={{ required: "Project is required" }}
+                  render={({ field }) => (
+                    <SearchableDropdown
+                      label="Select Project*"
+                      items={projects.map((p) => ({ name: p }))}
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                      placeholder="project"
+                      hasError={!!errors.project}
+                    />
+                  )}
                 />
                 <ErrorSlot msg={errors.project?.message} />
               </div>
@@ -298,7 +312,7 @@ export default function PaymentForm() {
                   htmlFor="unit"
                   className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter unit number
+                  Enter unit number*
                 </label>
                 <input
                   id="unit"
@@ -317,7 +331,7 @@ export default function PaymentForm() {
                 htmlFor="amount"
                 className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
               >
-                Amount AED
+                Amount AED*
               </label>
               <input
                 id="amount"
@@ -345,7 +359,7 @@ export default function PaymentForm() {
                 htmlFor="message"
                 className="block text-description mt-120 sm:mt-60 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
               >
-                Type your message here...
+                Type message here...
               </label>
               <textarea
                 id="message"

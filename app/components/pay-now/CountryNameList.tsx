@@ -13,14 +13,18 @@ export function SearchableDropdown({
   items,
   value,
   onChange,
+  required,
   placeholder,
   label,
+  hasError,
 }: {
   items: DropdownItem[];
   value: string;
   onChange: (val: string) => void;
   placeholder?: string;
   label?: string;
+  required?: boolean;
+  hasError?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -41,21 +45,34 @@ export function SearchableDropdown({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-
   return (
     <div ref={ref} className="relative">
       <div className="cursor-pointer" onClick={() => setOpen((o) => !o)}>
         {label && (
-          <span className="block text-description mt-25 text-foreground-light/50 select-none">
+          <span
+            className={`block text-description mt-25 select-none transition-colors ${
+              open ? "text-foreground-light" : "text-foreground-light/50"
+            }`}
+          >
             {label}
           </span>
         )}
         <div
-          className={`w-full mt-20 text-description p-0 truncate ${value ? "text-foreground-light" : "text-transparent"}`}
+          className={`w-full mt-20 text-description p-0 truncate ${
+            value ? "text-foreground-light" : "text-transparent"
+          }`}
         >
           {value || "‎"}
         </div>
-        <div className="h-px w-full bg-foreground-light/50" />
+
+        {/* Animated field line */}
+        <div className="relative h-px w-full bg-foreground-light/50">
+          <div
+            className={`absolute inset-y-0 left-0 transition-all duration-500 ease-in-out ${
+              hasError ? "bg-[#c0392b] w-full" : open ? "bg-foreground w-full" : "w-0"
+            }`}
+          />
+        </div>
       </div>
 
       {open && (

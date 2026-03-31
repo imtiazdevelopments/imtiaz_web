@@ -58,7 +58,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
       <div className="w-full max-w-[562px] flex flex-col items-center justify-center">
         <div className="flex flex-col items-center px-50 sm:px-0">
           <h1 className="text-heading text-primary-2 mb-20">MEMBERS LOGIN</h1>
-          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 2xl:px-0">
+          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 lg:px-0">
             Please fill out the form below so we can understand your
             requirements and assist you better.
           </p>
@@ -72,7 +72,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
           {/* Email */}
           <label htmlFor="email" className="group cursor-text block">
             <span className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
-              Enter Your Email
+              Enter Email*
             </span>
             <input
               id="email"
@@ -124,10 +124,8 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
                   stroke="currentColor"
                   strokeWidth="1.6"
                 >
-                  {/* Always visible: eye paths */}
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
-                  {/* Slash — only visible when password is shown */}
                   <line
                     x1="1"
                     y1="1"
@@ -138,7 +136,6 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
                       transition: "opacity 0.2s ease",
                     }}
                   />
-                  {/* Hide the eye circle when slashed */}
                   <circle
                     cx="12"
                     cy="12"
@@ -200,7 +197,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
           Don&apos;t have an account?{" "}
           <button
             onClick={onSwitch}
-            className="text-primary-2 hover:opacity-70 underline underline-offset-2"
+            className="text-primary-2 hover:opacity-70 underline underline-offset-2 cursor-pointer transition-all duration-300 ease-out"
           >
             Sign up here
           </button>
@@ -211,7 +208,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
         Don&apos;t have an account?{" "}
         <button
           onClick={onSwitch}
-          className="text-primary-2 hover:opacity-70 underline underline-offset-2"
+          className="text-primary-2 hover:opacity-70 underline underline-offset-2 cursor-pointer transition-all duration-300 ease-out"
         >
           Sign up here
         </button>

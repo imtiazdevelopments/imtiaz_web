@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import CustomOutlineButton from "../common/CustomOutlineButton";
 
@@ -73,7 +72,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
       <div className="w-full px-60 3xl:px-0 max-w-[700px] flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center px-50 sm:px-0">
           <h1 className="text-heading text-primary-2 mb-20">MEMBERS SIGN UP</h1>
-          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50">
+          <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 lg:px-0">
             Please fill out the form below so we can understand your
             requirements and assist you better.
           </p>
@@ -83,7 +82,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
           {/* First + Last name */}
           <div className="grid grid-cols-2 gap-40 sm:gap-70 3xl:gap-100">
             <label htmlFor="firstName" className="group cursor-text block">
-              <span className={labelClass}>Enter First Name</span>
+              <span className={labelClass}>Enter First Name*</span>
               <input
                 id="firstName"
                 type="text"
@@ -95,7 +94,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
             </label>
 
             <label htmlFor="lastName" className="group cursor-text block">
-              <span className={labelClass}>Enter Last Name</span>
+              <span className={labelClass}>Enter Last Name*</span>
               <input
                 id="lastName"
                 type="text"
@@ -111,7 +110,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-40 lg:gap-x-70 3xl:gap-x-100">
             <label htmlFor="email" className="group cursor-text block">
               <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
-                Enter Email
+                Enter Email*
               </span>
               <input
                 id="email"
@@ -131,7 +130,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
 
             <label htmlFor="phone" className="group cursor-text block">
               <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
-                Phone Number
+                Phone Number*
               </span>
               <div className="flex items-end mt-25 gap-2">
                 <CountryCodeSelect
@@ -188,9 +187,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                   stroke="currentColor"
                   strokeWidth="1.6"
                 >
-                  {/* Eye outline — always visible */}
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  {/* Pupil — hidden when slashed */}
                   <circle
                     cx="12"
                     cy="12"
@@ -200,7 +197,6 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                       transition: "opacity 0.2s ease",
                     }}
                   />
-                  {/* Slash — visible when password shown */}
                   <line
                     x1="1"
                     y1="1"
@@ -221,7 +217,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
           </label>
 
           {/* Privacy policy */}
-          <div className="flex items-center justify-between mb-50">
+          <div className="flex flex-col mb-50 mt-[12px]">
             <label className="flex items-center gap-[10px] text-description text-foreground-light cursor-pointer">
               <div className="relative w-[18px] h-[18px] flex-shrink-0 mb-[2px]">
                 <input
@@ -241,9 +237,11 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                   <polyline points="1.5,6 4.5,9.5 10.5,2.5" />
                 </svg>
               </div>
-              I&apos;ve read and agree to the Privacy Policy
+              I&apos;ve read and agree to the Privacy Policy*
             </label>
-            <ErrorSlot msg={errors.privacy?.message} />
+            <div className="w-full -mt-2">
+              <ErrorSlot msg={errors.privacy?.message} />
+            </div>
           </div>
 
           {/* Submit */}
@@ -259,7 +257,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
           Already have an account?{" "}
           <button
             onClick={onSwitch}
-            className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out"
+            className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out cursor-pointer"
           >
             Sign in here
           </button>
@@ -270,7 +268,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
         Already have an account?{" "}
         <button
           onClick={onSwitch}
-          className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out"
+          className="text-primary-2 hover:opacity-70 underline underline-offset-2 transition-all duration-300 ease-out cursor-pointer"
         >
           Sign in here
         </button>
