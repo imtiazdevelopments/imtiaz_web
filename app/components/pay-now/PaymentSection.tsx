@@ -30,8 +30,15 @@ const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
 );
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div className={`field-line relative h-px w-full bg-foreground-light/50 ${hasError ? "error" : ""}`} />
+  <div className="relative h-px w-full bg-foreground-light/50">
+    <div
+      className={`absolute inset-y-0 left-0 transition-all duration-[420ms] ease-out ${
+        hasError ? "bg-[#c0392b] w-full" : "w-0 group-focus-within:w-full bg-foreground-light"
+      }`}
+    />
+  </div>
 );
+
 
 const inputClass =
   "w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
@@ -148,7 +155,7 @@ export default function PaymentForm() {
                   id="firstName"
                   type="text"
                   className={inputClass}
-                  {...register("firstName", { required: "Required" })}
+                  {...register("firstName", { required: "First name is required" })}
                 />
                 <FieldLine hasError={!!errors.firstName} />
                 <ErrorSlot msg={errors.firstName?.message} />
@@ -164,7 +171,7 @@ export default function PaymentForm() {
                   id="lastName"
                   type="text"
                   className={inputClass}
-                  {...register("lastName", { required: "Required" })}
+                  {...register("lastName", { required: "Last name is required" })}
                 />
                 <FieldLine hasError={!!errors.lastName} />
                 <ErrorSlot msg={errors.lastName?.message} />

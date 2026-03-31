@@ -126,7 +126,7 @@ export default function ImpactAreas() {
   };
 
   return (
-    <section className="relative w-full h-[85vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden" data-header="light">
+    <section className="relative w-full h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden" data-header="light">
       <div className="absolute inset-0 bg-[#0a0a0a] z-0" />
 
       <AnimatePresence mode="sync">

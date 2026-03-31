@@ -70,16 +70,17 @@ const InnerHeader: React.FC = () => {
     return () => observer.disconnect();
   }, [pathname]);
 
-  useEffect(() => {
-    if (authView) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [authView]);
+  // Add this after the existing scroll hide/show useEffect
+useEffect(() => {
+  if (authView) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [authView]);
 
   const bgClass = headerTheme === "dark" ? "bg-black/60" : "bg-white/10";
 
@@ -197,7 +198,7 @@ const InnerHeader: React.FC = () => {
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={authView}
-                      className="absolute inset-0 flex items-center justify-center overflow-y-auto"
+                      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 3xl:pt-150"
                       initial={{ opacity: 0, x: 40 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -40 }}
