@@ -30,10 +30,12 @@ const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
 );
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div className="relative h-px w-full bg-foreground-light/50">
+  <div className="relative h-px w-full bg-foreground-light/50 overflow-hidden">
     <div
-      className={`absolute inset-y-0 left-0 transition-all duration-[420ms] ease-out ${
-        hasError ? "bg-[#c0392b] w-full" : "w-0 group-focus-within:w-full bg-foreground-light"
+      className={`absolute inset-0 origin-left transition-transform duration-[420ms] ease-out ${
+        hasError
+          ? "bg-[#c0392b] scale-x-100"
+          : "scale-x-0 group-focus-within:scale-x-100 bg-foreground-light"
       }`}
     />
   </div>
@@ -179,7 +181,7 @@ export default function PaymentForm() {
             </div>
 
             {/* Row 2 — Email + EID */}
-            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-70 3xl:gap-90">
               <div className="group">
                 <label
                   htmlFor="email"
@@ -223,7 +225,7 @@ export default function PaymentForm() {
             </div>
 
             {/* Row 3 — Phone + Country */}
-            <div className="grid grid-cols-2 gap-70 3xl:gap-90">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-70 3xl:gap-90">
               <div className="group">
                 <label
                   htmlFor="phone"
