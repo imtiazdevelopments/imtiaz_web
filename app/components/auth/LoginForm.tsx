@@ -267,15 +267,15 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
       {/* Close btn */}
       <button
         aria-label="Close"
-        className="absolute top-40 lg:top-50 xl:top-70 3xl:top-90 right-40 lg:right-50 xl:right-70 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
+        className="absolute top-50 3xl:top-90 right-50 w-50 h-50 rounded-full bg-[#49090533] backdrop-blur-[30px] flex items-center justify-center text-primary-2 group text-[24px] cursor-pointer transition-colors"
         onClick={onClose}
       >
-        <span className="group-hover:scale-110 transition-transform duration-300 ease-out text-16 2xl:text-25 !leading-none">
+        <span className="group-hover:scale-110 transition-transform duration-300 ease-out text-16 xl:text-19 3xl:text-25 !leading-none">
           ✕
         </span>
       </button>
 
-      <div className="w-full max-w-[562px] flex flex-col self-center 3xl:self-end 3xl:pb-80 pt-200 items-center">
+      <div className="w-full max-w-[562px] flex flex-col self-center 3xl:self-end 3xl:pb-80 items-center">
         <div className="flex flex-col items-center px-50 sm:px-0">
           <h1 className="text-heading text-primary-2 mb-20">MEMBERS LOGIN</h1>
           <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 lg:px-0">

@@ -213,7 +213,7 @@ useEffect(() => {
   <AnimatePresence mode="wait">
     <motion.div
       key={authView}
-      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-200 3xl:py-0 3xl:pt-200 pointer-events-auto"
+      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 pointer-events-auto"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}  
       initial={{ opacity: 0, x: 40 }}

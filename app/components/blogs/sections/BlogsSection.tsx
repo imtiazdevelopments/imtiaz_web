@@ -89,7 +89,10 @@ const BlogsSection = () => {
   };
 
   return (
-    <section className="w-full bg-white pt-70 pb-120 3xl:pb-160" data-header="dark">
+    <section
+      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      data-header="dark"
+    >
       <div className="container">
         {/* Filters Row */}
         <div className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70">

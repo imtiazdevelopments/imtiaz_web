@@ -12,14 +12,39 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
 
   const segments = pathname.split("/").filter(Boolean);
 
-  const crumbs = segments.map((seg, i) => ({
-    label: seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " "),
-    href: "/" + segments.slice(0, i + 1).join("/"),
-    isLast: i === segments.length - 1,
-  }));
+  // ✅ ONLY real existing routes
+  const VALID_ROUTES = new Set([
+    "/",
+    "/about",
+    "/about/sustainability",
+    "/about/expertise",
+    "/media-center/blog",
+    "/media-center/news",
+    "/media-center/events",
+    "/communities",
+    "/pay-now",
+  ]);
+
+  const crumbs = segments.map((seg, i) => {
+    const href = "/" + segments.slice(0, i + 1).join("/");
+
+    return {
+      label:
+        seg.charAt(0).toUpperCase() +
+        seg.slice(1).replace(/-/g, " "),
+      href,
+      isLast: i === segments.length - 1,
+      clickable: VALID_ROUTES.has(href),
+    };
+  });
 
   const allCrumbs = [
-    { label: "Home", href: "/", isLast: crumbs.length === 0 },
+    {
+      label: "Home",
+      href: "/",
+      isLast: crumbs.length === 0,
+      clickable: true,
+    },
     ...crumbs,
   ];
 
@@ -32,10 +57,10 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
           {i > 0 && (
             <span
               className={`text-[9px] ${
-                crumb.isLast
-                  ? isBlack
-                    ? "text-foreground-light"
-                    : "text-white"
+crumb.isLast
+  ? isBlack
+    ? "text-foreground-light"
+    : "text-white"
                   : isBlack
                     ? "text-foreground-light/30"
                     : "text-white/50"
@@ -44,11 +69,16 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
               ●
             </span>
           )}
-          {crumb.isLast ? (
+
+          {crumb.isLast || !crumb.clickable ? (
             <span
-              className={`text-description ${
-                isBlack ? "text-foreground-light" : "text-white"
-              }`}
+className={`text-description ${
+  crumb.isLast
+    ? "text-white"
+    : isBlack
+      ? "text-foreground-light/30"
+      : "text-white/50"
+}`}
             >
               {/* mobile */}
               <span className="lg:hidden">

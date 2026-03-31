@@ -18,7 +18,7 @@ const RelatedNews = () => {
             text="View All"
             borderColor="border-primary-2"
             textColor="text-foreground-light"
-            px="px-[12px] sm:px-[26px] 3xl:px-[37px]"
+            px="px-[12px] sm:px-[26px] 3xl:px-[36.6px]"
           />
         </div>
       </div>

@@ -89,7 +89,7 @@ const ColItem = ({
             ease: [0.62, 0.05, 0.01, 0.99],
             delay: isActive ? 0.4 : 0,
           }}
-          className="pt-5"
+          className="pt-[10px]"
         >
           <p className="text-white/80 text-16 font-[avenirHeavy] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
             {item.description}

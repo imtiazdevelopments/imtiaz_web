@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Breadcrumb from "./Breadcrumb";
+import { AnimatedHeading } from "../animations/AnimateHeading";
 
 interface InnerHeroProps {
   image: string;
@@ -24,9 +25,7 @@ const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) =>
 
       <div className="container absolute inset-0 flex items-center justify-center">
         <div className="w-full text-center">
-          <h1 className="text-white text-heading mb-20">
-            {title}
-          </h1>
+          <AnimatedHeading title={title} className="mb-20" mode="blade"/>
           {description && (
             <p className={`text-white/80 text-description ${maxW} mx-auto 3xl:h-[54px] text-center flex items-center justify-center px-30 xl:px-0`}>
               {description}

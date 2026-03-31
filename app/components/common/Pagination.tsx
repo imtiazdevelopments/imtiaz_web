@@ -25,7 +25,7 @@ const Pagination = ({
     const el = document.getElementById(scrollToId);
     if (!el) return;
 
-    const top = el.getBoundingClientRect().top + window.scrollY - 100;
+    const top = el.getBoundingClientRect().top + window.scrollY - 150;
 
     scrollTo(top, { duration: 1.2 });
   };
