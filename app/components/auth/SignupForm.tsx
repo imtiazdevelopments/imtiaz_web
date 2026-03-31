@@ -171,39 +171,48 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                   minLength: { value: 6, message: "Minimum 6 characters" },
                 })}
               />
-<button
-  type="button"
-  onClick={(e) => {
-    e.preventDefault();
-    setShowPassword((p) => !p);
-  }}
-  aria-label="Toggle password"
-  className="absolute right-0 bottom-2 text-foreground-light/50 hover:text-foreground-light bg-transparent border-none p-0 cursor-pointer"
->
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.6"
-  >
-    {/* Eye outline — always visible */}
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-    {/* Pupil — hidden when slashed */}
-    <circle
-      cx="12"
-      cy="12"
-      r="3"
-      style={{ opacity: showPassword ? 0 : 1, transition: "opacity 0.2s ease" }}
-    />
-    {/* Slash — visible when password shown */}
-    <line
-      x1="1" y1="1" x2="23" y2="23"
-      style={{ opacity: showPassword ? 1 : 0, transition: "opacity 0.2s ease" }}
-    />
-  </svg>
-</button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPassword((p) => !p);
+                }}
+                aria-label="Toggle password"
+                className="absolute right-0 bottom-2 text-foreground-light/50 hover:text-foreground-light bg-transparent border-none p-0 cursor-pointer"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  {/* Eye outline — always visible */}
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  {/* Pupil — hidden when slashed */}
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    style={{
+                      opacity: showPassword ? 0 : 1,
+                      transition: "opacity 0.2s ease",
+                    }}
+                  />
+                  {/* Slash — visible when password shown */}
+                  <line
+                    x1="1"
+                    y1="1"
+                    x2="23"
+                    y2="23"
+                    style={{
+                      opacity: showPassword ? 1 : 0,
+                      transition: "opacity 0.2s ease",
+                    }}
+                  />
+                </svg>
+              </button>
             </div>
             <FieldLine hasError={!!errors.password} />
             <p className="text-[12px] text-[#c0392b] pt-2 h-30">

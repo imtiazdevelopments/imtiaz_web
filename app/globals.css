@@ -735,3 +735,14 @@ body {
 .thinking-delivers .service-card.is-active .service-desc {
   color: white;
 }
+
+
+/* Hide browser native password controls - eye icon */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none;
+}
