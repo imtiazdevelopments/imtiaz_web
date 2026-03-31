@@ -184,6 +184,8 @@ export const enquiryData = {
     "Asset Management",
     "Engineering & Construction",
     "Project Management",
+    "Development",
+    
   ],
   contactModes: ["Phone", "Whatsapp", "Email"],
   checkboxes: [

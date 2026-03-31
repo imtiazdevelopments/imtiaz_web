@@ -12,7 +12,13 @@ interface FilterDropdownProps {
   className?: string;
 }
 
-const FilterDropdown = ({ placeholder, options, value, onChange, className }: FilterDropdownProps) => {
+const FilterDropdown = ({
+  placeholder,
+  options,
+  value,
+  onChange,
+  className,
+}: FilterDropdownProps) => {
   const [open, setOpen] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
@@ -46,7 +52,10 @@ const FilterDropdown = ({ placeholder, options, value, onChange, className }: Fi
   };
 
   return (
-    <div ref={ref} className={`relative w-full min-w-[220px] xl:w-[253px] ${className ?? ""}`}>
+    <div
+      ref={ref}
+      className={`relative w-full min-w-[220px] xl:w-[253px] ${className ?? ""}`}
+    >
       {/* Trigger */}
       <button
         onClick={() => setOpen(!open)}
@@ -57,7 +66,7 @@ const FilterDropdown = ({ placeholder, options, value, onChange, className }: Fi
         </span>
         <ChevronDown
           size={22}
-          className={`text-foreground-light transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`text-foreground-light size-[18px] lg:size-[22px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -73,7 +82,10 @@ const FilterDropdown = ({ placeholder, options, value, onChange, className }: Fi
             onScroll={handleScroll}
           >
             <button
-              onClick={() => { onChange(""); setOpen(false); }}
+              onClick={() => {
+                onChange("");
+                setOpen(false);
+              }}
               className="w-full text-left px-5 py-3 text-[13px] font-[avenirRoman] text-black/40 hover:bg-black/5 transition-colors duration-150"
             >
               {placeholder}
@@ -84,9 +96,14 @@ const FilterDropdown = ({ placeholder, options, value, onChange, className }: Fi
             {options.map((opt) => (
               <button
                 key={opt}
-                onClick={() => { onChange(opt); setOpen(false); }}
+                onClick={() => {
+                  onChange(opt);
+                  setOpen(false);
+                }}
                 className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-black/5 ${
-                  value === opt ? "text-primary-2 font-[avenirHeavy]" : "text-foreground-light"
+                  value === opt
+                    ? "text-primary-2 font-[avenirHeavy]"
+                    : "text-foreground-light"
                 }`}
               >
                 {opt}
@@ -98,7 +115,10 @@ const FilterDropdown = ({ placeholder, options, value, onChange, className }: Fi
           {hasScroll && !isAtBottom && (
             <div className="absolute bottom-0 left-0 w-full pointer-events-none rounded-b-2xl overflow-hidden">
               <div className="w-full py-2 flex items-center justify-center bg-gradient-to-t from-white/90 to-transparent">
-                <MdOutlineKeyboardDoubleArrowDown size={18} className="text-foreground-light/70" />
+                <MdOutlineKeyboardDoubleArrowDown
+                  size={18}
+                  className="text-foreground-light/70 "
+                />
               </div>
             </div>
           )}
