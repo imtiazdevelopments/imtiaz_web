@@ -15,13 +15,15 @@ const unique = Array.from(new Map(countries.map((c) => [c.code, c])).values());
 type Props = {
   value: string;
   onChange: (val: string) => void;
-  dropdownWidth?: number; // ← accept parent width
+  dropdownWidth?: number;
+  variant?: "light" | "dark";
 };
 
 export default function CountryCodeSelect({
   value,
   onChange,
   dropdownWidth,
+  variant = "dark",
 }: Props) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -46,13 +48,19 @@ export default function CountryCodeSelect({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const isLight = variant === "light";
+
   return (
     <div ref={ref} className="relative flex-shrink-0">
       {/* Trigger */}
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-[10px] text-description text-foreground-light bg-transparent pb-[6px] -mb-[1px] border-b border-foreground-light cursor-pointer"
+        className={`flex items-center gap-[10px] text-description bg-transparent pb-[6px] -mb-[1px] border-b ${variant === "light" ? "border-white" : "border-foreground-light"} cursor-pointer ${
+          isLight
+            ? "text-white border-white"
+            : "text-foreground-light border-foreground-light"
+        }`}
       >
         <span
           className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block`}
@@ -72,30 +80,52 @@ export default function CountryCodeSelect({
       {open && (
         <div
           style={{ width: dropdownWidth ? `${dropdownWidth}px` : "280px" }}
-          className="absolute top-[calc(100%+8px)] h-[250px] left-0 bg-white/50 backdrop-blur-md border border-black/10 rounded-2xl shadow-lg overflow-hidden z-50"
+          className={`absolute top-[calc(100%+8px)] h-[250px] left-0 backdrop-blur-md border rounded-2xl shadow-lg overflow-hidden z-50 ${
+            isLight
+              ? "bg-white border-white/50"
+              : "bg-white/50 border-black/10"
+          }`}
           onWheel={(e) => e.stopPropagation()}
         >
           {/* Search */}
-          <div className="px-3 py-2 border-b border-black/5">
+          <div
+            className={`px-3 py-2 border-b ${
+              isLight ? "border-foreground-light/10" : "border-black/5"
+            }`}
+          >
             <input
               type="text"
               placeholder="Search country..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full text-description text-foreground-light bg-transparent outline-none p-0 placeholder:text-foreground-light/30"
+              className={`w-full text-description bg-transparent outline-none p-0 ${
+                isLight
+                  ? "text-foreground placeholder:text-foreground/30"
+                  : "text-foreground-light placeholder:text-foreground-light/30"
+              }`}
             />
           </div>
 
           {/* List */}
           <div className="max-h-[220px] overflow-y-auto scrollbar-hide">
             {filtered.length === 0 && (
-              <p className="px-5 py-3 text-description text-foreground-light/40">
+              <p
+                className={`px-5 py-3 text-description ${
+                  isLight ? "text-foreground/40" : "text-foreground-light/40"
+                }`}
+              >
                 No results
               </p>
             )}
             {filtered.map((c, i) => (
               <div key={`${c.code}-${i}`}>
-                {i !== 0 && <div className="w-full h-px bg-black/5" />}
+                {i !== 0 && (
+                  <div
+                    className={`w-full h-px ${
+                      isLight ? "bg-foreground/5" : "bg-black/5"
+                    }`}
+                  />
+                )}
                 <button
                   type="button"
                   onClick={() => {
@@ -103,18 +133,24 @@ export default function CountryCodeSelect({
                     setOpen(false);
                     setSearch("");
                   }}
-                  className={`w-full text-left px-5 py-3 text-description transition-colors duration-150 hover:bg-black/5 flex items-center gap-2 ${
+                  className={`w-full text-left px-5 py-3 text-description transition-colors duration-150 flex items-center gap-2 ${
                     value === c.code
                       ? "text-primary-2 font-[avenirHeavy]"
-                      : "text-foreground-light"
+                      : isLight
+                        ? "text-foreground hover:bg-foreground/5"
+                        : "text-foreground-light hover:bg-black/5"
                   }`}
                 >
                   <span
                     className={`fi fi-${c.iso.toLowerCase()} inline-block flex-shrink-0`}
                     style={{ width: "22px", fontSize: "22px" }}
                   />
-                  <span>{c.code}</span>
-                  <span className="text-foreground-light/50 text-[11px] truncate">
+                  <span>{c.code} - </span>
+                  <span
+                    className={`text-[13px] ${
+                      isLight ? "text-foreground" : "text-foreground-light"
+                    }`}
+                  >
                     {c.name}
                   </span>
                 </button>

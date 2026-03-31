@@ -156,3 +156,38 @@ export const pressSpotlights = [
     title: "WHAT MAKES AN IMTIAZ HOME EXTRAORDINARY?",
   },
 ];
+
+
+// ─── Enquiry Data ─────────────────────────────────────────────────────────────────────
+
+export const enquiryData = {
+  heading: "Make an Enquiry",
+  subheading:
+    "We combine industry insight with hands-on experience to solve complex challenges.",
+  contacts: [
+    {
+      id: "phone",
+      icon: "phone",
+      label: "+971 800 468429",
+      href: "tel:+971800468429",
+    },
+    {
+      id: "email",
+      icon: "email",
+      label: "INFO@IMTIAZ.AE",
+      href: "mailto:info@imtiaz.ae",
+    },
+  ],
+  selectReasons: [
+    "General Enquiry",
+    "Project Development",
+    "Asset Management",
+    "Engineering & Construction",
+    "Project Management",
+  ],
+  contactModes: ["Phone", "Whatsapp", "Email"],
+  checkboxes: [
+    { id: "news", label: "I'd like to hear about news and offers." },
+    { id: "privacy", label: "I've read and agree to the Privacy Policy" },
+  ],
+};

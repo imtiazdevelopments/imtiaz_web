@@ -15,6 +15,7 @@ import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
 import EventCard from "./EventCard";
 import { Plus } from "lucide-react";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -113,12 +114,15 @@ const EventsSection = () => {
           </div>
 
           {hasFilter && (
-            <button
+<CustomOutlineButton
+              text="Clear Filters"
               onClick={clearFilters}
-              className="cursor-pointer uppercase px-60 3xl:px-[62px] py-5 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-19 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
-            >
-              Clear Filter
-            </button>
+              variant="dark"
+              px="px-60"
+              borderColor="border-primary-2"
+              textColor="text-foreground-light"
+              className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+            />
           )}
         </div>
 
@@ -170,12 +174,15 @@ const EventsSection = () => {
               />
 
               {hasFilter && (
-                <button
+                <CustomOutlineButton
+                  text="Clear Filters"
                   onClick={clearFilters}
-                  className="w-full cursor-pointer uppercase py-4 rounded-full border border-primary-2 text-foreground-light font-[avenirRoman] text-16 leading-[100%] hover:bg-primary-2/10 transition-colors duration-300"
-                >
-                  Clear Filter
-                </button>
+                  variant="dark"
+                  px="px-60"
+                  borderColor="border-primary-2"
+                  textColor="text-foreground-light"
+                  className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+                />
               )}
             </div>
           </div>

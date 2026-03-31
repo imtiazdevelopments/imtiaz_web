@@ -7,7 +7,7 @@ const EventCard = ({ item }: { item: EventItem }) => {
 
   return (
     <Link href={`/media-center/events/${item.slug}`} className="group block">
-      <div className="relative w-full h-[400px] lg:h-[522px] overflow-hidden">
+      <div className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden">
         <Image
           src={item.image}
           alt={item.title}
@@ -16,14 +16,18 @@ const EventCard = ({ item }: { item: EventItem }) => {
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden lg:block"
           style={{ background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)" }}
+        />
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{ background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 15.48%, #000000 98.07%)" }}
         />
         <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50">
           <h3 className="text-white uppercase text-25 font-[optima] tracking-[2%] leading-[1.4] mb-40 text-center line-clamp-2">
             {item.title}
           </h3>
-          <CustomOutlineButton text="Read More" px="px-[18px] sm:px-[26px] lg:px-[37px]"/>
+          <CustomOutlineButton text="Read More" px="px-[12px] sm:px-[26px] 3xl:px-[37px]"/>
         </div>
       </div>
     </Link>

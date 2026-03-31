@@ -152,7 +152,10 @@ export default function SustainabilitySpotlight() {
   };
 
   return (
-    <section className="w-full bg-[#EBEBEC] py-120 3xl:py-130" data-header="dark">
+    <section
+      className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
+      data-header="dark"
+    >
       <div className="container">
         {/* ── Mobile (below lg) ── */}
         <div className="flex flex-col items-center lg:hidden">
@@ -245,10 +248,11 @@ export default function SustainabilitySpotlight() {
 
           <div className="flex justify-center gap-30">
             <CustomOutlineButton
+              variant="dark"
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              px="px-[18px] sm:px-[26px]"
+              px="px-[12px] sm:px-[26px]"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton
@@ -361,14 +365,15 @@ export default function SustainabilitySpotlight() {
           </div>
 
           <div className="overflow-hidden">
-            <div className="flex justify-center mt-50 gap-30">
+            <div className="flex justify-center mt-50 gap-20 3xl:gap-30">
               <CustomOutlineButton
+                variant="dark"
                 text="View All"
                 borderColor="border-primary-2"
                 textColor="text-foreground-light"
-                px="px-[26px] lg:px-[37px]"
+                px="px-[26px] 3xl:px-[37px]"
               />
-              <div className="flex items-center gap-[15px]">
+              <div className="flex items-center gap-[10px] 3xl:gap-[15px]">
                 <SliderArrowButton
                   onClick={goPrev}
                   direction="prev"

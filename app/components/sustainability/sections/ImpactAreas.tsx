@@ -38,7 +38,7 @@ const ColItem = ({
     )}
 
 <motion.div
-  className="absolute inset-0 -left-[1px] -right-[1px]"
+  className="absolute inset-0"
       initial={false}
       animate={{ opacity: isActive ? 1 : 0 }}
       transition={{ duration: 0.9, ease: [0.62, 0.05, 0.01, 0.99] }}

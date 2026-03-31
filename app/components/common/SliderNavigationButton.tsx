@@ -18,7 +18,7 @@ export default function SliderArrowButton({
     <button
       onClick={onClick}
       className={`
-        relative  lg:w-[62px] lg:h-[62px] w-[45px] h-[45px] group rounded-[50px] flex items-center justify-center overflow-hidden
+        relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group rounded-[50px] flex items-center justify-center overflow-hidden
         ${isDark ? "border border-[#404040]" : "border border-white"}
       `}
     >
@@ -37,7 +37,7 @@ export default function SliderArrowButton({
         width={28}
         height={28}
         className={`
-          relative z-10 object-contain lg:w-[28px] lg:h-[28px] w-[20px] h-[20px] transition-all duration-300
+          relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300
           ${isNext ? "rotate-180" : ""}
           ${
             isDark

@@ -14,10 +14,11 @@ const RelatedNews = () => {
         </div>
         <div className="flex justify-center mt-50">
           <CustomOutlineButton
+            variant="dark"
             text="View All"
             borderColor="border-primary-2"
-            textColor="foreground-light"
-            px="px-[18px] sm:px-[26px] lg:px-[37px]"
+            textColor="text-foreground-light"
+            px="px-[12px] sm:px-[26px] 3xl:px-[37px]"
           />
         </div>
       </div>

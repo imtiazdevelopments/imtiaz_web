@@ -16,11 +16,7 @@ type SignupValues = {
 };
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div
-    className={`field-line relative h-px w-full ${
-      hasError ? "bg-[#c0392b] error" : "bg-foreground-light/50"
-    }`}
-  />
+  <div className={`field-line relative h-px w-full bg-foreground-light/50 ${hasError ? "error" : ""}`} />
 );
 
 const inputClass =
@@ -253,7 +249,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
             variant="dark"
           />
         </form>
-        <p className="block 2xl:hidden mt-120 text-center text-description">
+        <p className="block 3xl:hidden mt-120 text-center text-description">
           Already have an account?{" "}
           <button
             onClick={onSwitch}
@@ -264,7 +260,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
         </p>
       </div>
 
-      <p className="hidden 2xl:block absolute bottom-80 left-0 right-0 text-center text-description">
+      <p className="hidden 3xl:block absolute bottom-80 left-0 right-0 text-center text-description">
         Already have an account?{" "}
         <button
           onClick={onSwitch}
