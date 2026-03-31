@@ -35,9 +35,13 @@ const ErrorSlot = ({ msg }: { msg?: string }) => (
 );
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div
-    className={`field-line-2 relative h-px w-full bg-white/30 ${hasError ? "error" : ""}`}
-  />
+  <div className="relative h-px w-full bg-white/30">
+    <div
+      className={`absolute inset-y-0 left-0 transition-all duration-[420ms] ease-out ${
+        hasError ? "bg-[#c0392b] w-full" : "w-0 group-focus-within:w-full bg-white"
+      }`}
+    />
+  </div>
 );
 
 // ─── Icon Components ──────────────────────────────────────────────────────────
@@ -133,11 +137,11 @@ export default function EnquirySection() {
           className="!w-[1066px] h-[704px] absolute bottom-0 left-0 z-[1] select-none pointer-events-none"
         />
 
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row">
           {/* ── Left Panel ── */}
           <div
             style={{ paddingLeft: containerWidth }}
-            className="relative w-[43.65%] bg-primary-2 flex flex-col spacing-y-130 overflow-hidden py-120 3xl:py-130"
+            className="relative w-full lg:w-[43.65%] bg-primary-2 flex flex-col spacing-y-130 overflow-hidden py-120 3xl:py-130"
           >
             <div className="absolute inset-0 bg-black/20 z-1" />
             <h2 className="text-heading text-white mb-20">
@@ -166,7 +170,7 @@ export default function EnquirySection() {
 
           {/* ── Right Panel ── */}
           <div
-            className="flex-1 relative flex items-center justify-center pl-80 overflow-hidden py-120 3xl:py-130"
+            className="flex-1 relative flex items-center justify-center lg:pl-80 overflow-hidden py-120 3xl:py-130"
             style={{
               paddingRight: containerWidth,
               background:

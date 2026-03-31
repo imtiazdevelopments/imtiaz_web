@@ -702,44 +702,6 @@ body {
   animation: marquee 90s linear infinite;
 }
 
-.field-line::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.42s ease-out;
-  background: var(--foreground-light);
-}
-
-.field-line-2::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.42s ease-out;
-  background: white;
-}
-
-.group:focus-within .field-line::after {
-  transform: scaleX(1);
-}
-
-.group:focus-within .field-line-2::after {
-  transform: scaleX(1);
-}
-
-.field-line.error::after {
-  transform: scaleX(1);
-  background: #c0392b;
-}
-
-.field-line-2.error::after {
-  transform: scaleX(1);
-  background: #c0392b;
-}
-
 /* ThinkingThatDelivers section */
 .thinking-delivers .service-card .service-panel {
   background-color: #F0EDE8;
