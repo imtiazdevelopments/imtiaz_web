@@ -152,7 +152,7 @@ export default function SustainabilitySpotlight() {
   };
 
   return (
-    <section className="w-full bg-[#EBEBEC] py-130" data-header="dark">
+    <section className="w-full bg-[#EBEBEC] py-120 3xl:py-130" data-header="dark">
       <div className="container">
         {/* ── Mobile (below lg) ── */}
         <div className="flex flex-col items-center lg:hidden">

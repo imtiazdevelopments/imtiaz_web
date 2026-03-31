@@ -1,7 +1,95 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { faqData } from "../data";
+
+function AccordionItem({
+  item,
+  isOpen,
+  onToggle,
+}: {
+  item: (typeof faqData.items)[0];
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [item.answer]);
+
+  return (
+    <div>
+      {/* Question Row */}
+      <button
+        onClick={onToggle}
+        className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start justify-between gap-20 py-40 text-left group focus:outline-none`}
+        aria-expanded={isOpen}
+      >
+        <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
+          {item.question}
+        </span>
+        <span className="flex-shrink-0 select-none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M0.720703 8.71997H16.7207"
+              stroke="#490905"
+              strokeWidth="1.44"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8.7207 16.72V0.719971"
+              stroke="#490905"
+              strokeWidth="1.44"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                transform: isOpen ? "scaleY(0)" : "scaleY(1)",
+                transformOrigin: "center",
+                transition: "transform 0.3s ease",
+              }}
+            />
+          </svg>
+        </span>
+      </button>
+
+      {/* Answer — animates to exact height */}
+      <div
+        style={{
+          height: isOpen ? height : 0,
+          overflow: "hidden",
+          transition: "height 0.4s ease, opacity 0.4s ease",
+          opacity: isOpen ? 1 : 0,
+        }}
+      >
+        <div ref={contentRef}>
+          <p className="text-description text-foreground-light max-w-[846px] pb-30">
+            {item.answer}
+          </p>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="relative h-px w-full bg-black/10">
+        <div
+          className={`absolute inset-y-0 left-0 bg-primary-2 transition-all duration-500 ease-in-out ${
+            isOpen ? "w-full" : "w-0"
+          }`}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function Faq() {
   const [openId, setOpenId] = useState<string | null>(faqData.items[0].id);
@@ -11,55 +99,31 @@ export default function Faq() {
   };
 
   return (
-    <section className="w-full bg-[#EBEBEC] py-130" data-header="dark">
+    <section
+      className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
+      data-header="dark"
+    >
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[10px]">
           <h1 className="text-heading mb-20 text-foreground">
             {faqData.title}
           </h1>
-          <p className="text-16 font-[avenirHeavy] max-w-[407px] text-foreground-light">
+          <p className="text-description max-w-[407px] text-foreground-light">
             {faqData.subtitle}
           </p>
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
-          {faqData.items.map((item) => {
-            const isOpen = openId === item.id;
-            return (
-              <div key={item.id}>
-                {/* Question Row */}
-                <button
-                  onClick={() => toggle(item.id)}
-                  className={`${isOpen ? "2xl:pb-[20px]" : ""} w-full flex items-start justify-between py-40 text-left group focus:outline-none`}
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
-                    {item.question}
-                  </span>
-                  {/* +/- icon */}
-                  <span className="flex-shrink-0 mt-0.5 text-primary-2 text-[30px]   leading-none select-none transition-transform duration-300">
-                    {isOpen ? "−" : "+"}
-                  </span>
-                </button>
-
-                {/* Answer — animated with max-height */}
-                <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                    isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <p className="text-description text-foreground-light max-w-[846px] pb-30">
-                    {item.answer}
-                  </p>
-                </div>
-
-                {/* Divider */}
-                <div className={`${isOpen ? "bg-primary-2" : "bg-black/10"} h-px w-full`} />
-              </div>
-            );
-          })}
+          {faqData.items.map((item) => (
+            <AccordionItem
+              key={item.id}
+              item={item}
+              isOpen={openId === item.id}
+              onToggle={() => toggle(item.id)}
+            />
+          ))}
         </div>
       </div>
     </section>
