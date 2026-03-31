@@ -70,15 +70,28 @@ const InnerHeader: React.FC = () => {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // Add this after the existing scroll hide/show useEffect
+// Replace the existing body lock useEffect with this
 useEffect(() => {
-  if (authView) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+  if (!authView) return;
+
+  const scrollY = window.scrollY;
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";        // iOS Safari fix
+  document.body.style.top = `-${scrollY}px`;     // prevent jump
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.style.paddingRight = `${scrollbarWidth}px`; // prevent layout shift
+
   return () => {
     document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.paddingRight = "";
+    window.scrollTo(0, scrollY);                 // restore scroll position
   };
 }, [authView]);
 
@@ -186,38 +199,36 @@ useEffect(() => {
                   <AuthSlider />
                 </div>
 
-                <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden">
-                  <div className="absolute bottom-0 left-0">
-                    <Image
-                      src="/icons/layout_icons/m-icon.svg"
-                      alt="Icon"
-                      width={534}
-                      height={704}
-                    />
-                  </div>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={authView}
-                      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 3xl:pt-150"
-                      initial={{ opacity: 0, x: 40 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -40 }}
-                      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
-                    >
-                      {authView === "login" ? (
-                        <LoginForm
-                          onClose={closeAuth}
-                          onSwitch={() => setAuthView("signup")}
-                        />
-                      ) : (
-                        <SignupForm
-                          onClose={closeAuth}
-                          onSwitch={() => setAuthView("login")}
-                        />
-                      )}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+<div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">
+  {/* Background decoration — behind scroll layer */}
+  <div className="absolute bottom-0 left-0 pointer-events-none">
+    <Image
+      src="/icons/layout_icons/m-icon.svg"
+      alt="Icon"
+      width={534}
+      height={704}
+    />
+  </div>
+
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={authView}
+      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-200 3xl:py-0 3xl:pt-200 pointer-events-auto"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}  
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }}
+      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+    >
+      {authView === "login" ? (
+        <LoginForm onClose={closeAuth} onSwitch={() => setAuthView("signup")} />
+      ) : (
+        <SignupForm onClose={closeAuth} onSwitch={() => setAuthView("login")} />
+      )}
+    </motion.div>
+  </AnimatePresence>
+</div>
               </div>
             </motion.div>
           </>

@@ -349,7 +349,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
         </span>
       </button>
 
-      <div className="w-full px-60 3xl:px-0 max-w-[700px] flex flex-col self-center 3xl:self-end 3xl:pb-80 items-center">
+      <div className="w-full px-60 3xl:px-0 max-w-[700px] flex flex-col self-center 3xl:self-end 3xl:pb-80 pt-200 items-center">
         <div className="flex flex-col items-center justify-center px-50 sm:px-0">
           <h1 className="text-heading text-primary-2 mb-20">MEMBERS SIGN UP</h1>
           <p className="text-description text-center mb-50 max-w-[431px] text-foreground-light sm:px-50 lg:px-0">

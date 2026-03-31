@@ -79,22 +79,18 @@ export function SearchableDropdown({
           {value || "‎"}
         </div>
 
-        {/* Animated field line */}
-        <div
-          className={`relative h-px w-full ${
-            isLight ? "bg-white/30" : "bg-foreground-light/50"
-          }`}
-        >
-          <div
-            className={`absolute inset-y-0 left-0 transition-all duration-500 ease-in-out ${
-              hasError
-                ? "bg-[#c0392b] w-full"
-                : open
-                  ? `${isLight ? "bg-white" : "bg-foreground-light"} w-full`
-                  : "w-0"
-            }`}
-          />
-        </div>
+{/* Animated field line */}
+<div className={`relative h-px w-full overflow-hidden ${isLight ? "bg-white/30" : "bg-foreground-light/50"}`}>
+  <div
+    className={`absolute inset-0 origin-left transition-transform duration-[420ms] ease-out ${
+      hasError
+        ? "bg-[#c0392b] scale-x-100"
+        : open
+          ? `${isLight ? "bg-white" : "bg-foreground-light"} scale-x-100`
+          : "scale-x-0"
+    }`}
+  />
+</div>
       </div>
 
       {open && (
