@@ -4,7 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import NavPageV3 from "../common/NavPageV3";
-import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import { usePathname } from "next/navigation";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
@@ -48,7 +53,9 @@ const InnerHeader: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const theme = (entry.target as HTMLElement).dataset.header as "light" | "dark";
+            const theme = (entry.target as HTMLElement).dataset.header as
+              | "light"
+              | "dark";
             setHeaderTheme(theme);
           }
         });
@@ -56,12 +63,23 @@ const InnerHeader: React.FC = () => {
       {
         rootMargin: "0px 0px -95% 0px",
         threshold: 0,
-      }
+      },
     );
 
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [pathname]);
+
+  useEffect(() => {
+    if (authView) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [authView]);
 
   const bgClass = headerTheme === "dark" ? "bg-black/60" : "bg-white/10";
 
@@ -76,7 +94,7 @@ const InnerHeader: React.FC = () => {
       >
         <header className="w-full">
           <div className="container">
-            <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] xl:h-[80px] py-[15px] px-20 xl:px-40">
+            <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:px-40">
               <div
                 className={`absolute inset-0 rounded-full ${bgClass} backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500`}
               />
@@ -105,7 +123,7 @@ const InnerHeader: React.FC = () => {
                   width={183}
                   height={50}
                   priority
-                  className="w-auto xl:w-[183px] h-[26px] md:h-[30px] xl:h-[50px]"
+                  className="w-auto xl:w-[183px] h-[26px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
                 />
               </div>
 
@@ -169,7 +187,12 @@ const InnerHeader: React.FC = () => {
 
                 <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden">
                   <div className="absolute bottom-0 left-0">
-                    <Image src="/icons/layout_icons/m-icon.svg" alt="Icon" width={534} height={704} />
+                    <Image
+                      src="/icons/layout_icons/m-icon.svg"
+                      alt="Icon"
+                      width={534}
+                      height={704}
+                    />
                   </div>
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -181,9 +204,15 @@ const InnerHeader: React.FC = () => {
                       transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
                     >
                       {authView === "login" ? (
-                        <LoginForm onClose={closeAuth} onSwitch={() => setAuthView("signup")} />
+                        <LoginForm
+                          onClose={closeAuth}
+                          onSwitch={() => setAuthView("signup")}
+                        />
                       ) : (
-                        <SignupForm onClose={closeAuth} onSwitch={() => setAuthView("login")} />
+                        <SignupForm
+                          onClose={closeAuth}
+                          onSwitch={() => setAuthView("login")}
+                        />
                       )}
                     </motion.div>
                   </AnimatePresence>

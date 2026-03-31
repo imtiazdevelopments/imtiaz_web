@@ -28,7 +28,7 @@ const formatted = (date: string) => {
 
   return (
     <Link href={`/media-center/blog/${blog.slug}`} className="group block">
-      <div className="relative w-full h-[340px] lg:h-[522px] overflow-hidden">
+      <div className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden">
         <Image
           src={blog.image}
           alt={blog.title}

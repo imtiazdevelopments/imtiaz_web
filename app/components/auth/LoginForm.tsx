@@ -12,11 +12,7 @@ type LoginValues = {
 };
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div
-    className={`field-line relative h-px w-full ${
-      hasError ? "bg-[#c0392b] error" : "bg-foreground-light/50"
-    }`}
-  />
+  <div className={`field-line relative h-px w-full bg-foreground-light/50 ${hasError ? "error" : ""}`} />
 );
 
 const errorMessageClass = "text-[14px] text-[#c0392b] pt-[5px] h-20";

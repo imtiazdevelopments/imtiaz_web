@@ -30,11 +30,7 @@ const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
 );
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
-  <div
-    className={`field-line relative h-px w-full ${
-      hasError ? "bg-[#c0392b] error" : "bg-foreground-light/50"
-    }`}
-  />
+  <div className={`field-line relative h-px w-full bg-foreground-light/50 ${hasError ? "error" : ""}`} />
 );
 
 const inputClass =
@@ -361,10 +357,10 @@ export default function PaymentForm() {
               >
                 Type message here...
               </label>
-              <textarea
+              <input
                 id="message"
-                rows={1}
-                className="w-full mt-40 text-description text-foreground-light bg-transparent outline-none p-0 resize-none"
+                type="text"
+                className="w-full mt-40 text-description text-foreground-light bg-transparent outline-none p-0"
                 {...register("message")}
               />
               <FieldLine hasError={false} />

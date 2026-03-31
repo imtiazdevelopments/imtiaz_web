@@ -117,7 +117,7 @@
 --text-50: clamp(28px, 1.55vw + 22px, 50px);
 
 /* 32px → 24px at 390px, 32px at 1810px */
---text-32: clamp(23px, 0.81vw + 17.3px, 32px);
+--text-32: clamp(25px, 0.81vw + 17.3px, 32px);
 
 /* 25px → 16px at 390px, 25px at 1810px */
 --text-25: clamp(16px, 0.63vw + 13.5px, 25px);
@@ -702,7 +702,6 @@ body {
   animation: marquee 90s linear infinite;
 }
 
-
 .field-line::after {
   content: '';
   position: absolute;
@@ -713,7 +712,21 @@ body {
   background: var(--foreground-light);
 }
 
+.field-line-2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s ease-out;
+  background: white;
+}
+
 .group:focus-within .field-line::after {
+  transform: scaleX(1);
+}
+
+.group:focus-within .field-line-2::after {
   transform: scaleX(1);
 }
 
@@ -722,6 +735,10 @@ body {
   background: #c0392b;
 }
 
+.field-line-2.error::after {
+  transform: scaleX(1);
+  background: #c0392b;
+}
 
 /* ThinkingThatDelivers section */
 .thinking-delivers .service-card .service-panel {
