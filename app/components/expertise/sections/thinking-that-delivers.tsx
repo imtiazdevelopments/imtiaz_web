@@ -81,12 +81,12 @@ export default function ThinkingThatDelivers() {
                   </div>
 
                   {/* Content panel */}
-                  <div className="service-panel flex-1 min-w-0 bg-[#F0EDE8] flex flex-col justify-between p-30 lg:p-50 transition-colors duration-400">
-                    <span className="service-number text-heading text-primary-2 transition-colors duration-400">
+                  <div className="service-panel flex-1 min-w-0 flex flex-col p-30 lg:p-50 justify-between transition-colors duration-400">
+                    <span className="service-number text-heading text-primary-2 transition-colors duration-400 3xl:h-70 flex items-center">
                       {service.number}
                     </span>
                     <div>
-                      <h2 className="service-title text-25 font-[optima] uppercase text-primary-2 transition-colors duration-400 mb-40 max-w-[424px]">
+                      <h2 className="service-title text-25 font-[optima] leading-[1.4] uppercase text-foreground transition-colors duration-400 mb-20 max-w-[424px]">
                         {service.title}
                       </h2>
                       <p className="service-desc text-foreground-light transition-colors duration-400 text-description">

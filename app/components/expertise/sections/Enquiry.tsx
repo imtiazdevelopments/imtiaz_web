@@ -156,7 +156,7 @@ export default function EnquirySection() {
             }}
             className="relative w-full lg:w-[43.65%] bg-primary-2 flex flex-col spacing-y-130 overflow-hidden py-120 3xl:py-130"
           >
-            <div className="absolute inset-0 bg-black/20 z-1" />
+            <div className="absolute inset-0 bg-black/20 z-10" />
             <div className="lg:hidden absolute bottom-0 right-0 z-10">
               <Image
                 src="/images/expertise/m.svg"
@@ -166,7 +166,7 @@ export default function EnquirySection() {
                 className="w-auto h-[200px] sm:h-[225px] md:h-[300px] lg:h-[500px] z-[1] select-none pointer-events-none"
               />
             </div>
-            <div>
+            <div className="relative z-20">
               <h2 className="text-heading text-white mb-20">
                 {enquiryData.heading}
               </h2>
@@ -365,14 +365,14 @@ export default function EnquirySection() {
                                 className={`w-[20px] h-[20px] rounded-full border flex items-center justify-center transition-colors duration-200 mb-1 ${
                                   field.value === mode
                                     ? "border-white"
-                                    : "border-white/40"
+                                    : "border-white"
                                 }`}
                               >
                                 {field.value === mode && (
                                   <span className="w-[14px] h-[14px] rounded-full bg-white block" />
                                 )}
                               </span>
-                              <span className="text-description text-white">
+                              <span className="text-description text-white/80">
                                 {mode}
                               </span>
                             </label>
@@ -395,7 +395,7 @@ export default function EnquirySection() {
                             className={`w-5 mb-1 h-5 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
                               field.value
                                 ? "bg-white border-white"
-                                : "border-white/40"
+                                : "border-white"
                             }`}
                           >
                             {field.value && (
@@ -410,7 +410,7 @@ export default function EnquirySection() {
                               </svg>
                             )}
                           </span>
-                          <span className="text-description text-white">
+                          <span className="text-description text-white/80">
                             {enquiryData.checkboxes[0].label}
                           </span>
                         </label>
@@ -434,7 +434,7 @@ export default function EnquirySection() {
                                   ? "bg-white border-white"
                                   : errors.privacy
                                     ? "border-[#c0392b]"
-                                    : "border-white/40"
+                                    : "border-white"
                               }`}
                             >
                               {field.value && (
@@ -449,7 +449,7 @@ export default function EnquirySection() {
                                 </svg>
                               )}
                             </span>
-                            <span className="text-description text-white">
+                            <span className="text-description text-white/80">
                               {enquiryData.checkboxes[1].label}
                             </span>
                           </label>
