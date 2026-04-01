@@ -136,7 +136,7 @@ export default function EnquirySection() {
   }, []);
 
   return (
-    <section className="w-full" data-header="light">
+    <section className="w-full dark-section" data-header="light">
       <ContainerAnchor ref={containerRef} />
       <div className="relative">
         <Image
@@ -290,7 +290,7 @@ export default function EnquirySection() {
                       <input
                         id="phone"
                         type="number"
-                        className="flex-1 outline-none bg-transparent text-description text-white pb-[10px]"
+                        className="flex-1 outline-none bg-transparent text-description text-white"
                         {...register("phone", {
                           required: "Phone number is required",
                           pattern: {
@@ -307,25 +307,34 @@ export default function EnquirySection() {
 
                 {/* Row 3 — Reason */}
                 <div className="group mb-40">
-                  <Controller
-                    name="reason"
-                    control={control}
-                    rules={{ required: "Reason is required" }}
-                    render={({ field }) => (
-                      <SearchableDropdown
-                        variant="light"
-                        label="Select Reason*"
-                        items={enquiryData.selectReasons.map((p) => ({
-                          name: p,
-                        }))}
-                        value={field.value ?? ""}
-                        onChange={field.onChange}
-                        placeholder="project"
-                        hasError={!!errors.reason}
-                      />
-                    )}
-                  />
-                  <ErrorSlot msg={errors.reason?.message} />
+                  <div className="group relative flex flex-col self-end">
+                    <Image
+                      src="/images/icons/down-tip-arrow.svg"
+                      alt="arrow-down"
+                      width={20}
+                      height={10}
+                      className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0 invert brightness-0"
+                    />
+                    <Controller
+                      name="reason"
+                      control={control}
+                      rules={{ required: "Reason is required" }}
+                      render={({ field }) => (
+                        <SearchableDropdown
+                          variant="light"
+                          label="Select Reason*"
+                          items={enquiryData.selectReasons.map((p) => ({
+                            name: p,
+                          }))}
+                          value={field.value ?? ""}
+                          onChange={field.onChange}
+                          placeholder="project"
+                          hasError={!!errors.reason}
+                        />
+                      )}
+                    />
+                    <ErrorSlot msg={errors.reason?.message} />
+                  </div>
                 </div>
 
                 {/* Row 4 — Message */}
