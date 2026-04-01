@@ -111,6 +111,7 @@
   --foreground-light: #404040;
   --primary: #7A253A;
   --primary-2: #490905;
+   --gray: #EBEBEC;
 
 
 /* 50px → 28px at 390px, 50px at 1810px */
@@ -204,6 +205,7 @@
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
   --color-primary-2: var(--primary-2);
+  --color-gray: var(--gray);
   --color-foreground-light: var(--foreground-light);
 
   --text-50: var(--text-50);

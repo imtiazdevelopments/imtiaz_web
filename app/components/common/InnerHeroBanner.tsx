@@ -7,9 +7,10 @@ interface InnerHeroProps {
   title: string;
   description?: string;
   maxW?: string;
+  maxTitle?: string;
 }
 
-const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) => {
+const InnerHeroBanner = ({ image, title, description, maxW, maxTitle }: InnerHeroProps) => {
   return (
     <section className="relative w-full h-[70vh] 2xl:h-[89.5dvh] overflow-hidden" data-header="light">
       <Image
@@ -25,7 +26,9 @@ const InnerHeroBanner = ({ image, title, description, maxW }: InnerHeroProps) =>
 
       <div className="container absolute inset-0 flex items-center justify-center">
         <div className="w-full text-center">
-          <AnimatedHeading title={title} className="mb-20" mode="blade"/>
+          <div className={`${maxTitle} mx-auto`}>
+            <AnimatedHeading title={title} className="mb-20" mode="blade"/>
+          </div>
           {description && (
             <p className={`text-white/80 text-description ${maxW} mx-auto 3xl:h-[54px] text-center flex items-center justify-center px-30 xl:px-0`}>
               {description}
