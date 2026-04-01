@@ -83,7 +83,7 @@ export default function PaymentForm() {
 
   return (
     <section
-      className="w-full min-h-screen py-120 3xl:py-130 bg-[#EBEBEC]"
+      className="w-full min-h-screen py-120 3xl:py-130 bg-[#EBEBEC] dark-section-2"
       data-header="dark"
     >
       <div className="container flex flex-col lg:flex-row gap-80 lg:gap-50 2xl:gap-0">

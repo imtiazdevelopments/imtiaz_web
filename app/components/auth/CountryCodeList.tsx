@@ -56,24 +56,26 @@ export default function CountryCodeSelect({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`flex items-center gap-[10px] text-description bg-transparent pb-[6px] -mb-[1px] border-b ${variant === "light" ? "border-white" : "border-foreground-light"} cursor-pointer ${
+        className={`flex items-center relative text-description bg-transparent cursor-pointer ${
           isLight
             ? "text-white border-white"
             : "text-foreground-light border-foreground-light"
         }`}
       >
-        <span
-          className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block`}
-          style={{ width: "27px", height: "20px" }}
-        />
-        <span>{selected.code}</span>
-        <Image
-          src="/images/icons/down-tip-arrow.svg"
-          alt="arrow-down"
-          width={10}
-          height={10}
-          className="h-[5px] w-auto mb-[6px]"
-        />
+        <div className={`flex items-center gap-[10px] absolute -top-[28px] border-b pr-[15px] ${variant === "light" ? "border-white" : "border-foreground-light"} pb-1`}>
+          <span
+            className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block shrink-0`}
+            style={{ width: "27px", height: "20px" }}
+          />
+          <span>{selected.code}</span>
+          <Image
+            src="/images/icons/down-tip-arrow.svg"
+            alt="arrow-down"
+            width={10}
+            height={10}
+            className={`h-[7.4px] w-auto mb-[6px] ${isLight ? "invert brightness-0" : ""}`}
+          />
+        </div>
       </button>
 
       {/* Dropdown */}

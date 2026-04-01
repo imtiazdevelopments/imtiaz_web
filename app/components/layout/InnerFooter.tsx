@@ -2,8 +2,31 @@
 
 import Image from "next/image";
 import { footerV2Data } from "../common/data";
+import { useState } from "react";
 
 const InnerFooter = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const validateEmail = (value: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  };
+
+  const handleSubmit = () => {
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Enter a valid email");
+      return;
+    }
+
+    setError("");
+    // ✅ proceed with API / submit
+    console.log("Email:", email);
+  };
   return (
     <footer className="w-full text-white">
       {/* ================= TOP HERO SECTION ================= */}
@@ -20,19 +43,35 @@ const InnerFooter = () => {
 
           {/* Stay Updated */}
           <div className="flex flex-col mt-12 lg:mt-0 lg:flex-row gap-5 xl:gap-10 items-center">
-            <p className="uppercase text-19font-[avenirHeavy] text-white">
+            <p className="text-19 font-[avenirHeavy] text-white uppercase leading-[1.5]">
               STAY UPDATED
             </p>
 
-            <div className="flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white">
+            <div className="flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white relative">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (error) setError(""); // clear on typing
+                }}
                 placeholder={footerV2Data.top.placeholderEmail}
-                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirHeavy] font-[800] text-16 xl:text-[16px] text-white placeholder-white/60 focus:outline-none"
+                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirHeavy] text-16 text-white placeholder-white/60 focus:outline-none"
               />
-              <button className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] font-[avenirRoman] text-17">
+
+              <button
+                onClick={handleSubmit}
+                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-description text-white"
+              >
                 {footerV2Data.top.sendText}
               </button>
+
+              {/* ✅ Error message */}
+              {error && (
+                <p className="text-[14px] text-red-400 absolute -bottom-50 3xl:-bottom-30 left-[27px] xl:left-[42px]">
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -72,11 +111,11 @@ const InnerFooter = () => {
 
       {/* ================= BOTTOM FOOTER BAR ================= */}
       <div className="bg-primary-2 relative py-[17px]">
-        <div className="absolute inset-0 z-0 bg-white/2 w-full h-full" />
+        <div className="absolute inset-0 z-0 bg-white/2 w-full h-full pointer-events-none" />
 
         <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
           {/* LEFT LINKS */}
-          <div className="flex gap-3 xl:gap-6 3xl:gap-7 text-16 font-[avenirHeavy] justify-center md:justify-start w-full">
+          <div className="flex gap-3 xl:gap-6 3xl:gap-7 text-description justify-center md:justify-start w-full">
             {footerV2Data.bottom.left.map((txt, i) => (
               <span
                 key={i}
@@ -88,7 +127,7 @@ const InnerFooter = () => {
           </div>
 
           {/* CENTER TEXT */}
-          <div className="text-white/45 text-16 font-[avenirHeavy] leading-[2.1] text-center w-full">
+          <div className="text-white/45 text-description text-center w-full">
             ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
           </div>
 
@@ -104,7 +143,7 @@ const InnerFooter = () => {
                   alt="icon"
                   width={22}
                   height={22}
-                  className="w-[22px] h-[22px] hover:opacity-80 transition-opacity duration-300"
+                  className="w-[22px] h-[22px] hover:scale-110 transition-all duration-300"
                 />
               </div>
             ))}

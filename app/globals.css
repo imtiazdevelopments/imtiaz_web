@@ -706,15 +706,18 @@ body {
 
 /* ThinkingThatDelivers section */
 .thinking-delivers .service-card .service-panel {
-  background-color: #F0EDE8;
+  background-color: #EBEBEC;
 }
 .thinking-delivers .service-card.is-active .service-panel {
   background-color: var(--color-primary-2);
 }
 .thinking-delivers .service-card.is-active .service-number,
-.thinking-delivers .service-card.is-active .service-title,
+.thinking-delivers .service-card.is-active .service-title {
+    color: white;
+}
 .thinking-delivers .service-card.is-active .service-desc {
   color: white;
+  opacity: 0.8;
 }
 
 
@@ -726,4 +729,22 @@ input::-ms-clear {
 input::-webkit-contacts-auto-fill-button,
 input::-webkit-credentials-auto-fill-button {
   display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--input-text-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark-section {
+  --input-text-color: #ffffff;
+}
+
+.dark-section-2 {
+  --input-text-color: #404040;
 }
