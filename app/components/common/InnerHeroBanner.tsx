@@ -11,6 +11,7 @@ interface InnerHeroProps {
   title: string;
   description?: string;
   maxW?: string;
+  maxTitle?: string;
 }
 
 const ZOOM_OUT_DURATION = 2.2;
@@ -27,7 +28,7 @@ const InnerHeroBanner = ({
   image,
   title,
   description,
-  maxW,
+  maxW, maxTitle,
 }: InnerHeroProps) => {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -117,13 +118,15 @@ const InnerHeroBanner = ({
       <div className="container absolute inset-0 flex items-center justify-center">
         <div className="w-full text-center">
           {/* delay prop fires blade animation after zoom-out nearly finishes */}
-          <AnimatedHeading
+          <div className={`${maxTitle} mx-auto`}>
+            <AnimatedHeading
             title={title}
             className="mb-20 text-white"
             mode="blade"
             delay={HEADING_DELAY}
           />
 
+          </div>
           {description && (
             <p
               ref={descRef}

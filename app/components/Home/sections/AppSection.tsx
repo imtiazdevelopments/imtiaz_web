@@ -65,7 +65,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   return (
     <section
       ref={section5Ref}
-      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:py-[141px] bg-[#F4F2F2]"
+      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:py-[141px] bg-gray"
     >
       <div
         className="container"
@@ -73,13 +73,13 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* ----- MAIN LAYOUT ----- */}
-        <div className="flex justify-center items-center gap-20">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-150">
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center">
-            <div className="relative w-[394px] h-[761px] overflow-hidden phone-wrapper z-[100]">
+            <div className="relative w-[394px] h-[600px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
-                src={"/images/home/app/phone.png"}
+                src={"/images/home/app/phone3.png"}
                 alt="phone"
                 width={900}
                 height={900}
@@ -105,7 +105,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] mb-[20px] font-[optima] uppercase text-primary leading-[1.2]"
+                className="  mb-[20px] text-heading uppercase text-primary-2  "
               >
                 Download Imtiaz App
               </motion.h2>
@@ -119,7 +119,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-[20px] font-[avenirHeavy] text-[#404040] mb-[60px] max-w-[58ch] leading-[110%] text-center"
+                className="text-description text-[#404040] mb-50 max-w-[58ch]   text-center"
               >
                 Imtiaz Developments delivers a total solution to all kinds of
                 Real Estate projects, from initial concept through completion
@@ -127,7 +127,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               </motion.p>
             </div>
 
-            <div className="flex gap-[14px]">
+            <div className="flex gap-[14px] justify-center">
               <motion.div
                 variants={fadeUp}
                 // custom={0.7}
@@ -136,12 +136,13 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
                     src="/images/home/app/plv3.svg"
                     alt="Download on App Store"
                     width={194}
                     height={65}
+                    className="w-auto h-[45px] lg:w-[194px] lg:h-[65px] "
                   />
                 </a>
               </motion.div>
@@ -154,12 +155,13 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <a className="inline-block bg-black rounded-[11px] h-[65px] w-[194px] hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
                     src="/images/home/app/asv3.svg"
                     alt="Get it on Google Play"
                     width={194}
                     height={65}
+                    className="w-auto h-[45px] lg:w-[194px] lg:h-[65px]"
                   />
                 </a>
               </motion.div>

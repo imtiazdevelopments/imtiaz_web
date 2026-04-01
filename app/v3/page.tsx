@@ -31,6 +31,7 @@ import AppSectionV2 from "../components/Home/sections/AppSection";
 import CommunityNamesSlider from "../components/Home/sections/CommunityNamesSlider";
 import { useSmoothScrollContext } from "../contexts/smoothScrollContext";
 import AboutJourneyV3 from "../components/Home/sections/AboutJourneyV3";
+import SpotlightSlider from "../components/Home/sections/SpotlightSlider";
 // import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -241,7 +242,8 @@ export default function Home() {
             <ImtiazProperties data={imtiazPropertiesData} />
             <ConstructionProgress2 data={ConstructionProgressData} />
             {/* <PressSpotlight data={pressSpotlightData} /> */}
-            <PressSpotlightV3 data={pressSpotlightData} />
+            {/* <PressSpotlightV3 data={pressSpotlightData} /> */}
+            <SpotlightSlider />
             {/* <AppSection data={appSectionData} /> */}
             <AppSectionV2 data={appSectionData} />
         </>

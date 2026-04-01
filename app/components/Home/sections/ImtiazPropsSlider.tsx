@@ -339,7 +339,8 @@ import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
+import { projectsData } from "../data"; 
+import ProjectCard from "../../common/ProjectCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import type { Swiper as SwiperType } from "swiper";
@@ -459,7 +460,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 3xl:py-[170px] bg-white container">
+    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 3xl:py-[160px] bg-white container">
       <div className="overflow-hidden">
         <motion.h2
           // variants={moveUp(0.35)}
@@ -467,7 +468,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] mb-[50px]"
+          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] mb-50"
         >
           {data.sectionTitle}
         </motion.h2>
@@ -476,7 +477,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
       <div className="relative" ref={rootRef}>
         <Swiper
           modules={[Navigation]}
-          spaceBetween={8}
+          spaceBetween={28}
           slidesPerView={1}
           loop
           onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -489,123 +490,17 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
             };
           }}
           breakpoints={{
-            768: { slidesPerView: 2 },
+            700: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 4 },
           }}
         >
-          {data.properties.map((item, idx) => {
-            // ⭐ Combined active state:
-            const isActive =
-              (!isMobile && hoverIndex === idx) ||
-              (isMobile && activeSlide === idx);
+          {projectsData.map((project, i) => { 
 
             return (
-              <SwiperSlide key={item.id}>
-                <motion.div
-                  // variants={moveUp(idx * 0.13)}
-                  variants={moveUp(idx * 0.55)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  className="relative group h-[520px] md:h-[500px] xl:h-[580px] 3xl:h-[650px]
-                  w-full max-w-[424px] mx-auto overflow-hidden cursor-pointer"
-                  ref={(el) => setWrapRef(el, idx)}
-                  onMouseEnter={() => !isMobile && setHoverIndex(idx)}
-                  onMouseLeave={() => !isMobile && setHoverIndex(null)}
-                >
-                  <Image
-                    ref={(el) => setImgRef(el, idx)}
-                    src={item.image}
-                    alt={item.title}
-                    width={1000}
-                    height={1200}
-                    className="absolute object-cover w-full h-full scale-[1.1]"
-                  />
-
-                  {/* DEFAULT GRADIENT */}
-                  <div
-                    className={`absolute inset-0 z-[2] transition-all duration-500 ${
-                      isActive ? "opacity-0" : "group-hover:opacity-0"
-                    }`}
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(0,0,0,0) 47.23%, rgba(0,0,0,0.7) 100%)",
-                    }}
-                  />
-
-                  {/* HOVER GRADIENT */}
-                  <div
-                    className={`absolute inset-0 z-[3] transition-opacity duration-500 ${
-                      isActive
-                        ? "opacity-100"
-                        : "opacity-0 group-hover:opacity-100"
-                    }`}
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%)",
-                    }}
-                  />
-
-                  {/* HOVER CONTENT */}
-                  <div className="absolute inset-0 z-[5] flex flex-col items-center justify-center text-center px-[50px]">
-                    <div
-                      className={`transition-all duration-400 translate-y-25 ${
-                        isActive
-                          ? "!opacity-100 !translate-y-0"
-                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                      } mb-[50px]`}
-                    >
-                      <Image
-                        src={item.logo}
-                        alt="Project Logo"
-                        width={207}
-                        height={50}
-                        className="object-contain"
-                      />
-                    </div>
-
-                    <h3
-                      className={`text-white text-[22px] md:text-[30px] font-[optima] uppercase
-                      mb-[100px] xl:mb-[130px]  3xl:mb-[190px]
-                      transition-all duration-600 translate-y-18 ${
-                        isActive
-                          ? "!opacity-100 !translate-y-0"
-                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                      }`}
-                    >
-                      {item.title}
-                    </h3>
-
-                    <span
-                      className={`inline-block border border-white px-[36px] py-[19.5px]
-                      rounded-full text-white font-[avenirRoman] text-[17px]
-                      transition-all duration-800 translate-y-6 ${
-                        isActive
-                          ? "!opacity-100 !translate-y-0"
-                          : "opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
-                      }`}
-                    >
-                      Read More
-                    </span>
-                  </div>
-
-                  {/* DEFAULT TITLE */}
-                  <h4
-                    className={`absolute bottom-10 left-1/2 -translate-x-1/2 w-full justify-center items-center
-flex px-6 z-[4] text-center text-white
-text-[18px] md:text-[20px] lg:text-[25px] 3xl:text-[30px]
-font-[optima] uppercase tracking-wide
-transition-all duration-500
-${
-  isActive
-    ? "opacity-0 translate-y-3"
-    : "group-hover:opacity-0 group-hover:translate-y-3"
-}`}
-                  >
-                    {item.title}
-                  </h4>
-                </motion.div>
+              <SwiperSlide key={i}> 
+                          <ProjectCard key={i} {...project} />
+                      
               </SwiperSlide>
             );
           })}
@@ -613,7 +508,7 @@ ${
       </div>
 
       {/* BOTTOM BUTTONS */}
-      <div className="flex items-center justify-center mt-10">
+      <div className="flex items-center justify-center mt-10 2xl:mt-12">
         <motion.div
           // variants={moveUp(0.1)}
           variants={moveUp(0.6)}
