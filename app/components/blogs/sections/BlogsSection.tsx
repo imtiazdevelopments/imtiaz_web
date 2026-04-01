@@ -14,6 +14,13 @@ import BlogCard from "./BlogCard";
 import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import { motion } from "framer-motion";
+import {
+  containerStagger,
+  moveUp,
+  moveUpV2,
+} from "@/app/components/motionVariants";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 const BLOGS_PER_PAGE = 4;
 
@@ -95,36 +102,67 @@ const BlogsSection = () => {
     >
       <div className="container">
         {/* Filters Row */}
-        <div className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70">
-          <div className="flex flex-col md:flex-row items-center gap-30 w-full md:w-auto">
-            <FilterDropdown
-              placeholder="Topic"
-              options={blogTopics}
-              value={selectedTopic}
-              onChange={(val) => updateParam("topic", val)}
-            />
-            <FilterDropdown
-              placeholder="Categories"
-              options={blogCategories}
-              value={selectedCategory}
-              onChange={(val) => updateParam("category", val)}
-            />
-          </div>
+        <motion.div
+          className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70"
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="flex flex-col md:flex-row items-center gap-30 w-full md:w-auto"
+            variants={containerStagger}
+          >
+            <motion.div className="w-full md:w-auto" variants={moveUp(0)}>
+              <FilterDropdown
+                placeholder="Topic"
+                options={blogTopics}
+                value={selectedTopic}
+                onChange={(val) => updateParam("topic", val)}
+              />
+            </motion.div>
+            <motion.div className="w-full md:w-auto" variants={moveUp(0.15)}>
+              <FilterDropdown
+                placeholder="Categories"
+                options={blogCategories}
+                value={selectedCategory}
+                onChange={(val) => updateParam("category", val)}
+              />
+            </motion.div>
+          </motion.div>
 
           {hasFilter && (
-            <CustomOutlineButton
-              text="Clear Filters"
-              onClick={clearFilters}
-              variant="dark"
-              px="px-60"
-              borderColor="border-primary-2"
-              textColor="text-foreground-light"
-              className="w-full md:w-auto !py-[17px] md:!py-5 uppercase"
-            />
+            <motion.div
+              className="w-full md:w-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <CustomOutlineButton
+                text="Clear Filters"
+                onClick={clearFilters}
+                variant="dark"
+                px="px-60"
+                borderColor="border-primary-2"
+                textColor="text-foreground-light"
+                className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+              />
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        <div className="w-full h-px bg-black/10 mb-50" />
+        <div className="w-full mb-50">
+          <div className="relative w-full h-px overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-black/10 origin-center"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
 
         {/* Hero Slider — hidden when filters active */}
         <div
@@ -136,9 +174,26 @@ const BlogsSection = () => {
             willChange: "max-height",
           }}
         >
-          <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
+          <motion.div
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
+          </motion.div>
           {/* Divider */}
-          <div className="w-full h-px bg-black/10 my-50" />
+          <div className="w-full my-50">
+            <div className="relative w-full h-px overflow-hidden">
+              <motion.div
+                className="absolute inset-0 bg-black/10 origin-center"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Blog Cards Grid */}
@@ -146,7 +201,11 @@ const BlogsSection = () => {
           {paginated.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-40 gap-40">
               {paginated.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
+                <Reveal key={blog.id} variants={moveUpV2}>
+                  <div>
+                    <BlogCard blog={blog} />
+                  </div>
+                </Reveal>
               ))}
             </div>
           ) : (
@@ -158,14 +217,20 @@ const BlogsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="w-full flex justify-center">
+          <motion.div
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="w-full flex justify-center"
+          >
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
               onPageChange={handlePageChange}
               scrollToId="blog-list"
             />
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

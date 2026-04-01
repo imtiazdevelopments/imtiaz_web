@@ -76,7 +76,7 @@ export default function ThinkingThatDelivers() {
                       alt={service.alt}
                       width={500}
                       height={500}
-                      className="w-full object-cover h-[220px] md:h-full lg:min-h-[320px]"
+                      className="w-full object-cover h-[260px] md:h-full lg:min-h-[320px]"
                     />
                   </div>
 

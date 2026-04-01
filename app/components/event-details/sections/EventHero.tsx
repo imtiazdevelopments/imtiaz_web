@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Breadcrumb from "../../common/Breadcrumb";
 import { EventDetail } from "../data";
-import { GoCalendar } from "react-icons/go";
-import { GoLocation } from "react-icons/go";
 
 interface Props {
   event: EventDetail;

@@ -29,9 +29,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
     const href = "/" + segments.slice(0, i + 1).join("/");
 
     return {
-      label:
-        seg.charAt(0).toUpperCase() +
-        seg.slice(1).replace(/-/g, " "),
+      label: seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " "),
       href,
       isLast: i === segments.length - 1,
       clickable: VALID_ROUTES.has(href),
@@ -57,10 +55,10 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
           {i > 0 && (
             <span
               className={`text-[9px] ${
-crumb.isLast
-  ? isBlack
-    ? "text-foreground-light"
-    : "text-white"
+                crumb.isLast
+                  ? isBlack
+                    ? "text-foreground-light"
+                    : "text-white"
                   : isBlack
                     ? "text-foreground-light/30"
                     : "text-white/50"
@@ -72,13 +70,13 @@ crumb.isLast
 
           {crumb.isLast || !crumb.clickable ? (
             <span
-className={`text-description ${
-  crumb.isLast
-    ? "text-white"
-    : isBlack
-      ? "text-foreground-light/30"
-      : "text-white/50"
-}`}
+              className={`text-description ${
+                crumb.isLast
+                  ? isBlack ? "text-foreground-light" : "text-white"
+                  : isBlack
+                    ? "text-foreground-light/30"
+                    : "text-white/50"
+              }`}
             >
               {/* mobile */}
               <span className="lg:hidden">

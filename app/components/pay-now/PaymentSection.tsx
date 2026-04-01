@@ -244,7 +244,7 @@ export default function PaymentForm() {
                     type="number"
                     className="flex-1 border-none border-b pb-[10px] border-foreground-light outline-none bg-transparent text-description text-foreground-light"
                     {...register("phone", {
-                      required: "Phone is required",
+                      required: "Phone number is required",
                       pattern: {
                         value: /^[0-9]{7,15}$/,
                         message: "Invalid number",

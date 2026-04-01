@@ -1,27 +1,48 @@
+"use client";
+
 import Image from "next/image";
 import Breadcrumb from "../../common/Breadcrumb";
 import { BlogDetail } from "../data";
 import { GoShareAndroid } from "react-icons/go";
+import { SectionHeading } from "../../animations/SectionHeading";
+import { motion } from "framer-motion";
+import { moveDown, moveUp } from "../../motionVariants";
+import { useParallax } from "@/app/hooks/useParallax";
 
 interface Props {
   blog: BlogDetail;
 }
 
 const BlogHero = ({ blog }: Props) => {
+  const { ref, parallaxY } = useParallax(15);
   return (
     <section className="w-full pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
-        <Breadcrumb variant="black" />
+        <motion.div
+          variants={moveDown(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <Breadcrumb variant="black" />
+        </motion.div>
 
         {/* Title */}
-        <h1 className="text-heading max-w-[50ch] text-foreground text-center uppercase mt-100">
-          {blog.title}
-        </h1>
+        <SectionHeading
+          title={blog.title}
+          className="max-w-[50ch] text-foreground text-center uppercase mt-100"
+        />
 
         {/* Meta row */}
         <div className="mt-20 flex items-center justify-between w-full">
-          <div className="flex items-center gap-[10px] text-foreground-light font-[avenirHeavy] text-16">
+          <motion.div
+            variants={moveUp(0.12)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex items-center gap-[10px] text-foreground-light font-[avenirHeavy] text-16"
+          >
             <div>
               <span>{blog.category}</span>
               <span> - </span>
@@ -31,24 +52,34 @@ const BlogHero = ({ blog }: Props) => {
             <div>
               <span>Reading Time: {blog.readingTime}</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Share button */}
-          <button
-            className="text-foreground-light cursor-pointer hover:scale-110 transition-all duration-300"
+          <motion.button
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-foreground-light cursor-pointer hover:scale-110 transition-colors duration-300"
             aria-label="Share"
           >
             <GoShareAndroid size={32} />
-          </button>
+          </motion.button>
         </div>
         {/* Full-width Hero Image */}
-        <div className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative">
+        <div
+          ref={ref}
+          className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative overflow-hidden"
+        >
           <Image
             src={blog.heroImage}
             alt={blog.title}
             fill
             priority
             sizes="100vw"
+            style={{
+              transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+            }}
           />
         </div>
       </div>

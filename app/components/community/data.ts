@@ -18,7 +18,7 @@ export interface CommunityCard {
 }
 
 export const communitySectionData = {
-  title: "LIVING SPACES THAT SHAPE\nEXPERIENCES",
+  title: "LIVING SPACES THAT SHAPE EXPERIENCES",
   description:
     "Each community we create is thoughtfully shaped to reflect its surroundings, culture, and lifestyle. From Dubai to the wider UAE and beyond, our developments foster connection, comfort.",
   cards: [

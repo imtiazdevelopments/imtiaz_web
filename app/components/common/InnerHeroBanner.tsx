@@ -59,20 +59,20 @@ const InnerHeroBanner = ({
         });
 
       // Description
-      if (descRef.current) {
-        const tl = gsap.timeline({ delay: DESC_DELAY });
-
-        tl.fromTo(
-          descRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" },
-        ).fromTo(
-          descRef.current,
-          { letterSpacing: "0.12em" },
-          { letterSpacing: "inherit", duration: 0.9, ease: "power2.out" },
-          "<", // starts at same time
-        );
-      }
+if (descRef.current) {
+  gsap.fromTo(
+    descRef.current,
+    { opacity: 0, y: 16, filter: "blur(4px)" },
+    {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.0,
+      ease: "power3.out",
+      delay: DESC_DELAY,
+    },
+  );
+}
 
       // Breadcrumb — subtle slide up
       if (breadcrumbRef.current) {

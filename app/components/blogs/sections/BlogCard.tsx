@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useParallax } from "@/app/hooks/useParallax";
 
 type Blog = {
   id: number;
@@ -8,56 +10,70 @@ type Blog = {
   category: string;
   date: string;
   slug: string;
-}
+};
 
 interface BlogCardProps {
-blog: Blog;
+  blog: Blog;
 }
 
 const BlogCard = ({ blog }: BlogCardProps) => {
+  const { ref, parallaxY } = useParallax(15);
+  const formatted = (date: string) => {
+    const d = new Date(date);
 
-const formatted = (date: string) => {
-  const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
 
-  const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const year = d.getFullYear();
-
-  return `${month}-${day}-${year}`;
-};
+    return `${month}-${day}-${year}`;
+  };
 
   return (
     <Link href={`/media-center/blog/${blog.slug}`} className="group block">
-      <div className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden">
+      <div
+        ref={ref}
+        className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden"
+      >
+        {/* hover fill overlay */}
+        <div className="absolute inset-0 bg-black/10 origin-left scale-x-0 transition-transform duration-500 z-20 ease-out group-hover:scale-x-100 pointer-events-none" />
         <Image
           src={blog.image}
           alt={blog.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className="object-cover"
+          style={{
+            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+          }}
         />
         {/* Overlay */}
         <div
           className="hidden md:block absolute inset-0"
-          style={{background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)"}}
+          style={{
+            background:
+              "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 29.48%, #000000 98.07%)",
+          }}
         />
 
-                <div
+        <div
           className="md:hidden absolute inset-0"
-          style={{background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 15.48%, #000000 98.07%)"}}
+          style={{
+            background:
+              "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 15.48%, #000000 98.07%)",
+          }}
         />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50">
+        <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50 z-30">
           <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] capitalize">
             {blog.category} - {formatted(blog.date)}
           </p>
           <h3 className="text-white uppercase text-25 leading-[1.5] md:leading-[1.4] mb-40 text-center">
             {blog.title}
           </h3>
-          <span className="text-white font-[avenirHeavy] text-19 leading-[100%] border-b border-white/40 group-hover:border-white transition-all duration-300">
-            Read More
-          </span>
+<span className="text-white font-[avenirHeavy] text-19 leading-[100%] underline underline-offset-3">
+  Read More
+</span>
         </div>
       </div>
     </Link>
