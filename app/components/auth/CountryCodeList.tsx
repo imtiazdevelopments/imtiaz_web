@@ -72,7 +72,7 @@ export default function CountryCodeSelect({
           alt="arrow-down"
           width={10}
           height={10}
-          className="h-[5px] w-auto mb-[6px]"
+          className={`h-[7.4px] w-auto mb-[6px] ${isLight ? "invert brightness-0" : ""}`}
         />
       </button>
 

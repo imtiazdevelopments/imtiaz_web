@@ -84,7 +84,7 @@ export function AnimatedHeading({
   const words = title.split(" ");
 
   return (
-    <h1 ref={ref} className={`text-white text-heading ${className}`}>
+    <h1 ref={ref} className={`text-heading ${className}`}>
       {words.map((word, wi) => (
         <span
           key={wi}

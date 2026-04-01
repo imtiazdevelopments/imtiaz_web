@@ -7,10 +7,12 @@ function AccordionItem({
   item,
   isOpen,
   onToggle,
+  isLast,
 }: {
   item: (typeof faqData.items)[0];
   isOpen: boolean;
   onToggle: () => void;
+  isLast: boolean;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -26,7 +28,7 @@ function AccordionItem({
       {/* Question Row */}
       <button
         onClick={onToggle}
-        className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start justify-between gap-20 py-40 text-left group focus:outline-none`}
+       className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-30" : ""}` : "py-40"} text-left group focus:outline-none`}
         aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
@@ -72,14 +74,15 @@ function AccordionItem({
           opacity: isOpen ? 1 : 0,
         }}
       >
-        <div ref={contentRef}>
-          <p className="text-description text-foreground-light max-w-[846px] pb-30">
-            {item.answer}
-          </p>
-        </div>
+<div ref={contentRef}>
+  <p className="text-description text-foreground-light max-w-[846px] pb-30">
+    {item.answer}
+  </p>
+</div>
       </div>
 
       {/* Divider */}
+      {!isLast && (
       <div className="relative h-px w-full bg-black/10">
         <div
           className={`absolute inset-y-0 left-0 bg-primary-2 transition-all duration-500 ease-in-out ${
@@ -87,6 +90,7 @@ function AccordionItem({
           }`}
         />
       </div>
+      )}
     </div>
   );
 }
@@ -100,7 +104,7 @@ export default function Faq() {
 
   return (
     <section
-      className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
+      className="w-full bg-[#EBEBEC] pt-120 pb-90 3xl:pt-130 3xl:pb-100"
       data-header="dark"
     >
       <div className="container">
@@ -109,19 +113,20 @@ export default function Faq() {
           <h1 className="text-heading mb-20 text-foreground">
             {faqData.title}
           </h1>
-          <p className="text-description max-w-[407px] text-foreground-light">
+          <p className="text-description shrink-0 max-w-[407px] text-foreground-light">
             {faqData.subtitle}
           </p>
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
-          {faqData.items.map((item) => (
+          {faqData.items.map((item, index) => (
             <AccordionItem
               key={item.id}
               item={item}
               isOpen={openId === item.id}
               onToggle={() => toggle(item.id)}
+              isLast={index === faqData.items.length - 1}
             />
           ))}
         </div>

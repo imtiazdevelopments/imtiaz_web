@@ -704,15 +704,18 @@ body {
 
 /* ThinkingThatDelivers section */
 .thinking-delivers .service-card .service-panel {
-  background-color: #F0EDE8;
+  background-color: #EBEBEC;
 }
 .thinking-delivers .service-card.is-active .service-panel {
   background-color: var(--color-primary-2);
 }
 .thinking-delivers .service-card.is-active .service-number,
-.thinking-delivers .service-card.is-active .service-title,
+.thinking-delivers .service-card.is-active .service-title {
+    color: white;
+}
 .thinking-delivers .service-card.is-active .service-desc {
   color: white;
+  opacity: 0.8;
 }
 
 

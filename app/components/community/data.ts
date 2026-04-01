@@ -6,6 +6,7 @@ export const bannerData = {
 
 export interface CommunityTag {
   label: string;
+  icon: string;
 }
 
 export interface CommunityCard {
@@ -26,9 +27,9 @@ export const communitySectionData = {
       title: "DUBAI ISLANDS",
       image: "/images/community/1.jpg",
       tags: [
-        { label: "Sought After" },
-        { label: "Souk Al Marsa" },
-        { label: "10 Mins to Sheikh Zayed Rd" },
+        { label: "Sought After" ,icon: "/images/community/icons/1.svg" },
+        { label: "Souk Al Marsa" ,icon: "/images/community/icons/2.svg" },
+        { label: "10 Mins to Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
       ],
       href: "/communities/dubai-islands",
     },
@@ -37,9 +38,9 @@ export const communitySectionData = {
       title: "DUBAI LAND RESIDENCE COMPLEX",
       image: "/images/community/2.jpg",
       tags: [
-        { label: "Green Parks" },
-        { label: "Cycling Track" },
-        { label: "10 Mins to D26" },
+        { label: "Green Parks" ,icon: "/images/community/icons/7.svg" },
+        { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
+        { label: "10 Mins to D26" ,icon: "/images/community/icons/3.svg" },
       ],
       href: "/communities/dubai-land",
     },
@@ -48,9 +49,9 @@ export const communitySectionData = {
       title: "AL FURJAN",
       image: "/images/community/3.jpg",
       tags: [
-        { label: "Green Parks" },
-        { label: "Cycling Track" },
-        { label: "10 Mins to D26" },
+        { label: "Green Parks" ,icon: "/images/community/icons/4.svg" },
+        { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
+        { label: "10 Mins to D26" ,icon: "/images/community/icons/6.svg" },
       ],
       href: "/communities/al-furjan",
     },
@@ -59,9 +60,9 @@ export const communitySectionData = {
       title: "JUMEIRAH GARDEN CITY",
       image: "/images/community/4.jpg",
       tags: [
-        { label: "Built Sustainably" },
-        { label: "Near Oud bin Khar" },
-        { label: "Well Connected" },
+        { label: "Built Sustainably" ,icon: "/images/community/icons/7.svg" },
+        { label: "Near Oud bin Khar" ,icon: "/images/community/icons/8.svg" },
+        { label: "Well Connected" ,icon: "/images/community/icons/3.svg" },
       ],
       href: "/communities/jumeirah-garden-city",
     },
@@ -70,9 +71,9 @@ export const communitySectionData = {
       title: "JVC",
       image: "/images/community/5.jpg",
       tags: [
-        { label: "Local Childcare" },
-        { label: "Circle Mall" },
-        { label: "Sheikh Zayed Rd" },
+        { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
+        { label: "Circle Mall" ,icon: "/images/community/icons/2.svg" },
+        { label: "Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
       ],
       href: "/communities/jvc",
     },

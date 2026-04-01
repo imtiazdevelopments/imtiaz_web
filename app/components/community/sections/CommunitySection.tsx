@@ -1,5 +1,9 @@
 import CommunityCard from "./CommunityCard";
 import { communitySectionData } from "../data";
+import { SectionHeading } from "../../animations/SectionHeading";
+import { SectionDescription } from "../../animations/SectionDescription";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveUpV2 } from "../../motionVariants";
 
 const CommunitiesSection = () => {
   const { title, description, cards } = communitySectionData;
@@ -9,18 +13,24 @@ const CommunitiesSection = () => {
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center mb-50">
-          <h2 className="text-heading text-foreground mb-20 max-w-[666px] mx-auto">
-            {title}
-          </h2>
-          <p className="text-description text-foreground-light max-w-[736px] mx-auto">
-            {description}
-          </p>
+          <SectionHeading
+            title={title}
+            as="h2"
+            className="text-foreground mb-20 max-w-[666px] mx-auto"
+          />
+
+          <SectionDescription
+            text={description}
+            className="text-foreground-light max-w-[736px] mx-auto"
+          />
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-30 md:gap-x-40 md:gap-y-60">
           {cards.map((card) => (
-            <CommunityCard key={card.id} card={card} />
+            <Reveal key={card.id} variants={moveUpV2}>
+              <CommunityCard card={card} />
+            </Reveal>
           ))}
         </div>
       </div>
