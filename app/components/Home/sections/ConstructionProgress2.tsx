@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,7 +91,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden pb-[200px] md:pb-[250px] lg:pb-[300px] xl:pb-[350px] 3xl:pb-[432px] flex justify-center pt-10 xl:pt-[140px] 3xl:pt-[196px] h-screen"
+      className="relative w-full overflow-hidden      flex justify-center items-center h-screen"
     >
       {/* ---------------- BACKGROUND VIDEO ---------------- */}
       <video
@@ -113,20 +114,24 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
         className="relative z-[5] text-center px-6 max-w-[900px]"
       >
         <div className="overflow-hidden">
-          <h2 className="anim-item text-white text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] font-[400] leading-[110%] mb-5 max-w-[20ch] uppercase">
+          <h2 className="anim-item text-white   text-heading mb-5 max-w-[20ch] uppercase mx-auto">
             {data.title}
           </h2>
         </div>
         <div className="overflow-hidden">
-          <p className="anim-item text-white text-[19px] font-[avenirRoman] font-[400] leading-[1.3] max-w-[60ch] mx-auto mb-[50px]">
+          <p className="anim-item text-white  text-description max-w-[60ch] mx-auto mb-[50px]">
             {data.description}
           </p>
         </div>
         <div className="overflow-hidden">
           {/* <Link href="/#"> */}
-            <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
+            {/* <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
               {data.button.label}
-            </button>
+            </button> */}
+            <CustomOutlineButton
+            text={data.button.label}
+            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px]"
+            />
           {/* </Link> */}
         </div>
       </div>
