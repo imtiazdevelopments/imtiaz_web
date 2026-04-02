@@ -17,7 +17,7 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ blog }: BlogCardProps) => {
-  const { ref, parallaxY } = useParallax(15);
+    const { ref, parallaxY } = useParallax(15);
   const formatted = (date: string) => {
     const d = new Date(date);
 

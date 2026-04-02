@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { footerV2Data } from "../common/data";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import Reveal from "../animations/RevealOneByOneAnimation";
+import { moveUp, moveUpV2, moveUpV3 } from "../motionVariants";
 
 const InnerFooter = () => {
   const [email, setEmail] = useState("");
@@ -33,21 +36,40 @@ const InnerFooter = () => {
       <div className="w-full overflow-hidden py-120 3xl:py-150 bg-primary-2">
         <div className="z-[20] h-full container flex flex-col lg:flex-row lg:justify-between items-center shrink-0">
           {/* Logo */}
-          <Image
-            src="/images/footer-logo-inner.svg"
-            alt="logo"
-            width={295}
-            height={80}
-            className="w-auto max-w-[291px] 3xl:w-[291px] h-[50px] xl:h-[80px] shrink-0"
-          />
+          <motion.div
+            variants={moveUp(0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <Image
+              src="/images/footer-logo-inner.svg"
+              alt="logo"
+              width={295}
+              height={80}
+              className="w-auto max-w-[291px] 3xl:w-[291px] h-[50px] xl:h-[80px] shrink-0"
+            />
+          </motion.div>
 
           {/* Stay Updated */}
           <div className="flex flex-col mt-12 lg:mt-0 lg:flex-row gap-5 xl:gap-10 items-center">
-            <p className="text-19 font-[avenirHeavy] text-white uppercase leading-[1.5]">
+            <motion.p
+              variants={moveUp(0.1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="text-19 font-[avenirHeavy] text-white uppercase leading-[1.5]"
+            >
               STAY UPDATED
-            </p>
+            </motion.p>
 
-            <div className="flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white relative">
+            <motion.div
+              variants={moveUp(0.15)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white relative"
+            >
               <input
                 type="email"
                 value={email}
@@ -72,39 +94,47 @@ const InnerFooter = () => {
                   {error}
                 </p>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* DIVIDER */}
-      <div
+      <motion.div
         className="w-full h-px"
         style={{
           background:
             "linear-gradient(90deg, #490905 0%, rgba(255,255,255,0.4) 50%, #490905 100%)",
         }}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
       />
 
       {/* ================= MENU COLUMNS ================= */}
       <div className="bg-primary-2 py-100">
         <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 xl:gap-10">
           {footerV2Data.columns.map((col, i) => (
-            <div key={i}>
-              <h4 className="uppercase text-white md:text-19 font-[800] font-[avenirHeavy] mb-30">
-                {col.heading}
-              </h4>
-              <ul className="space-y-2">
-                {col.items.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="text-white/80 3xl:text-19 font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Reveal variants={moveUpV2} key={i}>
+              <div>
+                <h4 className="uppercase text-white md:text-19 font-[800] font-[avenirHeavy] mb-30">
+                  {col.heading}
+                </h4>
+                <ul className="space-y-2">
+                  {col.items.map((item, idx) => (
+                    <Reveal variants={moveUpV3} key={idx}>
+                      <li
+                        key={idx}
+                        className="text-white/80 3xl:text-19 font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
+                      >
+                        {item}
+                      </li>
+                    </Reveal>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -115,7 +145,13 @@ const InnerFooter = () => {
 
         <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
           {/* LEFT LINKS */}
-          <div className="flex gap-3 xl:gap-6 3xl:gap-7 text-description justify-center md:justify-start w-full">
+          <motion.div
+            variants={moveUp(0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{once: true}}
+            className="flex gap-3 xl:gap-6 3xl:gap-7 text-description justify-center md:justify-start w-full"
+          >
             {footerV2Data.bottom.left.map((txt, i) => (
               <span
                 key={i}
@@ -124,15 +160,27 @@ const InnerFooter = () => {
                 {txt}
               </span>
             ))}
-          </div>
+          </motion.div>
 
           {/* CENTER TEXT */}
-          <div className="text-white/45 text-description text-center w-full">
+          <motion.div
+            variants={moveUp(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{once: true}}
+            className="text-white/45 text-description text-center w-full"
+          >
             ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
-          </div>
+          </motion.div>
 
           {/* ICONS */}
-          <div className="flex gap-2 justify-center md:justify-start xl:justify-end w-full z-10">
+          <motion.div
+            variants={moveUp(0.14)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{once: true}}
+            className="flex gap-2 justify-center md:justify-start xl:justify-end w-full z-10"
+          >
             {footerV2Data.bottom.icons.map((icon, i) => (
               <div
                 key={i}
@@ -147,7 +195,7 @@ const InnerFooter = () => {
                 />
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </footer>
