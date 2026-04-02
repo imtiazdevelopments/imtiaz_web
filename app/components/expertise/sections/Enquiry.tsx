@@ -15,6 +15,7 @@ import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveLeft, moveUp, moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
+import { useParallax } from "@/app/hooks/useParallax";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -118,6 +119,7 @@ export default function EnquirySection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = useContainerInset(containerRef);
   const [belowLg, setBelowLg] = useState(false);
+  const { ref, parallaxY } = useParallax(20);
 
   useEffect(() => {
     if (!phoneRowRef.current) return;
@@ -163,11 +165,12 @@ export default function EnquirySection() {
           >
             <div className="absolute inset-0 bg-black/20 z-10" />
             <motion.div
-            variants={moveLeft(0.1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{once:true}}
-             className="lg:hidden absolute bottom-0 right-0 z-10">
+              variants={moveLeft(0.1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="lg:hidden absolute bottom-0 right-0 z-10"
+            >
               <Image
                 src="/images/expertise/m.svg"
                 alt="M"
@@ -217,13 +220,18 @@ export default function EnquirySection() {
             }}
           >
             <div className="absolute inset-0 bg-black/90 z-[2]" />
-            <Image
-              src="/images/expertise/overimg.jpg"
-              alt="overimg"
-              width={1066}
-              height={703}
-              className="!w-full h-full absolute inset-0 z-[1] select-none pointer-events-none"
-            />
+            <div ref={ref} className="overflow-hidden">
+              <Image
+                src="/images/expertise/overimg.jpg"
+                alt="overimg"
+                width={1066}
+                height={703}
+                className="!w-full h-full absolute inset-0 z-[1] select-none pointer-events-none"
+                style={{
+                  transform: `scale(${1.20}) translateY(${parallaxY}vh)`,
+                }}
+              />
+            </div>
 
             {/* Form */}
             <div
@@ -233,11 +241,12 @@ export default function EnquirySection() {
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {/* Row 1 — First + Last name */}
                 <motion.div
-                variants={moveUp(0)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="grid grid-cols-2 gap-x-100 mb-40">
+                  variants={moveUp(0)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="grid grid-cols-2 gap-x-100 mb-40"
+                >
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>
                       First Name*
@@ -271,11 +280,13 @@ export default function EnquirySection() {
                 </motion.div>
 
                 {/* Row 2 — Email + Phone */}
-                                <motion.div
-                variants={moveUp(0.1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40">
+                <motion.div
+                  variants={moveUp(0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40"
+                >
                   <div className="group">
                     <label htmlFor="email" className={labelClass}>
                       Enter Your Email*
@@ -329,11 +340,13 @@ export default function EnquirySection() {
                 </motion.div>
 
                 {/* Row 3 — Reason */}
-                                <motion.div
-                variants={moveUp(0.14)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }} className="group mb-40">
+                <motion.div
+                  variants={moveUp(0.14)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="group mb-40"
+                >
                   <div className="group relative flex flex-col self-end">
                     <Image
                       src="/images/icons/down-tip-arrow.svg"
@@ -365,11 +378,13 @@ export default function EnquirySection() {
                 </motion.div>
 
                 {/* Row 4 — Message */}
-                                <motion.div
-                variants={moveUp(0.18)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }} className="group mb-40">
+                <motion.div
+                  variants={moveUp(0.18)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="group mb-40"
+                >
                   <label htmlFor="message" className={labelClass}>
                     Type your message here...*
                   </label>
@@ -387,35 +402,42 @@ export default function EnquirySection() {
                 {/* Preferred Mode of Contact */}
                 <div className="flex gap-2 md:gap-90 flex-col md:flex-row lg:flex-col lg:gap-0 items-start">
                   <div className="mb-30">
-                    <p className="text-25 font-[optima] leading-[1.4] uppercase text-white mb-20">
+                    <motion.p
+                      variants={moveUp(0.2)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      className="text-25 font-[optima] leading-[1.4] uppercase text-white mb-20"
+                    >
                       Preferred Mode of Contact
-                    </p>
+                    </motion.p>
                     <Controller
                       name="contactMode"
                       control={control}
                       render={({ field }) => (
                         <div className="flex items-center gap-40">
                           {enquiryData.contactModes.map((mode) => (
-                            <label
-                              key={mode}
-                              className="flex items-center gap-[10px] cursor-pointer group"
-                              onClick={() => field.onChange(mode)}
-                            >
-                              <span
-                                className={`w-[20px] h-[20px] rounded-full border flex items-center justify-center transition-colors duration-200 mb-1 ${
-                                  field.value === mode
-                                    ? "border-white"
-                                    : "border-white"
-                                }`}
+                            <Reveal variants={moveUpV2} key={mode}>
+                              <label
+                                className="flex items-center gap-[10px] cursor-pointer group"
+                                onClick={() => field.onChange(mode)}
                               >
-                                {field.value === mode && (
-                                  <span className="w-[14px] h-[14px] rounded-full bg-white block" />
-                                )}
-                              </span>
-                              <span className="text-description text-white/80">
-                                {mode}
-                              </span>
-                            </label>
+                                <span
+                                  className={`w-[20px] h-[20px] rounded-full border flex items-center justify-center transition-colors duration-200 mb-1 ${
+                                    field.value === mode
+                                      ? "border-white"
+                                      : "border-white"
+                                  }`}
+                                >
+                                  {field.value === mode && (
+                                    <span className="w-[14px] h-[14px] rounded-full bg-white block" />
+                                  )}
+                                </span>
+                                <span className="text-description text-white/80">
+                                  {mode}
+                                </span>
+                              </label>
+                            </Reveal>
                           ))}
                         </div>
                       )}
@@ -423,40 +445,53 @@ export default function EnquirySection() {
                   </div>
                   {/* Checkboxes */}
                   <div className="flex flex-col 2xl:flex-row 2xl:items-center items-start justify-between 3xl:justify-start gap-20 3xl:gap-90 mb-80 2xl:mb-40 ">
-                    <Controller
-                      name="news"
-                      control={control}
-                      render={({ field }) => (
-                        <label
-                          className="flex items-center gap-[10px] cursor-pointer group"
-                          onClick={() => field.onChange(!field.value)}
-                        >
-                          <span
-                            className={`w-5 mb-1 h-5 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
-                              field.value
-                                ? "bg-white border-white"
-                                : "border-white"
-                            }`}
+                    <motion.div
+                      variants={moveUp(0.2)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                    >
+                      <Controller
+                        name="news"
+                        control={control}
+                        render={({ field }) => (
+                          <label
+                            className="flex items-center gap-[10px] cursor-pointer group"
+                            onClick={() => field.onChange(!field.value)}
                           >
-                            {field.value && (
-                              <svg
-                                viewBox="0 0 12 12"
-                                fill="none"
-                                stroke="#000"
-                                strokeWidth="2"
-                                className="w-2.5 h-2.5"
-                              >
-                                <polyline points="1,6 4.5,9.5 11,2" />
-                              </svg>
-                            )}
-                          </span>
-                          <span className="text-description text-white/80">
-                            {enquiryData.checkboxes[0].label}
-                          </span>
-                        </label>
-                      )}
-                    />
-                    <div className="relative">
+                            <span
+                              className={`w-5 mb-1 h-5 border flex items-center justify-center transition-colors duration-200 flex-shrink-0 ${
+                                field.value
+                                  ? "bg-white border-white"
+                                  : "border-white"
+                              }`}
+                            >
+                              {field.value && (
+                                <svg
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  stroke="#000"
+                                  strokeWidth="2"
+                                  className="w-2.5 h-2.5"
+                                >
+                                  <polyline points="1,6 4.5,9.5 11,2" />
+                                </svg>
+                              )}
+                            </span>
+                            <span className="text-description text-white/80">
+                              {enquiryData.checkboxes[0].label}
+                            </span>
+                          </label>
+                        )}
+                      />
+                    </motion.div>
+                    <motion.div
+                      variants={moveUp(0.22)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
                       <Controller
                         name="privacy"
                         control={control}
@@ -498,7 +533,7 @@ export default function EnquirySection() {
                       <div className="absolute top-7 left-0 w-full text-[#c0392b] text-[14px]">
                         {errors.privacy?.message}
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 

@@ -251,7 +251,7 @@ const handleSlideChange = (swiper: SwiperType) => {
       />
 
       {/* Desktop (md+) */}
-      <div className="absolute left-0 bottom-0 right-0 z-20 hidden md:flex">
+      <div className="absolute left-0 bottom-0 right-0 z-20 hidden md:grid md:grid-cols-3">
         {impactAreas.items.map((item, i) => (
           <Reveal key={item.id} variants={moveUpV2}>
             <ColItem
