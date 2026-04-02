@@ -357,8 +357,8 @@ export default function SustainabilitySpotlight() {
 
         {/* ── Desktop (lg+) ── */}
         <div className="hidden lg:block">
-          <div className="flex items-center gap-50 3xl:gap-0">
-            <div className="w-1/2 flex flex-col items-center justify-center">
+          <div className="flex items-center justify-center gap-50 3xl:gap-160">
+            <div className="w-auto flex flex-col items-center justify-center">
               <div className="flex flex-col items-center text-center">
                 <SectionHeading
                   title={sustainabilitySpotlight.title}
@@ -469,6 +469,7 @@ export default function SustainabilitySpotlight() {
                 variants={moveUp(0)}
                 initial="hidden"
                 whileInView="show"
+                viewport={{ once: true }}
                 exit="exit"
               >
                 <CustomOutlineButton
@@ -484,6 +485,7 @@ export default function SustainabilitySpotlight() {
                   variants={moveUp(0.1)}
                   initial="hidden"
                   whileInView="show"
+                  viewport={{ once: true }}
                   exit="exit"
                 >
                   <SliderArrowButton
@@ -496,6 +498,7 @@ export default function SustainabilitySpotlight() {
                   variants={moveUp(0.13)}
                   initial="hidden"
                   whileInView="show"
+                  viewport={{ once: true }}
                   exit="exit"
                 >
                   <SliderArrowButton

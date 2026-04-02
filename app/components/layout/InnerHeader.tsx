@@ -111,13 +111,13 @@ useEffect(() => {
       <motion.div
       id="inner-header"
         style={{ y: springY }}
-        className="fixed top-0 left-0 w-full z-[999] pt-20"
+        className="fixed top-0 left-0 w-full z-[999] pt-[20px]"
       >
         <header className="w-full">
           <div className="container">
-            <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:px-40">
+            <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:pl-40 xl:pr-30">
               <div
-                className={`absolute inset-0 rounded-full backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500 ${
+                className={`absolute inset-0 rounded-full backdrop-blur-[30px] z-[-1] transition-colors duration-500 ${
                   headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
                 }`}
               />
@@ -133,7 +133,7 @@ useEffect(() => {
                     alt="menu"
                     width={22}
                     height={22}
-                    className="w-[22px] h-[15.13px]"
+                    className="w-[22px] h-[14px] sm:h-[15.13px]"
                   />
                 </button>
               </div>
@@ -152,29 +152,31 @@ useEffect(() => {
 
               {/* RIGHT — Icons */}
               <div className="w-[40%] 2xl:w-[33.33%] flex justify-end">
-                <div className="flex items-center gap-[10px]">
+                <div className="flex items-center gap-[5px] sm:gap-[10px]">
                   <button
                     onClick={() => setAuthView("login")}
-                    className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer"
+                    className="flex items-center justify-center w-[32px] h-[32px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer"
                   >
                     <Image
                       src="/images/account.svg"
                       alt="account"
                       width={14}
                       height={15}
-                      className="invert"
+                      className="invert h-[17px] md:h-[15.16px] w-auto"
                     />
                   </button>
 
-                  <button className="hidden xl:flex items-center justify-center gap-[8px] h-[32px] px-[10px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer">
+                  <button className="flex items-center justify-center gap-[8px] h-[32px] w-[32px] md:w-auto sm:px-[6px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer">
                     <Image
                       src="/images/map.svg"
                       alt="map"
                       width={24}
                       height={24}
-                      className="invert w-[24px] h-[24px]"
+                      className="invert h-[17px] md:h-[24px] w-auto"
                     />
-                    <ChevronDown size={18} className="text-white" />
+                    <div className="hidden md:block">
+                      <ChevronDown size={18} className="text-white" />
+                    </div>
                   </button>
                 </div>
               </div>
