@@ -120,7 +120,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         slidesPerView={1}
         loop
         modules={[EffectFade, Autoplay, Navigation]}
-        // autoplay={{ delay: 8000, disableOnInteraction: false }}
+        autoplay={{ delay: 8000, disableOnInteraction: false }}
         onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade h-full"
@@ -217,7 +217,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               <div className="absolute w-full bottom-15 lg:bottom-[50px]">
                 <motion.div
                   // variants={fadeUp}
-                  variants={moveUp(3.5)}
+                  variants={moveUp(1.2)}
                   // custom={0.5}
                   // custom={1.2}
                   initial="hidden"
@@ -227,30 +227,37 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                 >
                   {/* <AnimatePresence mode="wait"> */}
                     <div className="relative">
-                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-md lg:rounded-full pointer-events-none" />
+                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-xl lg:rounded-full pointer-events-none" />
                       <motion.div
                         key={`pill-${activeIndex}`}
                         // initial="hidden"
                         // animate={startAnim ? "show" : "hidden"}
                         // exit="exit"
-                        className="bg-white/5 backdrop-blur-[30px] py-4 lg:py-0 rounded-md lg:rounded-full flex flex-col lg:flex-row items-center justify-between gap-6    lg:min-h-[90px]"
+                        className="bg-white/5 backdrop-blur-[30px] py-6 lg:py-0 rounded-xl lg:rounded-full flex flex-col lg:flex-row md:items-center justify-between gap-6    lg:min-h-[90px]"
                       >
                         {/* Pill Logo */}
 
                         {/* Features */}
-                        <div className="flex gap-6 md:gap-4  3xl:gap-[80px] items-center  flex-wrap lg:flex-nowrap   px-6 lg:px-[30px] 3xl:px-[68px]">
+                        <div className=" grid grid-cols-1 md:flex gap-3 md:gap-4  3xl:gap-[80px] md:items-center  flex-wrap lg:flex-nowrap   px-6 lg:px-[30px] 3xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
-                            <motion.div
-                              key={`${idx}-${activeIndex}`}
+                          
+                             <motion.div 
                               // variants={fadeUp}
                               // custom={0.25 + idx * 0.12}
                               variants={moveUp(idx * 0.4)}
                               initial="hidden"
                               // animate={startAnim ? "show" : "hidden"}
                               animate="show"
-                              className="flex items-center gap-2 md:gap-3"
-                            >
-                              <Image
+                              key={`${idx}-${activeIndex}`}>   
+                              <motion.div 
+                              // variants={fadeUp}
+                              // custom={0.25 + idx * 0.12}
+                              variants={moveUp(idx * 0.4)}
+                              initial="hidden"
+                              // animate={startAnim ? "show" : "hidden"}
+                              animate="show"
+                              className="flex items-center mb-3 md:mb-0 gap-2 md:gap-3"
+                            ><Image
                                 src={f.icon}
                                 width={20}
                                 height={20}
@@ -259,12 +266,16 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               <span className="text-white text-description uppercase">
                                 {f.label}
                               </span>
+                              </motion.div>   
+                              <div className=" left-0 top-0 h-[1px] w-full  md:hidden  " style={{ background: "linear-gradient(rgb(255 255 255 / 0%) 0%, rgba(255, 255, 255, 0.404) 50%, rgb(255 255 255 / 0%) 100%)" }}></div>
+                         
                             </motion.div>
+                            
                           ))}
                         </div>
 
                         <motion.div
-                          className="pr-6 md:pr-[15px] flex items-center justify-center "
+                          className="md:pr-6 md:pr-[15px] flex items-center justify-center "
                         >
                           <AnimatePresence mode="wait">
                             <motion.div
@@ -363,7 +374,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         initial="hidden"
         animate={startAnim ? "show" : "hidden"}
         exit="exit"
-        className="absolute top-[35%] lg:top-[40%] left-0 w-full z-[60]"
+        className="absolute top-[35%] lg:top-[40%] left-0 w-full z-[60] hidden md:block"
       >
         <div className="container flex items-center justify-between">
           {/* Prev */}

@@ -253,7 +253,7 @@ export default function HeroFeatureSlider({
                 key={`title-communities`}
                 variants={textFade}
                 // custom={0.25}
-                custom={0.7}
+                custom={0.23}
                 initial="initial"
                 whileInView="animate"
                 animate={isHalfInView ? "animate" : "initial"}
