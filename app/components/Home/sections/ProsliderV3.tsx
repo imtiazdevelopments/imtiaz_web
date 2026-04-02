@@ -120,7 +120,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         slidesPerView={1}
         loop
         modules={[EffectFade, Autoplay, Navigation]}
-        autoplay={{ delay: 8000, disableOnInteraction: false }}
+        // autoplay={{ delay: 8000, disableOnInteraction: false }}
         onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade h-full"
