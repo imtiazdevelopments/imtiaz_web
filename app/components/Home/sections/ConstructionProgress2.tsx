@@ -130,7 +130,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
             </button> */}
             <CustomOutlineButton
             text={data.button.label}
-            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px]"
+            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px] mx-auto"
             />
           {/* </Link> */}
         </div>

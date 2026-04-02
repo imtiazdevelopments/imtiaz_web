@@ -54,22 +54,29 @@ export default function ProjectCard({
         {/* ── DEFAULT STATE ── */}
         <div className="absolute inset-0 z-20 flex flex-col transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 pointer-events-none">
 
-          <div className="absolute top-10 left-0 right-0 flex flex-col items-center gap-5">
-            <span className="bg-white/30 backdrop-blur-sm text-white text-[11px] leading-[1.548] uppercase px-4 py-[1.5px] rounded-full">
+          <div className="absolute top-10 left-0 right-0  ">
+            { status &&(
+            <span className="bg-white/30 backdrop-blur-sm text-white/80 text-description   uppercase px-4 py-[1.5px] rounded-full">
               {status}
             </span>
-            <div className="flex items-center justify-center gap-[12.75px] px-4">
-              <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
-                <path d="M9.34539 12.1493C11.0689 12.1493 12.4662 10.7521 12.4662 9.0285C12.4662 7.30494 11.0689 5.90771 9.34539 5.90771C7.62183 5.90771 6.22461 7.30494 6.22461 9.0285C6.22461 10.7521 7.62183 12.1493 9.34539 12.1493Z" stroke="white" strokeWidth="1.44"/>
-                <path d="M0.96352 7.21184C2.93401 -1.45033 15.7672 -1.44032 17.7277 7.22184C18.878 12.3031 15.7172 16.6042 12.9465 19.2649C10.936 21.2053 7.75522 21.2053 5.73471 19.2649C2.97402 16.6042 -0.186768 12.2931 0.96352 7.21184Z" stroke="white" strokeWidth="1.44"/>
-              </svg>
-              <span className="text-white/80 text-[12px]">{location}</span>
+            )}
+
+            <div className="flex items-center justify-center gap-[12.75px] px-4 mt-5">
+              {location && (
+                <>
+                  <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
+                    <path d="M9.34539 12.1493C11.0689 12.1493 12.4662 10.7521 12.4662 9.0285C12.4662 7.30494 11.0689 5.90771 9.34539 5.90771C7.62183 5.90771 6.22461 7.30494 6.22461 9.0285C6.22461 10.7521 7.62183 12.1493 9.34539 12.1493Z" stroke="white" strokeWidth="1.44"/>
+                    <path d="M0.96352 7.21184C2.93401 -1.45033 15.7672 -1.44032 17.7277 7.22184C18.878 12.3031 15.7172 16.6042 12.9465 19.2649C10.936 21.2053 7.75522 21.2053 5.73471 19.2649C2.97402 16.6042 -0.186768 12.2931 0.96352 7.21184Z" stroke="white" strokeWidth="1.44"/>
+                  </svg>
+                  <span className="text-white/80 text-description">{location}</span>
+                </>
+              )}
             </div>
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 px-5 pb-10">
             <h3
-              className="font-[optima] text-white text-[22px] leading-[1.4] uppercase text-center mb-[10px]"
+              className="font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px]"
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <div
@@ -78,7 +85,7 @@ export default function ProjectCard({
                 background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
             />
-            <p className="text-white/80 text-[12px] text-center">{subtitle}</p>
+            <p className="text-white/80 text-description text-center">{subtitle}</p>
           </div>
         </div>
 

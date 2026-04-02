@@ -65,7 +65,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   return (
     <section
       ref={section5Ref}
-      className="make-header-black w-full py-12 md:py-15 xl:py-20 2xl:py-25 3xl:py-[141px] bg-gray"
+      className="make-header-black w-full py-120 3xl:py-[130px] bg-gray"
     >
       <div
         className="container"
@@ -138,7 +138,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               >
                 <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
-                    src="/images/home/app/plv3.svg"
+                    src="/images/home/app/appstore1.svg"
                     alt="Download on App Store"
                     width={194}
                     height={65}
@@ -157,7 +157,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               >
                 <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
-                    src="/images/home/app/asv3.svg"
+                    src="/images/home/app/playstore1.svg"
                     alt="Get it on Google Play"
                     width={194}
                     height={65}
