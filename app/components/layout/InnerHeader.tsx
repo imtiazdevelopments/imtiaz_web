@@ -95,8 +95,6 @@ useEffect(() => {
   };
 }, [authView]);
 
-  const bgClass = headerTheme === "dark" ? "bg-black/60" : "bg-white/10";
-
   const closeAuth = () => setAuthView(null);
 
   return (
@@ -109,9 +107,11 @@ useEffect(() => {
         <header className="w-full">
           <div className="container">
             <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:px-40">
-              <div
-                className={`absolute inset-0 rounded-full ${bgClass} backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500`}
-              />
+<div
+  className={`absolute inset-0 rounded-full backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500 ${
+    headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
+  }`}
+/>
 
               {/* LEFT — Hamburger */}
               <div className="flex items-center w-[40%] 2xl:w-[33.33%]">

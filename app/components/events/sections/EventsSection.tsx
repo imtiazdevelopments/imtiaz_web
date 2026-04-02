@@ -46,13 +46,19 @@ const EventsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+const updateParam = (key: string, value: string) => {
+  const scrollY = window.scrollY;
+
+  const params = new URLSearchParams(searchParams.toString());
+  if (value) params.set(key, value);
+  else params.delete(key);
+  params.set("page", "1");
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+  setTimeout(() => {
+    window.scrollTo({ top: scrollY, behavior: "instant" });
+  }, 520);
+};
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });
@@ -149,7 +155,7 @@ const EventsSection = () => {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <CustomOutlineButton
-                text="Clear Filters"
+                text="Clear Filter"
                 onClick={clearFilters}
                 variant="dark"
                 px="px-60"
@@ -216,7 +222,7 @@ const EventsSection = () => {
 
               {hasFilter && (
                 <CustomOutlineButton
-                  text="Clear Filters"
+                  text="Clear Filter"
                   onClick={clearFilters}
                   variant="dark"
                   px="px-60"
