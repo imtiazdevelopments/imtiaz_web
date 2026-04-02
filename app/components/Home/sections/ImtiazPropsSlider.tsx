@@ -336,7 +336,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { projectsData } from "../data"; 
@@ -508,17 +508,20 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
       </div>
 
       {/* BOTTOM BUTTONS */}
-      <div className="flex items-center justify-center mt-10 2xl:mt-12">
+      <div className="flex items-center justify-center mt-50">
         <motion.div
           // variants={moveUp(0.1)}
           variants={moveUp(0.6)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-        >
-          <button className="border border-primary text-[#404040] py-[19.5px] px-[36px] max-h-[62px] rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
-            View All
-          </button>
+        > 
+           <CustomOutlineButton 
+              text="View All"
+              borderColor="border-primary"
+              textColor="text-foreground-light"
+              px="px-[12px] sm:px-[26px] xl:px-[37px]"
+            />
         </motion.div>
 
         <div className="flex gap-[15px] ml-[30px]">
@@ -531,7 +534,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           >
             <button
               ref={prevRef}
-              className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group  border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               {/* FILL ANIMATION */}
               <span className="absolute right-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
@@ -541,7 +544,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                 alt="Arrow Right"
                 width={28}
                 height={28}
-                className="relative z-10  object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                className="relative z-10  object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
               />
             </button>
           </motion.div>
@@ -554,7 +557,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           >
             <button
               ref={nextRef}
-              className="relative w-[62px] group h-[62px] border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group  border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               {/* FILL ANIMATION */}
               <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
@@ -564,7 +567,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                 alt="Arrow Right"
                 width={28}
                 height={28}
-                className="relative z-10 rotate-180 object-contain w-[28px] h-[28px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                className="relative z-10 rotate-180 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
               />
             </button>
           </motion.div>
