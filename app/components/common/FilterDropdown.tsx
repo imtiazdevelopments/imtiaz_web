@@ -53,10 +53,16 @@ const FilterDropdown = ({
   const handleToggle = () => {
     if (!open && ref.current) {
       const rect = ref.current.getBoundingClientRect();
-      const targetScrollY =
-        window.scrollY + rect.top - window.innerHeight * 0.4;
-      window.scrollTo({ top: targetScrollY, behavior: "smooth" });
-      setTimeout(() => setOpen(true), 350);
+
+      // Only scroll if the dropdown is below 80% of the viewport
+      if (rect.top > window.innerHeight * 0.7) {
+        const targetScrollY =
+          window.scrollY + rect.top - window.innerHeight * 0.4;
+        window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+        setTimeout(() => setOpen(true), 350);
+      } else {
+        setOpen(true);
+      }
     } else {
       setOpen(false);
     }

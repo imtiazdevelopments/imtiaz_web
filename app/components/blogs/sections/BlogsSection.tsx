@@ -41,25 +41,19 @@ const BlogsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    const newsGrid = document.getElementById("blog-list");
-    const gridTop = newsGrid?.getBoundingClientRect().top ?? 0;
-    const absoluteGridTop = window.scrollY + gridTop;
+const updateParam = (key: string, value: string) => {
+  const scrollY = window.scrollY;
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  const params = new URLSearchParams(searchParams.toString());
+  if (value) params.set(key, value);
+  else params.delete(key);
+  params.set("page", "1");
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
 
-    requestAnimationFrame(() => {
-      const newGridTop =
-        document.getElementById("blog-list")?.getBoundingClientRect().top ?? 0;
-      const newAbsoluteGridTop = window.scrollY + newGridTop;
-      const diff = newAbsoluteGridTop - absoluteGridTop;
-      window.scrollBy({ top: -diff, behavior: "instant" });
-    });
-  };
+  setTimeout(() => {
+    window.scrollTo({ top: scrollY, behavior: "instant" });
+  }, 520);
+};
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });
@@ -140,7 +134,7 @@ const BlogsSection = () => {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <CustomOutlineButton
-                text="Clear Filters"
+                text="Clear Filter"
                 onClick={clearFilters}
                 variant="dark"
                 px="px-60"

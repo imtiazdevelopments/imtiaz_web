@@ -30,6 +30,7 @@ export default function SustainabilitySpotlight() {
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
   const DRAG_THRESHOLD = 50;
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
   const dImgParallaxRef = useRef<HTMLDivElement>(null);
@@ -54,32 +55,34 @@ export default function SustainabilitySpotlight() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const setBg = (el: HTMLDivElement | null, src: string) => {
-  if (!el) return;
-  const img = el.querySelector("img");
-  if (img) {
-    img.srcset = "";
-    img.src = src;
-  }
-};
+  const setBg = (el: HTMLDivElement | null, src: string) => {
+    if (!el) return;
+    const img = el.querySelector("img");
+    if (img) {
+      img.srcset = "";
+      img.src = src;
+    }
+  };
 
-  const animateLayer = (
-    layerA: HTMLDivElement | null,
-    layerB: HTMLDivElement | null,
-    layerBImg: HTMLDivElement | null,
-    dir: 1 | -1,
-    prevSrc: string,
-    nextSrc: string,
-    onComplete?: () => void,
-  ) => {
-    if (!layerB || !layerBImg) return;
-    setBg(layerA, prevSrc);
-    setBg(layerB, nextSrc);
-    gsap.killTweensOf([layerB, layerBImg]);
-    gsap.set(layerB, {
-      clipPath: dir === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)",
-    });
-    gsap.set(layerBImg, { scale: 1.06 });
+const animateLayer = (
+  layerA: HTMLDivElement | null,
+  layerB: HTMLDivElement | null,
+  layerBImg: HTMLDivElement | null,
+  dir: 1 | -1,
+  prevSrc: string,
+  nextSrc: string,
+  onComplete?: () => void,
+) => {
+  if (!layerB || !layerBImg) return;
+  setBg(layerA, prevSrc);
+  setBg(layerB, nextSrc);
+  gsap.killTweensOf([layerB, layerBImg]);
+  gsap.set(layerB, {
+    clipPath: dir === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)",
+  });
+  gsap.set(layerBImg, { scale: 1.06 });
+
+  const startAnim = () => {
     const tl = gsap.timeline({ onComplete });
     tl.to(layerB, {
       clipPath: "inset(0% 0% 0% 0%)",
@@ -88,6 +91,15 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
     });
     tl.to(layerBImg, { scale: 1, duration: 1.4, ease: "power2.out" }, "<");
   };
+
+  // Wait for image to load before revealing — prevents flash on first transition
+  const img = layerB.querySelector("img");
+  if (!img || img.complete) {
+    startAnim();
+  } else {
+    img.onload = startAnim;
+  }
+};
 
   const go = useCallback(
     (nextIndex: number, forcedDirection?: 1 | -1) => {
@@ -147,9 +159,29 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
     go(next, 1);
   }, [slides.length, go]);
 
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
+  const startAutoplay = useCallback(() => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      goNext();
+    }, 4000);
+  }, [goNext]);
+
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, [startAutoplay]);
+
   const handlePointerDown = (e: React.PointerEvent) => {
     dragStartX.current = e.clientX;
     isDragging.current = false;
+    stopAutoplay();
   };
   const handlePointerMove = (e: React.PointerEvent) => {
     if (dragStartX.current === null) return;
@@ -163,10 +195,12 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
     }
     dragStartX.current = null;
     isDragging.current = false;
+    startAutoplay();
   };
   const handlePointerLeave = () => {
     dragStartX.current = null;
     isDragging.current = false;
+    startAutoplay();
   };
 
   const slide = slides[current];
