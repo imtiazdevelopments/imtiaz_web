@@ -198,9 +198,9 @@ const Header2: React.FC = () => {
               ></div>
 
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
-              <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
+              <div className="mnhmns  flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[12%] md:w-[15%] lg:w-[23%] lg:w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 <button
-                  className="flex items-center justify-center w-[40px] h-[40px] opacity-0 cursor-pointer"
+                  className="flex items-center justify-center w-[40px] h-[40px] opacity-0 cursor-pointer bg-white/20 lg:bg-transparent rounded-full"
                   onClick={() => setIsMenuOpen(true)}
                 >
                   <Image
@@ -208,24 +208,19 @@ const Header2: React.FC = () => {
                     alt="menu"
                     width={22}
                     height={22}
-                    className=""
+                    className="hidden lg:block"
                   />
-                </button>
-              </div>
-
-              {/* ------- MOBILE HAMBURGER ------- */}
-              <button
-                className="lg:hidden p-2 flex items-center justify-center w-[40px] h-[40px] bg-white/20 rounded-full"
-                onClick={() => setIsMenuOpen(true)}
-              >
-                <Image
+                  <Image
                   src="/images/hamburger.svg"
                   alt="menu"
                   width={22}
                   height={22}
-                  className="invert"
+                  className="invert lg:hidden"
                 />
-              </button>
+                </button>
+              </div>
+
+             
 
               {/* ------- CENTER LOGO ------- */}
 
@@ -358,7 +353,7 @@ const Header2: React.FC = () => {
               </div>
 
               {/* ------- RIGHT SIDE ICONS (DESKTOP ONLY) ------- */}
-              <div className="w-[40%] 2xl:w-[33.33%] flex justify-end ">
+              <div className="w-[23%] lg:w-[40%] 2xl:w-[33.33%] flex justify-end ">
                 <div className="flex items-center gap-[10px] overflow-hidden rgtbtn">
                   <button className="flex items-center justify-center w-[32px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0 cursor-pointer">
                     <Image
@@ -370,7 +365,7 @@ const Header2: React.FC = () => {
                     />
                   </button>
 
-                  <button className="flex items-center justify-center w-[61px] gap-[8px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0 cursor-pointer">
+                  <button className="flex items-center justify-center w-[33px] lg:w-[61px] gap-[8px] h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full opacity-0 cursor-pointer">
                     <Image
                       src="/images/map.svg"
                       alt="map"
@@ -378,7 +373,7 @@ const Header2: React.FC = () => {
                       height={24}
                       className="invert"
                     />
-                    <ChevronDown size={17} className="invert" />
+                    <ChevronDown size={17} className="invert hidden lg:block" />
                   </button>
                 </div>
               </div>

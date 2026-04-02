@@ -124,15 +124,14 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
           </p>
         </div>
         <div className="overflow-hidden">
-          {/* <Link href="/#"> */}
-            {/* <button className="anim-item px-[36px] py-[19.5px] text-[17px] rounded-full border border-white text-white font-[avenirRoman] font-[400] capitalize transition-all cursor-pointer">
-              {data.button.label}
-            </button> */}
-            <CustomOutlineButton
+         
+            <div className="anim-item">
+              <CustomOutlineButton
             text={data.button.label}
-            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px] mx-auto"
+            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px] mx-auto "
             />
-          {/* </Link> */}
+            </div>
+         
         </div>
       </div>
     </section>
