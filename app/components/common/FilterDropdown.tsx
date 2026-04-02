@@ -56,8 +56,10 @@ const FilterDropdown = ({
       const targetScrollY =
         window.scrollY + rect.top - window.innerHeight * 0.4;
       window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+      setTimeout(() => setOpen(true), 350);
+    } else {
+      setOpen(false);
     }
-    setOpen((prev) => !prev);
   };
 
   return (

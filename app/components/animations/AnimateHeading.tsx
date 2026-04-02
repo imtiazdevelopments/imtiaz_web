@@ -17,7 +17,8 @@ export function AnimatedHeading({
   delay = 0,
 }: AnimatedHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null);
-  const isSingleWordBlade = mode === "blade" && title.trim().split(" ").length === 1;
+  const isSingleWordBlade =
+    mode === "blade" && title.trim().split(" ").length === 1;
 
   useEffect(() => {
     const el = ref.current;
@@ -35,31 +36,55 @@ export function AnimatedHeading({
           opacity: 1,
           duration: 1.1,
           stagger: { amount: 0.55 },
+          onComplete: () => {
+            gsap.set(chars, { clearProps: "all" });
+            el.querySelectorAll<HTMLElement>(".ah-word-wrap").forEach((w) => {
+              w.style.overflow = "visible";
+            });
+          },
         });
       }
 
       if (mode === "blade") {
         if (isSingleWordBlade) {
-          // Per-character blade reveal for single words — much sharper
           const chars = el.querySelectorAll<HTMLElement>(".ah-char-blade");
-          gsap.set(chars, { xPercent: -8, opacity: 0, clipPath: "inset(0 100% 0 0)" });
+          gsap.set(chars, {
+            xPercent: -8,
+            opacity: 0,
+            clipPath: "inset(0 100% 0 0)",
+          });
           tl.to(chars, {
             xPercent: 0,
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
             duration: 0.95,
             stagger: 0.055,
+            onComplete: () => {
+              gsap.set(chars, { clearProps: "all" });
+              el.querySelectorAll<HTMLElement>(".ah-word-wrap").forEach((w) => {
+                w.style.overflow = "visible";
+              });
+            },
           });
         } else {
-          // Word-by-word blade for 2+ words (unchanged)
           const words = el.querySelectorAll<HTMLElement>(".ah-word-inner");
-          gsap.set(words, { xPercent: -8, opacity: 0, clipPath: "inset(0 100% 0 0)" });
+          gsap.set(words, {
+            xPercent: -8,
+            opacity: 0,
+            clipPath: "inset(0 100% 0 0)",
+          });
           tl.to(words, {
             xPercent: 0,
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
             duration: 1.1,
             stagger: 0.13,
+            onComplete: () => {
+              gsap.set(words, { clearProps: "all" });
+              el.querySelectorAll<HTMLElement>(".ah-word-wrap").forEach((w) => {
+                w.style.overflow = "visible";
+              });
+            },
           });
         }
       }
@@ -74,6 +99,12 @@ export function AnimatedHeading({
           duration: 1.4,
           stagger: 0.18,
           ease: "power3.out",
+          onComplete: () => {
+            gsap.set(words, { clearProps: "all" });
+            el.querySelectorAll<HTMLElement>(".ah-word-wrap").forEach((w) => {
+              w.style.overflow = "visible";
+            });
+          },
         });
       }
     }, el);
@@ -88,6 +119,7 @@ export function AnimatedHeading({
       {words.map((word, wi) => (
         <span
           key={wi}
+          className="ah-word-wrap"
           style={{
             display: "inline-block",
             overflow: "hidden",
@@ -99,7 +131,11 @@ export function AnimatedHeading({
             [...word].map((char, ci) => (
               <span
                 key={ci}
-                style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}
+                style={{
+                  display: "inline-block",
+                  overflow: "hidden",
+                  verticalAlign: "top",
+                }}
               >
                 <span className="ah-char" style={{ display: "inline-block" }}>
                   {char}
@@ -107,13 +143,19 @@ export function AnimatedHeading({
               </span>
             ))
           ) : isSingleWordBlade ? (
-            // Per-char blade: each letter gets its own clip container
             [...word].map((char, ci) => (
               <span
                 key={ci}
-                style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}
+                style={{
+                  display: "inline-block",
+                  overflow: "hidden",
+                  verticalAlign: "top",
+                }}
               >
-                <span className="ah-char-blade" style={{ display: "inline-block" }}>
+                <span
+                  className="ah-char-blade"
+                  style={{ display: "inline-block" }}
+                >
                   {char}
                 </span>
               </span>

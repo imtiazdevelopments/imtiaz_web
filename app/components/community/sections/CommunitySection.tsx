@@ -16,7 +16,7 @@ const CommunitiesSection = () => {
           <SectionHeading
             title={title}
             as="h2"
-            className="text-foreground mb-20 max-w-[666px] mx-auto"
+            className="text-foreground mb-20 max-w-[685px] mx-auto"
           />
 
           <SectionDescription

@@ -84,97 +84,97 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
           {card.title}
         </h3>
 
-<div className="3xl:hidden grid grid-cols-1 2xl:grid-cols-2 bg-[#FFFFFF0D] backdrop-blur-[30px] border border-[#FFFFFF0D] rounded-[20px] w-full overflow-hidden">
-  {card.tags.map((tag, i) => {
-    const isLastOdd =
-      card.tags.length % 2 !== 0 && i === card.tags.length - 1;
-    const showHorizontal = i > 0;
-    const hideHorizontalAt2xl = i === 1;
-    const isLeftCol = i % 2 === 0 && !isLastOdd;
-    const isRightCol = i % 2 !== 0;
-    return (
-      <div
-        key={i}
-        className={`flex flex-col ${isLastOdd ? "2xl:col-span-2" : ""}`}
-      >
-        {/* Horizontal separator */}
-        {showHorizontal && (
-          <div
-            className={`h-px w-full ${hideHorizontalAt2xl ? "2xl:hidden" : ""}`}
-            style={{
-              background:
-                "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)",
-            }}
-          />
-        )}
-        {/* Cell content */}
-        <div
-          style={{
-            opacity: active ? 0 : 1,
-            transform: active ? "translateY(8px)" : "translateY(0)",
-            transition: active
-              ? "opacity 0.2s ease-in-out, transform 0.2s ease-in-out"
-              : `opacity 0.3s ease-out ${0.15 + i * 0.18}s, transform 0.3s ease-out ${0.15 + i * 0.18}s`,
-          }}
-          className={`
+        <div className="3xl:hidden grid grid-cols-1 2xl:grid-cols-2 bg-[#FFFFFF0D] backdrop-blur-[30px] border border-[#FFFFFF0D] rounded-[20px] w-full overflow-hidden">
+          {card.tags.map((tag, i) => {
+            const isLastOdd =
+              card.tags.length % 2 !== 0 && i === card.tags.length - 1;
+            const showHorizontal = i > 0;
+            const hideHorizontalAt2xl = i === 1;
+            const isLeftCol = i % 2 === 0 && !isLastOdd;
+            const isRightCol = i % 2 !== 0;
+            return (
+              <div
+                key={i}
+                className={`flex flex-col ${isLastOdd ? "2xl:col-span-2" : ""}`}
+              >
+                {/* Horizontal separator */}
+                {showHorizontal && (
+                  <div
+                    className={`h-px w-full ${hideHorizontalAt2xl ? "2xl:hidden" : ""}`}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)",
+                    }}
+                  />
+                )}
+                {/* Cell content */}
+                <div
+                  style={{
+                    opacity: active ? 0 : 1,
+                    transform: active ? "translateY(8px)" : "translateY(0)",
+                    transition: active
+                      ? "opacity 0.2s ease-in-out, transform 0.2s ease-in-out"
+                      : `opacity 0.3s ease-out ${0.15 + i * 0.18}s, transform 0.3s ease-out ${0.15 + i * 0.18}s`,
+                  }}
+                  className={`
             relative flex items-center gap-[10px] py-[10px] lg:py-[20px]
             justify-center px-5
             ${isLeftCol ? "2xl:justify-end 2xl:pr-80 2xl:pl-5" : ""}
             ${isRightCol ? "2xl:justify-start 2xl:pl-80 2xl:pr-5" : ""}
             ${isLastOdd ? "2xl:justify-center 2xl:px-5" : ""}
           `}
-        >
-          <Image
-            src={tag.icon}
-            alt={tag.label}
-            width={25}
-            height={25}
-            className="h-[14px] w-auto"
-          />
-          <span className="text-white font-[avenirHeavy] text-16 uppercase">
-            {tag.label}
-          </span>
-          {/* Vertical separator — fixed at right edge of left column */}
-          {isLeftCol && (
-            <div
-              className="hidden 2xl:block absolute right-0 top-[15%] h-[70%] w-px"
-              style={{
-                background:
-                  "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)",
-              }}
-            />
-          )}
+                >
+                  <Image
+                    src={tag.icon}
+                    alt={tag.label}
+                    width={25}
+                    height={25}
+                    className="h-[14px] w-auto"
+                  />
+                  <span className="text-white font-[avenirHeavy] text-16 uppercase">
+                    {tag.label}
+                  </span>
+                  {/* Vertical separator — fixed at right edge of left column */}
+                  {isLeftCol && (
+                    <div
+                      className="hidden 2xl:block absolute right-0 top-[15%] h-[70%] w-px"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)",
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    );
-  })}
-</div>
-<div className="hidden 3xl:flex bg-[#FFFFFF0D] justify-center backdrop-blur-[30px] rounded-full px-[30px] py-[34px] w-full gap-50">
-  {card.tags.map((tag, i) => (
-    <div
-      key={i}
-      className="flex items-center gap-[10px]"
-      style={{
-        opacity: active ? 0 : 1,
-        transform: active ? "translateY(8px)" : "translateY(0)",
-        transition: active
-          ? "opacity 0.2s ease-in-out, transform 0.2s ease-in-out"
-          : `opacity 0.3s ease-out ${0.15 + i * 0.18}s, transform 0.3s ease-out ${0.15 + i * 0.18}s`,
-      }}
-    >
-      <Image
-        src={tag.icon}
-        alt={tag.label}
-        width={25}
-        height={25}
-        className="h-[18px] w-auto mb-1"
-      />
-      <span className="text-white font-[avenirHeavy] text-16 uppercase">
-        {tag.label}
-      </span>
-    </div>
-  ))}
-</div>
+        <div className="hidden 3xl:flex bg-[#FFFFFF0D] justify-center backdrop-blur-[30px] rounded-full px-[30px] py-[34px] w-full gap-50">
+          {card.tags.map((tag, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-[10px]"
+              style={{
+                opacity: active ? 0 : 1,
+                transform: active ? "translateY(8px)" : "translateY(0)",
+                transition: active
+                  ? "opacity 0.2s ease-in-out, transform 0.2s ease-in-out"
+                  : `opacity 0.3s ease-out ${0.15 + i * 0.18}s, transform 0.3s ease-out ${0.15 + i * 0.18}s`,
+              }}
+            >
+              <Image
+                src={tag.icon}
+                alt={tag.label}
+                width={25}
+                height={25}
+                className="h-[18px] w-auto mb-1"
+              />
+              <span className="text-white font-[avenirHeavy] text-16 uppercase">
+                {tag.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ACTIVE STATE */}

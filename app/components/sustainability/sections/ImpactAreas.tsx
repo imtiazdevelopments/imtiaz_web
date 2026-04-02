@@ -9,6 +9,9 @@ import type { Swiper as SwiperType } from "swiper";
 import { impactAreas } from "../data";
 import "swiper/css";
 import SliderArrowButton from "../../common/SliderNavigationButton";
+import { SectionHeading } from "../../animations/SectionHeading";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveUp, moveUpV2 } from "../../motionVariants";
 
 const ColItem = ({
   item,
@@ -37,8 +40,8 @@ const ColItem = ({
       />
     )}
 
-<motion.div
-  className="absolute inset-0"
+    <motion.div
+      className="absolute inset-0"
       initial={false}
       animate={{ opacity: isActive ? 1 : 0 }}
       transition={{ duration: 0.9, ease: [0.62, 0.05, 0.01, 0.99] }}
@@ -52,42 +55,42 @@ const ColItem = ({
       {/* Title — moves up smoothly */}
       <motion.h3
         className="text-white font-[optima] uppercase max-w-[201px] text-25"
-        initial={false}
-        animate={{ y: isActive ? -10 : 0 }}
-        transition={{ duration: 0.7, ease: [0.62, 0.05, 0.01, 0.99] }}
+        initial={{ y: 0 }}
+        animate={{ y: isActive ? -16 : 0 }}
+        transition={{
+          duration: 0.9,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: isActive ? 0.08 : 0,
+        }}
       >
         {item.title}
       </motion.h3>
 
-      {/* Outer wrapper: clips and reveals height */}
-      <motion.div
-        className="overflow-hidden"
-        initial={false}
-        animate={{
-          height: isActive ? "auto" : 0,
-          opacity: isActive ? 1 : 0,
-        }}
-        transition={{
-          height: {
-            duration: 0.65,
-            ease: [0.62, 0.05, 0.01, 0.99],
-            delay: isActive ? 0.18 : 0,
-          },
-          opacity: {
-            duration: 0.5,
-            ease: [0.62, 0.05, 0.01, 0.99],
-            delay: isActive ? 0.18 : 0,
-          },
-        }}
-      >
-        {/* Inner: slides up independently */}
+      {/* Clip wrapper — maxHeight instead of height avoids jump */}
+      <div className="overflow-hidden">
         <motion.div
           initial={false}
-          animate={{ y: isActive ? 0 : 10 }}
+          animate={{
+            maxHeight: isActive ? 200 : 0,
+            opacity: isActive ? 1 : 0,
+            y: isActive ? 0 : 16,
+          }}
           transition={{
-            duration: 0.65,
-            ease: [0.62, 0.05, 0.01, 0.99],
-            delay: isActive ? 0.4 : 0,
+            maxHeight: {
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: isActive ? 0.15 : 0,
+            },
+            opacity: {
+              duration: 0.6,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: isActive ? 0.2 : 0,
+            },
+            y: {
+              duration: 0.6,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: isActive ? 0.25 : 0,
+            },
           }}
           className="pt-[10px]"
         >
@@ -95,7 +98,7 @@ const ColItem = ({
             {item.description}
           </p>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   </div>
 );
@@ -105,6 +108,11 @@ export default function ImpactAreas() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const bgWrapperRef = useRef<HTMLDivElement>(null);
+  const bgImageRef = useRef<HTMLImageElement>(null);
+  const bgPrevImageRef = useRef<HTMLImageElement>(null);
+  const bgCurrentWrapperRef = useRef<HTMLDivElement>(null); // only current fades
 
   useEffect(() => {
     impactAreas.items.forEach((item) => {
@@ -113,62 +121,151 @@ export default function ImpactAreas() {
     });
   }, []);
 
-  const handleEnter = (index: number) => {
-    if (index === activeIndex) return;
-    if (fadeTimer.current) clearTimeout(fadeTimer.current);
-    setCurrentIndex(index);
-    setActiveIndex(index);
+  // Parallax — stable ref, works throughout entire scroll
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = (vh / 2 - (rect.top + rect.height / 2)) / vh;
+      const y = progress * 15;
+      [bgImageRef, bgPrevImageRef].forEach((ref) => {
+        if (ref.current) {
+          ref.current.style.transform = `scale(1.15) translateY(${y}vh)`;
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+const handleEnter = (index: number) => {
+  if (index === activeIndex) return;
+  if (fadeTimer.current) clearTimeout(fadeTimer.current);
+
+  const nextSrc = impactAreas.items[index].image;
+
+  // Pre-load next image first, then crossfade instantly
+  const preload = new window.Image();
+  preload.src = nextSrc;
+
+  const swap = () => {
+    if (bgPrevImageRef.current && bgImageRef.current) {
+      bgPrevImageRef.current.src = bgImageRef.current.src;
+    }
+    if (bgImageRef.current) {
+      bgImageRef.current.src = nextSrc;
+    }
+    if (bgCurrentWrapperRef.current) {
+      bgCurrentWrapperRef.current.style.transition = "none";
+      bgCurrentWrapperRef.current.style.opacity = "0";
+      // Force a reflow so the browser registers opacity:0 before transitioning
+      void bgCurrentWrapperRef.current.offsetHeight;
+      bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
+      bgCurrentWrapperRef.current.style.opacity = "1";
+    }
   };
 
-  const handleSlideChange = (swiper: SwiperType) => {
-    setCurrentIndex(swiper.realIndex);
-    setActiveIndex(swiper.realIndex);
+  if (preload.complete) {
+    swap();
+  } else {
+    preload.onload = swap;
+  }
+
+  setCurrentIndex(index);
+  setActiveIndex(index);
+};
+
+const handleSlideChange = (swiper: SwiperType) => {
+  const index = swiper.realIndex;
+  const nextSrc = impactAreas.items[index].image;
+
+  const preload = new window.Image();
+  preload.src = nextSrc;
+
+  const swap = () => {
+    if (bgPrevImageRef.current && bgImageRef.current) {
+      bgPrevImageRef.current.src = bgImageRef.current.src;
+    }
+    if (bgImageRef.current) {
+      bgImageRef.current.src = nextSrc;
+    }
+    if (bgCurrentWrapperRef.current) {
+      bgCurrentWrapperRef.current.style.transition = "none";
+      bgCurrentWrapperRef.current.style.opacity = "0";
+      void bgCurrentWrapperRef.current.offsetHeight;
+      bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
+      bgCurrentWrapperRef.current.style.opacity = "1";
+    }
   };
+
+  if (preload.complete) {
+    swap();
+  } else {
+    preload.onload = swap;
+  }
+
+  setCurrentIndex(index);
+  setActiveIndex(index);
+};
 
   return (
-    <section className="relative w-full h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden" data-header="light">
+    <section
+      ref={sectionRef}
+      className="relative w-full h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden"
+      data-header="light"
+    >
       <div className="absolute inset-0 bg-[#0a0a0a] z-0" />
 
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={currentIndex}
-          className="absolute inset-0 z-[1]"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.04 }}
-          transition={{ duration: 1.4, ease: [0.62, 0.05, 0.01, 0.99] }}
-        >
-          <Image
-            src={impactAreas.items[currentIndex].image}
+      <div className="absolute inset-0 z-[1]">
+        {/* Previous — never fades, always visible underneath */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={bgPrevImageRef}
+          src={impactAreas.items[0].image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ transform: "scale(1.15) translateY(0vh)" }}
+        />
+
+        {/* Current — fades in/out on top of previous */}
+        <div ref={bgCurrentWrapperRef} className="absolute inset-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={bgImageRef}
+            src={impactAreas.items[0].image}
             alt=""
-            fill
-            className="object-cover object-center"
-            priority
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ transform: "scale(1.15) translateY(0vh)" }}
           />
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </div>
 
       <div className="absolute inset-0 bg-black/50 z-10" />
 
-      <h2 className="absolute top-130 left-1/2 -translate-x-1/2 z-20 text-white text-heading text-center pointer-events-none whitespace-nowrap">
-        {impactAreas.title}
-      </h2>
+      <SectionHeading
+        title={impactAreas.title}
+        className="absolute top-130 left-1/2 -translate-x-1/2 z-20 text-white text-center pointer-events-none whitespace-nowrap"
+      />
 
       {/* Desktop (md+) */}
       <div className="absolute left-0 bottom-0 right-0 z-20 hidden md:flex">
         {impactAreas.items.map((item, i) => (
-          <ColItem
-            key={item.id}
-            item={item}
-            i={i}
-            isActive={activeIndex === i}
-            showDivider={i !== 0}
-            onEnter={handleEnter}
-          />
+          <Reveal key={item.id} variants={moveUpV2}>
+            <ColItem
+              item={item}
+              i={i}
+              isActive={activeIndex === i}
+              showDivider={i !== 0}
+              onEnter={handleEnter}
+            />
+          </Reveal>
         ))}
       </div>
 
-      {/* Mobile nav buttons — centered to full section */}
+      {/* Mobile nav buttons */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-30 flex justify-between px-30 pointer-events-none md:hidden">
         {impactAreas.items.length > 1 && (
           <>

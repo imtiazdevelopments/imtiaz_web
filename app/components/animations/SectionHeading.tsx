@@ -19,34 +19,36 @@ export function SectionHeading({
   as: Tag = "h2",
   delay = 0,
 }: SectionHeadingProps) {
-  const ref = useRef<HTMLHeadingElement>(null);
+  const ref = useRef<HTMLHeadingElement | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const chars = el.querySelectorAll<HTMLElement>("[data-char]");
+
+    gsap.set(chars, { yPercent: 120, rotation: 2, opacity: 0 });
+
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        {
-          clipPath: "inset(0 100% 0 0)",
-          y: 14,
-          opacity: 0,
+      const tl = gsap.timeline({
+        delay,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          once: true,
         },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          y: 0,
-          opacity: 1,
-          duration: 1.6,
-          ease: "expo.out",
-          delay,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%", // fires when top of element hits 88% down the viewport
-            once: true,       // plays once, doesn't reverse on scroll up
-          },
-        }
-      );
+      });
+
+      tl.to(chars, {
+        yPercent: 0,
+        rotation: 0,
+        opacity: 1,
+        duration: 1.1,
+        ease: "power3.out",
+        stagger: { amount: 0.55 },
+      });
     }, el);
 
     return () => ctx.revert();
@@ -54,7 +56,31 @@ export function SectionHeading({
 
   return (
     <Tag ref={ref} className={`text-heading ${className}`}>
-      {title}
+      {title.split(" ").map((word, wordIndex) => (
+<span
+  key={`${wordIndex}-${word}`}
+  style={{
+    display: "inline-block",
+    whiteSpace: "nowrap",
+    marginRight: "0.25em",
+    overflow: "hidden",
+    lineHeight: "inherit",
+    verticalAlign: "top",
+    paddingBottom: "0.2em",
+    marginBottom: "-0.2em",
+  }}
+>
+          {word.split("").map((char, charIndex) => (
+            <span
+              key={`${wordIndex}-${charIndex}`}
+              data-char
+              style={{ display: "inline-block" }}
+            >
+              {char}
+            </span>
+          ))}
+        </span>
+      ))}
     </Tag>
   );
 }

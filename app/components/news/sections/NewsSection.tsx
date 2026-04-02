@@ -17,6 +17,13 @@ import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
 import { Plus } from "lucide-react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import { motion } from "framer-motion";
+import {
+  containerStagger,
+  moveUp,
+  moveUpV2,
+} from "@/app/components/motionVariants";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 const NEWS_PER_PAGE = 6;
 
@@ -115,47 +122,81 @@ const NewsSection = () => {
   };
 
   return (
-    <section className="w-full bg-white pt-70 pb-120 3xl:pb-160" data-header="dark">
+    <section
+      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      data-header="dark"
+    >
       <div className="container">
         {/* Filters Row */}
         {/* ── Desktop (lg+) ── */}
-        <div className="hidden lg:flex items-center justify-between mb-70">
-          <div className="flex items-center gap-30">
-            <FilterDropdown
-              placeholder="Topics"
-              options={pressCategories}
-              value={selectedCategory}
-              onChange={(val) => updateParam("category", val)}
-            />
-            <FilterDropdown
-              placeholder="Year"
-              options={pressYears}
-              value={selectedYear}
-              onChange={(val) => updateParam("year", val)}
-            />
-            <FilterDropdown
-              placeholder="Month"
-              options={pressMonths}
-              value={selectedMonth}
-              onChange={(val) => updateParam("month", val)}
-            />
-          </div>
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="hidden lg:flex items-center justify-between mb-70"
+        >
+          <motion.div
+            className="flex items-center gap-30"
+            variants={containerStagger}
+          >
+            <motion.div variants={moveUp(0)} className="w-auto">
+              <FilterDropdown
+                placeholder="Topics"
+                options={pressCategories}
+                value={selectedCategory}
+                onChange={(val) => updateParam("category", val)}
+              />
+            </motion.div>
+
+            <motion.div variants={moveUp(0.1)} className="w-auto">
+              <FilterDropdown
+                placeholder="Year"
+                options={pressYears}
+                value={selectedYear}
+                onChange={(val) => updateParam("year", val)}
+              />
+            </motion.div>
+
+            <motion.div variants={moveUp(0.2)} className="w-auto">
+              <FilterDropdown
+                placeholder="Month"
+                options={pressMonths}
+                value={selectedMonth}
+                onChange={(val) => updateParam("month", val)}
+              />
+            </motion.div>
+          </motion.div>
 
           {hasFilter && (
-            <CustomOutlineButton
-              text="Clear Filters"
-              onClick={clearFilters}
-              variant="dark"
-              px="px-60"
-              borderColor="border-primary-2"
-              textColor="text-foreground-light"
-              className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
-            />
+            <motion.div
+              className="w-full md:w-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <CustomOutlineButton
+                text="Clear Filters"
+                onClick={clearFilters}
+                variant="dark"
+                px="px-60"
+                borderColor="border-primary-2"
+                textColor="text-foreground-light"
+                className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+              />
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* ── Mobile (below lg) ── */}
-        <div className="lg:hidden mb-70">
+        <motion.div
+          variants={moveUp(0.12)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="lg:hidden mb-70"
+        >
           {/* Toggle button */}
           <button
             onClick={() => setFiltersOpen((prev) => !prev)}
@@ -214,9 +255,19 @@ const NewsSection = () => {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="w-full h-px bg-black/10 mb-50" />
+        <div className="w-full mb-50">
+          <div className="relative w-full h-px overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-black/10 origin-center"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
 
         {/* Slider — top 3 latest News items, unaffected by filters */}
         <div
@@ -230,8 +281,25 @@ const NewsSection = () => {
             willChange: "max-height",
           }}
         >
-          <LatestNewsSlider news={latestNews.slice(0, 3)} />
-          <div className="w-full h-px bg-black/10 my-50" />
+          <motion.div
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <LatestNewsSlider news={latestNews.slice(0, 3)} />
+          </motion.div>
+                  <div className="w-full my-50">
+          <div className="relative w-full h-px overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-black/10 origin-center"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
         </div>
 
         {/* News Cards Grid */}
@@ -239,7 +307,9 @@ const NewsSection = () => {
           {paginated.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-40">
               {paginated.map((item) => (
-                <NewsCard key={item.id} item={item} />
+                <Reveal variants={moveUpV2} key={item.id}>
+                  <NewsCard item={item} />
+                </Reveal>
               ))}
             </div>
           ) : (
@@ -251,14 +321,20 @@ const NewsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="w-full flex justify-center">
+          <motion.div
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="w-full flex justify-center"
+          >
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
               onPageChange={handlePageChange}
               scrollToId="news-list"
             />
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

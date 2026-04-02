@@ -2,6 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { faqData } from "../data";
+import { SectionHeading } from "../../animations/SectionHeading";
+import { SectionDescription } from "../../animations/SectionDescription";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveUpV2 } from "../../motionVariants";
 
 function AccordionItem({
   item,
@@ -28,7 +32,7 @@ function AccordionItem({
       {/* Question Row */}
       <button
         onClick={onToggle}
-       className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-30" : ""}` : "py-40"} text-left group focus:outline-none`}
+        className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-30" : ""}` : "py-40"} text-left group focus:outline-none`}
         aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
@@ -74,22 +78,22 @@ function AccordionItem({
           opacity: isOpen ? 1 : 0,
         }}
       >
-<div ref={contentRef}>
-  <p className="text-description text-foreground-light max-w-[846px] pb-30">
-    {item.answer}
-  </p>
-</div>
+        <div ref={contentRef}>
+          <p className="text-description text-foreground-light max-w-[846px] pb-30">
+            {item.answer}
+          </p>
+        </div>
       </div>
 
       {/* Divider */}
       {!isLast && (
-      <div className="relative h-px w-full bg-black/10">
-        <div
-          className={`absolute inset-y-0 left-0 bg-primary-2 transition-all duration-500 ease-in-out ${
-            isOpen ? "w-full" : "w-0"
-          }`}
-        />
-      </div>
+        <div className="relative h-px w-full bg-black/10">
+          <div
+            className={`absolute inset-y-0 left-0 bg-primary-2 transition-all duration-500 ease-in-out ${
+              isOpen ? "w-full" : "w-0"
+            }`}
+          />
+        </div>
       )}
     </div>
   );
@@ -110,24 +114,22 @@ export default function Faq() {
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[10px]">
-          <h1 className="text-heading mb-20 text-foreground">
-            {faqData.title}
-          </h1>
-          <p className="text-description shrink-0 max-w-[407px] text-foreground-light">
-            {faqData.subtitle}
-          </p>
+          <SectionHeading title={faqData.title} className="mb-20 text-foreground" />
+          <SectionDescription text={faqData.subtitle} className="shrink-0 max-w-[407px] text-foreground-light" />
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
           {faqData.items.map((item, index) => (
+            <Reveal variants={moveUpV2} key={item.id} >
+
             <AccordionItem
-              key={item.id}
               item={item}
               isOpen={openId === item.id}
               onToggle={() => toggle(item.id)}
               isLast={index === faqData.items.length - 1}
-            />
+              />
+              </Reveal>
           ))}
         </div>
       </div>

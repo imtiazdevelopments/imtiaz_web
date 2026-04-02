@@ -422,7 +422,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                   type="tel"
                   className="flex-1 border-none outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
                   {...register("phone", {
-                    required: "Phone is required",
+                    required: "Phone number is required",
                     pattern: {
                       value: /^[0-9]{7,15}$/,
                       message: "Invalid number",

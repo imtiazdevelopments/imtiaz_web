@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { sustainabilitySpotlight } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import SliderArrowButton from "../../common/SliderNavigationButton";
-import { itemVariants } from "../../motionVariants";
+import { moveUp, itemVariants } from "../../motionVariants";
+import { SectionHeading } from "../../animations/SectionHeading";
 
 export default function SustainabilitySpotlight() {
   const slides = sustainabilitySpotlight.slides;
@@ -29,11 +31,37 @@ export default function SustainabilitySpotlight() {
   const isDragging = useRef(false);
   const DRAG_THRESHOLD = 50;
 
-  const setBg = (el: HTMLDivElement | null, src: string) => {
-    if (!el) return;
-    const img = el.querySelector("img");
-    if (img) img.src = src;
-  };
+  const sectionRef = useRef<HTMLElement>(null);
+  const dImgParallaxRef = useRef<HTMLDivElement>(null);
+  const mImgParallaxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = (vh / 2 - (rect.top + rect.height / 2)) / vh;
+      const y = progress * 15;
+      [dImgParallaxRef, mImgParallaxRef].forEach((ref) => {
+        if (ref.current) {
+          ref.current.style.transform = `scale(1.15) translateY(${y}vh)`;
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+const setBg = (el: HTMLDivElement | null, src: string) => {
+  if (!el) return;
+  const img = el.querySelector("img");
+  if (img) {
+    img.srcset = "";
+    img.src = src;
+  }
+};
 
   const animateLayer = (
     layerA: HTMLDivElement | null,
@@ -143,7 +171,6 @@ export default function SustainabilitySpotlight() {
 
   const slide = slides[current];
 
-  // Shared pointer handlers object
   const pointerHandlers = {
     onPointerDown: handlePointerDown,
     onPointerMove: handlePointerMove,
@@ -153,15 +180,17 @@ export default function SustainabilitySpotlight() {
 
   return (
     <section
+      ref={sectionRef}
       className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
       data-header="dark"
     >
       <div className="container">
         {/* ── Mobile (below lg) ── */}
         <div className="flex flex-col items-center lg:hidden">
-          <h2 className="text-heading uppercase text-foreground mb-50 text-center">
-            {sustainabilitySpotlight.title}
-          </h2>
+          <SectionHeading
+            title={sustainabilitySpotlight.title}
+            className="uppercase text-foreground mb-50 text-center"
+          />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -220,28 +249,34 @@ export default function SustainabilitySpotlight() {
             className="w-full relative h-[320px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-50"
             {...pointerHandlers}
           >
-            <div ref={mLayerARef} className="absolute inset-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={slides[0].image}
-                alt={slides[0].alt}
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                draggable={false}
-              />
-            </div>
             <div
-              ref={mLayerBRef}
+              ref={mImgParallaxRef}
               className="absolute inset-0"
-              style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+              style={{ transform: "scale(1.15) translateY(0vh)" }}
             >
-              <div ref={mLayerBImgRef} className="absolute inset-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div ref={mLayerARef} className="absolute inset-0">
+                <Image
                   src={slides[0].image}
                   alt={slides[0].alt}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  fill
+                  className="object-cover object-center"
                   draggable={false}
                 />
+              </div>
+              <div
+                ref={mLayerBRef}
+                className="absolute inset-0"
+                style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+              >
+                <div ref={mLayerBImgRef} className="absolute inset-0">
+                  <Image
+                    src={slides[0].image}
+                    alt={slides[0].alt}
+                    fill
+                    className="object-cover object-center"
+                    draggable={false}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -274,49 +309,56 @@ export default function SustainabilitySpotlight() {
           <div className="flex items-center gap-50 3xl:gap-0">
             <div className="w-1/2 flex flex-col items-center justify-center">
               <div className="flex flex-col items-center text-center">
-                <h2 className="text-heading uppercase text-foreground mb-90">
-                  {sustainabilitySpotlight.title}
-                </h2>
+                <SectionHeading
+                  title={sustainabilitySpotlight.title}
+                  className="uppercase text-foreground mb-90"
+                />
 
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={slide.id}
                     className="flex flex-col items-center text-center"
                   >
-                    <motion.span
-                      custom={0}
-                      variants={itemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      className="text-16 font-[avenirHeavy] text-foreground-light mb-20"
-                    >
-                      {slide.date}
-                    </motion.span>
-                    <motion.h3
-                      custom={1}
-                      variants={itemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      className="text-25 font-[optima] uppercase text-foreground leading-[1.2] mb-50 max-w-[598px]"
-                    >
-                      {slide.title}
-                    </motion.h3>
-                    <motion.div
-                      custom={2}
-                      variants={itemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                    >
-                      <Link
-                        href={slide.href}
-                        className="text-primary-2 text-19 font-[avenirHeavy] leading-[100%] hover:opacity-70 transition-opacity duration-300"
+                    <div className="overflow-hidden mb-20">
+                      <motion.span
+                        custom={0}
+                        variants={moveUp(0)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        className="text-16 font-[avenirHeavy] text-foreground-light"
                       >
-                        Read More...
-                      </Link>
-                    </motion.div>
+                        {slide.date}
+                      </motion.span>
+                    </div>
+                    <div className="overflow-hidden">
+                      <motion.h3
+                        custom={1}
+                        variants={moveUp(0.1)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        className="text-25 font-[optima] uppercase text-foreground leading-[1.2] mb-50 max-w-[598px]"
+                      >
+                        {slide.title}
+                      </motion.h3>
+                    </div>
+                    <div className="overflow-hidden">
+                      <motion.div
+                        custom={2}
+                        variants={moveUp(0.14)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                      >
+                        <Link
+                          href={slide.href}
+                          className="text-primary-2 text-19 font-[avenirHeavy] leading-[100%] hover:opacity-70 transition-colors duration-300"
+                        >
+                          Read More...
+                        </Link>
+                      </motion.div>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
 
@@ -337,28 +379,34 @@ export default function SustainabilitySpotlight() {
               className="w-1/2 relative h-[460px] 3xl:h-[602px] overflow-hidden cursor-grab active:cursor-grabbing select-none"
               {...pointerHandlers}
             >
-              <div ref={dLayerARef} className="absolute inset-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={slides[0].image}
-                  alt={slides[0].alt}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                  draggable={false}
-                />
-              </div>
               <div
-                ref={dLayerBRef}
+                ref={dImgParallaxRef}
                 className="absolute inset-0"
-                style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+                style={{ transform: "scale(1.15) translateY(0vh)" }}
               >
-                <div ref={dLayerBImgRef} className="absolute inset-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div ref={dLayerARef} className="absolute inset-0">
+                  <Image
                     src={slides[0].image}
                     alt={slides[0].alt}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    fill
+                    className="object-cover object-center"
                     draggable={false}
                   />
+                </div>
+                <div
+                  ref={dLayerBRef}
+                  className="absolute inset-0"
+                  style={{ clipPath: "inset(0% 100% 0% 0%)" }}
+                >
+                  <div ref={dLayerBImgRef} className="absolute inset-0">
+                    <Image
+                      src={slides[0].image}
+                      alt={slides[0].alt}
+                      fill
+                      className="object-cover object-center"
+                      draggable={false}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -366,24 +414,45 @@ export default function SustainabilitySpotlight() {
 
           <div className="overflow-hidden">
             <div className="flex justify-center mt-50 gap-20 3xl:gap-30">
-              <CustomOutlineButton
-                variant="dark"
-                text="View All"
-                borderColor="border-primary-2"
-                textColor="text-foreground-light"
-                px="px-[26px] 3xl:px-[36.6px]"
-              />
+              <motion.div
+                variants={moveUp(0)}
+                initial="hidden"
+                whileInView="show"
+                exit="exit"
+              >
+                <CustomOutlineButton
+                  variant="dark"
+                  text="View All"
+                  borderColor="border-primary-2"
+                  textColor="text-foreground-light"
+                  px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+                />
+              </motion.div>
               <div className="flex items-center gap-[10px] 3xl:gap-[15px]">
-                <SliderArrowButton
-                  onClick={goPrev}
-                  direction="prev"
-                  variant="dark"
-                />
-                <SliderArrowButton
-                  onClick={goNext}
-                  direction="next"
-                  variant="dark"
-                />
+                <motion.div
+                  variants={moveUp(0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  exit="exit"
+                >
+                  <SliderArrowButton
+                    onClick={goPrev}
+                    direction="prev"
+                    variant="dark"
+                  />
+                </motion.div>
+                <motion.div
+                  variants={moveUp(0.13)}
+                  initial="hidden"
+                  whileInView="show"
+                  exit="exit"
+                >
+                  <SliderArrowButton
+                    onClick={goNext}
+                    direction="next"
+                    variant="dark"
+                  />
+                </motion.div>
               </div>
             </div>
           </div>

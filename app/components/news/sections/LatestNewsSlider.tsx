@@ -8,27 +8,34 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import { motion, AnimatePresence } from "framer-motion";
 import { PressItem } from "../data";
 import CustomOutlineButton from "@/app/components/common/CustomOutlineButton";
+import { useParallax } from "@/app/hooks/useParallax";
+import { moveUp } from "../../motionVariants";
 
 const LatestNewsSlider = ({ news }: { news: PressItem[] }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { ref, parallaxY } = useParallax(15);
 
-const formatted = (date: string) => {
-  const d = new Date(date);
+  const formatted = (date: string) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    return `${month}-${day}-${year}`;
+  };
 
-  const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const year = d.getFullYear();
-
-  return `${month}-${day}-${year}`;
-};
+  const activeItem = news[activeIndex];
 
   return (
     <div className="relative w-full">
       {/* Swiper */}
-      <div className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px]">
+      <div
+        ref={ref}
+        className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px]"
+      >
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
@@ -47,6 +54,9 @@ const formatted = (date: string) => {
                 fill
                 className="object-cover"
                 priority={i === 0}
+                style={{
+                  transform: `scale(1.15) translateY(${parallaxY}vh)`,
+                }}
               />
               <div
                 className="hidden md:block absolute inset-0"
@@ -62,24 +72,88 @@ const formatted = (date: string) => {
                     "linear-gradient(180deg, rgba(0, 0, 0, 0) 20.99%, #000000 104.8%)",
                 }}
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-end py-50 px-20 sm:px-40 md:px-50 text-center">
-                <p className="text-white/80 text-description mb-20 capitalize">
-                  {item.category} · {formatted(item.date)}
-                </p>
-                <h2 className="text-heading text-white max-w-[1638px] mb-20 line-clamp-2">
-                  {item.title}
-                </h2>
-                <Link href={`/media-center/news/${item.slug}`}>
-                <CustomOutlineButton text="Read More"  borderColor="border-white/90" px="px-[12px] sm:px-[26px] 3xl:px-[36.6px]" />
-                </Link>
-              </div>
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Content overlay — outside Swiper slides */}
+        <div className="absolute inset-0 flex flex-col items-center justify-between py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
+          {/* Top label */}
+          <div>
+            <span className="text-19 leading-[100%] text-white font-[avenirHeavy] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
+              Latest News
+            </span>
+          </div>
+
+          {/* Bottom content */}
+          <div className="flex flex-col items-center pointer-events-auto">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`cat-${activeIndex}`}
+                className="text-white/80 text-description mb-20 capitalize"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.05,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
+                {activeItem.category} · {formatted(activeItem.date)}
+              </motion.p>
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              <motion.h2
+                key={`title-${activeIndex}`}
+                className="text-heading text-white max-w-[1638px] mb-20 line-clamp-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.12,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
+                {activeItem.title}
+              </motion.h2>
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`btn-${activeIndex}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
+                <Link href={`/media-center/news/${activeItem.slug}`}>
+                  <CustomOutlineButton
+                    text="Read More"
+                    borderColor="border-white/90"
+                    px="px-[12px] lg:px-[22px] 3xl:px-[36.6px]"
+                  />
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
- 
+
       {/* Pagination */}
-      <div className="flex items-center justify-center gap-3 mt-20">
+      <motion.div
+        variants={moveUp(0.14)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="flex items-center justify-center gap-3 mt-20"
+      >
         {news.map((_, i) => (
           <button
             key={i}
@@ -91,7 +165,7 @@ const formatted = (date: string) => {
             }`}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

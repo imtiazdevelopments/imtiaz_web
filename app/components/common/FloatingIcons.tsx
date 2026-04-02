@@ -24,7 +24,7 @@ export default function FloatingRightIcons() {
           ease: "expo.out",
           stagger: 0.12,
           delay: 0.3,
-        }
+        },
       );
     }, el);
 
@@ -34,7 +34,7 @@ export default function FloatingRightIcons() {
   return (
     <div
       ref={containerRef}
-      className="floating-icons hidden lg:flex fixed right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[9px] z-[900]"
+      className="floating-icons hidden lg:flex fixed right-[12px] 3xl:right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[9px] z-[900]"
     >
       {[
         { src: "/icons/layout_icons/phone.svg", alt: "phone" },
