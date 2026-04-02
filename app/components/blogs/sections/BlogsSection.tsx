@@ -21,6 +21,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const BLOGS_PER_PAGE = 4;
 
@@ -32,6 +33,7 @@ const BlogsSection = () => {
   const selectedTopic = (searchParams.get("topic") as BlogTopic) || "";
   const selectedCategory = (searchParams.get("category") as BlogCategory) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -48,10 +50,13 @@ const updateParam = (key: string, value: string) => {
   if (value) params.set(key, value);
   else params.delete(key);
   params.set("page", "1");
+
+  lock(); // pause Lenis during transition
   router.push(`${pathname}?${params.toString()}`, { scroll: false });
 
   setTimeout(() => {
-    window.scrollTo({ top: scrollY, behavior: "instant" });
+    scrollTo(scrollY, { duration: 0 }); // instant jump via Lenis
+    unlock(); // resume Lenis
   }, 520);
 };
 

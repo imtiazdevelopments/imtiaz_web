@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 interface FilterDropdownProps {
   placeholder: string;
@@ -24,6 +25,8 @@ const FilterDropdown = ({
   const [isAtBottom, setIsAtBottom] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const pendingRef = useRef(false);
+  const { scrollTo } = useLenis();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -51,15 +54,22 @@ const FilterDropdown = ({
   };
 
   const handleToggle = () => {
+    if (pendingRef.current) return;
+
     if (!open && ref.current) {
       const rect = ref.current.getBoundingClientRect();
+      const dropdownHeight = 220;
+      const willBeCutOff = rect.bottom + dropdownHeight > window.innerHeight;
 
-      // Only scroll if the dropdown is below 80% of the viewport
-      if (rect.top > window.innerHeight * 0.7) {
+      if (willBeCutOff) {
+        pendingRef.current = true;
         const targetScrollY =
           window.scrollY + rect.top - window.innerHeight * 0.4;
-        window.scrollTo({ top: targetScrollY, behavior: "smooth" });
-        setTimeout(() => setOpen(true), 350);
+        scrollTo(targetScrollY, { duration: 0.8 });
+        setTimeout(() => {
+          setOpen(true);
+          pendingRef.current = false;
+        }, 850); // slightly longer than duration to ensure scroll finishes
       } else {
         setOpen(true);
       }

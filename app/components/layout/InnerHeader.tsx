@@ -44,56 +44,64 @@ const InnerHeader: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [y]);
 
-  // Section-based header theme
-  useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("[data-header]");
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const theme = (entry.target as HTMLElement).dataset.header as
-              | "light"
-              | "dark";
-            setHeaderTheme(theme);
-          }
-        });
-      },
-      {
-        rootMargin: "0px 0px -95% 0px",
-        threshold: 0,
-      },
-    );
-
-    sections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [pathname]);
-
-// Replace the existing body lock useEffect with this
+// Section-based header theme
 useEffect(() => {
-  if (!authView) return;
+  const check = () => {
+    const headerEl = document.getElementById("inner-header");
+    if (headerEl) headerEl.style.pointerEvents = "none";
 
-  const scrollY = window.scrollY;
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const el = document.elementFromPoint(window.innerWidth / 2, 80);
 
-  document.body.style.overflow = "hidden";
-  document.body.style.position = "fixed";        // iOS Safari fix
-  document.body.style.top = `-${scrollY}px`;     // prevent jump
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.paddingRight = `${scrollbarWidth}px`; // prevent layout shift
+    if (headerEl) headerEl.style.pointerEvents = "";
+
+    let node = el as HTMLElement | null;
+    let theme: "light" | "dark" = "light";
+
+    while (node && node !== document.body) {
+      if (node.dataset.header) {
+        theme = node.dataset.header as "light" | "dark";
+        break;
+      }
+      node = node.parentElement;
+    }
+
+    setHeaderTheme(theme);
+  };
+
+  window.addEventListener("scroll", check, { passive: true });
+  window.addEventListener("resize", check);
+  setTimeout(check, 100);
 
   return () => {
-    document.body.style.overflow = "";
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.paddingRight = "";
-    window.scrollTo(0, scrollY);                 // restore scroll position
+    window.removeEventListener("scroll", check);
+    window.removeEventListener("resize", check);
   };
-}, [authView]);
+}, [pathname]);
+
+  useEffect(() => {
+    if (!authView) return;
+
+    const scrollY = window.scrollY;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.paddingRight = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [authView]);
 
   const closeAuth = () => setAuthView(null);
 
@@ -101,17 +109,18 @@ useEffect(() => {
     <>
       {/* ========================= HEADER ========================= */}
       <motion.div
+      id="inner-header"
         style={{ y: springY }}
         className="fixed top-0 left-0 w-full z-[999] pt-20"
       >
         <header className="w-full">
           <div className="container">
             <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:px-40">
-<div
-  className={`absolute inset-0 rounded-full backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500 ${
-    headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
-  }`}
-/>
+              <div
+                className={`absolute inset-0 rounded-full backdrop-blur-[30px] border border-white/[0.08] z-[-1] transition-colors duration-500 ${
+                  headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
+                }`}
+              />
 
               {/* LEFT — Hamburger */}
               <div className="flex items-center w-[40%] 2xl:w-[33.33%]">
@@ -199,36 +208,42 @@ useEffect(() => {
                   <AuthSlider />
                 </div>
 
-<div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">
-  {/* Background decoration — behind scroll layer */}
-  <div className="absolute bottom-0 left-0 pointer-events-none">
-    <Image
-      src="/icons/layout_icons/m-icon.svg"
-      alt="Icon"
-      width={534}
-      height={704}
-    />
-  </div>
+                <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">
+                  {/* Background decoration — behind scroll layer */}
+                  <div className="absolute bottom-0 left-0 pointer-events-none">
+                    <Image
+                      src="/icons/layout_icons/m-icon.svg"
+                      alt="Icon"
+                      width={534}
+                      height={704}
+                    />
+                  </div>
 
-  <AnimatePresence mode="wait">
-    <motion.div
-      key={authView}
-      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 pointer-events-auto dark-section-2"
-      onWheel={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}  
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
-    >
-      {authView === "login" ? (
-        <LoginForm onClose={closeAuth} onSwitch={() => setAuthView("signup")} />
-      ) : (
-        <SignupForm onClose={closeAuth} onSwitch={() => setAuthView("login")} />
-      )}
-    </motion.div>
-  </AnimatePresence>
-</div>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={authView}
+                      className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 pointer-events-auto dark-section-2"
+                      onWheel={(e) => e.stopPropagation()}
+                      onTouchMove={(e) => e.stopPropagation()}
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -40 }}
+                      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+                    >
+                      {authView === "login" ? (
+                        <LoginForm
+                          onClose={closeAuth}
+                          onSwitch={() => setAuthView("signup")}
+                        />
+                      ) : (
+                        <SignupForm
+                          onClose={closeAuth}
+                          onSwitch={() => setAuthView("login")}
+                        />
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
             </motion.div>
           </>
