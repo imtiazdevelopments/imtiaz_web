@@ -65,7 +65,7 @@ const handleSlideChange = useCallback(
   );
 
   return (
-    <section className="w-full bg-white pb-100 cursor-grab" data-header="light">
+    <section className="w-full bg-white pb-100" data-header="light">
       <div className="container">
         <SectionHeading title="Signature Moments" className="text-center mb-50 text-foreground" />
       </div>
@@ -140,7 +140,7 @@ const handleSlideChange = useCallback(
         >
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="w-[62px] cursor-pointer group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image src="/icons/left_arrow_slider_primary.svg" alt="Previous" width={28} height={28}
@@ -159,7 +159,7 @@ const handleSlideChange = useCallback(
         >
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="w-[62px] cursor-pointer group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image src="/icons/left_arrow_slider_primary.svg" alt="Next" width={28} height={28}
