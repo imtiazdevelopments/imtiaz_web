@@ -18,7 +18,7 @@ export default function SliderArrowButton({
     <button
       onClick={onClick}
       className={`
-        relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group rounded-[50px] flex items-center justify-center overflow-hidden
+        relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden
         ${isDark ? "border border-[#404040]" : "border border-white"}
       `}
     >

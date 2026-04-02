@@ -30,10 +30,19 @@ export default function SustainabilitySpotlight() {
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
   const DRAG_THRESHOLD = 50;
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
   const dImgParallaxRef = useRef<HTMLDivElement>(null);
   const mImgParallaxRef = useRef<HTMLDivElement>(null);
+
+  // Preload all images on mount
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new window.Image();
+      img.src = slide.image;
+    });
+  }, [slides]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -54,14 +63,14 @@ export default function SustainabilitySpotlight() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const setBg = (el: HTMLDivElement | null, src: string) => {
-  if (!el) return;
-  const img = el.querySelector("img");
-  if (img) {
-    img.srcset = "";
-    img.src = src;
-  }
-};
+  // Use plain <img> tags so we have full imperative control — no Next.js srcset interference
+  const setBg = (el: HTMLDivElement | null, src: string) => {
+    if (!el) return;
+    const img = el.querySelector("img");
+    if (img) {
+      img.src = src;
+    }
+  };
 
   const animateLayer = (
     layerA: HTMLDivElement | null,
@@ -74,19 +83,35 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
   ) => {
     if (!layerB || !layerBImg) return;
     setBg(layerA, prevSrc);
-    setBg(layerB, nextSrc);
     gsap.killTweensOf([layerB, layerBImg]);
     gsap.set(layerB, {
       clipPath: dir === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)",
     });
     gsap.set(layerBImg, { scale: 1.06 });
-    const tl = gsap.timeline({ onComplete });
-    tl.to(layerB, {
-      clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.0,
-      ease: "expo.inOut",
-    });
-    tl.to(layerBImg, { scale: 1, duration: 1.4, ease: "power2.out" }, "<");
+
+    const startAnim = () => {
+      const tl = gsap.timeline({ onComplete });
+      tl.to(layerB, {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.0,
+        ease: "expo.inOut",
+      });
+      tl.to(layerBImg, { scale: 1, duration: 1.4, ease: "power2.out" }, "<");
+    };
+
+    // Set layerB image and wait for load before animating
+    const img = layerB.querySelector("img");
+    if (img) {
+      img.src = nextSrc;
+      if (img.complete) {
+        startAnim();
+      } else {
+        img.onload = startAnim;
+        img.onerror = startAnim; // fallback so animation never gets stuck
+      }
+    } else {
+      startAnim();
+    }
   };
 
   const go = useCallback(
@@ -100,19 +125,22 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
       const nextSrc = slides[nextIndex].image;
       setIsAnimating(true);
       setCurrent(nextIndex);
-      let completed = 0;
-      const onComplete = () => {
-        completed++;
-        if (completed >= 2) {
-          setBg(dLayerARef.current, nextSrc);
-          gsap.set(dLayerBRef.current, { clipPath: "inset(0% 100% 0% 0%)" });
-          gsap.set(dLayerBImgRef.current, { scale: 1 });
-          setBg(mLayerARef.current, nextSrc);
-          gsap.set(mLayerBRef.current, { clipPath: "inset(0% 100% 0% 0%)" });
-          gsap.set(mLayerBImgRef.current, { scale: 1 });
-          setIsAnimating(false);
-        }
+
+      // Each call gets its own independent counter — no shared state race
+      let dDone = false;
+      let mDone = false;
+
+      const tryFinish = () => {
+        if (!dDone || !mDone) return;
+        setBg(dLayerARef.current, nextSrc);
+        gsap.set(dLayerBRef.current, { clipPath: "inset(0% 100% 0% 0%)" });
+        gsap.set(dLayerBImgRef.current, { scale: 1 });
+        setBg(mLayerARef.current, nextSrc);
+        gsap.set(mLayerBRef.current, { clipPath: "inset(0% 100% 0% 0%)" });
+        gsap.set(mLayerBImgRef.current, { scale: 1 });
+        setIsAnimating(false);
       };
+
       animateLayer(
         dLayerARef.current,
         dLayerBRef.current,
@@ -120,7 +148,7 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
         dir,
         prevSrc,
         nextSrc,
-        onComplete,
+        () => { dDone = true; tryFinish(); },
       );
       animateLayer(
         mLayerARef.current,
@@ -129,11 +157,19 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
         dir,
         prevSrc,
         nextSrc,
-        onComplete,
+        () => { mDone = true; tryFinish(); },
       );
     },
     [isAnimating, slides],
   );
+
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
 
   const goPrev = useCallback(() => {
     const prev =
@@ -147,9 +183,22 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
     go(next, 1);
   }, [slides.length, go]);
 
+    const startAutoplay = useCallback(() => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      goNext();
+    }, 4000);
+  }, [goNext]);
+
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, [startAutoplay]);
+
   const handlePointerDown = (e: React.PointerEvent) => {
     dragStartX.current = e.clientX;
     isDragging.current = false;
+    stopAutoplay();
   };
   const handlePointerMove = (e: React.PointerEvent) => {
     if (dragStartX.current === null) return;
@@ -163,10 +212,12 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
     }
     dragStartX.current = null;
     isDragging.current = false;
+    startAutoplay(); // reset autoplay from 0
   };
   const handlePointerLeave = () => {
     dragStartX.current = null;
     isDragging.current = false;
+    startAutoplay();
   };
 
   const slide = slides[current];
@@ -238,13 +289,13 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
             {slides.map((_, i) => (
               <button
                 key={i}
-                onClick={() => go(i)}
+                onClick={() => { go(i); startAutoplay(); }}
                 className={`rounded-full transition-all duration-300 cursor-pointer w-[10px] h-[10px] ${i === current ? "bg-primary-2" : "bg-white border border-primary-2"}`}
               />
             ))}
           </div>
 
-          {/* Mobile image — own refs */}
+          {/* Mobile image — plain img tags for full imperative control */}
           <div
             className="w-full relative h-[320px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-50"
             {...pointerHandlers}
@@ -255,11 +306,11 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
               style={{ transform: "scale(1.15) translateY(0vh)" }}
             >
               <div ref={mLayerARef} className="absolute inset-0">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={slides[0].image}
                   alt={slides[0].alt}
-                  fill
-                  className="object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
                   draggable={false}
                 />
               </div>
@@ -269,11 +320,11 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                 style={{ clipPath: "inset(0% 100% 0% 0%)" }}
               >
                 <div ref={mLayerBImgRef} className="absolute inset-0">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={slides[0].image}
                     alt={slides[0].alt}
-                    fill
-                    className="object-cover object-center"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                     draggable={false}
                   />
                 </div>
@@ -291,12 +342,12 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton
-                onClick={goPrev}
+                onClick={() => { goPrev(); startAutoplay(); }}
                 direction="prev"
                 variant="dark"
               />
               <SliderArrowButton
-                onClick={goNext}
+                onClick={() => { goNext(); startAutoplay(); }}
                 direction="next"
                 variant="dark"
               />
@@ -366,7 +417,7 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                   {slides.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => go(i)}
+                      onClick={() => { go(i); startAutoplay(); }}
                       className={`rounded-full transition-all duration-300 cursor-pointer w-[10px] h-[10px] ${i === current ? "bg-primary-2" : "bg-white border border-primary-2"}`}
                     />
                   ))}
@@ -374,7 +425,7 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
               </div>
             </div>
 
-            {/* Desktop image — own refs */}
+            {/* Desktop image — plain img tags for full imperative control */}
             <div
               className="w-1/2 relative h-[460px] 3xl:h-[602px] overflow-hidden cursor-grab active:cursor-grabbing select-none"
               {...pointerHandlers}
@@ -385,11 +436,11 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                 style={{ transform: "scale(1.15) translateY(0vh)" }}
               >
                 <div ref={dLayerARef} className="absolute inset-0">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={slides[0].image}
                     alt={slides[0].alt}
-                    fill
-                    className="object-cover object-center"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                     draggable={false}
                   />
                 </div>
@@ -399,11 +450,11 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                   style={{ clipPath: "inset(0% 100% 0% 0%)" }}
                 >
                   <div ref={dLayerBImgRef} className="absolute inset-0">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={slides[0].image}
                       alt={slides[0].alt}
-                      fill
-                      className="object-cover object-center"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
                       draggable={false}
                     />
                   </div>
@@ -436,7 +487,7 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                   exit="exit"
                 >
                   <SliderArrowButton
-                    onClick={goPrev}
+                    onClick={() => { goPrev(); startAutoplay(); }}
                     direction="prev"
                     variant="dark"
                   />
@@ -448,7 +499,7 @@ const setBg = (el: HTMLDivElement | null, src: string) => {
                   exit="exit"
                 >
                   <SliderArrowButton
-                    onClick={goNext}
+                    onClick={() => { goNext(); startAutoplay(); }}
                     direction="next"
                     variant="dark"
                   />

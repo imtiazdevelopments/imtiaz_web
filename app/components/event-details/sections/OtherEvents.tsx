@@ -16,7 +16,7 @@ const OtherEvents = () => {
           title="Other Events"
           className="text-center uppercase"
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-40 mt-50 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-40 mt-20 overflow-hidden">
           {pressItems.slice(0, 2).map((item) => (
             <Reveal key={item.id} variants={moveUpV2}>
               <BlogCard blog={item} />

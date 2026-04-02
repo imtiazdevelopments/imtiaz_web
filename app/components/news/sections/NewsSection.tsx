@@ -24,6 +24,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const NEWS_PER_PAGE = 6;
 
@@ -39,6 +40,7 @@ const NewsSection = () => {
   const selectedCategory =
     (searchParams.get("category") as PressCategory) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -48,27 +50,22 @@ const NewsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    // Save the position of the news grid, not the page top
-    const newsGrid = document.getElementById("news-list");
-    const gridTop = newsGrid?.getBoundingClientRect().top ?? 0;
-    const absoluteGridTop = window.scrollY + gridTop;
+const updateParam = (key: string, value: string) => {
+  const scrollY = window.scrollY;
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  const params = new URLSearchParams(searchParams.toString());
+  if (value) params.set(key, value);
+  else params.delete(key);
+  params.set("page", "1");
 
-    // After the slider collapses, keep the news grid in the same visual position
-    requestAnimationFrame(() => {
-      const newGridTop =
-        document.getElementById("news-list")?.getBoundingClientRect().top ?? 0;
-      const newAbsoluteGridTop = window.scrollY + newGridTop;
-      const diff = newAbsoluteGridTop - absoluteGridTop;
-      window.scrollBy({ top: -diff, behavior: "instant" });
-    });
-  };
+  lock();
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+  setTimeout(() => {
+    scrollTo(scrollY, { duration: 0 });
+    unlock();
+  }, 520);
+};
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });
@@ -177,7 +174,7 @@ const NewsSection = () => {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <CustomOutlineButton
-                text="Clear Filters"
+                text="Clear Filter"
                 onClick={clearFilters}
                 variant="dark"
                 px="px-60"
@@ -244,7 +241,7 @@ const NewsSection = () => {
 
               {hasFilter && (
                 <CustomOutlineButton
-                  text="Clear Filters"
+                  text="Clear Filter"
                   onClick={clearFilters}
                   variant="dark"
                   px="px-60"
@@ -289,21 +286,21 @@ const NewsSection = () => {
           >
             <LatestNewsSlider news={latestNews.slice(0, 3)} />
           </motion.div>
-                  <div className="w-full my-50">
-          <div className="relative w-full h-px overflow-hidden">
-            <motion.div
-              className="absolute inset-0 bg-black/10 origin-center"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-            />
+          <div className="w-full my-50">
+            <div className="relative w-full h-px overflow-hidden">
+              <motion.div
+                className="absolute inset-0 bg-black/10 origin-center"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              />
+            </div>
           </div>
-        </div>
         </div>
 
         {/* News Cards Grid */}
-        <div id="news-list" className="scroll-mt-20">
+        <div id="news-list" className="scroll-mt-20 min-h-[100px]">
           {paginated.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-40">
               {paginated.map((item) => (

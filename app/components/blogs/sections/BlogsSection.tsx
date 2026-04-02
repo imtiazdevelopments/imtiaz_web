@@ -21,6 +21,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const BLOGS_PER_PAGE = 4;
 
@@ -32,6 +33,7 @@ const BlogsSection = () => {
   const selectedTopic = (searchParams.get("topic") as BlogTopic) || "";
   const selectedCategory = (searchParams.get("category") as BlogCategory) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -41,25 +43,22 @@ const BlogsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    const newsGrid = document.getElementById("blog-list");
-    const gridTop = newsGrid?.getBoundingClientRect().top ?? 0;
-    const absoluteGridTop = window.scrollY + gridTop;
+const updateParam = (key: string, value: string) => {
+  const scrollY = window.scrollY;
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  const params = new URLSearchParams(searchParams.toString());
+  if (value) params.set(key, value);
+  else params.delete(key);
+  params.set("page", "1");
 
-    requestAnimationFrame(() => {
-      const newGridTop =
-        document.getElementById("blog-list")?.getBoundingClientRect().top ?? 0;
-      const newAbsoluteGridTop = window.scrollY + newGridTop;
-      const diff = newAbsoluteGridTop - absoluteGridTop;
-      window.scrollBy({ top: -diff, behavior: "instant" });
-    });
-  };
+  lock(); // pause Lenis during transition
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+  setTimeout(() => {
+    scrollTo(scrollY, { duration: 0 }); // instant jump via Lenis
+    unlock(); // resume Lenis
+  }, 520);
+};
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });
@@ -140,7 +139,7 @@ const BlogsSection = () => {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <CustomOutlineButton
-                text="Clear Filters"
+                text="Clear Filter"
                 onClick={clearFilters}
                 variant="dark"
                 px="px-60"

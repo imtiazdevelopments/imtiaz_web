@@ -23,6 +23,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -37,6 +38,7 @@ const EventsSection = () => {
   const selectedYear = (searchParams.get("year") as EventYear) || "";
   const selectedMonth = (searchParams.get("month") as EventMonth) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -47,11 +49,20 @@ const EventsSection = () => {
   }, [pathname]);
 
   const updateParam = (key: string, value: string) => {
+    const scrollY = window.scrollY;
+
     const params = new URLSearchParams(searchParams.toString());
     if (value) params.set(key, value);
     else params.delete(key);
     params.set("page", "1");
+
+    lock();
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+    setTimeout(() => {
+      scrollTo(scrollY, { duration: 0 });
+      unlock();
+    }, 520);
   };
 
   const clearFilters = () => {
@@ -149,7 +160,7 @@ const EventsSection = () => {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <CustomOutlineButton
-                text="Clear Filters"
+                text="Clear Filter"
                 onClick={clearFilters}
                 variant="dark"
                 px="px-60"
@@ -216,7 +227,7 @@ const EventsSection = () => {
 
               {hasFilter && (
                 <CustomOutlineButton
-                  text="Clear Filters"
+                  text="Clear Filter"
                   onClick={clearFilters}
                   variant="dark"
                   px="px-60"
