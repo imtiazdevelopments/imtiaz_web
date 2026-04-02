@@ -24,6 +24,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const NEWS_PER_PAGE = 6;
 
@@ -39,6 +40,7 @@ const NewsSection = () => {
   const selectedCategory =
     (searchParams.get("category") as PressCategory) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -48,20 +50,22 @@ const NewsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    const scrollY = window.scrollY; // snapshot current scroll
+const updateParam = (key: string, value: string) => {
+  const scrollY = window.scrollY;
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  const params = new URLSearchParams(searchParams.toString());
+  if (value) params.set(key, value);
+  else params.delete(key);
+  params.set("page", "1");
 
-    // Wait for the slider collapse transition (500ms) to finish, then restore scroll
-    setTimeout(() => {
-      window.scrollTo({ top: scrollY, behavior: "instant" });
-    }, 520);
-  };
+  lock();
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+  setTimeout(() => {
+    scrollTo(scrollY, { duration: 0 });
+    unlock();
+  }, 520);
+};
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });

@@ -17,18 +17,18 @@ const Pagination = ({
 }: PaginationProps) => {
   const { scrollTo } = useLenis();
 
-  const handleClick = (page: number) => {
-    onPageChange(page);
+const handleClick = (page: number) => {
+  onPageChange(page);
 
-    if (!scrollToId) return;
+  if (!scrollToId) return;
 
+  setTimeout(() => {
     const el = document.getElementById(scrollToId);
     if (!el) return;
-
     const top = el.getBoundingClientRect().top + window.scrollY - 150;
-
     scrollTo(top, { duration: 1.2 });
-  };
+  }, 60);
+};
 
   const getPages = (): (number | "...")[] => {
     if (totalPages <= 6) {

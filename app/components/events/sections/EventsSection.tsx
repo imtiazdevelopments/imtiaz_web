@@ -23,6 +23,7 @@ import {
   moveUpV2,
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -37,6 +38,7 @@ const EventsSection = () => {
   const selectedYear = (searchParams.get("year") as EventYear) || "";
   const selectedMonth = (searchParams.get("month") as EventMonth) || "";
   const currentPage = Number(searchParams.get("page") || "1");
+  const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -46,19 +48,22 @@ const EventsSection = () => {
     }
   }, [pathname]);
 
-const updateParam = (key: string, value: string) => {
-  const scrollY = window.scrollY;
+  const updateParam = (key: string, value: string) => {
+    const scrollY = window.scrollY;
 
-  const params = new URLSearchParams(searchParams.toString());
-  if (value) params.set(key, value);
-  else params.delete(key);
-  params.set("page", "1");
-  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set(key, value);
+    else params.delete(key);
+    params.set("page", "1");
 
-  setTimeout(() => {
-    window.scrollTo({ top: scrollY, behavior: "instant" });
-  }, 520);
-};
+    lock();
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+    setTimeout(() => {
+      scrollTo(scrollY, { duration: 0 });
+      unlock();
+    }, 520);
+  };
 
   const clearFilters = () => {
     router.replace(`${pathname}?page=1`, { scroll: false });
