@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 // import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -110,7 +111,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   }, []);
 
   return (
-    <div className="w-full relative h-screen" ref={rootRef}>
+    <div className="w-full relative h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen" ref={rootRef}>
       <Swiper
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -175,10 +176,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       <motion.h1
                         variants={fadeUp}
                         // custom={0.3}
-                        custom={0.7}
+                        custom={0.2}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
-                        className="text-white font-[optima] uppercase leading-[1] text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] text-center"
+                        className="text-white  uppercase text-heading text-center"
                       >
                         {RightLabel}
                       </motion.h1>
@@ -191,19 +192,23 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       exit="exit"
                       className="flex gap-4 mt-15  font-[avenirRoman] overflow-hidden"
                     >
-                      <motion.a
+                      <motion.div
                         variants={fadeUp}
                         // custom={0.3}
-                        custom={1.3}
+                        custom={0.23}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
-                        className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
-                      rounded-full border border-white text-white
-                      text-[15px] md:text-[17px] cursor-pointer"
-                      >
-                        <span>Register Interest</span>
-                      </motion.a>
+                         
+                      > 
+                         <CustomOutlineButton 
+              text="Register Interest"
+              borderColor="border-white"
+              textColor="text-white"
+              px="px-[12px] sm:px-[26px] xl:px-[25px] h-[45px] lg:h-[66px] !leading-[1.58]"
+            />
+                      </motion.div>
                     </motion.div>
+                   
 
                     {/* Logo */}
                     {/* <div className="overflow-hidden">

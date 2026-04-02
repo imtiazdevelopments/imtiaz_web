@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,7 +46,7 @@ const AboutJourneyV3 = () => {
           y: 0,
           opacity: 1,
           duration: 1.2,
-          stagger: 0.55,
+          stagger: 0.25,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
@@ -71,7 +72,7 @@ const AboutJourneyV3 = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden flex justify-center items-center"
+      className="relative min-h-[82vh] md:min-h-[70vh] lg:min-h-[75vh] xl:min-h-screen overflow-hidden flex justify-center items-center"
       // Added bottom padding like working component so section actually scrolls
     >
       {/* VIDEO */}
@@ -92,22 +93,22 @@ const AboutJourneyV3 = () => {
       {/* CONTENT */}
       <div
         ref={textRef}
-        className="relative z-10 container mx-auto text-center px-4"
+        className="relative z-10 container mx-auto text-center px-4 pb-2"
       >
         <div className="overflow-hidden">
-          <h2 className="anim-item text-[40px] md:text-[50px] lg:text-[60px] text-white font-[optima] leading-[1] mb-[25px] uppercase">
+          <h2 className="anim-item   text-white text-heading mb-30 uppercase">
             A JOURNEY TO PERFECTION
           </h2>
         </div>
 
         <div className="overflow-hidden">
-          <h3 className="anim-item text-[25px] text-white font-[avenirHeavy] leading-[1] mb-[40px] uppercase">
+          <h3 className="anim-item text-25 text-white font-[avenirHeavy] leading-[1] mb-[40px] uppercase">
             CREATING DESTINATIONS OF DISTINCTION
           </h3>
         </div>
 
         <div className="overflow-hidden">
-          <p className="anim-item text-white text-[19px] leading-[1.3] max-w-[75ch] mx-auto mb-[50px]">
+          <p className="anim-item text-white text-description max-w-[73ch] mx-auto mb-50">
             We transform visions into living, breathing destinations. At Imtiaz
             Developments, our legacy is built on excellence, innovation, and
             uncompromising quality — delivering iconic properties that inspire
@@ -115,10 +116,15 @@ const AboutJourneyV3 = () => {
           </p>
         </div>
 
-        <div className="overflow-hidden">
-          <button className="anim-item px-9 py-[19.5px] rounded-full border border-white text-white text-[17px]">
-            About Imtiaz
-          </button>
+        <div className="overflow-hidden ">
+          <div className="anim-item mx-auto w-fit">
+            <CustomOutlineButton
+              text="About Imtiaz"
+              borderColor="border-white"
+              textColor="text-white"
+              px="px-[26px] xl:px-[27px] h-[45px] lg:h-[66px] !leading-[1.58]"
+              />
+            </div>
         </div>
       </div>
     </section>

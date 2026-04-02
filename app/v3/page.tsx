@@ -114,11 +114,11 @@ export default function Home() {
 
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_1.12%,rgba(0,0,0,0.15)_40.24%,rgba(0,0,0,0.75)_100%)] pointer-events-none" />
 
-                    <div className="absolute bottom-[110px] 3xl:bottom-[80px] max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
+                    <div className="absolute bottom-[110px] 3xl:bottom-[90px] max-w-[135ch] flex flex-col gap-[40px] md:gap-[60px] 3xl:gap-[72px] items-center justify-center">
                         <div className="relative overflow-hidden">
                             <h1
                                 ref={titleRef}
-                                className="text-[35px] xl:text-[64px] 3xl:text-[80px] font-[optima] leading-[1] uppercase text-white opacity-0"
+                                className="text-[35px] xl:text-[64px] 3xl:text-[70px] font-[optima] leading-[1.143] uppercase text-white opacity-0"
                             >
                                 Redefining Spaces <br />
                                 Elevating Lives

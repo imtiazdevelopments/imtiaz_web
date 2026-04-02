@@ -76,7 +76,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         <div className="flex flex-col md:flex-row justify-center items-center gap-150">
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center">
-            <div className="relative w-[394px] h-[600px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
+            <div className="relative w-[300px] md:w-[394px] h-[520px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
                 src={"/images/home/app/phone3.png"}
@@ -101,7 +101,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               <motion.h2
                 variants={fadeUp}
                 // custom={0.5}
-                custom={1}
+                custom={0.2}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -115,7 +115,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               <motion.p
                 variants={fadeUp}
                 // custom={0.6}
-                custom={1.5}
+                custom={0.21}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -131,7 +131,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               <motion.div
                 variants={fadeUp}
                 // custom={0.7}
-                custom={1.8}
+                custom={0.23}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -150,7 +150,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               <motion.div
                 variants={fadeUp}
                 // custom={0.8}
-                custom={2.2}
+                custom={0.23}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}

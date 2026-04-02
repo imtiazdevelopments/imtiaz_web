@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useInView } from "framer-motion";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -112,14 +113,14 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   // const inView = useInView(rootRef, { once: true, amount: 0.2 });
 
   return (
-    <div className="w-full relative h-screen" ref={sectionRef}>
+    <div className="w-full relative h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen" ref={sectionRef}>
       <Swiper
         effect="fade"
         fadeEffect={{ crossFade: true }}
         slidesPerView={1}
         loop
         modules={[EffectFade, Autoplay, Navigation]}
-        autoplay={{ delay: 8000, disableOnInteraction: false }}
+        // autoplay={{ delay: 8000, disableOnInteraction: false }}
         onSwiper={setSwiperInstance}
         navigation={{ nextEl: ".swiper-btn-next", prevEl: ".swiper-btn-prev" }}
         className="w-full swiper-fade h-full"
@@ -127,7 +128,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full flex flex-col justify-center items-center">
+            <div className="relative w-full h-full flex flex-col pt-15 lg:pt-0 lg:justify-center items-center">
               {/* -------------------------------- VIDEO BG -------------------------------- */}
               <div
                 className="absolute inset-0 -z-10 overflow-hidden"
@@ -153,20 +154,19 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     initial="hidden"
                     animate={startAnim ? "show" : "hidden"}
                     exit="exit"
-                    className="flex flex-col justify-between items-center pb-[250px]"
+                    className="flex flex-col justify-between items-center pb-15 lg:pb-[250px]"
                   >
                     {/* Right Label */}
-                    <div className="overflow-hidden mb-10 3xl:mb-[130px]">
+                    <div className="overflow-hidden mb-50">
                       <motion.div
                         // variants={fadeUp}
-                        variants={moveUp(1)}
+                        variants={moveUp(0.25)}
                         // custom={0.15}
                         // custom={0.5}
                         initial="hidden"
                         animate={startAnim ? "show" : "hidden"}                      >
                         <span
-                          className="text-white font-[avenirHeavy] font-[800] uppercase
-      text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
+                          className="text-white   uppercase text-description"
                         >
                           {RightLabel}
                         </span>
@@ -177,21 +177,19 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     <div className="overflow-hidden">
                       <motion.h1
                         // variants={fadeUp}
-                        variants={moveUp(2)}
+                        variants={moveUp(0.2)}
                         // custom={0.35}
                         // custom={0.8}
                         initial="hidden"
                         animate={startAnim ? "show" : "hidden"}
-                        className="text-white font-[optima] uppercase leading-[1]
-                          text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px]
-                          text-center mb-[22px]"
+                        className="text-white   uppercase  text-heading  text-center "
                       >
                         {slide.title}
                       </motion.h1>
                     </div>
 
                     {/* Logo */}
-                    <div className="overflow-hidden">
+                    {/* <div className="overflow-hidden">
                       <motion.div
                         // variants={fadeUp}
                         variants={moveUp(2.6)}
@@ -208,7 +206,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           className="object-contain w-[150px] h-[47px]"
                         />
                       </motion.div>
-                    </div>
+                    </div> */}
                   </motion.div>
                 </AnimatePresence>
 
@@ -216,7 +214,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               </div>
 
               {/* -------------------------------- PILL SECTION -------------------------------- */}
-              <div className="absolute w-full bottom-[50px]">
+              <div className="absolute w-full bottom-15 lg:bottom-[50px]">
                 <motion.div
                   // variants={fadeUp}
                   variants={moveUp(3.5)}
@@ -225,22 +223,22 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   initial="hidden"
                   animate={startAnim ? "show" : "hidden"}
                   exit="exit"
-                  className={`container px-4 md:px-6 lg:px-10 mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
+                  className={`container px-4 md:px-6 lg:px-10 mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
                 >
                   {/* <AnimatePresence mode="wait"> */}
                     <div className="relative">
-                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-full pointer-events-none" />
+                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-md lg:rounded-full pointer-events-none" />
                       <motion.div
                         key={`pill-${activeIndex}`}
                         // initial="hidden"
                         // animate={startAnim ? "show" : "hidden"}
                         // exit="exit"
-                        className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6  h-[70px] md:h-[90px]"
+                        className="bg-white/5 backdrop-blur-[30px] py-4 lg:py-0 rounded-md lg:rounded-full flex flex-col lg:flex-row items-center justify-between gap-6    lg:min-h-[90px]"
                       >
                         {/* Pill Logo */}
 
                         {/* Features */}
-                        <div className="flex gap-6 md:gap-10 3xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 lg:px-[30px] 3xl:px-[68px]">
+                        <div className="flex gap-6 md:gap-4  3xl:gap-[80px] items-center  flex-wrap lg:flex-nowrap   px-6 lg:px-[30px] 3xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               key={`${idx}-${activeIndex}`}
@@ -258,7 +256,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                                 height={20}
                                 alt={f.label}
                               />
-                              <span className="text-white text-[14px] md:text-[17px] font-[avenirRoman] uppercase">
+                              <span className="text-white text-description uppercase">
                                 {f.label}
                               </span>
                             </motion.div>
@@ -266,8 +264,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         </div>
 
                         <motion.div
-                          className="pr-6 md:pr-[15px] 
-                        flex items-center justify-center overflow-hidden"
+                          className="pr-6 md:pr-[15px] flex items-center justify-center "
                         >
                           <AnimatePresence mode="wait">
                             <motion.div
@@ -278,27 +275,31 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               exit="exit"
                               className="flex gap-4 font-[avenirRoman] overflow-hidden"
                             >
-                              <motion.a
+                              <motion.div
                                 // variants={fadeUp}
                                 // custom={0.38} 
-                                variants={moveUp(1.4)}
-                                className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
-                      rounded-full border border-white text-white
-                      text-[15px] md:text-[17px] cursor-pointer"
-                              >
-                                <span>Register</span>
-                              </motion.a>
+                                variants={moveUp(1.4)} 
+                              > 
+                                 <CustomOutlineButton 
+                                    text="Register"
+                                    borderColor="border-white"
+                                    textColor="text-white"
+                                    px="px-[18px] h-[45px] lg:h-[66px]   !leading-[1.58]"
+                                  />
+                              </motion.div>
 
-                              <motion.a
+                              <motion.div
                                 // variants={fadeUp}
                                 // custom={0.5}
-                                variants={moveUp(1.8)}
-                                className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
-                      rounded-full border border-white text-white
-                      text-[15px] md:text-[17px] cursor-pointer"
-                              >
-                                <span>Explore</span>
-                              </motion.a>
+                                variants={moveUp(1.8)} 
+                              > 
+                                <CustomOutlineButton 
+                                    text="Explore"
+                                    borderColor="border-white"
+                                    textColor="text-white"
+                                    px="px-[16px]  h-[45px] lg:h-[66px]  !leading-[1.58]"
+                                  />
+                              </motion.div>
                             </motion.div>
                           </AnimatePresence>
                           {/*   <motion.div
@@ -339,7 +340,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           {/* Prev */}
 
           {/* Pagination Dots */}
-          <div className="flex gap-3 justify-center items-center z-[50]">
+          {/* <div className="flex gap-3 justify-center items-center z-[50]">
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -351,7 +352,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                 }`}
               />
             ))}
-          </div>
+          </div> */}
 
           {/* Next */}
         </div>
@@ -362,13 +363,13 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         initial="hidden"
         animate={startAnim ? "show" : "hidden"}
         exit="exit"
-        className="absolute top-[40%] left-0 w-full z-[60]"
+        className="absolute top-[35%] lg:top-[40%] left-0 w-full z-[60]"
       >
         <div className="container flex items-center justify-between">
           {/* Prev */}
           <button
             aria-label="Previous slide"
-            className="swiper-btn-prev relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            className="swiper-btn-prev relative w-10 h-10 lg:w-[62px] lg:h-[62px] group  border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -376,7 +377,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               alt="Next"
               width={28}
               height={28}
-              className="relative z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              className="relative z-10 object-contain w-[20px] h-[20px] lg:w-[28px] lg:h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
 
@@ -385,7 +386,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           {/* Next */}
           <button
             aria-label="Next slide"
-            className="swiper-btn-next relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            className="swiper-btn-next relative  w-10 h-10 lg:w-[62px] lg:h-[62px]  group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -393,7 +394,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               alt="Next"
               width={28}
               height={28}
-              className="relative rotate-180 z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              className="relative rotate-180 z-10 object-contain w-[20px] h-[20px] lg:w-[28px] lg:h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
         </div>

@@ -152,7 +152,7 @@ export default function HeroFeatureSlider({
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-screen"
+      className="w-full relative overflow-hidden h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
     >
       {/* Nav Buttons */}
       <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
@@ -166,7 +166,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={prevRef}
-              className="relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative   group 3xl:w-[62px] 3xl:h-[62px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -189,7 +189,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={nextRef}
-              className="relative w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative   group 3xl:w-[62px] 3xl:h-[62px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image

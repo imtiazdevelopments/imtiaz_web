@@ -492,7 +492,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           breakpoints={{
             700: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
+            1500: { slidesPerView: 4 },
           }}
         >
           {projectsData.map((project, i) => { 
