@@ -73,7 +73,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* ----- MAIN LAYOUT ----- */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-150">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-50 md:gap-150">
           {/* PHONE - ALWAYS CENTERED */}
           <div className="flex justify-center">
             <div className="relative w-[300px] md:w-[394px] h-[520px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">

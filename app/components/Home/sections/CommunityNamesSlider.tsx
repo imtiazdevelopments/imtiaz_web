@@ -166,7 +166,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={prevRef}
-              className="relative   group 3xl:w-[62px] 3xl:h-[62px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -174,7 +174,7 @@ export default function HeroFeatureSlider({
                 alt="Previous"
                 width={28}
                 height={28}
-                className="relative z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -189,7 +189,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={nextRef}
-              className="relative   group 3xl:w-[62px] 3xl:h-[62px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -197,7 +197,7 @@ export default function HeroFeatureSlider({
                 alt="Next"
                 width={28}
                 height={28}
-                className="relative rotate-180 z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>

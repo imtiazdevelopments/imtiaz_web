@@ -91,7 +91,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden      flex justify-center items-center h-screen"
+      className="relative w-full overflow-hidden flex justify-center items-center h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
     >
       {/* ---------------- BACKGROUND VIDEO ---------------- */}
       <video
