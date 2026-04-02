@@ -206,7 +206,7 @@ export default function HeroFeatureSlider({
       {/* Background */}
       <div
         ref={bgRef}
-        className="absolute w-full h-full inset-0 -z-20 overflow-hidden"
+        className="absolute w-full h-full inset-0 -z-20 overflow-hidden scale-[1.08]"
       >
         {prevBg && (
           <motion.div
@@ -269,16 +269,16 @@ export default function HeroFeatureSlider({
 
       {/* Swiper Feature Cards */}
       <div
-        className="absolute bottom-0 w-full z-20"
+        className="absolute bottom-0 w-full z-20 "
         onMouseLeave={handleMouseLeave}
       >
         <Swiper
           modules={[Autoplay, Navigation]}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
+          // autoplay={{
+          //   delay: 3500,
+          //   disableOnInteraction: false,
+          //   pauseOnMouseEnter: true,
+          // }}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
@@ -306,7 +306,7 @@ export default function HeroFeatureSlider({
 
             <Reveal key={c.id} variants={moveUpV2}>
               <SwiperSlide key={c.id}>
-                <div className="relative flex flex-1">
+                <div className="relative flex flex-1 ">
                   <div
                     className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
                     onMouseEnter={() => {

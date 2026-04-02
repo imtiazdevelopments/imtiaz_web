@@ -139,7 +139,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover "
+                  className="w-full h-full object-cover scale-[1.08]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
               </div>

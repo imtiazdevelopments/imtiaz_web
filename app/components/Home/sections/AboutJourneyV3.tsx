@@ -84,7 +84,7 @@ const AboutJourneyV3 = () => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover scale-[1.5]"
+        className="absolute inset-0 w-full h-full object-cover scale-[1.6]"
       />
 
       {/* OVERLAY */}
