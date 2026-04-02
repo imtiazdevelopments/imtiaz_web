@@ -49,7 +49,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
   const isBlack = variant === "black";
 
   return (
-    <div className="flex items-center gap-[10px]">
+    <div className="flex items-center gap-[10px] capitalize">
       {allCrumbs.map((crumb, i) => (
         <div key={i} className="flex items-center gap-[10px]">
           {i > 0 && (

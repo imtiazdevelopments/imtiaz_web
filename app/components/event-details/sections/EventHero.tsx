@@ -1,33 +1,54 @@
+"use client";
+
 import Image from "next/image";
 import Breadcrumb from "../../common/Breadcrumb";
 import { EventDetail } from "../data";
+import { SectionHeading } from "../../animations/SectionHeading";
+import { motion } from "framer-motion";
+import { moveDown, moveUp } from "../../motionVariants";
+import { useParallax } from "@/app/hooks/useParallax";
 
 interface Props {
   event: EventDetail;
 }
 
 const EventHero = ({ event }: Props) => {
+  const { ref, parallaxY } = useParallax(15);
   const formattedDate = event.date.replace(/-/g, " - ");
 
   return (
     <section className="w-full pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
-        <Breadcrumb variant="black" />
+        <motion.div
+          variants={moveDown(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <Breadcrumb variant="black" />
+        </motion.div>
 
         {/* Title */}
-        <h1 className="text-heading max-w-[50ch] text-foreground text-center uppercase mt-100">
-          {event.title}
-        </h1>
+        <SectionHeading
+          title={event.title}
+          className="max-w-[50ch] text-foreground text-center uppercase mt-100"
+        />
 
         {/* Image with overlay and meta bar */}
-        <div className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative">
+        <div
+          ref={ref}
+          className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative overflow-hidden"
+        >
           <Image
             src={event.heroImage}
             alt={event.title}
             fill
             priority
             sizes="100vw"
+            style={{
+              transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+            }}
           />
 
           {/* Gradient overlay */}
@@ -39,7 +60,7 @@ const EventHero = ({ event }: Props) => {
             }}
           />
 
-                    <div
+          <div
             className="lg:hidden absolute inset-0"
             style={{
               background:
@@ -51,7 +72,13 @@ const EventHero = ({ event }: Props) => {
           <div className="absolute bottom-0 left-0 right-0 flex py-[10px] md:py-20 items-end justify-center bg-white/20 backdrop-blur-[30px]">
             <div className="flex items-center gap-x-50">
               {/* Date */}
-              <div className="flex flex-col items-center gap-1 lg:gap-[6px]">
+              <motion.div
+                variants={moveUp(0)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex flex-col items-center gap-1 lg:gap-[6px]"
+              >
                 <div className="flex items-center gap-[10px]">
                   <Image
                     src="/images/icons/date.svg"
@@ -67,19 +94,29 @@ const EventHero = ({ event }: Props) => {
                 <span className="text-white/80 text-description leading-[1.54]">
                   {formattedDate}
                 </span>
+              </motion.div>
+
+              <div className="relative w-px h-[50px] lg:h-[72px] overflow-hidden">
+                <motion.div
+                  className="absolute inset-0 origin-center"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
+                  }}
+                  initial={{ scaleY: 0, opacity: 0 }}
+                  whileInView={{ scaleY: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-20% 0px" }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                />
               </div>
-
-              {/* Divider */}
-              <div
-                className="w-px h-[50px] lg:h-[72px]"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)",
-                }}
-              />
-
               {/* Location */}
-              <div className="flex flex-col items-center gap-1 lg:gap-[6px]">
+              <motion.div
+                variants={moveUp(0.12)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex flex-col items-center gap-1 lg:gap-[6px]"
+              >
                 <div className="flex items-center gap-[10px]">
                   <Image
                     src="/images/icons/map.svg"
@@ -95,7 +132,7 @@ const EventHero = ({ event }: Props) => {
                 <span className="text-white/80 text-description leading-[1.54]">
                   {event.location}
                 </span>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -10,6 +10,11 @@ import { useContainerInset } from "@/app/hooks/useContainerInset";
 import { enquiryData } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { SearchableDropdown } from "../../pay-now/CountryNameList";
+import { SectionHeading } from "../../animations/SectionHeading";
+import { SectionDescription } from "../../animations/SectionDescription";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveLeft, moveUp, moveUpV2 } from "../../motionVariants";
+import { motion } from "framer-motion";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -157,7 +162,12 @@ export default function EnquirySection() {
             className="relative w-full lg:w-[43.65%] bg-primary-2 flex flex-col spacing-y-130 overflow-hidden py-120 3xl:py-130"
           >
             <div className="absolute inset-0 bg-black/20 z-10" />
-            <div className="lg:hidden absolute bottom-0 right-0 z-10">
+            <motion.div
+            variants={moveLeft(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{once:true}}
+             className="lg:hidden absolute bottom-0 right-0 z-10">
               <Image
                 src="/images/expertise/m.svg"
                 alt="M"
@@ -165,28 +175,32 @@ export default function EnquirySection() {
                 height={200}
                 className="w-auto h-[200px] sm:h-[225px] md:h-[300px] lg:h-[500px] z-[1] select-none pointer-events-none"
               />
-            </div>
+            </motion.div>
             <div className="relative z-20">
-              <h2 className="text-heading text-white mb-20">
-                {enquiryData.heading}
-              </h2>
-              <p className="text-description text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]">
-                {enquiryData.subheading}
-              </p>
+              <SectionHeading
+                title={enquiryData.heading}
+                className="text-white mb-20"
+              />
+              <SectionDescription
+                text={enquiryData.subheading}
+                className="text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]"
+              />
               <div className="flex flex-col gap-40">
                 {enquiryData.contacts.map((c) => (
-                  <Link
-                    key={c.id}
-                    href={c.href}
-                    className="flex items-center gap-20 group"
-                  >
-                    <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
-                      {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
-                    </span>
-                    <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
-                      {c.label}
-                    </span>
-                  </Link>
+                  <Reveal variants={moveUpV2} key={c.id}>
+                    <Link
+                      key={c.id}
+                      href={c.href}
+                      className="flex items-center gap-20 group"
+                    >
+                      <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                        {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
+                      </span>
+                      <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
+                        {c.label}
+                      </span>
+                    </Link>
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -218,7 +232,12 @@ export default function EnquirySection() {
             >
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {/* Row 1 — First + Last name */}
-                <div className="grid grid-cols-2 gap-x-100 mb-40">
+                <motion.div
+                variants={moveUp(0)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="grid grid-cols-2 gap-x-100 mb-40">
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>
                       First Name*
@@ -249,10 +268,14 @@ export default function EnquirySection() {
                     <FieldLine hasError={!!errors.lastName} />
                     <ErrorSlot msg={errors.lastName?.message} />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Row 2 — Email + Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40">
+                                <motion.div
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40">
                   <div className="group">
                     <label htmlFor="email" className={labelClass}>
                       Enter Your Email*
@@ -303,10 +326,14 @@ export default function EnquirySection() {
                     <FieldLine hasError={!!errors.phone} />
                     <ErrorSlot msg={errors.phone?.message} />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Row 3 — Reason */}
-                <div className="group mb-40">
+                                <motion.div
+                variants={moveUp(0.14)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }} className="group mb-40">
                   <div className="group relative flex flex-col self-end">
                     <Image
                       src="/images/icons/down-tip-arrow.svg"
@@ -335,10 +362,14 @@ export default function EnquirySection() {
                     />
                     <ErrorSlot msg={errors.reason?.message} />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Row 4 — Message */}
-                <div className="group mb-40">
+                                <motion.div
+                variants={moveUp(0.18)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }} className="group mb-40">
                   <label htmlFor="message" className={labelClass}>
                     Type your message here...*
                   </label>
@@ -351,7 +382,7 @@ export default function EnquirySection() {
                   />
                   <FieldLine hasError={!!errors.message} />
                   <ErrorSlot msg={errors.message?.message} />
-                </div>
+                </motion.div>
 
                 {/* Preferred Mode of Contact */}
                 <div className="flex gap-2 md:gap-90 flex-col md:flex-row lg:flex-col lg:gap-0 items-start">

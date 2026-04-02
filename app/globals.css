@@ -103,13 +103,28 @@
   --breakpoint-3xl: 1560px;
 }
 
+/* Hide scrollbar - Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar - Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar - IE & old Edge */
+html {
+  -ms-overflow-style: none;
+}
+
 
 /* ---------- Variables ---------- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --foreground-light: #404040;
-  --primary: #7A253A;
+  --primary: #490905;
   --primary-2: #490905;
    --gray: #EBEBEC;
 

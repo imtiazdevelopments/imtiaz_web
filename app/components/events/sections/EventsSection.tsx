@@ -16,6 +16,13 @@ import FilterDropdown from "../../common/FilterDropdown";
 import EventCard from "./EventCard";
 import { Plus } from "lucide-react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import { motion } from "framer-motion";
+import {
+  containerStagger,
+  moveUp,
+  moveUpV2,
+} from "@/app/components/motionVariants";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -94,43 +101,74 @@ const EventsSection = () => {
       <div className="container">
         {/* Filters Row */}
         {/* ── Desktop (lg+) ── */}
-        <div className="hidden lg:flex items-center justify-between mb-70">
-          <div className="flex items-center gap-30">
-            <FilterDropdown
-              placeholder="Topics"
-              options={eventCategories}
-              value={selectedTopic}
-              onChange={(val) => updateParam("topic", val)}
-            />
-            <FilterDropdown
-              placeholder="Year"
-              options={eventYears}
-              value={selectedYear}
-              onChange={(val) => updateParam("year", val)}
-            />
-            <FilterDropdown
-              placeholder="Month"
-              options={eventMonths}
-              value={selectedMonth}
-              onChange={(val) => updateParam("month", val)}
-            />
-          </div>
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="hidden lg:flex items-center justify-between mb-70"
+        >
+          <motion.div
+            variants={containerStagger}
+            className="flex items-center gap-30"
+          >
+            <motion.div variants={moveUp(0)} className="w-auto">
+              <FilterDropdown
+                placeholder="Topics"
+                options={eventCategories}
+                value={selectedTopic}
+                onChange={(val) => updateParam("topic", val)}
+              />
+            </motion.div>
+
+            <motion.div variants={moveUp(0.1)} className="w-auto">
+              <FilterDropdown
+                placeholder="Year"
+                options={eventYears}
+                value={selectedYear}
+                onChange={(val) => updateParam("year", val)}
+              />
+            </motion.div>
+
+            <motion.div variants={moveUp(0.2)} className="w-auto">
+              <FilterDropdown
+                placeholder="Month"
+                options={eventMonths}
+                value={selectedMonth}
+                onChange={(val) => updateParam("month", val)}
+              />
+            </motion.div>
+          </motion.div>
 
           {hasFilter && (
-            <CustomOutlineButton
-              text="Clear Filters"
-              onClick={clearFilters}
-              variant="dark"
-              px="px-60"
-              borderColor="border-primary-2"
-              textColor="text-foreground-light"
-              className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
-            />
+            <motion.div
+              className="w-full md:w-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <CustomOutlineButton
+                text="Clear Filters"
+                onClick={clearFilters}
+                variant="dark"
+                px="px-60"
+                borderColor="border-primary-2"
+                textColor="text-foreground-light"
+                className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+              />
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* ── Mobile (below lg) ── */}
-        <div className="lg:hidden mb-70">
+        <motion.div
+          variants={moveUp(0.12)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="lg:hidden mb-70"
+        >
           {/* Toggle button */}
           <button
             onClick={() => setFiltersOpen((prev) => !prev)}
@@ -189,16 +227,28 @@ const EventsSection = () => {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="w-full h-px bg-black/10 my-50" />
+        <div className="w-full my-50">
+          <div className="relative w-full h-px overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-black/10 origin-center"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
 
         {/* Cards Grid */}
         <div id="events-list" className="scroll-mt-20">
           {paginated.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-30 md:gap-40">
               {paginated.map((item) => (
-                <EventCard key={item.id} item={item} />
+                <Reveal key={item.id} variants={moveUpV2}>
+                  <EventCard item={item} />
+                </Reveal>
               ))}
             </div>
           ) : (
@@ -210,14 +260,20 @@ const EventsSection = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="w-full flex justify-center">
+          <motion.div
+            variants={moveUp(0.15)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="w-full flex justify-center"
+          >
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
               onPageChange={handlePageChange}
               scrollToId="events-list"
             />
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

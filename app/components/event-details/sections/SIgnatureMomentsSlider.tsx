@@ -1,114 +1,120 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-import gsap from "gsap";
+import { SectionHeading } from "../../animations/SectionHeading";
 
 const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [bgImage, setBgImage] = useState(images[0]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const slideImageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const bgImgRef = useRef<HTMLImageElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const animateSlideIn = useCallback((index: number) => {
-    const el = slideRefs.current[index];
-    if (!el) return;
-    gsap.killTweensOf(el);
-    gsap.fromTo(
-      el,
-      { scale: 0, opacity: 1, transformOrigin: "center center" },
-      { scale: 1, opacity: 1, duration: 1.2, ease: "power3.out" },
-    );
+  // Parallax — direct DOM, zero state
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = (vh / 2 - (rect.top + rect.height / 2)) / vh;
+      const y = progress * 15;
+      if (bgImgRef.current)
+        bgImgRef.current.style.transform = `scale(1.15) translateY(${y}vh)`;
+      slideImageRefs.current.forEach((img) => {
+        if (img) img.style.transform = `scale(1.15) translateY(${y}vh)`;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const animateSlideOut = useCallback((index: number) => {
-    const el = slideRefs.current[index];
-    if (!el) return;
-    gsap.killTweensOf(el);
-    gsap.set(el, { scale: 0, opacity: 0 });
+  const updateDots = useCallback((current: number) => {
+    dotRefs.current.forEach((dot, i) => {
+      if (!dot) return;
+      dot.classList.toggle("bg-primary-2", i === current);
+    });
   }, []);
 
-  const handleSlideChange = useCallback(
-    (swiper: SwiperType) => {
-      const prev = swiper.previousIndex % images.length;
-      const current = swiper.realIndex;
-      setBgImage(images[prev]);
-      animateSlideOut(prev);
-      animateSlideIn(current);
-      setActiveIndex(current);
-    },
-    [animateSlideIn, animateSlideOut, images],
-  );
+const handleSlideChange = useCallback(
+  (swiper: SwiperType) => {
+    const prev = (swiper.previousIndex ?? 0) % images.length;
+    if (bgImgRef.current) {
+      bgImgRef.current.src = images[prev];
+    }
+    updateDots(swiper.realIndex);
+  },
+  [updateDots, images],
+);
 
   const handleSwiper = useCallback(
     (swiper: SwiperType) => {
       swiperRef.current = swiper;
-      animateSlideIn(0);
+      updateDots(0);
     },
-    [animateSlideIn],
+    [updateDots],
   );
 
   return (
-    <section className="w-full bg-white pb-100 border-b border-black/10" data-header="light">
+    <section className="w-full bg-white pb-100 cursor-grab" data-header="light">
       <div className="container">
-        <h2 className="text-heading text-center mb-50 text-foreground">
-          Signature Moments
-        </h2>
+        <SectionHeading title="Signature Moments" className="text-center mb-50 text-foreground" />
       </div>
 
-      {/* Slider wrapper — all layers stack here */}
-      <div className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen">
-        {/* z-0 — background image (previous slide) */}
+      <div
+        ref={containerRef}
+        className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black"
+      >
+        {/* z-0 — previous slide bg, always visible underneath during crossfade */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src={bgImage}
-            alt="background"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={bgImgRef}
+            src={images[0]}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+            style={{ transform: "scale(1.15) translateY(0vh)" }}
           />
         </div>
 
-        {/* z-10 — swiper slides */}
+        {/* z-10 — Swiper crossfade on top */}
         <div className="absolute inset-0 z-10">
           <Swiper
-            modules={[Autoplay]}
-            speed={0}
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            speed={1400}
             loop={true}
             autoplay={{ delay: 4500, disableOnInteraction: false }}
             onSwiper={handleSwiper}
             onSlideChange={handleSlideChange}
             className="w-full h-full"
-            allowTouchMove={false}
+            allowTouchMove={true}
           >
             {images.map((src, i) => (
               <SwiperSlide key={i} className="relative w-full h-full">
-                <div
-                  ref={(el) => {
-                    slideRefs.current[i] = el;
-                  }}
-                  className="w-full h-full"
+                <Image
+                  ref={(el) => { slideImageRefs.current[i] = el; }}
+                  src={src}
+                  alt={`Gallery image ${i + 1}`}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority={i === 0}
                   style={{
-                    transform: "scale(0)",
-                    transformOrigin: "center center",
-                    willChange: "transform",
+                    transform: "scale(1.15) translateY(0vh)",
                   }}
-                >
-                  <Image
-                    src={src}
-                    alt={`Gallery image ${i + 1}`}
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
-                  />
-                </div>
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -117,21 +123,14 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         {/* z-20 — gradient overlay */}
         <div
           className="hidden lg:block absolute inset-0 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 64.27%, rgba(0, 0, 0, 0.8) 100%)",
-          }}
+          style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 64.27%, rgba(0, 0, 0, 0.8) 100%)" }}
         />
-
         <div
           className="lg:hidden absolute inset-0 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 55.27%, rgba(0, 0, 0, 1) 100%)",
-          }}
+          style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 55.27%, rgba(0, 0, 0, 1) 100%)" }}
         />
 
-        {/* z-30 — prev button */}
+        {/* prev button */}
         <motion.div
           variants={moveUp(0.2)}
           initial="hidden"
@@ -144,17 +143,13 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
             className="w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Previous"
-              width={28}
-              height={28}
+            <Image src="/icons/left_arrow_slider_primary.svg" alt="Previous" width={28} height={28}
               className="relative z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
         </motion.div>
 
-        {/* z-30 — next button */}
+        {/* next button */}
         <motion.div
           variants={moveUp(0.3)}
           initial="hidden"
@@ -167,27 +162,20 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
             className="w-[62px] group h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Next"
-              width={28}
-              height={28}
+            <Image src="/icons/left_arrow_slider_primary.svg" alt="Next" width={28} height={28}
               className="relative rotate-180 z-10 object-contain w-[28px] h-[28px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
         </motion.div>
 
-        {/* z-30 — pagination dots */}
+        {/* dots */}
         <div className="absolute bottom-130 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-3">
           {images.map((_, i) => (
             <button
               key={i}
+              ref={(el) => { dotRefs.current[i] = el; }}
               onClick={() => swiperRef.current?.slideToLoop(i)}
-              className={`rounded-full transition-all duration-300 cursor-pointer border border-white ${
-                i === activeIndex
-                  ? "bg-primary-2 w-[10px] h-[10px]"
-                  : "w-[10px] h-[10px]"
-              }`}
+              className={`rounded-full transition-all duration-300 cursor-pointer border border-white w-[10px] h-[10px] ${i === 0 ? "bg-primary-2" : ""}`}
             />
           ))}
         </div>

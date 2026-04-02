@@ -57,15 +57,19 @@ export function SectionHeading({
   return (
     <Tag ref={ref} className={`text-heading ${className}`}>
       {title.split(" ").map((word, wordIndex) => (
-        <span
-          key={`${wordIndex}-${word}`}
-          style={{
-            display: "inline-block",
-            whiteSpace: "nowrap",
-            marginRight: "0.25em",
-            overflow: "hidden",
-          }}
-        >
+<span
+  key={`${wordIndex}-${word}`}
+  style={{
+    display: "inline-block",
+    whiteSpace: "nowrap",
+    marginRight: "0.25em",
+    overflow: "hidden",
+    lineHeight: "inherit",
+    verticalAlign: "top",
+    paddingBottom: "0.2em",
+    marginBottom: "-0.2em",
+  }}
+>
           {word.split("").map((char, charIndex) => (
             <span
               key={`${wordIndex}-${charIndex}`}

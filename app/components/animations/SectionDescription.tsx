@@ -50,7 +50,7 @@ export function SectionDescription({
     }, el);
 
     return () => ctx.revert();
-  }, [text, delay]);
+  }, [text, delay]);  
 
   return (
     <Tag

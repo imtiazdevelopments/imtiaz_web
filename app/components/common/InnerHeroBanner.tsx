@@ -15,8 +15,8 @@ interface InnerHeroProps {
 }
 
 const ZOOM_OUT_DURATION = 2.2;
-const ZOOM_IN_DURATION = 11;
-const ZOOM_OUT_START = 1.32;
+const ZOOM_IN_DURATION = 10;
+const ZOOM_OUT_START = 1.4;
 const ZOOM_OUT_END = 1.0;
 const ZOOM_IN_END = 1.06;
 
@@ -28,7 +28,8 @@ const InnerHeroBanner = ({
   image,
   title,
   description,
-  maxW, maxTitle,
+  maxW,
+  maxTitle,
 }: InnerHeroProps) => {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -41,38 +42,43 @@ const InnerHeroBanner = ({
 
     gsap.context(() => {
       // Zoom-out → slow Ken-Burns creep
-      gsap
-        .timeline()
-        .fromTo(
-          imageWrapperRef.current,
-          { scale: ZOOM_OUT_START, transformOrigin: "center center" },
-          {
-            scale: ZOOM_OUT_END,
-            duration: ZOOM_OUT_DURATION,
-            ease: "expo.out",
-          },
-        )
-        .to(imageWrapperRef.current, {
-          scale: ZOOM_IN_END,
-          duration: ZOOM_IN_DURATION,
-          ease: "sine.inOut",
-        });
+gsap
+  .timeline({ repeat: -1 })
+  .fromTo(
+    imageWrapperRef.current,
+    { scale: ZOOM_OUT_START, transformOrigin: "center center" },
+    {
+      scale: ZOOM_OUT_END,
+      duration: ZOOM_OUT_DURATION,
+      ease: "expo.out",
+    },
+  )
+  .to(imageWrapperRef.current, {
+    scale: ZOOM_IN_END,
+    duration: ZOOM_IN_DURATION,
+    ease: "sine.inOut",
+  })
+  .to(imageWrapperRef.current, {
+    scale: ZOOM_OUT_END,
+    duration: ZOOM_IN_DURATION,
+    ease: "sine.inOut",
+  });
 
       // Description
-if (descRef.current) {
-  gsap.fromTo(
-    descRef.current,
-    { opacity: 0, y: 16, filter: "blur(4px)" },
-    {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      duration: 1.0,
-      ease: "power3.out",
-      delay: DESC_DELAY,
-    },
-  );
-}
+      if (descRef.current) {
+        gsap.fromTo(
+          descRef.current,
+          { opacity: 0, y: 16, filter: "blur(4px)" },
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 1.0,
+            ease: "power3.out",
+            delay: DESC_DELAY,
+          },
+        );
+      }
 
       // Breadcrumb — subtle slide up
       if (breadcrumbRef.current) {
@@ -93,7 +99,7 @@ if (descRef.current) {
 
   return (
     <section
-      className="relative w-full h-[70vh] 2xl:h-[89.5dvh] overflow-hidden"
+      className="relative w-full h-[75vh] 2xl:h-[89.5dvh] overflow-hidden"
       data-header="light"
     >
       <div
@@ -120,12 +126,11 @@ if (descRef.current) {
           {/* delay prop fires blade animation after zoom-out nearly finishes */}
           <div className={`${maxTitle} mx-auto`}>
             <AnimatedHeading
-            title={title}
-            className="mb-20 text-white"
-            mode="blade"
-            delay={HEADING_DELAY}
-          />
-
+              title={title}
+              className="mb-20 text-white"
+              mode="blade"
+              delay={HEADING_DELAY}
+            />
           </div>
           {description && (
             <p
