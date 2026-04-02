@@ -460,7 +460,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-12 md:py-[80px] lg:py-[120px] 3xl:py-[160px] bg-white container">
+    <section className="make-header-black w-full py-120 3xl:py-[160px] bg-white container">
       <div className="overflow-hidden">
         <motion.h2
           // variants={moveUp(0.35)}
@@ -468,7 +468,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center text-[36px] md:text-[58px]  lg:text-[60px] 3xl:text-[70px] font-[optima] mb-50"
+          className="text-center text-heading mb-50"
         >
           {data.sectionTitle}
         </motion.h2>

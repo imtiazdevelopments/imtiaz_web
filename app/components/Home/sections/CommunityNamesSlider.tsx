@@ -6,8 +6,9 @@ import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
 
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion, useInView } from "framer-motion";
-import { textFade, moveUp } from "../../motionVariants";
+import { textFade, moveUp, moveUpV2 } from "../../motionVariants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -15,6 +16,7 @@ import "swiper/css/pagination";
 import { cubicBezier } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -153,7 +155,7 @@ export default function HeroFeatureSlider({
       className="w-full relative overflow-hidden h-screen"
     >
       {/* Nav Buttons */}
-      <div className="absolute w-full z-50 inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
+      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
         <div>
           {/* Prev Button */}
           <motion.div
@@ -238,7 +240,7 @@ export default function HeroFeatureSlider({
       />
 
       {/* Heading */}
-      <div className="container pt-14 md:pt-20 lg:pt-24 2xl:pt-32 relative z-10">
+      <div className="container pt-120 2xl:pt-[130px] relative z-10">
         <motion.div className="flex items-center justify-center relative">
           <motion.div
             className=" max-w-[1150px] w-full text center"
@@ -256,7 +258,7 @@ export default function HeroFeatureSlider({
                 whileInView="animate"
                 animate={isHalfInView ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="text-white font-[optima] text-[36px] md:text-[58px] lg:text-[60px] 3xl:text-[70px] leading-none"
+                className="text-white font-[optima] text-heading "
               >
                 {heading}
               </motion.h1>
@@ -301,19 +303,17 @@ export default function HeroFeatureSlider({
             const active = activeFeat === i;
 
             return (
+
+            <Reveal key={c.id} variants={moveUpV2}>
               <SwiperSlide key={c.id}>
                 <div className="relative flex flex-1">
-                  <motion.div
+                  <div
                     className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
                     onMouseEnter={() => {
                       setActiveFeat(i);
                       switchBg(c.bgImage);
                     }}
-                    // variants={featureItem}
-                    variants={moveUp(i * 0.3)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: false, amount: 0.3 }}
+                   
                   >
                     <div
                       className={`absolute inset-0 transition-opacity duration-400 ${
@@ -328,14 +328,14 @@ export default function HeroFeatureSlider({
                       <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
                         <motion.h3
                           key={`feat-title-${i}-${active}`}
-                          initial={{ opacity: 0, y: 40 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            ease: [0.25, 0.1, 0.25, 1],
-                            delay: i * 0.2,
-                          }}
-                          className="text-white font-[optima] uppercase text-center text-[22px] md:text-[25px] xl:text-[30px] px-4"
+                          initial={{ y: 0 }}
+        animate={{ y: active ? -16 : 0 }}
+        transition={{
+          duration: 0.9,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: active ? 0.08 : 0,
+        }}
+                          className="text-white font-[optima] uppercase text-center text-25 leading-[1.4] px-4"
                         >
                           {c.name}
                         </motion.h3>
@@ -362,18 +362,27 @@ export default function HeroFeatureSlider({
                               : "pointer-events-none absolute"
                           } gap-responsive`}
                         >
-                          <button
+                          {/* <button
                             className="inline-block border border-white px-[23px] py-[19.5px] rounded-[50px] text-white text-17"
                             onClick={() =>
                               c.link && (window.location.href = c.link)
                             }
                           >
                             Read More
-                          </button>
+                          </button> */}
+                           <CustomOutlineButton
+                           onClick={() =>
+                              c.link && (window.location.href = c.link)
+                            }
+              text="Read More"
+              borderColor="border-white"
+              textColor="text-white"
+              px="px-[12px] sm:px-[26px] xl:px-[37px]"
+            />
                         </motion.div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div
                     className="hidden lg:block absolute top-0 right-0 h-full w-[1px]"
@@ -384,6 +393,7 @@ export default function HeroFeatureSlider({
                   />
                 </div>
               </SwiperSlide>
+              </Reveal>
             );
           })}
         </Swiper>
