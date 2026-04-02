@@ -128,7 +128,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
             <div className="anim-item">
               <CustomOutlineButton
             text={data.button.label}
-            px="px-[12px] sm:px-[26px] 3xl:px-[40.4px] mx-auto "
+            px="px-[20px] md:px-[26px] 3xl:px-[40.4px] mx-auto "
             />
             </div>
          

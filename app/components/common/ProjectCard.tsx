@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import type { ProjectCardType } from "@/types/cardtype";
 import CustomOutlineButton from "./CustomOutlineButton";
+import { useParallax } from "@/app/hooks/useParallax";
  
 export default function ProjectCard({
   image,
@@ -16,6 +17,7 @@ export default function ProjectCard({
   units,
   hoverImage
 }: ProjectCardType) {
+    const { ref, parallaxY } = useParallax(15);
 
   const [isActive, setIsActive] = useState(false);
   return ( 
@@ -24,14 +26,18 @@ export default function ProjectCard({
       onTouchStart={() => setIsActive(true)}
       onTouchEnd={() => setIsActive(false)}
       onTouchCancel={() => setIsActive(false)}
+       ref={ref}
     >
       <div className="relative w-full aspect-[12/13] lg:aspect-[8.48/13] overflow-hidden">
 
         <Image
           src={image}
           alt={title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105 group-[.is-active]:scale-105"
+          fill  
+          className="object-cover  (max-width: 768px) 100vw, 50vw  "
+           style={{
+            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+          }}
         />
 
         {/* Default overlay */}
