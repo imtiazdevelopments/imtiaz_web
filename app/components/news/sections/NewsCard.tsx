@@ -18,36 +18,47 @@ const EventCard = ({ item }: { item: PressItem }) => {
   return (
     <Link href={`/media-center/news/${item.slug}`} className="group block">
       {/* Image + Category Bar */}
-      <div
-        ref={ref}
-        className="relative w-full h-[250px] xl:h-[333px] overflow-hidden"
-      >
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-          style={{
-            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
-          }}
-        />
+<div
+  ref={ref}
+  className="relative w-full h-[250px] xl:h-[333px] overflow-hidden"
+  style={{ willChange: "transform" }} // 👈 promote to GPU layer early
+>
+  <Image
+    src={item.image}
+    alt={item.title}
+    fill
+    sizes="(max-width: 768px) 100vw, 50vw"
+    className="object-cover"
+    style={{
+      transform: `scale(1.15) translateY(${parallaxY}vh)`,
+      willChange: "transform", // 👈 tell Safari to prep this layer
+    }}
+  />
 
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 61.41%, #000000 100%)",
-          }}
-        />
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(180deg, rgba(0, 0, 0, 0) 61.41%, #000000 100%)",
+    }}
+  />
 
-        {/* Category & Date Bar — pinned to bottom of image */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/30 backdrop-blur-[30px] py-[12px] flex items-center justify-center">
-          <span className="text-white/80 font-[avenirHeavy] text-16 leading-[1.54]">
-            {item.category} - {formatted}
-          </span>
-        </div>
-      </div>
+  {/* Category & Date Bar */}
+  <div
+    className="absolute bottom-0 left-0 right-0 py-[12px] flex items-center justify-center"
+    style={{
+      backdropFilter: "blur(30px)",
+      WebkitBackdropFilter: "blur(20px)", // 👈 Safari needs this explicitly
+      backgroundColor: "rgba(255,255,255,0.3)",
+      transform: "translateZ(0)",         // 👈 force own compositing layer
+      isolation: "isolate",               // 👈 prevents bleed from parent transform
+    }}
+  >
+    <span className="text-white/80 font-[avenirHeavy] text-16 leading-[1.54]">
+      {item.category} - {formatted}
+    </span>
+  </div>
+</div>
 
       {/* Content */}
       <div className="relative bg-[#EBEBEC] p-40 flex flex-col items-center gap-20 overflow-hidden group">

@@ -46,7 +46,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const projects = [
   "Project Alpha",
@@ -291,18 +291,20 @@ export default function PaymentForm() {
                     onChange={(val) => setValue("countryCode", val)}
                     dropdownWidth={phoneRowWidth}
                   />
-                  <input
-                    id="phone"
-                    type="number"
-                    className="flex-1 border-none border-b pb-[10px] border-foreground-light outline-none bg-transparent text-description text-foreground-light"
-                    {...register("phone", {
-                      required: "Phone number is required",
-                      pattern: {
-                        value: /^[0-9]{7,15}$/,
-                        message: "Invalid number",
-                      },
-                    })}
-                  />
+                  <div className="overflow-x-hidden">
+                    <input
+                      id="phone"
+                      type="number"
+                      className="flex-1 pl-[100px] border-none border-b pb-[5px] border-foreground-light outline-none bg-transparent text-description text-foreground-light"
+                      {...register("phone", {
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^[0-9]{7,15}$/,
+                          message: "Invalid number",
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
                 <FieldLine hasError={!!errors.phone} />
                 <ErrorSlot msg={errors.phone?.message} />
@@ -315,7 +317,7 @@ export default function PaymentForm() {
                   alt="arrow-down"
                   width={20}
                   height={10}
-                  className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0"
+                  className="h-[7px] w-auto absolute top-30 right-0"
                 />
                 <Controller
                   name="country"
@@ -350,7 +352,7 @@ export default function PaymentForm() {
                   alt="arrow-down"
                   width={20}
                   height={10}
-                  className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0"
+                  className="h-[7px] w-auto absolute top-30 right-0"
                 />
                 <Controller
                   name="project"
@@ -439,7 +441,7 @@ export default function PaymentForm() {
               <input
                 id="message"
                 type="text"
-                className="w-full mt-40 text-description text-foreground-light bg-transparent outline-none p-0"
+                className="w-full mt-40 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0"
                 {...register("message")}
               />
               <FieldLine hasError={false} />

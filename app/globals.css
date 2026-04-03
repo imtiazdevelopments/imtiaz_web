@@ -128,6 +128,8 @@ html {
   --primary-2: #490905;
    --gray: #EBEBEC;
 
+/* 70px → 30px at 390px, 70px at 1810px */
+--text-70: clamp(33px, 2.76vw + 20px, 70px);
 
 /* 50px → 28px at 390px, 50px at 1810px */
 --text-50: clamp(28px, 1.55vw + 22px, 50px);
@@ -223,6 +225,7 @@ html {
   --color-gray: var(--gray);
   --color-foreground-light: var(--foreground-light);
 
+  --text-70: var(--text-70);
   --text-50: var(--text-50);
   --text-32: var(--text-32);
   --text-25: var(--text-25);

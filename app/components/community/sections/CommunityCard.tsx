@@ -32,9 +32,9 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         alt={card.title}
         fill
         sizes="100vw"
-        className="object-cover object-center transition-transform duration-500 ease-out"
+        className="object-cover object-center"
         style={{
-          transform: `scale(${active ? 1.06 : 1.15}) translateY(${parallaxY}vh)`,
+          transform: `scale(1.15) translateY(${parallaxY}vh)`,
         }}
       />
 
