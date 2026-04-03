@@ -32,6 +32,7 @@ export default function SustainablityMoments() {
   const isVisible = useRef(false);
   const frameCount = useRef(0);
   const scale = useTrackScale();
+  const hoveredCol = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,6 +80,7 @@ export default function SustainablityMoments() {
 
       values.forEach((grayscale, i) => {
         if (grayscale === null) return;
+        if (hoveredCol.current === i) return;
         const col = colRefs.current[i];
         if (col) col.style.filter = `grayscale(${grayscale})`;
       });
@@ -126,8 +128,9 @@ export default function SustainablityMoments() {
           }}
         >
           <div className="flex w-max marquee-track-sustainability">
+            
             {/* Replaced 8 stacked backdropFilter divs with a single CSS gradient blur approximation */}
-            <div
+            {/* <div
               className="left-0 bottom-0 absolute w-full h-[60%] z-10 pointer-events-none"
               style={{
                 backdropFilter: "blur(6px)",
@@ -139,7 +142,7 @@ export default function SustainablityMoments() {
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0) 28.62%, rgba(255,255,255,0.19) 130.19%)",
               }}
-            />
+            /> */}
 
             {[...slides, ...slides].map((slide, idx) => (
               <div
@@ -151,6 +154,14 @@ export default function SustainablityMoments() {
                   ref={setColRef(idx * 4 + 0)}
                   className="flex flex-col flex-shrink-0 gap-40 h-[615px]"
                   style={{ transition: "filter 0.5s ease" }}
+                  onMouseEnter={() => {
+                    hoveredCol.current = idx * 4 + 0;
+                    const col = colRefs.current[idx * 4 + 0];
+                    if (col) col.style.filter = "grayscale(0)";
+                  }}
+                  onMouseLeave={() => {
+                    hoveredCol.current = null;
+                  }}
                 >
                   {slide.cols[0].images.map((img) => (
                     <div
@@ -176,6 +187,14 @@ export default function SustainablityMoments() {
                   ref={setColRef(idx * 4 + 1)}
                   className="flex flex-col justify-end flex-shrink-0 h-[615px]"
                   style={{ transition: "filter 0.5s ease" }}
+                  onMouseEnter={() => {
+                    hoveredCol.current = idx * 4 + 1;
+                    const col = colRefs.current[idx * 4 + 1];
+                    if (col) col.style.filter = "grayscale(0)";
+                  }} // 👈
+                  onMouseLeave={() => {
+                    hoveredCol.current = null;
+                  }}
                 >
                   {slide.cols[1].images.map((img) => (
                     <div
@@ -201,6 +220,14 @@ export default function SustainablityMoments() {
                   ref={setColRef(idx * 4 + 2)}
                   className="flex flex-col flex-shrink-0 gap-40 h-[615px]"
                   style={{ transition: "filter 0.5s ease" }}
+                  onMouseEnter={() => {
+                    hoveredCol.current = idx * 4 + 2;
+                    const col = colRefs.current[idx * 4 + 2];
+                    if (col) col.style.filter = "grayscale(0)";
+                  }} // 👈
+                  onMouseLeave={() => {
+                    hoveredCol.current = null;
+                  }}
                 >
                   {slide.cols[2].images.map((img) => (
                     <div
@@ -226,6 +253,14 @@ export default function SustainablityMoments() {
                   ref={setColRef(idx * 4 + 3)}
                   className="flex flex-col justify-center flex-shrink-0 h-[615px]"
                   style={{ transition: "filter 0.5s ease" }}
+                  onMouseEnter={() => {
+                    hoveredCol.current = idx * 4 + 3;
+                    const col = colRefs.current[idx * 4 + 3];
+                    if (col) col.style.filter = "grayscale(0)";
+                  }} // 👈
+                  onMouseLeave={() => {
+                    hoveredCol.current = null;
+                  }}
                 >
                   <div
                     className="relative overflow-hidden"

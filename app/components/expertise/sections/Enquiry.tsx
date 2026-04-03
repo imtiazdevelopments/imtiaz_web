@@ -131,7 +131,7 @@ export default function EnquirySection() {
   }, []);
 
   const inputClass =
-    "w-full mt-20 text-description text-white bg-transparent outline-none p-0 h-auto placeholder-transparent";
+    "w-full mt-20 text-description pb-[5px] text-white bg-transparent outline-none p-0 h-auto placeholder-transparent";
   const labelClass =
     "block text-description text-white/50 transition-colors group-focus-within:text-white";
 
@@ -324,7 +324,7 @@ export default function EnquirySection() {
                       <input
                         id="phone"
                         type="number"
-                        className="flex-1 outline-none bg-transparent text-description text-white"
+                        className="flex-1 pl-[100px] pb-[5px] outline-none bg-transparent text-description text-white"
                         {...register("phone", {
                           required: "Phone number is required",
                           pattern: {
@@ -353,7 +353,7 @@ export default function EnquirySection() {
                       alt="arrow-down"
                       width={20}
                       height={10}
-                      className="h-[7px] w-auto mb-[6px] absolute top-30 -mt-1 right-0 invert brightness-0"
+                      className="h-[7px] w-auto absolute top-30 right-0 invert brightness-0"
                     />
                     <Controller
                       name="reason"
@@ -390,7 +390,7 @@ export default function EnquirySection() {
                   </label>
                   <input
                     id="message"
-                    className="w-full text-description mt-40 text-white bg-transparent outline-none p-0 resize-none"
+                    className="w-full text-description mt-40 pb-[5px] text-white bg-transparent outline-none p-0 resize-none"
                     {...register("message", {
                       required: "Message is required",
                     })}

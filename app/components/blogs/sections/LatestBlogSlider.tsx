@@ -34,7 +34,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
       {/* Swiper */}
       <div
         ref={ref}
-        className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px]"
+        className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px] cursor-grab"
       >
         <Swiper
           modules={[Autoplay, EffectFade]}

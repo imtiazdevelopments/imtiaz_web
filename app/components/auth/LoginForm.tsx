@@ -27,7 +27,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 const errorMessageClass = "text-[14px] text-[#c0392b] pt-[5px] h-20";
 
 const inputClass =
-  "w-full mt-20 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-20 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 interface LoginFormProps {
   onClose: () => void;
@@ -104,7 +104,7 @@ export default function LoginForm({ onClose, onSwitch }: LoginFormProps) {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                className="w-full text-description text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto"
+                className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto"
                 {...register("password", {
                   required: "Password is required",
                   minLength: { value: 6, message: "Minimum 6 characters" },

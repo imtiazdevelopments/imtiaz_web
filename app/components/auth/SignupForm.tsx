@@ -29,7 +29,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 
 
 const inputClass =
-  "w-full mt-25 text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-25 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const labelClass =
   "block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light";
@@ -141,8 +141,8 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
                 />
                 <input
                   id="phone"
-                  type="tel"
-                  className="flex-1 border-none outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
+                  type="number"
+                  className="flex-1 pb-[5px] pl-[100px] border-none outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
                   {...register("phone", {
                     required: "Phone number is required",
                     pattern: {
@@ -166,7 +166,7 @@ export default function SignupForm({ onClose, onSwitch }: SignupFormProps) {
               <input
                 id="signupPassword"
                 type={showPassword ? "text" : "password"}
-                className="w-full text-description text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto"
+                className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto"
                 {...register("password", {
                   required: "Password is required",
                   minLength: { value: 6, message: "Minimum 6 characters" },

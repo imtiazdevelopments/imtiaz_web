@@ -86,7 +86,7 @@ import { useLenis } from "../../contexts/LenisContext";
 export default function ScrollToTopReload() {
   const { lock } = useLenis();
 
-  useEffect(() => {
+  useEffect(() => { 
     lock(); // lock scroll on home page load
 
     if ("scrollRestoration" in history) {

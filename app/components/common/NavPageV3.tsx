@@ -72,10 +72,10 @@ export default function MegaMenu({
         /> */}
 
         {/* ---------------- CONTENT WRAPPER ---------------- */}
-        <div className="relative z-20 flex h-full w-full container pt-24 2xl:pt-32">
+        <div className="relative z-20 flex h-full w-full container pt-120">
           {/* LEFT MENU */}
-          <div className="w-1/2 lg:w-1/5 flex flex-col xl:mr-4">
-            <div className="flex flex-col justify-center gap-[22px] w-full text-white relative mb-[120px]">
+          <div className="w-1/2 lg:w-1/3 2xl:w-1/4 flex flex-col justify-between xl:mr-4">
+            <div className="flex flex-col justify-center gap-[22px] w-full text-white relative mb-120">
               {menuItems.map((item, index) => {
                 const isActive = activeMenu.id === item.id;
 
@@ -145,7 +145,7 @@ export default function MegaMenu({
               variants={moveUp(0.2)}
               initial="hidden"
               animate="show"
-              className="flex-col  text-white text-sm pb-14 2xl:pb-[95px] hidden lg:flex"
+              className="flex-col  text-white text-sm pb-90 flex"
             >
               <div>
                 <motion.div
@@ -157,7 +157,7 @@ export default function MegaMenu({
                   CONTACT US
                 </motion.div>
 
-                <div className="flex items-center font-[avenirRoman] gap-4 text-white opacity-70">
+                <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
                   <motion.div
                     variants={moveUp(0.25)}
                     initial="hidden"
@@ -167,7 +167,7 @@ export default function MegaMenu({
                     {contactInfo.email}
                   </motion.div>
 
-                  <div className="w-[1px] h-[13px] bg-white" />
+                  <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
 
                   <motion.div
                     variants={moveUp(0.2)}
@@ -233,7 +233,7 @@ export default function MegaMenu({
 
           {/* CLOSE BTN */}
           <button
-            className="absolute top-8 2xl:top-14 left-[49.5%] lg:left-[21.6%] 2xl:left-[21.3%] -translate-x-1/2 
+            className="absolute top-8 2xl:top-16 left-[50%] lg:left-[33.6%] 2xl:left-[26.5%] -translate-x-1/2 
             bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center cursor-pointer"
             onClick={() => (setIsMenuOpen ? setIsMenuOpen(false) : null)}
           >
