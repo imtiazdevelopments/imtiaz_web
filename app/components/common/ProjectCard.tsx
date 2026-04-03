@@ -105,7 +105,7 @@ export default function ProjectCard({
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 2xl:gap-[20px] w-full 2xl:px-[17px] py-1 translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-500 delay-100">
 
             <div className="flex items-center gap-[10px]">
-              <div className="w-[49px] h-[49px] rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
+              <div className="w-[49px] h-[49px] rounded-full bg-[#3c3d3d] flex items-center justify-center shrink-0">
                 <svg width="25" height="18" viewBox="0 0 25 18" fill="none">
                   <path d="M8.72021 8.72022C8.72021 6.51022 10.5102 4.72021 12.7202 4.72021C14.9302 4.72021 16.7202 6.51022 16.7202 8.72022C16.7202 10.9302 14.9302 12.7202 12.7202 12.7202C10.5102 12.7202 8.72021 10.9302 8.72021 8.72022Z" stroke="white" strokeWidth="1.44"/>
                   <path d="M23.7202 16.7202H0.720215V0.720215H23.7202V16.7202Z" stroke="white" strokeWidth="1.44"/>
@@ -118,7 +118,7 @@ export default function ProjectCard({
             </div>
 
             <div className="flex items-center gap-[10px]">
-              <div className="w-[49px] h-[49px] rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
+              <div className="w-[49px] h-[49px] rounded-full bg-[#3c3d3d] flex items-center justify-center shrink-0">
                 <svg width="22" height="19" viewBox="0 0 22 19" fill="none">
                   <path d="M17.7058 8.91778V2.33544C17.7058 1.44478 17.5743 0.720215 16.8603 0.720215H4.27831C3.56435 0.720215 2.98352 1.44484 2.98352 2.33544L2.85947 8.91778M19.0473 14.7982H20.009C20.3926 14.7982 20.7047 14.4088 20.7047 13.9303V11.0997C20.7048 10.2045 21.0277 8.91778 18.7251 8.91778H3.052H1.38263C0.719653 8.91778 0.720215 10.4744 0.720215 11.3229V13.9303C0.720215 14.1871 0.887648 14.396 1.09354 14.396H20.0091M2.85947 17.7202V14.8341M18.1551 17.7202L18.1551 14.8341H18.7251" stroke="white" strokeWidth="1.44" strokeLinecap="round"/>
                 </svg>

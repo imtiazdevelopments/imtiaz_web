@@ -415,6 +415,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import NavPageV3 from "./NavPageV3";
 import { motion, AnimatePresence } from "framer-motion";
+import AuthSlider from "../auth/AuthSlider";
+import SignupForm from "../auth/SignupForm";
+import LoginForm from "../auth/LoginForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -425,12 +428,13 @@ const Header2: React.FC = () => {
   const [showHeader, setShowHeader] = useState(true);
   const [darkHeader, setDarkHeader] = useState(false);
   const [authView, setAuthView] = useState<AuthView | null>(null);
-    const [mounted, setMounted] = useState(false); 
+  const [mounted, setMounted] = useState(false);
+  const closeAuth = () => setAuthView(null);
 
   const lastScroll = useRef(0);
-    const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
-    // 👇 Only render portal after client mount
+  // 👇 Only render portal after client mount
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -504,12 +508,13 @@ const Header2: React.FC = () => {
         { y: 0, opacity: 1, stagger: 0.2, duration: 1 },
         "<",
       )
-.add(() => {
-  const w = window.innerWidth;
-  const finalH = w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "50px";
-  gsap.set(".bckbg", { height: finalH });
-  window.dispatchEvent(new Event("headerAnimationComplete"));
-});
+      .add(() => {
+        const w = window.innerWidth;
+        const finalH =
+          w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "50px";
+        gsap.set(".bckbg", { height: finalH });
+        window.dispatchEvent(new Event("headerAnimationComplete"));
+      });
   }, []);
 
   useEffect(() => {
@@ -550,24 +555,24 @@ const Header2: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+      if (!headerRef.current) return;
 
-useEffect(() => {
-  const handleScroll = () => {
-    const current = window.scrollY;
-    if (!headerRef.current) return;
+      if (current > lastScroll.current && current > 300) {
+        headerRef.current.style.transform =
+          "translateX(-50%) translateY(-100%)";
+      } else {
+        headerRef.current.style.transform = "translateX(-50%) translateY(0px)";
+      }
 
-    if (current > lastScroll.current && current > 300) {
-      headerRef.current.style.transform = "translateX(-50%) translateY(-100%)";
-    } else {
-      headerRef.current.style.transform = "translateX(-50%) translateY(0px)";
-    }
+      lastScroll.current = current;
+    };
 
-    lastScroll.current = current;
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -575,21 +580,21 @@ useEffect(() => {
         id="header"
         className={clsx(
           "mnhdr fixed w-full z-[999] left-1/2 -translate-x-1/2 transition-all duration-500",
-showHeader
-  ? "translate-y-0"
-  : "-translate-y-full pointer-events-none",
+          showHeader
+            ? "translate-y-0"
+            : "-translate-y-full pointer-events-none",
         )}
       >
         <div className="ovrlyabg bg-black/60 w-full h-screen z-0 absolute"></div>
         <header className="overflow-hidden w-full">
           <div className="container flex justify-center">
             <div className="hdrcnts flex items-center justify-between rounded-[150px] py-[15px] px-20 xl:pl-30 w-full relative h-screen">
-<div
-  className={clsx(
-    "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute rounded-[150px] z-[-1] transition-colors duration-500",
-    darkHeader ? "bg-black/60" : "bg-white/10",
-  )}
-></div>
+              <div
+                className={clsx(
+                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute rounded-[150px] z-[-1] transition-colors duration-500",
+                  darkHeader ? "bg-black/60" : "bg-white/10",
+                )}
+              ></div>
 
               {/* ------- LEFT MENU ------- */}
               <div className="flex items-center w-[40%] 2xl:w-[33.33%] mnhmns">
@@ -763,8 +768,81 @@ showHeader
         </header>
       </div>
 
-      {/* ========================= MOBILE SIDEBAR ========================= */}
-{mounted &&
+      {mounted &&
+        createPortal(
+          <AnimatePresence mode="wait">
+            {authView && (
+              <>
+                <motion.div
+                  key="auth-backdrop"
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1000]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={closeAuth}
+                />
+
+                <motion.div
+                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full sm:h-[85vh] lg:h-[80vh] xl:h-full"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
+                >
+                  <div className="flex w-full overflow-hidden bg-white h-full">
+                    <div className="relative h-full flex-shrink-0 hidden md:block md:w-[48.4%]">
+                      <AuthSlider />
+                    </div>
+
+                    <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">
+                      {/* Background decoration — behind scroll layer */}
+                      <div className="absolute bottom-0 left-0 pointer-events-none">
+                        <Image
+                          src="/icons/layout_icons/m-icon.svg"
+                          alt="Icon"
+                          width={534}
+                          height={704}
+                        />
+                      </div>
+
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={authView}
+                          className="absolute inset-0 flex items-start justify-center overflow-y-auto py-150 3xl:py-0 pointer-events-auto dark-section-2"
+                          onWheel={(e) => e.stopPropagation()}
+                          onTouchMove={(e) => e.stopPropagation()}
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -40 }}
+                          transition={{
+                            duration: 0.25,
+                            ease: [0.25, 1, 0.5, 1],
+                          }}
+                        >
+                          {authView === "login" ? (
+                            <LoginForm
+                              onClose={closeAuth}
+                              onSwitch={() => setAuthView("signup")}
+                            />
+                          ) : (
+                            <SignupForm
+                              onClose={closeAuth}
+                              onSwitch={() => setAuthView("login")}
+                            />
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
+
+      {/* ========================= SIDEBAR ========================= */}
+      {mounted &&
         createPortal(
           <AnimatePresence>
             {isMenuOpen && (
@@ -788,7 +866,7 @@ showHeader
               </>
             )}
           </AnimatePresence>,
-          document.body, // 👈 mounts directly on body, outside header
+          document.body,
         )}
     </>
   );

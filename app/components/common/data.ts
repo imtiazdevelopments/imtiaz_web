@@ -164,11 +164,13 @@ export interface MenuItem {
   id: string;
   label: string;
   bgImage: string;
+  href?: string;
 }
 
 export interface SubMenuItem {
   id: string;
   label: string;
+  href?: string;
 }
 
 export const menuItems: MenuItem[] = [
@@ -208,13 +210,13 @@ export const menuItems: MenuItem[] = [
 // Submenus mapped to parent menu ID
 export const subMenuItems: Record<string, SubMenuItem[]> = {
   about: [
-    { id: "Overview", label: "OVERVIEW" },
-    { id: "mission", label: "MISSION & VISION" },
-    { id: "team", label: "OUR TEAM" },
+    { id: "overview", label: "OVERVIEW" },
+    { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
+    { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
     { id: "careers", label: "CAREERS" },
   ],
   communities: [
-    { id: "community-list", label: "COMMUNITY LIST" },
+    { id: "community-list", label: "COMMUNITY LIST", href: "/communities" },
     { id: "lifestyle", label: "LIFESTYLE" },
   ],
   properties: [
@@ -223,9 +225,9 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "ready", label: "READY PROJECTS" },
   ],
   media: [
-    { id: "news", label: "NEWS & PRESS" },
-    { id: "events", label: "EVENTS" },
-    { id: "blogs", label: "BLOGS" },
+    { id: "news", label: "NEWS & PRESS", href: "/media-center/news-press" },
+    { id: "events", label: "EVENTS", href: "/media-center/events" },
+    { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
     { id: "investor", label: "INVESTOR RELATIONS" },
   ],
   partnership: [
@@ -237,8 +239,8 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "register", label: "REGISTER AS PARTNER" },
   ],
   paynow: [
-    { id: "online", label: "PAY ONLINE" },
-    { id: "methods", label: "PAYMENT METHODS" },
+    { id: "online", label: "PAY ONLINE", href: "/pay-now" },
+    { id: "payment-methods", label: "Payment Methods", href: "/pay-now" },
   ],
 };
 
