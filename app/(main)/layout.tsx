@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import "../globals.css";
 import HeaderWithHamburger from "../components/common/HeaderWithHamburger";
-import { SmoothScrollProvider } from "../contexts/smoothScrollContext";
 import ScrollToTopReload from "../components/common/ScrollToTopReload";
 import LenisUnlock from "../components/common/LenisUnlock";
 

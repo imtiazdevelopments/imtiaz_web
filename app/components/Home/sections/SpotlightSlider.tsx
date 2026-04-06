@@ -212,7 +212,7 @@ export default function SustainabilitySpotlight() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white py-120 3xl:py-130"
+      className="w-full bg-white py-120 3xl:py-130 relative z-10"
       data-header="dark"
     >
       <div className="container">

@@ -11,7 +11,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useInView } from "framer-motion";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -208,6 +207,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       </motion.div>
                     </div> */}
                   </motion.div>
+                  
                 </AnimatePresence>
 
                 {/* -------------------------------- BUTTONS -------------------------------- */}

@@ -137,6 +137,9 @@ html {
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
 
+/* 30px → 24px at 390px, 30px at 1810px */
+--text-30: clamp(24px, 0.81vw + 17.3px, 30px);
+
 /* 25px → 16px at 390px, 25px at 1810px */
 --text-25: clamp(16px, 0.63vw + 13.5px, 25px);
 
@@ -228,6 +231,7 @@ html {
   --text-70: var(--text-70);
   --text-50: var(--text-50);
   --text-32: var(--text-32);
+  --text-30: var(--text-30);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
   --text-18: var(--text-18);

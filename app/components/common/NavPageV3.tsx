@@ -49,12 +49,11 @@ export default function MegaMenu({
 
 const handleNavigate = (href?: string) => {
   if (!mounted.current) return;
+  
   if (href && href !== "#") {
-    // Close menu AFTER navigation starts, not before
+    // Instantly unmount without waiting for animation
+    setIsMenuOpen?.(false);
     router.push(href);
-    setTimeout(() => {
-      if (mounted.current) setIsMenuOpen?.(false);
-    }, 100);
   } else {
     setIsMenuOpen?.(false);
   }
@@ -125,14 +124,14 @@ const handleNavigate = (href?: string) => {
                       initial={false}
                       animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 pb-1"
                     >
                       <Image
                         src="/icons/arrow_nav.svg"
                         alt={item.label}
                         width={28}
                         height={21}
-                        className="w-[28px] h-[21px] invert brightness-0"
+                        className="md:w-[28px] md:h-[21px] w-[20px] h-[18px] invert brightness-0"
                       />
                     </motion.div>
 
@@ -147,7 +146,7 @@ const handleNavigate = (href?: string) => {
                         initial={false}
                         animate={isActive ? { opacity: 0 } : { opacity: 1 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="text-17 lg:text-[25px] 2xl:text-30 font-[optima] uppercase text-white"
+                        className="text-16 md:text-25 3xl:text-30 font-[optima] uppercase text-white"
                       >
                         {item.label}
                       </motion.span>
@@ -156,7 +155,7 @@ const handleNavigate = (href?: string) => {
                         initial={{ opacity: 0 }}
                         animate={isActive ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="absolute left-0 top-0 text-17 lg:text-[25px] 2xl:text-30 font-[optima] uppercase bg-gradient-to-r from-[#7A253A] to-white bg-clip-text text-transparent"
+                        className="absolute left-0 top-0 text-16 md:text-25 3xl:text-30 font-[optima] uppercase bg-gradient-to-r from-[#7A253A] to-white bg-clip-text text-transparent"
                       >
                         {item.label}
                       </motion.span>
@@ -182,15 +181,15 @@ const handleNavigate = (href?: string) => {
                 >
                   CONTACT US
                 </motion.div>
-                <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
-                  <motion.div variants={moveUp(0.25)} initial="hidden" animate="show" className="text-[16px] leading-[2.2]">
-                    {contactInfo.email}
-                  </motion.div>
-                  <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
-                  <motion.div variants={moveUp(0.2)} initial="hidden" animate="show" className="text-[18px] leading-[2.2]">
-                    {contactInfo.phone}
-                  </motion.div>
-                </div>
+<div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
+  <motion.div variants={moveUp(0.25)} initial="hidden" animate="show" className="text-[16px] leading-[2.2]">
+    <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+  </motion.div>
+  <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
+  <motion.div variants={moveUp(0.2)} initial="hidden" animate="show" className="text-[18px] leading-[2.2]">
+    <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+  </motion.div>
+</div>
                 <div className="flex gap-[5px] w-full mt-[30px]">
                   {socialLinks.map((icon, i) => (
                     <motion.div
@@ -230,7 +229,7 @@ const handleNavigate = (href?: string) => {
                 <Link
                   href={item.href ?? "#"}
                   onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
-                  className="text-17 font-[avenirRoman] leading-[2.2] uppercase cursor-pointer hover:translate-x-2 transition-all duration-300 block"
+                  className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer hover:translate-x-2 transition-all duration-300 block"
                 >
                   {item.label}
                 </Link>
@@ -240,7 +239,7 @@ const handleNavigate = (href?: string) => {
 
           {/* CLOSE BTN */}
           <button
-            className="absolute top-8 2xl:top-16 left-[50%] lg:left-[33.6%] 2xl:left-[26.5%] -translate-x-1/2 bg-white/25 text-white rounded-full h-[60px] w-[60px] flex items-center justify-center cursor-pointer"
+            className="absolute top-4 md:top-8 lg:top-10 left-[50%] lg:left-[33.6%] 2xl:left-[26.5%] 3xl:left-[26.2%] -translate-x-1/2 bg-white/25 text-white rounded-full w-[40px] h-[40px] xl:h-[60px] xl:w-[60px] flex items-center justify-center cursor-pointer"
             onClick={() => setIsMenuOpen?.(false)}
           >
             <Image src="/icons/close_nav.svg" alt="close" width={21} height={19} className="w-[21px] h-[19px] hover:scale-[1.2] transition-all duration-300" />

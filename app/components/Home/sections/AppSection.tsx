@@ -65,7 +65,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   return (
     <section
       ref={section5Ref}
-      className="make-header-black w-full py-120 3xl:py-[130px] bg-gray"
+      className="make-header-black w-full py-120 3xl:py-[130px] bg-gray relative z-10"
     >
       <div
         className="container"
