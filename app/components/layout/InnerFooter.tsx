@@ -31,7 +31,7 @@ const InnerFooter = () => {
     console.log("Email:", email);
   };
   return (
-    <footer className="w-full text-white">
+    <footer className="w-full text-white bg-primary-2 relative z-10">
       {/* ================= TOP HERO SECTION ================= */}
       <div className="w-full overflow-hidden py-120 3xl:py-150 bg-primary-2">
         <div className="z-[20] h-full container flex flex-col lg:flex-row lg:justify-between items-center shrink-0">
@@ -100,17 +100,33 @@ const InnerFooter = () => {
       </div>
 
       {/* DIVIDER */}
-      <motion.div
-        className="w-full h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, #490905 0%, rgba(255,255,255,0.4) 50%, #490905 100%)",
-        }}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      />
+<div className="relative w-full h-[2px]">
+  {/* Gradient line underneath — always there */}
+  <div
+    className="absolute inset-0 w-full h-full"
+    style={{
+      background: "linear-gradient(90deg, #490905 0%, rgba(255,255,255,0.4) 50%, #490905 100%)",
+    }}
+  />
+
+  {/* Left half — slides to the left */}
+  <motion.div
+    className="absolute left-0 top-0 w-1/2 h-full bg-white"
+    initial={{ x: 0 }}
+    whileInView={{ x: "-100%" }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.9, ease: "easeInOut" }}
+  />
+
+  {/* Right half — slides to the right */}
+  <motion.div
+    className="absolute right-0 top-0 w-1/2 h-full bg-white"
+    initial={{ x: 0 }}
+    whileInView={{ x: "100%" }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.9, ease: "easeInOut" }}
+  />
+</div>
 
       {/* ================= MENU COLUMNS ================= */}
       <div className="bg-primary-2 py-100">

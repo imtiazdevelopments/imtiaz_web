@@ -90,51 +90,56 @@ export default function Index({
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-  }, []);
 
-  useEffect(() => {
-    const startAnimations = () => {
+    return () => {
       document.body.style.overflow = "";
-      unlock();
-
-      const ctx = gsap.context(() => {
-        const t2 = gsap.timeline();
-        t2.fromTo(
-          titleRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2 },
-        ).fromTo(
-          scrollRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1 },
-          "-=0.3",
-        );
-
-        ScrollTrigger.create({
-          trigger: "#sec1",
-          start: "top top",
-          end: "bottom top",
-          pin: true,
-          pinSpacing: false,
-        });
-      });
-
-      window.dispatchEvent(new Event("homeAnimationsReady"));
-      setTimeout(() => ScrollTrigger.refresh(), 300);
-      return () => ctx.revert();
     };
-
-    window.addEventListener("headerAnimationComplete", startAnimations);
-    
-    return () => window.removeEventListener("headerAnimationComplete", startAnimations);
   }, []);
+
+useEffect(() => {
+  let ctx: gsap.Context | null = null;
+
+  const startAnimations = () => {
+    if (ctx) return;
+    document.body.style.overflow = "";
+    unlock();
+
+    ctx = gsap.context(() => {
+      const t2 = gsap.timeline();
+      t2.fromTo(
+        titleRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2 },
+      ).fromTo(
+        scrollRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        "-=0.3",
+      );
+    });
+
+    window.dispatchEvent(new Event("homeAnimationsReady"));
+    setTimeout(() => ScrollTrigger.refresh(), 300);
+  };
+
+  window.addEventListener("headerAnimationComplete", startAnimations);
+
+  return () => {
+    window.removeEventListener("headerAnimationComplete", startAnimations);
+    ctx?.revert();
+    ctx = null;
+  };
+}, []);
 
   return (
     <>
       <HeroSection titleRef={titleRef} scrollRef={scrollRef} />
       <AboutJourneyV3 />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
-      <ProSliderComingSoonV3 slides={heroSlidesComingSoon} RightLabel="Coming Soon" />
+      <ProSliderComingSoonV3
+        slides={heroSlidesComingSoon}
+        RightLabel="Coming Soon"
+      />
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />

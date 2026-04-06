@@ -152,7 +152,7 @@ export default function HeroFeatureSlider({
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
+      className="w-full relative overflow-hidden h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen z-10"
     >
       {/* Nav Buttons */}
       <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
