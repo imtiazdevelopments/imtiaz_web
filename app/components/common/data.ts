@@ -225,7 +225,7 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "ready", label: "READY PROJECTS" },
   ],
   media: [
-    { id: "news", label: "NEWS & PRESS", href: "/media-center/news-press" },
+    { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
     { id: "investor", label: "INVESTOR RELATIONS" },
