@@ -167,6 +167,9 @@ html {
 /* 34px → 20px at 390px, 34px at 1810px */
 --space-34: clamp(20px, 0.98vw + 16.2px, 34px);
 
+/* 35px → scaled down proportionally */
+--space-35: clamp(21px, 1.07vw + 17.5px, 35px);
+
 /* 40px → 24px at 390px, 40px at 1810px */
 --space-40: clamp(24px, 1.22vw + 19.6px, 40px);
 
@@ -193,6 +196,9 @@ html {
 
 /* 130px → 52px at 390px, 130px at 1810px */
 --space-130: clamp(52px, 5.49vw + 30.6px, 130px);
+
+/* 140px → 56px at 390px, 140px at 1810px */
+--space-140: clamp(56px, 5.93vw + 32.9px, 140px);
 
 /* 150px → 60px at 390px, 150px at 1810px */
 --space-150: clamp(60px, 6.34vw + 35.3px, 150px);
@@ -241,6 +247,7 @@ html {
   --spacing-25: var(--space-25);
   --spacing-30: var(--space-30);
   --spacing-34: var(--space-34);
+  --spacing-35: var(--space-35);
   --spacing-40: var(--space-40);
   --spacing-50: var(--space-50);
   --spacing-60: var(--space-60);
@@ -250,6 +257,7 @@ html {
   --spacing-100: var(--space-100);
   --spacing-120: var(--space-120);
   --spacing-130: var(--space-130);
+  --spacing-140: var(--space-140);
   --spacing-150: var(--space-150);
   --spacing-160: var(--space-160);
   --spacing-180: var(--space-180);
@@ -769,4 +777,9 @@ input:-webkit-autofill:active {
 
 .dark-section-2 {
   --input-text-color: #404040;
+}
+
+/* Award Section */
+.award-description p + p {
+  margin-top: var(--space-20);
 }
