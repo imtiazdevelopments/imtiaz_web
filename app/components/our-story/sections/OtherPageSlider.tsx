@@ -176,6 +176,7 @@ export default function OtherPageSlider() {
 
   return (
     <section
+    data-header="dark"
       className="relative w-full overflow-hidden select-none h-[90vh] cursor-grab"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}

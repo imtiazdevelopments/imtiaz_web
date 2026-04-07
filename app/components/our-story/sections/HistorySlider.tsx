@@ -84,7 +84,7 @@ export default function HistorySection() {
   );
 
   return (
-    <section className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden">
+    <section data-header="dark" className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden">
       {/* ── Header ── */}
       <div className="container mx-auto px-6 text-center mb-150 lg:mb-50">
         <SectionHeading title={sectionTitle} className="mb-20 uppercase" />
