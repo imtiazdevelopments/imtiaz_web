@@ -5,7 +5,7 @@ import Image from "next/image";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { projectsData } from "../data"; 
+import { projectsData } from "../data";
 import ProjectCard from "../../common/ProjectCard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -16,7 +16,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 const ImtiazProperties = () => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
@@ -65,7 +64,7 @@ const ImtiazProperties = () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     wrapRefs.current.forEach((el, idx) => {
@@ -98,7 +97,7 @@ const ImtiazProperties = () => {
               start: "top bottom",
               end: "bottom top",
             },
-          }
+          },
         );
       });
     });
@@ -152,8 +151,7 @@ const ImtiazProperties = () => {
             {projectsData.properties.map((project, i) => {
               return (
                 <SwiperSlide key={i}>
-                            <ProjectCard key={i} {...project} />
-        
+                  <ProjectCard key={i} {...project} />
                 </SwiperSlide>
               );
             })}
@@ -168,12 +166,12 @@ const ImtiazProperties = () => {
             whileInView="show"
             viewport={{ once: true }}
           >
-             <CustomOutlineButton
-                text="View All"
-                borderColor="border-primary"
-                textColor="text-foreground-light"
-                px="px-[12px] sm:px-[26px] xl:px-[37px]"
-              />
+            <CustomOutlineButton
+              text="View All"
+              borderColor="border-primary"
+              textColor="text-foreground-light"
+              px="px-[12px] sm:px-[26px] xl:px-[37px]"
+            />
           </motion.div>
           <div className="flex gap-[15px] ml-[30px]">
             <motion.div
