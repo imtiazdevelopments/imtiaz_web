@@ -54,29 +54,36 @@ export function SectionHeading({
     return () => ctx.revert();
   }, [title, delay]);
 
-  return (
+  // Split into lines first, then words within each line
+  const lines = title.split("\n");
+
+ return (
     <Tag ref={ref} className={`text-heading ${className}`}>
-      {title.split(" ").map((word, wordIndex) => (
-<span
-  key={`${wordIndex}-${word}`}
-  style={{
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    marginRight: "0.25em",
-    overflow: "hidden",
-    lineHeight: "inherit",
-    verticalAlign: "top",
-    paddingBottom: "0.2em",
-    marginBottom: "-0.2em",
-  }}
->
-          {word.split("").map((char, charIndex) => (
+      {lines.map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "block" }}>
+          {line.trim().split(" ").map((word, wordIndex) => (
             <span
-              key={`${wordIndex}-${charIndex}`}
-              data-char
-              style={{ display: "inline-block" }}
+              key={`${lineIndex}-${wordIndex}-${word}`}
+              style={{
+                display: "inline-block",
+                whiteSpace: "nowrap",
+                marginRight: "0.25em",
+                overflow: "hidden",
+                lineHeight: "inherit",
+                verticalAlign: "top",
+                paddingBottom: "0.2em",
+                marginBottom: "-0.2em",
+              }}
             >
-              {char}
+              {word.split("").map((char, charIndex) => (
+                <span
+                  key={`${lineIndex}-${wordIndex}-${charIndex}`}
+                  data-char
+                  style={{ display: "inline-block" }}
+                >
+                  {char}
+                </span>
+              ))}
             </span>
           ))}
         </span>
