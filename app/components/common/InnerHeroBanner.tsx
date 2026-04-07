@@ -136,7 +136,7 @@ gsap
             <p
               ref={descRef}
               style={{ opacity: 0 }}
-              className={`text-white/80 text-description ${maxW} mx-auto 3xl:h-[54px] text-center flex items-center justify-center px-30 xl:px-0`}
+              className={`text-white/80 text-description ${maxW} mx-auto text-center flex items-center justify-center px-30 xl:px-0 whitespace-pre-line`}
             >
               {description}
             </p>
