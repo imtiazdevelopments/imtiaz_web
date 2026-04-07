@@ -116,6 +116,7 @@ export const LandpropertyData = {
  
 export const projectsData = [
   {
+    id:"1",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -127,6 +128,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"2",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Ongoing",
@@ -138,6 +140,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"3",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -149,6 +152,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"4",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -158,6 +162,7 @@ export const projectsData = [
     href: "/projects/palm-villas",
   },
   {
+    id:"5",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Ongoing",
@@ -169,6 +174,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"6",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
