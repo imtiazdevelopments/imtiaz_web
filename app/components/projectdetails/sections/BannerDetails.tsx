@@ -18,16 +18,16 @@ function PropertyStat({ label, value, icon, delay }: PropertyStatProps) {
     >
       {/* Label */}
       <span className="
-        text-white/50    text-description uppercase 
+        text-white/50 !leading-[1.563] text-description uppercase 
       ">
         {label}
       </span>
 
       {/* Icon + Value */}
-      <div className="flex items-center gap-2 lg:gap-5">
+      <div className="flex items-center gap-2 lg:gap-3 xl:gap-5">
        <Image src={icon} alt={label} width={24} height={24} />
         <span className="
-          text-white text-25 font-[optima] tracking-[2%] uppercase leading-[1.4]  whitespace-nowrap
+          text-white text-25 lg:text-[20px] xl:text-25 font-[optima] tracking-[2%] uppercase leading-[1.4]  whitespace-nowrap
         ">
           {value}
         </span>
@@ -66,18 +66,11 @@ export default function BannerDetails() {
 
   return (
     <div className="
-      w-full
-      bg-white/10
-      backdrop-blur-[15px]
-      border-t border-white/10
-      px-6 md:px-10 lg:px-16
-      py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]
+      w-full bg-white/10 backdrop-blur-[15px] border-t border-white/10 px-6 md:px-10 lg:px-16 py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]
     ">
       {/* Desktop & Tablet — single row */}
       <div className="
-        hidden sm:grid
-        grid-cols-2 md:grid-cols-4
-        gap-y-6 gap-x-4
+        hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4
         
       ">
         {stats.map((stat) => (

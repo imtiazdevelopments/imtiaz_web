@@ -13,8 +13,14 @@ const DubaiResidence = () => {
         <div className="text-center "> 
              <SectionHeading title={title} className="text-heading  text-primary-2 mb-20 max-w-[666px] mx-auto" />
                     <SectionDescription text={subtitle} className="text-25 uppercase font-[optima] mb-4 xl:mb-5 3xl:mb-10 text-foreground-light leading-[1.5] md:leading-[1.4] font-normal" />
-                <SectionDescription text={description} className="text-description text-foreground-light max-w-[754px] mx-auto" />
-                
+               
+  {communitySectionData.description.split("\n").map((line, i, arr) => (
+    <span key={i}>
+     <SectionDescription text={line} className="text-description text-foreground-light max-w-[754px] mx-auto" />
+    
+    </span>
+  ))}
+ 
         </div>
 
         
