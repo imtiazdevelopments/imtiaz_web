@@ -43,14 +43,14 @@ export default function FloatingRightIcons() {
       ].map(({ src, alt }) => (
         <div
           key={alt}
-          className="floating-icon w-[50px] h-[50px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300"
+          className="floating-icon w-[45px] h-[45px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300"
         >
           <Image
             src={src}
             alt={alt}
             width={27}
             height={27}
-            className="w-[27px] h-[27px] transition-transform duration-300 hover:scale-[1.05]"
+            className="w-[22px] h-[22px] transition-transform duration-300 hover:scale-[1.05]"
           />
         </div>
       ))}

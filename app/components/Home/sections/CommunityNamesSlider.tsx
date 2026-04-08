@@ -289,7 +289,8 @@ export default function HeroFeatureSlider({
           breakpoints={{
             0: { slidesPerView: 1 },
             640: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 },
+            1024: { slidesPerView: 4 },
+            1580: { slidesPerView: 5 },
           }}
           onSwiper={setSwiper}
           onSlideChange={(s) => {

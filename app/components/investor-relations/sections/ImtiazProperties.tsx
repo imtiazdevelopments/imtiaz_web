@@ -164,6 +164,7 @@ const ImtiazProperties = () => {
           >
             <CustomOutlineButton
               text="View All"
+              variant="dark"
               borderColor="border-primary"
               textColor="text-foreground-light"
               px="px-[12px] sm:px-[26px] xl:px-[37px]"

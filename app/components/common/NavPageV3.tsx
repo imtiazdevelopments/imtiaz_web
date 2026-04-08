@@ -155,7 +155,7 @@ const handleNavigate = (href?: string) => {
                         initial={{ opacity: 0 }}
                         animate={isActive ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="absolute left-0 top-0 text-16 md:text-25 3xl:text-30 font-[optima] uppercase bg-gradient-to-r from-[#7A253A] to-white bg-clip-text text-transparent"
+                        className="absolute left-0 top-0 text-16 md:text-25 3xl:text-30 font-[optima] uppercase text-white"
                       >
                         {item.label}
                       </motion.span>

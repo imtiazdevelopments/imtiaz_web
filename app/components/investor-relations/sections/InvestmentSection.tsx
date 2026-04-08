@@ -4,7 +4,7 @@ import Image from "next/image";
 import { investmentAppealData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
-import { useParallax } from "@/app/hooks/useParallax";
+import { useParallax } from "../../../hooks/useParallax";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUpV2, moveUp } from "../../motionVariants";
 import { motion } from "framer-motion";
@@ -113,7 +113,7 @@ export default function InvestmentSection() {
                           initial="hidden"
                           whileInView="show"
                           viewport={{ once: true }}
-                          className="text-description text-white"
+                          className="text-description text-white py-1 sm:py-0"
                         >
                           {stat.label}
                         </motion.span>

@@ -101,11 +101,11 @@ const AboutJourneyV3 = () => {
           </h2>
         </div>
 
-        <div className="overflow-hidden">
+        {/* <div className="overflow-hidden">
           <h3 className="anim-item text-25 text-white font-[avenirHeavy] leading-[1] mb-[40px] uppercase">
             CREATING DESTINATIONS OF DISTINCTION
           </h3>
-        </div>
+        </div> */}
 
         <div className="overflow-hidden">
           <p className="anim-item text-white text-description max-w-[73ch] mx-auto mb-50">
@@ -122,7 +122,7 @@ const AboutJourneyV3 = () => {
               text="About Imtiaz"
               borderColor="border-white"
               textColor="text-white"
-              px="px-[26px] xl:px-[27px] h-[45px] lg:h-[66px] !leading-[1.58]"
+              px="px-[26px] xl:px-[28px] h-[45px] lg:h-[66px] !leading-[1.58]"
               />
             </div>
         </div>
