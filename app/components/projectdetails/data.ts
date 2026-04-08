@@ -1,14 +1,14 @@
 export const bannerData = {
-    image: "/images/community-listing/community-listing-banner.jpg",
-    title: "Dubai Land Residence Complex",
+    image: "/images/projects/banner.jpg",
+    title: "",
   }
  
 
 export const communitySectionData = {
-  title: "Dubai Land Residence Complex",
-  subtitle: "Spacious Community Living",
+  title: "Meydan Horizon",
+  subtitle: "Luxury Urban Living",
   description:
-    "Dubai Land spans over 3 million sq. ft., comprising diverse districts such as Al Habtoor Polo Resort & Club, Dubailand Oasis, Layan, Majan, Falcon City of Wonders, Living Legends,Villanova, Rukan, Tiger Woods, and Al Waha.",
+    "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 million sq. ft. masterplan that seamlessly unites urban",
  
 };
 export const EverythingWithinData = {
@@ -58,62 +58,27 @@ export const eventDetails = [
 ];
 
 export const amenitiesData = {
-  title: "On your doorstep", 
+  title: "Amenities", 
   description:
-    "Affordable homes, great connectivity, a family-friendly setting, and strong investment potential make it a smart place to live.",
+    "Enjoy a lifestyle of comfort and convenience with premium amenities including a modern gym, swimming pool, landscaped gardens, and secure community spaces — all designed to enhance your everyday living.",
      
    amenities: [
   // Row 1
-  { label: "COMMUNITY\nCENTRE", icon: "/images/community-listing/amenities1.svg" },
-  { label: "GREEN\nSPACES", icon: "/images/community-listing/amenities2.svg" },
-  { label: "RETAIL\nOUTLETS", icon: "/images/community-listing/amenities3.svg" },
-  { label: "SCHOOLS", icon: "/images/community-listing/amenities4.svg" },
+ { label: "EV CHARGING", icon: "/images/projects/icon1.svg" },
+  { label: "COURTYARD", icon: "/images/projects/icon2.svg" },
+  { label: "CLUBHOUSE", icon: "/images/projects/icon3.svg" },
+  { label: "ADULT POOL", icon: "/images/projects/icon4.svg" },
   // Row 2
-  { label: "COMMUNITY\nCENTRE", icon: "/images/community-listing/amenities5.svg" },
-  { label: "CULTURAL\nDIVERSITY", icon: "/images/community-listing/amenities6.svg" },
-  { label: "TRANSPORTATION\nACCESS", icon: "/images/community-listing/amenities7.svg" },
-  { label: "SAFETY AND\nSECURITY", icon: "/images/community-listing/amenities8.svg" },
+  { label: "KIDS' POOL", icon: "/images/projects/icon5.svg" },
+  { label: "BBQ AREA", icon: "/images/projects/icon6.svg" },
+  { label: "YOGA RETREAT", icon: "/images/projects/icon7.svg" },
+  { label: "ADULT POOL", icon: "/images/projects/icon8.svg" },
   // Row 3
-  { label: "METRO\nLINE", icon: "/images/community-listing/amenities9.svg" },
-  { label: "10 MIN SHEIKH\nZAYED ROAD", icon: "/images/community-listing/amenities10.svg" },
-  { label: "NEAR EXPO\n2020", icon: "/images/community-listing/amenities11.svg" },
-]
+  { label: "GYM", icon: "/images/projects/icon9.svg" },
+  { label: "OUTDOOR CINEMA", icon: "/images/projects/icon10.svg" }, 
+] 
 
 };
-// export const LandpropertyData = {
-//   title: "Dubai land Properties", 
-//      cards: [
-//         {
-//           id: 1,
-//           icon: '/images/community-listing/icon1.svg', 
-//           label: "DUBAI INTERNATIONAL<br>AIRPORT",
-//           minutes: "20 Minutes",
-//         },
-//         {
-//           id: 2,
-//           icon: '/images/community-listing/icon2.svg', 
-//           label: "GOLD SOUQ METRO<br>STATION",
-//           minutes: "10 Minutes",
-       
-//         },
-//         {
-//           id: 3,
-//          icon: '/images/community-listing/icon3.svg', 
-//           label: "DOWNTOWN<br>DUBAI",
-//           minutes: "24 Minutes",
-       
-//         },
-//         {
-//           id: 4,
-//           icon: '/images/community-listing/icon4.svg', 
-//           label: "BUSINESS<br>BAY",
-//           minutes: "13 Minutes",
-       
-//         }, 
-//       ] ,
- 
-// };
- 
 export const LandpropertyData = {
   title: "Similar properties", 
      cards: [
@@ -224,8 +189,6 @@ export const LandpropertyData = {
       ] ,
  
 };
- 
- 
  
  export const faqData = {
   title: "FAQ",

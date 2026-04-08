@@ -781,4 +781,95 @@ input:-webkit-autofill:active {
 /* Award Section */
 .award-description p + p {
   margin-top: var(--space-20);
-}
+} 
+ 
+  /* ── Swiper bullet pagination — rendered below tab pill ── */
+        .gallery-swiper .swiper-pagination {
+          display: none !important;
+        }
+        .custom-pagination .swiper-pagination-bullet {
+          width: 10px;
+          height: 10px;
+          background: transparent;
+          border: 1px solid white;
+          border-radius: 50%;
+          opacity: 1;
+          transition: all 0.3s ease;
+          margin: 0 !important;
+          cursor: pointer;
+          display: inline-block;
+        }
+        .custom-pagination .swiper-pagination-bullet-active {
+          background: white;  
+        }
+
+        /* ── Fade transition on tab switch ── */
+        .slide-fade-enter {
+          opacity: 0;
+          transform: scale(1.015);
+        }
+        .slide-fade-active {
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .slide-fade-exit {
+          opacity: 0;
+          transition: opacity 0.25s ease;
+        }
+
+        /* ── Nav arrow button ── */
+        .nav-arrow {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(255,255,255,0.55);
+          background: rgba(255,255,255,0.12);
+          backdrop-filter: blur(6px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s ease, border-color 0.2s ease;
+          color: white;
+          z-index: 20;
+        }
+        .nav-arrow:hover {
+          background: rgba(255,255,255,0.22);
+          border-color: rgba(255,255,255,0.8);
+        }
+        .nav-arrow svg {
+          width: 18px;
+          height: 18px;
+          stroke: white;
+          stroke-width: 1.8;
+          fill: none;
+        }
+
+        /* ── Tab pill ── */
+        .tab-pill {
+          position: relative;
+          display: flex;
+          align-items: center;
+          background: rgba(255,255,255,0.18);
+          backdrop-filter: blur(14px);
+          border-radius: 9999px;
+          padding: 8px;
+          gap: 2px;
+        }
+        .tab-btn {
+          position: relative;
+          z-index: 2; 
+          border-radius: 9999px;
+          border: none;    
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: color 0.3s ease;
+        }
+        
+        .tab-btn.inactive {
+          color: rgba(255,255,255,0.85);
+        }
+        .tab-btn.inactive:hover {
+          color: white;
+        }    
