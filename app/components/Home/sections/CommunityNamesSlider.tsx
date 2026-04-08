@@ -212,8 +212,8 @@ export default function HeroFeatureSlider({
           <motion.div
             key={`prev-${prevBg}`}
             initial={{ opacity: 1, filter: "blur(0px)" }}
-            animate={{ opacity: 0, filter: "blur(1px)" }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            animate={{ opacity: 0.9, filter: "blur(1px)" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
             style={{ backgroundImage: `url('${prevBg}')` }}
           />
@@ -223,7 +223,7 @@ export default function HeroFeatureSlider({
             key={`base-${bgBase}`}
             initial={{ opacity: 0, filter: "blur(1px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
             style={{ backgroundImage: `url('${bgBase}')` }}
           />
@@ -326,60 +326,55 @@ export default function HeroFeatureSlider({
                     />
                     <div className="relative z-20 w-full flex justify-center pointer-events-none">
                       <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
-                        <motion.h3
-                          key={`feat-title-${i}-${active}`}
-                          initial={{ y: 0 }}
-        animate={{ y: active ? -16 : 0 }}
-        transition={{
-          duration: 0.9,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          delay: active ? 0.08 : 0,
-        }}
-                          className="text-white font-[optima] uppercase text-center text-25 leading-[1.4] px-4"
-                        >
-                          {c.name}
-                        </motion.h3>
-
-                        <motion.div
-                          initial={{ opacity: 0, y: 30 }}
-                          animate={{
-                            opacity: active ? 1 : 0,
-                            y: active ? 0 : 30,
-                            marginTop: active ? "var(--gap-active)" : "0px",
-                          }}
-                          transition={{
-                            duration: 0.75,
-                            ease: [0.25, 0.1, 0.25, 1],
-                          }}
-                          style={
-                            {
-                              ["--gap-active"]: "50px",
-                            } as unknown as React.CSSProperties
-                          }
-                          className={`${
-                            active
-                              ? "pointer-events-auto"
-                              : "pointer-events-none absolute"
-                          } gap-responsive`}
-                        >
-                          {/* <button
-                            className="inline-block border border-white px-[23px] py-[19.5px] rounded-[50px] text-white text-17"
-                            onClick={() =>
-                              c.link && (window.location.href = c.link)
-                            }
+                          <motion.h3
+                            key={`feat-title-${i}-${active}`}
+                            initial={{ y: 0 }}
+                            animate={{ y: active ? -16 : 0 }}
+                            transition={{
+                              duration: 0.9, // was already good
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                              delay: active ? 0.08 : 0,
+                            }}
+                            className="text-white font-[optima] uppercase text-center text-25 leading-[1.4] px-4"
                           >
-                            Read More
-                          </button> */}
-                           <CustomOutlineButton
-                           onClick={() =>
-                              c.link && (window.location.href = c.link)
+                            {c.name}
+                          </motion.h3>
+
+                          {/* Button wrapper — remove the instant class swap, use opacity+y only */}
+                          <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{
+                              opacity: active ? 1 : 0,
+                              y: active ? 0 : 30,
+                              marginTop: active ? "var(--gap-active)" : "0px",
+                            }}
+                            transition={{
+                              duration: active ? 0.5 : 0.5, // faster fade-out than fade-in
+                              ease: [0.25, 0.1, 0.25, 1],
+                            }}
+                            style={
+                              {
+                                ["--gap-active"]: "50px",
+                              } as unknown as React.CSSProperties
                             }
-              text="Read More"
-              borderColor="border-white"
-              textColor="text-white"
-              px="px-[12px] sm:px-[26px] xl:px-[37px]"
-            />
-                        </motion.div>
+                            className="gap-responsive pointer-events-none" // ← always pointer-events-none
+                          >
+                            <div
+                              style={{
+                                pointerEvents: active ? "auto" : "none",
+                              }} // ← control clicks here instead
+                            >
+                              <CustomOutlineButton
+                                onClick={() =>
+                                  c.link && (window.location.href = c.link)
+                                }
+                                text="Read More"
+                                borderColor="border-white"
+                                textColor="text-white"
+                                px="px-[12px] sm:px-[26px] xl:px-[37px]"
+                              />
+                            </div>
+                          </motion.div>
                       </div>
                     </div>
                   </div>

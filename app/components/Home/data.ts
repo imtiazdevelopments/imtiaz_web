@@ -486,6 +486,7 @@ export const communityNamesData = {
 };
 export const projectsData = [
   {
+    id:"1",
     image: "/images/home/feat-property/property1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
  
@@ -496,6 +497,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"2",
     image: "/images/home/feat-property/property2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",
@@ -507,6 +509,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"3",
     image: "/images/home/feat-property/property3.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
      
@@ -517,6 +520,7 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
+    id:"4",
     image: "/images/home/feat-property/property4.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     
@@ -525,6 +529,7 @@ export const projectsData = [
     href: "/projects/palm-villas",
   }, 
   {
+    id:"5",
     image: "/images/home/feat-property/property2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",

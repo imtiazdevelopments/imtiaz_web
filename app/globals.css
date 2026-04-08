@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import 'flag-icons/css/flag-icons.min.css';
-
+ 
 /* ---------- Custom Font Faces ---------- */
 @font-face {
   font-family: "Optima";
@@ -10,7 +10,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "Optima";
   src: url("/fonts/Optima_Medium.woff2") format("woff2"),
@@ -19,7 +19,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Book.woff2") format("woff2"),
@@ -28,7 +28,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Light.woff2") format("woff2"),
@@ -37,7 +37,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Regular.woff2") format("woff2"),
@@ -46,7 +46,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "Rubik";
   src: url("/fonts/Rubik-Medium.ttf") format("truetype"),
@@ -55,7 +55,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "AvenirRoman";
   src: url("/fonts/AvenirLTStd-Roman.woff2") format("woff2"),
@@ -64,7 +64,7 @@
   font-style: unset;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "AvenirHeavy";
   src: url("/fonts/Avenir_Heavy.woff2") format("woff2"),
@@ -73,7 +73,7 @@
   font-style: unset;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "AvenirBook";
   src: url("/fonts/Avenir_Book.woff2") format("woff2"),
@@ -82,7 +82,7 @@
   font-style: unset;
   font-display: swap;
 }
-
+ 
 @font-face {
   font-family: "AvenirLight";
   src: url("/fonts/Avenir_Light.woff2") format("woff2"),
@@ -91,8 +91,8 @@
   font-style: unset;
   font-display: swap;
 }
-
-
+ 
+ 
 @theme {
   --breakpoint-*: initial;
   --breakpoint-sm: 640px;
@@ -102,23 +102,23 @@
   --breakpoint-2xl: 1440px;
   --breakpoint-3xl: 1560px;
 }
-
+ 
 /* Hide scrollbar - Chrome, Safari, Edge */
 ::-webkit-scrollbar {
   display: none;
 }
-
+ 
 /* Hide scrollbar - Firefox */
 html {
   scrollbar-width: none;
 }
-
+ 
 /* Hide scrollbar - IE & old Edge */
 html {
   -ms-overflow-style: none;
 }
-
-
+ 
+ 
 /* ---------- Variables ---------- */
 :root {
   --background: #ffffff;
@@ -127,92 +127,98 @@ html {
   --primary: #490905;
   --primary-2: #490905;
    --gray: #EBEBEC;
-
+ 
 /* 70px → 30px at 390px, 70px at 1810px */
 --text-70: clamp(33px, 2.76vw + 20px, 70px);
-
+ 
 /* 50px → 28px at 390px, 50px at 1810px */
 --text-50: clamp(28px, 1.55vw + 22px, 50px);
-
+ 
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
-
+ 
 /* 30px → 24px at 390px, 30px at 1810px */
 --text-30: clamp(24px, 0.81vw + 17.3px, 30px);
-
+ 
 /* 25px → 16px at 390px, 25px at 1810px */
 --text-25: clamp(16px, 0.63vw + 13.5px, 25px);
-
+ 
 /* 19px → 13px at 390px, 19px at 1810px */
 --text-19: clamp(14.5px, 0.42vw + 11.4px, 19px);
-
+ 
 /* 18px → 13px at 390px, 18px at 1810px */
 --text-18: clamp(15px, 0.35vw + 11.6px, 18px);
-
+ 
 /* 16px → 12px at 390px, 16px at 1810px */
 --text-16: clamp(14px, 0.28vw + 10.9px, 16px);
-
-
-
-
+ 
+ 
+ 
+ 
 /* 20px → 12px at 390px, 20px at 1810px */
 --space-20: clamp(17px, 0.56vw + 9.8px, 20px);
-
+ 
 /* 25px → 14px at 390px, 25px at 1810px */
 --space-25: clamp(15px, 0.77vw + 11px, 25px);
-
+ 
 /* 30px → 18px at 390px, 30px at 1810px */
 --space-30: clamp(18px, 0.84vw + 14.7px, 30px);
-
+ 
 /* 34px → 20px at 390px, 34px at 1810px */
 --space-34: clamp(20px, 0.98vw + 16.2px, 34px);
 
+/* 35px → scaled down proportionally */
+--space-35: clamp(21px, 1.07vw + 17.5px, 35px);
+
 /* 40px → 24px at 390px, 40px at 1810px */
 --space-40: clamp(24px, 1.22vw + 19.6px, 40px);
-
+ 
 /* 50px → 28px at 390px, 50px at 1810px */
 --space-50: clamp(28px, 1.55vw + 21.9px, 50px);
-
+ 
 /* 60px → 32px at 390px, 60px at 1810px */
 --space-60: clamp(32px, 1.97vw + 24.3px, 60px);
-
+ 
 /* 70px → 36px at 390px, 70px at 1810px */
 --space-70: clamp(36px, 2.39vw + 26.7px, 70px);
-
+ 
 /* 80px → 40px at 390px, 80px at 1810px */
 --space-80: clamp(40px, 2.81vw + 29px, 80px);
-
+ 
 /* 90px → 43px at 390px, 90px at 1810px */
 --space-90: clamp(43px, 3.31vw + 30px, 90px);
-
+ 
 /* 100px → 44px at 390px, 100px at 1810px */
 --space-100: clamp(44px, 3.94vw + 28.6px, 100px);
-
+ 
 /* 120px → 50px at 390px, 120px at 1810px */
 --space-120: clamp(50px, 4.93vw + 30.8px, 120px);
-
+ 
 /* 130px → 52px at 390px, 130px at 1810px */
 --space-130: clamp(52px, 5.49vw + 30.6px, 130px);
 
+/* 140px → 56px at 390px, 140px at 1810px */
+--space-140: clamp(56px, 5.93vw + 32.9px, 140px);
+
 /* 150px → 60px at 390px, 150px at 1810px */
 --space-150: clamp(60px, 6.34vw + 35.3px, 150px);
-
+ 
 /* 160px → 65px at 390px, 160px at 1810px */
 --space-160: clamp(65px, 6.69vw + 38.9px, 160px);
-
+ 
 /* 180px → 72px at 390px, 180px at 1810px */
 --space-180: clamp(72px, 7.6vw + 42.3px, 180px);
-
+ 
 /* 190px → 76px at 390px, 190px at 1810px */
 --space-190: clamp(76px, 8vw + 44.8px, 190px);
-
+ 
 /* 200px → 80px at 390px, 200px at 1810px */
 --space-200: clamp(80px, 8.45vw + 47px, 200px);
-
+ 
 /* 250px → 100px at 390px, 250px at 1810px */
 --space-250: clamp(100px, 18vw + 29.8px, 250px);
 }
-
+ 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -227,7 +233,7 @@ html {
   --color-primary-2: var(--primary-2);
   --color-gray: var(--gray);
   --color-foreground-light: var(--foreground-light);
-
+ 
   --text-70: var(--text-70);
   --text-50: var(--text-50);
   --text-32: var(--text-32);
@@ -236,11 +242,12 @@ html {
   --text-19: var(--text-19);
   --text-18: var(--text-18);
   --text-16: var(--text-16);
-
+ 
   --spacing-20: var(--space-20);
   --spacing-25: var(--space-25);
   --spacing-30: var(--space-30);
   --spacing-34: var(--space-34);
+  --spacing-35: var(--space-35);
   --spacing-40: var(--space-40);
   --spacing-50: var(--space-50);
   --spacing-60: var(--space-60);
@@ -250,6 +257,7 @@ html {
   --spacing-100: var(--space-100);
   --spacing-120: var(--space-120);
   --spacing-130: var(--space-130);
+  --spacing-140: var(--space-140);
   --spacing-150: var(--space-150);
   --spacing-160: var(--space-160);
   --spacing-180: var(--space-180);
@@ -257,134 +265,134 @@ html {
   --spacing-200: var(--space-200);
   --spacing-250: var(--space-250);
 }
-
+ 
 @utility text-heading {
   @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-32 md:text-50;
 }
-
+ 
 @utility text-description {
   @apply font-[avenirHeavy] text-16 leading-[1.54375];
 }
-
+ 
 @utility container-spacing-details-page {
   @apply xl:!px-200 3xl:!px-250;
 }
-
+ 
 @utility scrollbar-hide {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
 }
-
-
+ 
+ 
 /* ---------- Base Styles ---------- */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
 }
-
+ 
 .container {
   @apply mx-auto w-full px-[15px];
 }
-
+ 
 @media (min-width: 640px) {
   .container { max-width: 600px; }
 }
-
+ 
 @media (min-width: 720px) {
   .container { max-width: 680px; }
 }
-
+ 
 @media (min-width: 768px) {
   .container { max-width: 740px; }
 }
-
+ 
 @media (min-width: 820px) {
   .container { max-width: 800px; }
 }
-
+ 
 @media (min-width: 860px) {
   .container { max-width: 840px; }
 }
-
+ 
 @media (min-width: 920px) {
   .container { max-width: 890px; }
 }
-
+ 
 @media (min-width: 960px) {
   .container { max-width: 900px; }
 }
-
+ 
 @media (min-width: 1024px) {
   .container { max-width: 960px; }
 }
-
+ 
 @media (min-width: 1100px) {
   .container { max-width: 1050px; }
 }
-
+ 
 @media (min-width: 1140px) {
   .container { max-width: 1100px; }
 }
-
+ 
 @media (min-width: 1280px) {
   .container { max-width: 1200px; }
 }
-
+ 
 @media (min-width: 1340px) {
   .container { max-width: 1250px; }
 }
-
+ 
 @media (min-width: 1440px) {
   .container { max-width: 1360px; }
 }
-
+ 
 @media (min-width: 1500px) {
   .container { max-width: 1440px; }
 }
-
+ 
 @media (min-width: 1600px) {
   .container { max-width: 1520px; }
 }
-
+ 
 @media (min-width: 1700px) {
   .container { max-width: 1620px; }
 }
-
+ 
 @media (min-width: 1800px) {
   .container { max-width: 1720px; }
 }
-
+ 
 @media (min-width: 1850px) {
   .container { max-width: 1810px; }
 }
-
+ 
 /* Base: light text (over dark background) */
 .light-mode .header-icon {
   filter: brightness(0) invert(1);
   /* turns dark SVGs white */
   transition: filter 0.4s ease;
 }
-
+ 
 /* Dark mode: normal dark icons */
 .dark-mode .header-icon {
   filter: brightness(1) invert(0);
   transition: filter 0.4s ease;
 }
-
+ 
 /* Optional: Text color for lucide icons */
 /* .light-mode svg {
   color: white;
   transition: color 0.4s ease;
 }
-
+ 
 .dark-mode svg {
   color: black;
   transition: color 0.4s ease;
 }
- */
+*/
 /* featured property pagination */
 .custom-pagination-featured {
   display: flex;
@@ -397,7 +405,7 @@ body {
   z-index: 50;
   width: auto;
 }
-
+ 
 .custom-pagination-featured .swiper-pagination-bullet {
   width: 8px;
   height: 3px;
@@ -407,12 +415,12 @@ body {
   margin: 0 !important;
   opacity: 1 !important;
 }
-
+ 
 .custom-pagination-featured .swiper-pagination-bullet-active {
   width: 40px;
 }
-
-
+ 
+ 
 /* press spotlight pagination */
 .press-pagination {
   display: flex;
@@ -420,7 +428,7 @@ body {
   justify-content: center;
   margin-top: 40px;
 }
-
+ 
 .press-pagination .swiper-pagination-bullet {
   width: 8px;
   height: 3px;
@@ -430,19 +438,19 @@ body {
   margin: 0 !important;
   opacity: 1 !important;
 }
-
+ 
 .press-pagination .swiper-pagination-bullet-active {
   width: 40px;
-
+ 
 }
-
+ 
 /* imtiaz-properties */
 .properties-pagination {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
-
+ 
 .properties-pagination .swiper-pagination-bullet {
   width: 8px;
   height: 3px;
@@ -452,11 +460,11 @@ body {
   margin: 0 !important;
   opacity: 1 !important;
 }
-
+ 
 .properties-pagination .swiper-pagination-bullet-active {
   width: 40px;
 }
-
+ 
 .lgoicon.sectw {
   position: absolute;
   left: 50%;
@@ -465,22 +473,22 @@ body {
   opacity: 0.1;
   z-index: 3;
 }
-
-
+ 
+ 
 /* ---------------------------------------
    HERO SLIDER – BUILT-IN PAGINATION STYLES
 -----------------------------------------*/
 .hero-pro-slider .swiper-pagination {
   bottom: 170px !important;
 }
-
+ 
 @media (min-width:1560px) {
   .hero-pro-slider .swiper-pagination {
     bottom: 238px !important;
   }
 }
-
-
+ 
+ 
 .hero-pro-slider .swiper-pagination-bullet {
   width: 10px !important;
   height: 10px !important;
@@ -489,26 +497,26 @@ body {
   border: 1px solid rgba(255, 255, 255, 1) !important;
   opacity: 1 !important;
 }
-
+ 
 .hero-pro-slider .swiper-pagination-bullet-active {
   background: #7A253A !important;
   border: 1px solid #7A253A !important;
 }
-
+ 
 .swiper-fade .swiper-slide {
   opacity: 0 !important;
   transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
-
+ 
 .swiper-fade .swiper-slide-active {
   opacity: 1 !important;
 }
-
+ 
 .btn-fill-blur {
   position: relative;
   overflow: hidden;
 }
-
+ 
 .btn-fill-blur::before {
   content: "";
   position: absolute;
@@ -520,18 +528,18 @@ body {
   z-index: 0;
   border-radius: inherit;
 }
-
+ 
 .btn-fill-blur:hover::before {
   transform: translateX(0);
 }
-
+ 
 .btn-fill-blur>span {
   position: relative;
   z-index: 10;
 }
-
-
-
+ 
+ 
+ 
 .pressspotlight-pagination .swiper-pagination-bullet {
   width: 10px !important;
   height: 10px !important;
@@ -540,47 +548,47 @@ body {
   border: 1px solid #404040 !important;
   opacity: 1 !important;
 }
-
+ 
 .pressspotlight-pagination .swiper-pagination-bullet-active {
   background: #7A253A !important;
   border: 1px solid #7A253A !important;
 }
-
+ 
 .group-1 path {
   opacity: 0;
   transform: translateY(50px);
 }
-
+ 
 .group-2 path {
   opacity: 0;
   transform: translateY(40px);
 }
-
+ 
 /* Default gap */
 .gap-responsive {
   --gap-active: 50px;
 }
-
+ 
 /* xl gap */
 @media (min-width: 1280px) {
   .gap-responsive {
     --gap-active: 70px;
   }
 }
-
+ 
 /* 3xl gap */
 @media (min-width: 1920px) {
   .gap-responsive {
     --gap-active: 85px;
   }
 }
-
+ 
 .text-blur-edges {
   position: relative;
   filter: blur(0px);
   /* keep container itself sharp */
 }
-
+ 
 .text-blur-edges>div {
   filter: blur(0px);
   /* text fully sharp before masking */
@@ -599,7 +607,7 @@ body {
       transparent 92%,
       transparent 100%);
 }
-
+ 
 .text-blur-edges::after {
   content: "";
   position: absolute;
@@ -619,14 +627,14 @@ body {
       transparent 100%);
   z-index: 3;
 }
-
-
+ 
+ 
 /************************ Blog Content ************************/
 /* Single enter — base gap between all elements */
 .blog-content > * + * {
   margin-top: var(--space-20);
 }
-
+ 
 /* Double enter — empty <p> becomes a spacer block */
 .blog-content p:empty,
 .blog-content p:has(> br:only-child) {
@@ -634,13 +642,13 @@ body {
   height: var(--space-50);
   margin: 0 !important;
 }
-
+ 
 /* Cancel top margin on element immediately after the spacer */
 .blog-content p:empty + *,
 .blog-content p:has(> br:only-child) + * {
   margin-top: 0 !important;
 }
-
+ 
 /* Paragraphs */
 .blog-content p {
   font-size: var(--text-16);
@@ -648,7 +656,7 @@ body {
   line-height: 1.54;
   color: var(--foreground-light);
 }
-
+ 
 /* H2 — main section heading */
 .blog-content h2 {
   font-size: var(--text-25);
@@ -658,7 +666,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2%;
 }
-
+ 
 /* H3 — subheading with square indicator */
 .blog-content h3 {
   font-size: var(--text-18);
@@ -672,7 +680,7 @@ body {
   gap: 10px;
   margin-bottom: -5px;
 }
-
+ 
 .blog-content h3::before {
   content: "";
   display: inline-block;
@@ -682,14 +690,14 @@ body {
   margin-top: 9px;
   background-color: var(--primary-2);
 }
-
+ 
 /* UL — bullet list */
 .blog-content ul {
   padding-left: 30px;
   display: flex;
   flex-direction: column;
 }
-
+ 
 .blog-content ul li {
   list-style-type: disc;
   font-size: var(--text-16);
@@ -697,7 +705,7 @@ body {
   line-height: 1.54;
   color: var(--foreground-light);
 }
-
+ 
 /* Blog content Images */
 .blog-content img {
   width: 100%;
@@ -707,7 +715,7 @@ body {
   object-fit: cover;
   display: block;
 }
-
+ 
 /* links */
 .blog-content a {
   color: var(--primary-2);
@@ -715,17 +723,17 @@ body {
   text-underline-offset: 2px;
   font-size: var(--text-19);
 }
-
+ 
 /* sustainability moments slider */
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
+ 
 .marquee-track-sustainability {
   animation: marquee 90s linear infinite;
 }
-
+ 
 /* ThinkingThatDelivers section */
 .thinking-delivers .service-card .service-panel {
   background-color: #EBEBEC;
@@ -741,8 +749,8 @@ body {
   color: white;
   opacity: 0.8;
 }
-
-
+ 
+ 
 /* Hide browser native password controls - eye icon */
 input::-ms-reveal,
 input::-ms-clear {
@@ -752,7 +760,7 @@ input::-webkit-contacts-auto-fill-button,
 input::-webkit-credentials-auto-fill-button {
   display: none;
 }
-
+ 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -762,13 +770,17 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--input-text-color) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
-
+ 
 .dark-section {
   --input-text-color: #ffffff;
 }
-
+ 
 .dark-section-2 {
   --input-text-color: #404040;
+}
+/* Award Section */
+.award-description p + p {
+  margin-top: var(--space-20);
 } 
  
   /* ── Swiper bullet pagination — rendered below tab pill ── */

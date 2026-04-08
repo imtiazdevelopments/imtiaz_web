@@ -1,4 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type ProjectCardType = {
+  id:string;
    image: string;
    hoverImage: string;
   status?: string;
@@ -8,4 +11,5 @@ export type ProjectCardType = {
   href?: string;
   startingFrom?: string;
   units?: string;
+  setActiveProject?:Dispatch<SetStateAction<string>>
 };

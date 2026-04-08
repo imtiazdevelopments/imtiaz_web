@@ -192,7 +192,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
           <OutlineButton
             text="View Community"
             borderColor="rgba(255,255,255,0.9)"
-            px="px-10"
+            px="px-6 lg:px-8 3xl:px-10"
           />
         </Link>
       </div>

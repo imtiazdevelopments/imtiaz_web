@@ -83,6 +83,7 @@ export const LandpropertyData = {
   title: "Similar properties", 
      cards: [
          {
+      id:"1",
     image: "/images/community-listing/card1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completedss",
@@ -94,6 +95,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Ongoing",
@@ -105,6 +107,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card3.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -116,6 +119,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card4.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -125,6 +129,7 @@ export const LandpropertyData = {
     href: "/projects/palm-villas",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card5.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -134,6 +139,7 @@ export const LandpropertyData = {
     href: "/projects/palm-villas",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card6.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -145,6 +151,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+     id:"1",
     image: "/images/community-listing/card7.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -156,6 +163,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card8.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -167,6 +175,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+     id:"1",
     image: "/images/community-listing/card9.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",

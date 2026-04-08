@@ -80,10 +80,45 @@ export const amenitiesData = {
 ]
 
 };
+// export const LandpropertyData = {
+//   title: "Dubai land Properties", 
+//      cards: [
+//         {
+//           id: 1,
+//           icon: '/images/community-listing/icon1.svg', 
+//           label: "DUBAI INTERNATIONAL<br>AIRPORT",
+//           minutes: "20 Minutes",
+//         },
+//         {
+//           id: 2,
+//           icon: '/images/community-listing/icon2.svg', 
+//           label: "GOLD SOUQ METRO<br>STATION",
+//           minutes: "10 Minutes",
+       
+//         },
+//         {
+//           id: 3,
+//          icon: '/images/community-listing/icon3.svg', 
+//           label: "DOWNTOWN<br>DUBAI",
+//           minutes: "24 Minutes",
+       
+//         },
+//         {
+//           id: 4,
+//           icon: '/images/community-listing/icon4.svg', 
+//           label: "BUSINESS<br>BAY",
+//           minutes: "13 Minutes",
+       
+//         }, 
+//       ] ,
+ 
+// };
+ 
 export const LandpropertyData = {
-  title: "Dubai land Properties", 
+  title: "Similar properties", 
      cards: [
          {
+      id:"1",
     image: "/images/community-listing/card1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completedss",
@@ -95,6 +130,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Ongoing",
@@ -106,6 +142,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card3.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -117,6 +154,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+      id:"1",
     image: "/images/community-listing/card4.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -126,6 +164,7 @@ export const LandpropertyData = {
     href: "/projects/palm-villas",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card5.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Completed",
@@ -135,6 +174,7 @@ export const LandpropertyData = {
     href: "/projects/palm-villas",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card6.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -146,6 +186,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+     id:"1",
     image: "/images/community-listing/card7.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -157,6 +198,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   }, 
   {
+     id:"1",
     image: "/images/community-listing/card8.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -168,6 +210,7 @@ export const LandpropertyData = {
     units: "1BR - 3BR",
   },
   {
+     id:"1",
     image: "/images/community-listing/card9.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "Upcoming",
@@ -181,6 +224,8 @@ export const LandpropertyData = {
       ] ,
  
 };
+ 
+ 
  
  export const faqData = {
   title: "FAQ",
