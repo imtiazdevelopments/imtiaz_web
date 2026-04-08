@@ -873,3 +873,19 @@ input:-webkit-autofill:active {
         .tab-btn.inactive:hover {
           color: white;
         }    
+        /* Default bullet */
+.mobslider .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: 1px solid white;
+  opacity: 1;
+  margin: 0 5px !important;
+  transition: all 0.3s ease;
+}
+
+/* Active bullet */
+.mobslider .swiper-pagination-bullet-active {
+  background: white !important;
+  border-color: white;
+}

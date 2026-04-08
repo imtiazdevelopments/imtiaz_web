@@ -115,13 +115,13 @@ export const amenitiesData = {
 // };
  
 export const LandpropertyData = {
-  title: "Similar properties", 
+  title: "Dubai land Properties", 
      cards: [
          {
       id:"1",
     image: "/images/community-listing/card1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
-    status: "Completedss",
+    status: "Completed",
     location: "Down Town Dubai, UAE",
     title: "COVE<br>BY IMTIAZ",
     subtitle: "Spacious Community Living",

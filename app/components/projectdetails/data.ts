@@ -2,7 +2,11 @@ export const bannerData = {
     image: "/images/projects/banner.jpg",
     title: "",
   }
- 
+ export const introData = {
+  title: "Wynwood Horizon by Imtiaz",
+  description:
+    "Welcome to Wynwood Residence by Imtiaz, an architectural sanctuary rising on the prestigious shores of the Dubai Islands. Poised along the coastline, Wynwood is a sculpted reflection of serenity and sophistication, designed for those who seek stillness without compromise.",
+};
 
 export const communitySectionData = {
   title: "Meydan Horizon",

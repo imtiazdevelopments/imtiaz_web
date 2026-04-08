@@ -113,7 +113,7 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
         href={unit.image}
         download={`${unit.image}`}
       >
-        <div     className="w-fit mx-auto mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description !text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
+        <div     className="w-fit mx-auto mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
     >
           <div className="flex items-center gap-[10px]">
           <span>
@@ -123,7 +123,7 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
       <path d="M12 14.6667V4" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       </span>
-        <span className="px-[15px]">Download Unit layout</span>
+        <span className="2xl:px-[15px]">Download Unit layout</span>
         </div>
         </div>
       </a>
@@ -156,7 +156,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         href={unit.image}
         download={`${unit.image}`}
       >
-        <div     className="w-fit mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description !text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
+        <div     className="w-fit mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
     >
           <div className="flex items-center gap-[10px]">
           <span>
@@ -166,7 +166,7 @@ function SideInfo({ unit }: { unit: Unit }) {
       <path d="M12 14.6667V4" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       </span>
-        <span className="px-[15px]">Download Unit layout</span>
+        <span className="2xl:px-[15px]">Download Unit layout</span>
         </div>
         </div>
       </a>

@@ -28,7 +28,7 @@ export default function ProjectCard({
       onTouchCancel={() => setIsActive(false)}
        ref={ref}
     >
-      <div className="relative w-full aspect-[12/13] lg:aspect-[8.48/13] overflow-hidden">
+      <div className="relative w-full aspect-[12/13] lg:aspect-[11/13] xl:aspect-[8.48/13] overflow-hidden">
 
         <Image
           src={image}
