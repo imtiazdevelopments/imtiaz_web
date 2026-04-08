@@ -1,4 +1,4 @@
-import Index from '@/app/components/investor-relations/Index'
+import Index from "../../../components/investor-relations/Index"
 
 const page = () => {
   return (

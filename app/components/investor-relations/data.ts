@@ -207,7 +207,7 @@ export const investReasonsData = {
       icon: "/images/investor-relations/reasons/8.svg",
       title: "Premium Infrastructure",
       description:
-        "Dubai is known for its advanced infrastructure, attracting both residents and businesses.",
+        "Dubai is known for its advanced infrastructure, attracting both.",
     },
   ],
 };
