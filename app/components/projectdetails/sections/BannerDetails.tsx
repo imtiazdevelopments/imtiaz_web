@@ -11,21 +11,19 @@ function PropertyStat({ label, value, icon, delay }: PropertyStatProps) {
   return (
     <div
       className="
-        flex flex-col items-center gap-[10px]
-        animate-fadeUp
-      "
+        flex flex-col items-left sm:items-center gap-1 md:gap-[10px] animate-fadeUp  "
       style={{ animationDelay: delay, animationFillMode: "both" }}
     >
       {/* Label */}
       <span className="
-        text-white/50 !leading-[1.563] text-description uppercase 
+        text-white/50 !leading-[1.563] text-[12px] font-[avenirHeavy] sm:text-description uppercase 
       ">
         {label}
       </span>
 
       {/* Icon + Value */}
       <div className="flex items-center gap-2 lg:gap-3 xl:gap-5">
-       <Image src={icon} alt={label} width={24} height={24} />
+       <Image src={icon} alt={label} width={24} height={24} className="w-4 h-4 md:w-[24px] md:h-[24px]" />
         <span className="
           text-white text-25 lg:text-[20px] xl:text-25 font-[optima] tracking-[2%] uppercase leading-[1.4]  whitespace-nowrap
         ">
@@ -66,7 +64,7 @@ export default function BannerDetails() {
 
   return (
     <div className="
-      w-full bg-white/10 backdrop-blur-[15px] border-t border-white/10 px-6 md:px-10 lg:px-16 py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]
+      w-full bg-white/10 backdrop-blur-[15px] border-t border-white/10 px-5 sm:px-6 md:px-10 lg:px-16 py-1 sm:py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]
     ">
       {/* Desktop & Tablet — single row */}
       <div className="
@@ -81,13 +79,27 @@ export default function BannerDetails() {
       </div>
 
       {/* Mobile — 2x2 grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-2 sm:hidden">
-        {stats.map((stat) => (
-          <div key={stat.label} className="flex justify-center">
-            <PropertyStat {...stat} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2 sm:hidden">
+        {stats.map((stat, i) => (
+          <div key={stat.label} className="flex flex-col">
+            <div className="flex justify-left py-3">
+              <PropertyStat {...stat} />
+            </div>
+
+            {/* Horizontal gradient divider — hidden after last row */}
+            {i < stats.length - 1 && (
+              <div
+                className="w-full h-px"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(73,9,5,0) 0%, #b6afafff 50%, rgba(73,9,5,0) 100%)",
+                }}
+              />
+            )}
           </div>
         ))}
       </div>
+
     </div>
   );
 }
