@@ -150,7 +150,7 @@ gsap
         style={{ opacity: 0 }}
         className="absolute bottom-0   left-0 right-0 "
       >
-        <div className="flex justify-center mb-60 3xl:mb-[63px] ">
+        <div className="flex justify-center mb-2 sm:mb-5 lg:mb-60 3xl:mb-[63px] ">
            <Breadcrumb /> 
         </div>
        

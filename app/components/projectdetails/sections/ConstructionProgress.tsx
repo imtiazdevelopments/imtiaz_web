@@ -8,6 +8,8 @@ import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 
+import { useGsapStagger } from "../../../hooks/useGsapStagger";  
+import { useScrollFadeUp } from "../../../hooks/useScrollFadeUp";
 gsap.registerPlugin(ScrollTrigger);
 
 interface CircularProgressProps {
@@ -163,6 +165,9 @@ function CircularProgress({
 export default function WynwoodProgress() {
   const sectionRef = useRef<HTMLElement>(null);
 
+  const ref = useScrollFadeUp({ y: 40, duration: 0.7, start: "top 90%" });
+  const firstref = useScrollFadeUp({ y: 50, duration: 0.7, start: "top 90%" });
+
   const stats = [
     { percentage: 92, label: "Sub-Structure" },
     { percentage: 45, label: "Sub-Structure" },
@@ -173,6 +178,13 @@ const statsData = {
   title: "construction progress",
   description: "As the project progresses, significant milestones are reached, showcasing our team's dedication and expertise. We are steadily moving closer to our completion goal, ensuring quality and safety at every step.",
 };
+const gridRef = useGsapStagger({
+    selector: ".selector",
+    from: { opacity: 0, y: 40 },
+    to: { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+    stagger: 0.15,
+    start: "top 80%",
+  });
   return (
     <>
    
@@ -203,7 +215,7 @@ const statsData = {
         <div className="py-120 2xl:py-[130px] w-full px-[15px] lg:px-[40px] 2xl:px-[70px]  bg-gray flex flex-col justify-center px-10 sm:px-14 lg:px-16  gap-12 2xl:gap-[60px]">
 
           {/* Top — Overall Progress */}
-          <div className="flex flex-col sm:flex-row items-center   gap-10 lg:gap-15 2xl:gap-[142px]">
+          <div className="flex flex-col sm:flex-row items-center   gap-10 lg:gap-15 2xl:gap-[142px]" ref={firstref} style={{ opacity: 0 }} >
             {/* Big circle */}
             <CircularProgress
               percentage={19}
@@ -234,31 +246,33 @@ const statsData = {
           <div className="w-full h-px bg-black/30 2xl:my-[10px]" />
 
           {/* Bottom — Sub-stats */}
-          <div className="flex flex-wrap justify-between gap-y-8 gap-x-4">
+          <div className="flex flex-wrap justify-between gap-y-8 gap-x-4" ref={gridRef}>
             {stats.map((stat, i) => (
+              <div className="selector"
+                key={i}>
               <CircularProgress
-                key={i}
                 percentage={stat.percentage}
                 size={108}
                 strokeWidth={10}
                 label={stat.label}
                 isLarge={false}
                 animationDelay={i * 0.12}
+                
               />
+              </div>
             ))}
           </div>
 
           {/* CTA Button */}
-          <div>
-            
-              <CustomOutlineButton
-            className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
-            text="Construction updates"
-            borderColor="border-primary"
-            textColor="text-foreground-light"
-            variant="dark"
-          />
-          </div>
+           <div ref={ref} style={{ opacity: 0 }}>
+      <CustomOutlineButton
+        className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
+        text="Construction updates"
+        borderColor="border-primary"
+        textColor="text-foreground-light"
+        variant="dark"
+      />
+    </div>
         </div>
       </div>
       </section>

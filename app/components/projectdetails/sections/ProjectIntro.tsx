@@ -1,8 +1,17 @@
+"use client";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { introData } from "../data";
+import { useGsapStagger } from "../../../hooks/useGsapStagger";  
 
 const ProjectIntro = () => {
+  const gridRef = useGsapStagger({
+    selector: ".selector",
+    from: { opacity: 0, y: 40 },
+    to: { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+    stagger: 0.15,
+    start: "top 80%",
+  });
   return (
     <section
       data-header="dark"
@@ -13,14 +22,15 @@ const ProjectIntro = () => {
       className="w-full py-120 3xl:py-130"
     >
       <div className="container mx-auto flex flex-col items-center">
-        <SectionHeading title={introData.title} className="text-white mb-20 text-center" />
+        <SectionHeading title={introData.title} className="text-white mb-20 text-center max-w-[25ch]" />
         <SectionDescription
           text={introData.description}
-          className="text-white/80 max-w-[1220px] 3xl:max-w-[1308px] text-center whitespace-pre-line"
+          className="text-white/80  max-w-[87ch] text-center whitespace-pre-line"
         />
-        <div className="flex flex-wrap gap-[15px] justify-center items-center mt-50">
-          <a href="#" >
-          <div className="cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[35px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2">
+        <div className="flex flex-wrap gap-[15px] justify-center items-center mt-50" 
+          ref={gridRef}>
+          <a href="#" className="selector">
+          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,8 +43,8 @@ const ProjectIntro = () => {
             </div>
           </div>
         </a>
-          <a href="#" >
-          <div className="cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[35px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2">
+          <a href="#" className="selector">
+          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,8 +57,8 @@ const ProjectIntro = () => {
             </div>
           </div>
         </a>
-          <a href="#" >
-          <div className="cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[35px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2">
+          <a href="#" className="selector">
+          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
