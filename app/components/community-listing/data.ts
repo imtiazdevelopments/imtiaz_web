@@ -8,7 +8,7 @@ export const communitySectionData = {
   title: "Dubai Land Residence Complex",
   subtitle: "Spacious Community Living",
   description:
-    "Dubai Land spans over 3 million sq. ft., comprising diverse districts such as Al Habtoor Polo Resort & Club, Dubailand Oasis, Layan, Majan, Falcon City of Wonders, Living Legends,Villanova, Rukan, Tiger Woods, and Al Waha.",
+    "Dubai Land spans over 3 million sq. ft., comprising diverse districts such as Al Habtoor Polo Resort & Club, Dubailand Oasis, Layan, Majan, Falcon City of Wonders, Living Legends,\nVillanova, Rukan, Tiger Woods, and Al Waha.",
  
 };
 export const EverythingWithinData = {

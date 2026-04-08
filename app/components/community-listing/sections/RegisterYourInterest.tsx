@@ -253,7 +253,7 @@ export default function RegisterYourInterest() {
                 variant="dark"
                 textColor="text-foreground-light"
                 borderColor="border-primary-2"
-                px="px-60"
+                px="px-60 2xl:px-[54.22px] 2xl:py-[23px]"
               />
             </motion.div>
           </form>
