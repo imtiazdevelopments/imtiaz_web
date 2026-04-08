@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-
+import { SectionHeading } from "../../animations/SectionHeading";
+ 
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger"; 
 // ── Types ──────────────────────────────────────────────
 interface Slide {
   id: number;
@@ -14,12 +17,11 @@ interface Slide {
 
 // ── Breakpoint hook ────────────────────────────────────
 function useBreakpoint() {
-  const [bp, setBp] = useState<"mobile" | "tablet" | "desktop">("desktop");
+  const [bp, setBp] = useState<"mobile"   | "desktop">("desktop");
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      if (w < 640) setBp("mobile");
-      else if (w < 1024) setBp("tablet");
+      if (w < 768) setBp("mobile"); 
       else setBp("desktop");
     };
     update();
@@ -31,8 +33,9 @@ function useBreakpoint() {
 
 // ── Data ───────────────────────────────────────────────
 const slides: Slide[] = [
+   { id: 2, image: "/images/community-listing/slide2.jpg", title: "DUBAI LAND RESIDENCE COMPLEX", featured: true },
+ 
   { id: 1, image: "/images/community-listing/slide1.jpg", title: "DUBAI ISLANDS", featured: false },
-  { id: 2, image: "/images/community-listing/slide2.jpg", title: "DUBAI LAND RESIDENCE COMPLEX", featured: true },
   { id: 3, image: "/images/community-listing/slide3.jpg", title: "JUMEIRAH GARDEN CITY", featured: false }, 
 ];
 
@@ -50,18 +53,13 @@ export default function CommunitySlider() {
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
-  // Autoplay — pauses on hover
-  useEffect(() => {
-    if (hovered) return;
-    timerRef.current = setTimeout(next, 4000);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [active, next, hovered]);
+   
 
   type PanelPos = "left" | "center" | "right";
 
   // ── Panel config per breakpoint ──────────────────────
   const panels: { pos: PanelPos; idx: number }[] =
-    bp === "mobile" || bp === "tablet"
+    bp === "mobile" 
       ? [{ pos: "center", idx: active }]
       : [
           { pos: "left",   idx: mod(active - 1, TOTAL) },
@@ -85,24 +83,100 @@ export default function CommunitySlider() {
     if (!hovered) return pos === "center";
     return hovered === pos;
   };
+const btnRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!btnRef.current) return;
+
+    gsap.fromTo(
+      btnRef.current,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: btnRef.current,
+          start: "top 90%",
+          once: true,
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
 
   return (
     <section >
-        <div className="container flex flex-col justify-center">
-            {/* Header */}
-            <div className="text-center ">
-              <h2 className="text-heading  mb-20 ">
-                OUR OTHER COMMUNITIES
-              </h2> 
-                <CustomOutlineButton
-                className="w-fit mx-auto mb-50 xl:!px-[36px] xl:!py-[22.62px]"
-                text="View All"
-                borderColor="border-primary-2"
-                textColor="text-foreground-light"
+      <div className="container flex flex-col justify-center">
+
+    {/* Header */}
+    <div className="text-center">
+      <SectionHeading
+        title="OUR OTHER COMMUNITIES"
+        className="text-heading mb-20"
+      /> 
+
+        <div ref={btnRef} className="mb-50 hidden md:block">
+          <CustomOutlineButton
+            className="w-fit mx-auto 2xl:!px-[35.5px] 2xl:!py-[22.5px]"
+            text="View All"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
+        </div>
+    </div>
+
+    {/* 📱 MOBILE: LIST VIEW */}
+    {bp === "mobile" && (
+      <div className="flex flex-col gap-6">
+
+        {slides.map((slide, i) => (
+          <div key={slide.id} className="relative h-[300px] overflow-hidden">
+
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
+
+            <div className="absolute inset-0 flex flex-col items-center justify-end mb-7 text-white text-center px-4">
+              <h2 className="mb-6">{slide.title}</h2>
+
+              <CustomOutlineButton
+                className="px-6 py-2"
+                text="View Community"
+                borderColor="border-white/80"
+                textColor="text-white"
                 variant="dark"
               />
             </div>
+          </div>
+        ))}
+ 
+        <div ref={btnRef} className="mt-3">
+          <CustomOutlineButton
+            className="w-fit mx-auto"
+            text="View All"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
         </div>
+      </div>
+    )}
+
+  </div>
+
+  {/* 💻 DESKTOP: KEEP YOUR SLIDER */}
+  {bp !== "mobile" && (
       <div className="relative w-full h-[420px] md:h-[520px] lg:h-[620px] overflow-hidden ">
         <div className="flex w-full h-full justify-between bg-black">
         {panels.map(({ pos, idx }) => {
@@ -201,56 +275,27 @@ export default function CommunitySlider() {
                 >
                   {slide.title}
                 </h2>
-
-                <button className="px-7 py-3 rounded-full border border-white/80 text-white text-sm tracking-widest uppercase font-light bg-white/10 backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-300 ease-in-out">
-                  View Community
-                </button>
+ 
+                 <CustomOutlineButton
+        className="2xl:!px-[41px] 2xl:!py-[22.5px]  "
+        text="View Community"
+        borderColor="border-white/80"
+        textColor="text-white" 
+      />
               </div>
 
-              {/* Mobile / Tablet nav arrows inside the single panel */}
-              {pos === "center" && bp !== "desktop" && (
-                <>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); prev(); }}
-                    aria-label="Previous"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-200"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M15 18l-6-6 6-6" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); next(); }}
-                    aria-label="Next"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-200"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 18l6-6-6-6" />
-                    </svg>
-                  </button>
-                </>
-              )}
+             
             </div>
           );
         })}
       </div>
 
-      {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 lg:hidden">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(mod(i, TOTAL))}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`rounded-full transition-all duration-300 ${
-              i === active
-                ? "w-6 h-2 bg-white"
-                : "w-2 h-2 bg-white/40 hover:bg-white/70"
-            }`}
-          />
-        ))}
+     
       </div>
-      </div>
+  )}
+
+     
+     
     </section>
   );
 }

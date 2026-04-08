@@ -44,7 +44,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-20 2xl:mt-[13px] text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const projects = [
   "Project Alpha",
@@ -84,12 +84,12 @@ export default function RegisterYourInterest() {
 
   return (
     <section
-      className="w-full min-h-screen py-120 3xl:py-130 bg-[#EBEBEC] dark-section-2"
+      className="w-full   py-120 3xl:py-130 bg-gray dark-section-2"
       data-header="dark"
     >
       <div className="container flex flex-col lg:flex-row gap-10 sm:gap-10 lg:gap-50 2xl:gap-0">
         {/* Left col — 49% */}
-        <div className="w-full lg:w-[48.5%] flex-shrink-0 flex flex-col">
+        <div className="w-full lg:w-[47.865%] flex-shrink-0 flex flex-col">
           <SectionHeading
             title="Register your interest"
             className="text-foreground mb-20 lg:max-w-[17ch]"
@@ -102,7 +102,7 @@ export default function RegisterYourInterest() {
         </div>
 
         {/* Right col — 51% */}
-        <div className="w-full lg:w-[51.5%] flex flex-col justify-center">
+        <div className="w-full lg:w-[52.135%] flex flex-col justify-center">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             {/* Row 1 — First + Last name */}
             <motion.div
@@ -187,7 +187,7 @@ export default function RegisterYourInterest() {
                 >
                   Enter Phone no*
                 </label>
-                <div ref={phoneRowRef} className="flex items-end pt-20 gap-2">
+                <div ref={phoneRowRef} className="flex items-end pt-[12px] gap-2">
                   <CountryCodeSelect
                     value={watch("countryCode")}
                     onChange={(val) => setValue("countryCode", val)}
@@ -224,14 +224,14 @@ export default function RegisterYourInterest() {
             >
               <label
                 htmlFor="message"
-                className="block text-description mt-120 sm:mt-60 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
+                className="block !leading-[1.75] text-description mt-120 sm:mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
               >
                 Type message here...
               </label>
               <input
                 id="message"
                 type="text"
-                className="w-full mt-40 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0"
+                className="w-full mt-30 2xl:mt-[39px] pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0"
                 {...register("message")}
               />
               <FieldLine hasError={false} />
@@ -244,7 +244,7 @@ export default function RegisterYourInterest() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="mt-30"
+              className="mt-[20px]"
             >
               <CustomOutlineButton
                 text="Submit Enquire"
