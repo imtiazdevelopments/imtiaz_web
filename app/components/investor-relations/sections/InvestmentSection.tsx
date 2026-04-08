@@ -5,6 +5,10 @@ import { investmentAppealData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { useParallax } from "@/app/hooks/useParallax";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveUpV2, moveUp } from "../../motionVariants";
+import { motion } from "framer-motion";
+import Counter from "../../common/Counter";
 
 export default function InvestmentSection() {
   const { ref, parallaxY } = useParallax(15);
@@ -55,19 +59,30 @@ export default function InvestmentSection() {
                 const isLast = index === investmentAppealData.stats.length - 1;
 
                 return (
+                  <Reveal variants={moveUpV2} key={index}>
                   <div
-                    key={index}
                     className="relative flex flex-col items-center justify-center py-40"
                   >
                     {/* Value */}
-                    <span className="text-heading text-white mb-[10px]">
-                      {stat.value}
-                    </span>
+                    <motion.span
+                    variants={moveUp(0.1)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                     className="text-heading text-white mb-[10px]">
+                      {/* {stat.value} */}
+                      <Counter value={stat.value} duration={2000} />
+                    </motion.span>
 
                     {/* Label */}
-                    <span className="text-description text-white">
+                    <motion.span
+                    variants={moveUp(0.15)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                     className="text-description text-white">
                       {stat.label}
-                    </span>
+                    </motion.span>
 
                     {/* Vertical separator */}
                     {!isLast && (
@@ -82,6 +97,7 @@ export default function InvestmentSection() {
                       />
                     )}
                   </div>
+                  </Reveal>
                 );
               })}
             </div>

@@ -11,9 +11,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import type { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
-import { moveUp } from "../../motionVariants";
+import { moveUp, moveUpV2 } from "../../motionVariants";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SectionHeading } from "../../animations/SectionHeading";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,20 +115,12 @@ const ImtiazProperties = () => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-120 3xl:py-[160px] bg-white z-10 relative">
+    <section className="make-header-black w-full py-120 3xl:py-160 bg-white z-10 relative">
       <div className="container">
-        <div className="overflow-hidden">
-          <motion.h2
-            // variants={moveUp(0.35)}
-            variants={moveUp(0.7)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="text-center text-heading mb-50"
-          >
-            {projectsData.sectionTitle}
-          </motion.h2>
-        </div>
+        <SectionHeading
+          title={projectsData.sectionTitle}
+          className="text-foreground text-center mb-50"
+        />
         <div className="relative" ref={rootRef}>
           <Swiper
             modules={[Navigation]}
@@ -151,7 +145,9 @@ const ImtiazProperties = () => {
             {projectsData.properties.map((project, i) => {
               return (
                 <SwiperSlide key={i}>
-                  <ProjectCard key={i} {...project} />
+                  <Reveal variants={moveUpV2}>
+                    <ProjectCard key={i} {...project} />
+                  </Reveal>
                 </SwiperSlide>
               );
             })}

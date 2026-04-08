@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-, "app/(innerpages)/about/sustainability"  ],
+, "app/(innerpages)/about/sustainability", "app/components/common/Counter.tsx"  ],
   "exclude": [
     "node_modules"
   ]

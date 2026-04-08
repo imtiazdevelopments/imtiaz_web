@@ -304,8 +304,8 @@ export default function HeroFeatureSlider({
 
             return (
 
-            <Reveal key={c.id} variants={moveUpV2}>
               <SwiperSlide key={c.id}>
+                <Reveal key={c.id} variants={moveUpV2}>
                 <div className="relative flex flex-1 ">
                   <div
                     className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
@@ -387,8 +387,8 @@ export default function HeroFeatureSlider({
                     }}
                   />
                 </div>
-              </SwiperSlide>
               </Reveal>
+              </SwiperSlide>
             );
           })}
         </Swiper>

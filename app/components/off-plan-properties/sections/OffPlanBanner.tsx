@@ -20,7 +20,7 @@ interface InnerHeroProps {
 
 const ZOOM_OUT_DURATION = 2.2;
 const ZOOM_IN_DURATION = 10;
-const ZOOM_OUT_START = 1.4;
+const ZOOM_OUT_START = 1.45;
 const ZOOM_OUT_END = 1.0;
 const ZOOM_IN_END = 1.06;
 
@@ -50,27 +50,31 @@ const InnerHeroBanner = ({
 
     gsap.context(() => {
       // Zoom-out → slow Ken-Burns creep
-gsap
-  .timeline({ repeat: -1 })
-  .fromTo(
-    imageWrapperRef.current,
-    { scale: ZOOM_OUT_START, transformOrigin: "center center" },
-    {
-      scale: ZOOM_OUT_END,
-      duration: ZOOM_OUT_DURATION,
-      ease: "expo.out",
-    },
-  )
-  .to(imageWrapperRef.current, {
-    scale: ZOOM_IN_END,
-    duration: ZOOM_IN_DURATION,
-    ease: "sine.inOut",
-  })
-  .to(imageWrapperRef.current, {
-    scale: ZOOM_OUT_END,
-    duration: ZOOM_IN_DURATION,
-    ease: "sine.inOut",
-  });
+      // 👉 First: run intro ONCE
+      gsap.fromTo(
+        imageWrapperRef.current,
+        { scale: ZOOM_OUT_START, transformOrigin: "center center" },
+        {
+          scale: ZOOM_OUT_END,
+          duration: ZOOM_OUT_DURATION,
+          ease: "expo.out",
+          onComplete: () => {
+            // 👉 Then start infinite subtle loop
+            gsap
+              .timeline({ repeat: -1 })
+              .to(imageWrapperRef.current, {
+                scale: ZOOM_IN_END,
+                duration: ZOOM_IN_DURATION,
+                ease: "sine.inOut",
+              })
+              .to(imageWrapperRef.current, {
+                scale: ZOOM_OUT_END,
+                duration: ZOOM_IN_DURATION,
+                ease: "sine.inOut",
+              });
+          },
+        },
+      );
 
       // Description
       if (descRef.current) {
@@ -164,9 +168,16 @@ gsap
               {description}
             </p>
           )}
-          <div ref={btnRef} className="mt-50 overflow-hidden flex justify-center w-full">
+          <div
+            ref={btnRef}
+            className="mt-50 overflow-hidden flex justify-center w-full"
+          >
             <Link href={buttonLink}>
-              <CustomOutlineButton text={buttonText} className="capitalize" />
+              <CustomOutlineButton
+                text={buttonText}
+                className="capitalize"
+                px="px-[12px] sm:px-[26px] xl:px-[33px]"
+              />
             </Link>
           </div>
         </div>

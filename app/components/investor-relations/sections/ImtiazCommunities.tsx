@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion, useInView } from "framer-motion";
-import { textFade, moveUp, moveUpV2 } from "../../motionVariants";
+import { moveUp, moveUpV2 } from "../../motionVariants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -18,6 +18,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { communityNamesData } from "../data";
+import { SectionHeading } from "../../animations/SectionHeading";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -219,31 +220,8 @@ export default function HeroFeatureSlider() {
       />
 
       {/* Heading */}
-      <div className="container pt-120 2xl:pt-[130px] relative z-10">
-        <motion.div className="flex items-center justify-center relative">
-          <motion.div
-            className=" max-w-[1150px] w-full text center"
-            variants={dropWrapper}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <div className="overflow-hidden text-center">
-              <motion.h1
-                key={`title-communities`}
-                variants={textFade}
-                // custom={0.25}
-                custom={0.23}
-                initial="initial"
-                whileInView="animate"
-                animate={isHalfInView ? "animate" : "initial"}
-                viewport={{ once: true }}
-                className="text-white font-[optima] text-heading "
-              >
-                {heading}
-              </motion.h1>
-            </div>
-          </motion.div>
-        </motion.div>
+      <div className="container pt-120 3xl:pt-130 relative z-10">
+        <SectionHeading title={heading} className="text-white text-center" />
       </div>
 
       {/* Swiper Feature Cards */}
@@ -282,8 +260,8 @@ export default function HeroFeatureSlider() {
             const active = activeFeat === i;
 
             return (
-              <Reveal key={c.id} variants={moveUpV2}>
-                <SwiperSlide key={c.id}>
+              <SwiperSlide key={c.id}>
+                <Reveal key={c.id} variants={moveUpV2} delayRange={0.1 * i}>
                   <div className="relative flex flex-1 ">
                     <div
                       className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
@@ -349,7 +327,7 @@ export default function HeroFeatureSlider() {
                                 text="Read More"
                                 borderColor="border-white"
                                 textColor="text-white"
-                                px="px-[12px] sm:px-[26px] xl:px-[37px]"
+                                px="px-[12px] sm:px-[26px] xl:px-[36.7px]"
                               />
                             </div>
                           </motion.div>
@@ -365,8 +343,8 @@ export default function HeroFeatureSlider() {
                       }}
                     />
                   </div>
-                </SwiperSlide>
-              </Reveal>
+                </Reveal>
+              </SwiperSlide>
             );
           })}
         </Swiper>
