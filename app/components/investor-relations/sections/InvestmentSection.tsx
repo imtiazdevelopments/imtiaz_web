@@ -4,10 +4,36 @@ import Image from "next/image";
 import { investmentAppealData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
-import { useParallax } from "@/app/hooks/useParallax";
+import { useParallax } from "../../../hooks/useParallax";
+import Reveal from "../../animations/RevealOneByOneAnimation";
+import { moveUpV2, moveUp } from "../../motionVariants";
+import { motion } from "framer-motion";
+import Counter from "../../common/Counter";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { useCallback, useState } from "react";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+
+const total = investmentAppealData.stats.length;
 
 export default function InvestmentSection() {
   const { ref, parallaxY } = useParallax(15);
+  const [innerIndices, setInnerIndices] = useState<Set<number>>(new Set());
+
+  const computeInnerIndices = useCallback((swiper: SwiperType) => {
+    const spv = Math.round(swiper.params.slidesPerView as number) || 1;
+    const startReal = swiper.realIndex;
+
+    const visible: number[] = [];
+    for (let i = 0; i < spv; i++) {
+      visible.push((startReal + i) % total);
+    }
+
+    // All except rightmost get a separator line
+    setInnerIndices(new Set(visible.slice(0, -1)));
+  }, []);
+
   return (
     <section className="w-full bg-white">
       {/* Top white header */}
@@ -23,7 +49,7 @@ export default function InvestmentSection() {
       </div>
 
       {/* Image section */}
-      <div className="relative w-full h-[96vh]">
+      <div className="relative w-full h-[65vh] md:lg:h-[70vh] xl:h-[90vh] 3xl:h-[96.5vh]">
         {/* Full-width image */}
         <div ref={ref} className="relative w-full h-full overflow-hidden">
           <Image
@@ -32,9 +58,7 @@ export default function InvestmentSection() {
             fill
             className="object-cover"
             priority
-            style={{
-              transform: `translateY(${parallaxY}vh)`,
-            }}
+            style={{ transform: `translateY(${parallaxY}vh)` }}
           />
         </div>
 
@@ -47,44 +71,71 @@ export default function InvestmentSection() {
           }}
         />
 
-        {/* Stats grid — pinned to bottom */}
+        {/* Stats — pinned to bottom */}
         <div className="absolute bottom-0 left-0 right-0 pb-60">
           <div className="container">
-            <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              speed={700}
+              loop={true}
+              slidesPerView={2}
+              onSwiper={(s) => computeInnerIndices(s)}
+              onSlideChange={(s) => computeInnerIndices(s)}
+              onBreakpoint={(s) => computeInnerIndices(s)}
+              breakpoints={{
+                768:  { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
+                1280: { slidesPerView: 5 },
+              }}
+            >
               {investmentAppealData.stats.map((stat, index) => {
-                const isLast = index === investmentAppealData.stats.length - 1;
+                const showLine = innerIndices.has(index);
 
                 return (
-                  <div
-                    key={index}
-                    className="relative flex flex-col items-center justify-center py-40"
-                  >
-                    {/* Value */}
-                    <span className="text-heading text-white mb-[10px]">
-                      {stat.value}
-                    </span>
+                  <SwiperSlide key={index}>
+                    <Reveal variants={moveUpV2}>
+                      <div className="relative flex flex-col items-center justify-center py-40">
+                        {/* Value */}
+                        <motion.span
+                          variants={moveUp(0.1)}
+                          initial="hidden"
+                          whileInView="show"
+                          viewport={{ once: true }}
+                          className="text-heading text-white mb-[10px]"
+                        >
+                          <Counter value={stat.value} duration={2000} />
+                        </motion.span>
 
-                    {/* Label */}
-                    <span className="text-description text-white">
-                      {stat.label}
-                    </span>
+                        {/* Label */}
+                        <motion.span
+                          variants={moveUp(0.15)}
+                          initial="hidden"
+                          whileInView="show"
+                          viewport={{ once: true }}
+                          className="text-description text-white py-1 sm:py-0"
+                        >
+                          {stat.label}
+                        </motion.span>
 
-                    {/* Vertical separator */}
-                    {!isLast && (
-                      <div
-                        className="absolute top-0 right-0 w-px h-full"
-                        style={{
-                          borderRight: "1px solid",
-                          borderImageSource:
-                            "linear-gradient(180deg, rgba(255, 255, 255, 0) -6.9%, #FFFFFF 46.55%, rgba(255, 255, 255, 0) 100%)",
-                          borderImageSlice: 1,
-                        }}
-                      />
-                    )}
-                  </div>
+                        {/* Vertical separator — only between visible slides, never at right edge */}
+                        <div
+                          className="absolute top-0 right-0 w-px h-full"
+                          style={{
+                            borderRight: "1px solid",
+                            borderImageSource:
+                              "linear-gradient(180deg, rgba(255, 255, 255, 0) -6.9%, #FFFFFF 46.55%, rgba(255, 255, 255, 0) 100%)",
+                            borderImageSlice: 1,
+                            opacity: showLine ? 1 : 0,
+                            transition: "opacity 0.4s ease",
+                          }}
+                        />
+                      </div>
+                    </Reveal>
+                  </SwiperSlide>
                 );
               })}
-            </div>
+            </Swiper>
           </div>
         </div>
       </div>

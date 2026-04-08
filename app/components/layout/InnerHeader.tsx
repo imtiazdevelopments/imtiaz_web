@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
 import AuthSlider from "../auth/AuthSlider";
+import Link from "next/link";
 
 type AuthView = "login" | "signup";
 
@@ -44,39 +45,39 @@ const InnerHeader: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [y]);
 
-// Section-based header theme
-useEffect(() => {
-  const check = () => {
-    const headerEl = document.getElementById("inner-header");
-    if (headerEl) headerEl.style.pointerEvents = "none";
+  // Section-based header theme
+  useEffect(() => {
+    const check = () => {
+      const headerEl = document.getElementById("inner-header");
+      if (headerEl) headerEl.style.pointerEvents = "none";
 
-    const el = document.elementFromPoint(window.innerWidth / 2, 80);
+      const el = document.elementFromPoint(window.innerWidth / 2, 80);
 
-    if (headerEl) headerEl.style.pointerEvents = "";
+      if (headerEl) headerEl.style.pointerEvents = "";
 
-    let node = el as HTMLElement | null;
-    let theme: "light" | "dark" = "light";
+      let node = el as HTMLElement | null;
+      let theme: "light" | "dark" = "light";
 
-    while (node && node !== document.body) {
-      if (node.dataset.header) {
-        theme = node.dataset.header as "light" | "dark";
-        break;
+      while (node && node !== document.body) {
+        if (node.dataset.header) {
+          theme = node.dataset.header as "light" | "dark";
+          break;
+        }
+        node = node.parentElement;
       }
-      node = node.parentElement;
-    }
 
-    setHeaderTheme(theme);
-  };
+      setHeaderTheme(theme);
+    };
 
-  window.addEventListener("scroll", check, { passive: true });
-  window.addEventListener("resize", check);
-  setTimeout(check, 100);
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    setTimeout(check, 100);
 
-  return () => {
-    window.removeEventListener("scroll", check);
-    window.removeEventListener("resize", check);
-  };
-}, [pathname]);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!authView) return;
@@ -109,7 +110,7 @@ useEffect(() => {
     <>
       {/* ========================= HEADER ========================= */}
       <motion.div
-      id="inner-header"
+        id="inner-header"
         style={{ y: springY }}
         className="fixed top-0 left-0 w-full z-[999] pt-[20px]"
       >
@@ -140,14 +141,16 @@ useEffect(() => {
 
               {/* CENTER — Logo */}
               <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <Image
-                  src="/icons/layout_icons/header-logo.svg"
-                  alt="Imtiaz"
-                  width={183}
-                  height={50}
-                  priority
-                  className="w-auto xl:w-[183px] h-[26px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
-                />
+                <Link href="/">
+                  <Image
+                    src="/icons/layout_icons/header-logo.svg"
+                    alt="Imtiaz"
+                    width={183}
+                    height={50}
+                    priority
+                    className="w-auto xl:w-[183px] h-[26px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
+                  />
+                </Link>
               </div>
 
               {/* RIGHT — Icons */}

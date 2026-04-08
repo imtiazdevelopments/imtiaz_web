@@ -289,7 +289,8 @@ export default function HeroFeatureSlider({
           breakpoints={{
             0: { slidesPerView: 1 },
             640: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 },
+            1024: { slidesPerView: 4 },
+            1580: { slidesPerView: 5 },
           }}
           onSwiper={setSwiper}
           onSlideChange={(s) => {
@@ -304,8 +305,8 @@ export default function HeroFeatureSlider({
 
             return (
 
-            <Reveal key={c.id} variants={moveUpV2}>
               <SwiperSlide key={c.id}>
+                <Reveal key={c.id} variants={moveUpV2}>
                 <div className="relative flex flex-1 ">
                   <div
                     className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
@@ -387,8 +388,8 @@ export default function HeroFeatureSlider({
                     }}
                   />
                 </div>
-              </SwiperSlide>
               </Reveal>
+              </SwiperSlide>
             );
           })}
         </Swiper>

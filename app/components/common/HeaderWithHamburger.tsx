@@ -426,7 +426,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 type AuthView = "login" | "signup";
 
-const Header2: React.FC = () => {
+const HeaderWithHamburger: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [darkHeader, setDarkHeader] = useState(false);
@@ -875,4 +875,4 @@ const Header2: React.FC = () => {
   );
 };
 
-export default Header2;
+export default HeaderWithHamburger;

@@ -81,7 +81,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
               {/* mobile */}
               <span className="lg:hidden">
                 {crumb.label.length > 15
-                  ? crumb.label.slice(0, 10) + "..."
+                  ? crumb.label.slice(0, 15) + "..."
                   : crumb.label}
               </span>
 

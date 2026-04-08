@@ -49,7 +49,6 @@
 //   );
 // }
 
-
 "use client";
 import Image from "next/image";
 
@@ -60,10 +59,10 @@ type Props = {
 
 export default function HeroSection({ titleRef, scrollRef }: Props) {
   return (
-<section
-  id="sec1"
-  className="h-screen bg-black text-white flex items-center justify-center relative text-center sticky top-0 z-0"
->
+    <section
+      id="sec1"
+      className="h-screen bg-black text-white flex items-center justify-center relative text-center sticky top-0 z-0"
+    >
       <div className="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
         {/* Portrait video — mobile only */}
         <video
@@ -91,7 +90,7 @@ export default function HeroSection({ titleRef, scrollRef }: Props) {
           <div className="relative overflow-hidden">
             <h1
               ref={titleRef}
-              className="text-70 font-[optima] leading-[1.143] uppercase text-white opacity-0"
+              className="text-heading uppercase text-white opacity-0"
             >
               Redefining Spaces <br />
               Elevating Lives
