@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect, useState, useRef } from "react";
+import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
   eventItems,
@@ -48,26 +48,26 @@ const EventsSection = () => {
     }
   }, [pathname]);
 
-  const updateParam = (key: string, value: string) => {
-    const scrollY = window.scrollY;
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const scrollY = window.scrollY;
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) params.set(key, value);
+      else params.delete(key);
+      params.set("page", "1");
+      lock();
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        scrollTo(scrollY, { duration: 0 });
+        unlock();
+      }, 520);
+    },
+    [searchParams, pathname, router, lock, unlock, scrollTo],
+  );
 
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
-
-    lock();
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-
-    setTimeout(() => {
-      scrollTo(scrollY, { duration: 0 });
-      unlock();
-    }, 520);
-  };
-
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     router.replace(`${pathname}?page=1`, { scroll: false });
-  };
+  }, [pathname, router]);
 
   const hasFilter = selectedTopic || selectedYear || selectedMonth;
 
@@ -92,17 +92,27 @@ const EventsSection = () => {
     });
   }, [selectedTopic, selectedYear, selectedMonth, sorted]);
 
-  const totalPages = Math.ceil(filtered.length / EVENTS_PER_PAGE);
-  const paginated = filtered.slice(
-    (currentPage - 1) * EVENTS_PER_PAGE,
-    currentPage * EVENTS_PER_PAGE,
+  const totalPages = useMemo(
+    () => Math.ceil(filtered.length / EVENTS_PER_PAGE),
+    [filtered.length],
+  );
+  const paginated = useMemo(
+    () =>
+      filtered.slice(
+        (currentPage - 1) * EVENTS_PER_PAGE,
+        currentPage * EVENTS_PER_PAGE,
+      ),
+    [filtered, currentPage],
   );
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", String(page));
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", String(page));
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, router],
+  );
 
   return (
     <section
@@ -141,7 +151,7 @@ const EventsSection = () => {
               />
             </motion.div>
 
-            <motion.div variants={moveUp(0.2)} className="w-auto">
+            <motion.div variants={moveUp(0.15)} className="w-auto">
               <FilterDropdown
                 placeholder="Month"
                 options={eventMonths}

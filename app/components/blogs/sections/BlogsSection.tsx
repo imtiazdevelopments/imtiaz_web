@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
   blogs,
@@ -43,26 +43,26 @@ const BlogsSection = () => {
     }
   }, [pathname]);
 
-const updateParam = (key: string, value: string) => {
-  const scrollY = window.scrollY;
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const scrollY = window.scrollY;
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) params.set(key, value);
+      else params.delete(key);
+      params.set("page", "1");
+      lock();
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        scrollTo(scrollY, { duration: 0 });
+        unlock();
+      }, 520);
+    },
+    [searchParams, pathname, router, lock, unlock, scrollTo],
+  );
 
-  const params = new URLSearchParams(searchParams.toString());
-  if (value) params.set(key, value);
-  else params.delete(key);
-  params.set("page", "1");
-
-  lock(); // pause Lenis during transition
-  router.push(`${pathname}?${params.toString()}`, { scroll: false });
-
-  setTimeout(() => {
-    scrollTo(scrollY, { duration: 0 }); // instant jump via Lenis
-    unlock(); // resume Lenis
-  }, 520);
-};
-
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     router.replace(`${pathname}?page=1`, { scroll: false });
-  };
+  }, [pathname, router]);
 
   const hasFilter = selectedTopic || selectedCategory;
 
@@ -82,17 +82,27 @@ const updateParam = (key: string, value: string) => {
     });
   }, [selectedTopic, selectedCategory, sortedBlogs]);
 
-  const totalPages = Math.ceil(filtered.length / BLOGS_PER_PAGE);
-  const paginated = filtered.slice(
-    (currentPage - 1) * BLOGS_PER_PAGE,
-    currentPage * BLOGS_PER_PAGE,
+  const totalPages = useMemo(
+    () => Math.ceil(filtered.length / BLOGS_PER_PAGE),
+    [filtered.length],
+  );
+  const paginated = useMemo(
+    () =>
+      filtered.slice(
+        (currentPage - 1) * BLOGS_PER_PAGE,
+        currentPage * BLOGS_PER_PAGE,
+      ),
+    [filtered, currentPage],
   );
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", String(page));
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", String(page));
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, router],
+  );
 
   return (
     <section

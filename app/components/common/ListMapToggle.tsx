@@ -9,7 +9,7 @@ export default function ListMapToggle({
     <div className="flex items-center gap-2 text-description">
       <button
         onClick={() => setView("list")}
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 cursor-pointer ${
           view === "list"
             ? "text-foreground-light"
             : "text-foreground-light/30 hover:text-foreground-light/80"
@@ -20,7 +20,7 @@ export default function ListMapToggle({
       <span className="text-foreground-light">|</span>
       <button
         onClick={() => setView("map")}
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 cursor-pointer ${
           view === "map"
             ? "text-foreground-light"
             : "text-foreground-light/30 hover:text-foreground-light/80"
