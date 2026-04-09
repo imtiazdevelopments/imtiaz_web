@@ -90,7 +90,7 @@ export default function ProjectCard({
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-10 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-140">
+          <div className="absolute bottom-0 left-0 right-0 px-5 pb-10 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-250">
             <h3
               className="font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px]"
               dangerouslySetInnerHTML={{ __html: title }}
@@ -136,7 +136,7 @@ export default function ProjectCard({
                   />
                 </svg>
               </div>
-              <div className="flex flex-col items-baseline">
+              <div className="flex flex-col items-baseline gap-1">
                 <span className="text-white text-description  text-left">
                   Starting From
                 </span>
@@ -157,7 +157,7 @@ export default function ProjectCard({
                   />
                 </svg>
               </div>
-              <div className="flex flex-col items-baseline">
+              <div className="flex flex-col items-baseline gap-1">
                 <span className="text-white text-description  text-left">
                   Units
                 </span>
@@ -171,7 +171,7 @@ export default function ProjectCard({
           <CustomOutlineButton
             text="View Property"
             px="px-[12px] md:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
-            className="translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-300 delay-100"
+            className="translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 3xl:py-[21px] transition-transform duration-300 delay-100"
           />
         </div>
       </div>
