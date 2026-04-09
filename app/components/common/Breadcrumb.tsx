@@ -79,25 +79,25 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
               }`}
             >
               {/* mobile */}
-              <span className="lg:hidden">
-                {crumb.label.length > 15
-                  ? crumb.label.slice(0, 15) + "..."
-                  : crumb.label}
-              </span>
+<span className="md:hidden">
+  {crumb.label.length > 15
+    ? crumb.label.slice(0, 15) + "..."
+    : crumb.label}
+</span>
 
-              {/* lg → xl */}
-              <span className="hidden lg:inline 2xl:hidden">
-                {crumb.label.length > 40
-                  ? crumb.label.slice(0, 40) + "..."
-                  : crumb.label}
-              </span>
+{/* md */}
+<span className="hidden md:inline 2xl:hidden">
+  {crumb.label.length > 25
+    ? crumb.label.slice(0, 50) + "..."
+    : crumb.label}
+</span>
 
-              {/* 2xl+ */}
-              <span className="hidden 2xl:inline">
-                {crumb.label.length > 60
-                  ? crumb.label.slice(0, 60) + "..."
-                  : crumb.label}
-              </span>
+{/* 2xl+ */}
+<span className="hidden 2xl:inline">
+  {crumb.label.length > 60
+    ? crumb.label.slice(0, 80) + "..."
+    : crumb.label}
+</span>
             </span>
           ) : (
             <Link

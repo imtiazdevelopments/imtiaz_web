@@ -1,12 +1,12 @@
 "use client";
 
 import { pressItems } from "../../news/data";
-import BlogCard from "../../blogs/sections/BlogCard";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
+import EventCard from "../../events/sections/EventCard";
 
 const OtherEvents = () => {
   return (
@@ -19,7 +19,7 @@ const OtherEvents = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-40 mt-20 overflow-hidden">
           {pressItems.slice(0, 2).map((item) => (
             <Reveal key={item.id} variants={moveUpV2}>
-              <BlogCard blog={item} />
+              <EventCard item={item} />
             </Reveal>
           ))}
         </div>

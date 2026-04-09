@@ -110,7 +110,7 @@ const btnRef = useRef<HTMLDivElement>(null);
   }, []);
 
   return (
-    <section >
+    <section data-header="dark" >
       <div className="container flex flex-col justify-center">
 
     {/* Header */}

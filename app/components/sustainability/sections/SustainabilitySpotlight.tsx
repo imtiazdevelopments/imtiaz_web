@@ -139,7 +139,7 @@ export default function SustainabilitySpotlight() {
       const animate = (img: HTMLImageElement | undefined, onDone: () => void) => {
         if (!img) { onDone(); return; }
         const tl = gsap.timeline({ onComplete: onDone });
-        tl.to(img, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "expo.inOut" });
+        tl.to(img, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.7, ease: "expo.inOut" });
         tl.to(img, { scale: 1,                        duration: 1.4, ease: "power2.out" }, "<");
       };
 

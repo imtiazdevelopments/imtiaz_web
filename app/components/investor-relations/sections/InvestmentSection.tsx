@@ -35,7 +35,7 @@ export default function InvestmentSection() {
   }, []);
 
   return (
-    <section className="w-full bg-white">
+    <section data-header="dark" className="w-full bg-white">
       {/* Top white header */}
       <div className="container text-center pt-120 3xl:pt-160">
         <SectionHeading

@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 
 const LandpropertyCards = () => {
   return (
-    <section className="w-full">
+    <section data-header="dark" className="w-full">
       <div className="container flex flex-col justify-center">
 
         {/* Header */}

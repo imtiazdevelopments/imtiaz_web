@@ -17,7 +17,7 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ blog }: BlogCardProps) => {
-    const { ref, parallaxY } = useParallax(15);
+  const { ref, parallaxY } = useParallax(15);
   const formatted = (date: string) => {
     const d = new Date(date);
 
@@ -71,9 +71,9 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           <h3 className="text-white uppercase text-25 leading-[1.5] md:leading-[1.4] mb-40 text-center">
             {blog.title}
           </h3>
-<span className="text-white font-[avenirHeavy] text-19 leading-[100%] underline underline-offset-3">
-  Read More
-</span>
+          <span className="text-white font-[avenirHeavy] text-19 leading-[100%] underline underline-offset-3">
+            Read More
+          </span>
         </div>
       </div>
     </Link>

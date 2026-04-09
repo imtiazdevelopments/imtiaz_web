@@ -115,7 +115,7 @@ const ImtiazProperties = () => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-120 3xl:py-160 bg-white z-10 relative">
+    <section data-header="dark" className="make-header-black w-full py-120 3xl:py-160 bg-white z-10 relative">
       <div className="container">
         <SectionHeading
           title={projectsData.sectionTitle}

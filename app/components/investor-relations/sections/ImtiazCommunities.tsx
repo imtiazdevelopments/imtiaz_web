@@ -61,11 +61,6 @@ export default function HeroFeatureSlider() {
     once: true,
   });
 
-  // const featureItem = {
-  //   initial: { opacity: 0, y: 20 },
-  //   animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  // };
-
   const dropWrapper = {
     hidden: { opacity: 0, y: -60 },
     visible: {
@@ -131,8 +126,9 @@ export default function HeroFeatureSlider() {
 
   return (
     <section
+    data-header="light"
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen z-10"
+      className="w-full relative overflow-hidden h-[82vh] lg:h-[85vh] xl:h-screen z-10"
     >
       {/* Nav Buttons */}
       <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
@@ -231,11 +227,6 @@ export default function HeroFeatureSlider() {
       >
         <Swiper
           modules={[Autoplay, Navigation]}
-          // autoplay={{
-          //   delay: 3500,
-          //   disableOnInteraction: false,
-          //   pauseOnMouseEnter: true,
-          // }}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
@@ -245,7 +236,8 @@ export default function HeroFeatureSlider() {
           speed={600}
           breakpoints={{
             0: { slidesPerView: 1 },
-            640: { slidesPerView: 3 },
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
             1024: { slidesPerView: 4 },
             1580: { slidesPerView: 5 },
           }}
@@ -337,7 +329,7 @@ export default function HeroFeatureSlider() {
                     </div>
 
                     <div
-                      className="hidden lg:block absolute top-0 right-0 h-full w-[1px]"
+                      className="hidden sm:block absolute top-0 right-0 h-full w-[1px]"
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%)",
