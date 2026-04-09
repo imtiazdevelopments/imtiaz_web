@@ -33,7 +33,7 @@ export default function IconGrid({ data, bgClass }: Props) {
   });
 
   return (
-    <section className={`w-full py-120 3xl:py-130 ${bgClass ? bgClass : ""}`}>
+    <section data-header="dark" className={`w-full py-120 3xl:py-130 ${bgClass ? bgClass : ""}`}>
       <div className="container flex flex-col justify-center">
 
         {/* Header */}

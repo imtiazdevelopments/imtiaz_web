@@ -28,12 +28,12 @@ export default function ProjectCard({
       onTouchCancel={() => setIsActive(false)}
       ref={ref}
     >
-      <div className="relative w-full aspect-[10.2/13] sm:aspect-[9.4/13] lg:aspect-[9/13] xl:aspect-[8.48/13] overflow-hidden">
+      <div className="relative w-full aspect-[9.9/13] sm:aspect-[9.4/13] md:aspect-[9/13] xl:aspect-[8.8/13] 3xl:aspect-[8.48/13] overflow-hidden">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover  (max-width: 768px) 100vw, 50vw  "
+          className="object-cover"
           style={{
             transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
           }}
@@ -58,10 +58,11 @@ export default function ProjectCard({
         />
 
         {/* ── DEFAULT STATE ── */}
-        <div className="absolute inset-0 z-20 flex flex-col transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 pointer-events-none">
-          <div className="absolute top-10 left-0 right-0 flex justify-center flex-col items-center">
+        <div className="absolute inset-0 z-20 flex flex-col transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 delay-0 pointer-events-none">
+          <div className="absolute top-10 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 delay-200 group-hover:opacity-0 group-[.is-active]:opacity-0">
             {status && (
-              <div className="bg-white/30 backdrop-blur-sm px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
+              // <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
+              <div className="bg-[#818082]/60 px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
                 <p className="text-white/80 text-description uppercase">{status}</p>
               </div>
             )}
@@ -108,8 +109,8 @@ export default function ProjectCard({
         </div>
 
         {/* ── HOVER STATE ── */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-7 lg:py-10 px-8 lg:px-5 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity duration-500">
-          <div className="flex flex-col items-center gap-1 mt-3 xl:mt-[48px] -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-300 delay-100">
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-7 lg:py-10 px-8 lg:px-5 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity delay-140 duration-500">
+          <div className="flex flex-col items-center gap-1 mt-3 xl:mt-[48px] -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-300 delay-140">
             <Image
               src={hoverImage}
               alt="Hover Image"

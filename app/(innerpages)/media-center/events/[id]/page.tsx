@@ -1,9 +1,7 @@
 import Index from "@/app/components/event-details/Index";
 
 const page = () => {
-  return (
-    <Index />
-  )
-}
+  return <Index />;
+};
 
-export default page
+export default page;
