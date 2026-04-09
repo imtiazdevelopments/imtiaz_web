@@ -34,7 +34,7 @@ export default function FloatingRightIcons() {
   return (
     <div
       ref={containerRef}
-      className="floating-icons hidden lg:flex fixed right-[12px] 3xl:right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[9px] z-[900]"
+      className="floating-icons flex fixed right-[6px] md:right-[12px] 3xl:right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[5px] md:gap-[9px] z-[900]"
     >
       {[
         { src: "/icons/layout_icons/phone.svg", alt: "phone" },
@@ -43,14 +43,14 @@ export default function FloatingRightIcons() {
       ].map(({ src, alt }) => (
         <div
           key={alt}
-          className="floating-icon w-[45px] h-[45px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300"
+          className="floating-icon w-[35px] h-[35px] md:w-[45px] md:h-[45px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300"
         >
           <Image
             src={src}
             alt={alt}
             width={27}
             height={27}
-            className="w-[22px] h-[22px] transition-transform duration-300 hover:scale-[1.05]"
+            className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] transition-transform duration-300 hover:scale-[1.05]"
           />
         </div>
       ))}

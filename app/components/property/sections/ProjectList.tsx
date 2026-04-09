@@ -1,36 +1,23 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { ComponentType, useState, useRef, useEffect } from "react";
-// import {
-//   components,
-//   DropdownIndicatorProps,
-//   Props as ReactSelectProps,
-// } from "react-select";
-// import { StylesConfig } from "react-select";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-// import { fadeIn, moveLeft, moveUp } from "../../motionVarients";
-import Image from "next/image";
-type Option = { value: string; label: string };
-// import { assets } from "@/public/assets/assets";
 import {
   Map,
   MapCameraChangedEvent,
   Marker,
   useMap,
 } from "@vis.gl/react-google-maps";
-import { useRouter } from "next/navigation";
 import { useContainerInset } from "@/app/hooks/useContainerInset";
 import ContainerAnchor from "../../layout/ContainerAnchor";
 import ProjectCardMap from "./ProjectCardMap";
-
-// const Select = dynamic<ReactSelectProps<Option, false>>(
-//   () => import("react-select"),
-//   { ssr: false }
-// ) as ComponentType<ReactSelectProps<Option, false>>;
+import { moveUp, moveUpV2 } from "../../motionVariants";
+import { useLenis } from "@/app/contexts/LenisContext";
+import ProjectCard from "../../common/ProjectCard";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 export interface Project {
-  id:string;
+  id: string;
   image: string;
   hoverImage: string;
   status: string;
@@ -43,171 +30,68 @@ export interface Project {
   date: string;
   propertyType: string;
   community: string;
-  latitude:string;
-  longitude:string;
+  latitude: string;
+  longitude: string;
 }
 
-
-// Custom dropdown indicator
-// const DropdownIndicator = (props: DropdownIndicatorProps<Option, false>) => {
-//   return (
-//     <components.DropdownIndicator {...props}>
-//       <svg
-//         width="25"
-//         height="25"
-//         viewBox="0 0 20 20"
-//         fill="none"
-//         xmlns="http://www.w3.org/2000/svg"
-//       >
-//         <path
-//           d="M5 7L10 12L15 7"
-//           stroke="#000000"
-//           strokeWidth={1.2}
-//           strokeLinecap="round"
-//           strokeLinejoin="round"
-//         />
-//       </svg>
-//     </components.DropdownIndicator>
-//   );
-// };
-
-type FilterKey = "type" | "sector" | "status";
+const EmptyState = () => (
+  <motion.div
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    className="mb-10 lg:mb-0"
+  >
+    <motion.p
+      initial="hidden"
+      whileInView="show"
+      variants={moveUp(0)}
+      viewport={{ once: true }}
+      className="text-2xl"
+    >
+      No results in this area
+    </motion.p>
+    <motion.p
+      variants={moveUp(0.1)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+    >
+      Try zooming out, moving the map, or changing your filters.
+    </motion.p>
+  </motion.div>
+);
 
 export default function FeaturedProjects({
   projects,
 }: {
   projects: Project[];
 }) {
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const [leftOffset, setLeftOffset] = useState(0);
   const [activeProject, setActiveProject] = useState<string>("");
 
-
   useEffect(() => {
-    setVisibleProjects([]);        // reset old map results
-    setHighlighted([]);           // reset markers
-    setActiveProject(projects[0]?.id || ""); // reset active project safely
+    setVisibleProjects([]);
+    setHighlighted([]);
+    setActiveProject(projects[0]?.id || "");
   }, [projects]);
 
-  const containerRef = useRef(null)
-  const leftSpacing = useContainerInset(containerRef)
-  // const [filters, setFilters] = useState<Record<FilterKey, string>>({
-  //   type: "Project Type",
-  //   sector: "Sector",
-  //   status: "Status",
-  // });
-
-  const [visibleProjects, setVisibleProjects] = useState<Project[]>(
-    []
-  );
-
-  // const filteredProjects = projects.filter((project) => {
-  //   return (
-  //     (filters.type === "All" ||
-  //       filters.type === "Project Type" ||
-  //       project.secondSection.projectType.name === filters.type) &&
-  //     (filters.sector === "All" ||
-  //       filters.sector === "Sector" ||
-  //       project.secondSection.sector.name === filters.sector) &&
-  //     (filters.status === "All" ||
-  //       filters.status === "Status" ||
-  //       project.secondSection.status === filters.status)
-  //   );
-  // });
-  // // Config for mapping filters
-  // const filterConfigs: { key: FilterKey; placeholder: string }[] = [
-  //   { key: "type", placeholder: "Project Type" },
-  //   { key: "sector", placeholder: "Sector" },
-  //   { key: "status", placeholder: "Status" },
-  // ];
-
-  // Get unique options for each filter
-  // const getOptions = (field: FilterKey): Option[] => {
-  //   const baseOption = [{ value: "All", label: "All" }];
-
-  //   switch (field) {
-  //     case "type":
-  //       return [
-  //         ...baseOption,
-  //         ...projectTypes.map((p) => ({
-  //           value: p.name,
-  //           label: p.name,
-  //         })),
-  //       ];
-
-  //     case "sector":
-  //       return [
-  //         ...baseOption,
-  //         ...sectors.map((s) => ({
-  //           value: s.name,
-  //           label: s.name,
-  //         })),
-  //       ];
-
-  //     case "status":
-  //       return [
-  //         ...baseOption,
-  //         { value: "Completed", label: "Completed" },
-  //         { value: "Ongoing", label: "Ongoing" },
-  //       ];
-
-  //     default:
-  //       return baseOption;
-  //   }
-  // };
-
-  // Styles for react-select
-  // const selectStyles: StylesConfig<Option, false> = {
-  //   control: (base) => ({
-  //     ...base,
-  //     border: "none",
-  //     backgroundColor: "transparent",
-  //     borderBottom: "1px solid #BCBCBC",
-  //     borderRadius: 0,
-  //     boxShadow: "none",
-  //     padding: "2px 0",
-  //     "&:hover": { borderBottom: "1px solid #000" },
-  //     transition: "all 0.3s ease-in-out",
-  //   }),
-  //   valueContainer: (base) => ({ ...base, padding: 0 }),
-  //   input: (base) => ({ ...base, margin: 0, padding: 0 }),
-  //   placeholder: (base) => ({
-  //     ...base,
-  //     color: "#000",
-  //     fontWeight: 300,
-  //     fontSize: "19px",
-  //   }),
-  //   singleValue: (base) => ({
-  //     ...base,
-  //     color: "#000",
-  //     fontWeight: 300,
-  //     fontSize: "19px",
-  //   }),
-  //   option: (base, state) => ({
-  //     ...base,
-  //     backgroundColor: state.isSelected ? "#EE3524" : "white",
-  //     color: state.isSelected ? "white" : "black",
-  //     fontSize: "19px",
-  //     cursor: "pointer",
-  //     "&:hover": { backgroundColor: "#f3f3f3", color: "black" },
-  //   }),
-  //   indicatorSeparator: () => ({ display: "none" }),
-  // };
-
+  const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    const updateOffset = () => {
-      if (headingRef.current) {
-        const rect = headingRef.current.getBoundingClientRect();
-        setLeftOffset(rect.left + 15); // distance from viewport left
-      }
-    };
-    updateOffset();
-    window.addEventListener("resize", updateOffset);
-    return () => window.removeEventListener("resize", updateOffset);
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
+
+  const containerRef = useRef(null);
+  const leftSpacing = useContainerInset(containerRef);
+
+  const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
 
   const [highlighted, setHighlighted] = useState<string[]>([]);
   const map = useMap();
+
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const { lock, unlock, scrollTo } = useLenis();
 
   const handleCameraChanged = (event: MapCameraChangedEvent) => {
     const { bounds } = event.detail || {};
@@ -219,7 +103,7 @@ export default function FeaturedProjects({
         parseFloat(p.latitude) >= bounds.south &&
         parseFloat(p.latitude) <= bounds.north &&
         parseFloat(p.longitude) >= bounds.west &&
-        parseFloat(p.longitude) <= bounds.east
+        parseFloat(p.longitude) <= bounds.east,
     );
 
     const visibleIds = visibleProjectsInBounds.map((p) => p.id);
@@ -261,168 +145,80 @@ export default function FeaturedProjects({
     }
   }, [projects]);
 
-  const navigate = useRouter();
+  const handleEnter = () => {
+    if (window.innerWidth >= 1024) lock();
+  };
+  const handleLeave = () => {
+    if (window.innerWidth >= 1024) unlock();
+  };
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+    el.addEventListener("mouseenter", handleEnter);
+    el.addEventListener("mouseleave", handleLeave);
+    return () => {
+      el.removeEventListener("mouseenter", handleEnter);
+      el.removeEventListener("mouseleave", handleLeave);
+      unlock();
+    };
+  }, [lock, unlock]);
+
   return (
-    <section className="max-[1440px]:container mx-auto">
-      <ContainerAnchor ref={containerRef}/>
-      <div style={{ paddingRight: 0 }}>
+    <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
+      <ContainerAnchor ref={containerRef} />
+      <div>
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse 2xl:grid 2xl:grid-cols-[749px_1fr] gap-[20px]"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr]  2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[749px_1fr] gap-20"
         >
           {/* Left Column */}
-          <div className="lg:border-r dark:border-white/20 max-md:z-20 relative bg-light-white" style={{paddingLeft:window.innerWidth > 1440 ? leftSpacing : ""}}>
-            {/* Filters */}
-            {/* <div className="flex flex-col lg:flex-row gap-37px 2xl:gap-47px my-37px 2xl:my-47px lg:pr-37px w-full">
-              {filterConfigs.map(({ key, placeholder }, index) => (
-                <motion.div
-                  key={key}
-                  variants={moveUp(index * 0.15)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  className="xl:w-[220px] h-[40px]"
-                >
-                  <Select
-                    components={{ DropdownIndicator }}
-                    className="w-full h-full"
-                    classNamePrefix="react-select"
-                    options={getOptions(key)}
-                    placeholder={placeholder}
-                    value={
-                      filters[key] === placeholder
-                        ? null
-                        : { value: filters[key], label: filters[key] }
-                    }
-                    onChange={async (option) => {
-                      setFilters({
-                        ...filters,
-                        [key]: option?.value ?? placeholder,
-                      });
-                    }}
-                    styles={selectStyles}
-                  />
-                </motion.div>
-              ))}
-            </div> */}
-
+          <div
+            className="lg:border-r dark:border-white/20 max-md:z-20 relative bg-light-white"
+            style={{ paddingLeft: isDesktop ? leftSpacing : "" }}
+          >
             {/* Projects List */}
-            <div className=" relative bg-light-white flex flex-col gap-y-[20px]">
-              {(visibleProjects.length > 0) ? (
+            <div className="relative grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-20 gap-x-20 hidden sm:grid 2xl:hidden">
+              {visibleProjects.length > 0 ? (
                 visibleProjects?.map((project, index) => (
-                  // <motion.div
-                  //   // onClick={() => navigate.push(`/projects/${project.slug}`)}
-                  //   key={project.id}
-                  //   initial="hidden"
-                  //   whileInView="show"
-                  //   viewport={{ once: true }}
-                  //   className="cursor-pointer relative group"
-                  //   onMouseEnter={() => {
-                  //     // Hover only on desktop (lg and above)
-                  //     if (window.innerWidth >= 1024)
-                  //       setActiveProject(project.id);
-                  //   }}
-                  // >
-                  //   <div className="relative lg:pr-[47px]">
-                  //     <div className="relative">
-                  //       <Image
-                  //         src={project.image}
-                  //         alt={project.image}
-                  //         width={742}
-                  //         height={475}
-                  //         className="w-full object-cover"
-                  //       />
-
-                  //       {/* Overlay + Blur */}
-                  //       <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-sm backdrop-blur-[4px]"></div>
-
-                  //       {/* Centered Arrow */}
-                  //       {/* <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  //         <div className="bg-white rounded-full border border-accent w-12 h-12 xl:w-20 xl:h-20 flex items-center justify-center">
-                  //           <Image
-                  //             src={assets.linkArrowGreen}
-                  //             alt="Arrow"
-                  //             width={19}
-                  //             height={19}
-                  //             className="w-7 h-7 xl:w-[19px] xl:h-[19.05px] transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0 -translate-x-2 translate-y-2"
-                  //           />
-                  //         </div>
-                  //       </div> */}
-                  //     </div>
-
-                  //     {/* Map Button on Mobile */}
-                  //     {/* <button
-                  //     className="absolute top-2 right-2 lg:hidden bg-white text-black px-1 py-1"
-                  //     onClick={() =>
-                  //       setMobileMapOpen(
-                  //         mobileMapOpen === project._id ? null : project._id
-                  //       )
-                  //     }
-                  //   >
-                  //     <MapPin className="w-4 h-4 text-primary" />
-                  //   </button> */}
-                  //   </div>
-
-                  //   {/* Project Info */}
-                  //   <motion.div
-                  //     initial="hidden"
-                  //     whileInView="show"
-                  //     viewport={{ once: true }}
-                  //     className="mt-[17px] gap-x-5 gap-y-2 font-light text-lg leading-1h-text19 flex flex-wrap text-para-color dark:text-white/70"
-                  //   >
-                  //     <span>{project.title}</span>|
-                  //     <span>{project.propertyType}</span>|
-                  //     <span>{project.community}</span>|
-                  //     <span>{project.status}</span>
-                  //   </motion.div>
-
-                  //   <motion.h3
-                  //     initial="hidden"
-                  //     whileInView="show"
-                  //     viewport={{ once: true }}
-                  //     className="text-2xl leading-1h-text32 text-primary mt-[17px] pb-[15px] border-b dark:border-white/20 lg:mr-[47px]"
-                  //   >
-                  //     {project.title}
-                  //   </motion.h3>
-                  // </motion.div>
-                  <ProjectCardMap
-                  id={project.id}
-                  image={project.image}
-                  status={project.status}
-                  location={project.location}
-                  title={project.title}
-                  subtitle={project.subtitle}
-                  startingFrom={project.startingFrom}
-                  units={project.units}
-                  hoverImage={project.hoverImage}
-                  setActiveProject={setActiveProject}
-                  />
+                  <Reveal
+                    variants={moveUpV2}
+                    key={project.id}
+                    delayRange={index * 0.11}
+                  >
+                    <ProjectCard {...project} />
+                  </Reveal>
                 ))
               ) : (
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  className="mb-10 lg:mb-0"
-                >
-                  <motion.p
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="text-2xl"
+                <EmptyState />
+              )}
+            </div>
+
+            <div className="relative grid grid-cols-1 sm:hidden gap-y-20 2xl:grid">
+              {visibleProjects.length > 0 ? (
+                visibleProjects?.map((project, index) => (
+                  <Reveal
+                    variants={moveUpV2}
+                    key={project.id}
+                    delayRange={index * 0.11}
                   >
-                    No results in this area
-                  </motion.p>
-                  <motion.p
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                  >
-                    Try zooming out, moving the map, or changing your filters.
-                  </motion.p>
-                </motion.div>
+                    <ProjectCardMap
+                      id={project.id}
+                      image={project.image}
+                      status={project.status}
+                      location={project.location}
+                      title={project.title}
+                      subtitle={project.subtitle}
+                      startingFrom={project.startingFrom}
+                      units={project.units}
+                      hoverImage={project.hoverImage}
+                      setActiveProject={setActiveProject}
+                    />
+                  </Reveal>
+                ))
+              ) : (
+                <EmptyState />
               )}
             </div>
           </div>
@@ -432,66 +228,56 @@ export default function FeaturedProjects({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className=" lg:block  lg:pl-37px 2xl:pl-47px pt-37px 2xl:pt-47px 
-            sticky top-[60px] h-[calc(100vh-70px)] max-md:h-[300px] z-10"
+            className="lg:sticky top-[10px] h-[70vh] lg:h-[calc(100vh-20px)] z-10"
           >
-            {/* <iframe
-              src={activeProject.mapUrl}
-              width="100%"
-              height="100%"
-              loading="lazy"
-              className="border-0"
-            ></iframe> */}
-            <Map
-              defaultCenter={{
-                lat: parseFloat(projects[0]?.latitude),
-                lng: parseFloat(projects[0]?.longitude),
-              }}
-              defaultZoom={15}
-              mapId="2567b86b459988d06657407f"
-              className="w-full h-full "
-              gestureHandling="greedy"
-              onCameraChanged={handleCameraChanged}
-              disableDefaultUI={true}
-            >
-              {projects?.map((project) => {
-                // Only show markers that are either hovered or inside bounds
-                const isHovered = activeProject === project.id;
-                const isHighlighted = highlighted.includes(project.id);
-
-                console.log(isHovered);
-
-                if (!isHovered && !isHighlighted) return null; // Don't render
-
-                return (
-                  <Marker
-                    key={project.id}
-                    position={{
-                      lat: parseFloat(project.latitude),
-                      lng: parseFloat(project.longitude),
-                    }}
-                    title={project.title}
-                    icon={{
-                      url: isHovered
-                        ? "/active-icon.svg" // Hovered project
-                        : "/inactive-icon.svg", // Project in bounds
-                    }}
-                    onClick={() => {
-                      // Move clicked project to the start of visibleProjects
-                      setVisibleProjects((prev) => {
-                        const newArr = prev.filter(
-                          (p) => p.id !== project.id
-                        ); // remove clicked project
-                        return [project, ...newArr]; // add it to the start
-                      });
-
-                      setActiveProject(project.id); // set as active
-                      window.scrollTo({ top: 700, behavior: "smooth" }); // scroll to top
-                    }}
-                  />
-                );
-              })}
-            </Map>
+            <div ref={mapContainerRef} className="w-full h-full">
+              <Map
+                defaultCenter={{
+                  lat: parseFloat(projects[0]?.latitude),
+                  lng: parseFloat(projects[0]?.longitude),
+                }}
+                defaultZoom={15}
+                mapId="2567b86b459988d06657407f"
+                className="w-full h-full "
+                gestureHandling="greedy"
+                onCameraChanged={handleCameraChanged}
+                disableDefaultUI={true}
+              >
+                {projects?.map((project) => {
+                  // Only show markers that are either hovered or inside bounds
+                  const isHovered = activeProject === project.id;
+                  const isHighlighted = highlighted.includes(project.id);
+                  if (!isHovered && !isHighlighted) return null; // Don't render
+                  return (
+                    <Marker
+                      key={project.id}
+                      position={{
+                        lat: parseFloat(project.latitude),
+                        lng: parseFloat(project.longitude),
+                      }}
+                      title={project.title}
+                      icon={{
+                        url: isHovered
+                          ? "/active-icon.svg" // Hovered project
+                          : "/inactive-icon.svg", // Project in bounds
+                      }}
+                      onClick={() => {
+                        // Move clicked project to the start of visibleProjects
+                        setVisibleProjects((prev) => {
+                          const newArr = prev.filter(
+                            (p) => p.id !== project.id,
+                          ); // remove clicked project
+                          return [project, ...newArr]; // add it to the start
+                        });
+                        setActiveProject(project.id); // set as active
+                        // window.scrollTo({ top: 700, behavior: "smooth" }); // scroll to top
+                        scrollTo(700, { duration: 1.2 });
+                      }}
+                    />
+                  );
+                })}
+              </Map>
+            </div>
           </motion.div>
         </motion.div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect, useState, useRef } from "react";
+import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
   pressItems,
@@ -50,26 +50,26 @@ const NewsSection = () => {
     }
   }, [pathname]);
 
-const updateParam = (key: string, value: string) => {
-  const scrollY = window.scrollY;
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const scrollY = window.scrollY;
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) params.set(key, value);
+      else params.delete(key);
+      params.set("page", "1");
+      lock();
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        scrollTo(scrollY, { duration: 0 });
+        unlock();
+      }, 520);
+    },
+    [searchParams, pathname, router, lock, unlock, scrollTo],
+  );
 
-  const params = new URLSearchParams(searchParams.toString());
-  if (value) params.set(key, value);
-  else params.delete(key);
-  params.set("page", "1");
-
-  lock();
-  router.push(`${pathname}?${params.toString()}`, { scroll: false });
-
-  setTimeout(() => {
-    scrollTo(scrollY, { duration: 0 });
-    unlock();
-  }, 520);
-};
-
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     router.replace(`${pathname}?page=1`, { scroll: false });
-  };
+  }, [pathname, router]);
 
   const hasFilter = selectedYear || selectedMonth || selectedCategory;
 
@@ -106,17 +106,27 @@ const updateParam = (key: string, value: string) => {
     });
   }, [selectedCategory, selectedYear, selectedMonth, sorted]);
 
-  const totalPages = Math.ceil(filtered.length / NEWS_PER_PAGE);
-  const paginated = filtered.slice(
-    (currentPage - 1) * NEWS_PER_PAGE,
-    currentPage * NEWS_PER_PAGE,
+  const totalPages = useMemo(
+    () => Math.ceil(filtered.length / NEWS_PER_PAGE),
+    [filtered.length],
+  );
+  const paginated = useMemo(
+    () =>
+      filtered.slice(
+        (currentPage - 1) * NEWS_PER_PAGE,
+        currentPage * NEWS_PER_PAGE,
+      ),
+    [filtered, currentPage],
   );
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", String(page));
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", String(page));
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, pathname, router],
+  );
 
   return (
     <section
@@ -155,7 +165,7 @@ const updateParam = (key: string, value: string) => {
               />
             </motion.div>
 
-            <motion.div variants={moveUp(0.2)} className="w-auto">
+            <motion.div variants={moveUp(0.15)} className="w-auto">
               <FilterDropdown
                 placeholder="Month"
                 options={pressMonths}

@@ -28,7 +28,7 @@ export default function ProjectCard({
       onTouchCancel={() => setIsActive(false)}
       ref={ref}
     >
-      <div className="relative w-full aspect-[9.9/13] sm:aspect-[9.4/13] md:aspect-[9/13] xl:aspect-[8.8/13] 3xl:aspect-[8.48/13] overflow-hidden">
+      <div className="relative w-full aspect-[9.9/13] sm:aspect-[9.4/13] md:aspect-[9/13] xl:aspect-[8.8/13]  3xl:aspect-[8.48/13] overflow-hidden">
         <Image
           src={image}
           alt={title}
@@ -58,12 +58,14 @@ export default function ProjectCard({
         />
 
         {/* ── DEFAULT STATE ── */}
-        <div className="absolute inset-0 z-20 flex flex-col transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 delay-0 pointer-events-none">
-          <div className="absolute top-10 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 delay-200 group-hover:opacity-0 group-[.is-active]:opacity-0">
+        <div className="absolute inset-0 z-20 flex flex-col transition-opacity my-[32px] xl:my-[40px] duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 delay-0 pointer-events-none">
+          <div className="absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 delay-200 group-hover:opacity-0 group-[.is-active]:opacity-0">
             {status && (
               // <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
               <div className="bg-[#818082]/60 px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
-                <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">{status}</p>
+                <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">
+                  {status}
+                </p>
               </div>
             )}
 
@@ -90,7 +92,7 @@ export default function ProjectCard({
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-10 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-250">
+          <div className="absolute bottom-0 left-0 right-0 px-5 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-250">
             <h3
               className="font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px]"
               dangerouslySetInnerHTML={{ __html: title }}
@@ -109,21 +111,25 @@ export default function ProjectCard({
         </div>
 
         {/* ── HOVER STATE ── */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-7 lg:py-10 px-8 lg:px-5 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity delay-140 duration-500">
-          <div className="flex flex-col items-center gap-1 mt-3 xl:mt-[48px] -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-300 delay-140">
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-between py-80 3xl:py-[88px] px-20 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity delay-140 duration-500">
+          <div className="flex flex-col items-center -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-300 delay-140">
             <Image
               src={hoverImage}
               alt="Hover Image"
               width={160}
               height={70}
-              className="h-[50px]  lg:h-[70px]  w-auto"
+              className="h-[50px] 2x:h-[70px]  w-auto"
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 2xl:gap-[20px] w-full 2xl:px-[17px] py-1 translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-500 delay-100">
+          <div className="flex  items-center justify-center gap-30 lg:gap-40 w-full  py-1 translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-500 delay-100">
             <div className="flex items-center gap-[10px]">
-              <div className="w-[49px] h-[49px] rounded-full bg-[#818082] will-change-transform transform-gpu flex items-center justify-center shrink-0">
-                <svg width="25" height="18" viewBox="0 0 25 18" fill="none">
+              <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-[#818082] will-change-transform transform-gpu flex items-center justify-center shrink-0">
+                <svg
+                  className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]"
+                  viewBox="0 0 25 18"
+                  fill="none"
+                >
                   <path
                     d="M8.72021 8.72022C8.72021 6.51022 10.5102 4.72021 12.7202 4.72021C14.9302 4.72021 16.7202 6.51022 16.7202 8.72022C16.7202 10.9302 14.9302 12.7202 12.7202 12.7202C10.5102 12.7202 8.72021 10.9302 8.72021 8.72022Z"
                     stroke="white"
@@ -147,8 +153,12 @@ export default function ProjectCard({
             </div>
 
             <div className="flex items-center gap-[10px]">
-              <div className="w-[49px] h-[49px] rounded-full bg-[#818082] will-change-transform transform-gpu flex items-center justify-center shrink-0">
-                <svg width="22" height="19" viewBox="0 0 22 19" fill="none">
+              <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-[#818082] will-change-transform transform-gpu flex items-center justify-center shrink-0">
+                <svg
+                  className="w-[19px] h-[16px] md:w-[22px] md:h-[19px]"
+                  viewBox="0 0 22 19"
+                  fill="none"
+                >
                   <path
                     d="M17.7058 8.91778V2.33544C17.7058 1.44478 17.5743 0.720215 16.8603 0.720215H4.27831C3.56435 0.720215 2.98352 1.44484 2.98352 2.33544L2.85947 8.91778M19.0473 14.7982H20.009C20.3926 14.7982 20.7047 14.4088 20.7047 13.9303V11.0997C20.7048 10.2045 21.0277 8.91778 18.7251 8.91778H3.052H1.38263C0.719653 8.91778 0.720215 10.4744 0.720215 11.3229V13.9303C0.720215 14.1871 0.887648 14.396 1.09354 14.396H20.0091M2.85947 17.7202V14.8341M18.1551 17.7202L18.1551 14.8341H18.7251"
                     stroke="white"
