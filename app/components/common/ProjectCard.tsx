@@ -63,7 +63,7 @@ export default function ProjectCard({
             {status && (
               // <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
               <div className="bg-[#818082]/60 px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
-                <p className="text-white/80 text-description uppercase">{status}</p>
+                <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">{status}</p>
               </div>
             )}
 

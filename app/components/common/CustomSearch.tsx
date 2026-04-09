@@ -16,7 +16,7 @@ interface OutlineButtonProps {
     onChange?: (val: string) => void; // ✅ add
 }
 
-const CustomSearch = ({
+const   CustomSearch = ({
     className,
     text,
     borderColor = "border-white/90",
