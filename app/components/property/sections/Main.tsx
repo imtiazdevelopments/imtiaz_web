@@ -5,7 +5,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import FilterDropdown from "../../common/FilterDropdown";
 import { Plus } from "lucide-react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-import { projectsData, properties } from "../data";
+import { properties } from "../data";
 import CustomSearch from "../../common/CustomSearch";
 import ListMapToggle from "../../common/ListMapToggle";
 import ProjectCard from "../../common/ProjectCard";
@@ -257,7 +257,7 @@ const Main = () => {
                     {view === "list" ? (
                         <div className="flex flex-col justify-center container">
                             <div className="text-center">
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 xl:gap-x-[28px] xl:gap-y-[50px]">
+                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
                                     {filtered.map((project, i) => (
                                         <ProjectCard key={i} {...project} />
                                     ))}

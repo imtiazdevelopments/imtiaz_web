@@ -36,14 +36,14 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
       /* --- PARALLAX --- */
       gsap.fromTo(
         image,
-        { y: "12vh" },
+        { y: "11vh" },
         {
-          y: "-35vh",
+          y: "-32vh",
           ease: "none",
           scrollTrigger: {
             trigger: section,
             scrub: true,
-            start: "top bottom",
+              start: "top 85%",
             end: "bottom top",
           },
         }
@@ -79,7 +79,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="relative w-[300px] md:w-[394px] h-[520px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
-                src={"/images/home/app/phone3.png"}
+                src={"/images/home/app/phone-4.png"}
                 alt="phone"
                 width={900}
                 height={900}
@@ -90,7 +90,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                   alt="mobile"
                   width={1500}
                   height={2000}
-                  className=" absolute w-full"
+                  className="absolute w-full"
                 />
               </div>
             </div>
