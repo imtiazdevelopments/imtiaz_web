@@ -5,11 +5,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const INTERIOR_SLIDES = [
   { id: 1, src: "/images/projects/int1.jpg", alt: "Interior – Study Room" },
@@ -26,13 +30,18 @@ const EXTERIOR_SLIDES = [
 type TabType = "interior" | "exterior";
 
 export default function GallerySlider() {
-  const [activeTab, setActiveTab] = useState<TabType>("interior"); 
+  const [activeTab, setActiveTab] = useState<TabType>("interior");
   const [mounted, setMounted] = useState(false);
 
-  const swiperRef = useRef<SwiperType | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const swiperWrapperRef = useRef<HTMLDivElement>(null);
+  const navButtonsRef = useRef<HTMLDivElement>(null);
+  const controlsRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
+
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const slides = activeTab === "interior" ? INTERIOR_SLIDES : EXTERIOR_SLIDES;
 
@@ -41,19 +50,122 @@ export default function GallerySlider() {
     setMounted(true);
   }, []);
 
+  // Scroll trigger animations on viewport visibility
+  useEffect(() => {
+    if (!sectionRef.current || !mounted) return;
+
+    // Kill existing triggers to prevent conflicts
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (trigger.vars.id === "gallery-scroll") trigger.kill();
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 70%",
+        end: "top 20%",
+        toggleActions: "play none none none",
+        id: "gallery-scroll",
+      },
+    });
+
+    // Animate swiper container with fade and scale
+    if (swiperWrapperRef.current) {
+      tl.fromTo(
+        swiperWrapperRef.current,
+        {
+          opacity: 0,
+          scale: 0.98,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+        },
+        0
+      );
+    }
+
+    // Animate nav buttons with stagger from sides
+    if (navButtonsRef.current) {
+      const buttons = navButtonsRef.current.querySelectorAll("button");
+      const prevBtn = buttons[0];
+      const nextBtn = buttons[1];
+
+      if (prevBtn && nextBtn) {
+        // Prev button slides in from left
+        tl.fromTo(
+          prevBtn,
+          {
+            opacity: 0,
+            x: -50,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          0.2
+        );
+
+        // Next button slides in from right
+        tl.fromTo(
+          nextBtn,
+          {
+            opacity: 0,
+            x: 50,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          0.2
+        );
+      }
+    }
+
+    // Animate controls (tabs and pagination) from bottom
+    if (controlsRef.current) {
+      tl.fromTo(
+        controlsRef.current,
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        0.3
+      );
+    }
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "gallery-scroll") trigger.kill();
+      });
+    };
+  }, [mounted, activeTab]);
+
   const handleTabSwitch = (tab: TabType) => {
-  if (tab === activeTab) return;
-  setActiveTab(tab);
-};
+    if (tab === activeTab) return;
+    setActiveTab(tab);
+  };
 
   return (
-    <section className="gallery-slider-root relative w-full overflow-hidden h-[75vh] 2xl:h-screen bg-[#0e0e0e]">
-
+    <section
+      ref={sectionRef}
+      className="gallery-slider-root relative w-full overflow-hidden h-[75vh] 2xl:h-screen bg-[#0e0e0e]"
+    >
       {/* ── Swiper ── */}
-      <div
-        className="absolute inset-0"
-         
-      >
+      <div ref={swiperWrapperRef} className="absolute inset-0">
         {mounted && (
           <Swiper
             key={activeTab}
@@ -121,7 +233,7 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Nav arrows ── */}
-      <div className="container relative h-full">
+      <div ref={navButtonsRef} className="container relative h-full">
         {/* Prev */}
         <button
           ref={prevRef}
@@ -156,8 +268,10 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Bottom controls ── */}
-      <div className="absolute bottom-120 2xl:bottom-[130px] inset-x-0 z-30 flex flex-col items-center gap-5 2xl:gap-[30px]">
-
+      <div
+        ref={controlsRef}
+        className="absolute bottom-120 2xl:bottom-[130px] inset-x-0 z-30 flex flex-col items-center gap-5 2xl:gap-[30px]"
+      >
         {/* Tab pill with sliding bg */}
         <div className="relative flex rounded-full border border-white/40 overflow-hidden">
           {/* Sliding white background */}
