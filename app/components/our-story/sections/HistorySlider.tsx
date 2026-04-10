@@ -13,7 +13,6 @@ import { SectionDescription } from "../../animations/SectionDescription";
 
 /* ─────────────────────────── constants ────────────────────────── */
 
-const CARD_GAP = 50;
 const AUTO_INTERVAL = 2500;
 
 /* ──────────────────────────── types ───────────────────────────── */
@@ -158,21 +157,27 @@ function CardsSlider({
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
-        slidesPerView="auto"
-        spaceBetween={CARD_GAP}
+        slidesPerView={1}
+        breakpoints={{
+          480: { slidesPerView: 1.2 },
+          640: { slidesPerView: 1.5 },
+          768: { slidesPerView: 1.8 },
+          1024: { slidesPerView: 1.4 },
+          1280: { slidesPerView: 1.6, spaceBetween: 30 },
+          1440: { slidesPerView: 1.7, spaceBetween: 40 },
+          1600: { slidesPerView: 1.8, spaceBetween: 50 },
+        }}
+        spaceBetween={20}
         speed={700}
         grabCursor={true}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
         onSlideChange={(swiper) => onCardChange(swiper.realIndex)}
-        className="w-full !overflow-visible !h-full"
+        className="w-full !overflow-visible !h-full !px-[15px] md:!px-0"
       >
         {allCards.map((card, idx) => (
-          <SwiperSlide
-            key={card.id}
-            className="!w-[calc(100%-20px)] lg:!w-[849px] !h-full"
-          >
+          <SwiperSlide key={card.id} className="!h-full">
             <HistoryCard card={card} isActive={idx === activeCardIdx} />
           </SwiperSlide>
         ))}
