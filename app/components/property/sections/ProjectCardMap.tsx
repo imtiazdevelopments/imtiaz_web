@@ -47,7 +47,7 @@ export default function ProjectCardMap({
           className="absolute inset-0 z-10 transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.71%, rgba(0, 0, 0, 0.8) 84.03%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.8) 83.74%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
           }}
         />
 
@@ -56,7 +56,7 @@ export default function ProjectCardMap({
           className="absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-[.is-active]:opacity-100"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 44.3%, #000000 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 44.3%, #000000 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))",
           }}
         />
 
@@ -182,7 +182,7 @@ export default function ProjectCardMap({
 
           <CustomOutlineButton
             text="View Property"
-            px="px-[12px] md:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+            px="px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
             className="-translate-x-2 group-hover:translate-x-0 group-[.is-active]:translate-x-0 transition-transform duration-300 delay-100"
           />
         </div>
