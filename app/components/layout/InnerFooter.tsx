@@ -31,7 +31,7 @@ const InnerFooter = () => {
     console.log("Email:", email);
   };
   return (
-    <footer className="w-full text-white bg-primary-2 relative z-10">
+    <footer className="w-full text-white bg-primary-2 relative z-10 overflow-hidden">
       {/* ================= TOP HERO SECTION ================= */}
       <div className="w-full overflow-hidden py-120 3xl:py-150 bg-primary-2">
         <div className="z-[20] h-full container flex flex-col lg:flex-row lg:justify-between items-center shrink-0">
