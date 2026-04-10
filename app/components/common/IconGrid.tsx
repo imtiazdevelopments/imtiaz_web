@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SectionHeading } from "../animations/SectionHeading";
 import { SectionDescription } from "../animations/SectionDescription";
 import { useGsapStagger } from "../../hooks/useGsapStagger";  
-
+import { useEffect, useState } from "react";
 // ── Types ──────────────────────────────────────────────
 type EverythingWithinData = {
   title: string;
@@ -14,6 +14,8 @@ type EverythingWithinData = {
     icon: string;
     label: string;
     minutes: string;
+    iconWidth?:number ;
+    iconHeight?:number ;
   }[];
 };
 
@@ -24,6 +26,14 @@ type Props = {
 
 // ── Component ──────────────────────────────────────────
 export default function IconGrid({ data, bgClass }: Props) {
+  const [isXL, setIsXL] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsXL(window.innerWidth >= 1280);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
   const gridRef = useGsapStagger({
     selector: ".location-card",
     from: { opacity: 0, y: 40 },
@@ -82,13 +92,12 @@ export default function IconGrid({ data, bgClass }: Props) {
 
               {/* Icon */}
               <div className="w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center bg-primary/5">
-                <Image
-                  src={loc.icon}
-                  alt={loc.label}
-                  width={32}
-                  height={32}
-                  className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px] xl:w-[32px] xl:h-[32px]"
-                />
+               <Image
+                src={loc.icon}
+                alt={loc.label}
+                width={isXL ? loc.iconWidth : 24}
+                height={isXL ? loc.iconWidth : 24}
+              />
               </div>
 
               {/* Label */}

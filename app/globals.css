@@ -889,3 +889,6 @@ input:-webkit-autofill:active {
   background: white !important;
   border-color: white;
 }
+
+.btncard:hover{@apply !translate-y-0}
+.btncard:hover span.absolute{@apply !scale-x-100}
