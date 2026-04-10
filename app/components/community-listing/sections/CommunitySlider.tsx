@@ -70,7 +70,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
   );
 
   return (
-    <section className="w-full bg-white pb-100" data-header="light">
+    <section className="w-full bg-white " data-header="light">
       <div
         ref={containerRef}
         className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
