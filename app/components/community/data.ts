@@ -31,7 +31,7 @@ export const communitySectionData = {
         { label: "Souk Al Marsa" ,icon: "/images/community/icons/2.svg" },
         { label: "10 Mins to Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
       ],
-      href: "/community-listing",
+      href: "/communities/dubai-islands",
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ export const communitySectionData = {
         { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
         { label: "10 Mins to D26" ,icon: "/images/community/icons/3.svg" },
       ],
-      href: "/community-listing",
+      href: "/communities/dubai-islands",
     },
     {
       id: 3,
@@ -53,7 +53,7 @@ export const communitySectionData = {
         { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
         { label: "10 Mins to D26" ,icon: "/images/community/icons/6.svg" },
       ],
-      href: "/community-listing",
+      href: "/communities/dubai-islands",
     },
     {
       id: 4,
@@ -64,7 +64,7 @@ export const communitySectionData = {
         { label: "Near Oud bin Khar" ,icon: "/images/community/icons/8.svg" },
         { label: "Well Connected" ,icon: "/images/community/icons/3.svg" },
       ],
-      href: "/community-listing",
+      href: "/communities/dubai-islands",
     },
     {
       id: 5,
@@ -75,7 +75,7 @@ export const communitySectionData = {
         { label: "Circle Mall" ,icon: "/images/community/icons/2.svg" },
         { label: "Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
       ],
-      href: "/community-listing",
+      href: "/communities/dubai-islands",
     },
   ] as CommunityCard[],
 };

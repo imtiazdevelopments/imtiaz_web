@@ -32,7 +32,7 @@ function AccordionItem({
       {/* Question Row */}
       <button
         onClick={onToggle}
-      className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-0" : ""}` : "py-40"} text-left group focus:outline-none`}  aria-expanded={isOpen}
+      className={`${isOpen ? "pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40` : "py-40"} text-left group focus:outline-none`}  aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
           {item.question}
@@ -78,7 +78,7 @@ function AccordionItem({
         }}
       >
         <div ref={contentRef}>
-          <p className="text-description text-foreground-light max-w-[846px] pb-30">
+          <p className={`text-description text-foreground-light max-w-[846px] ${!isLast ? "pb-30" : ""}`}>
             {item.answer}
           </p>
         </div>

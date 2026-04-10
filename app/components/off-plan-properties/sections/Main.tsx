@@ -49,8 +49,10 @@ const priceRanges: PriceRange[] = [
 const bedrooms: Bedroom[] = ["1", "2", "3", "4", "5+"];
 
 const parsePrice = (raw: string): number => {
-  const match = raw?.replace(/,/g, "").match(/[\d.]+/);
-  return match ? parseFloat(match[0]) : 0;
+  const cleaned = raw?.replace(/,/g, "").match(/[\d.]+/);
+  if (!cleaned) return 0;
+  const num = parseFloat(cleaned[0]);
+  return num > 1000 ? num / 1_000_000 : num;
 };
 
 const priceInRange = (raw: string, range: PriceRange): boolean => {
@@ -94,7 +96,7 @@ const Main = () => {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   const updateParam = useCallback(
     (key: string, value: string) => {
@@ -141,13 +143,12 @@ const Main = () => {
       )
         return false;
       if (selectedBedroom) {
-        const match = item.units?.match(/(\d+)BR\s*-\s*(\d+)BR/);
-        if (match) {
-          const min = parseInt(match[1]);
-          const max = parseInt(match[2]);
-          const bed = selectedBedroom === "5+" ? 5 : parseInt(selectedBedroom);
-          if (bed < min || bed > max) return false;
-        }
+        const match = item.units?.match(/(\d+)BR\s*-\s*(\d+)BR/i);
+        if (!match) return false;
+        const min = parseInt(match[1]);
+        const max = parseInt(match[2]);
+        const bed = selectedBedroom === "5+" ? 5 : parseInt(selectedBedroom);
+        if (bed < min || bed > max) return false;
       }
       return true;
     });
@@ -190,7 +191,7 @@ const Main = () => {
             </button>
             <div
               ref={contentRef}
-              className="transition-all duration-400 ease-in-out overflow-hidden"
+              className="transition-all duration-400 ease-in-out"
               style={{
                 maxHeight: filtersOpen ? "500px" : "0px",
                 opacity: filtersOpen ? 1 : 0,

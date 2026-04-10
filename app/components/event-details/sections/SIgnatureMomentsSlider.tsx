@@ -103,7 +103,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
             modules={[Autoplay, EffectFade]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
-            speed={1400}
+            speed={700}
             loop={true}
             autoplay={{ delay: 4500, disableOnInteraction: false }}
             onSwiper={handleSwiper}

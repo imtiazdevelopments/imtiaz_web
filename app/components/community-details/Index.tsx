@@ -18,7 +18,6 @@ const Index = () => {
       <DubaiResidence />
       <IconGrid data={EverythingWithinData} bgClass="bg-gray" />
       <CommunitySlider images={eventDetails[0].signatureImages} />
-
       <Amenities data={amenitiesData} maxTitle="max-w-[74ch]" />
       <LandpropertyCards />
       <Map />

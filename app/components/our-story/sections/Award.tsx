@@ -8,7 +8,10 @@ import { moveUp } from "../../motionVariants";
 
 export default function AwardSection() {
   return (
-    <section data-header="dark" className="relative w-full overflow-hidden flex flex-col">
+    <section
+      data-header="dark"
+      className="relative w-full overflow-hidden flex flex-col"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

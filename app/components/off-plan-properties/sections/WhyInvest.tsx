@@ -9,7 +9,7 @@ export default function WhyInvest() {
   const { title, description } = whyInvestData;
 
   return (
-    <section className="w-full bg-gray">
+    <section data-header="dark" className="w-full bg-gray">
       <div className="container py-120 3xl:py-130">
         <div className="flex flex-col items-center text-center mx-auto">
           {/* Title */}

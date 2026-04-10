@@ -1,6 +1,6 @@
 export const offPlanBannerData = {
   image: "/images/off-plan/banner.jpg",
-  title: "Off-Plan Properties",
+  title: "Off-Plan Properties in Dubai",
   description:
     "Discover Premium Off-Plan Developments with Flexible Payment Plans",
   buttonText: "schedule visit",
@@ -55,7 +55,7 @@ export const whyInvestData = {
 export const offPlanProperties = [
     {
         id: "1",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/1.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Under Construction",
         location: "Downtown Dubai, UAE",
@@ -72,7 +72,7 @@ export const offPlanProperties = [
     },
     {
         id: "2",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/2.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",
@@ -89,7 +89,7 @@ export const offPlanProperties = [
     },
     {
         id: "3",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/3.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",
@@ -106,7 +106,7 @@ export const offPlanProperties = [
     },
     {
         id: "4",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/4.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Completed",
         location: "Downtown Dubai, UAE",
@@ -123,7 +123,7 @@ export const offPlanProperties = [
     },
     {
         id: "5",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/5.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",
@@ -140,7 +140,7 @@ export const offPlanProperties = [
     },
     {
         id: "6",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/6.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",
@@ -157,7 +157,7 @@ export const offPlanProperties = [
     },
     {
         id: "7",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/7.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",
@@ -174,7 +174,7 @@ export const offPlanProperties = [
     },
     {
         id: "8",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/8.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Completed",
         location: "Downtown Dubai, UAE",
@@ -191,7 +191,7 @@ export const offPlanProperties = [
     },
     {
         id: "9",
-        image: "/images/community-listing/card2.jpg",
+        image: "/images/property/9.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
         status: "Off Plan",
         location: "Downtown Dubai, UAE",

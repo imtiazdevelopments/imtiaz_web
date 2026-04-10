@@ -43,7 +43,7 @@ export default function ProjectCard({
           className="absolute inset-0 z-10 transition-opacity  "
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.71%, rgba(0, 0, 0, 0.8) 84.03%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.69%, rgba(0, 0, 0, 0.8) 84.83%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
           }}
         />
 
@@ -52,7 +52,7 @@ export default function ProjectCard({
           className="absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-[.is-active]:opacity-100"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 44.3%, #000000 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 44.3%, #000000 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))",
           }}
         />
 
