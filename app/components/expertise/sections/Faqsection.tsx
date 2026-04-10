@@ -32,7 +32,7 @@ function AccordionItem({
       {/* Question Row */}
       <button
         onClick={onToggle}
-        className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-30" : ""}` : "py-40"} text-left group focus:outline-none`}
+        className={`${isOpen ? "pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40` : "py-40"} text-left group focus:outline-none`}
         aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
@@ -79,7 +79,7 @@ function AccordionItem({
         }}
       >
         <div ref={contentRef}>
-          <p className="text-description text-foreground-light max-w-[846px] pb-30">
+          <p className={`${!isLast ? "pb-30" : ""} text-description text-foreground-light max-w-[846px]`}>
             {item.answer}
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function Faq() {
 
   return (
     <section
-      className="w-full bg-[#EBEBEC] pt-120 pb-90 3xl:pt-130 3xl:pb-100"
+      className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
       data-header="dark"
     >
       <div className="container">

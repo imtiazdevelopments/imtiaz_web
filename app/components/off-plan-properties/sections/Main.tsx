@@ -190,7 +190,7 @@ const Main = () => {
             </button>
             <div
               ref={contentRef}
-              className="transition-all duration-400 ease-in-out overflow-hidden"
+              className="transition-all duration-400 ease-in-out"
               style={{
                 maxHeight: filtersOpen ? "500px" : "0px",
                 opacity: filtersOpen ? 1 : 0,

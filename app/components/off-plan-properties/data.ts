@@ -1,6 +1,6 @@
 export const offPlanBannerData = {
   image: "/images/off-plan/banner.jpg",
-  title: "Off-Plan Properties",
+  title: "Off-Plan Properties in Dubai",
   description:
     "Discover Premium Off-Plan Developments with Flexible Payment Plans",
   buttonText: "schedule visit",

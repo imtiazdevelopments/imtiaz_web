@@ -182,7 +182,7 @@ export default function ProjectCardMap({
 
           <CustomOutlineButton
             text="View Property"
-            px="px-[12px] md:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+            px="px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
             className="-translate-x-2 group-hover:translate-x-0 group-[.is-active]:translate-x-0 transition-transform duration-300 delay-100"
           />
         </div>

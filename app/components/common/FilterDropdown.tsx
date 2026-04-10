@@ -98,73 +98,76 @@ const FilterDropdown = ({
         />
       </button>
 
-{/* Dropdown */}
-<AnimatePresence>
-  {open && (
-    <motion.div
-initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0% round 16px)" }}
-animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0% round 16px)" }}
-exit={{ opacity: 0, clipPath: "inset(0% 0% 100% 0% round 16px)" }}
-transition={{
-  duration: 0.5,
-  ease: [0.76, 0, 0.24, 1],
-  opacity: { duration: 0.3, ease: "easeIn" },
-}}
-      style={{ transformOrigin: "top" }}
-      className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-black/10 rounded-2xl shadow-lg z-50 overflow-hidden"
-    >
-      {/* Scrollable list */}
-      <div
-        ref={listRef}
-        className="max-h-[200px] overflow-y-auto scrollbar-hide"
-        onWheel={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
-        onScroll={handleScroll}
-      >
-        <button
-          onClick={() => {
-            onChange("");
-            setOpen(false);
-          }}
-          className="w-full text-left px-5 py-3 text-[13px] font-[avenirRoman] text-black/40 hover:bg-black/5 transition-colors duration-150"
-        >
-          {placeholder}
-        </button>
-
-        <div className="w-full h-px bg-black/5" />
-
-        {options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => {
-              onChange(opt);
-              setOpen(false);
+      {/* Dropdown */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              clipPath: "inset(0% 0% 100% 0% round 16px)",
             }}
-            className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-black/5 ${
-              value === opt
-                ? "text-primary-2 font-[avenirHeavy]"
-                : "text-foreground-light"
-            }`}
+            animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0% round 16px)" }}
+            exit={{ opacity: 0, clipPath: "inset(0% 0% 100% 0% round 16px)" }}
+            transition={{
+              duration: 0.5,
+              ease: [0.76, 0, 0.24, 1],
+              opacity: { duration: 0.3, ease: "easeIn" },
+            }}
+            style={{ transformOrigin: "top" }}
+            className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-black/10 rounded-2xl shadow-lg z-50 overflow-hidden"
           >
-            {opt}
-          </button>
-        ))}
-      </div>
+            {/* Scrollable list */}
+            <div
+              ref={listRef}
+              className="max-h-[200px] overflow-y-auto scrollbar-hide"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+              onScroll={handleScroll}
+            >
+              <button
+                onClick={() => {
+                  onChange("");
+                  setOpen(false);
+                }}
+                className="w-full text-left px-5 py-3 text-[13px] font-[avenirRoman] text-black/40 hover:bg-black/5 transition-colors duration-150"
+              >
+                {placeholder}
+              </button>
 
-      {/* Scroll hint */}
-      {hasScroll && !isAtBottom && (
-        <div className="absolute bottom-0 left-0 w-full pointer-events-none rounded-b-2xl overflow-hidden">
-          <div className="w-full py-2 flex items-center justify-center bg-gradient-to-t from-white/90 to-transparent">
-            <MdOutlineKeyboardDoubleArrowDown
-              size={18}
-              className="text-foreground-light/70"
-            />
-          </div>
-        </div>
-      )}
-    </motion.div>
-  )}
-</AnimatePresence>
+              <div className="w-full h-px bg-black/5" />
+
+              {options.map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => {
+                    onChange(opt);
+                    setOpen(false);
+                  }}
+                  className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-black/5 ${
+                    value === opt
+                      ? "text-primary-2 font-[avenirHeavy]"
+                      : "text-foreground-light"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+
+            {/* Scroll hint */}
+            {hasScroll && !isAtBottom && (
+              <div className="absolute bottom-0 left-0 w-full pointer-events-none rounded-b-2xl overflow-hidden">
+                <div className="w-full py-2 flex items-center justify-center bg-gradient-to-t from-white/90 to-transparent">
+                  <MdOutlineKeyboardDoubleArrowDown
+                    size={18}
+                    className="text-foreground-light/70"
+                  />
+                </div>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
