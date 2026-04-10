@@ -84,11 +84,17 @@ export default function HistorySection() {
   );
 
   return (
-    <section data-header="dark" className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden">
+    <section
+      data-header="dark"
+      className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden"
+    >
       {/* ── Header ── */}
       <div className="container mx-auto px-6 text-center mb-150 lg:mb-50">
         <SectionHeading title={sectionTitle} className="mb-20 uppercase" />
-        <SectionDescription text={sectionDescription} className="max-w-[870px] text-foreground-light mx-auto text-center" />
+        <SectionDescription
+          text={sectionDescription}
+          className="max-w-[870px] text-foreground-light mx-auto text-center"
+        />
       </div>
 
       {/* ── Cards Slider ── */}
@@ -129,8 +135,20 @@ function CardsSlider({
 }) {
   return (
     <div className="relative w-full">
-    <div style={{background: "linear-gradient(270deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)"}} className="hidden lg:block absolute w-[200px] left-0 top-0 h-full z-10" />
-    <div style={{background: "linear-gradient(90deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)"}} className="hidden lg:block absolute w-[200px] right-0 top-0 h-full z-10" />
+      <div
+        style={{
+          background:
+            "linear-gradient(270deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)",
+        }}
+        className="hidden lg:block absolute w-[200px] left-0 top-0 h-full z-10"
+      />
+      <div
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)",
+        }}
+        className="hidden lg:block absolute w-[200px] right-0 top-0 h-full z-10"
+      />
       <Swiper
         modules={[Navigation, Autoplay]}
         loop={true}
@@ -217,7 +235,6 @@ function HistoryCard({
 }) {
   return (
     <div className="flex flex-col lg:flex-row items-stretch rounded-[10px] overflow-hidden lg:h-[371px]">
-      
       {/* Image */}
       <div className="flex-shrink-0 w-full lg:w-[51.84%] h-[200px] sm:h-[250px] md:h-[300px] lg:h-full">
         <Image
@@ -231,20 +248,15 @@ function HistoryCard({
 
       {/* Content */}
       <div className="flex flex-col justify-between p-30 flex-1 h-full bg-gray">
-        <span className="text-heading text-primary mb-50">
-          {card.year}
-        </span>
+        <span className="text-heading text-primary mb-50">{card.year}</span>
 
         <div className="mb-[10px]">
           <h3 className="text-25 font-[optima] text-foreground-light uppercase mb-[10px]">
             {card.title}
           </h3>
-          <p className="text-description">
-            {card.description}
-          </p>
+          <p className="text-description">{card.description}</p>
         </div>
       </div>
-
     </div>
   );
 }
@@ -393,11 +405,10 @@ function YearTimeline({
                 {/* ── Line after dot ── */}
                 {hasLine && (
                   <div
-                    className="relative h-[1.5px] flex-shrink-0 self-center"
+                    className="relative h-[1.5px] w-[120px] md:w-[150px] lg:w-[200px] xl:w-[255px] flex-shrink-0 self-center"
                     style={{
-                      width: "clamp(120px, 10vw, 255px)",
                       marginLeft: isActive ? 16 : 10,
-            marginRight: isNextActive ? 16 : 10,
+                      marginRight: isNextActive ? 16 : 10,
                     }}
                   >
                     {!isActive && (
@@ -405,16 +416,16 @@ function YearTimeline({
                     )}
                     {isActive && (
                       <>
-<div
-  className="absolute inset-0 w-full"
-  style={{
-    backgroundImage:
-      "repeating-linear-gradient(90deg, #5B1A1A 0px, #5B1A1A 6px, transparent 6px, transparent 10px)",
-    backgroundSize: "100% 2px",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-  }}
-/>
+                        <div
+                          className="absolute inset-0 w-full"
+                          style={{
+                            backgroundImage:
+                              "repeating-linear-gradient(90deg, #5B1A1A 0px, #5B1A1A 6px, transparent 6px, transparent 10px)",
+                            backgroundSize: "100% 2px",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                          }}
+                        />
                         <div
                           className="absolute -top-[1px] left-0 h-[3px] bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
                           style={{ width: `${progressPct}%` }}

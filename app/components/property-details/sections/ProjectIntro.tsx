@@ -34,9 +34,9 @@ const ProjectIntro = () => {
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <span>Brochure</span>
@@ -48,9 +48,9 @@ const ProjectIntro = () => {
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <span>Fact Sheet</span>
@@ -62,9 +62,9 @@ const ProjectIntro = () => {
             <div className="flex items-center gap-[10px] uppercase">
               <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <span>Unit layout</span>

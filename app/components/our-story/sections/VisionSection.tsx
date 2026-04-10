@@ -1,15 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import { visionSectionData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
-import { moveUpV2 } from "../../motionVariants";
+import { moveUp, moveUpV2 } from "../../motionVariants";
+import { motion } from "framer-motion";
 
 export default function VisionSection() {
   const { title, description, bgImage, stats } = visionSectionData;
 
   return (
-    <section data-header="dark" className="make relative w-full overflow-hidden text-white h-[88vh] xl:h-[95vh]">
+    <section
+      data-header="dark"
+      className="make relative w-full overflow-hidden text-white h-[88vh] xl:h-[95vh]"
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -18,7 +24,7 @@ export default function VisionSection() {
           width={1920}
           height={1080}
           priority
-          className="object-cover h-full w-full"
+          className="object-cover object-top h-full w-full absolute"
         />
       </div>
 
@@ -52,12 +58,24 @@ export default function VisionSection() {
               <div className="flex items-stretch">
                 {/* Column */}
                 <div className="py-35 px-30 text-center flex flex-col justify-center">
-                  <h3 className="text-heading text-white mb-[10px]">
+                  <motion.h3
+                    variants={moveUp(0)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="text-heading text-white mb-[10px]"
+                  >
                     {item.value}
-                  </h3>
-                  <p className="text-25 leading-[1.4] uppercase font-[optima] tracking-[2%]">
+                  </motion.h3>
+                  <motion.p
+                    variants={moveUp(0.12)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="text-25 leading-[1.4] uppercase font-[optima] tracking-[2%]"
+                  >
                     {item.label}
-                  </p>
+                  </motion.p>
                 </div>
 
                 {/* Separator */}
