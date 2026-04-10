@@ -105,7 +105,7 @@ useEffect(() => {
   return (
     <div
       ref={containerRef}
-      className="w-full   backdrop-blur-[15px] border-t border-white/10 px-5 sm:px-6 md:px-10 lg:px-16 py-1 sm:py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]"
+      className="w-full bg-white/10 backdrop-blur-[15px] border-t border-white/10 px-5 sm:px-6 md:px-10 lg:px-16 py-1 sm:py-5 md:py-6 lg:py-7 2xl:pt-[49px] 2xl:pb-[46px]"
     >
       {/* Desktop & Tablet — single row */}
       <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4">
