@@ -9,7 +9,7 @@ import gsap from "gsap";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 export default function OtherPageSlider() {
-  const { slides, learnMoreText } = otherPageSliderData;
+  const { slides } = otherPageSliderData;
   const [current, setCurrent] = useState(0);
   const currentRef = useRef(0);
   const transitioning = useRef(false);
@@ -39,10 +39,42 @@ export default function OtherPageSlider() {
     });
   }, [slides]);
 
+  // Parallax on scroll
+  useEffect(() => {
+    const PARALLAX_STRENGTH = 15; // vh units
+
+    const handleScroll = () => {
+      const section = layerARef.current?.closest(
+        "section",
+      ) as HTMLElement | null;
+      if (!section) return;
+
+      const { top, height } = section.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+
+      // progress: -1 (section bottom at top of viewport) → +1 (section top at bottom)
+      const progress = (viewportH / 2 - (top + height / 2)) / (viewportH / 2);
+      const offset = progress * PARALLAX_STRENGTH;
+
+      [layerARef.current, layerBRef.current].forEach((layer) => {
+        if (!layer) return;
+        layer.style.backgroundPositionY = `calc(50% + ${offset}vh)`;
+        // scale is applied via transform on a wrapper — use backgroundSize for zoom
+        layer.style.backgroundSize = `cover`;
+        layer.style.transform = `scale(1.15)`;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // run once on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const setLayerBg = (layer: HTMLDivElement, src: string) => {
     layer.style.backgroundImage = `url(${src})`;
     layer.style.backgroundSize = "cover";
     layer.style.backgroundPosition = "center";
+    layer.style.transform = "scale(1.15)"; // headroom for parallax movement
   };
 
   // Reset autoplay — always restarts the 4500ms clock from zero
@@ -176,7 +208,7 @@ export default function OtherPageSlider() {
 
   return (
     <section
-    data-header="dark"
+      data-header="dark"
       className="relative w-full overflow-hidden select-none h-[90vh] cursor-grab"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -273,7 +305,12 @@ export default function OtherPageSlider() {
             {slides[current].description}
           </motion.p>
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
-            <CustomOutlineButton text="learn more" className="capitalize" variant="light" px="px-[12px] sm:px-[26px] lg:px-[34px]" />
+            <CustomOutlineButton
+              text="learn more"
+              className="capitalize"
+              variant="light"
+              px="px-[12px] sm:px-[26px] lg:px-[34px]"
+            />
           </motion.div>
         </div>
 
