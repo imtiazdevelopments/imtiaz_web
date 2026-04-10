@@ -220,15 +220,15 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "lifestyle", label: "LIFESTYLE" },
   ],
   properties: [
-    { id: "all", label: "ALL PROPERTIES" },
-    { id: "offplan", label: "OFF-PLAN PROJECTS" },
+    { id: "all", label: "ALL PROPERTIES", href: "/properties" },
+    { id: "offplan", label: "OFF-PLAN PROJECTS", href: "/off-plan-properties" },
     { id: "ready", label: "READY PROJECTS" },
   ],
   media: [
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
-    { id: "investor", label: "INVESTOR RELATIONS" },
+    { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
   ],
   partnership: [
     { id: "corp", label: "CORPORATE PARTNERSHIP" },

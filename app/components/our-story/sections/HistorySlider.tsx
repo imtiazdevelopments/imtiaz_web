@@ -10,6 +10,9 @@ import { historyData, sectionDescription, sectionTitle } from "../data";
 import Image from "next/image";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
+import ContainerAnchor from "../../layout/ContainerAnchor";
+import { useContainerInset } from "@/app/hooks/useContainerInset";
+import { useParallax } from "@/app/hooks/useParallax";
 
 /* ─────────────────────────── constants ────────────────────────── */
 
@@ -132,64 +135,35 @@ function CardsSlider({
   swiperRef: React.MutableRefObject<SwiperType | null>;
   onCardChange: (realIdx: number) => void;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const paddingInset = useContainerInset(containerRef);
   return (
-    <div className="relative w-full">
+    <div className="relative">
+      <ContainerAnchor ref={containerRef} />
       <div
         style={{
           background:
             "linear-gradient(270deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)",
         }}
-        className="hidden lg:block absolute w-[200px] left-0 top-0 h-full z-10"
+        className="hidden lg:block absolute w-200 left-0 top-0 h-full z-10"
       />
       <div
         style={{
           background:
             "linear-gradient(90deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)",
         }}
-        className="hidden lg:block absolute w-[200px] right-0 top-0 h-full z-10"
+        className="hidden lg:block absolute w-200 right-0 top-0 h-full z-10"
       />
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        loop={true}
-        centeredSlides={true}
-        autoplay={{
-          delay: AUTO_INTERVAL,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        slidesPerView={1}
-        breakpoints={{
-          480: { slidesPerView: 1.2 },
-          640: { slidesPerView: 1.5 },
-          768: { slidesPerView: 1.8 },
-          1024: { slidesPerView: 1.4 },
-          1280: { slidesPerView: 1.6, spaceBetween: 30 },
-          1440: { slidesPerView: 1.7, spaceBetween: 40 },
-          1600: { slidesPerView: 1.8, spaceBetween: 50 },
-        }}
-        spaceBetween={20}
-        speed={700}
-        grabCursor={true}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-        onSlideChange={(swiper) => onCardChange(swiper.realIndex)}
-        className="w-full !overflow-visible !h-full !px-[15px] md:!px-0"
-      >
-        {allCards.map((card, idx) => (
-          <SwiperSlide key={card.id} className="!h-full">
-            <HistoryCard card={card} isActive={idx === activeCardIdx} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
       {/* ── Prev btn ── */}
-      <div className="absolute left-[15px] -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30">
+      <div
+        style={{ paddingLeft: paddingInset }}
+        className="absolute left-0 -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30"
+      >
         <button
           onClick={() => swiperRef.current?.slidePrev()}
           className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]
-            group border border-foreground rounded-full
-            flex items-center justify-center overflow-hidden transition-all duration-300"
+              group border border-foreground rounded-full
+              flex items-center justify-center overflow-hidden transition-all duration-300"
         >
           <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
           <Image
@@ -198,18 +172,20 @@ function CardsSlider({
             src="/icons/left_arrow_slider_primary.svg"
             alt="Previous"
             className="relative z-10 object-contain group-hover:invert group-hover:brightness-0
-              3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300"
+                3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300"
           />
         </button>
       </div>
-
       {/* ── Next btn ── */}
-      <div className="absolute right-[15px] -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30">
+      <div
+        style={{ paddingRight: paddingInset }}
+        className="absolute right-0 -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30"
+      >
         <button
           onClick={() => swiperRef.current?.slideNext()}
           className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]
-            group border border-foreground rounded-full
-            flex items-center justify-center overflow-hidden transition-all duration-300"
+              group border border-foreground rounded-full
+              flex items-center justify-center overflow-hidden transition-all duration-300"
         >
           <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
           <Image
@@ -218,10 +194,46 @@ function CardsSlider({
             height={28}
             alt="Next"
             className="relative rotate-180 z-10 object-contain
-              3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px]
-              group-hover:invert group-hover:brightness-0 transition-all duration-300"
+                3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px]
+                group-hover:invert group-hover:brightness-0 transition-all duration-300"
           />
         </button>
+      </div>
+      <div className="relative w-full">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          loop={true}
+          centeredSlides={true}
+          autoplay={{
+            delay: AUTO_INTERVAL,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          slidesPerView={1}
+          breakpoints={{
+            480: { slidesPerView: 1.2 },
+            640: { slidesPerView: 1.5 },
+            768: { slidesPerView: 1.8 },
+            1024: { slidesPerView: 1.4 },
+            1280: { slidesPerView: 1.6, spaceBetween: 30 },
+            1440: { slidesPerView: 1.82, spaceBetween: 40 },
+            1600: { slidesPerView: 2.19, spaceBetween: 50 },
+          }}
+          spaceBetween={20}
+          speed={1000}
+          grabCursor={true}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onSlideChange={(swiper) => onCardChange(swiper.realIndex)}
+          className="w-full !overflow-visible !h-full"
+        >
+          {allCards.map((card, idx) => (
+            <SwiperSlide key={card.id} className="!h-full">
+              <HistoryCard card={card} isActive={idx === activeCardIdx} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
@@ -238,16 +250,23 @@ function HistoryCard({
   card: CardData;
   isActive: boolean;
 }) {
+  const { ref, parallaxY } = useParallax(15);
   return (
     <div className="flex flex-col lg:flex-row items-stretch rounded-[10px] overflow-hidden lg:h-[371px]">
       {/* Image */}
-      <div className="flex-shrink-0 w-full lg:w-[51.84%] h-[200px] sm:h-[250px] md:h-[300px] lg:h-full">
+      <div
+        ref={ref}
+        className="flex-shrink-0 w-full lg:w-[51.84%] h-[200px] sm:h-[250px] md:h-[300px] lg:h-full overflow-hidden"
+      >
         <Image
           width={800}
           height={800}
           src={card.image}
           alt={card.title}
           className="w-full h-full object-cover"
+          style={{
+            transform: `scale(${1.35}) translateY(${parallaxY}vh)`,
+          }}
         />
       </div>
 
@@ -318,7 +337,10 @@ function YearTimeline({
       // Check active dot
       const activeSlide = slides[activeYearIdx];
       // Check next dot (could be ghost dot at loopedYears length)
-      const nextSlide = slides[activeYearIdx + 1] ?? slides[activeYearIdx];
+      const nextSlide =
+        typeof window !== "undefined" && window.innerWidth < 1024
+          ? (slides[activeYearIdx] ?? slides[activeYearIdx])
+          : (slides[activeYearIdx + 1] ?? slides[activeYearIdx]);
 
       if (!activeSlide) return;
 
@@ -396,7 +418,7 @@ function YearTimeline({
 
                   {/* Active ring */}
                   {isActive && (
-                    <span className="absolute inset-[-5px] rounded-full ring-2 ring-primary transition-all duration-300" />
+                    <span className="absolute inset-[-4px] rounded-full ring-1 ring-primary transition-all duration-300" />
                   )}
 
                   {/* Core dot */}

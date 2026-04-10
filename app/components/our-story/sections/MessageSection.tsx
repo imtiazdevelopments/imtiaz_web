@@ -6,27 +6,30 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import { useParallax } from "@/app/hooks/useParallax";
 
 type Props = {
   data: messageData;
 };
 
 export default function MessageSection({ data }: Props) {
+  const { ref, parallaxY } = useParallax(15);
   return (
     <section
       data-header="dark"
       className="relative min-h-screen w-full overflow-hidden flex flex-col"
     >
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div ref={ref} className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src={data.bgImage}
           alt="background"
           fill
           className="object-cover"
-          priority
+          style={{
+            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+          }}
         />
-        <div className="absolute inset-0 bg-white/60" />
       </div>
 
       {/* Title */}
