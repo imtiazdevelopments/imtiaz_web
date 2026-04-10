@@ -42,7 +42,7 @@ const LandpropertyCards = () => {
         </div>
 
         {/* 💻 DESKTOP: GRID (UNCHANGED) */}
-        <div className="hidden md:grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 xl:gap-x-[28px] xl:gap-y-[50px]">
+        <div className="hidden md:grid grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 xl:gap-x-[28px] xl:gap-y-[50px]">
           {LandpropertyData.cards.map((project) => (
             <ProjectCard key={project.id} {...project} />
           ))}
