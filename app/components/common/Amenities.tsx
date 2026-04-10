@@ -70,7 +70,7 @@ export default function Amenities({ data, maxTitle }: Props) {
         {data.amenities.map((item, i) => (
           <div
             key={i}
-            className="amenity-card group relative flex flex-col items-center justify-start gap-4 xl:gap-[30px] p-3 md:px-6 md:py-[20px] text-center cursor-default transition-all duration-300 hover:bg-[#EAEAEA] w-1/2 sm:w-1/3 lg:w-1/4"
+            className="amenity-card group relative flex flex-col items-center justify-start gap-4 xl:gap-[30px] p-3 md:px-6 md:py-[20px] text-center cursor-default  hover:bg-[#EAEAEA] w-1/2 sm:w-1/3 lg:w-1/4"
           >
             {/* Icon */}
             <div className="w-9 h-9 md:w-12 md:h-12 xl:w-15 xl:h-15 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1">
