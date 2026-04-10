@@ -7,6 +7,7 @@ import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useParallax } from "@/app/hooks/useParallax";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -33,10 +34,12 @@ export default function GallerySlider() {
   const [activeTab, setActiveTab] = useState<TabType>("interior");
   const [mounted, setMounted] = useState(false);
 
+  const { ref: parallaxRef, parallaxY } = useParallax(15);
+
   const sectionRef = useRef<HTMLElement>(null);
   const swiperWrapperRef = useRef<HTMLDivElement>(null);
   const navButtonsRef = useRef<HTMLDivElement>(null);
-  const controlsRef = useRef<HTMLDivElement>(null);
+  // const controlsRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
@@ -129,22 +132,20 @@ export default function GallerySlider() {
     }
 
     // Animate controls (tabs and pagination) from bottom
-    if (controlsRef.current) {
-      tl.fromTo(
-        controlsRef.current,
-        {
-          opacity: 0,
-          y: 40,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        0.3
-      );
-    }
+    // if (controlsRef.current) {
+    //   tl.fromTo(
+    //     controlsRef.current,
+    //     { 
+    //       y: 40,
+    //     },
+    //     { 
+    //       y: 0,
+    //       duration: 0.8,
+    //       ease: "power2.out",
+    //     },
+    //     0.3
+    //   );
+    // }
 
     return () => {
       tl.kill();
@@ -201,8 +202,8 @@ export default function GallerySlider() {
             className="gallery-swiper w-full h-full"
           >
             {slides.map((slide) => (
-              <SwiperSlide key={slide.id} className="relative w-full h-full">
-                <div className="relative w-full h-full">
+              <SwiperSlide key={slide.id} className="relative w-full h-screen">
+                <div ref={parallaxRef} className="relative w-full h-full">
                   <Image
                     src={slide.src}
                     alt={slide.alt}
@@ -210,6 +211,9 @@ export default function GallerySlider() {
                     className="object-cover"
                     priority
                     sizes="100vw"
+                    style={{
+                transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+              }}
                   />
                   <div
                     className="absolute inset-0"
@@ -222,7 +226,7 @@ export default function GallerySlider() {
                     className="absolute inset-x-0 bottom-0 h-full"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)",
+                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 52.5%, rgba(0, 0, 0, 0.8) 100%)",
                     }}
                   />
                 </div>
@@ -269,14 +273,15 @@ export default function GallerySlider() {
 
       {/* ── Bottom controls ── */}
       <div
-        ref={controlsRef}
+        // ref={controlsRef}
         className="absolute bottom-120 2xl:bottom-[130px] inset-x-0 z-30 flex flex-col items-center gap-5 2xl:gap-[30px]"
       >
         {/* Tab pill with sliding bg */}
-        <div className="relative flex rounded-full border border-white/40 overflow-hidden">
+        <div className="p-[8px] backdrop-blur-[30px] rounded-full "> 
+          <div className="relative flex round  overflow-hidden  2xl:gap-[29.5px] ">
           {/* Sliding white background */}
           <div
-            className="absolute top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
+            className="absolute  top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
             style={{
               transform:
                 activeTab === "interior"
@@ -287,7 +292,7 @@ export default function GallerySlider() {
 
           <button
             onClick={() => handleTabSwitch("interior")}
-            className={`relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] font-[optima] transition-colors duration-300 ${
+            className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[72.6px] font-[optima] transition-colors duration-300 ${
               activeTab === "interior" ? "text-primary" : "text-white"
             }`}
           >
@@ -295,12 +300,13 @@ export default function GallerySlider() {
           </button>
           <button
             onClick={() => handleTabSwitch("exterior")}
-            className={`relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] font-[optima] transition-colors duration-300 ${
+            className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[72.6px]font-[optima] transition-colors duration-300 ${
               activeTab === "exterior" ? "text-primary" : "text-white"
             }`}
           >
             Exterior
           </button>
+        </div>
         </div>
 
         {/* Pagination bullets */}
