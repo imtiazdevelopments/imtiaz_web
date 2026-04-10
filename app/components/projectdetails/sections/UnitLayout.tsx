@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SectionHeading } from "../../animations/SectionHeading";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const units = [
   {
@@ -65,8 +70,29 @@ const units = [
 type Unit = (typeof units)[0];
 
 function FloorPlanImage({ unit }: { unit: Unit }) {
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!imageRef.current) return;
+
+    // Animate image fade and scale on unit change
+    gsap.fromTo(
+      imageRef.current,
+      {
+        opacity: 0,
+        scale: 0.95,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      }
+    );
+  }, [unit.id]);
+
   return (
-    <div className="relative w-full h-full">
+    <div ref={imageRef} className="relative w-full h-full">
       <Image
         src={unit.image}
         alt={`${unit.label} floor plan`}
@@ -80,8 +106,32 @@ function FloorPlanImage({ unit }: { unit: Unit }) {
 }
 
 function MobileFloorPanel({ unit }: { unit: Unit }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!panelRef.current) return;
+
+    // Animate panel appearance on mobile
+    gsap.fromTo(
+      panelRef.current,
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }
+    );
+  }, [unit.id]);
+
   return (
-    <div className="bg-[#f5f0eb] rounded-xl p-4 border border-[#ddd8d0] shadow-sm">
+    <div
+      ref={panelRef}
+      className="bg-[#f5f0eb] rounded-xl p-4 border border-[#ddd8d0] shadow-sm"
+    >
       {/* Floor plan image */}
       <div className="relative w-full aspect-square max-w-[320px] mx-auto mb-6">
         <FloorPlanImage unit={unit} />
@@ -90,18 +140,16 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
       {/* Stats row */}
       <div className="flex flex-row justify-around border-t border-[#ddd8d0] pt-4">
         <div className="text-center">
-          <p
-            className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground" 
-          >
+          <p className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground">
             UNITS
           </p>
-          <p className="text-description text-foreground-light">{unit.units} units</p>
+          <p className="text-description text-foreground-light">
+            {unit.units} units
+          </p>
         </div>
         <div className="w-px bg-[#ddd8d0]" />
         <div className="text-center">
-          <p
-            className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground" 
-          >
+          <p className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground">
             TOTAL AREA
           </p>
           <p className="text-description text-foreground-light">{unit.area}</p>
@@ -109,22 +157,45 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
       </div>
 
       {/* Download button */}
-       <a
-        href={unit.image}
-        download={`${unit.image}`}
-      >
-        <div     className="w-fit mx-auto mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
-    >
+      <a href={unit.image} download={`${unit.image}`}>
+        <div className="w-fit mx-auto mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2">
           <div className="flex items-center gap-[10px]">
-          <span>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12 14.6667V4" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      </span>
-        <span className="2xl:px-[15px]">Download Unit layout</span>
-        </div>
+            <span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12 14.6667V4"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <span className="2xl:px-[15px]">Download Unit layout</span>
+          </div>
         </div>
       </a>
     </div>
@@ -132,42 +203,88 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
 }
 
 function SideInfo({ unit }: { unit: Unit }) {
+  const sideInfoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sideInfoRef.current) return;
+
+    // Animate side info appearance
+    gsap.fromTo(
+      sideInfoRef.current,
+      {
+        opacity: 0,
+        x: 30,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      }
+    );
+  }, [unit.id]);
+
   return (
-    <div
-      className="flex flex-col gap-6 2xl:gap-[30px]" 
-    >
+    <div ref={sideInfoRef} className="flex flex-col gap-6 2xl:gap-[30px]">
       <div>
-        <p className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground">UNITS</p>
-        <div className="border-b border-[#ccc8c0] pb-30">
-          <p className="text-description text-foreground-light">{unit.units} units</p>
+        <p className="text-25 font-[optima] leading-[1.4] mb-20 text-foreground">
+          UNITS
+        </p>
+        <div className="border-b border-black/30  pb-30">
+          <p className="text-description text-foreground-light">
+            {unit.units} units
+          </p>
         </div>
       </div>
 
       <div>
-        <p className="text-25 font-[optima] leading-[1.4] mb-2 text-foreground">
+        <p className="text-25 font-[optima] leading-[1.4] mb-20 text-foreground">
           TOTAL AREA
         </p>
-        <div className=" pb-[10px]">
+        <div className=" ">
           <p className="text-description text-foreground-light">{unit.area}</p>
         </div>
       </div>
 
-      <a
-        href={unit.image}
-        download={`${unit.image}`}
-      >
-        <div     className="w-fit mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 mt-2"
-    >
+      <a href={unit.image} download={`${unit.image}`}>
+        <div className="w-fit mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-primary hover:text-white transition-colors duration-300 mt-2">
           <div className="flex items-center gap-[10px]">
-          <span>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12 14.6667V4" stroke="#490905" className="group-hover:stroke-white transition-colors duration-300" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      </span>
-        <span className="2xl:px-[15px]">Download Unit layout</span>
-        </div>
+            <span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12 14.6667V4"
+                  stroke="#490905"
+                  className="group-hover:stroke-white transition-colors duration-300"
+                  strokeWidth="1.44"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <span className="2xl:px-[15px]">Download Unit layout</span>
+          </div>
         </div>
       </a>
     </div>
@@ -177,21 +294,109 @@ function SideInfo({ unit }: { unit: Unit }) {
 export default function UnitLayout() {
   const [activeId, setActiveId] = useState<string | null>("1bhk");
   const activeUnit = units.find((u) => u.id === activeId);
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const buttonsContainerRef = useRef<HTMLDivElement>(null);
+  const centerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll trigger animation for entire section
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    // Kill existing triggers to prevent conflicts
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (trigger.vars.id === "unit-layout-scroll") trigger.kill();
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        end: "top 20%",
+        toggleActions: "play none none none",
+        id: "unit-layout-scroll",
+      },
+    });
+
+    // Animate title
+    if (titleRef.current) {
+      tl.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        0
+      );
+    }
+
+    // Animate buttons with stagger
+    if (buttonsContainerRef.current) {
+      const buttons = buttonsContainerRef.current.querySelectorAll("button");
+      tl.fromTo(
+        buttons,
+        {
+          opacity: 0,
+          x: -30,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        0.2
+      );
+    }
+
+    // Animate center content
+    if (centerRef.current) {
+      tl.fromTo(
+        centerRef.current,
+        {
+          opacity: 0,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        0.2
+      );
+    }
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "unit-layout-scroll") trigger.kill();
+      });
+    };
+  }, []);
 
   return (
-    <section className="bg-gray py-120 2xl:py-130">
-      {/* Title */}
-      <h1
-        className="text-center text-heading mb-50" 
-      >
-        UNIT LAYOUT
-      </h1>
+    <section
+      ref={sectionRef}
+      className="bg-gray py-120 2xl:py-130"
+    > 
 
-      <div className="container 3xl:!max-w-[1605px] flex flex-col lg:flex-row gap-8 lg:gap-12">
-
+            <SectionHeading title={'UNIT LAYOUT'} className="text-center text-heading mb-50" />
+      <div className="container">
+        <div className="  3xl:!max-w-[1605px] flex items-end flex-col lg:flex-row gap-8 lg:gap-12">
         {/* LEFT: Accordion buttons */}
-        <div className="  w-full lg:w-64 xl:w-[305px] flex-shrink-0">
-           <div className="flex flex-col gap-2 lg:gap-[18px]">
+        <div className="w-full lg:w-64 xl:w-[305px] flex-shrink-0">
+          <div
+            ref={buttonsContainerRef}
+            className="flex flex-col gap-2 lg:gap-[18px]"
+          >
             {units.map((unit) => {
               const isActive = activeId === unit.id;
               return (
@@ -199,12 +404,12 @@ export default function UnitLayout() {
                   {/* Button */}
                   <button
                     onClick={() => setActiveId(isActive ? null : unit.id)}
-                    className={`w-full text-center py-4 px-6 rounded-full text-description   transition-all duration-300 cursor-pointer
+                    className={`w-full text-center py-4 px-6 3xl:py-[16.67px]   rounded-full text-description transition-all duration-300 cursor-pointer
                       ${
                         isActive
                           ? "bg-primary text-white shadow-md"
-                          : "bg-white text-foreground-light hover:bg-primary hover:text-white  "
-                      }`} 
+                          : "bg-white text-foreground-light hover:bg-primary hover:text-white"
+                      }`}
                   >
                     {unit.label}
                   </button>
@@ -222,13 +427,16 @@ export default function UnitLayout() {
         </div>
 
         {/* CENTER: Floor plan image — desktop only */}
-        <div className="hidden lg:flex flex-1 items-center justify-center">
+        <div
+          ref={centerRef}
+          className="hidden lg:flex flex-1 items-center justify-center"
+        >
           {activeUnit ? (
-            <div className="relative w-full max-w-[454px] aspect-square     ">
+            <div className="relative w-full max-w-[454px] aspect-square">
               <FloorPlanImage unit={activeUnit} />
             </div>
           ) : (
-            <div className="flex items-center justify-center flex-1 text-[#999] text-sm tracking-widest" >
+            <div className="flex items-center justify-center flex-1 text-[#999] text-sm tracking-widest">
               SELECT A UNIT TYPE
             </div>
           )}
@@ -240,6 +448,7 @@ export default function UnitLayout() {
             <SideInfo unit={activeUnit} />
           </div>
         )}
+      </div>
       </div>
     </section>
   );

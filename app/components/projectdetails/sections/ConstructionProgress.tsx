@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -93,7 +93,7 @@ function CircularProgress({
   return (
     <div
       ref={containerRef}
-      className={`flex flex-col items-center gap-3 lg:gap-[20px] ${isLarge ? "" : ""}`}
+      className={`2xl:px-[18.65px] flex flex-col items-center gap-3 lg:gap-[20px] ${isLarge ? "" : ""}`}
     >
       <div className="relative" style={{ width: size, height: size }}>
         <svg
@@ -164,6 +164,8 @@ function CircularProgress({
 
 export default function WynwoodProgress() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [circleSize, setCircleSize] = useState(203);
+  const [strokeWidth, setStrokeWidth] = useState(15);
 
   const ref = useScrollFadeUp({ y: 40, duration: 0.7, start: "top 90%" });
   const firstref = useScrollFadeUp({ y: 50, duration: 0.7, start: "top 90%" });
@@ -174,107 +176,129 @@ export default function WynwoodProgress() {
     { percentage: 1, label: "MEP Works" },
     { percentage: 0, label: "Finishing Works" },
   ];
-const statsData = {
-  title: "construction progress",
-  description: "As the project progresses, significant milestones are reached, showcasing our team's dedication and expertise. We are steadily moving closer to our completion goal, ensuring quality and safety at every step.",
-};
-const gridRef = useGsapStagger({
+
+  const statsData = {
+    title: "construction progress",
+    description: "As the project progresses, significant milestones are reached, showcasing our team's dedication and expertise. We are steadily moving closer to our completion goal, ensuring quality and safety at every step.",
+  };
+
+  const gridRef = useGsapStagger({
     selector: ".selector",
     from: { opacity: 0, y: 40 },
     to: { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
     stagger: 0.15,
     start: "top 80%",
   });
+
+  // Handle responsive sizing
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        // sm breakpoint
+        setCircleSize(120);
+        setStrokeWidth(8);
+      } else if (window.innerWidth < 1024) {
+        // lg breakpoint
+        setCircleSize(160);
+        setStrokeWidth(12);
+      } else {
+        // lg and above
+        setCircleSize(203);
+        setStrokeWidth(15);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
-   
-
-      <section
-        ref={sectionRef}
-        className="pt-120 2xl:pt-[160px]"
-      >
-        <div className="text-center container "> 
-         <SectionHeading title={statsData.title} className="mb-20 text-foreground" />
-                               <SectionDescription text={statsData.description} className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-50" />
-        </div>
-      <div className="w-full   flex flex-col lg:flex-row overflow-hidden bg-[#F0EDE8]">
-          {/* LEFT — Building Image */}
-        <div className="relative w-full  h-[300px] lg:h-auto    overflow-hidden">
-          <Image
-            src="/images/projects/progress.jpg"
-            alt="Wynwood Horizon Building"
-            fill
-            className="object-cover object-center"
-            priority
+      <section ref={sectionRef} className="pt-120 2xl:pt-[160px]">
+        <div className="text-center container">
+          <SectionHeading title={statsData.title} className="mb-20 text-foreground" />
+          <SectionDescription
+            text={statsData.description}
+            className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-50"
           />
-          {/* Subtle right-side fade to blend into info panel */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#F0EDE8]/30 pointer-events-none" />
         </div>
-
-        {/* RIGHT — Info Panel */}
-        <div className="py-120 2xl:py-[130px] w-full px-[15px] lg:px-[40px] 2xl:px-[70px]  bg-gray flex flex-col justify-center px-10 sm:px-14 lg:px-16  gap-12 2xl:gap-[60px]">
-
-          {/* Top — Overall Progress */}
-          <div className="flex flex-col sm:flex-row items-center   gap-10 lg:gap-15 2xl:gap-[142px]" ref={firstref} style={{ opacity: 0 }} >
-            {/* Big circle */}
-            <CircularProgress
-              percentage={19}
-              size={203}
-              strokeWidth={15}
-              label="overall"
-              isLarge
-              animationDelay={0}
+        <div className="w-full flex flex-col lg:flex-row 3xl:grid 3xl:grid-cols-[auto_920px] overflow-hidden bg-gray">
+          {/* LEFT — Building Image */}
+          <div className="relative w-full h-[300px] lg:h-auto overflow-hidden">
+            <Image
+              src="/images/projects/progress.jpg"
+              alt="Wynwood Horizon Building"
+              fill
+              className="object-cover object-center"
+              priority
             />
+            {/* Subtle right-side fade to blend into info panel */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#F0EDE8]/30 pointer-events-none" />
+          </div>
 
-            {/* Completion date */}
-            <div className="flex flex-col justify-center">
-              <p
-                className="text-25 leading-[1.4] font-[optima] uppercase text-foreground mb-2 lg:mb-[30px] tracking-[2%]"
-                 
-              >
-                Estimated
-                <br />
-                Completion Date
-              </p>
-              <p className="text-heading text-black leading-[1.4]">
-                Q4 - 2026
-              </p>
+          {/* RIGHT — Info Panel */}
+          <div className="py-120 2xl:py-[130px] w-full px-[15px] lg:px-[40px] 2xl:px-[70px] bg-gray flex flex-col justify-center gap-12 2xl:gap-[60px]">
+            {/* Top — Overall Progress */}
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-15 2xl:gap-[142px]"
+              ref={firstref}
+              style={{ opacity: 0 }}
+            >
+              {/* Big circle - responsive size */}
+              <div className="flex-shrink-0">
+                <CircularProgress
+                  percentage={19}
+                  size={circleSize}
+                  strokeWidth={strokeWidth}
+                  label="overall"
+                  isLarge
+                  animationDelay={0}
+                />
+              </div>
+
+              {/* Completion date */}
+              <div className="flex flex-col justify-center text-center sm:text-left">
+                <p className="text-25 leading-[1.4] font-[optima] uppercase text-foreground mb-2 lg:mb-[30px] tracking-[2%]">
+                  Estimated
+                  <br />
+                  Completion Date
+                </p>
+                <p className="text-heading text-black leading-[1.4]">Q4 - 2026</p>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="w-full h-px bg-black/30 2xl:my-[10px]" />
+
+            {/* Bottom — Sub-stats */}
+            <div className="flex flex-wrap justify-between gap-y-8 gap-x-4" ref={gridRef}>
+              {stats.map((stat, i) => (
+                <div className="selector" key={i}>
+                  <CircularProgress
+                    percentage={stat.percentage}
+                    size={108}
+                    strokeWidth={10}
+                    label={stat.label}
+                    isLarge={false}
+                    animationDelay={i * 0.12}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <div ref={ref} style={{ opacity: 0 }}>
+              <CustomOutlineButton
+                className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
+                text="Construction updates"
+                borderColor="border-primary"
+                textColor="text-foreground-light"
+                variant="dark"
+              />
             </div>
           </div>
-
-          {/* Divider */}
-          <div className="w-full h-px bg-black/30 2xl:my-[10px]" />
-
-          {/* Bottom — Sub-stats */}
-          <div className="flex flex-wrap justify-between gap-y-8 gap-x-4" ref={gridRef}>
-            {stats.map((stat, i) => (
-              <div className="selector"
-                key={i}>
-              <CircularProgress
-                percentage={stat.percentage}
-                size={108}
-                strokeWidth={10}
-                label={stat.label}
-                isLarge={false}
-                animationDelay={i * 0.12}
-                
-              />
-              </div>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-           <div ref={ref} style={{ opacity: 0 }}>
-      <CustomOutlineButton
-        className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
-        text="Construction updates"
-        borderColor="border-primary"
-        textColor="text-foreground-light"
-        variant="dark"
-      />
-    </div>
         </div>
-      </div>
       </section>
     </>
   );

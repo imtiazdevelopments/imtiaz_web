@@ -65,7 +65,7 @@ export default function Amenities({ data, maxTitle }: Props) {
         <div>
       <div
         ref={gridRef}
-        className="flex flex-wrap md:justify-center mt-50 gap-y-2 md:gap-y-5 xl:gap-y-[61px]"
+        className="flex flex-wrap md:justify-center mt-50 gap-y-2 md:gap-y-5 xl:gap-y-[60px]"
       >
         {data.amenities.map((item, i) => (
           <div
@@ -77,8 +77,8 @@ export default function Amenities({ data, maxTitle }: Props) {
               <Image
                 src={item.icon}
                 alt={item.label.replace("\n", " ")}
-                width={52}
-                height={52}
+                width={60}
+                height={60}
                 className="object-contain"
               />
             </div>
