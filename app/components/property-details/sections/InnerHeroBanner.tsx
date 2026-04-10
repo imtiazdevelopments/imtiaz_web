@@ -145,13 +145,15 @@ gsap
         </div>
       </div>
 
-      <div
-        ref={breadcrumbRef}
-        style={{ opacity: 0 }}
+      <div 
         className="absolute bottom-0   left-0 right-0 "
+      ><div
+        ref={breadcrumbRef}
+        style={{ opacity: 0 }} 
       >
         <div className="flex justify-center mb-2 sm:mb-5 lg:mb-60 3xl:mb-[63px] ">
            <Breadcrumb /> 
+        </div>
         </div>
        
       <BannerDetails />

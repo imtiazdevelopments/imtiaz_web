@@ -10,6 +10,7 @@ import { SectionDescription } from "../../animations/SectionDescription";
 
 import { useGsapStagger } from "../../../hooks/useGsapStagger";  
 import { useScrollFadeUp } from "../../../hooks/useScrollFadeUp";
+import { useParallax } from "@/app/hooks/useParallax";
 gsap.registerPlugin(ScrollTrigger);
 
 interface CircularProgressProps {
@@ -93,7 +94,7 @@ function CircularProgress({
   return (
     <div
       ref={containerRef}
-      className={`2xl:px-[18.65px] flex flex-col items-center gap-3 lg:gap-[20px] ${isLarge ? "" : ""}`}
+      className={`flex flex-col items-center gap-3 lg:gap-[20px] ${isLarge ? "" : ""}`}
     >
       <div className="relative" style={{ width: size, height: size }}>
         <svg
@@ -135,15 +136,11 @@ function CircularProgress({
                 ? "text-heading leading-[1.4]"
                 : "text-25  leading-[1.4] tracking-[2%]"
             }`}
-             
           >
             0%
           </span>
           {isLarge && (
-            <span
-              className="text-description mt-[2px]  "
-               
-            >
+            <span className="text-description mt-[2px]">
               overall
             </span>
           )}
@@ -151,10 +148,7 @@ function CircularProgress({
       </div>
 
       {!isLarge && (
-        <span
-          className="text-description uppercase text-foreground-light text-center"
-           
-        >
+        <span className="text-description uppercase text-foreground-light text-center">
           {label}
         </span>
       )}
@@ -167,7 +161,11 @@ export default function WynwoodProgress() {
   const [circleSize, setCircleSize] = useState(203);
   const [strokeWidth, setStrokeWidth] = useState(15);
 
-  const ref = useScrollFadeUp({ y: 40, duration: 0.7, start: "top 90%" });
+  // Move useParallax hook to parent component
+
+  const { ref: parallaxRef, parallaxY } = useParallax(15);
+
+  const refs = useScrollFadeUp({ y: 40, duration: 0.7, start: "top 90%" });
   const firstref = useScrollFadeUp({ y: 50, duration: 0.7, start: "top 90%" });
 
   const stats = [
@@ -225,20 +223,23 @@ export default function WynwoodProgress() {
         </div>
         <div className="w-full flex flex-col lg:flex-row 3xl:grid 3xl:grid-cols-[auto_920px] overflow-hidden bg-gray">
           {/* LEFT — Building Image */}
-          <div className="relative w-full h-[300px] lg:h-auto overflow-hidden">
+          <div ref={parallaxRef} className="relative w-full h-[300px] lg:h-auto overflow-hidden">
             <Image
               src="/images/projects/progress.jpg"
               alt="Wynwood Horizon Building"
               fill
-              className="object-cover object-center"
               priority
+              className="object-cover object-center"
+              style={{
+                transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+              }}
             />
             {/* Subtle right-side fade to blend into info panel */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#F0EDE8]/30 pointer-events-none" />
           </div>
 
           {/* RIGHT — Info Panel */}
-          <div className="py-120 2xl:py-[130px] w-full px-[15px] lg:px-[40px] 2xl:px-[70px] bg-gray flex flex-col justify-center gap-12 2xl:gap-[60px]">
+          <div className="py-120 3xl:py-[130px] w-full px-[15px] lg:px-[40px] 2xl:px-[70px] bg-gray flex flex-col justify-center gap-12 2xl:gap-[45px] 3xl:gap-[60px]">
             {/* Top — Overall Progress */}
             <div
               className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-15 2xl:gap-[142px]"
@@ -274,7 +275,7 @@ export default function WynwoodProgress() {
             {/* Bottom — Sub-stats */}
             <div className="flex flex-wrap justify-between gap-y-8 gap-x-4" ref={gridRef}>
               {stats.map((stat, i) => (
-                <div className="selector" key={i}>
+                <div className="selector 3xl:px-[18.65px]" key={i}>
                   <CircularProgress
                     percentage={stat.percentage}
                     size={108}
@@ -288,7 +289,7 @@ export default function WynwoodProgress() {
             </div>
 
             {/* CTA Button */}
-            <div ref={ref} style={{ opacity: 0 }}>
+            <div ref={refs} style={{ opacity: 0 }}>
               <CustomOutlineButton
                 className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
                 text="Construction updates"

@@ -50,6 +50,7 @@ useEffect(() => {
   if (!containerRef.current) return;
 
   const statItems = containerRef.current.querySelectorAll(".stat-item");
+  
   if (!statItems.length) return;
 
   // Kill previous tweens
@@ -57,17 +58,18 @@ useEffect(() => {
 
   // Initial state
   gsap.set(statItems, {
-     
+     opacity: 0,
     y: 30,
   });
 
   // Timeline WITHOUT ScrollTrigger
   const tl = gsap.timeline({
-    delay: 1.5,
+    delay: .2,
   });
 
   // Stagger animation
   tl.to(statItems, { 
+    opacity: 1,
     y: 0,
     duration: 0.6,
     ease: "power2.out",

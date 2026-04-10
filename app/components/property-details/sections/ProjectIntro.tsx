@@ -4,6 +4,7 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { introData } from "../data";
 import { useGsapStagger } from "../../../hooks/useGsapStagger";  
 
+import CustomIconButton from "../../common/CustomIconButton";
 const ProjectIntro = () => {
   const gridRef = useGsapStagger({
     selector: ".selector",
@@ -30,46 +31,37 @@ const ProjectIntro = () => {
         <div className="flex flex-wrap gap-[15px] justify-center items-center mt-50" 
           ref={gridRef}>
           <a href="#" className="selector">
-          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
-            <div className="flex items-center gap-[10px] uppercase">
-              <span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span>Brochure</span>
-            </div>
-          </div>
+          
+           <CustomIconButton
+          icondownload={true}
+            className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+            text="Brochure"
+            borderColor="border-white"
+            textColor="text-white"
+            variant="light"
+          />
         </a>
           <a href="#" className="selector">
-          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
-            <div className="flex items-center gap-[10px] uppercase">
-              <span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span>Fact Sheet</span>
-            </div>
-          </div>
+          
+          <CustomIconButton
+          icondownload={true}
+            className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+            text="Fact Sheet"
+            borderColor="border-white"
+            textColor="text-white"
+            variant="light"
+          />
         </a>
           <a href="#" className="selector">
-          <div className="w-[178px] xl:w-[210px] cursor-pointer w-fit mx-auto group flex items-center justify-center gap-2 border border-white leading-[1.37] text-white rounded-full px-6 py-3 2xl:px-[15px] 2xl:py-[19.5px] text-description 2xl:!text-[19px] hover:bg-[#6b1a1a] hover:text-white transition-colors duration-300 ">
-            <div className="flex items-center gap-[10px] uppercase">
-              <span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M12 14.6667V4" stroke="white" className="group-hover:stroke-white transition-colors duration-300" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span>Unit layout</span>
-            </div>
-          </div>
+         
+          <CustomIconButton
+          icondownload={true}
+            className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+            text="Unit layout"
+            borderColor="border-white"
+            textColor="text-white"
+            variant="light"
+          />
         </a>
         </div>
       </div>

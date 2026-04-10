@@ -13,7 +13,7 @@ const LandpropertyCards = () => {
     const desktopBtnRef = useScrollFadeUp({ y: 40, duration: 0.7, start: "top 90%" });
   return (
     <section className="w-full   "  >
-      <div className="container flex flex-col justify-center py-120 2xl:pt-[100px] border-t border-black/10">
+      <div className="container flex flex-col justify-center py-120 2xl:pt-[100px] 3xl:pb-160 border-t border-black/10">
         {/* Header */}
         <div className="text-center "> 
             <SectionHeading title={LandpropertyData.title} className="text-heading mb-50" />

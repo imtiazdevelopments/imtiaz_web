@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CustomIconButton from "../../common/CustomIconButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -247,45 +248,16 @@ function SideInfo({ unit }: { unit: Unit }) {
       </div>
 
       <a href={unit.image} download={`${unit.image}`}>
-        <div className="w-fit mt-50 group flex items-center justify-center gap-2 border border-[#6b1a1a] leading-[1.37] text-foreground-light rounded-full px-6 py-3 2xl:px-[42px] 2xl:py-[20px] text-description 2xl:!text-[19px] hover:bg-primary hover:text-white transition-colors duration-300 mt-2">
-          <div className="flex items-center gap-[10px]">
-            <span>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20 14.6665V18.2221C20 18.6936 19.8127 19.1457 19.4793 19.4791C19.1459 19.8125 18.6937 19.9998 18.2222 19.9998H5.77778C5.30628 19.9998 4.8541 19.8125 4.5207 19.4791C4.1873 19.1457 4 18.6936 4 18.2221V14.6665"
-                  stroke="#490905"
-                  className="group-hover:stroke-white transition-colors duration-300"
-                  strokeWidth="1.44"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M7.55469 10.2222L11.9991 14.6666L16.4436 10.2222"
-                  stroke="#490905"
-                  className="group-hover:stroke-white transition-colors duration-300"
-                  strokeWidth="1.44"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 14.6667V4"
-                  stroke="#490905"
-                  className="group-hover:stroke-white transition-colors duration-300"
-                  strokeWidth="1.44"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="2xl:px-[15px]">Download Unit layout</span>
-          </div>
-        </div>
+        
+          <CustomIconButton
+          icondownload={true}
+          iconColor="dark"
+            className="w-fit 2xl:!px-[37.5px] 2xl:!py-[20px]"
+            text="Download Unit layout"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
       </a>
     </div>
   );
