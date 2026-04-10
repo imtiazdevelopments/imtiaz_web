@@ -19,36 +19,40 @@ export const EverythingWithinData = {
   title: "Everything Within Reach", 
   description:
     "Experience island life, moments from the city’s most convenient connections and amenities.",
-     cards: [
-        {
-          id: 1,
-          icon: '/images/community-listing/icon1.svg', 
-          label: "DUBAI INTERNATIONAL<br>AIRPORT",
-          minutes: "20 Minutes",
-        },
-        {
-          id: 2,
-          icon: '/images/community-listing/icon2.svg', 
-          label: "GOLD SOUQ METRO<br>STATION",
-          minutes: "10 Minutes",
-       
-        },
-        {
-          id: 3,
-         icon: '/images/community-listing/icon3.svg', 
-          label: "DOWNTOWN<br>DUBAI",
-          minutes: "24 Minutes",
-       
-        },
-        {
-          id: 4,
-          icon: '/images/community-listing/icon4.svg', 
-          label: "BUSINESS<br>BAY",
-          minutes: "13 Minutes",
-       
-        }, 
-      ] ,
- 
+      cards: [
+    {
+      id: 1,
+      icon: "/images/community-listing/icon1.svg",
+      iconWidth: 32,
+      iconHeight: 32,
+      label: "DUBAI INTERNATIONAL<br>AIRPORT",
+      minutes: "20 Minutes",
+    },
+    {
+      id: 2,
+      icon: "/images/community-listing/icon2.svg",
+      iconWidth: 32,
+      iconHeight: 32,
+      label: "GOLD SOUQ METRO<br>STATION",
+      minutes: "10 Minutes",
+    },
+    {
+      id: 3,
+      icon: "/images/community-listing/icon3.svg",
+      iconWidth: 34,
+      iconHeight: 32,
+      label: "DOWNTOWN<br>DUBAI",
+      minutes: "24 Minutes",
+    },
+    {
+      id: 4,
+      icon: "/images/community-listing/icon4.svg",
+      iconWidth: 38,
+      iconHeight: 32,
+      label: "BUSINESS<br>BAY",
+      minutes: "13 Minutes",
+    },
+  ],
 };
  
 export const eventDetails = [

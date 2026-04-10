@@ -57,7 +57,7 @@ useEffect(() => {
 
   // Initial state
   gsap.set(statItems, {
-    opacity: 0,
+     
     y: 30,
   });
 
@@ -67,8 +67,7 @@ useEffect(() => {
   });
 
   // Stagger animation
-  tl.to(statItems, {
-    opacity: 1,
+  tl.to(statItems, { 
     y: 0,
     duration: 0.6,
     ease: "power2.out",

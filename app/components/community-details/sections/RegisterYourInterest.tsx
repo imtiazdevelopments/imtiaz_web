@@ -117,7 +117,7 @@ export default function RegisterYourInterest() {
                   htmlFor="firstName"
                   className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter First Name*
+                  Enter Your First Name*
                 </label>
                 <input
                   id="firstName"
@@ -135,7 +135,7 @@ export default function RegisterYourInterest() {
                   htmlFor="lastName"
                   className="block text-description text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Last Name*
+                  Enter Your Last Name*
                 </label>
                 <input
                   id="lastName"
@@ -163,7 +163,7 @@ export default function RegisterYourInterest() {
                   htmlFor="email"
                   className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
-                  Enter Email*
+                  Enter Your Email*
                 </label>
                 <input
                   id="email"
@@ -226,7 +226,7 @@ export default function RegisterYourInterest() {
                 htmlFor="message"
                 className="block !leading-[1.75] text-description mt-120 sm:mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
               >
-                Type message here...
+                Type your message here...
               </label>
               <input
                 id="message"

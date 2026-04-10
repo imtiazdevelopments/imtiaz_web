@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import type { ProjectCardType } from "@/types/cardtype";
-import CustomOutlineButton from "./CustomOutlineButton";
+import type { ProjectCardType } from "@/types/cardtype"; 
 import { useParallax } from "@/app/hooks/useParallax";
 
 export default function ProjectCard({
@@ -41,7 +40,7 @@ export default function ProjectCard({
 
         {/* Default overlay */}
         <div
-          className="absolute inset-0 z-10 transition-opacity duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0"
+          className="absolute inset-0 z-10 transition-opacity  "
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.69%, rgba(0, 0, 0, 0.8) 84.83%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
@@ -58,18 +57,18 @@ export default function ProjectCard({
         />
 
         {/* ── DEFAULT STATE ── */}
-        <div className="absolute inset-0 z-20 flex flex-col transition-opacity my-[32px] xl:my-[40px] duration-500 group-hover:opacity-0 group-[.is-active]:opacity-0 delay-0 pointer-events-none">
+        <div className="absolute inset-0 z-20 flex flex-col transition-opacity my-[32px] xl:my-[40px] duration-700 -delay-100 group-hover:opacity-0 group-[.is-active]:opacity-0 delay-0 pointer-events-none">
           <div className="absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 delay-200 group-hover:opacity-0 group-[.is-active]:opacity-0">
             {status && (
               // <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
-              <div className="bg-[#818082]/60 px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
+              <div className="bg-[#818082]/60 px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140" >
                 <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">
                   {status}
                 </p>
               </div>
             )}
 
-            <div className="flex items-center justify-center gap-[10px] mt-20">
+            <div className="flex items-center justify-center gap-[10px] mt-20  -translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140">
               {location && (
                 <>
                   <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
@@ -92,19 +91,19 @@ export default function ProjectCard({
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 px-5 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-250">
+          <div className="absolute bottom-0 xl:bottom-[13px] left-0 right-0 px-5 translate-y-2 group-hover:opacity-0 group-[.is-active]:opacity-0 transition-opacity duration-500 delay-250">
             <h3
-              className="font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px]"
+              className="font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px]  translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140"
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <div
-              className="w-full h-px mb-[10px]"
+              className="w-full h-px mb-[10px] translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140"
               style={{
                 background:
                   "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
             />
-            <p className="text-white/80 text-description text-center">
+            <p className="text-white/80 text-description text-center translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140">
               {subtitle}
             </p>
           </div>
@@ -177,12 +176,12 @@ export default function ProjectCard({
               </div>
             </div>
           </div>
-
-          <CustomOutlineButton
-            text="View Property"
-            px="px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
-            className="translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 3xl:py-[21px] transition-transform duration-300 delay-100"
-          />
+ 
+          <button className="-translate-y-2 group-hover:translate-y-0 group-[.is-active]:translate-y-0 transition-transform duration-900 delay-140 cursor-pointer flex items-center justify-center   relative transition-all duration-300  translate-y-2 btncard  3xl:py-[21px] transition-transform duration-300 delay-100 overflow-hidden px-[12px] md:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px] py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border border-white/90 text-white font-[avenirHeavy] text-19 leading-[100%]"  >
+          <span className="absolute inset-y-0 left-0 w-[50%] bg-white/10 transform scale-x-0 origin-left transition-transform duration-300  ease-out "></span>
+          <span className="absolute inset-y-0 right-0 w-[50%] bg-white/10 transform scale-x-0 origin-right transition-transform duration-300  ease-out "></span>
+          <span className="relative z-10 transition-colors duration-300 min-w-[98px] inline-block text-center ">View Property</span>
+          </button>
         </div>
       </div>
     </div>
