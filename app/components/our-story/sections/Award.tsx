@@ -5,20 +5,25 @@ import { awardData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import { useParallax } from "@/app/hooks/useParallax";
 
 export default function AwardSection() {
+    const { ref, parallaxY } = useParallax(15);
   return (
     <section
       data-header="dark"
       className="relative w-full overflow-hidden flex flex-col"
     >
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div ref={ref} className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src={awardData.bgImage}
           alt="background"
           fill
           className="object-cover object-center"
+                    style={{
+            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+          }}
         />
       </div>
 
