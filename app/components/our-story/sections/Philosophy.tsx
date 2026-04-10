@@ -16,7 +16,7 @@ const Philosophy = () => {
         <SectionHeading title={philosophyData.title} className="text-white mb-20" />
         <SectionDescription
           text={philosophyData.description}
-          className="text-white/80 max-w-[1220px] 3xl:max-w-[1308px] text-center whitespace-pre-line"
+          className="text-white/80 max-w-[1220px] 3xl:max-w-[1308px] text-center lg:whitespace-pre-line"
         />
       </div>
     </section>

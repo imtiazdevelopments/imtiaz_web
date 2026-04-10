@@ -44,7 +44,7 @@ const CustomSearch = ({
           type="text"
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
-          className="outline-none w-full"
+          className="outline-none w-full placeholder:text-foreground-light"
           placeholder="Search Projects"
         />
       </span>
