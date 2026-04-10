@@ -149,7 +149,7 @@ const btnRef = useRef<HTMLDivElement>(null);
 
             <div className="absolute inset-0 flex flex-col items-center justify-end mb-7 text-white text-center px-4">
               <h2 className="mb-6">{slide.title}</h2>
-
+ <div ref={btnRef} >
               <CustomOutlineButton
                 className="px-6 py-2"
                 text="View Community"
@@ -157,6 +157,7 @@ const btnRef = useRef<HTMLDivElement>(null);
                 textColor="text-white"
                 variant="dark"
               />
+            </div>
             </div>
           </div>
         ))}
