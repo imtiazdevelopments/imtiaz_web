@@ -73,7 +73,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
     <section className="w-full bg-white " data-header="light">
       <div
         ref={containerRef}
-        className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[500px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
       >
         {/* z-0 — previous slide bg, fades out after each transition for zero flash */}
         <div className="absolute inset-0 z-0">
@@ -158,7 +158,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute left-20 lg:left-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
+          className="absolute left-20 lg:left-70 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
         >
           <button
             onClick={() => swiperRef.current?.slidePrev()}
@@ -181,7 +181,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute right-20 lg:right-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
+          className="absolute right-20 lg:right-70 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
         >
           <button
             onClick={() => swiperRef.current?.slideNext()}
