@@ -8,7 +8,7 @@ import { moveUp } from "../../motionVariants";
 import { useParallax } from "@/app/hooks/useParallax";
 
 export default function AwardSection() {
-    const { ref, parallaxY } = useParallax(15);
+  const { ref, parallaxY } = useParallax(8);
   return (
     <section
       data-header="dark"
@@ -21,8 +21,8 @@ export default function AwardSection() {
           alt="background"
           fill
           className="object-cover object-center"
-                    style={{
-            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+          style={{
+            transform: `scale(${1.08}) translateY(${parallaxY}vh)`,
           }}
         />
       </div>
