@@ -23,6 +23,7 @@ export const visionSectionData = {
 };
 
 export type messageData = {
+  id: string;
   title: string;
   quote: string;
   name: string;
@@ -33,6 +34,7 @@ export type messageData = {
 };
 
 export const chairmanMessageData: messageData = {
+  id: "chairman",
   title: "Message From Chairman",
   quote: "Asian and Middle Eastern economies grew rapidly despite challenges.",
   name: "Ustad Rahimullah Shahsawar",
@@ -44,6 +46,7 @@ export const chairmanMessageData: messageData = {
 };
 
 export const ceoMessageData: messageData = {
+  id: "ceo",
   title: "Message From CEO",
   quote: "Imtiaz Developments creates vibrant, modern communities.",
   name: "Mr. Masih Ullah Imtiaz",
