@@ -221,8 +221,8 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
   ],
   properties: [
     { id: "all", label: "ALL PROPERTIES", href: "/properties" },
-    { id: "offplan", label: "OFF-PLAN PROJECTS", href: "/off-plan-properties" },
-    { id: "ready", label: "READY PROJECTS" },
+    { id: "offplan", label: "OFF-PLAN PROPERTIES", href: "/off-plan-properties" },
+    { id: "ready", label: "READY PROPERTIES" },
   ],
   media: [
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
