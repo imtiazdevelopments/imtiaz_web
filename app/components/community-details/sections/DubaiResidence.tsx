@@ -1,6 +1,10 @@
+"use client";
+
 import { communitySectionData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVariants";
 
 const DubaiResidence = () => {
   const { title, description, subtitle } = communitySectionData;
@@ -16,13 +20,18 @@ const DubaiResidence = () => {
           />
           <SectionDescription
             text={subtitle}
-            className="text-25 uppercase font-[optima] mb-4 xl:mb-5 3xl:mb-10 text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
+            className="text-25 uppercase font-[optima] mb-40 text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
           />
 
-          <SectionDescription
-            text={description}
+          <motion.p
+            variants={moveUp(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="text-description text-foreground-light max-w-[754px] mx-auto whitespace-pre-line"
-          />
+          >
+            {description}
+          </motion.p>
         </div>
       </div>
     </section>

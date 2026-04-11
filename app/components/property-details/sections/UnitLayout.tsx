@@ -88,7 +88,7 @@ function FloorPlanImage({ unit }: { unit: Unit }) {
         scale: 1,
         duration: 0.6,
         ease: "power2.out",
-      }
+      },
     );
   }, [unit.id]);
 
@@ -124,7 +124,7 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
         y: 0,
         duration: 0.5,
         ease: "power2.out",
-      }
+      },
     );
   }, [unit.id]);
 
@@ -221,7 +221,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         x: 0,
         duration: 0.6,
         ease: "power2.out",
-      }
+      },
     );
   }, [unit.id]);
 
@@ -248,16 +248,15 @@ function SideInfo({ unit }: { unit: Unit }) {
       </div>
 
       <a href={unit.image} download={`${unit.image}`}>
-        
-          <CustomIconButton
+        <CustomIconButton
           icondownload={true}
           iconColor="dark"
-            className="w-fit 2xl:!px-[37.5px] 2xl:!py-[20px]"
-            text="Download Unit layout"
-            borderColor="border-primary-2"
-            textColor="text-foreground-light"
-            variant="dark"
-          />
+          className="w-fit 2xl:!px-[37.5px] 2xl:!py-[20px]"
+          text="Download Unit layout"
+          borderColor="border-primary-2"
+          textColor="text-foreground-light"
+          variant="dark"
+        />
       </a>
     </div>
   );
@@ -304,7 +303,7 @@ export default function UnitLayout() {
           duration: 0.8,
           ease: "power2.out",
         },
-        0
+        0,
       );
     }
 
@@ -324,7 +323,7 @@ export default function UnitLayout() {
           stagger: 0.1,
           ease: "power2.out",
         },
-        0.2
+        0.2,
       );
     }
 
@@ -342,7 +341,7 @@ export default function UnitLayout() {
           duration: 0.8,
           ease: "power2.out",
         },
-        0.2
+        0.2,
       );
     }
 
@@ -355,72 +354,71 @@ export default function UnitLayout() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-gray py-120 2xl:py-130"
-    > 
-
-            <SectionHeading title={'UNIT LAYOUT'} className="text-center text-heading mb-50" />
+    <section ref={sectionRef} className="bg-gray py-120 2xl:py-130">
+      <SectionHeading
+        title={"UNIT LAYOUT"}
+        className="text-center text-heading mb-50"
+      />
       <div className="container">
         <div className="  3xl:!max-w-[1605px] flex items-end flex-col lg:flex-row gap-8 lg:gap-12">
-        {/* LEFT: Accordion buttons */}
-        <div className="w-full lg:w-64 xl:w-[305px] flex-shrink-0">
-          <div
-            ref={buttonsContainerRef}
-            className="flex flex-col gap-2 lg:gap-[18px]"
-          >
-            {units.map((unit) => {
-              const isActive = activeId === unit.id;
-              return (
-                <div key={unit.id}>
-                  {/* Button */}
-                  <button
-                    onClick={() => setActiveId(isActive ? null : unit.id)}
-                    className={`w-full text-center py-4 px-6 3xl:py-[16.67px]   rounded-full text-description transition-all duration-300 cursor-pointer
+          {/* LEFT: Accordion buttons */}
+          <div className="w-full lg:w-64 xl:w-[305px] flex-shrink-0">
+            <div
+              ref={buttonsContainerRef}
+              className="flex flex-col gap-2 lg:gap-[18px]"
+            >
+              {units.map((unit) => {
+                const isActive = activeId === unit.id;
+                return (
+                  <div key={unit.id}>
+                    {/* Button */}
+                    <button
+                      onClick={() => setActiveId(isActive ? null : unit.id)}
+                      className={`w-full text-center py-4 px-6 3xl:py-[16.67px]   rounded-full text-description transition-all duration-300 cursor-pointer
                       ${
                         isActive
                           ? "bg-primary text-white shadow-md"
                           : "bg-white text-foreground-light hover:bg-primary hover:text-white"
                       }`}
-                  >
-                    {unit.label}
-                  </button>
+                    >
+                      {unit.label}
+                    </button>
 
-                  {/* Mobile: inline accordion panel */}
-                  {isActive && (
-                    <div className="block lg:hidden mt-3 mb-1">
-                      <MobileFloorPanel unit={unit} />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* CENTER: Floor plan image — desktop only */}
-        <div
-          ref={centerRef}
-          className="hidden lg:flex flex-1 items-center justify-center"
-        >
-          {activeUnit ? (
-            <div className="relative w-full max-w-[454px] aspect-square">
-              <FloorPlanImage unit={activeUnit} />
+                    {/* Mobile: inline accordion panel */}
+                    {isActive && (
+                      <div className="block lg:hidden mt-3 mb-1">
+                        <MobileFloorPanel unit={unit} />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          ) : (
-            <div className="flex items-center justify-center flex-1 text-[#999] text-sm tracking-widest">
-              SELECT A UNIT TYPE
+          </div>
+
+          {/* CENTER: Floor plan image — desktop only */}
+          <div
+            ref={centerRef}
+            className="hidden lg:flex flex-1 items-center justify-center"
+          >
+            {activeUnit ? (
+              <div className="relative w-full max-w-[454px] aspect-square">
+                <FloorPlanImage unit={activeUnit} />
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-1 text-[#999] text-sm tracking-widest">
+                SELECT A UNIT TYPE
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT: Stats + download — desktop only */}
+          {activeUnit && (
+            <div className="hidden lg:flex flex-col justify-center gap-6 min-w-[300px] 3xl:min-w-[358px]">
+              <SideInfo unit={activeUnit} />
             </div>
           )}
         </div>
-
-        {/* RIGHT: Stats + download — desktop only */}
-        {activeUnit && (
-          <div className="hidden lg:flex flex-col justify-center gap-6 min-w-[300px] 3xl:min-w-[358px]">
-            <SideInfo unit={activeUnit} />
-          </div>
-        )}
-      </div>
       </div>
     </section>
   );

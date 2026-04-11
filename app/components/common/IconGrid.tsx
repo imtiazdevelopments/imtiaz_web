@@ -61,7 +61,7 @@ useEffect(() => {
         {/* Cards */}
         <div
           ref={gridRef}
-          className="grid grid-cols-2 lg:grid-cols-4 mt-5 2xl:mt-[60px]"
+          className="grid grid-cols-2 lg:grid-cols-4 mt-60"
         >
           {data.cards.map((loc, i) => (
             <div

@@ -142,7 +142,7 @@ const handleCardClick = () => {
             />
           </div>
 
-          <div className={`flex items-center justify-center gap-30 lg:gap-40 w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
+          <div className={`flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
             <div className="flex items-center gap-[10px]">
               <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-[#818082] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                 <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">

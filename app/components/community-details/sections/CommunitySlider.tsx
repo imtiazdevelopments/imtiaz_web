@@ -10,7 +10,7 @@ import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-const CommunitySlider = ({ images }: { images: string[] }) => {
+const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideImageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const bgImgRef = useRef<HTMLImageElement>(null);
@@ -37,7 +37,6 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const handleSlideChange = useCallback(
     (swiper: SwiperType) => {
       const prev = (swiper.previousIndex ?? 0) % images.length;
@@ -49,7 +48,8 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
         // After swiper fade completes, fade bg out too so next slide shows cleanly
         requestAnimationFrame(() => {
           if (bgImgRef.current) {
-            bgImgRef.current.style.transition = "opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1)";
+            bgImgRef.current.style.transition =
+              "opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1)";
             bgImgRef.current.style.opacity = "0";
           }
         });
@@ -58,22 +58,19 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
     [images],
   );
 
-  const handleSwiper = useCallback(
-    (swiper: SwiperType) => {
-      swiperRef.current = swiper;
-      // Ensure bg starts invisible — first slide is already on top
-      if (bgImgRef.current) {
-        bgImgRef.current.style.opacity = "0";
-      }
-    },
-    [],
-  );
+  const handleSwiper = useCallback((swiper: SwiperType) => {
+    swiperRef.current = swiper;
+    // Ensure bg starts invisible — first slide is already on top
+    if (bgImgRef.current) {
+      bgImgRef.current.style.opacity = "0";
+    }
+  }, []);
 
   return (
-    <section className="w-full bg-white " data-header="light">
+    <section data-header="light">
       <div
         ref={containerRef}
-        className="relative w-full h-[400px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[500px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
       >
         {/* z-0 — previous slide bg, fades out after each transition for zero flash */}
         <div className="absolute inset-0 z-0">
@@ -98,9 +95,13 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
             modules={[Autoplay, EffectFade]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
-            speed={700}
+            speed={500}
             loop={true}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            autoplay={{
+              delay: 4500,
+              disableOnInteraction: false,
+              waitForTransition: false, // ← key fix
+            }}
             onSwiper={handleSwiper}
             onSlideChange={(swiper) => {
               setActiveIndex(swiper.realIndex);
@@ -158,7 +159,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute left-20 lg:left-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
+          className="absolute left-20 lg:left-70 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
         >
           <button
             onClick={() => swiperRef.current?.slidePrev()}
@@ -181,7 +182,7 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute right-20 lg:right-70 bottom-50 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
+          className="absolute right-20 lg:right-70 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
         >
           <button
             onClick={() => swiperRef.current?.slideNext()}
@@ -215,4 +216,4 @@ const CommunitySlider = ({ images }: { images: string[] }) => {
   );
 };
 
-export default CommunitySlider;
+export default SignatureMomentsSlider;
