@@ -2,29 +2,50 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useId } from "react";
 import { CommunityCard as CommunityCardType } from "../data";
 import OutlineButton from "@/app/components/common/CustomOutlineButton";
 import { useParallax } from "@/app/hooks/useParallax";
 
 const CommunityCard = ({ card }: { card: CommunityCardType }) => {
-  const [active, setActive] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const cardId = useId();
   const { ref, parallaxY } = useParallax(15);
 
+  const active = isHovered || isActive;
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsTouch(window.matchMedia("(hover: none)").matches);
+    const handleOtherCardActive = (e: Event) => {
+      const { id } = (e as CustomEvent).detail;
+      if (id !== cardId) setIsActive(false);
+    };
+
+    window.addEventListener("card:activated", handleOtherCardActive);
+    return () =>
+      window.removeEventListener("card:activated", handleOtherCardActive);
+  }, [cardId]);
+
+  const handleCardClick = () => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+
+    const next = !isActive;
+    setIsActive(next);
+
+    if (next) {
+      window.dispatchEvent(
+        new CustomEvent("card:activated", { detail: { id: cardId } }),
+      );
     }
-  }, []);
+  };
 
   return (
     <div
       ref={ref}
       className="relative w-full h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden cursor-pointer select-none"
-      onMouseEnter={() => !isTouch && setActive(true)}
-      onMouseLeave={() => !isTouch && setActive(false)}
-      onClick={() => isTouch && setActive((prev) => !prev)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       {/* Background Image */}
       <Image
@@ -60,7 +81,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
       {/* Active overlay */}
       <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-in-out"
+        className="absolute inset-0 pointer-events-none transition-opacity duration-500 ease-in-out"
         style={{
           opacity: active ? 1 : 0,
           background: `linear-gradient(180deg, rgba(0,0,0,0) 35.92%, #000000 100%), linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5))`,
@@ -69,7 +90,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
       {/* DEFAULT STATE */}
       <div
-        className="absolute inset-0 flex flex-col justify-end px-30 pb-30 lg:px-40 lg:pb-40 transition-opacity duration-300 ease-in-out pointer-events-none"
+        className="absolute inset-0 flex flex-col justify-end px-30 pb-30 lg:px-40 lg:pb-40 transition-opacity duration-500 ease-in-out pointer-events-none"
         style={{ transform: active ? "translateY(110%)" : "translateY(0)" }}
       >
         <h3
