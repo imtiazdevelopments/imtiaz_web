@@ -192,20 +192,17 @@ const updateParam = useCallback(
 
     savedScrollY.current = window.scrollY;
 
-    // ← Remove lock() and unlock() entirely
+    lock();  // ← add back
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    setTimeout(() => { unlock(); }, 520);
   },
-  [pathname, router],
+  [pathname, router, lock, unlock],
 );
 
   const clearFilters = useCallback(() => {
     savedScrollY.current = window.scrollY;
-    lock();
     router.replace(`${pathname}?page=1`, { scroll: false });
-    setTimeout(() => {
-      unlock();
-    }, 520);
-  }, [pathname, router, lock, unlock]);
+  }, [pathname, router]);
 
   const handlePageChange = useCallback(
     (page: number) => {
