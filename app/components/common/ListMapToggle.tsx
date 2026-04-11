@@ -6,7 +6,7 @@ export default function ListMapToggle({
   setView: (val: "list" | "map") => void;
 }) {
   return (
-    <div className="flex items-center gap-2 text-description">
+    <div className="flex items-center gap-2 text-description z-[10]">
       <button
         onClick={() => setView("list")}
         className={`transition-all duration-300 cursor-pointer ${
