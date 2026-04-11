@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect, useCallback } from "react";
+import { useMemo, useEffect, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
   blogs,
@@ -22,13 +22,55 @@ import {
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { useLenis } from "@/app/contexts/LenisContext";
+import { SearchX } from "lucide-react";
 
 const BLOGS_PER_PAGE = 4;
 
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray">
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
+    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground">No Blog found</motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs">
+        No results match your current filters. Try adjusting or clearing your selection.
+      </motion.p>
+    </div>
+  </div>
+);
+
+// ── BlogsSection ─────────────────────────────────────────────────────────────
 const BlogsSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
 
   const selectedTopic = (searchParams.get("topic") as BlogTopic) || "";
   const selectedCategory = (searchParams.get("category") as BlogCategory) || "";
@@ -36,31 +78,55 @@ const BlogsSection = () => {
   const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [pathname]);
 
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      requestAnimationFrame(() => {
+        scrollTo(y, { duration: 0 });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams, scrollTo]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const scrollY = window.scrollY;
-      const params = new URLSearchParams(searchParams.toString());
+      // Read from ref — always latest, never stale
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+
+      // Save scroll before navigation so the layout-shrink jump is masked
+      savedScrollY.current = window.scrollY;
+
       lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
       setTimeout(() => {
-        scrollTo(scrollY, { duration: 0 });
         unlock();
       }, 520);
     },
-    [searchParams, pathname, router, lock, unlock, scrollTo],
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
@@ -97,11 +163,11 @@ const BlogsSection = () => {
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
   return (
@@ -218,9 +284,7 @@ const BlogsSection = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-foreground-light text-description py-20">
-              No blogs found for selected filters.
-            </p>
+            <EmptyState />
           )}
         </div>
 
