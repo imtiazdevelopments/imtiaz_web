@@ -17,6 +17,7 @@ import Pagination from "../../common/Pagination";
 import Image from "next/image";
 import { Plus, SearchX } from "lucide-react";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 type PropertyType =
   | "Villa"
@@ -65,16 +66,38 @@ const priceInRange = (raw: string, range: PriceRange): boolean => {
 };
 
 // ── Empty state ──────────────────────────────────────────────────────────────
-const EmptyState = ({ onClear }: { onClear: () => void }) => (
+const EmptyState = () => (
   <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
-    <div className="flex items-center justify-center w-18 h-18 rounded-full bg-gray">
-      <SearchX size={32} className="text-foreground-light" />
-    </div>
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
     <div className="flex flex-col gap-2 font-[avenirHeavy]">
-      <p className="text-25 text-foreground">No properties found</p>
-      <p className="text-description text-foreground-light max-w-xs">
-        No results match your current filters. Try adjusting or clearing your selection.
-      </p>
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground"
+      >
+        No Properties found
+      </motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
+      </motion.p>
     </div>
   </div>
 );
@@ -95,6 +118,21 @@ const Main = () => {
 
   // Saved scroll position while a filter navigation is in flight
   const savedScrollY = useRef<number | null>(null);
+
+  // Guards against our own programmatic scroll triggering the "scroll" listener
+  // and clearing savedScrollY before the restore effect has a chance to run
+  const isRestoringScroll = useRef(false);
+
+  // Root cause of the inconsistent filter bug:
+  // FilterDropdown uses Lenis internally (scrollTo with duration:0.8).
+  // This fires continuous "scroll" events during its animation.
+  // The previous version used native window.scrollTo for restore AND had no
+  // lock/unlock around router.push — so Lenis's RAF loop kept firing "scroll"
+  // events that cleared savedScrollY mid-navigation, making the restore a no-op
+  // and causing Lenis to override the native window.scrollTo call on its next tick.
+  // Fix: lock Lenis around router.push (same as every other section), use Lenis
+  // scrollTo for restore so Lenis's internal state stays in sync.
+  const { scrollTo, lock, unlock } = useLenis();
 
   const selectedPropertyType =
     (searchParams.get("propertyType") as PropertyType) || "";
@@ -123,22 +161,29 @@ const Main = () => {
     }
   }, [pathname]);
 
-  // Restore scroll position after URL change, if we saved one
+  // Restore scroll after URL change using Lenis scrollTo (not window.scrollTo)
+  // so Lenis's internal position tracker stays in sync and won't override it
   useEffect(() => {
     if (savedScrollY.current !== null) {
       const y = savedScrollY.current;
-      // Use rAF to let React finish painting first
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: y, behavior: "instant" });
-      });
       savedScrollY.current = null;
+      isRestoringScroll.current = true;
+      requestAnimationFrame(() => {
+        scrollTo(y, { duration: 0 });
+        requestAnimationFrame(() => {
+          isRestoringScroll.current = false;
+        });
+      });
     }
-  }, [searchParams]);
+  }, [searchParams, scrollTo]);
 
-  // Clear saved scroll on any manual scroll (user intentionally moved)
+  // Clear savedScrollY on genuine user scroll only — the isRestoringScroll guard
+  // prevents our own programmatic scrollTo from triggering this
   useEffect(() => {
     const onScroll = () => {
-      savedScrollY.current = null;
+      if (!isRestoringScroll.current) {
+        savedScrollY.current = null;
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -152,19 +197,28 @@ const Main = () => {
       else params.delete(key);
       params.set("page", "1");
 
-      // Save scroll before navigation so the layout-shrink jump is masked
       savedScrollY.current = window.scrollY;
 
+      // lock() stops Lenis's RAF loop from firing "scroll" events during
+      // navigation — without this, those events clear savedScrollY before
+      // the restore effect runs, which was the root cause of the filter bug
+      lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        unlock();
+      }, 520);
     },
-    [pathname, router],
-    // Note: searchParams intentionally omitted — we read from the ref instead
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
     savedScrollY.current = window.scrollY;
+    lock();
     router.replace(`${pathname}?page=1`, { scroll: false });
-  }, [pathname, router]);
+    setTimeout(() => {
+      unlock();
+    }, 520);
+  }, [pathname, router, lock, unlock]);
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -428,7 +482,7 @@ const Main = () => {
         {view === "list" ? (
           <div className="flex flex-col justify-center container">
             <div className="text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px] min-h-[400px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
                 {paginated.length > 0 ? (
                   paginated.map((project, i) => (
                     <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
@@ -436,7 +490,7 @@ const Main = () => {
                     </Reveal>
                   ))
                 ) : (
-                  <EmptyState onClear={clearFilters} />
+                  <EmptyState />
                 )}
               </div>
             </div>
