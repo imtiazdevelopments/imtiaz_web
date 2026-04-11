@@ -15,7 +15,7 @@ import { SectionDescription } from "../../animations/SectionDescription";
 import { containerStagger, moveUp, moveUpV2 } from "../../motionVariants";
 import Pagination from "../../common/Pagination";
 import Image from "next/image";
-import { Plus } from "lucide-react";
+import { Plus, SearchX } from "lucide-react";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 
 type PropertyType =
@@ -64,12 +64,37 @@ const priceInRange = (raw: string, range: PriceRange): boolean => {
   return true;
 };
 
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = ({ onClear }: { onClear: () => void }) => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <div className="flex items-center justify-center w-18 h-18 rounded-full bg-gray">
+      <SearchX size={32} className="text-foreground-light" />
+    </div>
+    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+      <p className="text-25 text-foreground">No properties found</p>
+      <p className="text-description text-foreground-light max-w-xs">
+        No results match your current filters. Try adjusting or clearing your selection.
+      </p>
+    </div>
+  </div>
+);
+
+// ── Main ─────────────────────────────────────────────────────────────────────
 const Main = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
 
   const selectedPropertyType =
     (searchParams.get("propertyType") as PropertyType) || "";
@@ -91,35 +116,63 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
+
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      // Use rAF to let React finish painting first
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: y, behavior: "instant" });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      // Read from ref — always latest, never stale
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+
+      // Save scroll before navigation so the layout-shrink jump is masked
+      savedScrollY.current = window.scrollY;
+
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
+    // Note: searchParams intentionally omitted — we read from the ref instead
   );
 
   const clearFilters = useCallback(() => {
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
   const hasFilter =
@@ -362,7 +415,11 @@ const Main = () => {
         />
         <SectionDescription
           className="text-description text-foreground-light"
-          text={`Showing ${filtered.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–${Math.min(currentPage * itemsPerPage, filtered.length)} of ${filtered.length} premium developments`}
+          text={
+            filtered.length !== 0
+              ? `Showing ${(currentPage - 1) * itemsPerPage + 1}–${Math.min(currentPage * itemsPerPage, filtered.length)} of ${filtered.length} premium developments`
+              : ""
+          }
         />
       </div>
 
@@ -371,12 +428,16 @@ const Main = () => {
         {view === "list" ? (
           <div className="flex flex-col justify-center container">
             <div className="text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
-                {paginated.map((project, i) => (
-                  <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                    <ProjectCard {...project} />
-                  </Reveal>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px] min-h-[400px]">
+                {paginated.length > 0 ? (
+                  paginated.map((project, i) => (
+                    <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
+                      <ProjectCard {...project} />
+                    </Reveal>
+                  ))
+                ) : (
+                  <EmptyState onClear={clearFilters} />
+                )}
               </div>
             </div>
           </div>

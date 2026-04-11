@@ -72,7 +72,7 @@ export default function MessageSection({ data }: Props) {
       <div className="relative z-10 flex flex-1 items-end">
         <div className="w-full container">
           {/* ── DESKTOP (lg+): original 3-col grid, unchanged ── */}
-          <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] mt-150">
+          <div className={`hidden lg:grid grid-cols-[1fr_auto_1fr] ${data.id === "chairman" ? "mt-150" : "mt-130"}`}>
             {/* Col 1 — Left Content */}
             <div className="h-full flex flex-col justify-between pb-130 ml-[12%] 3xl:ml-[27.6%]">
               <div>
@@ -262,8 +262,8 @@ export default function MessageSection({ data }: Props) {
                 <Image
                   src={data.personImage}
                   alt={data.name}
-                  width={800}
-                  height={800}
+                  width={1200}
+                  height={1000}
                   className="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain object-bottom"
                   priority
                 />
