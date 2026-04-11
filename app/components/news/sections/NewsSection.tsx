@@ -118,23 +118,22 @@ const NewsSection = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-const updateParam = useCallback(
-  (key: string, value: string) => {
-    console.log("updateParam called", key, value); // ← add this
-    const params = new URLSearchParams(searchParamsRef.current.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const params = new URLSearchParams(searchParamsRef.current.toString());
+      if (value) params.set(key, value);
+      else params.delete(key);
+      params.set("page", "1");
 
-    savedScrollY.current = window.scrollY;
-
-    console.log("about to push", params.toString()); // ← and this
-    lock();
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-    setTimeout(() => { unlock(); }, 520);
-  },
-  [pathname, router, lock, unlock],
-);
+      savedScrollY.current = window.scrollY;
+      lock();
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        unlock();
+      }, 520);
+    },
+    [pathname, router, lock, unlock],
+  );
 
   const clearFilters = useCallback(() => {
     savedScrollY.current = window.scrollY;
