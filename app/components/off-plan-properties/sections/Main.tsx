@@ -65,6 +65,10 @@ const priceInRange = (raw: string, range: PriceRange): boolean => {
   return true;
 };
 
+// Derive itemsPerPage from window width — no state, no spurious re-renders
+const getItemsPerPage = () =>
+  typeof window !== "undefined" && window.innerWidth >= 1600 ? 8 : 6;
+
 // ── Empty state ──────────────────────────────────────────────────────────────
 const EmptyState = () => (
   <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
@@ -119,19 +123,6 @@ const Main = () => {
   // Saved scroll position while a filter navigation is in flight
   const savedScrollY = useRef<number | null>(null);
 
-  // Guards against our own programmatic scroll triggering the "scroll" listener
-  // and clearing savedScrollY before the restore effect has a chance to run
-  const isRestoringScroll = useRef(false);
-
-  // Root cause of the inconsistent filter bug:
-  // FilterDropdown uses Lenis internally (scrollTo with duration:0.8).
-  // This fires continuous "scroll" events during its animation.
-  // The previous version used native window.scrollTo for restore AND had no
-  // lock/unlock around router.push — so Lenis's RAF loop kept firing "scroll"
-  // events that cleared savedScrollY mid-navigation, making the restore a no-op
-  // and causing Lenis to override the native window.scrollTo call on its next tick.
-  // Fix: lock Lenis around router.push (same as every other section), use Lenis
-  // scrollTo for restore so Lenis's internal state stays in sync.
   const { scrollTo, lock, unlock } = useLenis();
 
   const selectedPropertyType =
@@ -142,13 +133,24 @@ const Main = () => {
   const currentPage = Number(searchParams.get("page") || "1");
   const [view, setView] = useState<"list" | "map">("list");
 
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const itemsPerPageRef = useRef(6); // always 6 on server to match SSR
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
+    // Correct value after hydration (server always renders with 6)
+    const initial = getItemsPerPage();
+    if (initial !== itemsPerPageRef.current) {
+      itemsPerPageRef.current = initial;
+      forceUpdate((n) => n + 1);
+    }
+
     const update = () => {
-      setItemsPerPage(window.innerWidth >= 1600 ? 8 : 6);
+      const next = getItemsPerPage();
+      if (next !== itemsPerPageRef.current) {
+        itemsPerPageRef.current = next;
+        forceUpdate((n) => n + 1);
+      }
     };
-    update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
@@ -161,29 +163,21 @@ const Main = () => {
     }
   }, [pathname]);
 
-  // Restore scroll after URL change using Lenis scrollTo (not window.scrollTo)
-  // so Lenis's internal position tracker stays in sync and won't override it
+  // Restore scroll position after URL change, if we saved one
   useEffect(() => {
     if (savedScrollY.current !== null) {
       const y = savedScrollY.current;
-      savedScrollY.current = null;
-      isRestoringScroll.current = true;
       requestAnimationFrame(() => {
         scrollTo(y, { duration: 0 });
-        requestAnimationFrame(() => {
-          isRestoringScroll.current = false;
-        });
       });
+      savedScrollY.current = null;
     }
   }, [searchParams, scrollTo]);
 
-  // Clear savedScrollY on genuine user scroll only — the isRestoringScroll guard
-  // prevents our own programmatic scrollTo from triggering this
+  // Clear saved scroll on any manual scroll (user intentionally moved)
   useEffect(() => {
     const onScroll = () => {
-      if (!isRestoringScroll.current) {
-        savedScrollY.current = null;
-      }
+      savedScrollY.current = null;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -191,7 +185,6 @@ const Main = () => {
 
   const updateParam = useCallback(
     (key: string, value: string) => {
-      // Read from ref — always latest, never stale
       const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
@@ -199,9 +192,6 @@ const Main = () => {
 
       savedScrollY.current = window.scrollY;
 
-      // lock() stops Lenis's RAF loop from firing "scroll" events during
-      // navigation — without this, those events clear savedScrollY before
-      // the restore effect runs, which was the root cause of the filter bug
       lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
       setTimeout(() => {
@@ -260,6 +250,8 @@ const Main = () => {
       return true;
     });
   }, [selectedPropertyType, selectedPriceRange, selectedBedroom, sorted]);
+
+  const itemsPerPage = itemsPerPageRef.current;
 
   const totalPages = useMemo(
     () => Math.ceil(filtered.length / itemsPerPage),
@@ -379,6 +371,7 @@ const Main = () => {
                   onChange={(val) => updateParam("priceRange", val)}
                 />
               </motion.div>
+
               <motion.div variants={moveUp(0.15)} className="w-full">
                 <FilterDropdown
                   placeholder="Property Type"
@@ -436,7 +429,7 @@ const Main = () => {
             </div>
           </motion.div>
 
-          {/* List/Map toggle — only between xl and 2xl */}
+          {/* List/Map toggle — only between xl and 2xl when filter active */}
           <motion.div
             initial="hidden"
             whileInView="show"
