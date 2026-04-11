@@ -192,7 +192,7 @@ const updateParam = useCallback(
 
     savedScrollY.current = window.scrollY;
 
-    lock();  // ← add back
+    lock();
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
     setTimeout(() => { unlock(); }, 520);
   },

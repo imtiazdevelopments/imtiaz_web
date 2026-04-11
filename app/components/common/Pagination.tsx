@@ -27,7 +27,7 @@ const handleClick = (page: number) => {
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY - 150;
     scrollTo(top, { duration: 1.2 });
-  }, 60);
+  }, 20);
 };
 
   const getPages = (): (number | "...")[] => {

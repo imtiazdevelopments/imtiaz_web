@@ -15,16 +15,49 @@ import Pagination from "../../common/Pagination";
 import { Plus } from "lucide-react";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import CustomSearch from "../../common/CustomSearch";
+import { useLenis } from "@/app/contexts/LenisContext";
 
-// ── Filter options ──────────────────────────────────────────────
-type PropertyType = "Villa" | "Apartment" | "Townhouse" | "Penthouse" | "Studio" | "";
-type PropertyStatus = "Available" | "Off Plan" | "Completed" | "Under Construction" | "";
-type Community = "Downtown" | "Waterfront" | "Suburbs" | "Business Bay" | "Old Town" | "";
+type PropertyType =
+  | "Villa"
+  | "Apartment"
+  | "Townhouse"
+  | "Penthouse"
+  | "Studio"
+  | "";
+type PropertyStatus =
+  | "Available"
+  | "Off Plan"
+  | "Completed"
+  | "Under Construction"
+  | "";
+type Community =
+  | "Downtown"
+  | "Waterfront"
+  | "Suburbs"
+  | "Business Bay"
+  | "Old Town"
+  | "";
 
-const propertyTypes: PropertyType[] = ["Villa", "Apartment", "Townhouse", "Penthouse", "Studio"];
-const propertyStatuses: PropertyStatus[] = ["Available", "Off Plan", "Completed", "Under Construction"];
-const communities: Community[] = ["Downtown", "Waterfront", "Suburbs", "Business Bay", "Old Town"];
-// ────────────────────────────────────────────────────────────────
+const propertyTypes: PropertyType[] = [
+  "Villa",
+  "Apartment",
+  "Townhouse",
+  "Penthouse",
+  "Studio",
+];
+const propertyStatuses: PropertyStatus[] = [
+  "Available",
+  "Off Plan",
+  "Completed",
+  "Under Construction",
+];
+const communities: Community[] = [
+  "Downtown",
+  "Waterfront",
+  "Suburbs",
+  "Business Bay",
+  "Old Town",
+];
 
 const Main = () => {
   const router = useRouter();
@@ -33,58 +66,106 @@ const Main = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const selectedPropertyType = (searchParams.get("propertyType") as PropertyType) || "";
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
+
+  const { scrollTo, lock, unlock } = useLenis();
+
+  const selectedPropertyType =
+    (searchParams.get("propertyType") as PropertyType) || "";
   const selectedStatus = (searchParams.get("status") as PropertyStatus) || "";
   const selectedCommunity = (searchParams.get("community") as Community) || "";
   const currentPage = Number(searchParams.get("page") || "1");
   const [searchQuery, setSearchQuery] = useState("");
   const [view, setView] = useState<"list" | "map">("list");
 
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const itemsPerPageRef = useRef(6);
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
+    const initial = window.innerWidth >= 1600 ? 8 : 6;
+    if (initial !== itemsPerPageRef.current) {
+      itemsPerPageRef.current = initial;
+      forceUpdate((n) => n + 1);
+    }
     const update = () => {
-      setItemsPerPage(window.innerWidth >= 1600 ? 8 : 6);
+      const next = window.innerWidth >= 1600 ? 8 : 6;
+      if (next !== itemsPerPageRef.current) {
+        itemsPerPageRef.current = next;
+        forceUpdate((n) => n + 1);
+      }
     };
-    update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [pathname]);
 
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      requestAnimationFrame(() => {
+        scrollTo(y, { duration: 0 });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams, scrollTo]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+      savedScrollY.current = window.scrollY;
+      lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        unlock();
+      }, 520);
     },
-    [searchParams, pathname, router],
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
     setSearchQuery("");
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
-  const hasFilter = selectedPropertyType || selectedStatus || selectedCommunity || searchQuery;
+  const hasFilter =
+    selectedPropertyType || selectedStatus || selectedCommunity || searchQuery;
 
   const sorted = useMemo(
     () =>
@@ -96,10 +177,11 @@ const Main = () => {
 
   const filtered = useMemo(() => {
     return sorted.filter((item) => {
-      if (selectedPropertyType && item.propertyType !== selectedPropertyType) return false;
+      if (selectedPropertyType && item.propertyType !== selectedPropertyType)
+        return false;
       if (selectedStatus && item.status !== selectedStatus) return false;
-      if (selectedCommunity && item.community !== selectedCommunity) return false;
-
+      if (selectedCommunity && item.community !== selectedCommunity)
+        return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         const matches =
@@ -108,10 +190,17 @@ const Main = () => {
           item.propertyType.toLowerCase().includes(q);
         if (!matches) return false;
       }
-
       return true;
     });
-  }, [selectedPropertyType, selectedStatus, selectedCommunity, searchQuery, sorted]);
+  }, [
+    selectedPropertyType,
+    selectedStatus,
+    selectedCommunity,
+    searchQuery,
+    sorted,
+  ]);
+
+  const itemsPerPage = itemsPerPageRef.current;
 
   const totalPages = useMemo(
     () => Math.ceil(filtered.length / itemsPerPage),
@@ -126,7 +215,6 @@ const Main = () => {
   return (
     <section className="w-full bg-white pt-70" data-header="dark">
       <div className="w-full container">
-
         {/* ── Mobile: collapsible filter (below lg) ── */}
         <div className="lg:hidden mb-70">
           <motion.div
@@ -343,7 +431,9 @@ const Main = () => {
             variants={moveUp(0.1)}
             className="w-full h-full"
           >
-            <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}>
+            <APIProvider
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
+            >
               <ProjectList projects={filtered} />
             </APIProvider>
           </motion.div>
