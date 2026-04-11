@@ -170,7 +170,12 @@ const handleCardClick = () => {
           </div>
 
           <div onClick={(e) => e.stopPropagation()}>
-            <Link href={`/properties/${title}`}>
+            <Link
+  href={`/properties/${title
+    .replace(/<br\s*\/?>/gi, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")}`}
+>
               <CustomOutlineButton
                 text="View Property"
                 px="px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
