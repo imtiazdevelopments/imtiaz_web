@@ -4,103 +4,157 @@ import { LandpropertyData } from "../data";
 import ProjectCard from "../../common/ProjectCard";
 import { SectionHeading } from "../../animations/SectionHeading";
 import type { Swiper as SwiperType } from "swiper";
-
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { motion } from "framer-motion";
-import { moveUp } from "@/app/components/motionVariants";
+import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import Image from "next/image";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Reveal from "../../animations/RevealOneByOneAnimation";
 
 const LandpropertyCards = () => {
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const [initialCount, setInitialCount] = useState(6);
+
+  useEffect(() => {
+    const getCount = () => (window.innerWidth >= 1700 ? 8 : 6);
+    setInitialCount(getCount());
+
+    const handleResize = () => setInitialCount(getCount());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const cards = LandpropertyData.cards;
+  const hasMore = cards.length > initialCount;
+  const visibleCards = showAll ? cards : cards.slice(0, initialCount);
 
   return (
     <section data-header="dark" className="w-full">
       <div className="container flex flex-col justify-center">
-
         <div className="text-center">
           <SectionHeading
             title={LandpropertyData.title}
             className="text-heading mb-50"
           />
 
-          {/* 📱 MOBILE: SWIPER */}
-          <div className="block md:hidden mobslider relative">
+          {/* 📱 MOBILE to 1140: SWIPER */}
+          <div className="block min-[1140px]:hidden relative">
             <Swiper
-              modules={[Autoplay, Pagination]}
-              loop={true}
+              modules={[Autoplay, Navigation]}
+              spaceBetween={28}
               slidesPerView={1}
-              spaceBetween={16}
+              loop
               onSwiper={(swiper) => {
-                swiperRef.current = swiper; // ✅ assign here
+                swiperRef.current = swiper;
               }}
-              className="pb-5"
+              onBeforeInit={(s) => {
+                s.params.navigation = {
+                  ...(s.params.navigation as object),
+                  prevEl: prevRef.current,
+                  nextEl: nextRef.current,
+                };
+              }}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+              }}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+              }}
             >
-              {LandpropertyData.cards.map((project) => (
+              {cards.map((project) => (
                 <SwiperSlide key={project.id}>
                   <ProjectCard {...project} />
                 </SwiperSlide>
               ))}
             </Swiper>
 
-            {/* prev button — z-30 above gradient, pointer-events-auto */}
-                    <motion.div
-                      variants={moveUp(0.2)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true }}
-                      className="absolute left-20 lg:left-70 bottom-1/2 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
-                    >
-                      <button
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
-                      >
-                        <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-                        <Image
-                          src="/icons/left_arrow_slider_primary.svg"
-                          alt="Previous"
-                          width={28}
-                          height={28}
-                          className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-                        />
-                      </button>
-                    </motion.div>
-            
-                    {/* next button — z-30 above gradient, pointer-events-auto */}
-                    <motion.div
-                      variants={moveUp(0.3)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true }}
-                      className="absolute right-20 lg:right-70 bottom-1/2 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 z-30 pointer-events-auto"
-                    >
-                      <button
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
-                      >
-                        <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-                        <Image
-                          src="/icons/left_arrow_slider_primary.svg"
-                          alt="Next"
-                          width={28}
-                          height={28}
-                          className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-                        />
-                      </button>
-                    </motion.div>
+            {/* Nav buttons */}
+            <div className="flex items-center justify-center gap-[15px] mt-30">
+              <motion.div
+                variants={moveUp(0.8)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <button
+                  ref={prevRef}
+                  className="relative cursor-pointer w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+                >
+                  <span className="absolute right-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+                  <Image
+                    src="/icons/left_arrow_slider_primary.svg"
+                    alt="Previous"
+                    width={28}
+                    height={28}
+                    className="relative z-10 object-contain w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                  />
+                </button>
+              </motion.div>
+              <motion.div
+                variants={moveUp(0.95)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <button
+                  ref={nextRef}
+                  className="relative cursor-pointer w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+                >
+                  <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+                  <Image
+                    src="/icons/left_arrow_slider_primary.svg"
+                    alt="Next"
+                    width={28}
+                    height={28}
+                    className="relative z-10 rotate-180 object-contain w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                  />
+                </button>
+              </motion.div>
+            </div>
           </div>
 
-          {/* 💻 DESKTOP: GRID */}
-          <div className="hidden md:grid grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 xl:gap-x-[28px] xl:gap-y-[50px]">
-            {LandpropertyData.cards.map((project) => (
-              <ProjectCard key={project.id} {...project} />
+          {/* 💻 DESKTOP 1140+: GRID */}
+          <div className="hidden min-[1140px]:grid min-[1140px]:grid-cols-3 min-[1700px]:grid-cols-4 3xl:gap-y-50 gap-y-40 gap-x-30 xl:gap-x-[28px]">
+            {visibleCards.map((project, index) => (
+              <Reveal
+                variants={moveUpV2}
+                key={project.id}
+                delayRange={index * 0.1}
+              >
+                <ProjectCard {...project} />
+              </Reveal>
             ))}
           </div>
-        </div>
 
+          {/* View More — desktop only, only if remaining cards exist */}
+          {hasMore && !showAll && (
+            <div className="hidden min-[1140px]:flex justify-center mt-50">
+              <motion.div
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <CustomOutlineButton
+                  text="View More"
+                  variant="dark"
+                  borderColor="border-primary"
+                  textColor="text-foreground-light"
+                  px="px-[12px] sm:px-[26px] xl:px-[37px]"
+                  onClick={() => setShowAll(true)}
+                />
+              </motion.div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ const Index = () => {
     <>
       <InnerHeroBanner {...bannerData} maxTitle="max-w-[73ch]" />
       <ProjectIntro />
-      <ConstructionProgress />
+      {/* <ConstructionProgress /> */}
       <IconGrid data={EverythingWithinData} />
       <GallerySlider />
       <Amenities data={amenitiesData} maxTitle="max-w-[90ch]" />

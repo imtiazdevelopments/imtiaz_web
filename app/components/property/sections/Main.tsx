@@ -12,7 +12,7 @@ import ProjectList from "./ProjectList";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import { containerStagger, moveUp, moveUpV2 } from "../../motionVariants";
 import Pagination from "../../common/Pagination";
-import { Plus } from "lucide-react";
+import { Plus, SearchX } from "lucide-react";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import CustomSearch from "../../common/CustomSearch";
 import { useLenis } from "@/app/contexts/LenisContext";
@@ -58,6 +58,43 @@ const communities: Community[] = [
   "Business Bay",
   "Old Town",
 ];
+
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
+    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground"
+      >
+        No Properties found
+      </motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
+      </motion.p>
+    </div>
+  </div>
+);
 
 const Main = () => {
   const router = useRouter();
@@ -414,13 +451,17 @@ const Main = () => {
         {view === "list" ? (
           <div className="flex flex-col justify-center container">
             <div className="text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
-                {paginated.map((project, i) => (
-                  <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                    <ProjectCard {...project} />
-                  </Reveal>
-                ))}
-              </div>
+              {paginated.length === 0 ? (
+                <EmptyState />
+              ) : (
+                <div className="project-card-grid">
+                  {paginated.map((project, i) => (
+                    <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
+                      <ProjectCard {...project} />
+                    </Reveal>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ) : (

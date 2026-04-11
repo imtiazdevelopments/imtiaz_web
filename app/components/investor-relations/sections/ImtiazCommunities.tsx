@@ -19,6 +19,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { communityNamesData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -313,15 +314,14 @@ export default function HeroFeatureSlider() {
                                 pointerEvents: active ? "auto" : "none",
                               }} // ← control clicks here instead
                             >
-                              <CustomOutlineButton
-                                onClick={() =>
-                                  c.link && (window.location.href = c.link)
-                                }
-                                text="Read More"
-                                borderColor="border-white"
-                                textColor="text-white"
-                                px="px-[12px] sm:px-[26px] xl:px-[36.7px]"
-                              />
+                              <Link href={`/communities/${c.name.toLowerCase().replace(/ /g, "-")}`}>
+                                <CustomOutlineButton
+                                  text="Read More"
+                                  borderColor="border-white"
+                                  textColor="text-white"
+                                  px="px-[12px] sm:px-[26px] xl:px-[36.7px]"
+                                />
+                              </Link>
                             </div>
                           </motion.div>
                         </div>
