@@ -171,7 +171,7 @@ export default function FeaturedProjects({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr]  2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[749px_1fr] gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr] 2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[calc(749px+70px)_1fr] gap-20"
         >
           {/* Left Column */}
           <div
@@ -222,7 +222,6 @@ export default function FeaturedProjects({
             </div>
           </div>
 
-          {/* Right Column Map for Desktop */}
           {/* Right Column Map for Desktop */}
           <motion.div
             initial="hidden"

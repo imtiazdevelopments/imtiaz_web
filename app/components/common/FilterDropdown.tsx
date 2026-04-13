@@ -10,6 +10,7 @@ import Image from "next/image";
 interface FilterDropdownProps {
   placeholder: string;
   options: string[];
+  variant?: "primary" | "secondary";
   value: string;
   onChange: (val: string) => void;
   className?: string;
@@ -18,6 +19,7 @@ interface FilterDropdownProps {
 const FilterDropdown = ({
   placeholder,
   options,
+  variant = "primary",
   value,
   onChange,
   className,
@@ -103,7 +105,7 @@ const FilterDropdown = ({
       {/* Trigger */}
       <button
         onClick={handleToggle}
-        className="w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirHeavy] text-16 text-foreground-light cursor-pointer"
+        className={`w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full ${variant === "primary" ? "bg-[#EBEBEC]" : "bg-transparent border border-primary"} font-[avenirHeavy] text-16 text-foreground-light cursor-pointer`}
       >
         <span className={value ? "text-foreground" : "text-foreground-light"}>
           {value || placeholder}
@@ -164,7 +166,7 @@ const FilterDropdown = ({
                   }}
                   className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-black/5 ${
                     value === opt
-                      ? "text-primary-2 font-[avenirHeavy]"
+                      ? "text-primary font-[avenirHeavy]"
                       : "text-foreground-light"
                   }`}
                 >

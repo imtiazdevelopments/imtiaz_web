@@ -1,0 +1,120 @@
+export const bannerData = {
+    image: "/images/careers/banner.jpg",
+    title: "career at imtiaz",
+    description: "Welcome to Imtiaz Developments, where excellence meets opportunity."
+}
+
+export const careerImpactAreas = {
+  title: "Join Imtiaz Developments",
+  description: "Be part of our team of visionaries, innovators, and creative minds. We believe in nurturing talent, fostering creativity, and providing a platform for growth. If you are driven by excellence, thrive in a dynamic environment, \n and seek to transform dreams into reality",
+  items: [
+    {
+      id: "Competitive salaries",
+      title: "Competitive salaries",
+      description:
+        "We offer competitive salaries and benefits to attract and retain top talent.",
+      image: "/images/careers/car-slide-1.jpg",
+    },
+    {
+      id: "key Benefits",
+      title: "Key Benefits",
+      description:
+        "We actively promote corporate social responsibility across our communities, fostering a culture of care and conscious living.",
+      image: "/images/expertise/banner.jpg",
+    },
+    {
+      id: "Collective culture",
+      title: "Collective culture",
+      description:
+        "At Imtiaz Developments, we foster a collaborative and inclusive environment where every team member’s contribution is valued. We believe that our collective strength drives our success.",
+      image: "/images/sustainability/banner.jpg",
+    },
+  ],
+};
+
+export type JobType = "Full Time" | "Part Time" | "Contract" | "Remote";
+export type Department =
+  | "Marketing"
+  | "Design & Architecture"
+  | "Sales"
+  | "Real Estate"
+  | "Leasing"
+  | "Operations";
+
+export interface Career {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  jobType: JobType;
+  department: Department;
+}
+
+export const careersData: Career[] = [
+  {
+    id: "1",
+    title: "Marketing Lead",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Marketing",
+  },
+  {
+    id: "2",
+    title: "Design & Architecture",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Design & Architecture",
+  },
+  {
+    id: "3",
+    title: "Property Sales Executive",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Sales",
+  },
+  {
+    id: "4",
+    title: "Channel Sales Manager",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Sales",
+  },
+  {
+    id: "5",
+    title: "Real Estate Advisor",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Real Estate",
+  },
+  {
+    id: "6",
+    title: "Leasing Consultant",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    location: "Dubai",
+    jobType: "Full Time",
+    department: "Leasing",
+  },
+];
+
+export const vacanciesConfig = {
+  section: {
+    title: "Vacancies",
+    description:
+      "Browse our open vacancies below. Use filters to refine search by role, discipline, and location, making it easier to find the perfect fit for your skills.",
+  },
+filters: {
+  department: ["Marketing", "Design & Architecture", "Sales", "Real Estate", "Leasing", "Operations"],
+  jobType: ["Full Time", "Part Time", "Contract", "Remote"],
+},
+};

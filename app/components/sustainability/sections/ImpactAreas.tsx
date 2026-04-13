@@ -1,17 +1,29 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { impactAreas } from "../data";
 import "swiper/css";
 import SliderArrowButton from "../../common/SliderNavigationButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 import Reveal from "../../animations/RevealOneByOneAnimation";
-import { moveUp, moveUpV2 } from "../../motionVariants";
+import { moveUpV2 } from "../../motionVariants";
+import { SectionDescription } from "../../animations/SectionDescription";
+
+type ImpactAreaItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
+type ImpactAreas = {
+  title: string;
+  description?: string;
+  items: ImpactAreaItem[];
+};
 
 const ColItem = ({
   item,
@@ -20,7 +32,7 @@ const ColItem = ({
   showDivider,
   onEnter,
 }: {
-  item: (typeof impactAreas.items)[0];
+  item: ImpactAreaItem;
   i: number;
   isActive: boolean;
   showDivider: boolean;
@@ -103,19 +115,18 @@ const ColItem = ({
   </div>
 );
 
-export default function ImpactAreas() {
+export default function ImpactAreas({data}: {data: ImpactAreas}) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const bgWrapperRef = useRef<HTMLDivElement>(null);
   const bgImageRef = useRef<HTMLImageElement>(null);
   const bgPrevImageRef = useRef<HTMLImageElement>(null);
   const bgCurrentWrapperRef = useRef<HTMLDivElement>(null); // only current fades
 
   useEffect(() => {
-    impactAreas.items.forEach((item) => {
+    data.items.forEach((item) => {
       const img = new window.Image();
       img.src = item.image;
     });
@@ -145,7 +156,7 @@ const handleEnter = (index: number) => {
   if (index === activeIndex) return;
   if (fadeTimer.current) clearTimeout(fadeTimer.current);
 
-  const nextSrc = impactAreas.items[index].image;
+  const nextSrc = data.items[index].image;
 
   // Pre-load next image first, then crossfade instantly
   const preload = new window.Image();
@@ -180,7 +191,7 @@ const handleEnter = (index: number) => {
 
 const handleSlideChange = (swiper: SwiperType) => {
   const index = swiper.realIndex;
-  const nextSrc = impactAreas.items[index].image;
+  const nextSrc = data.items[index].image;
 
   const preload = new window.Image();
   preload.src = nextSrc;
@@ -224,7 +235,7 @@ const handleSlideChange = (swiper: SwiperType) => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={bgPrevImageRef}
-          src={impactAreas.items[0].image}
+          src={data.items[0].image}
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ transform: "scale(1.15) translateY(0vh)" }}
@@ -235,7 +246,7 @@ const handleSlideChange = (swiper: SwiperType) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={bgImageRef}
-            src={impactAreas.items[0].image}
+            src={data.items[0].image}
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ transform: "scale(1.15) translateY(0vh)" }}
@@ -245,14 +256,19 @@ const handleSlideChange = (swiper: SwiperType) => {
 
       <div className="absolute inset-0 bg-black/50 z-10" />
 
-      <SectionHeading
-        title={impactAreas.title}
-        className="absolute top-130 left-1/2 -translate-x-1/2 z-20 text-white text-center pointer-events-none whitespace-nowrap"
-      />
+      <div className="absolute top-130 left-1/2 -translate-x-1/2 z-20">
+        <SectionHeading
+          title={data.title}
+          className="text-white text-center pointer-events-none whitespace-nowrap mb-20"
+        />
+        {data.description && (
+          <SectionDescription text={data.description} className="text-white text-center max-w-[931px] mx-auto whitespace-pre-line" />
+        )}
+      </div>
 
       {/* Desktop (md+) */}
       <div className="absolute left-0 bottom-0 right-0 z-20 hidden md:grid md:grid-cols-3">
-        {impactAreas.items.map((item, i) => (
+        {data.items.map((item, i) => (
           <Reveal key={item.id} variants={moveUpV2}>
             <ColItem
               item={item}
@@ -267,7 +283,7 @@ const handleSlideChange = (swiper: SwiperType) => {
 
       {/* Mobile nav buttons */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-30 flex justify-between px-30 pointer-events-none md:hidden">
-        {impactAreas.items.length > 1 && (
+        {data.items.length > 1 && (
           <>
             <div className="pointer-events-auto">
               <SliderArrowButton
@@ -301,7 +317,7 @@ const handleSlideChange = (swiper: SwiperType) => {
           }}
           onSlideChange={handleSlideChange}
         >
-          {impactAreas.items.map((item, i) => (
+          {data.items.map((item, i) => (
             <SwiperSlide key={item.id}>
               <ColItem
                 item={item}
