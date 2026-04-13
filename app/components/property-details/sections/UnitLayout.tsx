@@ -118,10 +118,12 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
       {
         opacity: 0,
         y: 20,
+        height: 0,
       },
       {
         opacity: 1,
         y: 0,
+        height: "auto",
         duration: 0.5,
         ease: "power2.out",
       },
@@ -131,7 +133,7 @@ function MobileFloorPanel({ unit }: { unit: Unit }) {
   return (
     <div
       ref={panelRef}
-      className="bg-[#f5f0eb] rounded-xl p-4 border border-[#ddd8d0] shadow-sm"
+      className="bg-[#f5f0eb] rounded-xl p-4 border border-[#ddd8d0] shadow-sm overflow-hidden"
     >
       {/* Floor plan image */}
       <div className="relative w-full aspect-square max-w-[320px] mx-auto mb-6">
@@ -231,7 +233,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         <p className="text-25 font-[optima] leading-[1.4] mb-20 text-foreground">
           UNITS
         </p>
-        <div className="border-b border-black/30  pb-30">
+        <div className="border-b border-black/30 pb-30">
           <p className="text-description text-foreground-light">
             {unit.units} units
           </p>
@@ -242,7 +244,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         <p className="text-25 font-[optima] leading-[1.4] mb-20 text-foreground">
           TOTAL AREA
         </p>
-        <div className=" ">
+        <div>
           <p className="text-description text-foreground-light">{unit.area}</p>
         </div>
       </div>
@@ -269,6 +271,19 @@ export default function UnitLayout() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const buttonsContainerRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+const handleUnitClick = (unitId: string) => {
+  const isCurrentlyActive = activeId === unitId;
+  setActiveId(isCurrentlyActive ? null : unitId);
+
+  // Scroll to top on mobile
+  if (!isCurrentlyActive && typeof window !== "undefined" && window.innerWidth < 1024) {
+    setTimeout(() => {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  }
+};
 
   // Scroll trigger animation for entire section
   useEffect(() => {
@@ -360,7 +375,7 @@ export default function UnitLayout() {
         className="text-center text-heading mb-50"
       />
       <div className="container">
-        <div className="  3xl:!max-w-[1605px] flex items-end flex-col lg:flex-row gap-8 lg:gap-12">
+        <div className="mx-auto 3xl:!max-w-[1605px] flex items-end flex-col lg:flex-row gap-8 lg:gap-12">
           {/* LEFT: Accordion buttons */}
           <div className="w-full lg:w-64 xl:w-[305px] flex-shrink-0">
             <div
@@ -371,22 +386,40 @@ export default function UnitLayout() {
                 const isActive = activeId === unit.id;
                 return (
                   <div key={unit.id}>
-                    {/* Button */}
                     <button
-                      onClick={() => setActiveId(isActive ? null : unit.id)}
-                      className={`w-full text-center py-4 px-6 3xl:py-[16.67px]   rounded-full text-description transition-all duration-300 cursor-pointer
-                      ${
-                        isActive
-                          ? "bg-primary text-white shadow-md"
-                          : "bg-white text-foreground-light hover:bg-primary hover:text-white"
-                      }`}
+                      data-unit-id={unit.id}
+                      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirHeavy] text-16 leading-[100%]`}
+                      onClick={() => handleUnitClick(unit.id)}
                     >
-                      {unit.label}
+                      <div className="flex items-center gap-[10px] 2xl:gap-[10px]">
+                        <span
+                          className={`${
+                            isActive ? "scale-x-100" : ""
+                          } absolute inset-y-0 left-0 w-[50%] bg-primary-2 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
+                        ></span>
+                        <span
+                          className={`${
+                            isActive ? "scale-x-100" : ""
+                          } absolute inset-y-0 right-0 w-[50%] bg-primary-2 transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
+                        ></span>
+                        <span
+                          className={`${
+                            isActive ? "text-white" : ""
+                          } relative z-10 transition-colors duration-300 min-w-[98px] inline-block text-center group-hover:text-white`}
+                        >
+                          {unit.label}
+                        </span>
+                      </div>
                     </button>
 
                     {/* Mobile: inline accordion panel */}
                     {isActive && (
-                      <div className="block lg:hidden mt-3 mb-1">
+                      <div
+                        ref={(el) => {
+                          if (el) panelRefs.current[unit.id] = el;
+                        }}
+                        className="block lg:hidden mt-3 mb-1"
+                      >
                         <MobileFloorPanel unit={unit} />
                       </div>
                     )}
