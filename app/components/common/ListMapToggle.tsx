@@ -12,7 +12,7 @@ export default function ListMapToggle({
         className={`transition-all duration-300 cursor-pointer ${
           view === "list"
             ? "text-foreground-light"
-            : "text-foreground-light/10 hover:text-foreground-light/80"
+            : "text-foreground-light/30 hover:text-foreground-light/80"
         }`}
       >
         LIST
@@ -23,7 +23,7 @@ export default function ListMapToggle({
         className={`transition-all duration-300 cursor-pointer ${
           view === "map"
             ? "text-foreground-light"
-            : "text-foreground-light/10 hover:text-foreground-light/80"
+            : "text-foreground-light/30 hover:text-foreground-light/80"
         }`}
       >
         MAP
