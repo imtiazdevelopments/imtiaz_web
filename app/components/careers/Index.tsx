@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import InnerHeroBanner from "../common/InnerHeroBanner";
 import ImpactAreas from "../sustainability/sections/ImpactAreas";
 import { bannerData, careerImpactAreas } from "./data";
@@ -10,7 +11,9 @@ const Index = () => {
       <InnerHeroBanner {...bannerData} maxW="max-w-[392px]" />
       <ImpactAreas data={careerImpactAreas} />
       <WhatToExpect />
-      <VacanciesSection />
+      <Suspense fallback={<div>Loading...</div>}>
+        <VacanciesSection />
+      </Suspense>
     </div>
   );
 };
