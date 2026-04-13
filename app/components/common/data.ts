@@ -210,19 +210,16 @@ export const menuItems: MenuItem[] = [
 // Submenus mapped to parent menu ID
 export const subMenuItems: Record<string, SubMenuItem[]> = {
   about: [
-    { id: "overview", label: "OVERVIEW" },
+    { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
     { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
     { id: "careers", label: "CAREERS" },
   ],
   communities: [
-    { id: "community-list", label: "COMMUNITY LIST", href: "/communities" },
-    { id: "lifestyle", label: "LIFESTYLE" },
+    { id: "communities", label: "COMMUNITIES", href: "/communities" },
   ],
   properties: [
     { id: "all", label: "ALL PROPERTIES", href: "/properties" },
-    { id: "offplan", label: "OFF-PLAN PROPERTIES", href: "/off-plan-properties" },
-    { id: "ready", label: "READY PROPERTIES" },
   ],
   media: [
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },

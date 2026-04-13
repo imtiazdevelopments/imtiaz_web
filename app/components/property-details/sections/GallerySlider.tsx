@@ -131,7 +131,6 @@
 //       }
 //     }
 
-
 //     return () => {
 //       tl.kill();
 //       ScrollTrigger.getAll().forEach((trigger) => {
@@ -304,8 +303,6 @@
 //   );
 // }
 
-
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -338,7 +335,15 @@ const EXTERIOR_SLIDES = [
 
 type TabType = "interior" | "exterior";
 
-function SlideContent({ src, alt, parallaxY }: { src: string; alt: string; parallaxY: number }) {
+function SlideContent({
+  src,
+  alt,
+  parallaxY,
+}: {
+  src: string;
+  alt: string;
+  parallaxY: number;
+}) {
   return (
     <div className="relative w-full h-full">
       <Image
@@ -352,11 +357,17 @@ function SlideContent({ src, alt, parallaxY }: { src: string; alt: string; paral
       />
       <div
         className="absolute inset-0"
-        style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.45) 100%)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.45) 100%)",
+        }}
       />
       <div
         className="absolute inset-x-0 bottom-0 h-full"
-        style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 52.5%, rgba(0, 0, 0, 0.8) 100%)" }}
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0, 0, 0, 0) 52.5%, rgba(0, 0, 0, 0.8) 100%)",
+        }}
       />
     </div>
   );
@@ -405,7 +416,11 @@ function TabSwiper({
         swiper.pagination.render();
         swiper.pagination.update();
       }}
-      autoplay={{ delay: 4500, disableOnInteraction: false, waitForTransition: false }}
+      autoplay={{
+        delay: 4500,
+        disableOnInteraction: false,
+        waitForTransition: false,
+      }}
       loop={slides.length > 1}
       speed={800}
       className="w-full h-full"
@@ -444,7 +459,9 @@ export default function GallerySlider() {
   useEffect(() => {
     if (!sectionRef.current || !mounted) return;
 
-    ScrollTrigger.getAll().forEach((t) => { if (t.vars.id === "gallery-scroll") t.kill(); });
+    ScrollTrigger.getAll().forEach((t) => {
+      if (t.vars.id === "gallery-scroll") t.kill();
+    });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -457,24 +474,46 @@ export default function GallerySlider() {
     });
 
     if (swiperWrapperRef.current) {
-      tl.fromTo(swiperWrapperRef.current, { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0);
+      tl.fromTo(
+        swiperWrapperRef.current,
+        { opacity: 0, scale: 0.98 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
+        0,
+      );
     }
 
     if (navButtonsRef.current) {
       const buttons = navButtonsRef.current.querySelectorAll("button");
-      if (buttons[0]) tl.fromTo(buttons[0], { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" }, 0.2);
-      if (buttons[1]) tl.fromTo(buttons[1], { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" }, 0.2);
+      if (buttons[0])
+        tl.fromTo(
+          buttons[0],
+          { opacity: 0, x: -50 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" },
+          0.2,
+        );
+      if (buttons[1])
+        tl.fromTo(
+          buttons[1],
+          { opacity: 0, x: 50 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" },
+          0.2,
+        );
     }
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach((t) => { if (t.vars.id === "gallery-scroll") t.kill(); });
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.vars.id === "gallery-scroll") t.kill();
+      });
     };
   }, [mounted]);
 
   // When tab switches, update nav refs on the newly visible swiper
   useEffect(() => {
-    const swiper = activeTab === "interior" ? interiorSwiperRef.current : exteriorSwiperRef.current;
+    const swiper =
+      activeTab === "interior"
+        ? interiorSwiperRef.current
+        : exteriorSwiperRef.current;
     if (!swiper) return;
     swiper.navigation.update();
     swiper.pagination.render();
@@ -484,7 +523,7 @@ export default function GallerySlider() {
   return (
     <section
       ref={sectionRef}
-      className="gallery-slider-root relative w-full overflow-hidden h-[75vh] 2xl:h-screen bg-[#0e0e0e]"
+      className="gallery-slider-root relative w-full overflow-hidden h-[75vh] 2xl:h-screen bg-[#0e0e0e] cursor-grab"
     >
       {/* ── Swiper layer ── */}
       <div ref={swiperWrapperRef} className="absolute inset-0">
@@ -493,7 +532,10 @@ export default function GallerySlider() {
             {/* Interior — always mounted, toggle visibility */}
             <div
               className="absolute inset-0 transition-opacity duration-700"
-              style={{ opacity: activeTab === "interior" ? 1 : 0, pointerEvents: activeTab === "interior" ? "auto" : "none" }}
+              style={{
+                opacity: activeTab === "interior" ? 1 : 0,
+                pointerEvents: activeTab === "interior" ? "auto" : "none",
+              }}
             >
               <TabSwiper
                 slides={INTERIOR_SLIDES}
@@ -508,7 +550,10 @@ export default function GallerySlider() {
             {/* Exterior — always mounted, toggle visibility */}
             <div
               className="absolute inset-0 transition-opacity duration-700"
-              style={{ opacity: activeTab === "exterior" ? 1 : 0, pointerEvents: activeTab === "exterior" ? "auto" : "none" }}
+              style={{
+                opacity: activeTab === "exterior" ? 1 : 0,
+                pointerEvents: activeTab === "exterior" ? "auto" : "none",
+              }}
             >
               <TabSwiper
                 slides={EXTERIOR_SLIDES}
@@ -524,14 +569,21 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Nav arrows ── */}
-      <div ref={navButtonsRef} className="container relative h-full pointer-events-none">
+      <div
+        ref={navButtonsRef}
+        className="container relative h-full pointer-events-none"
+      >
         <button
           ref={prevRef}
           className="pointer-events-auto absolute left-6 top-1/2 -translate-y-1/2 z-20 lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden border border-white"
           aria-label="Previous slide"
         >
           <span className="absolute top-0 left-0 h-full w-0 transition-all duration-300 group-hover:w-full z-0 bg-white/30" />
-          <Image src="/icons/left_arrow_slider_primary.svg" alt="Prev" width={28} height={28}
+          <Image
+            src="/icons/left_arrow_slider_primary.svg"
+            alt="Prev"
+            width={28}
+            height={28}
             className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
           />
         </button>
@@ -542,7 +594,11 @@ export default function GallerySlider() {
           aria-label="Next slide"
         >
           <span className="absolute top-0 left-0 h-full w-0 transition-all duration-300 group-hover:w-full z-0 bg-white/30" />
-          <Image src="/icons/left_arrow_slider_primary.svg" alt="Next" width={28} height={28}
+          <Image
+            src="/icons/left_arrow_slider_primary.svg"
+            alt="Next"
+            width={28}
+            height={28}
             className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300 rotate-180 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
           />
         </button>
@@ -555,7 +611,12 @@ export default function GallerySlider() {
           <div className="relative flex overflow-hidden 2xl:gap-[29.5px]">
             <div
               className="absolute top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
-              style={{ transform: activeTab === "interior" ? "translateX(0%)" : "translateX(100%)" }}
+              style={{
+                transform:
+                  activeTab === "interior"
+                    ? "translateX(0%)"
+                    : "translateX(100%)",
+              }}
             />
             <button
               onClick={() => setActiveTab("interior")}
@@ -573,18 +634,24 @@ export default function GallerySlider() {
         </div>
 
         {/* Pagination — show only active tab's dots */}
-        <div className="relative flex items-center justify-center">
-          <div
-            ref={interiorPaginationRef}
-            className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
-            style={{ opacity: activeTab === "interior" ? 1 : 0, position: activeTab === "exterior" ? "absolute" : "relative" }}
-          />
-          <div
-            ref={exteriorPaginationRef}
-            className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
-            style={{ opacity: activeTab === "exterior" ? 1 : 0, position: activeTab === "interior" ? "absolute" : "relative" }}
-          />
-        </div>
+        <div
+          ref={interiorPaginationRef}
+          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
+          style={{
+            opacity: activeTab === "interior" ? 1 : 0,
+            position: activeTab === "exterior" ? "absolute" : "relative",
+            pointerEvents: activeTab === "interior" ? "auto" : "none",
+          }}
+        />
+        <div
+          ref={exteriorPaginationRef}
+          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
+          style={{
+            opacity: activeTab === "exterior" ? 1 : 0,
+            position: activeTab === "interior" ? "absolute" : "relative",
+            pointerEvents: activeTab === "exterior" ? "auto" : "none",
+          }}
+        />
       </div>
     </section>
   );
