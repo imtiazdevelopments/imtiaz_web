@@ -118,3 +118,18 @@ filters: {
   jobType: ["Full Time", "Part Time", "Contract", "Remote"],
 },
 };
+
+
+
+export const whatToExpectData = {
+  heading: "What To Expect",
+  description:
+    "Our company culture is rooted in innovation, collaboration, and a deep commitment to our team members' growth and wellbeing. We foster a working environment that values open communication, mutual respect, and continuous learning. We celebrate diversity and believe that our collective strength lies in our varied backgrounds, experiences, and perspectives. At Imtaz, you are part of a community committed to excellence and success.",
+  carousalImages: [
+    { src: "/images/careers/carousal/1.jpg"},
+    { src: "/images/careers/carousal/2.jpg"},
+    { src: "/images/careers/carousal/3.jpg"},
+    { src: "/images/careers/carousal/4.jpg"},
+    { src: "/images/careers/carousal/5.jpg"},
+  ],
+};

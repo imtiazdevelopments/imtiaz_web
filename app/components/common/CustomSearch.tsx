@@ -86,7 +86,7 @@ const CustomSearch = ({
           onChange={(e) => onChange?.(e.target.value)}
           onFocus={handleFocus}
           className="outline-none w-full placeholder:text-foreground-light"
-          placeholder="Search Projects"
+          placeholder="Search Properties"
         />
       </span>
     </button>

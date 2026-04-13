@@ -358,7 +358,7 @@ function CircularProgress({
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="#00000008"
+            stroke="#0000000D"
             strokeWidth={strokeWidth}
           />
           {/* Progress */}
