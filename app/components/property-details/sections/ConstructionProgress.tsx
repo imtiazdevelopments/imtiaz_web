@@ -444,7 +444,7 @@ export default function WynwoodProgress() {
 
   return (
     <>
-      <section className="pt-120 2xl:pt-[160px]">
+      <section data-header="dark" className="pt-120 2xl:pt-[160px]">
         <div className="text-center container">
           <SectionHeading
             title={statsData.title}
