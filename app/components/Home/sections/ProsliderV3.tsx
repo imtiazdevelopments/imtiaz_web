@@ -15,6 +15,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { moveUpExit, moveUp } from "../../motionVariants";
+import Link from "next/link";
 
 export interface feats {
   icon: string;
@@ -304,12 +305,14 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                                 // custom={0.5}
                                 variants={moveUp(1.8)} 
                               > 
-                                <CustomOutlineButton 
-                                    text="Explore"
-                                    borderColor="border-white"
-                                    textColor="text-white"
-                                    px="px-[16px]  h-[45px] lg:h-[66px]  !leading-[1.58]"
-                                  />
+                                <Link href={`/properties/${slide.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                                  <CustomOutlineButton
+                                      text="Explore"
+                                      borderColor="border-white"
+                                      textColor="text-white"
+                                      px="px-[16px]  h-[45px] lg:h-[66px]  !leading-[1.58]"
+                                    />
+                                </Link>
                               </motion.div>
                             </motion.div>
                           </AnimatePresence>

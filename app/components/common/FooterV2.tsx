@@ -126,7 +126,7 @@ const Footer = () => {
                     key={idx}
                     className="text-[#FFD8E1] text-[17px] 3xl:text-[19px] font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
                   >
-                    {item}
+                    {item.label}
                   </motion.li>
                 ))}
               </ul>

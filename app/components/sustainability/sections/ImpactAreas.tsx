@@ -1,18 +1,119 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { impactAreas } from "../data";
 import "swiper/css";
 import SliderArrowButton from "../../common/SliderNavigationButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 import Reveal from "../../animations/RevealOneByOneAnimation";
-import { moveUp, moveUpV2 } from "../../motionVariants";
+import { moveUpV2 } from "../../motionVariants";
+import { SectionDescription } from "../../animations/SectionDescription";
 
+type ImpactAreaItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
+type ImpactAreas = {
+  title: string;
+  description?: string;
+  items: ImpactAreaItem[];
+};
+
+// const ColItem = ({
+//   item,
+//   i,
+//   isActive,
+//   showDivider,
+//   onEnter,
+// }: {
+//   item: ImpactAreaItem;
+//   i: number;
+//   isActive: boolean;
+//   showDivider: boolean;
+//   onEnter: (i: number) => void;
+// }) => (
+//   <div
+//     className="flex-1 relative flex items-end pb-[60px]  md:items-center justify-center cursor-default min-h-[368px]"
+//     onMouseEnter={() => onEnter(i)}
+//   >
+//     {showDivider && (
+//       <div
+//         className="absolute left-0 top-0 h-full w-[1px] -translate-x-1/2"
+//         style={{
+//           background:
+//             "linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)",
+//         }}
+//       />
+//     )}
+
+//     <motion.div
+//       className="absolute inset-0"
+//       initial={false}
+//       animate={{ opacity: isActive ? 1 : 0 }}
+//       transition={{ duration: 0.9, ease: [0.62, 0.05, 0.01, 0.99] }}
+//       style={{
+//         background:
+//           "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.94) 100%)",
+//       }}
+//     />
+
+//     <div className="relative flex flex-col items-center justify-center text-center">
+//       {/* Title — moves up smoothly */}
+//       <motion.h3
+//         className="text-white font-[optima] uppercase max-w-[201px] text-25"
+//         initial={{ y: 0 }}
+//         animate={{ y: isActive ? -16 : 0 }}
+//         transition={{
+//           duration: 0.9,
+//           ease: [0.25, 0.46, 0.45, 0.94],
+//           delay: isActive ? 0.08 : 0,
+//         }}
+//       >
+//         {item.title}
+//       </motion.h3>
+
+//       {/* Clip wrapper — maxHeight instead of height avoids jump */}
+//       <div className="overflow-hidden">
+//         <motion.div
+//           initial={false}
+//           animate={{
+//             maxHeight: isActive ? 200 : 0,
+//             opacity: isActive ? 1 : 0,
+//             y: isActive ? 0 : 16,
+//           }}
+//           transition={{
+//             maxHeight: {
+//               duration: 0.7,
+//               ease: [0.25, 0.46, 0.45, 0.94],
+//               delay: isActive ? 0.15 : 0,
+//             },
+//             opacity: {
+//               duration: 0.6,
+//               ease: [0.25, 0.46, 0.45, 0.94],
+//               delay: isActive ? 0.2 : 0,
+//             },
+//             y: {
+//               duration: 0.6,
+//               ease: [0.25, 0.46, 0.45, 0.94],
+//               delay: isActive ? 0.25 : 0,
+//             },
+//           }}
+//           className="pt-[10px]"
+//         >
+//           <p className="text-white/80 text-16 font-[avenirHeavy] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
+//             {item.description}
+//           </p>
+//         </motion.div>
+//       </div>
+//     </div>
+//   </div>
+// );
 const ColItem = ({
   item,
   i,
@@ -20,14 +121,14 @@ const ColItem = ({
   showDivider,
   onEnter,
 }: {
-  item: (typeof impactAreas.items)[0];
+  item: ImpactAreaItem;
   i: number;
   isActive: boolean;
   showDivider: boolean;
   onEnter: (i: number) => void;
 }) => (
   <div
-    className="flex-1 relative flex items-center justify-center cursor-default min-h-[368px]"
+    className="flex-1 relative flex items-end pb-[60px] md:items-center justify-center cursor-default min-h-[368px]"
     onMouseEnter={() => onEnter(i)}
   >
     {showDivider && (
@@ -55,7 +156,7 @@ const ColItem = ({
       {/* Title — moves up smoothly */}
       <motion.h3
         className="text-white font-[optima] uppercase max-w-[201px] text-25"
-        initial={{ y: 0 }}
+        initial={false}
         animate={{ y: isActive ? -16 : 0 }}
         transition={{
           duration: 0.9,
@@ -66,21 +167,24 @@ const ColItem = ({
         {item.title}
       </motion.h3>
 
-      {/* Clip wrapper — maxHeight instead of height avoids jump */}
-      <div className="overflow-hidden">
+      {/* Clip wrapper — animate height via motion, not maxHeight */}
+      <motion.div
+        className="overflow-hidden"
+        initial={false}
+        animate={{ height: isActive ? "auto" : 0 }}
+        transition={{
+          duration: 0.7,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: isActive ? 0.15 : 0,
+        }}
+      >
         <motion.div
           initial={false}
           animate={{
-            maxHeight: isActive ? 200 : 0,
             opacity: isActive ? 1 : 0,
             y: isActive ? 0 : 16,
           }}
           transition={{
-            maxHeight: {
-              duration: 0.7,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              delay: isActive ? 0.15 : 0,
-            },
             opacity: {
               duration: 0.6,
               ease: [0.25, 0.46, 0.45, 0.94],
@@ -98,24 +202,24 @@ const ColItem = ({
             {item.description}
           </p>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   </div>
 );
 
-export default function ImpactAreas() {
+
+export default function ImpactAreas({data}: {data: ImpactAreas}) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const bgWrapperRef = useRef<HTMLDivElement>(null);
   const bgImageRef = useRef<HTMLImageElement>(null);
   const bgPrevImageRef = useRef<HTMLImageElement>(null);
   const bgCurrentWrapperRef = useRef<HTMLDivElement>(null); // only current fades
 
   useEffect(() => {
-    impactAreas.items.forEach((item) => {
+    data.items.forEach((item) => {
       const img = new window.Image();
       img.src = item.image;
     });
@@ -145,7 +249,7 @@ const handleEnter = (index: number) => {
   if (index === activeIndex) return;
   if (fadeTimer.current) clearTimeout(fadeTimer.current);
 
-  const nextSrc = impactAreas.items[index].image;
+  const nextSrc = data.items[index].image;
 
   // Pre-load next image first, then crossfade instantly
   const preload = new window.Image();
@@ -180,7 +284,7 @@ const handleEnter = (index: number) => {
 
 const handleSlideChange = (swiper: SwiperType) => {
   const index = swiper.realIndex;
-  const nextSrc = impactAreas.items[index].image;
+  const nextSrc = data.items[index].image;
 
   const preload = new window.Image();
   preload.src = nextSrc;
@@ -214,7 +318,7 @@ const handleSlideChange = (swiper: SwiperType) => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden"
+      className="relative w-full h-[90vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden"
       data-header="light"
     >
       <div className="absolute inset-0 bg-[#0a0a0a] z-0" />
@@ -224,7 +328,7 @@ const handleSlideChange = (swiper: SwiperType) => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={bgPrevImageRef}
-          src={impactAreas.items[0].image}
+          src={data.items[0].image}
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ transform: "scale(1.15) translateY(0vh)" }}
@@ -235,7 +339,7 @@ const handleSlideChange = (swiper: SwiperType) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={bgImageRef}
-            src={impactAreas.items[0].image}
+            src={data.items[0].image}
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ transform: "scale(1.15) translateY(0vh)" }}
@@ -245,14 +349,19 @@ const handleSlideChange = (swiper: SwiperType) => {
 
       <div className="absolute inset-0 bg-black/50 z-10" />
 
-      <SectionHeading
-        title={impactAreas.title}
-        className="absolute top-130 left-1/2 -translate-x-1/2 z-20 text-white text-center pointer-events-none whitespace-nowrap"
-      />
+      <div className="absolute top-130 left-1/2 -translate-x-1/2 z-20">
+        <SectionHeading
+          title={data.title}
+          className="text-white text-center pointer-events-none whitespace-nowrap mb-20"
+        />
+        {data.description && (
+          <SectionDescription text={data.description} className="text-white text-center max-w-[931px] mx-auto whitespace-pre-line" />
+        )}
+      </div>
 
       {/* Desktop (md+) */}
       <div className="absolute left-0 bottom-0 right-0 z-20 hidden md:grid md:grid-cols-3">
-        {impactAreas.items.map((item, i) => (
+        {data.items.map((item, i) => (
           <Reveal key={item.id} variants={moveUpV2}>
             <ColItem
               item={item}
@@ -267,7 +376,7 @@ const handleSlideChange = (swiper: SwiperType) => {
 
       {/* Mobile nav buttons */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-30 flex justify-between px-30 pointer-events-none md:hidden">
-        {impactAreas.items.length > 1 && (
+        {data.items.length > 1 && (
           <>
             <div className="pointer-events-auto">
               <SliderArrowButton
@@ -301,7 +410,7 @@ const handleSlideChange = (swiper: SwiperType) => {
           }}
           onSlideChange={handleSlideChange}
         >
-          {impactAreas.items.map((item, i) => (
+          {data.items.map((item, i) => (
             <SwiperSlide key={item.id}>
               <ColItem
                 item={item}

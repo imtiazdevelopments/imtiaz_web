@@ -15,6 +15,7 @@ import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
 import AuthSlider from "../auth/AuthSlider";
 import Link from "next/link";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 type AuthView = "login" | "signup";
 
@@ -23,27 +24,31 @@ const InnerHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authView, setAuthView] = useState<AuthView | null>(null);
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("light");
-
+  
   // Scroll hide/show
   const lastScrollY = useRef(0);
   const y = useMotionValue(0);
   const springY = useSpring(y, { stiffness: 80, damping: 20, mass: 0.8 });
+  const { isProgrammaticScroll } = useLenis();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      const diff = currentY - lastScrollY.current;
-      if (diff > 0) {
-        y.set(-120);
-      } else {
-        y.set(0);
-      }
-      lastScrollY.current = currentY;
-    };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [y]);
+useEffect(() => {
+  const handleScroll = () => {
+    if (isProgrammaticScroll.current) return; // 👈 ignore lenis scrollTo
+
+    const currentY = window.scrollY;
+    const diff = currentY - lastScrollY.current;
+    if (diff > 0) {
+      y.set(-120);
+    } else {
+      y.set(0);
+    }
+    lastScrollY.current = currentY;
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [y, isProgrammaticScroll]);
 
   // Section-based header theme
   useEffect(() => {

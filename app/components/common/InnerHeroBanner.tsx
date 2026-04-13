@@ -43,30 +43,30 @@ const InnerHeroBanner = ({
     gsap.context(() => {
       // Zoom-out → slow Ken-Burns creep
       // 👉 First: run intro ONCE
-      gsap.fromTo(
-        imageWrapperRef.current,
-        { scale: ZOOM_OUT_START, transformOrigin: "center center" },
-        {
-          scale: ZOOM_OUT_END,
-          duration: ZOOM_OUT_DURATION,
-          ease: "expo.out",
-          onComplete: () => {
-            // 👉 Then start infinite subtle loop
-            gsap
-              .timeline({ repeat: -1 })
-              .to(imageWrapperRef.current, {
-                scale: ZOOM_IN_END,
-                duration: ZOOM_IN_DURATION,
-                ease: "sine.inOut",
-              })
-              .to(imageWrapperRef.current, {
-                scale: ZOOM_OUT_END,
-                duration: ZOOM_IN_DURATION,
-                ease: "sine.inOut",
-              });
+        gsap.fromTo(
+          imageWrapperRef.current,
+          { scale: ZOOM_OUT_START, transformOrigin: "center center" },
+          {
+            scale: ZOOM_OUT_END,
+            duration: ZOOM_OUT_DURATION,
+            ease: "expo.out",
+            onComplete: () => {
+              // 👉 Then start infinite subtle loop
+              gsap
+                .timeline({ repeat: -1 })
+                .to(imageWrapperRef.current, {
+                  scale: ZOOM_IN_END,
+                  duration: ZOOM_IN_DURATION,
+                  ease: "sine.inOut",
+                })
+                .to(imageWrapperRef.current, {
+                  scale: ZOOM_OUT_END,
+                  duration: ZOOM_IN_DURATION,
+                  ease: "sine.inOut",
+                });
+            },
           },
-        },
-      );
+        );
 
       // Description
       if (descRef.current) {

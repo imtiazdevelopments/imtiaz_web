@@ -1,0 +1,55 @@
+"use client";
+
+import Image from "next/image";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
+import type { Career } from "../data";
+
+interface CareerCardProps {
+  career: Career;
+}
+
+export default function CareerCard({ career }: CareerCardProps) {
+  return (
+    <div className="bg-white p-30 flex flex-col hover:scale-[1.03] transition-all duration-500">
+      {/* Top row — location + job type */}
+      <div className="flex items-center justify-between mb-30">
+        <div className="flex items-center gap-[10px]">
+          <Image
+            src="/images/careers/location.svg"
+            alt="location"
+            width={30}
+            height={30}
+            className="w-auto 3xl:w-[15x] h-[20px] object-contain mb-1"
+          />
+          <span className="text-description text-foreground-light">
+            {career.location}
+          </span>
+        </div>
+        <span className="text-description text-foreground-light">
+          {career.jobType}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h3 className="font-[optima] text-25 leading-[1.4] uppercase text-foreground mb-20">
+        {career.title}
+      </h3>
+
+      {/* Description */}
+      <p className="text-description mb-20">
+        {career.description}
+      </p>
+
+      {/* CTA */}
+      <div>
+        <CustomOutlineButton
+          className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px]"
+          text="Apply Now"
+          borderColor="border-primary"
+          textColor="text-foreground-light"
+          variant="dark"
+        />
+      </div>
+    </div>
+  );
+}

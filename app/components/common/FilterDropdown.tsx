@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import { useLenis } from "@/app/contexts/LenisContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -10,6 +8,7 @@ import Image from "next/image";
 interface FilterDropdownProps {
   placeholder: string;
   options: string[];
+  variant?: "primary" | "secondary";
   value: string;
   onChange: (val: string) => void;
   className?: string;
@@ -18,6 +17,7 @@ interface FilterDropdownProps {
 const FilterDropdown = ({
   placeholder,
   options,
+  variant = "primary",
   value,
   onChange,
   className,
@@ -103,7 +103,7 @@ const FilterDropdown = ({
       {/* Trigger */}
       <button
         onClick={handleToggle}
-        className="w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirHeavy] text-16 text-foreground-light cursor-pointer"
+        className={`w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full ${variant === "primary" ? "bg-[#EBEBEC]" : "bg-transparent border border-primary"} font-[avenirHeavy] text-16 text-foreground-light cursor-pointer`}
       >
         <span className={value ? "text-foreground" : "text-foreground-light"}>
           {value || placeholder}
@@ -138,7 +138,11 @@ const FilterDropdown = ({
             {/* Scrollable list */}
             <div
               ref={listRef}
-              className="max-h-[200px] overflow-y-auto scrollbar-hide"
+              className="max-h-[200px] overflow-y-auto filter-dropdown-scroll"
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "#00000025 transparent",
+              }}
               onWheel={(e) => e.stopPropagation()}
               onTouchMove={(e) => e.stopPropagation()}
               onScroll={handleScroll}
@@ -150,7 +154,7 @@ const FilterDropdown = ({
                 }}
                 className="w-full text-left px-5 py-3 text-[13px] font-[avenirRoman] text-black/40 hover:bg-black/5 transition-colors duration-150"
               >
-                {placeholder}
+                All
               </button>
 
               <div className="w-full h-px bg-black/5" />
@@ -162,9 +166,9 @@ const FilterDropdown = ({
                     onChange(opt);
                     setOpen(false);
                   }}
-                  className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-black/5 ${
+                  className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-gray ${
                     value === opt
-                      ? "text-primary-2 font-[avenirHeavy]"
+                      ? "text-primary font-[avenirHeavy]"
                       : "text-foreground-light"
                   }`}
                 >
@@ -172,18 +176,6 @@ const FilterDropdown = ({
                 </button>
               ))}
             </div>
-
-            {/* Scroll hint */}
-            {hasScroll && !isAtBottom && (
-              <div className="absolute bottom-0 left-0 w-full pointer-events-none rounded-b-2xl overflow-hidden">
-                <div className="w-full py-2 flex items-center justify-center bg-gradient-to-t from-white/90 to-transparent">
-                  <MdOutlineKeyboardDoubleArrowDown
-                    size={18}
-                    className="text-foreground-light/70"
-                  />
-                </div>
-              </div>
-            )}
           </motion.div>
         )}
       </AnimatePresence>

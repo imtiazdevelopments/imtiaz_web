@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomIconButton from "../../common/CustomIconButton";
 import { SectionHeading } from "../../animations/SectionHeading";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -272,15 +273,21 @@ export default function UnitLayout() {
   const buttonsContainerRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const { scrollTo } = useLenis();
 
 const handleUnitClick = (unitId: string) => {
   const isCurrentlyActive = activeId === unitId;
   setActiveId(isCurrentlyActive ? null : unitId);
 
-  // Scroll to top on mobile
   if (!isCurrentlyActive && typeof window !== "undefined" && window.innerWidth < 1024) {
     setTimeout(() => {
-      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const button = buttonsContainerRef.current?.querySelector(
+        `[data-unit-id="${unitId}"]`
+      );
+      if (button) {
+        const top = button.getBoundingClientRect().top + window.scrollY - 80;
+        scrollTo(top, { duration: 1 });
+      }
     }, 100);
   }
 };
@@ -369,7 +376,7 @@ const handleUnitClick = (unitId: string) => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-gray py-120 2xl:py-130">
+    <section data-header="dark" ref={sectionRef} className="bg-gray py-120 2xl:py-130">
       <SectionHeading
         title={"UNIT LAYOUT"}
         className="text-center text-heading mb-50"
@@ -388,7 +395,7 @@ const handleUnitClick = (unitId: string) => {
                   <div key={unit.id}>
                     <button
                       data-unit-id={unit.id}
-                      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirHeavy] text-16 leading-[100%]`}
+                      className={`cursor-pointer flex items-center justify-center group relative transition-colors duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirHeavy] text-16 leading-[100%]`}
                       onClick={() => handleUnitClick(unit.id)}
                     >
                       <div className="flex items-center gap-[10px] 2xl:gap-[10px]">

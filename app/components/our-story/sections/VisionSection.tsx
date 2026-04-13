@@ -7,11 +7,9 @@ import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
-import { useParallax } from "@/app/hooks/useParallax";
 
 export default function VisionSection() {
   const { title, description, bgImage, stats } = visionSectionData;
-  const { ref, parallaxY } = useParallax(15);
 
   return (
     <section
@@ -19,16 +17,13 @@ export default function VisionSection() {
       className="make relative w-full overflow-hidden text-white h-[88vh] xl:h-[95vh]"
     >
       {/* Background Image */}
-      <div ref={ref} className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
         <Image
           src={bgImage}
           alt={title}
           width={1920}
           height={1080}
           priority
-                    style={{
-            transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
-          }}
           className="object-cover object-top h-full w-full absolute"
         />
       </div>

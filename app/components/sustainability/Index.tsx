@@ -1,4 +1,4 @@
-import { bannerData } from "./data";
+import { bannerData, impactAreas } from "./data";
 import InnerHeroBanner from "../common/InnerHeroBanner";
 import ImpactAreas from "./sections/ImpactAreas";
 import SustainablityMoments from "./sections/SustainablityMoments";
@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <>
       <InnerHeroBanner {...bannerData} maxW="max-w-[816px]" />
-      <ImpactAreas />
+      <ImpactAreas data={impactAreas} />
       <SustainablityMoments />
       <PressSpotlight />
     </>

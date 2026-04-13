@@ -35,7 +35,7 @@ const MeydanHorizon = () => {
           <div ref={desktopBtnRef} style={{ opacity: 0 }}>
             <CustomOutlineButton
               text="View Community"
-              px="px-[12px] lg:px-[20px] 3xl:px-[39.54px] mx-auto mt-50"
+              px="px-[20px] 3xl:px-[39.54px] mx-auto mt-50"
               borderColor="border-primary"
               className="3xl:h-[67px]"
               textColor="text-foreground-light"
