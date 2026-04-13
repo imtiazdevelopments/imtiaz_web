@@ -53,13 +53,18 @@ const LandpropertyCards = () => {
               loop
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
-              }}
-              onBeforeInit={(s) => {
-                s.params.navigation = {
-                  ...(s.params.navigation as object),
-                  prevEl: prevRef.current,
-                  nextEl: nextRef.current,
-                };
+                setTimeout(() => {
+                  if (
+                    swiper.params.navigation &&
+                    typeof swiper.params.navigation === "object"
+                  ) {
+                    (swiper.params.navigation as any).prevEl = prevRef.current;
+                    (swiper.params.navigation as any).nextEl = nextRef.current;
+                  }
+                  swiper.navigation.destroy();
+                  swiper.navigation.init();
+                  swiper.navigation.update();
+                }, 0);
               }}
               navigation={{
                 prevEl: prevRef.current,
