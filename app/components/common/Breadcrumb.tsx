@@ -22,6 +22,7 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
     "/media-center/news",
     "/media-center/events",
     "/communities",
+    "/properties",
     "/pay-now",
   ]);
 

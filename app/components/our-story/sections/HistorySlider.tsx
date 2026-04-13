@@ -209,7 +209,7 @@ function CardsSlider({
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
-          slidesPerView={1}
+          slidesPerView={1.1}
           breakpoints={{
             480: { slidesPerView: 1.2 },
             640: { slidesPerView: 1.5 },

@@ -24,96 +24,7 @@ type ImpactAreas = {
   description?: string;
   items: ImpactAreaItem[];
 };
-
-// const ColItem = ({
-//   item,
-//   i,
-//   isActive,
-//   showDivider,
-//   onEnter,
-// }: {
-//   item: ImpactAreaItem;
-//   i: number;
-//   isActive: boolean;
-//   showDivider: boolean;
-//   onEnter: (i: number) => void;
-// }) => (
-//   <div
-//     className="flex-1 relative flex items-end pb-[60px]  md:items-center justify-center cursor-default min-h-[368px]"
-//     onMouseEnter={() => onEnter(i)}
-//   >
-//     {showDivider && (
-//       <div
-//         className="absolute left-0 top-0 h-full w-[1px] -translate-x-1/2"
-//         style={{
-//           background:
-//             "linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)",
-//         }}
-//       />
-//     )}
-
-//     <motion.div
-//       className="absolute inset-0"
-//       initial={false}
-//       animate={{ opacity: isActive ? 1 : 0 }}
-//       transition={{ duration: 0.9, ease: [0.62, 0.05, 0.01, 0.99] }}
-//       style={{
-//         background:
-//           "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.94) 100%)",
-//       }}
-//     />
-
-//     <div className="relative flex flex-col items-center justify-center text-center">
-//       {/* Title — moves up smoothly */}
-//       <motion.h3
-//         className="text-white font-[optima] uppercase max-w-[201px] text-25"
-//         initial={{ y: 0 }}
-//         animate={{ y: isActive ? -16 : 0 }}
-//         transition={{
-//           duration: 0.9,
-//           ease: [0.25, 0.46, 0.45, 0.94],
-//           delay: isActive ? 0.08 : 0,
-//         }}
-//       >
-//         {item.title}
-//       </motion.h3>
-
-//       {/* Clip wrapper — maxHeight instead of height avoids jump */}
-//       <div className="overflow-hidden">
-//         <motion.div
-//           initial={false}
-//           animate={{
-//             maxHeight: isActive ? 200 : 0,
-//             opacity: isActive ? 1 : 0,
-//             y: isActive ? 0 : 16,
-//           }}
-//           transition={{
-//             maxHeight: {
-//               duration: 0.7,
-//               ease: [0.25, 0.46, 0.45, 0.94],
-//               delay: isActive ? 0.15 : 0,
-//             },
-//             opacity: {
-//               duration: 0.6,
-//               ease: [0.25, 0.46, 0.45, 0.94],
-//               delay: isActive ? 0.2 : 0,
-//             },
-//             y: {
-//               duration: 0.6,
-//               ease: [0.25, 0.46, 0.45, 0.94],
-//               delay: isActive ? 0.25 : 0,
-//             },
-//           }}
-//           className="pt-[10px]"
-//         >
-//           <p className="text-white/80 text-16 font-[avenirHeavy] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
-//             {item.description}
-//           </p>
-//         </motion.div>
-//       </div>
-//     </div>
-//   </div>
-// );
+ 
 const ColItem = ({
   item,
   i,
@@ -128,7 +39,7 @@ const ColItem = ({
   onEnter: (i: number) => void;
 }) => (
   <div
-    className="flex-1 relative flex items-end pb-[60px] md:items-center justify-center cursor-default min-h-[368px]"
+    className="flex-1 relative flex items-end pb-[60px] md:pb-0 md:items-center justify-center cursor-default min-h-[368px]"
     onMouseEnter={() => onEnter(i)}
   >
     {showDivider && (

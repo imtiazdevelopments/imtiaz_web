@@ -61,8 +61,10 @@ export default function BannerDetails() {
     <div className="w-full bg-white/10 backdrop-blur-[15px] pt-50 pb-40 2xl:pb-[46px]">
       {/* Desktop — equal gaps, fit width */}
       <div className="hidden lg:flex justify-between items-center w-full xl:!px-50 3xl:!px-100 container mx-auto">
-        {stats.map((stat) => (
+        {stats.map((stat,i) => (
+          <div key={i}>
             <PropertyStat {...stat} />          
+          </div>
         ))}
       </div>
 
