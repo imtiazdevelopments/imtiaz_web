@@ -34,7 +34,7 @@ export default function FloatingRightIcons() {
   return (
     <div
       ref={containerRef}
-      className="floating-icons flex fixed right-[6px] md:right-[12px] 3xl:right-[15px] top-1/2 -translate-y-1/2 flex-col gap-[5px] md:gap-[9px] z-[900]"
+      className="floating-icons flex fixed right-[6px] md:right-[12px] top-1/2 -translate-y-1/2 flex-col gap-[5px] md:gap-[9px] z-[900]"
     >
       {[
         { src: "/icons/layout_icons/phone.svg", alt: "phone" },

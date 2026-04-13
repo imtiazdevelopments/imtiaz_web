@@ -1,9 +1,10 @@
 "use client";
-// import Link from "next/link";
+
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
             start: "top bottom",
             end: "bottom top",
           },
-        }
+        },
       );
 
       /* --- TEXT FADE IN --- */
@@ -70,7 +71,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
             toggleActions: "play none none reverse",
             markers: false,
           },
-        }
+        },
       );
     });
 
@@ -124,14 +125,14 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
           </p>
         </div>
         <div className="overflow-hidden">
-         
-            <div className="anim-item">
+          <div className="anim-item">
+            <Link href="/properties/property-details">
               <CustomOutlineButton
-            text={data.button.label}
-            px="px-[20px] md:px-[26px] 3xl:px-[40.4px] mx-auto "
-            />
-            </div>
-         
+                text={data.button.label}
+                px="px-[20px] md:px-[26px] 3xl:px-[40.4px] mx-auto "
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

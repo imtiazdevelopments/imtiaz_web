@@ -75,7 +75,7 @@ export const footerData = {
 
 type FooterV2Column = {
   heading: string;
-  items: string[];
+items: { label: string; link: string }[];
 };
 
 type FooterV2Data = {
@@ -106,43 +106,53 @@ export const footerV2Data: FooterV2Data = {
     {
       heading: "COMMUNITIES",
       items: [
-        "Dubai Islands",
-        "Meydan Horizon Community",
-        "JVC Community",
-        "Al Furjan Community",
-        "Jumeirah Garden City",
-        "Dubai Land Residence Complex",
+        { label: "Dubai Islands", link: "/communities/dubai-islands" },
+        { label: "Meydan Horizon Community", link: "/communities/meydan-horizon" },
+        { label: "JVC Community", link: "/communities/jvc" },
+        { label: "Al Furjan Community", link: "/communities/al-furjan" },
+        { label: "Jumeirah Garden City", link: "/communities/jumeirah-garden-city" },
+        { label: "Dubai Land Residence Complex", link: "/communities/dubai-land-residence-complex" },
       ],
     },
     {
       heading: "NEW LAUNCHES",
       items: [
-        "Cove Edition 6",
-        "Wynwood",
-        "Cove Edition 5",
-        "Cove Grand",
-        "Sunset Bay 4",
-        "Beach Walk 4",
+        { label: "Cove Edition 6", link: "/properties/cove-edition-6" },
+        { label: "Wynwood", link: "/properties/wynwood" },
+        { label: "Cove Edition 5", link: "/properties/cove-edition-5" },
+        { label: "Cove Grand", link: "/properties/cove-grand" },
+        { label: "Sunset Bay 4", link: "/properties/sunset-bay-4" },
+        { label: "Beach Walk 4", link: "/properties/beach-walk-4" },
       ],
     },
     {
       heading: "COMING SOON",
       items: [
-        "Le Blanc",
-        "Sunset Bay Grand",
-        "Wynwood Horizon",
-        "Sunset Bay 5",
-        "Pearl House 4",
-        "Beach Walk Grand 2",
+        { label: "Le Blanc", link: "/properties/le-blanc" },
+        { label: "Sunset Bay Grand", link: "/properties/sunset-bay-grand" },
+        { label: "Wynwood Horizon", link: "/properties/wynwood-horizon" },
+        { label: "Sunset Bay 5", link: "/properties/sunset-bay-5" },
+        { label: "Pearl House 4", link: "/properties/pearl-house-4" },
+        { label: "Beach Walk Grand 2", link: "/properties/beach-walk-grand-2" },
       ],
     },
     {
       heading: "WORLD OF IMTIAZ",
-      items: ["About", "Leadership", "Vision Mission", "Careers", "Contact"],
+      items: [
+        { label: "About", link: "/about/our-story" },
+        { label: "Leadership", link: "/about/our-story" },
+        { label: "Vision Mission", link: "/about/our-story" },
+        { label: "Careers", link: "/about/careers" },
+        { label: "Contact", link: "#" },
+      ],
     },
     {
       heading: "MEDIA CENTER",
-      items: ["News & Press Releases", "Blogs", "Events"],
+      items: [
+        { label: "News & Press Releases", link: "/media-center/news" },
+        { label: "Blogs", link: "/media-center/blog" },
+        { label: "Events", link: "/media-center/events" },
+      ],
     },
   ],
 
@@ -213,7 +223,7 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
     { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
-    { id: "careers", label: "CAREERS" },
+    { id: "careers", label: "CAREERS", href: "/about/careers" },
   ],
   communities: [
     { id: "communities", label: "COMMUNITIES", href: "/communities" },
