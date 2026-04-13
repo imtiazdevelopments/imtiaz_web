@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Reveal from "../animations/RevealOneByOneAnimation";
 import { moveUp, moveUpV2, moveUpV3 } from "../motionVariants";
+import Link from "next/link";
 
 const InnerFooter = () => {
   const [email, setEmail] = useState("");
@@ -100,33 +101,34 @@ const InnerFooter = () => {
       </div>
 
       {/* DIVIDER */}
-<div className="relative w-full h-[2px]">
-  {/* Gradient line underneath — always there */}
-  <div
-    className="absolute inset-0 w-full h-full"
-    style={{
-      background: "linear-gradient(90deg, #490905 0%, rgba(255,255,255,0.4) 50%, #490905 100%)",
-    }}
-  />
+      <div className="relative w-full h-[2px]">
+        {/* Gradient line underneath — always there */}
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            background:
+              "linear-gradient(90deg, #490905 0%, rgba(255,255,255,0.4) 50%, #490905 100%)",
+          }}
+        />
 
-  {/* Left half — slides to the left */}
-  <motion.div
-    className="absolute left-0 top-0 w-1/2 h-full bg-white"
-    initial={{ x: 0 }}
-    whileInView={{ x: "-100%" }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.9, ease: "easeInOut" }}
-  />
+        {/* Left half — slides to the left */}
+        <motion.div
+          className="absolute left-0 top-0 w-1/2 h-full bg-white"
+          initial={{ x: 0 }}
+          whileInView={{ x: "-100%" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+        />
 
-  {/* Right half — slides to the right */}
-  <motion.div
-    className="absolute right-0 top-0 w-1/2 h-full bg-white"
-    initial={{ x: 0 }}
-    whileInView={{ x: "100%" }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.9, ease: "easeInOut" }}
-  />
-</div>
+        {/* Right half — slides to the right */}
+        <motion.div
+          className="absolute right-0 top-0 w-1/2 h-full bg-white"
+          initial={{ x: 0 }}
+          whileInView={{ x: "100%" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+        />
+      </div>
 
       {/* ================= MENU COLUMNS ================= */}
       <div className="bg-primary-2 py-100">
@@ -144,7 +146,7 @@ const InnerFooter = () => {
                         key={idx}
                         className="text-white/80 3xl:text-19 font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
                       >
-                        {item}
+                        <Link href={item.link}>{item.label}</Link>
                       </li>
                     </Reveal>
                   ))}
@@ -165,7 +167,7 @@ const InnerFooter = () => {
             variants={moveUp(0)}
             initial="hidden"
             whileInView="show"
-            viewport={{once: true}}
+            viewport={{ once: true }}
             className="flex gap-3 xl:gap-6 3xl:gap-7 text-description justify-center md:justify-start w-full"
           >
             {footerV2Data.bottom.left.map((txt, i) => (
@@ -183,7 +185,7 @@ const InnerFooter = () => {
             variants={moveUp(0.1)}
             initial="hidden"
             whileInView="show"
-            viewport={{once: true}}
+            viewport={{ once: true }}
             className="text-white/45 text-description text-center w-full"
           >
             ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
@@ -194,7 +196,7 @@ const InnerFooter = () => {
             variants={moveUp(0.14)}
             initial="hidden"
             whileInView="show"
-            viewport={{once: true}}
+            viewport={{ once: true }}
             className="flex gap-2 justify-center md:justify-start xl:justify-end w-full z-10"
           >
             {footerV2Data.bottom.icons.map((icon, i) => (

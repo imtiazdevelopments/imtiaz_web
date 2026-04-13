@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,12 +119,14 @@ const AboutJourneyV3 = () => {
 
         <div className="overflow-hidden ">
           <div className="anim-item mx-auto w-fit">
-            <CustomOutlineButton
-              text="About Imtiaz"
-              borderColor="border-white"
-              textColor="text-white"
-              px="px-[26px] xl:px-[28px] h-[45px] lg:h-[66px] !leading-[1.58]"
-              />
+            <Link href={"/about/our-story"}>
+              <CustomOutlineButton
+                text="About Imtiaz"
+                borderColor="border-white"
+                textColor="text-white"
+                px="px-[26px] xl:px-[28px] h-[45px] lg:h-[66px] !leading-[1.58]"
+                />
+            </Link>
             </div>
         </div>
       </div>

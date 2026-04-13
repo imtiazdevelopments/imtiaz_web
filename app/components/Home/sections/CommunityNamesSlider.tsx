@@ -17,6 +17,7 @@ import { cubicBezier } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -361,15 +362,14 @@ export default function HeroFeatureSlider({
                                 pointerEvents: active ? "auto" : "none",
                               }} // ← control clicks here instead
                             >
-                              <CustomOutlineButton
-                                onClick={() =>
-                                  c.link && (window.location.href = c.link)
-                                }
-                                text="Read More"
-                                borderColor="border-white"
-                                textColor="text-white"
-                                px="px-[12px] sm:px-[26px] xl:px-[37px]"
-                              />
+                              <Link href={`/properties/${c.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                                <CustomOutlineButton
+                                  text="Read More"
+                                  borderColor="border-white"
+                                  textColor="text-white"
+                                  px="px-[12px] sm:px-[26px] xl:px-[37px]"
+                                />
+                              </Link>
                             </div>
                           </motion.div>
                       </div>
