@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form"; 
 import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import CustomOutlineButton from "../common/CustomOutlineButton";
 import FileUploader from "../common/FileUploader";
@@ -59,20 +59,22 @@ export default function CareerForm({ onClose, onSwitch }: CareerFormProps) {
     defaultValues: { countryCode: "+971" },
   });
 
-  const onSubmit = (data: SignupValues) => {
-    console.log("Signup:", data);
-  };
+const methods = useForm();
 
+  const onSubmit = (data: any) => {
+    console.log("Form Data:", data);
+    console.log("Resume File:", data.resume);
+  };
   return (
     <>
       {/* Close btn */}
       
 
-      <div className="w-full px-60 3xl:px-0 max-w-[700px] relative flex flex-col self-center 3xl:self-end py-6 2xl:py-80  items-center">
+      <div className="w-full  px-3 py-60 md:px-60 3xl:px-0 max-w-[821px] h-screen overflow-scroll relative flex flex-col self-center 3xl:self-end py-6 2xl:py-80  items-center">
         <div className="cursor-pointer"  >
         <button
         aria-label="Close"
-        className="absolute top-50 3xl:top-90 left-0    gap-[10px] flex items-center justify-center text-primary-2 group   cursor-pointer transition-colors"
+        className="absolute top-50 3xl:top-90 left-3 md:left-60 3xl:left-0    gap-[10px] flex items-center justify-center text-primary-2 group   cursor-pointer transition-colors"
         onClick={onClose}
       >
         <div><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,11 +87,11 @@ export default function CareerForm({ onClose, onSwitch }: CareerFormProps) {
         </span>
       </button>
       </div>
-        <div className="flex flex-col items-center justify-center px-50 sm:px-0 mt-50">
+        <div className="flex flex-col items-center justify-center   mt-[45px]  md:mt-50">
           <AnimatedHeading title="Build Your Future with Imtiaz" className="text-primary-2 mb-20 max-w-[26ch] mx-auto text-center" mode="blade" />
-          <SectionDescription text="Fill out the form below to take the first step toward a rewarding career with Imtiaz, where innovation meets exceptional real estate development." className="text-center mb-50 max-w-[64ch] text-foreground-light sm:px-50 lg:px-0" />
+          <SectionDescription text="Fill out the form below to take the first step toward a rewarding career with Imtiaz, where innovation meets exceptional real estate development." className="text-center mb-50 max-w-[64ch] text-foreground-light  " />
         </div>
-
+<FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full">
           {/* First + Last name */}
           <div>
@@ -239,7 +241,7 @@ export default function CareerForm({ onClose, onSwitch }: CareerFormProps) {
               </button>
             </div>
             <FieldLine hasError={!!errors.password} />
-            <p className="text-[12px] text-[#c0392b] pt-2 h-30">
+            <p className="text-[12px] text-[#c0392b] pt-2 h-20">
               {errors.password?.message ?? "\u00A0"}
             </p>
           </label>
@@ -254,14 +256,14 @@ export default function CareerForm({ onClose, onSwitch }: CareerFormProps) {
 
           {/* Submit */}
           <CustomOutlineButton
-            px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+            px="px-[12px] lg:px-[23px] 3xl:px-[90.6px]"
             text="Submit"
             borderColor="border-primary-2"
             textColor="text-foreground-light"
             variant="dark"
           />
         </form>
-         
+      </FormProvider>   
       </div>
     </>
   );

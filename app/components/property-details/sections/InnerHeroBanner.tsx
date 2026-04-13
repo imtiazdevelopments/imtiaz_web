@@ -3,8 +3,7 @@
 import { useCallback, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import Breadcrumb from "./Breadcrumb";
-import { AnimatedHeading } from "../../animations/AnimateHeading";
+import Breadcrumb from "../../common/Breadcrumb"; 
 import BannerDetails from "./BannerDetails";
 
 interface InnerHeroProps {
@@ -126,7 +125,7 @@ const InnerHeroBanner = ({
           </div>
         </div>
 
-        <div ref={bannerDetailsRef} style={{ transform: "translateY(40px)" }}>
+        <div ref={bannerDetailsRef} style={{ transform: "translateY(200px)" }}>
           <BannerDetails />
         </div>
       </div>

@@ -100,7 +100,84 @@ const BlogHero = ({ jobDescription }: Props) => {
                 >
                   <div className="flex w-full overflow-hidden bg-white h-full">
                     <div className="relative h-full flex-shrink-0 hidden md:block md:w-[48.4%]">
-                      <AuthSlider />
+                      
+                      
+
+
+
+
+ <div className="relative w-full h-full overflow-hidden">
+      {/* Base layer — always shows the leaving slide so exit fade has no black gap */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src='/images/icons/build.jpg'
+          alt=""
+          fill
+          className="object-cover object-center"
+          aria-hidden
+        />
+        <div
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0) 39.74%, #000000 110.68%)",
+          }}
+          className="absolute inset-0"
+        />
+      </div>
+
+      {/* Static logo */}
+      <div className="absolute top-90 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+        <Image
+          src="/images/footer-logo-inner.svg"
+          alt="Imtiaz Developments logo"
+          width={222}
+          height={60}
+          priority
+          className="h-[60px] w-auto"
+        />
+      </div>
+
+      {/* Slide images — all stacked, GSAP opacity controls visibility */}
+      <div className="absolute inset-0 z-10">
+       
+          <div   className="absolute inset-0 overflow-hidden">
+            <div 
+              className="absolute inset-0 will-change-transform"
+            >
+              <Image
+                src='/images/icons/build.jpg'
+                alt='slide'
+                fill
+                className="object-cover object-center"
+              />
+            </div>
+            <div
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,0) 39.74%, #000000 110.68%)",
+              }}
+              className="absolute inset-0"
+            />
+          </div>
+     
+      </div>
+
+      {/* Title + pagination */}
+      <div className="absolute bottom-90 left-0 right-0 z-20 flex flex-col items-center justify-center px-50">
+        <div className="overflow-hidden mb-50">
+          <p 
+            className="text-heading text-white text-center max-w-[32ch]"
+          >
+           Join Our Team. Shape Iconic Spaces, Build the Future.
+          </p>
+        </div>
+
+       
+      </div>
+    </div>
+
+
+
                     </div>
 
                     <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">

@@ -56,7 +56,7 @@ export default function AwardSection() {
       <div
         style={{
           background:
-            "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%)",
+            "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 90%)",
         }}
         className="relative z-20 w-full h-[471px] flex items-end pb-50"
       >
@@ -66,7 +66,7 @@ export default function AwardSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="award-description mx-auto max-w-[1301px] text-description text-white/70"
+            className="award-description mx-auto max-w-[1301px] text-description text-white/95 lg:text-white/70"
             dangerouslySetInnerHTML={{ __html: awardData.descriptions }}
           />
         </div>

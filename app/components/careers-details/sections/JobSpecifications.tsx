@@ -53,7 +53,7 @@ useEffect(() => {
         {/* Cards */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4   w-full gap-3 md:gap-6 lg:gap-[80px] 2xl:gap-[104px]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   w-full gap-3 md:gap-6 lg:gap-[80px] 2xl:gap-[104px]"
         >
          {jobSpecs.specs.map((loc, i) => (
   <div key={i} className="flex justify-between">

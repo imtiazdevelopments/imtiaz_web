@@ -109,7 +109,7 @@ const AboutJob = ({ data }: Props) => {
           viewport={{ once: true }} 
         > 
         <div > 
-          <ul className="list-disc" >
+          <ul className="list-disc pl-5" >
             {data.qualifications.map((task, index) => (
               <li key={index} className="text-description" >{task}</li>
             ))}

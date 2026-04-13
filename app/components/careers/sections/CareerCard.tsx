@@ -3,7 +3,7 @@
 import Image from "next/image";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import type { Career } from "../data";
-
+import Link from "next/link";
 interface CareerCardProps {
   career: Career;
 }
@@ -42,13 +42,15 @@ export default function CareerCard({ career }: CareerCardProps) {
 
       {/* CTA */}
       <div>
-        <CustomOutlineButton
+        <Link href="careers/career-details">
+        <CustomOutlineButton 
           className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px]"
           text="Apply Now"
           borderColor="border-primary"
           textColor="text-foreground-light"
           variant="dark"
         />
+        </Link>
       </div>
     </div>
   );
