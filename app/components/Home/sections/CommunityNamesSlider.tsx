@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react"; 
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation,Pagination } from "swiper/modules";
 import Image from "next/image";
 
 import CustomOutlineButton from "../../common/CustomOutlineButton";
@@ -87,6 +87,18 @@ export default function HeroFeatureSlider({
   //   animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   // };
 
+const [bp, setBp] = useState<"mobile" | "desktop">("desktop");
+
+useEffect(() => {
+  const handleResize = () => {
+    setBp(window.innerWidth < 768 ? "mobile" : "desktop");
+  };
+
+  handleResize(); // run once
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
   const dropWrapper = {
     hidden: { opacity: 0, y: -60 },
     visible: {
@@ -153,10 +165,10 @@ export default function HeroFeatureSlider({
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-[82vh] lg:h-[85vh] xl:h-screen z-10"
+      className="w-full relative overflow-hidden h-screen z-10"
     >
       {/* Nav Buttons */}
-      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
+      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px]">
         <div>
           {/* Prev Button */}
           <motion.div
@@ -167,7 +179,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={prevRef}
-              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative  w-[62px]  h-[62px]   group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -175,7 +187,7 @@ export default function HeroFeatureSlider({
                 alt="Previous"
                 width={28}
                 height={28}
-                className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -190,7 +202,7 @@ export default function HeroFeatureSlider({
           >
             <button
               ref={nextRef}
-              className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative w-[62px] h-[62px]    group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -198,7 +210,7 @@ export default function HeroFeatureSlider({
                 alt="Next"
                 width={28}
                 height={28}
-                className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative rotate-180 z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -241,7 +253,7 @@ export default function HeroFeatureSlider({
       />
 
       {/* Heading */}
-      <div className="container pt-120 2xl:pt-[130px] relative z-10">
+      <div className="container pt-[70px] md:pt-120 2xl:pt-[130px] relative z-10">
         <motion.div className="flex items-center justify-center relative">
           <motion.div
             className=" max-w-[1150px] w-full text center"
@@ -274,11 +286,15 @@ export default function HeroFeatureSlider({
         onMouseLeave={handleMouseLeave}
       >
         <Swiper
-          modules={[Autoplay, Navigation]}
+          modules={[Autoplay, Navigation,Pagination]}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
+           pagination={{
+                  el: ".custom-pagination ",
+                  clickable: true,
+                }}
           slidesPerView={4}
           loop={true}
           speed={600}
@@ -323,55 +339,57 @@ export default function HeroFeatureSlider({
                       }}
                     />
                     <div className="relative z-20 w-full flex justify-center pointer-events-none">
-                      <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
-                          <motion.h3
-                            key={`feat-title-${i}-${active}`}
-                            initial={{ y: 0 }}
-                            animate={{ y: active ? -16 : 0 }}
-                            transition={{
-                              duration: 0.9, // was already good
-                              ease: [0.25, 0.46, 0.45, 0.94],
-                              delay: active ? 0.08 : 0,
-                            }}
-                            className="text-white font-[optima] uppercase text-center text-25 leading-[1.4] px-4"
-                          >
-                            {c.name}
-                          </motion.h3>
+                      <div className="flex flex-col items-center absolute bottom-[150px]  md:bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
+                         <motion.h3
+  key={`feat-title-${i}-${active}`}
+  initial={{ y: 0 }}
+  animate={{
+    y: bp === "mobile" ? 0 : active ? -16 : 0, // 👈 disable on mobile
+  }}
+  transition={{
+    duration: 0.9,
+    ease: [0.25, 0.46, 0.45, 0.94],
+    delay: active && bp !== "mobile" ? 0.08 : 0, // 👈 also remove delay on mobile
+  }}
+  className="text-white font-[optima] uppercase text-center text-[25px] leading-[1.4] px-4"
+>
+  {c.name}
+</motion.h3>
 
                           {/* Button wrapper — remove the instant class swap, use opacity+y only */}
                           <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{
-                              opacity: active ? 1 : 0,
-                              y: active ? 0 : 30,
-                              marginTop: active ? "var(--gap-active)" : "0px",
-                            }}
-                            transition={{
-                              duration: active ? 0.5 : 0.5, // faster fade-out than fade-in
-                              ease: [0.25, 0.1, 0.25, 1],
-                            }}
-                            style={
-                              {
-                                ["--gap-active"]: "50px",
-                              } as unknown as React.CSSProperties
-                            }
-                            className="gap-responsive pointer-events-none" // ← always pointer-events-none
-                          >
-                            <div
-                              style={{
-                                pointerEvents: active ? "auto" : "none",
-                              }} // ← control clicks here instead
-                            >
-                              <Link href={`/properties/${c.name.toLowerCase().replace(/\s+/g, '-')}`}>
-                                <CustomOutlineButton
-                                  text="Read More"
-                                  borderColor="border-white"
-                                  textColor="text-white"
-                                  px="px-[12px] sm:px-[26px] xl:px-[37px]"
-                                />
-                              </Link>
-                            </div>
-                          </motion.div>
+    initial={{ opacity: 0, y: 30 }}
+    animate={{
+      opacity: active ? 1 : 0,
+      y: active ? 0 : 30,
+      marginTop: active ? "var(--gap-active)" : "0px",
+    }}
+    transition={{
+      duration: active ? 0.5 : 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    }}
+    style={
+      {
+        ["--gap-active"]: window.innerWidth < 768 ? "20px" : "50px",
+      } as unknown as React.CSSProperties
+    }
+    className="gap-responsive pointer-events-none"
+  >
+    <div
+      style={{
+        pointerEvents: active ? "auto" : "none",
+      }}
+    >
+      <Link href={`/properties/${c.name.toLowerCase().replace(/\s+/g, '-')}`}>
+        <CustomOutlineButton
+          text="Read More"
+          borderColor="border-white"
+          textColor="text-white"
+          px="h-[66px] px-[37px]"
+        />
+      </Link>
+    </div>
+  </motion.div>
                       </div>
                     </div>
                   </div>
@@ -389,6 +407,13 @@ export default function HeroFeatureSlider({
             );
           })}
         </Swiper>
+        <div 
+          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300 absolute z-[2] bottom-[70px] left-1/2 transform -translate-x-1/2"
+          style={{
+            opacity: 1, 
+            pointerEvents: "auto",
+          }}
+        />
       </div>
     </section>
   );

@@ -223,7 +223,8 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
     { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
-    { id: "careers", label: "CAREERS", href: "/about/careers" },
+    { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
+    // { id: "careers", label: "CAREERS", href: "/about/careers" },
   ],
   communities: [
     { id: "communities", label: "COMMUNITIES", href: "/communities" },
@@ -235,7 +236,6 @@ export const subMenuItems: Record<string, SubMenuItem[]> = {
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
-    { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
   ],
   partnership: [
     { id: "corp", label: "CORPORATE PARTNERSHIP" },
