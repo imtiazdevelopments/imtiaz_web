@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
@@ -66,7 +66,18 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const setImgRef = (el: HTMLVideoElement | null, i: number) => {
     if (el) imgRefs.current[i] = el;
   };
+const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize(); // initial check
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
   // const initGSAP = () => {
   //   const section = sectionRef.current;
   //   if (!section) return;
@@ -223,18 +234,18 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   // custom={1.2}
                   initial="hidden"
                   animate={startAnim ? "show" : "hidden"}
-                  exit="exit"
-                  className={`container !px-0 md:!px-[15px] mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
+                  exit="exit" 
+                  className={`${isMobile ? "" : "container  md:!px-[15px]"}      mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden` }
                 >
                   {/* <AnimatePresence mode="wait"> */}
                     <div className="relative">
-                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-tl-xl md:rounded-tr-xl lg:rounded-full pointer-events-none" />
+                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full pointer-events-none" />
                       <motion.div
                         key={`pill-${activeIndex}`}
                         // initial="hidden"
                         // animate={startAnim ? "show" : "hidden"}
                         // exit="exit"
-                        className="bg-white/5 backdrop-blur-[30px] py-[40px] md:py-6 lg:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-tl-xl md:rounded-tr-xl lg:rounded-full flex flex-col lg:flex-row md:items-center justify-between  gap-5    lg:min-h-[90px]"
+                        className="bg-white/5 backdrop-blur-[30px] py-[40px] md:py-6 lg:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full flex flex-col lg:flex-row md:items-center justify-between  gap-5    lg:min-h-[90px]"
                       >
                         {/* Pill Logo */}
 

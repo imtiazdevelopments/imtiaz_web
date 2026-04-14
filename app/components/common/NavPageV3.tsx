@@ -2,23 +2,31 @@
 
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState, useEffect, useRef } from "react";
-import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data";
-import { motion } from "framer-motion";
+import { menuItems, subMenuItems, contactInfo, socialLinks } from "./data"; 
 import { moveRight, moveUp } from "../motionVariants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { motion, AnimatePresence } from "framer-motion"; 
+type MenuItem = {
+  id: string;
+  label: string;
+  href?: string;
+  children?: MenuItem[];
+};
 export default function MegaMenu({
   setIsMenuOpen,
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const router = useRouter();
   const mounted = useRef(true);
   const navTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
-  const currentSubmenu = subMenuItems[activeMenu.id];
+  const currentSubmenu = subMenuItems[
+  activeMenu.id as keyof typeof subMenuItems
+] as MenuItem[];
 
   // ── Two permanent BG layers, no key-swapping ──────────────────────────────
   const [bgA, setBgA] = useState(menuItems[0].bgImage);
@@ -217,25 +225,87 @@ const handleNavigate = (href?: string) => {
           </div>
 
           {/* RIGHT SUBMENU */}
-          <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/3 justify-start mt-[8%] overflow-hidden">
-            {currentSubmenu.map((item, idx) => (
-              <motion.div
-                key={`menu-${item.id}-${idx}`}
-                variants={moveRight(idx * 0.16)}
-                initial="hidden"
-                animate="show"
-                viewport={{ once: true }}
-              >
-                <Link
-                  href={item.href ?? "#"}
-                  onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
-                  className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer hover:translate-x-2 transition-all duration-300 block"
-                >
-                  {item.label}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+         <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/3 mt-[8%] relative">
+  {currentSubmenu.map((item, idx) => (
+    <div
+      key={item.id}
+      onMouseEnter={() => item.children && setActiveCategory(item.id)}
+      onMouseLeave={() => setActiveCategory(null)}
+      className="relative flex flex-col"
+    >
+      {/* MAIN ITEM */}
+      {item.href ? (
+        <Link
+          href={item.href}
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavigate(item.href);
+          }}
+          className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
+        >
+          {item.label}
+        </Link>
+      ) : (
+        <div className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer">
+          {item.label}
+        </div>
+      )}
+
+      {/* CHILDREN MENU */}
+       {/* {item.children && activeCategory === item.id && (
+        <div className="  left-full top-0   flex flex-col gap-2     px-4 min-w-[220px]">
+          {item.children.map((child) => (
+            <Link
+              key={child.id}
+              href={child.href || "#"}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigate(child.href);
+              }}
+              className="text-description uppercase hover:translate-x-2 transition-all duration-300"
+            >
+              {child.label}
+            </Link>
+          ))}
+        </div>
+      )} */}
+     <AnimatePresence>
+  {item.children && activeCategory === item.id && (
+    <motion.div
+      // 1. Accordion Animation Settings
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ 
+        height: "auto", 
+        opacity: 1,
+        transition: { height: { duration: 0.3 }, opacity: { duration: 0.2, delay: 0.1 } }
+      }}
+      exit={{ 
+        height: 0, 
+        opacity: 0,
+        transition: { height: { duration: 0.3 }, opacity: { duration: 0.2 } }
+      }}
+      // 2. Layout Classes (Removed absolute, left-full, etc.)
+      className="overflow-hidden flex flex-col gap-2 px-6" 
+    >
+      {item.children.map((child) => (
+        <Link
+          key={child.id}
+          href={child.href || "#"}
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavigate(child.href);
+          }}
+          className="text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
+        >
+          {child.label}
+        </Link>
+      ))}
+    </motion.div>
+  )}
+</AnimatePresence>
+    </div>
+  ))}
+</div>
 
           {/* CLOSE BTN */}
           <button
