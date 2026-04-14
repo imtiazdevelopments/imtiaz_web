@@ -80,7 +80,7 @@ const LatestNewsSlider = ({ news }: { news: PressItem[] }) => {
         <div className="absolute inset-0 flex flex-col items-center justify-between py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
           {/* Top label */}
           <div>
-            <span className="text-19 leading-[100%] text-white font-[avenirHeavy] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
+            <span className="text-19 leading-[100%] text-white font-[avenirBook] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
               Latest News
             </span>
           </div>

@@ -59,7 +59,7 @@ const InnerFooter = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="text-19 font-[avenirHeavy] text-white uppercase leading-[1.5]"
+              className="text-19 font-[avenirBook] text-white uppercase leading-[1.5]"
             >
               STAY UPDATED
             </motion.p>
@@ -79,7 +79,7 @@ const InnerFooter = () => {
                   if (error) setError(""); // clear on typing
                 }}
                 placeholder={footerV2Data.top.placeholderEmail}
-                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirHeavy] text-16 text-white placeholder-white/60 focus:outline-none"
+                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirBook] text-16 text-white placeholder-white/60 focus:outline-none"
               />
 
               <button
@@ -136,7 +136,7 @@ const InnerFooter = () => {
           {footerV2Data.columns.map((col, i) => (
             <Reveal variants={moveUpV2} key={i}>
               <div>
-                <h4 className="uppercase text-white md:text-19 font-[800] font-[avenirHeavy] mb-30">
+                <h4 className="uppercase text-white md:text-19 font-[800] font-[avenirBook] mb-30">
                   {col.heading}
                 </h4>
                 <ul className="space-y-2">
@@ -144,7 +144,7 @@ const InnerFooter = () => {
                     <Reveal variants={moveUpV3} key={idx}>
                       <li
                         key={idx}
-                        className="text-white/80 3xl:text-19 font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
+                        className="text-white/80 3xl:text-19 font-[avenirBook] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
                       >
                         <Link href={item.link}>{item.label}</Link>
                       </li>

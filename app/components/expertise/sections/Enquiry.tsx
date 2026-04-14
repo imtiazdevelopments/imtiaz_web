@@ -199,7 +199,7 @@ export default function EnquirySection() {
                       <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
                         {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
                       </span>
-                      <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
+                      <span className="text-white text-25 uppercase font-[avenirBook] leading-[1.2]">
                         {c.label}
                       </span>
                     </Link>
@@ -228,7 +228,7 @@ export default function EnquirySection() {
                 height={703}
                 className="!w-full h-full absolute inset-0 z-[1] select-none pointer-events-none"
                 style={{
-                  transform: `scale(${1.20}) translateY(${parallaxY}vh)`,
+                  transform: `scale(${1.2}) translateY(${parallaxY}vh)`,
                 }}
               />
             </div>

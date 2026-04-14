@@ -47,7 +47,7 @@ export default function VisionSection() {
           />
           <SectionDescription
             text={description}
-            className="max-w-[870px] mx-auto text-foreground-light"
+            className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
           />
         </div>
 

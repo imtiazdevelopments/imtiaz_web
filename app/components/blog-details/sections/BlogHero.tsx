@@ -41,7 +41,7 @@ const BlogHero = ({ blog }: Props) => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex items-center gap-[10px] text-foreground-light font-[avenirHeavy] text-16"
+            className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-16"
           >
             <div>
               <span>{blog.category}</span>

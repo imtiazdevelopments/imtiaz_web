@@ -23,7 +23,7 @@ const DubaiIsland = ({ data }: DubaiIslandProps) => {
           {data.title}
         </h2>
 
-        <h3 className="text-[25px] font-[avenirHeavy] leading-[1] text-white mb-[40px] uppercase">
+        <h3 className="text-[25px] font-[avenirBook] leading-[1] text-white mb-[40px] uppercase">
           {data.subtitle}
         </h3>
 

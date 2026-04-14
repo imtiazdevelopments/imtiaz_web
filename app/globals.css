@@ -73,12 +73,12 @@
   font-style: unset;
   font-display: swap;
 }
- 
+
 @font-face {
   font-family: "AvenirBook";
-  src: url("/fonts/Avenir_Book.woff2") format("woff2"),
-    url("/fonts/Avenir_Book.woff") format("woff");
-  font-weight: 200;
+  src: url("/fonts/avenir-book-new.woff2") format("woff2"),
+    url("/fonts/avenir-book-new.woff2") format("woff");
+  font-weight: 350;
   font-style: unset;
   font-display: swap;
 }
@@ -271,7 +271,7 @@ html {
 }
  
 @utility text-description {
-  @apply font-[avenirHeavy] text-16 leading-[1.54375];
+  @apply font-[avenirBook] text-16 leading-[1.54375];
 }
  
 @utility container-spacing-details-page {
@@ -290,7 +290,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-avenirBook);
 }
  
 .container {
@@ -474,7 +474,7 @@ body {
   z-index: 3;
 }
  
- 
+
 /* ---------------------------------------
    HERO SLIDER – BUILT-IN PAGINATION STYLES
 -----------------------------------------*/
@@ -652,7 +652,7 @@ body {
 /* Paragraphs */
 .blog-content p {
   font-size: var(--text-16);
-  font-family: var(--font-avenirHeavy);
+  font-family: var(--font-avenirBook);
   line-height: 1.54;
   color: var(--foreground-light);
 }
@@ -701,7 +701,7 @@ body {
 .blog-content ul li {
   list-style-type: disc;
   font-size: var(--text-16);
-  font-family: var(--font-avenirHeavy);
+  font-family: var(--font-avenirBook);
   line-height: 1.54;
   color: var(--foreground-light);
 }

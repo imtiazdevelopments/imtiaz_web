@@ -34,24 +34,30 @@ const EmptyState = () => (
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray">
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
       <SearchX size={32} className="text-primary" />
     </motion.div>
-    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+    <div className="flex flex-col gap-2 font-[avenirBook]">
       <motion.p
         variants={moveUp(0.1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="text-25 text-foreground">No Blog found</motion.p>
+        className="text-25 text-foreground"
+      >
+        No Blog found
+      </motion.p>
       <motion.p
         variants={moveUp(0.16)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
         animate="show"
-        className="text-description text-foreground-light max-w-xs">
-        No results match your current filters. Try adjusting or clearing your selection.
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
       </motion.p>
     </div>
   </div>

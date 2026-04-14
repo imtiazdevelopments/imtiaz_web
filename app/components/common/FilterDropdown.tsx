@@ -103,7 +103,7 @@ const FilterDropdown = ({
       {/* Trigger */}
       <button
         onClick={handleToggle}
-        className={`w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full ${variant === "primary" ? "bg-[#EBEBEC]" : "bg-transparent border border-primary"} font-[avenirHeavy] text-16 text-foreground-light cursor-pointer`}
+        className={`w-full h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full ${variant === "primary" ? "bg-[#EBEBEC]" : "bg-transparent border border-primary"} font-[avenirBook] text-16 text-foreground-light cursor-pointer`}
       >
         <span className={value ? "text-foreground" : "text-foreground-light"}>
           {value || placeholder}
@@ -168,7 +168,7 @@ const FilterDropdown = ({
                   }}
                   className={`w-full text-left px-5 py-3 text-[14px] xl:text-[15px] font-[avenirRoman] transition-colors duration-150 hover:bg-gray ${
                     value === opt
-                      ? "text-primary font-[avenirHeavy]"
+                      ? "text-primary font-[avenirBook]"
                       : "text-foreground-light"
                   }`}
                 >

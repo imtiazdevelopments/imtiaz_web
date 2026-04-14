@@ -8,7 +8,7 @@ export const bannerData = {
 export const visionSectionData = {
   title: "A Vision Built in 1993",
   description:
-    "At Imtiaz, we do more than develop properties — we craft experiences. Every project echoes our deep passion for architecture, purposeful design, and sustainable living. From luxury residences to waterfront communities and concept-driven spaces, each development is created to enrich lives and leave a lasting impact.",
+    "At Imtiaz, we do more than develop properties — we craft experiences. Every project echoes our deep passion for architecture, purposeful design, and sustainable living. From luxury residences to waterfront communities and \n concept-driven spaces, each development is created to enrich lives and leave a lasting impact.",
   bgImage: "/images/our-story/vision-bg.jpg",
   stats: [
     {
@@ -73,7 +73,7 @@ export const awardData = {
 export const expertiseData = {
   title: "Expertise",
   description:
-    "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 million sq. ft. masterplan that seamlessly unites urban \n vibrancy with nature’s calm. ",
+    "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 \n million sq. ft. masterplan that seamlessly unites urban \n vibrancy with nature’s calm. ",
 };
 
 export const otherPageSliderData = {

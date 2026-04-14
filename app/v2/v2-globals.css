@@ -281,7 +281,7 @@ html {
 }
  
 @utility text-description {
-  @apply font-[avenirHeavy] text-16 leading-[1.54375];
+  @apply font-[avenirBook] text-16 leading-[1.54375];
 }
  
 @utility container-spacing-details-page {

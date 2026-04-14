@@ -152,7 +152,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
                     height={25}
                     className="h-[14px] w-auto"
                   />
-                  <span className="text-white font-[avenirHeavy] text-16 uppercase">
+                  <span className="text-white font-[avenirBook] text-16 uppercase">
                     {tag.label}
                   </span>
                   {/* Vertical separator — fixed at right edge of left column */}
@@ -190,7 +190,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
                 height={25}
                 className="h-[18px] w-auto mb-1"
               />
-              <span className="text-white font-[avenirHeavy] text-16 uppercase">
+              <span className="text-white font-[avenirBook] text-16 uppercase">
                 {tag.label}
               </span>
             </div>
