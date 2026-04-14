@@ -89,7 +89,7 @@
   font-family: "AvenirHeavy";
   src: url("/fonts/avenir-book-new.woff2") format("woff2"),
     url("/fonts/avenir-book-new.woff2") format("woff");
-  font-weight: 800;
+  font-weight: 350;
   font-style: unset;
   font-display: swap;
 }
