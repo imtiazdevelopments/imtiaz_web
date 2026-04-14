@@ -70,7 +70,7 @@ const methods = useForm();
       {/* Close btn */}
       
 
-      <div className="w-full  px-3 py-60 md:px-60 3xl:px-0 max-w-[821px] h-screen overflow-scroll relative flex flex-col self-center 3xl:self-end py-6 2xl:py-80  items-center">
+      <div className="w-full  px-3 py-60 md:px-60 3xl:px-0 max-w-[790px] h-screen overflow-scroll relative flex flex-col self-center 3xl:self-end py-6 2xl:py-80  items-center">
         <div className="cursor-pointer"  >
         <button
         aria-label="Close"
@@ -185,66 +185,26 @@ const methods = useForm();
               <ErrorSlot msg={errors.phone?.message} />
             </label>
           </div>
-
-          {/* Password */}
+ 
           <label htmlFor="signupPassword" className="group cursor-text block">
-            <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
-              Cover letter*
-            </span>
-            <div className="relative mt-25">
-              <input 
-                type={ "text"}
-                className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto"
-                {...register("password", {
-                  required: "Cover letter is required",
-                  minLength: { value: 6, message: "Minimum 6 characters" },
-                })}
-              />
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowPassword((p) => !p);
-                }}
-                aria-label="Toggle password"
-                className="absolute right-0 bottom-2 text-foreground-light/50 hover:text-foreground-light bg-transparent border-none p-0 cursor-pointer"
-              >
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                >
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="3"
-                    style={{
-                      opacity: showPassword ? 0 : 1,
-                      transition: "opacity 0.2s ease",
-                    }}
-                  />
-                  <line
-                    x1="1"
-                    y1="1"
-                    x2="23"
-                    y2="23"
-                    style={{
-                      opacity: showPassword ? 1 : 0,
-                      transition: "opacity 0.2s ease",
-                    }}
-                  />
-                </svg>
-              </button>
-            </div>
-            <FieldLine hasError={!!errors.password} />
-            <p className="text-[12px] text-[#c0392b] pt-2 h-20">
-              {errors.password?.message ?? "\u00A0"}
-            </p>
-          </label>
+          <span className="block text-description mt-25 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+            Cover letter*
+          </span>
+          <div className="relative mt-[8px]">
+            <textarea 
+              className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
+              rows={3}
+              {...register("password", {
+                required: "Cover letter is required",
+                minLength: { value: 6, message: "Minimum 6 characters" },
+              })}
+            />
+          </div>
+          <FieldLine hasError={!!errors.password} />
+          <p className="text-[12px] text-[#c0392b] pt-2 h-20">
+            {errors.password?.message ?? "\u00A0"}
+          </p>
+        </label>
 
           {/* Privacy policy */}
          <FileUploader
@@ -256,7 +216,7 @@ const methods = useForm();
 
           {/* Submit */}
           <CustomOutlineButton
-            px="px-[12px] lg:px-[23px] 3xl:px-[90.6px]"
+            px="px-[12px] lg:px-[23px] 3xl:px-[90.6px] 3xl:py-[23px]"
             text="Submit"
             borderColor="border-primary-2"
             textColor="text-foreground-light"
