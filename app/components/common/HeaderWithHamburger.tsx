@@ -180,7 +180,18 @@ const HeaderWithHamburger: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize(); // initial check
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
   return (
     <>
       <div
@@ -194,7 +205,7 @@ const HeaderWithHamburger: React.FC = () => {
       >
         <div className="ovrlyabg bg-black/60 w-full h-screen z-0 absolute"></div>
         <header className="overflow-hidden w-full">
-          <div className="md:container md:mx-auto flex justify-center !px-0 md:!px-[15px]">
+          <div className={isMobile ? "max-w-full flex justify-center !px-0" : "container   flex justify-center  lg:!px-[15px] "}>
             <div className="hdrcnts flex items-center justify-between md:rounded-[150px] py-[30px] px-[20px] md:py-[15px] md:px-20 xl:pl-30 w-full relative h-screen md:mt-[20px]">
               <div
                 className={clsx(
