@@ -370,7 +370,7 @@ useEffect(() => {
     }}
     style={
       {
-        ["--gap-active"]: window.innerWidth < 768 ? "20px" : "50px",
+        ["--gap-active"]: "50px",
       } as unknown as React.CSSProperties
     }
     className="gap-responsive pointer-events-none"
