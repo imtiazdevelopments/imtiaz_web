@@ -193,7 +193,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       initial="hidden"
                       animate={inView ? "show" : "hidden"}
                       exit="exit"
-                      className="flex gap-4 mt-10 md:mt-15  font-[avenirRoman] overflow-hidden"
+                      className="flex gap-4 mt-12 md:mt-15  font-[avenirRoman] overflow-hidden"
                     >
                       <motion.div
                         variants={fadeUp}
@@ -201,13 +201,14 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         custom={0.23}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
-                      >
-                        <CustomOutlineButton
-                          text="Register Interest"
-                          borderColor="border-white"
-                          textColor="text-white"
-                          px="px-[20px] md:px-[26px] xl:px-[25px] h-[45px] lg:h-[66px] !leading-[1.58]"
-                        />
+                         
+                      > 
+                         <CustomOutlineButton 
+              text="Register Interest"
+              borderColor="border-white"
+              textColor="text-white"
+              px="px-[25px] h-[66px] !leading-[1.58]"
+            />
                       </motion.div>
                     </motion.div>
 
