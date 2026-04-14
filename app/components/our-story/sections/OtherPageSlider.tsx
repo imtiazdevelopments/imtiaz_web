@@ -7,6 +7,7 @@ import { moveUp } from "../../motionVariants";
 import { otherPageSliderData } from "../data";
 import gsap from "gsap";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Image from "next/image";
 
 export default function OtherPageSlider() {
   const { slides } = otherPageSliderData;
@@ -87,45 +88,46 @@ export default function OtherPageSlider() {
 
   const goNextAutoRef = useRef<() => void>(() => {});
 
-  const goTo = useCallback(
-    (index: number, fromAuto = false) => {
-      // Block if already transitioning OR cooldown active (except autoplay which manages its own rhythm)
-      if (transitioning.current) return;
-      if (!fromAuto && cooldownRef.current) return;
-      if (index === currentRef.current) return;
+const goTo = useCallback(
+  (index: number, fromAuto = false) => {
+    if (transitioning.current) return;
+    if (index === currentRef.current) return;
 
-      transitioning.current = true;
-      cooldownRef.current = true;
+    transitioning.current = true;
+    if (fromAuto) cooldownRef.current = true;
 
-      const layerA = layerARef.current!;
-      const layerB = layerBRef.current!;
-      const incoming = activeLayerRef.current === "A" ? layerB : layerA;
-      const outgoing = activeLayerRef.current === "A" ? layerA : layerB;
-      setLayerBg(incoming, slides[index].bgImage);
-      gsap.set(incoming, { opacity: 0, zIndex: 10 });
-      gsap.set(outgoing, { zIndex: 5 });
+    const layerA = layerARef.current!;
+    const layerB = layerBRef.current!;
+    const incoming = activeLayerRef.current === "A" ? layerB : layerA;
+    const outgoing = activeLayerRef.current === "A" ? layerA : layerB;
+    setLayerBg(incoming, slides[index].bgImage);
+    gsap.set(incoming, { opacity: 0, zIndex: 10 });
+    gsap.set(outgoing, { zIndex: 5 });
 
-      // ✅ Update content immediately when image starts fading
-      currentRef.current = index;
-      setCurrent(index);
+    currentRef.current = index;
+    setCurrent(index);
 
-      gsap.to(incoming, {
-        opacity: 1,
-        duration: 1,
-        ease: "power2.inOut",
-        onComplete: () => {
-          gsap.set(outgoing, { opacity: 0 });
-          activeLayerRef.current = activeLayerRef.current === "A" ? "B" : "A";
-          transitioning.current = false;
+    const duration = fromAuto ? 1 : 0.45; // fast for manual, smooth for auto
 
+    gsap.to(incoming, {
+      opacity: 1,
+      duration,
+      ease: "power2.inOut",
+      onComplete: () => {
+        gsap.set(outgoing, { opacity: 0 });
+        activeLayerRef.current = activeLayerRef.current === "A" ? "B" : "A";
+        transitioning.current = false;
+
+        if (fromAuto) {
           setTimeout(() => {
             cooldownRef.current = false;
           }, 600);
-        },
-      });
-    },
-    [slides],
-  );
+        }
+      },
+    });
+  },
+  [slides],
+);
 
   const goPrev = useCallback(() => {
     resetAutoplay();
@@ -250,7 +252,9 @@ export default function OtherPageSlider() {
             className="relative w-[62px] h-[62px] w-[45px] h-[45px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <img
+            <Image
+              width={58}
+              height={58}
               src="/icons/left_arrow_slider_primary.svg"
               alt="Prev"
               className="relative z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
@@ -275,7 +279,9 @@ export default function OtherPageSlider() {
             className="relative  w-[62px] h-[62px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <img
+            <Image
+              width={58}
+              height={58}
               src="/icons/left_arrow_slider_primary.svg"
               alt="Next"
               className="relative rotate-180 z-10 object-contain w-[28px] h-[28px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
