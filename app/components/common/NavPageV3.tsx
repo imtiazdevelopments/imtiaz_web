@@ -285,7 +285,7 @@ const handleNavigate = (href?: string) => {
         transition: { height: { duration: 0.3 }, opacity: { duration: 0.2 } }
       }}
       // 2. Layout Classes (Removed absolute, left-full, etc.)
-      className="overflow-hidden flex flex-col gap-2 md:px-4" 
+      className="overflow-hidden flex flex-col gap-2 px-2 md:px-4" 
     >
       {item.children.map((child) => (
         <Link
@@ -295,7 +295,7 @@ const handleNavigate = (href?: string) => {
             e.preventDefault();
             handleNavigate(child.href);
           }}
-          className="text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
+          className="!text-[11px] md:!text-[14px] text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
         >
           {child.label}
         </Link>
