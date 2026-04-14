@@ -92,7 +92,7 @@ const BlogHero = ({ jobDescription }: Props) => {
                 />
 
                 <motion.div
-                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full sm:h-[85vh] lg:h-[80vh] xl:h-full"
+                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-screen"
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
@@ -182,12 +182,13 @@ const BlogHero = ({ jobDescription }: Props) => {
 
                     <div className="relative w-full md:w-[51.6%] h-full bg-white overflow-hidden pointer-events-none">
                       {/* Background decoration — behind scroll layer */}
-                      <div className="absolute bottom-0 left-0 pointer-events-none">
+                      <div className="absolute bottom-0 left-0 pointer-events-none 3xl:bottom-[70px] 3xl:left-[-5px]">
                         <Image
                           src="/icons/layout_icons/m-icon.svg"
                           alt="Icon"
                           width={534}
-                          height={704}
+                          height={700}
+                          className="3xl:h-[700px]"
                         />
                       </div>
 
