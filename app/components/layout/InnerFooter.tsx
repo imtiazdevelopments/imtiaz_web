@@ -132,7 +132,7 @@ const InnerFooter = () => {
 
       {/* ================= MENU COLUMNS ================= */}
       <div className="bg-primary-2 py-100">
-        <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 xl:gap-10">
+        <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-5 xl:gap-10">
           {footerV2Data.columns.map((col, i) => (
             <Reveal variants={moveUpV2} key={i}>
               <div>

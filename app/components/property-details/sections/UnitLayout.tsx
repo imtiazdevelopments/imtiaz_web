@@ -254,7 +254,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         <CustomIconButton
           icondownload={true}
           iconColor="dark"
-          className="w-fit 2xl:!px-[37.5px] 2xl:!py-[20px]"
+          className="w-fit 2xl:!px-[37.5px] 3xl:!px-[41px] 2xl:!py-[20px]"
           text="Download Unit layout"
           borderColor="border-primary-2"
           textColor="text-foreground-light"
@@ -403,7 +403,7 @@ export default function UnitLayout() {
                   <div key={unit.id}>
                     <button
                       data-unit-id={unit.id}
-                      className={`cursor-pointer flex items-center justify-center group relative transition-colors duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirBook] text-16 leading-[100%]`}
+                      className={`cursor-pointer flex items-center justify-center group relative transition-colors duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirBook] text-16 leading-[100%] 2xl:h-[58.33px] 2xl:max-w-[305px]`}
                       onClick={() => handleUnitClick(unit.id)}
                     >
                       <div className="flex items-center gap-[10px] 2xl:gap-[10px]">

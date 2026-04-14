@@ -156,7 +156,7 @@ export default function MessageSection({ data }: Props) {
             <div className="pb-130 pt-90 3xl:pt-[96px] justify-self-end ml-[15%] 3xl:ml-0 3xl:pr-[27px]">
               <SectionDescription
                 text={data.description}
-                className="text-description text-foreground-light max-w-[561px] whitespace-pre-line"
+                className="text-description text-foreground-light xl:max-w-[561px] whitespace-pre-line"
               />
             </div>
           </div>

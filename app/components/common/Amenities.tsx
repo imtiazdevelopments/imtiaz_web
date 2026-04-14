@@ -75,9 +75,9 @@ export default function Amenities({ data, maxTitle }: Props) {
                   className="amenity-card group relative flex flex-col items-center justify-start gap-4 xl:gap-[30px] p-3 md:px-6 md:py-[20px] text-center cursor-default w-1/2 sm:w-1/3 lg:w-1/4 overflow-hidden"
                 >
                   {/* Left fill */}
-                  <span className="absolute inset-y-0 left-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                  {/* <span className="absolute inset-y-0 left-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
                   {/* Right fill */}
-                  <span className="absolute inset-y-0 right-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                  {/* <span className="absolute inset-y-0 right-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
 
                   {/* Icon */}
                   <div className="relative z-10 w-9 h-9 md:w-12 md:h-12 xl:w-15 xl:h-15 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1">

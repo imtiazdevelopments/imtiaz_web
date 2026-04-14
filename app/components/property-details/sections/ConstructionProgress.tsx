@@ -431,6 +431,9 @@ export default function WynwoodProgress() {
       } else if (window.innerWidth < 1024) {
         setCircleSize(160);
         setStrokeWidth(12);
+      } else if (window.innerWidth < 1550) {
+        setCircleSize(180);
+        setStrokeWidth(14);
       } else {
         setCircleSize(203);
         setStrokeWidth(15);

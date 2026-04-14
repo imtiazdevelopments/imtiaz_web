@@ -154,6 +154,12 @@ export const footerV2Data: FooterV2Data = {
         { label: "Events", link: "/media-center/events" },
       ],
     },
+        {
+      heading: "TRENDING SEARCHES",
+      items: [
+        { label: "Off Plan Properties", link: "/off-plan-properties" },
+      ],
+    },
   ],
 
   bottom: {
@@ -200,14 +206,14 @@ export const menuItems: MenuItem[] = [
     label: "MEDIA CENTER",
     bgImage: "/images/home/imtiaz-properties/3.png",
   },
+  // {
+  //   id: "partnership",
+  //   label: "PARTNERSHIP",
+  //   bgImage: "/images/home/imtiaz-properties/4.png",
+  // },
   {
     id: "partnership",
     label: "PARTNERSHIP",
-    bgImage: "/images/home/imtiaz-properties/4.png",
-  },
-  {
-    id: "channel",
-    label: "CHANNEL PARTNER",
     bgImage: "/images/home/imtiaz-properties/5.png",
   },
   {
@@ -227,12 +233,12 @@ export const subMenuItems = {
   ],
 
   communities: [
-    { id: "Al-furjan", label: "Al Furjan", href: "/communities/al-furjan" },
+    { id: "Al-furjan", label: "Al Furjan", href: "/#" },
     { id: "dubai-islands", label: "Dubai Islands", href: "/communities/dubai-islands" },
-    { id: "dubai-land-residence-complex", label: "Dubai Land Residence Complex", href: "/communities/dubai-land-residence-complex" },
-    { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/communities/jumeirah-garden-city" },
-    { id: "jvc", label: "JVC", href: "/communities/jvc" },
-    { id: "allcommunities", label: "View All Communities", href: "/communities/allcommunities" },
+    { id: "dubai-land-residence-complex", label: "Dubai Land Residence Complex", href: "/#" },
+    { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/#" },
+    { id: "jvc", label: "JVC", href: "/#" },
+    { id: "allcommunities", label: "View All Communities", href: "/communities" },
   ],
 
   properties: [
@@ -241,7 +247,7 @@ export const subMenuItems = {
       id: "Alfurjan",
       label: "Al Furjan",
       children: [
-        { id: "res-1", label: "Westwood", href: "/properties/westwood" }, 
+        { id: "res-1", label: "Westwood", href: "/#" }, 
       ],
     },
  
@@ -249,37 +255,37 @@ export const subMenuItems = {
       id: "dubaiislands",
       label: "Dubai Islands",
       children: [
-        { id: "Dubai-1", label: "Beach Walk Residence", href: "/properties/beach-walk-residence" },
-        { id: "Dubai-2", label: "Beach Walk Residence II", href: "/properties/beach-walk-residence-II" },
-        { id: "Dubai-3", label: "Beach Walk II", href: "/properties/beach-walk-II" },
+        { id: "Dubai-1", label: "Beach Walk Residence", href: "/#" },
+        { id: "Dubai-2", label: "Beach Walk Residence II", href: "/#" },
+        { id: "Dubai-3", label: "Beach Walk II", href: "/#" },
       ],
     }, 
     {
       id: "dubai-complex",
       label: "Dubai Land Residence Complex",
       children: [
-        { id: "lux-1", label: "Cove Edition I", href: "/properties/cove-edition-i" },
-        { id: "lux-2", label: "Cove by Imtiaz", href: "/properties/cove-by-imtiaz" },
-        { id: "lux-3", label: "Beach Walk III", href: "/properties/beach-walk-III" },
+        { id: "lux-1", label: "Cove Edition I", href: "/#" },
+        { id: "lux-2", label: "Cove by Imtiaz", href: "/#" },
+        { id: "lux-3", label: "Beach Walk III", href: "/#" },
       ],
     }, 
     {
       id: "jumeirahcity",
       label: "Jumeirah Garden City",
       children: [
-        { id: "jumeirahcity-1", label: "Hyde Walk", href: "/properties/hyde-walk" }, 
+        { id: "jumeirahcity-1", label: "Hyde Walk", href: "/#" }, 
       ],
     }, 
     {
       id: "JVC",
       label: "JVC",
       children: [
-        { id: "jvc-1", label: "Pearl House", href: "/properties/pearl-house" }, 
-        { id: "jvc-2", label: "Pearl House II", href: "/properties/pearl-house-ii" }, 
-        { id: "jvc-13", label: "Pearl House III", href: "/properties/pearl-house-iii" }, 
-        { id: "jvc-3", label: "Westwood Grande", href: "/properties/westwood-grande" }, 
-        { id: "jvc-4", label: "Westwood Grande II", href: "/properties/westwood-grande-II" }, 
-        { id: "jvc-5", label: "Luxor", href: "/properties/luxor" }, 
+        { id: "jvc-1", label: "Pearl House", href: "/#" }, 
+        { id: "jvc-2", label: "Pearl House II", href: "/#" }, 
+        { id: "jvc-13", label: "Pearl House III", href: "/#" }, 
+        { id: "jvc-3", label: "Westwood Grande", href: "/#" }, 
+        { id: "jvc-4", label: "Westwood Grande II", href: "/#" }, 
+        { id: "jvc-5", label: "Luxor", href: "/#" }, 
       ],
     }, 
     {
