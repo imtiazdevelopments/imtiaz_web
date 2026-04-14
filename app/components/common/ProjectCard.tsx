@@ -250,7 +250,7 @@ const handleCardClick = () => {
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleCardClick}
     >
-      <div className="relative w-full aspect-[9.9/13] sm:aspect-[9.4/13] md:aspect-[9/13] xl:aspect-[8.8/13] 3xl:aspect-[8.48/13] overflow-hidden">
+      <div className="relative w-full aspect-[8.5/13] sm:aspect-[8.5/13] md:aspect-[9/13] xl:aspect-[8.5/13] 3xl:aspect-[8.48/13] overflow-hidden">
         <Image
           src={image}
           alt={title}
