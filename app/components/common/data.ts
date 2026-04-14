@@ -218,38 +218,136 @@ export const menuItems: MenuItem[] = [
 ];
 
 // Submenus mapped to parent menu ID
-export const subMenuItems: Record<string, SubMenuItem[]> = {
+export const subMenuItems = {
   about: [
     { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
     { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
     { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
-    // { id: "careers", label: "CAREERS", href: "/about/careers" },
   ],
+
   communities: [
-    { id: "communities", label: "COMMUNITIES", href: "/communities" },
+    { id: "Al-furjan", label: "Al Furjan", href: "/communities/al-furjan" },
+    { id: "dubai-islands", label: "Dubai Islands", href: "/communities/dubai-islands" },
+    { id: "dubai-land-residence-complex", label: "Dubai Land Residence Complex", href: "/communities/dubai-land-residence-complex" },
+    { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/communities/jumeirah-garden-city" },
+    { id: "jvc", label: "JVC", href: "/communities/jvc" },
+    { id: "allcommunities", label: "View All Communities", href: "/communities/allcommunities" },
   ],
+
   properties: [
-    { id: "all", label: "ALL PROPERTIES", href: "/properties" },
+ 
+    {
+      id: "Alfurjan",
+      label: "Al Furjan",
+      children: [
+        { id: "res-1", label: "Westwood", href: "/properties/westwood" }, 
+      ],
+    },
+ 
+    {
+      id: "dubaiislands",
+      label: "Dubai Islands",
+      children: [
+        { id: "Dubai-1", label: "Beach Walk Residence", href: "/properties/beach-walk-residence" },
+        { id: "Dubai-2", label: "Beach Walk Residence II", href: "/properties/beach-walk-residence-II" },
+        { id: "Dubai-3", label: "Beach Walk II", href: "/properties/beach-walk-II" },
+      ],
+    }, 
+    {
+      id: "dubai-complex",
+      label: "Dubai Land Residence Complex",
+      children: [
+        { id: "lux-1", label: "Cove Edition I", href: "/properties/cove-edition-i" },
+        { id: "lux-2", label: "Cove by Imtiaz", href: "/properties/cove-by-imtiaz" },
+        { id: "lux-3", label: "Beach Walk III", href: "/properties/beach-walk-III" },
+      ],
+    }, 
+    {
+      id: "jumeirahcity",
+      label: "Jumeirah Garden City",
+      children: [
+        { id: "jumeirahcity-1", label: "Hyde Walk", href: "/properties/hyde-walk" }, 
+      ],
+    }, 
+    {
+      id: "JVC",
+      label: "JVC",
+      children: [
+        { id: "jvc-1", label: "Pearl House", href: "/properties/pearl-house" }, 
+        { id: "jvc-2", label: "Pearl House II", href: "/properties/pearl-house-ii" }, 
+        { id: "jvc-13", label: "Pearl House III", href: "/properties/pearl-house-iii" }, 
+        { id: "jvc-3", label: "Westwood Grande", href: "/properties/westwood-grande" }, 
+        { id: "jvc-4", label: "Westwood Grande II", href: "/properties/westwood-grande-II" }, 
+        { id: "jvc-5", label: "Luxor", href: "/properties/luxor" }, 
+      ],
+    }, 
+    {
+      id: "all",
+      label: "ALL PROPERTIES",
+      href: "/properties",
+    },
   ],
+
   media: [
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
   ],
+
   partnership: [
     { id: "corp", label: "CORPORATE PARTNERSHIP" },
     { id: "invest", label: "INVEST WITH US" },
   ],
+
   channel: [
     { id: "agent", label: "AGENT PORTAL" },
     { id: "register", label: "REGISTER AS PARTNER" },
   ],
+
   paynow: [
     { id: "online", label: "PAY ONLINE", href: "/pay-now" },
     { id: "payment-methods", label: "Payment Methods", href: "/pay-now" },
   ],
 };
+// export const subMenuItems: Record<string, SubMenuItem[]> = {
+//   about: [
+//     { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
+//     { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
+//     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
+//     { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
+//     // { id: "careers", label: "CAREERS", href: "/about/careers" },
+//   ],
+//   communities: [
+//     { id: "Al-furjan", label: "Al Furjan", href: "/communities/al-furjan" },
+//     { id: "dubai-islands", label: "Dubai Islands", href: "/communities/dubai-islands" },
+//     { id: "dubai-land-residence-complex", label: "Dubai Land Residence Complex", href: "/communities/dubai-land-residence-complex" },
+//     { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/communities/jumeirah-garden-city" },
+//     { id: "jvc", label: "JVC", href: "/communities/jvc" },
+//     { id: "allcommunities", label: "View All Communities", href: "/communities/allcommunities" },
+    
+//   ],
+//   properties: [
+//     { id: "all", label: "ALL PROPERTIES", href: "/properties" },
+//   ],
+//   media: [
+//     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
+//     { id: "events", label: "EVENTS", href: "/media-center/events" },
+//     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
+//   ],
+//   partnership: [
+//     { id: "corp", label: "CORPORATE PARTNERSHIP" },
+//     { id: "invest", label: "INVEST WITH US" },
+//   ],
+//   channel: [
+//     { id: "agent", label: "AGENT PORTAL" },
+//     { id: "register", label: "REGISTER AS PARTNER" },
+//   ],
+//   paynow: [
+//     { id: "online", label: "PAY ONLINE", href: "/pay-now" },
+//     { id: "payment-methods", label: "Payment Methods", href: "/pay-now" },
+//   ],
+// };
 
 // Right side contact section
 export const contactInfo = {
