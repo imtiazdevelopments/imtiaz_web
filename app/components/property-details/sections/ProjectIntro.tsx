@@ -38,7 +38,7 @@ const ProjectIntro = () => {
           <a href="#" className="selector">
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+              className="w-fit !px-5 xl:!px-[30px] 3xl:!px-[35px] 2xl:!py-[20.5px]"
               text="Brochure"
               borderColor="border-white"
               textColor="text-white"
@@ -48,7 +48,7 @@ const ProjectIntro = () => {
           <a href="#" className="selector">
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+              className="w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px]"
               text="Fact Sheet"
               borderColor="border-white"
               textColor="text-white"
@@ -58,7 +58,7 @@ const ProjectIntro = () => {
           <a href="#" className="selector">
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 2xl:!px-[39px] 2xl:!py-[20.5px]"
+              className="w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px]"
               text="Unit layout"
               borderColor="border-white"
               textColor="text-white"

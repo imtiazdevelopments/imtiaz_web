@@ -289,7 +289,7 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Bottom controls ── */}
-      <div className="absolute bottom-120 2xl:bottom-[130px] inset-x-0 z-30 flex flex-col items-center gap-5 2xl:gap-[30px]">
+      <div className="absolute bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-20 2xl:gap-30">
         {/* Tab pill */}
         <div className="p-[8px] backdrop-blur-[30px] rounded-full">
           <div className="relative flex overflow-hidden 2xl:gap-[29.5px]">
@@ -304,13 +304,13 @@ export default function GallerySlider() {
             />
             <button
               onClick={() => setActiveTab("interior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[72.6px] font-[optima] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[75px] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
             >
               Interior
             </button>
             <button
               onClick={() => setActiveTab("exterior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[72.6px] font-[optima] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
             >
               Exterior
             </button>
