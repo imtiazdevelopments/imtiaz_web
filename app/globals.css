@@ -136,6 +136,7 @@ html {
  
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
+--text-px32: clamp(32px, 0.81vw + 17.3px, 32px);
  
 /* 30px → 24px at 390px, 30px at 1810px */
 --text-30: clamp(24px, 0.81vw + 17.3px, 30px);
@@ -237,6 +238,7 @@ html {
   --text-70: var(--text-70);
   --text-50: var(--text-50);
   --text-32: var(--text-32);
+  --text-px32: var(--text-px32);
   --text-30: var(--text-30);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
@@ -267,7 +269,7 @@ html {
 }
  
 @utility text-heading {
-  @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-32 md:text-50;
+  @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-px32 md:text-50;
 }
  
 @utility text-description {

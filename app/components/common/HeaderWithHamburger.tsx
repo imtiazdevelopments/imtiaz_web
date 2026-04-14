@@ -86,9 +86,9 @@ const HeaderWithHamburger: React.FC = () => {
       hdrcntsH = "55px";
     } else {
       // below md
-      startH = "48px";
-      endH = "26px";
-      hdrcntsH = "48px";
+      startH = "44px";
+      endH = "44px";
+      hdrcntsH = "104px";
     }
 
     gsap.set(".hdrlgs svg", { height: startH });
@@ -97,7 +97,7 @@ const HeaderWithHamburger: React.FC = () => {
 
     tl.to(".group-1 path", { y: 0, opacity: 1, stagger: 0.15, duration: 0.8 })
       .to(".group-2 path", { y: 0, opacity: 1, stagger: 0.15, duration: 1 })
-      .to(".hdrcnts", { height: hdrcntsH, duration: 0.5, marginTop: "20px" })
+      .to(".hdrcnts", { height: hdrcntsH, duration: 0.5 })
       .to(".hdrlgs svg", { height: endH, duration: 0.5 }, "<")
       .to(".ovrlyabg", { opacity: "0", duration: 0.6 })
       .to(".bckbg", { height: "100%", duration: 0.6 }, "-=2")
@@ -118,7 +118,7 @@ const HeaderWithHamburger: React.FC = () => {
       .add(() => {
         const w = window.innerWidth;
         const finalH =
-          w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "50px";
+          w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "104px";
         gsap.set(".bckbg", { height: finalH });
         window.dispatchEvent(new Event("headerAnimationComplete"));
       });
@@ -194,11 +194,11 @@ const HeaderWithHamburger: React.FC = () => {
       >
         <div className="ovrlyabg bg-black/60 w-full h-screen z-0 absolute"></div>
         <header className="overflow-hidden w-full">
-          <div className="container flex justify-center">
-            <div className="hdrcnts flex items-center justify-between rounded-[150px] py-[15px] px-20 xl:pl-30 w-full relative h-screen">
+          <div className="md:container md:mx-auto flex justify-center !px-0 md:!px-[15px]">
+            <div className="hdrcnts flex items-center justify-between md:rounded-[150px] py-[30px] px-[20px] md:py-[15px] md:px-20 xl:pl-30 w-full relative h-screen md:mt-[20px]">
               <div
                 className={clsx(
-                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute rounded-[150px] z-[-1] transition-colors duration-500",
+                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute md:rounded-[150px] z-[-1] transition-colors duration-500",
                   darkHeader ? "bg-black/60" : "bg-white/10",
                 )}
               ></div>
@@ -214,7 +214,7 @@ const HeaderWithHamburger: React.FC = () => {
                     alt="menu"
                     width={22}
                     height={22}
-                    className="w-[22px] h-[14px] sm:h-[15px]"
+                    className="w-[18px] h-[16px] md:h-[15px] md:h-[22px]"
                   />
                 </button>
               </div>
@@ -345,14 +345,14 @@ const HeaderWithHamburger: React.FC = () => {
                 <div className="flex items-center gap-[5px] sm:gap-[10px] rgtbtn">
                   <button
                     onClick={() => setAuthView("login")}
-                    className="flex group items-center justify-center w-[32px] h-[32px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer opacity-0"
+                    className="flex group items-center justify-center w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer opacity-0"
                   >
                     <Image
                       src="/images/account.svg"
                       alt="account"
                       width={14}
                       height={15}
-                      className="invert h-[17px] md:h-[15.16px] w-auto group-hover:scale-110 transition-all duration-400"
+                      className="invert w-[10px] h-[12px] md:h-[15.16px] md:w-[14px] w-auto group-hover:scale-110 transition-all duration-400"
                     />
                   </button>
 
@@ -370,17 +370,17 @@ const HeaderWithHamburger: React.FC = () => {
                         }
                         setLangOpen((p) => !p);
                       }}
-                      className="group flex items-center justify-center gap-[8px] h-[32px] w-[32px] md:w-auto sm:px-[6px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer opacity-0"
+                      className="group flex items-center justify-center gap-[5px] sm:gap-[10px] md:gap-[8px] w-auto px-[7px] py-[6px]  md:px-[6px]  bg-white/25  backdrop-blur-[30px]  rounded-full cursor-pointer opacity-0"
                     >
                       <Image
                         src="/images/map.svg"
                         alt="map"
                         width={24}
                         height={24}
-                        className="invert h-[17px] md:h-[24px] w-auto group-hover:scale-110 transition-all duration-400"
+                        className="invert h-[12.24px] md:h-[24px] w-auto group-hover:scale-110 transition-all duration-400"
                       />
-                      <div className="hidden md:block">
-                        <ChevronDown size={18} className="text-white" />
+                      <div className="block">
+                        <ChevronDown className="text-white w-[12px] h-[12px] md:w-[18px] md:h-[18px]" />
                       </div>
                     </button>
 
