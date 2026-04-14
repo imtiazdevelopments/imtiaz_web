@@ -90,7 +90,7 @@
 //                   >
 //                     {/* Right Label */}
 //                     <span
-//                       className="text-white font-[avenirHeavy] font-[800] uppercase
+//                       className="text-white font-[avenirBook] font-[800] uppercase
 //                       text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]
 //                       mb-10 lg-mb-15 2xl:mb-25 3xl:mb-[130px]"
 //                     >
@@ -358,7 +358,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               start: "top bottom",
               end: "bottom top",
             },
-          }
+          },
         );
       });
     });
@@ -427,7 +427,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         animate={inView ? "show" : "hidden"}
                       >
                         <span
-                          className="text-white font-[avenirHeavy] font-[800] uppercase
+                          className="text-white font-[avenirBook] font-[800] uppercase
       text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
                         >
                           {RightLabel}
@@ -469,7 +469,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                 </AnimatePresence>
 
                 {/* -------------------------------- BUTTONS -------------------------------- */}
-               
               </div>
 
               {/* -------------------------------- PILL SECTION -------------------------------- */}
@@ -492,8 +491,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         exit="exit"
                         className="bg-white/5 backdrop-blur-[30px] rounded-full flex items-center justify-between gap-6 h-[70px] md:h-[90px]"
                       >
-                  
-                       
                         {/* Features */}
                         <div className="flex gap-6 md:gap-10 2xl:gap-20 items-center flex-col lg:flex-row flex-wrap lg:flex-nowrap overflow-hidden px-6 lg:px-[30px] 2xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
@@ -518,41 +515,40 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           ))}
                         </div>
 
-                          <motion.div
-                                                  className="pr-6 md:pr-[15px] 
+                        <motion.div
+                          className="pr-6 md:pr-[15px] 
                                                 flex items-center justify-center overflow-hidden"
-                                                >
-                                                   <AnimatePresence mode="wait">
-                  <motion.div
-                    key={`btns-${activeIndex}`}
-                    initial="hidden"
-                    animate={inView ? "show" : "hidden"}
-                    exit="exit"
-                    className="flex gap-4  font-[avenirRoman] overflow-hidden"
-                  >
-                    <motion.a
-                      variants={fadeUp}
-                      custom={0.38}
-                      className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
+                        >
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={`btns-${activeIndex}`}
+                              initial="hidden"
+                              animate={inView ? "show" : "hidden"}
+                              exit="exit"
+                              className="flex gap-4  font-[avenirRoman] overflow-hidden"
+                            >
+                              <motion.a
+                                variants={fadeUp}
+                                custom={0.38}
+                                className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
                       text-[15px] md:text-[17px] cursor-pointer"
-                    >
-                      <span>Register</span>
-                    </motion.a>
+                              >
+                                <span>Register</span>
+                              </motion.a>
 
-                    <motion.a
-                      variants={fadeUp}
-                      custom={0.48}
-                      className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
+                              <motion.a
+                                variants={fadeUp}
+                                custom={0.48}
+                                className="btn-fill-blur px-6 py-3 md:px-9 md:py-[19px]
                       rounded-full border border-white text-white
                       text-[15px] md:text-[17px] cursor-pointer"
-                    >
-                      <span>Explore</span>
-                    </motion.a>
-                  </motion.div>
-                </AnimatePresence>
-
-                                                </motion.div>
+                              >
+                                <span>Explore</span>
+                              </motion.a>
+                            </motion.div>
+                          </AnimatePresence>
+                        </motion.div>
                       </motion.div>
                     </div>
                   </AnimatePresence>
@@ -574,7 +570,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       >
         <div className="container flex items-center justify-center">
           {/* Prev */}
-       
+
           {/* Pagination Dots */}
           <div className="flex gap-3 justify-center items-center z-[50]">
             {slides.map((_, i) => (
@@ -589,8 +585,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               />
             ))}
           </div>
-
-        
         </div>
       </motion.div>
       <motion.div
@@ -617,7 +611,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           </button>
 
           {/* Pagination Dots */}
-         
 
           {/* Next */}
           <button

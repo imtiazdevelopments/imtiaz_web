@@ -80,7 +80,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
         <div className="absolute inset-0 flex flex-col items-center justify-between py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
           {/* Top label */}
           <div>
-            <span className="text-19 leading-[100%] text-white font-[avenirHeavy] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
+            <span className="text-19 leading-[100%] text-white font-[avenirBook] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
               Latest Blog
             </span>
           </div>
@@ -148,11 +148,12 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
 
       {/* Custom dots */}
       <motion.div
-      variants={moveUp(0.14)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{once: true}}
-       className="flex items-center justify-center gap-3 mt-20">
+        variants={moveUp(0.14)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="flex items-center justify-center gap-3 mt-20"
+      >
         {blogs.map((_, i) => (
           <button
             key={i}

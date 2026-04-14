@@ -275,22 +275,26 @@ export default function UnitLayout() {
   const panelRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const { scrollTo } = useLenis();
 
-const handleUnitClick = (unitId: string) => {
-  const isCurrentlyActive = activeId === unitId;
-  setActiveId(isCurrentlyActive ? null : unitId);
+  const handleUnitClick = (unitId: string) => {
+    const isCurrentlyActive = activeId === unitId;
+    setActiveId(isCurrentlyActive ? null : unitId);
 
-  if (!isCurrentlyActive && typeof window !== "undefined" && window.innerWidth < 1024) {
-    setTimeout(() => {
-      const button = buttonsContainerRef.current?.querySelector(
-        `[data-unit-id="${unitId}"]`
-      );
-      if (button) {
-        const top = button.getBoundingClientRect().top + window.scrollY - 80;
-        scrollTo(top, { duration: 1 });
-      }
-    }, 100);
-  }
-};
+    if (
+      !isCurrentlyActive &&
+      typeof window !== "undefined" &&
+      window.innerWidth < 1024
+    ) {
+      setTimeout(() => {
+        const button = buttonsContainerRef.current?.querySelector(
+          `[data-unit-id="${unitId}"]`,
+        );
+        if (button) {
+          const top = button.getBoundingClientRect().top + window.scrollY - 80;
+          scrollTo(top, { duration: 1 });
+        }
+      }, 100);
+    }
+  };
 
   // Scroll trigger animation for entire section
   useEffect(() => {
@@ -376,7 +380,11 @@ const handleUnitClick = (unitId: string) => {
   }, []);
 
   return (
-    <section data-header="dark" ref={sectionRef} className="bg-gray py-120 2xl:py-130">
+    <section
+      data-header="dark"
+      ref={sectionRef}
+      className="bg-gray py-120 2xl:py-130"
+    >
       <SectionHeading
         title={"UNIT LAYOUT"}
         className="text-center text-heading mb-50"
@@ -395,7 +403,7 @@ const handleUnitClick = (unitId: string) => {
                   <div key={unit.id}>
                     <button
                       data-unit-id={unit.id}
-                      className={`cursor-pointer flex items-center justify-center group relative transition-colors duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirHeavy] text-16 leading-[100%]`}
+                      className={`cursor-pointer flex items-center justify-center group relative transition-colors duration-300 overflow-hidden w-full text-center py-4 px-6 3xl:py-[16.67px] rounded-full bg-white text-foreground-light font-[avenirBook] text-16 leading-[100%]`}
                       onClick={() => handleUnitClick(unit.id)}
                     >
                       <div className="flex items-center gap-[10px] 2xl:gap-[10px]">

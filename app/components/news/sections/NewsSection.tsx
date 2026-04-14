@@ -40,7 +40,7 @@ const EmptyState = () => (
     >
       <SearchX size={32} className="text-primary" />
     </motion.div>
-    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+    <div className="flex flex-col gap-2 font-[avenirBook]">
       <motion.p
         variants={moveUp(0.1)}
         initial="hidden"

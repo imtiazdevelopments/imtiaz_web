@@ -279,7 +279,7 @@ export default function SustainabilitySpotlight() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-16 font-[avenirHeavy] text-foreground-light mb-20"
+                className="text-16 font-[avenirBook] text-foreground-light mb-20"
               >
                 {slide.date}
               </motion.span>
@@ -302,7 +302,7 @@ export default function SustainabilitySpotlight() {
               >
                 <Link
                   href={slide.href}
-                  className="text-primary-2 text-19 leading-[100%] font-[avenirHeavy] hover:opacity-70 transition-opacity duration-300"
+                  className="text-primary-2 text-19 leading-[100%] font-[avenirBook] hover:opacity-70 transition-opacity duration-300"
                 >
                   Read More...
                 </Link>
@@ -391,7 +391,7 @@ export default function SustainabilitySpotlight() {
                         initial="hidden"
                         animate="show"
                         exit="exit"
-                        className="text-16 font-[avenirHeavy] text-foreground-light"
+                        className="text-16 font-[avenirBook] text-foreground-light"
                       >
                         {slide.date}
                       </motion.span>
@@ -418,7 +418,7 @@ export default function SustainabilitySpotlight() {
                       >
                         <Link
                           href={`/media-center/news/${slide.title.toLowerCase().replace(/ /g, "-")}`}
-                          className="text-primary-2 text-19 font-[avenirHeavy] leading-[100%] hover:opacity-70 transition-colors duration-300"
+                          className="text-primary-2 text-19 font-[avenirBook] leading-[100%] hover:opacity-70 transition-colors duration-300"
                         >
                           Read More...
                         </Link>

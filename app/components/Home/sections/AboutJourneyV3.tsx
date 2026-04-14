@@ -36,7 +36,7 @@ const AboutJourneyV3 = () => {
             start: "top bottom",
             end: "bottom top",
           },
-        }
+        },
       );
 
       /* --- TEXT FADE IN --- */
@@ -54,7 +54,7 @@ const AboutJourneyV3 = () => {
             start: "top center",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     });
 
@@ -103,7 +103,7 @@ const AboutJourneyV3 = () => {
         </div>
 
         {/* <div className="overflow-hidden">
-          <h3 className="anim-item text-25 text-white font-[avenirHeavy] leading-[1] mb-[40px] uppercase">
+          <h3 className="anim-item text-25 text-white font-[avenirBook] leading-[1] mb-[40px] uppercase">
             CREATING DESTINATIONS OF DISTINCTION
           </h3>
         </div> */}
@@ -127,7 +127,7 @@ const AboutJourneyV3 = () => {
                 px="px-[28px] h-[66px] !leading-[1.58]"
                 />
             </Link>
-            </div>
+          </div>
         </div>
       </div>
     </section>

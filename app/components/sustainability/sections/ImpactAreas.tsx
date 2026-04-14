@@ -24,7 +24,7 @@ type ImpactAreas = {
   description?: string;
   items: ImpactAreaItem[];
 };
- 
+
 const ColItem = ({
   item,
   i,
@@ -109,7 +109,7 @@ const ColItem = ({
           }}
           className="pt-[10px]"
         >
-          <p className="text-white/80 text-16 font-[avenirHeavy] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
+          <p className="text-white/80 text-16 font-[avenirBook] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
             {item.description}
           </p>
         </motion.div>
@@ -118,8 +118,7 @@ const ColItem = ({
   </div>
 );
 
-
-export default function ImpactAreas({data}: {data: ImpactAreas}) {
+export default function ImpactAreas({ data }: { data: ImpactAreas }) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -156,75 +155,75 @@ export default function ImpactAreas({data}: {data: ImpactAreas}) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const handleEnter = (index: number) => {
-  if (index === activeIndex) return;
-  if (fadeTimer.current) clearTimeout(fadeTimer.current);
+  const handleEnter = (index: number) => {
+    if (index === activeIndex) return;
+    if (fadeTimer.current) clearTimeout(fadeTimer.current);
 
-  const nextSrc = data.items[index].image;
+    const nextSrc = data.items[index].image;
 
-  // Pre-load next image first, then crossfade instantly
-  const preload = new window.Image();
-  preload.src = nextSrc;
+    // Pre-load next image first, then crossfade instantly
+    const preload = new window.Image();
+    preload.src = nextSrc;
 
-  const swap = () => {
-    if (bgPrevImageRef.current && bgImageRef.current) {
-      bgPrevImageRef.current.src = bgImageRef.current.src;
+    const swap = () => {
+      if (bgPrevImageRef.current && bgImageRef.current) {
+        bgPrevImageRef.current.src = bgImageRef.current.src;
+      }
+      if (bgImageRef.current) {
+        bgImageRef.current.src = nextSrc;
+      }
+      if (bgCurrentWrapperRef.current) {
+        bgCurrentWrapperRef.current.style.transition = "none";
+        bgCurrentWrapperRef.current.style.opacity = "0";
+        // Force a reflow so the browser registers opacity:0 before transitioning
+        void bgCurrentWrapperRef.current.offsetHeight;
+        bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
+        bgCurrentWrapperRef.current.style.opacity = "1";
+      }
+    };
+
+    if (preload.complete) {
+      swap();
+    } else {
+      preload.onload = swap;
     }
-    if (bgImageRef.current) {
-      bgImageRef.current.src = nextSrc;
-    }
-    if (bgCurrentWrapperRef.current) {
-      bgCurrentWrapperRef.current.style.transition = "none";
-      bgCurrentWrapperRef.current.style.opacity = "0";
-      // Force a reflow so the browser registers opacity:0 before transitioning
-      void bgCurrentWrapperRef.current.offsetHeight;
-      bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
-      bgCurrentWrapperRef.current.style.opacity = "1";
-    }
+
+    setCurrentIndex(index);
+    setActiveIndex(index);
   };
 
-  if (preload.complete) {
-    swap();
-  } else {
-    preload.onload = swap;
-  }
+  const handleSlideChange = (swiper: SwiperType) => {
+    const index = swiper.realIndex;
+    const nextSrc = data.items[index].image;
 
-  setCurrentIndex(index);
-  setActiveIndex(index);
-};
+    const preload = new window.Image();
+    preload.src = nextSrc;
 
-const handleSlideChange = (swiper: SwiperType) => {
-  const index = swiper.realIndex;
-  const nextSrc = data.items[index].image;
+    const swap = () => {
+      if (bgPrevImageRef.current && bgImageRef.current) {
+        bgPrevImageRef.current.src = bgImageRef.current.src;
+      }
+      if (bgImageRef.current) {
+        bgImageRef.current.src = nextSrc;
+      }
+      if (bgCurrentWrapperRef.current) {
+        bgCurrentWrapperRef.current.style.transition = "none";
+        bgCurrentWrapperRef.current.style.opacity = "0";
+        void bgCurrentWrapperRef.current.offsetHeight;
+        bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
+        bgCurrentWrapperRef.current.style.opacity = "1";
+      }
+    };
 
-  const preload = new window.Image();
-  preload.src = nextSrc;
-
-  const swap = () => {
-    if (bgPrevImageRef.current && bgImageRef.current) {
-      bgPrevImageRef.current.src = bgImageRef.current.src;
+    if (preload.complete) {
+      swap();
+    } else {
+      preload.onload = swap;
     }
-    if (bgImageRef.current) {
-      bgImageRef.current.src = nextSrc;
-    }
-    if (bgCurrentWrapperRef.current) {
-      bgCurrentWrapperRef.current.style.transition = "none";
-      bgCurrentWrapperRef.current.style.opacity = "0";
-      void bgCurrentWrapperRef.current.offsetHeight;
-      bgCurrentWrapperRef.current.style.transition = "opacity 0.6s ease";
-      bgCurrentWrapperRef.current.style.opacity = "1";
-    }
+
+    setCurrentIndex(index);
+    setActiveIndex(index);
   };
-
-  if (preload.complete) {
-    swap();
-  } else {
-    preload.onload = swap;
-  }
-
-  setCurrentIndex(index);
-  setActiveIndex(index);
-};
 
   return (
     <section
@@ -266,7 +265,10 @@ const handleSlideChange = (swiper: SwiperType) => {
           className="text-white text-center pointer-events-none whitespace-nowrap mb-20"
         />
         {data.description && (
-          <SectionDescription text={data.description} className="text-white text-center max-w-[931px] mx-auto whitespace-pre-line" />
+          <SectionDescription
+            text={data.description}
+            className="text-white text-center max-w-[931px] mx-auto whitespace-pre-line"
+          />
         )}
       </div>
 

@@ -312,7 +312,7 @@
 //                   </h2>
 //                 </div>
 //                 <div className="overflow-hidden">
-//                   <h3 className="anim-item  text-[25px] font-[avenirHeavy] leading-[1] text-white mb-[40px] uppercase">
+//                   <h3 className="anim-item  text-[25px] font-[avenirBook] leading-[1] text-white mb-[40px] uppercase">
 //                     CREATING DESTINATIONS OF DISTINCTION
 //                   </h3>
 //                 </div>
@@ -565,7 +565,7 @@
 //                   </h2>
 //                 </div>
 //                 <div className="overflow-hidden">
-//                   <h3 className="anim-item  text-[25px] font-[avenirHeavy] leading-[1] text-white mb-[40px] uppercase">
+//                   <h3 className="anim-item  text-[25px] font-[avenirBook] leading-[1] text-white mb-[40px] uppercase">
 //                     CREATING DESTINATIONS OF DISTINCTION
 //                   </h3>
 //                 </div>
@@ -803,8 +803,6 @@
 //   );
 // }
 
-
-
 // "use client";
 
 // import { useEffect, useRef } from "react";
@@ -945,8 +943,6 @@
 //   );
 // }
 
-
-
 import Index from "@/app/components/Home/Index";
 import {
   heroSlides,
@@ -956,7 +952,6 @@ import {
   communityNamesData,
   heroSlidesComingSoon,
 } from "../components/Home/data";
-
 
 export default async function Page() {
   return (

@@ -81,7 +81,7 @@ const EmptyState = () => (
     >
       <SearchX size={32} className="text-primary" />
     </motion.div>
-    <div className="flex flex-col gap-2 font-[avenirHeavy]">
+    <div className="flex flex-col gap-2 font-[avenirBook]">
       <motion.p
         variants={moveUp(0.1)}
         initial="hidden"
@@ -183,21 +183,23 @@ const Main = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-const updateParam = useCallback(
-  (key: string, value: string) => {
-    const params = new URLSearchParams(searchParamsRef.current.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.set("page", "1");
+  const updateParam = useCallback(
+    (key: string, value: string) => {
+      const params = new URLSearchParams(searchParamsRef.current.toString());
+      if (value) params.set(key, value);
+      else params.delete(key);
+      params.set("page", "1");
 
-    savedScrollY.current = window.scrollY;
+      savedScrollY.current = window.scrollY;
 
-    lock();
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-    setTimeout(() => { unlock(); }, 520);
-  },
-  [pathname, router, lock, unlock],
-);
+      lock();
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        unlock();
+      }, 520);
+    },
+    [pathname, router, lock, unlock],
+  );
 
   const clearFilters = useCallback(() => {
     savedScrollY.current = window.scrollY;
@@ -377,7 +379,7 @@ const updateParam = useCallback(
 
               {/* More Filters — dummy */}
               <motion.div variants={moveUp(0.2)} className="w-full">
-                <button className="w-full min-w-[220px] 3xl:w-[253px] h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirHeavy] text-16 text-foreground-light">
+                <button className="w-full min-w-[220px] 3xl:w-[253px] h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirBook] text-16 text-foreground-light">
                   <span>More Filters</span>
                   <Image
                     src="/icons/filter.svg"

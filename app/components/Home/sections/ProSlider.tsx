@@ -128,7 +128,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       </motion.h1>
 
                       <span
-                        className="text-white font-[avenirHeavy] font-[800] uppercase
+                        className="text-white font-[avenirBook] font-[800] uppercase
                         text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
                       >
                         {RightLabel}

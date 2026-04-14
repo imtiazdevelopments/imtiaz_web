@@ -49,7 +49,7 @@ const AboutSection = ({ data }: AboutSectionProps) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="text-[25px] font-[avenirHeavy] leading-[1] text-white mb-[40px] uppercase"
+          className="text-[25px] font-[avenirBook] leading-[1] text-white mb-[40px] uppercase"
         >
           {data.subtitle}
         </motion.h3>

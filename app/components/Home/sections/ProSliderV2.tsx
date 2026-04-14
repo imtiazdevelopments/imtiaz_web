@@ -90,7 +90,7 @@
 //                   >
 //                     {/* Right Label */}
 //                     <span
-//                       className="text-white font-[avenirHeavy] font-[800] uppercase
+//                       className="text-white font-[avenirBook] font-[800] uppercase
 //                       text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]
 //                       mb-10 lg-mb-15 2xl:mb-25 3xl:mb-[130px]"
 //                     >
@@ -441,7 +441,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         animate={startAnim ? "show" : "hidden"}
                       >
                         <span
-                          className="text-white font-[avenirHeavy] font-[800] uppercase
+                          className="text-white font-[avenirBook] font-[800] uppercase
       text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
                         >
                           {RightLabel}
