@@ -124,7 +124,7 @@ const AboutJourneyV3 = () => {
                 text="About Imtiaz"
                 borderColor="border-white"
                 textColor="text-white"
-                px="px-[28px] h-[66px] !leading-[1.58]"
+                px="px-[28px] h-[50px] md:h-[66px] !leading-[1.58]"
                 />
             </Link>
           </div>

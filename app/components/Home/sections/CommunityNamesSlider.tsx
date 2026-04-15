@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react"; 
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, Navigation,Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 import CustomOutlineButton from "../../common/CustomOutlineButton";
@@ -53,7 +53,7 @@ export default function HeroFeatureSlider({
 
   /* Background fade logic */
   const [bgBase, setBgBase] = useState<string | null>(
-    communities?.[initialActive]?.bgImage ?? communities?.[0]?.bgImage ?? null
+    communities?.[initialActive]?.bgImage ?? communities?.[0]?.bgImage ?? null,
   );
   const [prevBg, setPrevBg] = useState<string | null>(null);
 
@@ -87,18 +87,18 @@ export default function HeroFeatureSlider({
   //   animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   // };
 
-const [bp, setBp] = useState<"mobile" | "desktop">("desktop");
+  const [bp, setBp] = useState<"mobile" | "desktop">("desktop");
 
-useEffect(() => {
-  const handleResize = () => {
-    setBp(window.innerWidth < 768 ? "mobile" : "desktop");
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setBp(window.innerWidth < 768 ? "mobile" : "desktop");
+    };
 
-  handleResize(); // run once
-  window.addEventListener("resize", handleResize);
+    handleResize(); // run once
+    window.addEventListener("resize", handleResize);
 
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const dropWrapper = {
     hidden: { opacity: 0, y: -60 },
     visible: {
@@ -127,7 +127,7 @@ useEffect(() => {
             start: "top bottom",
             end: "bottom top",
           },
-        }
+        },
       );
     });
 
@@ -162,10 +162,13 @@ useEffect(() => {
     swiper.navigation.update();
   }, [swiper, prevRef.current, nextRef.current]);
 
+
+  const gap = bp === "mobile" ? "20px" : "50px";
+
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-screen z-10"
+      className="w-full relative overflow-hidden h-[92vh] max-h-[745px] md:max-h-full md:h-screen z-10"
     >
       {/* Nav Buttons */}
       <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px]">
@@ -179,7 +182,7 @@ useEffect(() => {
           >
             <button
               ref={prevRef}
-              className="relative  w-[62px]  h-[62px]   group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative  md:w-[62px]  md:h-[62px] w-[50px] h-[50px]   group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -187,7 +190,7 @@ useEffect(() => {
                 alt="Previous"
                 width={28}
                 height={28}
-                className="relative z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative z-10 object-contain md:w-[28px] md:h-[28px] w-[20px] h-[20px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -202,7 +205,7 @@ useEffect(() => {
           >
             <button
               ref={nextRef}
-              className="relative w-[62px] h-[62px]    group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative  md:w-[62px]  md:h-[62px] w-[50px] h-[50px]    group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -210,7 +213,7 @@ useEffect(() => {
                 alt="Next"
                 width={28}
                 height={28}
-                className="relative rotate-180 z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative rotate-180 z-10 object-contain md:w-[28px] md:h-[28px] w-[20px] h-[20px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -256,7 +259,7 @@ useEffect(() => {
       <div className="container pt-[70px] md:pt-120 2xl:pt-[130px] relative z-10">
         <motion.div className="flex items-center justify-center relative">
           <motion.div
-            className=" max-w-[1150px] w-full text center"
+            className="max-w-[1150px] w-full text center"
             variants={dropWrapper}
             initial="hidden"
             whileInView="visible"
@@ -265,7 +268,6 @@ useEffect(() => {
               <motion.h1
                 key={`title-communities`}
                 variants={textFade}
-                // custom={0.25}
                 custom={0.23}
                 initial="initial"
                 whileInView="animate"
@@ -286,15 +288,15 @@ useEffect(() => {
         onMouseLeave={handleMouseLeave}
       >
         <Swiper
-          modules={[Autoplay, Navigation,Pagination]}
+          modules={[Autoplay, Navigation, Pagination]}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
-           pagination={{
-                  el: ".custom-pagination ",
-                  clickable: true,
-                }}
+          pagination={{
+            el: ".custom-pagination ",
+            clickable: true,
+          }}
           slidesPerView={4}
           loop={true}
           speed={600}
@@ -317,103 +319,109 @@ useEffect(() => {
             const active = activeFeat === i;
 
             return (
-
               <SwiperSlide key={c.id}>
                 <Reveal key={c.id} variants={moveUpV2}>
-                <div className="relative flex flex-1 ">
-                  <div
-                    className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
-                    onMouseEnter={() => {
-                      setActiveFeat(i);
-                      switchBg(c.bgImage);
-                    }}
-                   
-                  >
+                  <div className="relative flex flex-1 ">
                     <div
-                      className={`absolute inset-0 transition-opacity duration-400 ${
-                        active ? "opacity-100" : "opacity-0"
-                      }`}
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.66) 100%)",
+                      className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
+                      onMouseEnter={() => {
+                        setActiveFeat(i);
+                        switchBg(c.bgImage);
                       }}
-                    />
-                    <div className="relative z-20 w-full flex justify-center pointer-events-none">
-                      <div className="flex flex-col items-center absolute bottom-[150px]  md:bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
-                         <motion.h3
-  key={`feat-title-${i}-${active}`}
-  initial={{ y: 0 }}
-  animate={{
-    y: bp === "mobile" ? 0 : active ? -16 : 0, // 👈 disable on mobile
-  }}
-  transition={{
-    duration: 0.9,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: active && bp !== "mobile" ? 0.08 : 0, // 👈 also remove delay on mobile
-  }}
-  className="text-white font-[optima] uppercase text-center text-[25px] leading-[1.4] px-4"
->
-  {c.name}
-</motion.h3>
+                    >
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-400 ${
+                          active ? "opacity-100" : "opacity-0"
+                        }`}
+                        style={{
+                          background:
+                            "linear-gradient(180deg, rgba(0,0,0,0) 7.68%, rgba(0,0,0,0.66) 100%)",
+                        }}
+                      />
+                      <div className="relative z-20 w-full flex justify-center pointer-events-none">
+                        <div className="flex flex-col items-center absolute bottom-[70px] xl:bottom-22 3xl:bottom-[100px]">
+                          <motion.h3
+                            key={`feat-title-${i}-${active}`}
+                            initial={{ y: 0 }}
+                            animate={{
+                              y: bp === "mobile" ? 0 : active ? -16 : 0, // 👈 disable on mobile
+                            }}
+                            transition={{
+                              duration: 0.9,
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                              delay: active && bp !== "mobile" ? 0.08 : 0, // 👈 also remove delay on mobile
+                            }}
+                            className="text-white font-[optima] uppercase text-center text-[25px] leading-[1.4] px-4"
+                          >
+                            {c.name}
+                          </motion.h3>
 
                           {/* Button wrapper — remove the instant class swap, use opacity+y only */}
                           <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{
-      opacity: active ? 1 : 0,
-      y: active ? 0 : 30,
-      marginTop: active ? "var(--gap-active)" : "0px",
-    }}
-    transition={{
-      duration: active ? 0.5 : 0.5,
-      ease: [0.25, 0.1, 0.25, 1],
-    }}
-    style={
-      {
-        ["--gap-active"]: "50px",
-      } as unknown as React.CSSProperties
-    }
-    className="gap-responsive pointer-events-none"
-  >
-    <div
-      style={{
-        pointerEvents: active ? "auto" : "none",
-      }}
-    >
-      <Link href={`/properties/${c.name.toLowerCase().replace(/\s+/g, '-')}`}>
-        <CustomOutlineButton
-          text="Read More"
-          borderColor="border-white"
-          textColor="text-white"
-          px="h-[66px] px-[37px]"
-        />
-      </Link>
-    </div>
-  </motion.div>
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{
+                              opacity: active ? 1 : 0,
+                              y: active ? 0 : 30,
+                              marginTop: active ? "var(--gap-active)" : "0px",
+                            }}
+                            transition={{
+                              duration: active ? 0.5 : 0.5,
+                              ease: [0.25, 0.1, 0.25, 1],
+                            }}
+                            style={
+                              {
+                                ["--gap-active"]: gap,
+                              } as React.CSSProperties
+                            }
+                            className="gap-responsive pointer-events-none"
+                          >
+                            <div
+                              style={{
+                                pointerEvents: active ? "auto" : "none",
+                              }}
+                            >
+                              <Link
+                                href={`/properties/${c.name.toLowerCase().replace(/\s+/g, "-")}`}
+                              >
+                                <CustomOutlineButton
+                                  text="Read More"
+                                  borderColor="border-white"
+                                  textColor="text-white"
+                                  px="h-[50px] md:h-[66px] px-[30px] md:px-[37px]"
+                                />
+                              </Link>
+                            </div>
+                          </motion.div>
+
+                          {/* Pagination (only below 1540px) */}
+                          <div className="flex md:hidden justify-center mt-[50px] gap-[10px] min-[1540px]:hidden">
+                            {communities.map((_, i) => (
+                              <button
+                                key={i}
+                                // onClick={() => swiperRef.current?.slideToLoop(i)}
+                                className={`w-[10px] h-[10px] rounded-full border border-white transition-all duration-300 cursor-pointer ${
+                                  i === activeFeat ? "bg-white" : "bg-transparent"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div
-                    className="hidden sm:block absolute top-0 right-0 h-full w-[1px]"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%)",
-                    }}
-                  />
-                </div>
-              </Reveal>
+                    <div
+                      className="hidden sm:block absolute top-0 right-0 h-full w-[1px]"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 100%)",
+                      }}
+                    />
+                  </div>
+                </Reveal>
               </SwiperSlide>
             );
           })}
         </Swiper>
-        <div 
-          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300 absolute z-[2] bottom-[70px] left-1/2 transform -translate-x-1/2"
-          style={{
-            opacity: 1, 
-            pointerEvents: "auto",
-          }}
-        />
       </div>
     </section>
   );

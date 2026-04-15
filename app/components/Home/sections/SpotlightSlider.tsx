@@ -252,7 +252,7 @@ export default function SustainabilitySpotlight() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white py-120 3xl:py-130 relative z-10"
+      className="w-full bg-white py-[122px] lg:py-130 relative z-10"
       data-header="dark"
     >
       <div className="container">
@@ -271,7 +271,7 @@ export default function SustainabilitySpotlight() {
           <AnimatePresence mode="wait">
             <motion.div
               key={slide.id}
-              className="flex flex-col items-center text-center mb-50"
+              className="flex flex-col items-center text-center mb-[30px] lg:mb-50"
             >
               <motion.span
                 custom={0}
@@ -279,7 +279,7 @@ export default function SustainabilitySpotlight() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-16 font-[avenirBook] text-foreground-light mb-20"
+                className="text-16 font-[avenirBook] text-foreground-light mb-[30px] lg:mb-20"
               >
                 {slide.date}
               </motion.span>
@@ -289,7 +289,7 @@ export default function SustainabilitySpotlight() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-25 font-[optima] uppercase text-foreground line-clamp-2 leading-[1.2] mb-50 max-w-[598px]"
+                className="text-25 font-[optima] uppercase text-foreground line-clamp-2 leading-[1.2] mb-[30px] lg:mb-50 max-w-[598px]"
               >
                 {slide.title}
               </motion.h3>
@@ -310,7 +310,7 @@ export default function SustainabilitySpotlight() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center gap-[10px] mb-50">
+          <div className="flex items-center gap-[10px] mb-[30px] lg:mb-50">
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -331,17 +331,17 @@ export default function SustainabilitySpotlight() {
             slides={slides}
             targetRef={mImgsRef}
             parallaxRef={mParallaxRef}
-            className="w-full relative h-[320px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-50"
+            className="w-full relative h-[328px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-5 sm:mb-50"
             pointerHandlers={pointerHandlers}
           />
 
-          <div className="flex justify-center gap-30">
+          <div className="flex items-center justify-between w-full gap-30">
             <CustomOutlineButton
               variant="dark"
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              px="px-[12px] sm:px-[26px]"
+              px="px-[30px] lg:px-[26px] h-[50px] md:h-[66px]"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton

@@ -82,11 +82,15 @@ const HeaderWithHamburger: React.FC = () => {
     } else if (w >= 768) {
       // md
       startH = "55px";
-      endH = "30px";
+      endH = "40px";
       hdrcntsH = "55px";
+    } else if (w < 410 && w >=375) {
+      startH = "50px";
+      endH = "35px";
+      hdrcntsH = "50px";
     } else {
       // below md
-      startH = "44px";
+      startH = "55px";
       endH = "44px";
       hdrcntsH = "104px";
     }

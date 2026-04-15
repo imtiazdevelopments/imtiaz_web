@@ -296,7 +296,7 @@ body {
 }
  
 .container {
-  @apply mx-auto w-full px-[15px];
+  @apply mx-auto w-full px-[20px] md:px-[15px];
 }
  
 @media (min-width: 640px) {
@@ -314,7 +314,7 @@ body {
 @media (min-width: 820px) {
   .container { max-width: 800px; }
 }
- 
+  
 @media (min-width: 860px) {
   .container { max-width: 840px; }
 }
