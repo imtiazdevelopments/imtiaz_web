@@ -171,7 +171,7 @@ export default function FeaturedProjects({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr] 2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[calc(749px+70px)_1fr] gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr] 2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
           <div
@@ -227,7 +227,7 @@ export default function FeaturedProjects({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="lg:sticky top-[10px] h-[70vh] lg:h-[calc(100vh-20px)] z-10"
+            className="lg:sticky top-[10px] h-[371px] md:h-[70vh] lg:h-[calc(100vh-20px)] z-10"
           >
             {/* Grayscale overlay - affects tiles only, not markers */}
             <div ref={mapContainerRef} className="w-full h-full relative">

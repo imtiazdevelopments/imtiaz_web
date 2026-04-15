@@ -281,17 +281,17 @@ const handleCardClick = () => {
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col transition-opacity my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[38px] mb-[30px] md:my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
         >
           <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
               <div className={`bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
-                <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">
+                <p className="text-white/80 text-description font-bold uppercase h-[18px] lg:h-[22px]">
                   {status}
                 </p>
               </div>
             )}
-            <div className={`flex items-center justify-center gap-[10px] mt-20 transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
+            <div className={`flex items-center justify-center gap-[10px] mt-[20px] transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
               {location && (
                 <>
                   <svg width="19" height="22" viewBox="0 0 19 22" fill="none">

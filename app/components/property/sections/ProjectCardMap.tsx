@@ -54,7 +54,7 @@ export default function ProjectCardMap({
 
   return (
     <div
-      className="block w-full h-[441px]"
+      className="block w-full h-[485px] md:h-[441px]"
       ref={ref}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -91,17 +91,17 @@ export default function ProjectCardMap({
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col my-[32px] xl:my-[40px] transition-opacity duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 z-20 flex flex-col my-[30px] md:my-[32px] xl:my-[40px] transition-opacity duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
         >
           <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
               <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
-                <p className="text-white/80 text-description uppercase h-[18px] lg:h-[22px]">
+                <p className="text-white/80 text-description font-bold uppercase h-[18px] lg:h-[22px]">
                   {status}
                 </p>
               </div>
             )}
-            <div className="flex items-center justify-center gap-[10px] mt-20">
+            <div className="flex items-center justify-center gap-[10px] mt-[20px]">
               {location && (
                 <>
                   <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
