@@ -151,7 +151,7 @@ html {
 --text-18: clamp(15px, 0.35vw + 11.6px, 18px);
  
 /* 16px → 12px at 390px, 16px at 1810px */
---text-16: clamp(14px, 0.28vw + 10.9px, 16px);
+--text-16: clamp(16px, 0.28vw + 10.9px, 16px);
  
  
  
@@ -160,7 +160,7 @@ html {
 --space-20: clamp(17px, 0.56vw + 9.8px, 20px);
  
 /* 25px → 14px at 390px, 25px at 1810px */
---space-25: clamp(15px, 0.77vw + 11px, 25px);
+--space-25: clamp(18px, 0.77vw + 11px, 25px);
  
 /* 30px → 18px at 390px, 30px at 1810px */
 --space-30: clamp(18px, 0.84vw + 14.7px, 30px);

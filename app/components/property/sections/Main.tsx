@@ -250,10 +250,10 @@ const Main = () => {
   }, [filtered, currentPage, itemsPerPage]);
 
   return (
-    <section className="w-full bg-white pt-70" data-header="dark">
+    <section className="w-full bg-white pt-[20px] md:pt-70" data-header="dark">
       <div className="w-full container">
         {/* ── Mobile: collapsible filter (below lg) ── */}
-        <div className="lg:hidden mb-70">
+        <div className="lg:hidden mb-[20px] md:mb-70">
           <motion.div
             variants={moveUp(0.12)}
             initial="hidden"
@@ -433,10 +433,10 @@ const Main = () => {
         </div>
 
         {/* ── Divider ── */}
-        <div className="w-full mb-50">
+        <div className="w-full mb-[30px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-black/10 origin-center"
+              className="absolute inset-0 bg-foreground-light/50 md:bg-black/10 origin-center"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
