@@ -250,7 +250,7 @@ const handleCardClick = () => {
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleCardClick}
     >
-      <div className="relative w-full aspect-[8.5/13] sm:aspect-[8.5/13] md:aspect-[9/13] xl:aspect-[8.5/13] 3xl:aspect-[8.48/13] overflow-hidden">
+      <div className="relative w-full aspect-[10.72/13] md:aspect-[9/13] xl:aspect-[8.5/13] 3xl:aspect-[8.48/13] overflow-hidden">
         <Image
           src={image}
           alt={title}
@@ -281,7 +281,7 @@ const handleCardClick = () => {
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col transition-opacity my-[32px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 z-20 flex flex-col transition-opacity my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
         >
           <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (

@@ -48,10 +48,10 @@ const BlogHero = ({ blog }: Props) => {
               <span> - </span>
               <span>{blog.date}</span>
             </div>
-            <span>|</span>
+            {/* <span>|</span>
             <div>
               <span>Reading Time: {blog.readingTime}</span>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Share button */}

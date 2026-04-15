@@ -92,7 +92,8 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden flex justify-center items-center h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
+      // className="relative w-full overflow-hidden flex justify-center items-center h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
+      className="relative w-full overflow-hidden flex justify-center items-center h-screen"
     >
       {/* ---------------- BACKGROUND VIDEO ---------------- */}
       <video
@@ -129,7 +130,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
             <Link href="/properties/property-details">
               <CustomOutlineButton
                 text={data.button.label}
-                px="px-[20px] md:px-[26px] 3xl:px-[40.4px] mx-auto "
+                px="px-[30px] 3xl:px-[40.4px] mx-auto h-[50px] md:h-[66px]"
               />
             </Link>
           </div>

@@ -48,10 +48,10 @@ const NewsHero = ({ news }: Props) => {
               <span> - </span>
               <span>{news.date}</span>
             </div>
-            <span>|</span>
+            {/* <span>|</span>
             <div>
               <span>Reading Time: {news.readingTime}</span>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Share button */}

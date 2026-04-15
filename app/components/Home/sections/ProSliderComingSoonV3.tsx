@@ -111,10 +111,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   }, []);
 
   return (
-    <div
-      className="w-full relative h-[82vh] md:h-[70vh] lg:h-[75vh] xl:h-screen"
-      ref={rootRef}
-    >
+    <div className="w-full relative h-screen" ref={rootRef}>
       <Swiper
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -157,23 +154,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     exit="exit"
                     className="flex flex-col justify-between items-center "
                   >
-                    {/* Right Label */}
-                    {/* <div className="overflow-hidden mb-10 lg:mb-25 2xl:mb-[130px]">
-                      <motion.div
-                        variants={fadeUp}
-                        custom={0.15}
-                        initial="hidden"
-                        animate={inView ? "show" : "hidden"}
-                      >
-                        <span
-                          className="text-white font-[avenirBook] font-[800] uppercase
-      text-[16px] sm:text-[18px] md:text-[22px] lg:text-[25px]"
-                        >
-                          {RightLabel}
-                        </span>
-                      </motion.div>
-                    </div> */}
-
                     {/* Title */}
                     <div className="overflow-hidden">
                       <motion.h1
@@ -201,34 +181,15 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         custom={0.23}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
-                         
-                      > 
-                         <CustomOutlineButton 
-              text="Register Interest"
-              borderColor="border-white"
-              textColor="text-white"
-              px="px-[25px] h-[66px] !leading-[1.58]"
-            />
-                      </motion.div>
-                    </motion.div>
-
-                    {/* Logo */}
-                    {/* <div className="overflow-hidden">
-                      <motion.div
-                        variants={fadeUp}
-                        custom={0.45}
-                        initial="hidden"
-                        animate={inView ? "show" : "hidden"}
                       >
-                        <Image
-                          alt="logo"
-                          src={slide.pillFeatures.title}
-                          width={150}
-                          height={47}
-                          className="object-contain w-[150px] h-[47px]"
+                        <CustomOutlineButton
+                          text="Register Interest"
+                          borderColor="border-white"
+                          textColor="text-white"
+                          px="px-[30px] md:px-[25px] h-[50px] md:h-[66px] !leading-[1.58]"
                         />
                       </motion.div>
-                    </div> */}
+                    </motion.div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -237,34 +198,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
         ))}
       </Swiper>
 
-      {/* -------------------------------- ARROWS + PAGINATION -------------------------------- */}
-      <motion.div
-        variants={fadeUp}
-        custom={0.5}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
-        exit="exit"
-        className="absolute bottom-[150px] lg:bottom-[190px] 3xl:bottom-[215px] left-0 w-full z-[50]"
-      >
-        <div className="container flex items-center justify-center">
-          {/* Prev */}
-
-          {/* Pagination Dots */}
-          {/* <div className="flex gap-3 justify-center items-center z-[50]">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => swiperInstance?.slideToLoop(i)}
-                className={`w-[10px] h-[10px] rounded-full border transition-all cursor-pointer ${
-                  activeIndex === i
-                    ? "bg-primary border-primary"
-                    : "border-white bg-transparent"
-                }`}
-              />
-            ))}
-          </div> */}
-        </div>
-      </motion.div>
+      {/* -------------------------------- ARROWS  -------------------------------- */}
 
       {slides.length > 1 && (
         <motion.div
