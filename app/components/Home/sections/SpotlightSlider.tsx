@@ -252,7 +252,7 @@ export default function SustainabilitySpotlight() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white py-[122px] lg:py-130 relative z-10"
+      className="w-full bg-white pt-[122px] pb-[90px] lg:py-130 relative z-10"
       data-header="dark"
     >
       <div className="container">

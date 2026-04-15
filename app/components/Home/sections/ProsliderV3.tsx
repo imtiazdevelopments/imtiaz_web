@@ -191,7 +191,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                   initial="hidden"
                   animate={startAnim ? "show" : "hidden"}
                   exit="exit"
-                  className={`${isMobile ? "" : "container  md:!px-[15px]"}      mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
+                  className={`${isMobile ? "" : "container  md:!px-[15px]"} mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px]  overflow-hidden`}
                 >
                   <div className="relative">
                     <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full pointer-events-none" />
