@@ -4,9 +4,8 @@ import Image from "next/image";
 import { footerV2Data } from "../common/data";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Reveal from "../animations/RevealOneByOneAnimation";
-import { moveUp, moveUpV2, moveUpV3 } from "../motionVariants";
-import Link from "next/link";
+import { moveUp } from "../motionVariants";
+import FooterColumns from "./FooterAccordian";
 
 const InnerFooter = () => {
   const [email, setEmail] = useState("");
@@ -34,8 +33,8 @@ const InnerFooter = () => {
   return (
     <footer className="w-full text-white bg-primary-2 relative z-10 overflow-hidden">
       {/* ================= TOP HERO SECTION ================= */}
-      <div className="w-full overflow-hidden py-120 3xl:py-150 bg-primary-2">
-        <div className="z-[20] h-full container flex flex-col lg:flex-row lg:justify-between items-center shrink-0">
+      <div className="w-full overflow-hidden py-[70px] lg:py-120 3xl:py-150 bg-primary-2">
+        <div className="z-[20] h-full container flex flex-col md:flex-row md:justify-between items-center shrink-0">
           {/* Logo */}
           <motion.div
             variants={moveUp(0)}
@@ -53,7 +52,7 @@ const InnerFooter = () => {
           </motion.div>
 
           {/* Stay Updated */}
-          <div className="flex flex-col mt-12 lg:mt-0 lg:flex-row gap-5 xl:gap-10 items-center">
+          <div className="w-full md:w-auto flex flex-col mt-12 md:mt-0 md:flex-row gap-5 xl:gap-10 items-center">
             <motion.p
               variants={moveUp(0.1)}
               initial="hidden"
@@ -69,7 +68,7 @@ const InnerFooter = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white relative"
+              className="w-full md:w-auto flex items-center gap-8 xl:gap-15 rounded-[50px] p-[6px] border border-white relative"
             >
               <input
                 type="email"
@@ -84,7 +83,7 @@ const InnerFooter = () => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-description text-white"
+                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-[16px] text-white"
               >
                 {footerV2Data.top.sendText}
               </button>
@@ -131,8 +130,8 @@ const InnerFooter = () => {
       </div>
 
       {/* ================= MENU COLUMNS ================= */}
-      <div className="bg-primary-2 py-100">
-        <div className="container grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-5 xl:gap-10">
+      {/* <div className="bg-primary-2 py-[55px] lg:py-100">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-6 gap-5 xl:gap-10">
           {footerV2Data.columns.map((col, i) => (
             <Reveal variants={moveUpV2} key={i}>
               <div>
@@ -155,25 +154,26 @@ const InnerFooter = () => {
             </Reveal>
           ))}
         </div>
-      </div>
+      </div> */}
+      <FooterColumns />
 
       {/* ================= BOTTOM FOOTER BAR ================= */}
-      <div className="bg-primary-2 relative py-[17px]">
+      <div className="bg-primary relative pt-[21px] pb-[20px]">
         <div className="absolute inset-0 z-0 bg-white/2 w-full h-full pointer-events-none" />
 
-        <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
+        <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center md:gap-7">
           {/* LEFT LINKS */}
           <motion.div
             variants={moveUp(0)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex gap-3 xl:gap-6 3xl:gap-7 text-description justify-center md:justify-start w-full"
+            className="flex gap-3 xl:gap-6 3xl:gap-7 text-[16px] justify-between md:justify-start w-full mb-[9px] md:mb-0"
           >
             {footerV2Data.bottom.left.map((txt, i) => (
               <span
                 key={i}
-                className="text-white/45 hover:text-white/70 transition-colors duration-300 cursor-pointer"
+                className="text-white/45 hover:text-white/70 leading-[1.56] transition-colors duration-300 cursor-pointer"
               >
                 {txt}
               </span>
@@ -186,30 +186,34 @@ const InnerFooter = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-white/45 text-description text-center w-full"
+            className="text-white/45 text-[16px] leading-[1.56] text-center w-full mb-[20px] md:mb-0"
           >
             ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
           </motion.div>
 
           {/* ICONS */}
           <motion.div
-            variants={moveUp(0.14)}
-            initial="hidden"
-            whileInView="show"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex gap-2 justify-center md:justify-start xl:justify-end w-full z-10"
+            transition={{ duration: 0.5 }}
+            className="flex gap-[5px] md:gap-2 justify-center md:justify-start xl:justify-end w-full z-10 overflow-hidden"
           >
             {footerV2Data.bottom.icons.map((icon, i) => (
               <div
                 key={i}
-                className="cursor-pointer p-[13px] rounded-full bg-primary-2 flex items-center justify-center"
+                className="cursor-pointer w-6 h-6 md:w-auto md:h-auto md:p-[13px] rounded-full bg-primary flex items-center justify-center"
               >
                 <Image
                   src={icon}
                   alt="icon"
                   width={22}
                   height={22}
-                  className="w-[22px] h-[22px] hover:scale-110 transition-all duration-300"
+                  className={`w-auto hover:scale-110 transition-all duration-300 ${
+                    i === footerV2Data.bottom.icons.length - 1
+                      ? "h-[10px] md:h-[22px]"
+                      : "h-[15px] md:h-[22px]"
+                  }`}
                 />
               </div>
             ))}
