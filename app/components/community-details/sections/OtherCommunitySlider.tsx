@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { useScrollFadeUp } from "../../../hooks/useScrollFadeUp";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 
@@ -17,6 +18,7 @@ interface Slide {
   image: string;
   title: string;
   featured: boolean;
+  url?:string;
 }
 
 function useBreakpoint() {
@@ -36,18 +38,21 @@ const slides: Slide[] = [
     image: "/images/community-listing/slide2.jpg",
     title: "DUBAI LAND RESIDENCE COMPLEX",
     featured: true,
+    url:"1"
   },
   {
     id: 1,
     image: "/images/community-listing/slide1.jpg",
     title: "DUBAI ISLANDS",
     featured: false,
+    url:"2"
   },
   {
     id: 3,
     image: "/images/community-listing/slide3.jpg",
     title: "JUMEIRAH GARDEN CITY",
     featured: false,
+    url:"3"
   },
 ];
 
@@ -234,9 +239,11 @@ export default function CommunitySlider() {
           {/* desktop view-all */}
           <div
             ref={desktopBtnRef}
-            className="mb-10 lg:mb-50"
+            className="mb-10 lg:mb-50 w-fit  mx-auto"
             style={{ opacity: 0 }}
           >
+
+                    <Link href={'/communities'}   >
             <CustomOutlineButton
               className="w-fit mx-auto 2xl:!px-[35.5px] 2xl:!py-[22.5px] px-[30px] h-[50px] md:h-[66px]"
               text="View All"
@@ -244,6 +251,7 @@ export default function CommunitySlider() {
               textColor="text-foreground-light"
               variant="dark"
             />
+            </Link>
           </div>
         </div>
 
@@ -294,14 +302,16 @@ export default function CommunitySlider() {
                       btnRefs.current[i] = el;
                     }}
                     style={{ opacity: 0 }}
-                  >
-                    <CustomOutlineButton
+                  >  
+                       <Link href={`${slide.url}`}  >
+                      <CustomOutlineButton
                       className="px-[30px] py-2 h-[50px] md:h-[66px]"
                       text="View Community"
                       borderColor="border-white/80"
                       textColor="text-white"
                       variant="dark"
-                    />
+                    /> 
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -380,12 +390,14 @@ export default function CommunitySlider() {
                       {slide.title}
                     </h2>
                     <div>
+                       <Link href={`${slide.url}`}  >
                       <CustomOutlineButton
                         className="2xl:!px-[41px] 2xl:!py-[22.5px]"
                         text="View Community"
                         borderColor="border-white/80"
                         textColor="text-white"
                       />
+                      </Link>
                     </div>
                   </div>
                 </div>
