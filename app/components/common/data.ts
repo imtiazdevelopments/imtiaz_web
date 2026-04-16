@@ -143,7 +143,7 @@ export const footerV2Data: FooterV2Data = {
         { label: "Leadership", link: "/about/our-story" },
         { label: "Vision Mission", link: "/about/our-story" },
         { label: "Careers", link: "/about/careers" },
-        { label: "Contact", link: "#" },
+        { label: "Contact", link: "/contact-us" },
       ],
     },
     {
