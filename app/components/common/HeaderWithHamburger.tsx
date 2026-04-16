@@ -83,7 +83,7 @@ const HeaderWithHamburger: React.FC = () => {
       // md
       startH = "55px";
       endH = "40px";
-      hdrcntsH = "55px";
+      hdrcntsH = "65px";
     } else if (w < 410 && w >=375) {
       startH = "50px";
       endH = "35px";
@@ -229,7 +229,7 @@ useEffect(() => {
                     alt="menu"
                     width={22}
                     height={22}
-                    className="w-[18px] h-[16px] md:h-[15px] md:h-[22px]"
+                    className="w-[18px] h-[16px] md:w-auto md:h-[15.13px]"
                   />
                 </button>
               </div>
@@ -360,14 +360,14 @@ useEffect(() => {
                 <div className="flex items-center gap-[5px] sm:gap-[10px] rgtbtn">
                   <button
                     onClick={() => setAuthView("login")}
-                    className="flex group items-center justify-center w-[24px] h-[24px] md:w-[32px] md:h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer opacity-0"
+                    className="flex group items-center justify-center w-[24px] h-[24px] sm:w-[32px] sm:h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer opacity-0"
                   >
                     <Image
                       src="/images/account.svg"
                       alt="account"
                       width={14}
                       height={15}
-                      className="invert w-[10px] h-[12px] md:h-[15.16px] md:w-[14px] w-auto group-hover:scale-110 transition-all duration-400"
+                      className="invert w-[10px] h-[12px] sm:h-[15.16px] sm:w-[14px] w-auto group-hover:scale-110 transition-all duration-400"
                     />
                   </button>
 
@@ -385,17 +385,17 @@ useEffect(() => {
                         }
                         setLangOpen((p) => !p);
                       }}
-                      className="group flex items-center justify-center gap-[5px] sm:gap-[10px] md:gap-[8px] w-auto px-[7px] py-[6px]  md:px-[6px]  bg-white/25  backdrop-blur-[30px]  rounded-full cursor-pointer opacity-0"
+                      className="group flex items-center justify-center gap-[5px] sm:gap-[10px] md:gap-[8px] w-auto px-[7px] py-[6px]  md:px-[6px]  bg-white/25  backdrop-blur-[30px]  rounded-full cursor-pointer opacity-0 sm:h-[32px]"
                     >
                       <Image
                         src="/images/map.svg"
                         alt="map"
                         width={24}
                         height={24}
-                        className="invert h-[12.24px] md:h-[24px] w-auto group-hover:scale-110 transition-all duration-400"
+                        className="invert h-[12.24px] sm:h-[24px] w-auto group-hover:scale-110 transition-all duration-400"
                       />
                       <div className="block">
-                        <ChevronDown className="text-white w-[12px] h-[12px] md:w-[18px] md:h-[18px]" />
+                        <ChevronDown className="text-white w-[12px] h-[12px] sm:w-[18px] sm:h-[18px]" />
                       </div>
                     </button>
 
@@ -464,7 +464,7 @@ useEffect(() => {
                 />
 
                 <motion.div
-                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full sm:h-[85vh] lg:h-[80vh] xl:h-full"
+                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full  "
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}

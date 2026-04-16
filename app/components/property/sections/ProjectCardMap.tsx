@@ -73,10 +73,13 @@ export default function ProjectCardMap({
 
         {/* Default overlay */}
         <div
+          className="absolute inset-0 z-10 transition-opacity bg-black/20" 
+        />
+        <div
           className="absolute inset-0 z-10 transition-opacity"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.8) 83.74%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.8) 83.74%)",
           }}
         />
 
