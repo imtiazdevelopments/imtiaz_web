@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
+import { Pagination, EffectFade, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 import gsap from "gsap";
@@ -211,7 +211,7 @@ export default function GallerySlider() {
   return (
     <section
       ref={sectionRef}
-      className="gallery-slider-root relative w-full overflow-hidden h-[75vh] 2xl:h-screen bg-[#0e0e0e] cursor-grab"
+      className="gallery-slider-root relative w-full overflow-hidden h-[90vh] 2xl:h-screen bg-[#0e0e0e] cursor-grab"
     >
       {/* ── Swiper layer ── */}
       <div ref={swiperWrapperRef} className="absolute inset-0">
@@ -259,7 +259,7 @@ export default function GallerySlider() {
       >
         <button
           onClick={handlePrev}
-          className="pointer-events-auto absolute left-6 top-1/2 -translate-y-1/2 z-20 lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden border border-white"
+          className="pointer-events-auto absolute left-6 top-1/2 -translate-y-1/2 z-20 w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden border border-white"
           aria-label="Previous slide"
         >
           <span className="absolute top-0 left-0 h-full w-0 transition-all duration-300 group-hover:w-full z-0 bg-white/30" />
@@ -268,13 +268,13 @@ export default function GallerySlider() {
             alt="Prev"
             width={28}
             height={28}
-            className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
+            className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[21px] h-[21px] transition-all duration-300 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
           />
         </button>
 
         <button
           onClick={handleNext}
-          className="pointer-events-auto absolute right-6 top-1/2 -translate-y-1/2 z-20 lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden border border-white"
+          className="pointer-events-auto absolute right-6 top-1/2 -translate-y-1/2 z-20 w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden border border-white"
           aria-label="Next slide"
         >
           <span className="absolute top-0 left-0 h-full w-0 transition-all duration-300 group-hover:w-full z-0 bg-white/30" />
@@ -283,15 +283,15 @@ export default function GallerySlider() {
             alt="Next"
             width={28}
             height={28}
-            className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300 rotate-180 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
+            className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[21px] h-[21px] transition-all duration-300 rotate-180 invert brightness-0 group-hover:brightness-100 group-hover:invert-0"
           />
         </button>
       </div>
 
       {/* ── Bottom controls ── */}
-      <div className="absolute bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-20 2xl:gap-30">
+      <div className="absolute bottom-[70px] lg:bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-[30px]">
         {/* Tab pill */}
-        <div className="p-[8px] backdrop-blur-[30px] rounded-full">
+        <div className="p-[6px] md:p-[8px] backdrop-blur-[30px] rounded-full">
           <div className="relative flex overflow-hidden 2xl:gap-[29.5px]">
             <div
               className="absolute top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
@@ -304,13 +304,13 @@ export default function GallerySlider() {
             />
             <button
               onClick={() => setActiveTab("interior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[75px] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
             >
               Interior
             </button>
             <button
               onClick={() => setActiveTab("exterior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-5 md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
             >
               Exterior
             </button>
@@ -320,7 +320,7 @@ export default function GallerySlider() {
         {/* Pagination — show only active tab's dots */}
         <div
           ref={interiorPaginationRef}
-          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
+          className="custom-pagination flex items-center gap-[10px] justify-center"
           style={{
             opacity: activeTab === "interior" ? 1 : 0,
             position: activeTab === "exterior" ? "absolute" : "relative",
@@ -329,7 +329,7 @@ export default function GallerySlider() {
         />
         <div
           ref={exteriorPaginationRef}
-          className="custom-pagination flex items-center gap-[6px] justify-center transition-opacity duration-300"
+          className="custom-pagination flex items-center gap-[10px] justify-center"
           style={{
             opacity: activeTab === "exterior" ? 1 : 0,
             position: activeTab === "interior" ? "absolute" : "relative",

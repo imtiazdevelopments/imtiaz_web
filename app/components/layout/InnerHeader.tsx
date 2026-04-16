@@ -16,6 +16,7 @@ import SignupForm from "../auth/SignupForm";
 import AuthSlider from "../auth/AuthSlider";
 import Link from "next/link";
 import { useLenis } from "@/app/contexts/LenisContext";
+import { createPortal } from "react-dom";
 
 type AuthView = "login" | "signup";
 
@@ -23,32 +24,54 @@ const InnerHeader: React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authView, setAuthView] = useState<AuthView | null>(null);
+  const [mounted, setMounted] = useState(false);
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("light");
-  
+  const [langPos, setLangPos] = useState({ top: 0, right: 0 });
+  const langBtnRef = useRef<HTMLButtonElement>(null);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
   // Scroll hide/show
   const lastScrollY = useRef(0);
   const y = useMotionValue(0);
   const springY = useSpring(y, { stiffness: 80, damping: 20, mass: 0.8 });
   const { isProgrammaticScroll } = useLenis();
 
+  const [isMobile, setIsMobile] = useState(false);
 
-useEffect(() => {
-  const handleScroll = () => {
-    if (isProgrammaticScroll.current) return; // 👈 ignore lenis scrollTo
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    const currentY = window.scrollY;
-    const diff = currentY - lastScrollY.current;
-    if (diff > 0) {
-      y.set(-120);
-    } else {
-      y.set(0);
-    }
-    lastScrollY.current = currentY;
-  };
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [y, isProgrammaticScroll]);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isProgrammaticScroll.current) return; // 👈 ignore lenis scrollTo
+
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      if (diff > 0) {
+        y.set(-120);
+      } else {
+        y.set(0);
+      }
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [y, isProgrammaticScroll]);
+
+  // 👇 Only render portal after client mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Section-based header theme
   useEffect(() => {
@@ -117,13 +140,13 @@ useEffect(() => {
       <motion.div
         id="inner-header"
         style={{ y: springY }}
-        className="fixed top-0 left-0 w-full z-[999] pt-[20px]"
+        className="fixed top-0 left-0 w-full z-[999] md:pt-[20px]"
       >
         <header className="w-full">
-          <div className="container">
-            <div className="relative flex items-center justify-between w-full rounded-full h-[50px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:pl-40 xl:pr-30">
+          <div className={isMobile ? "" : "container"}>
+            <div className="relative flex items-center justify-between w-full md:rounded-full h-[104px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:pl-40 xl:pr-30">
               <div
-                className={`absolute inset-0 rounded-full backdrop-blur-[30px] z-[-1] transition-colors duration-500 ${
+                className={`absolute inset-0 md:rounded-full backdrop-blur-[30px] z-[-1] transition-colors duration-500 ${
                   headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
                 }`}
               />
@@ -139,7 +162,7 @@ useEffect(() => {
                     alt="menu"
                     width={22}
                     height={22}
-                    className="w-[22px] h-[14px] sm:h-[15.13px]"
+                    className="w-[18px] h-[16px] md:w-auto md:h-[15.13px]"
                   />
                 </button>
               </div>
@@ -153,39 +176,98 @@ useEffect(() => {
                     width={183}
                     height={50}
                     priority
-                    className="w-auto xl:w-[183px] h-[26px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
+                    className="w-auto xl:w-[183px] h-[44px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
                   />
                 </Link>
               </div>
 
               {/* RIGHT — Icons */}
               <div className="w-[40%] 2xl:w-[33.33%] flex justify-end">
-                <div className="flex items-center gap-[5px] sm:gap-[10px]">
+                <div className="flex items-center gap-[5px] sm:gap-[10px] rgtbtn">
                   <button
                     onClick={() => setAuthView("login")}
-                    className="flex items-center justify-center w-[32px] h-[32px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer"
+                    className="flex group items-center justify-center w-[24px] h-[24px]  sm:w-[32px] sm:h-[32px] bg-white/25 backdrop-blur-[30px] rounded-full cursor-pointer"
                   >
                     <Image
                       src="/images/account.svg"
                       alt="account"
                       width={14}
                       height={15}
-                      className="invert h-[17px] md:h-[15.16px] w-auto"
+                      className="invert w-[10px] h-[12px] md:h-[15.16px] md:w-[14px] w-auto group-hover:scale-110 transition-all duration-400"
                     />
                   </button>
 
-                  <button className="flex items-center justify-center gap-[8px] h-[32px] w-[32px] md:w-auto sm:px-[6px] sm:bg-white/25 sm:backdrop-blur-[30px] sm:rounded-full cursor-pointer">
-                    <Image
-                      src="/images/map.svg"
-                      alt="map"
-                      width={24}
-                      height={24}
-                      className="invert h-[17px] md:h-[24px] w-auto"
-                    />
-                    <div className="hidden md:block">
-                      <ChevronDown size={18} className="text-white" />
-                    </div>
-                  </button>
+                  <div className="relative" ref={langRef}>
+                    <button
+                      ref={langBtnRef}
+                      onClick={() => {
+                        if (!langOpen && langBtnRef.current) {
+                          const rect =
+                            langBtnRef.current.getBoundingClientRect();
+                          setLangPos({
+                            top: rect.bottom + 8,
+                            right: window.innerWidth - rect.right,
+                          });
+                        }
+                        setLangOpen((p) => !p);
+                      }}
+                      className="group flex items-center justify-center gap-[5px] sm:gap-[10px] md:gap-[8px] w-auto px-[7px] py-[6px] sm:h-[32px] md:px-[6px]  bg-white/25  backdrop-blur-[30px]  rounded-full cursor-pointer"
+                    >
+                      <Image
+                        src="/images/map.svg"
+                        alt="map"
+                        width={24}
+                        height={24}
+                        className="invert h-[12.24px] sm:h-[24px] w-auto group-hover:scale-110 transition-all duration-400"
+                      />
+                      <div className="block">
+                        <ChevronDown className="text-white w-[12px] h-[12px] sm:w-[18px] sm:h-[18px]" />
+                      </div>
+                    </button>
+
+                    {mounted &&
+                      createPortal(
+                        <AnimatePresence>
+                          {langOpen && (
+                            <motion.div
+                              initial={{
+                                opacity: 0,
+                                clipPath: "inset(0% 0% 100% 0% round 12px)",
+                              }}
+                              animate={{
+                                opacity: 1,
+                                clipPath: "inset(0% 0% 0% 0% round 12px)",
+                              }}
+                              exit={{
+                                opacity: 0,
+                                clipPath: "inset(0% 0% 100% 0% round 12px)",
+                              }}
+                              transition={{
+                                duration: 0.5,
+                                ease: [0.76, 0, 0.24, 1],
+                                opacity: { duration: 0.3, ease: "easeIn" },
+                              }}
+                              style={{
+                                transformOrigin: "top",
+                                position: "fixed",
+                                top: langPos.top,
+                                right: langPos.right,
+                                zIndex: 9999,
+                              }}
+                              className="bg-white/25 backdrop-blur-[30px] rounded-[12px] overflow-hidden"
+                            >
+                              <button
+                                onClick={() => setLangOpen(false)}
+                                className="w-full text-left px-5 py-2 text-white text-[14px] font-[avenirRoman] hover:bg-white/10 transition-colors duration-150"
+                              >
+                                العربية
+                              </button>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>,
+                        document.body,
+                      )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -207,7 +289,8 @@ useEffect(() => {
             />
 
             <motion.div
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full sm:h-[85vh] lg:h-[80vh] xl:h-full"
+              // className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full sm:h-[85vh] lg:h-[80vh] xl:h-full"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-full"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}

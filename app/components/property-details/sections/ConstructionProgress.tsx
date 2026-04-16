@@ -389,7 +389,7 @@ function CircularProgress({
             {percentage}%
           </span>
           {isLarge && (
-            <span className="text-description mt-[2px]">overall</span>
+            <span className="text-description capitalize mt-[2px]">overall</span>
           )}
         </div>
       </div>
@@ -426,8 +426,8 @@ export default function WynwoodProgress() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setCircleSize(120);
-        setStrokeWidth(8);
+        setCircleSize(163);
+        setStrokeWidth(10);
       } else if (window.innerWidth < 1024) {
         setCircleSize(160);
         setStrokeWidth(12);
@@ -447,7 +447,7 @@ export default function WynwoodProgress() {
 
   return (
     <>
-      <section data-header="dark" className="pt-120 2xl:pt-[160px]">
+      <section data-header="dark" className="pt-[70px] lg:pt-120 2xl:pt-[160px]">
         <div className="text-center container">
           <SectionHeading
             title={statsData.title}
@@ -455,12 +455,12 @@ export default function WynwoodProgress() {
           />
           <SectionDescription
             text={statsData.description}
-            className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-50"
+            className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-[40px] md:mb-50"
           />
         </div>
         <div className="w-full flex flex-col lg:flex-row 3xl:grid 3xl:grid-cols-[auto_920px] overflow-hidden bg-gray">
           {/* LEFT — Building Image */}
-          <div ref={ref} className="relative w-full h-[300px] lg:h-auto overflow-hidden">
+          <div ref={ref} className="relative w-full h-[275px] lg:h-auto overflow-hidden">
             <Image
               src="/images/projects/progress.jpg"
               alt="Wynwood Horizon Building"
@@ -473,9 +473,9 @@ export default function WynwoodProgress() {
           </div>
 
           {/* RIGHT — Info Panel */}
-          <div className="py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-[40px] 2xl:!px-[70px] lg:!max-w-none">
+          <div className="py-[40px] md:py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-[20px] md:gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-[40px] 2xl:!px-[70px] lg:!max-w-none">
             {/* Top — Overall Progress */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-15 2xl:gap-[142px]">
+            <div className="flex flex-row items-center lg:justify-center gap-10 lg:gap-15 2xl:gap-[142px]">
               <motion.div
                 variants={moveUp(0.1)}
                 initial="hidden"
@@ -498,9 +498,9 @@ export default function WynwoodProgress() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="flex flex-col justify-center text-center sm:text-left"
+                className="flex flex-col justify-center text-left"
               >
-                <p className="text-25 leading-[1.4] font-[optima] uppercase text-foreground mb-2 lg:mb-[30px] tracking-[2%]">
+                <p className="text-25 leading-[1.4] font-[optima] uppercase text-foreground mb-[10px] lg:mb-[30px] tracking-[2%]">
                   Estimated
                   <br />
                   Completion Date
@@ -522,8 +522,8 @@ export default function WynwoodProgress() {
               />
             </div>
 
-            {/* Bottom — Sub-stats */}
-            <div className="flex flex-wrap justify-between gap-y-8 gap-x-4">
+            {/* Bottom — Sub-stats - from md */}
+            <div className="hidden md:flex flex-wrap justify-between gap-y-8 gap-x-4">
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
                   <div className="3xl:px-[18.65px]">
@@ -540,15 +540,34 @@ export default function WynwoodProgress() {
               ))}
             </div>
 
+            {/* Bottom — Sub-stats - until md */}
+            <div className="flex md:hidden flex-wrap justify-between gap-y-8 gap-x-4">
+              {stats.map((stat, i) => (
+                <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
+                  <div className="3xl:px-[18.65px]">
+                    <CircularProgress
+                      percentage={stat.percentage}
+                      size={85}
+                      strokeWidth={7.87}
+                      label={stat.label}
+                      isLarge={false}
+                      animationDelay={i * 0.15}
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
             {/* CTA Button */}
             <motion.div
               variants={moveUp(0.2)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
+              className="mt-[10px]"
             >
               <CustomOutlineButton
-                className="w-fit mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px]"
+                className="w-fit lg:mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[50px] md:h-[66px] "
                 text="Construction updates"
                 borderColor="border-primary"
                 textColor="text-foreground-light"
