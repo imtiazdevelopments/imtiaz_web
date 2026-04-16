@@ -10,7 +10,7 @@ const DubaiResidence = () => {
   const { title, description, subtitle } = communitySectionData;
 
   return (
-    <section data-header="dark" className="w-full py-120 3xl:py-160">
+    <section data-header="dark" className="w-full pt-[70px] lg:pt-0 pb-[65px] lg:pb-0 lg:py-120 3xl:py-160">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
@@ -20,7 +20,7 @@ const DubaiResidence = () => {
           />
           <SectionDescription
             text={subtitle}
-            className="text-25 uppercase font-[optima] mb-40 text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
+            className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
           />
 
           <motion.p

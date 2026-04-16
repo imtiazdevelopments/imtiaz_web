@@ -50,7 +50,7 @@ export default function Amenities({ data, maxTitle }: Props) {
   }, [data.amenities]);
 
   return (
-    <section data-header="dark" className="w-full py-120 3xl:py-160 ">
+    <section data-header="dark" className="w-full py-[70px] lg:py-120 3xl:py-160 ">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
@@ -60,19 +60,19 @@ export default function Amenities({ data, maxTitle }: Props) {
           />
           <SectionDescription
             text={data.description}
-            className={`shrink-0  mx-auto text-foreground-light ${maxTitle ? maxTitle : ""}`}
+            className={`shrink-0  mx-auto text-foreground-light whitespace-pre-line ${maxTitle ? maxTitle : ""}`}
           />
         </div>
         <div>
           <div>
             <div
               ref={gridRef}
-              className="flex flex-wrap md:justify-center mt-50 gap-y-2 md:gap-y-5 xl:gap-y-[60px]"
+              className="flex flex-wrap md:justify-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60"
             >
               {data.amenities.map((item, i) => (
                 <div
                   key={i}
-                  className="amenity-card group relative flex flex-col items-center justify-start gap-4 xl:gap-[30px] p-3 md:px-6 md:py-[20px] text-center cursor-default w-1/2 sm:w-1/3 lg:w-1/4 overflow-hidden"
+                  className="amenity-card group relative flex flex-col items-center justify-start gap-[10px] md:gap-4 xl:gap-[30px] p-3 md:px-6 md:py-[20px] text-center cursor-default w-1/2 sm:w-1/3 lg:w-1/4 overflow-hidden"
                 >
                   {/* Left fill */}
                   {/* <span className="absolute inset-y-0 left-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
@@ -80,7 +80,7 @@ export default function Amenities({ data, maxTitle }: Props) {
                   {/* <span className="absolute inset-y-0 right-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
 
                   {/* Icon */}
-                  <div className="relative z-10 w-9 h-9 md:w-12 md:h-12 xl:w-15 xl:h-15 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1">
+                  <div className="relative z-10 w-10 h-10 md:w-12 md:h-12 xl:w-15 xl:h-15 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1">
                     <Image
                       src={item.icon}
                       alt={item.label.replace("\n", " ")}
@@ -91,7 +91,7 @@ export default function Amenities({ data, maxTitle }: Props) {
                   </div>
 
                   {/* Label */}
-                  <p className="relative z-10 font-[optima] text-[12px] md:text-25 text-foreground leading-[1.4] uppercase transition-colors duration-300">
+                  <p className="relative z-10 px-2 sm:px-0 font-[optima] text-25 text-foreground leading-[1.4] uppercase transition-colors duration-300">
                     {item.label}
                   </p>
                 </div>

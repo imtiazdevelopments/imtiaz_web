@@ -21,6 +21,8 @@ const LandpropertyCards = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [initialCount, setInitialCount] = useState(6);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(0);
 
   useEffect(() => {
     const getCount = () => (window.innerWidth >= 1700 ? 8 : 6);
@@ -41,7 +43,7 @@ const LandpropertyCards = () => {
         <div className="text-center">
           <SectionHeading
             title={LandpropertyData.title}
-            className="text-heading mb-50"
+            className="text-heading mb-20 lg:mb-50"
           />
 
           {/* 📱 MOBILE to 1140: SWIPER */}
@@ -53,6 +55,8 @@ const LandpropertyCards = () => {
               loop
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
+                setTotalSlides(swiper.slides.length);
+
                 setTimeout(() => {
                   if (
                     swiper.params.navigation &&
@@ -65,6 +69,9 @@ const LandpropertyCards = () => {
                   swiper.navigation.init();
                   swiper.navigation.update();
                 }, 0);
+              }}
+              onSlideChange={(swiper) => {
+                setActiveIndex(swiper.realIndex);
               }}
               navigation={{
                 prevEl: prevRef.current,
@@ -84,14 +91,14 @@ const LandpropertyCards = () => {
             {/* Nav buttons */}
             <div className="flex items-center justify-center gap-[15px] mt-30">
               <motion.div
-                variants={moveUp(0.8)}
+                variants={moveUp(0.1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
               >
                 <button
                   ref={prevRef}
-                  className="relative cursor-pointer w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+                  className="relative cursor-pointer w-[50px] h-[50px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
                 >
                   <span className="absolute right-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
                   <Image
@@ -99,19 +106,19 @@ const LandpropertyCards = () => {
                     alt="Previous"
                     width={28}
                     height={28}
-                    className="relative z-10 object-contain w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                    className="relative z-10 object-contain w-[21px] h-[21px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
                   />
                 </button>
               </motion.div>
               <motion.div
-                variants={moveUp(0.95)}
+                variants={moveUp(0.16)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
               >
                 <button
                   ref={nextRef}
-                  className="relative cursor-pointer w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
+                  className="relative cursor-pointer w-[50px] h-[50px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden"
                 >
                   <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
                   <Image
@@ -119,11 +126,30 @@ const LandpropertyCards = () => {
                     alt="Next"
                     width={28}
                     height={28}
-                    className="relative z-10 rotate-180 object-contain w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                    className="relative z-10 rotate-180 object-contain w-[21px] h-[21px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
                   />
                 </button>
               </motion.div>
             </div>
+
+            <motion.div
+              variants={moveUp(0.22)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="w-full flex justify-center mt-20"
+            >
+              <div className="relative w-full h-[1px] bg-foreground-light/50 overflow-visible">
+                {/* Active segment */}
+                <div
+                  className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-primary transition-all duration-300"
+                  style={{
+                    width: `${((activeIndex + 1) / totalSlides) * 100}%`,
+                    transform: "translateY(-50%)",
+                  }}
+                />
+              </div>
+            </motion.div>
           </div>
 
           {/* 💻 DESKTOP 1140+: GRID */}

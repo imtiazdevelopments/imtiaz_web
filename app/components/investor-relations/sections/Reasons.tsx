@@ -81,9 +81,9 @@ export default function Reasons() {
 
   return (
     <section data-header="dark" className="w-full bg-gray">
-      <div className="container py-120 3xl:py-130">
-        <div className="text-center mb-60 3xl:mb-[66px]">
-          <SectionHeading title={sectionTitle} className="uppercase mb-20" />
+      <div className="container py-[70px] lg:py-120 3xl:py-130">
+        <div className="text-center mb-[40px] lg:mb-60 3xl:mb-[66px]">
+          <SectionHeading title={sectionTitle} className="uppercase mb-[20px] lg:mb-20" />
           <SectionDescription
             text={sectionDescription}
             className="max-w-[750px] mx-auto text-foreground-light whitespace-pre-line"
@@ -131,9 +131,9 @@ export default function Reasons() {
                         }}
                         className="relative flex flex-col"
                       >
-                        <div className="flex flex-col items-center justify-center flex-1 px-50 py-40 3xl:py-[46px] overflow-hidden">
+                        <div className="flex flex-col items-center justify-center flex-1 px-50 py-[20px] md:py-40 3xl:py-[46px] overflow-hidden">
                           <div
-                            className="flex items-center justify-center mb-20
+                            className="flex items-center justify-center mb-[10px] md:mb-20
                                      w-[64px] h-[64px] xl:w-[72px] xl:h-[72px] 3xl:w-[80px] 3xl:h-[80px]
                                      rounded-full bg-[#4909050D] backdrop-blur-[30px]"
                           >
@@ -152,7 +152,7 @@ export default function Reasons() {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="font-[optima] uppercase text-25 leading-[1.4] mb-20 tracking-[2%] text-foreground text-center"
+                            className="font-[optima] uppercase text-25 leading-[1.4] mb-[10px] md:mb-20 tracking-[2%] text-foreground text-center"
                           >
                             {reason.title}
                           </motion.h3>
@@ -194,7 +194,7 @@ export default function Reasons() {
           ))}
         </Swiper>
         {/* Pagination (only below 1540px) */}
-        <div className="flex justify-center mt-50 gap-[10px] min-[1540px]:hidden">
+        <div className="flex justify-center mt-[40px] md:mt-50 gap-[10px] min-[1540px]:hidden">
           {slides.map((_, i) => (
             <button
               key={i}

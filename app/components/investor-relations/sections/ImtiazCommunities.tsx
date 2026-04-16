@@ -3,12 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion, useInView } from "framer-motion";
-import { moveUp, moveUpV2 } from "../../motionVariants";
+import { textFade, moveUp, moveUpV2 } from "../../motionVariants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -62,6 +62,18 @@ export default function HeroFeatureSlider() {
     once: true,
   });
 
+    const [bp, setBp] = useState<"mobile" | "desktop">("desktop");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBp(window.innerWidth < 768 ? "mobile" : "desktop");
+    };
+
+    handleResize(); // run once
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const dropWrapper = {
     hidden: { opacity: 0, y: -60 },
     visible: {
@@ -125,14 +137,15 @@ export default function HeroFeatureSlider() {
     swiper.navigation.update();
   }, [swiper, prevRef.current, nextRef.current]);
 
+    const gap = bp === "mobile" ? "20px" : "50px";
+
   return (
     <section
-    data-header="light"
       ref={sectionRef}
-      className="w-full relative overflow-hidden h-[82vh] lg:h-[85vh] xl:h-screen z-10"
+      className="w-full relative overflow-hidden h-[92vh] max-h-[745px] md:max-h-full md:h-screen z-10"
     >
       {/* Nav Buttons */}
-      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center">
+      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px]">
         <div>
           {/* Prev Button */}
           <motion.div
@@ -143,7 +156,7 @@ export default function HeroFeatureSlider() {
           >
             <button
               ref={prevRef}
-              className="relative cursor-pointer lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative  md:w-[62px]  md:h-[62px] w-[50px] h-[50px]   group   border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -151,7 +164,7 @@ export default function HeroFeatureSlider() {
                 alt="Previous"
                 width={28}
                 height={28}
-                className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative z-10 object-contain md:w-[28px] md:h-[28px] w-[20px] h-[20px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -166,7 +179,7 @@ export default function HeroFeatureSlider() {
           >
             <button
               ref={nextRef}
-              className="relative cursor-pointer lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px]  group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              className="relative  md:w-[62px]  md:h-[62px] w-[50px] h-[50px]    group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
@@ -174,7 +187,7 @@ export default function HeroFeatureSlider() {
                 alt="Next"
                 width={28}
                 height={28}
-                className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                className="relative rotate-180 z-10 object-contain md:w-[28px] md:h-[28px] w-[20px] h-[20px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
               />
             </button>
           </motion.div>
@@ -183,7 +196,7 @@ export default function HeroFeatureSlider() {
       {/* Background */}
       <div
         ref={bgRef}
-        className="absolute w-full h-full inset-0 -z-20 overflow-hidden"
+        className="absolute w-full h-full inset-0 -z-20 overflow-hidden scale-[1.08]"
       >
         {prevBg && (
           <motion.div
@@ -191,7 +204,7 @@ export default function HeroFeatureSlider() {
             initial={{ opacity: 1, filter: "blur(0px)" }}
             animate={{ opacity: 0.9, filter: "blur(1px)" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
             style={{ backgroundImage: `url('${prevBg}')` }}
           />
         )}
@@ -201,7 +214,7 @@ export default function HeroFeatureSlider() {
             initial={{ opacity: 0, filter: "blur(1px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
             style={{ backgroundImage: `url('${bgBase}')` }}
           />
         )}
@@ -217,8 +230,13 @@ export default function HeroFeatureSlider() {
       />
 
       {/* Heading */}
-      <div className="container pt-120 3xl:pt-130 relative z-10">
-        <SectionHeading title={heading} className="text-white text-center" />
+      <div className="container pt-[70px] md:pt-120 2xl:pt-[130px] relative z-10">
+        <motion.div className="flex items-center justify-center relative">
+            <SectionHeading
+              title={heading}
+              className="text-center text-white text-heading"
+            />
+        </motion.div>
       </div>
 
       {/* Swiper Feature Cards */}
@@ -227,10 +245,14 @@ export default function HeroFeatureSlider() {
         onMouseLeave={handleMouseLeave}
       >
         <Swiper
-          modules={[Autoplay, Navigation]}
+          modules={[Autoplay, Navigation, Pagination]}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
+          }}
+          pagination={{
+            el: ".custom-pagination ",
+            clickable: true,
           }}
           slidesPerView={4}
           loop={true}
@@ -255,7 +277,7 @@ export default function HeroFeatureSlider() {
 
             return (
               <SwiperSlide key={c.id}>
-                <Reveal key={c.id} variants={moveUpV2} delayRange={0.1 * i}>
+                <Reveal key={c.id} variants={moveUpV2}>
                   <div className="relative flex flex-1 ">
                     <div
                       className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
@@ -274,18 +296,19 @@ export default function HeroFeatureSlider() {
                         }}
                       />
                       <div className="relative z-20 w-full flex justify-center pointer-events-none">
-                        <div className="flex flex-col items-center absolute bottom-10 lg:bottom-15 xl:bottom-22 3xl:bottom-[100px]">
-                          {/* Title — already has animate, just ensure leave transition is defined */}
+                        <div className="flex flex-col items-center absolute bottom-[70px] xl:bottom-22 3xl:bottom-[100px]">
                           <motion.h3
                             key={`feat-title-${i}-${active}`}
                             initial={{ y: 0 }}
-                            animate={{ y: active ? -16 : 0 }}
-                            transition={{
-                              duration: 0.9, // was already good
-                              ease: [0.25, 0.46, 0.45, 0.94],
-                              delay: active ? 0.08 : 0,
+                            animate={{
+                              y: bp === "mobile" ? 0 : active ? -16 : 0, // 👈 disable on mobile
                             }}
-                            className="text-white font-[optima] uppercase text-center text-25 leading-[1.4] px-4"
+                            transition={{
+                              duration: 0.9,
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                              delay: active && bp !== "mobile" ? 0.08 : 0, // 👈 also remove delay on mobile
+                            }}
+                            className="text-white font-[optima] uppercase text-center text-[25px] leading-[1.4] px-4"
                           >
                             {c.name}
                           </motion.h3>
@@ -299,31 +322,46 @@ export default function HeroFeatureSlider() {
                               marginTop: active ? "var(--gap-active)" : "0px",
                             }}
                             transition={{
-                              duration: active ? 0.5 : 0.5, // faster fade-out than fade-in
+                              duration: active ? 0.5 : 0.5,
                               ease: [0.25, 0.1, 0.25, 1],
                             }}
                             style={
                               {
-                                ["--gap-active"]: "50px",
-                              } as unknown as React.CSSProperties
+                                ["--gap-active"]: gap,
+                              } as React.CSSProperties
                             }
-                            className="gap-responsive pointer-events-none" // ← always pointer-events-none
+                            className="gap-responsive pointer-events-none"
                           >
                             <div
                               style={{
                                 pointerEvents: active ? "auto" : "none",
-                              }} // ← control clicks here instead
+                              }}
                             >
-                              <Link href={`/communities/${c.name.toLowerCase().replace(/ /g, "-")}`}>
+                              <Link
+                                href={`/properties/${c.name.toLowerCase().replace(/\s+/g, "-")}`}
+                              >
                                 <CustomOutlineButton
                                   text="Read More"
                                   borderColor="border-white"
                                   textColor="text-white"
-                                  px="px-[12px] sm:px-[26px] xl:px-[36.7px]"
+                                  px="h-[50px] md:h-[66px] px-[30px] md:px-[37px]"
                                 />
                               </Link>
                             </div>
                           </motion.div>
+
+                          {/* Pagination (only below 1540px) */}
+                          <div className="flex md:hidden justify-center mt-[50px] gap-[10px] min-[1540px]:hidden">
+                            {communities.map((_, i) => (
+                              <button
+                                key={i}
+                                // onClick={() => swiperRef.current?.slideToLoop(i)}
+                                className={`w-[10px] h-[10px] rounded-full border border-white transition-all duration-300 cursor-pointer ${
+                                  i === activeFeat ? "bg-white" : "bg-transparent"
+                                }`}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>

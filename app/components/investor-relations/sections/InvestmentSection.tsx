@@ -20,6 +20,10 @@ const total = investmentAppealData.stats.length;
 export default function InvestmentSection() {
   const { ref, parallaxY } = useParallax(15);
   const [innerIndices, setInnerIndices] = useState<Set<number>>(new Set());
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(2);
+  const showPagination = total > slidesPerView;
 
   const computeInnerIndices = useCallback((swiper: SwiperType) => {
     const spv = Math.round(swiper.params.slidesPerView as number) || 1;
@@ -37,19 +41,19 @@ export default function InvestmentSection() {
   return (
     <section data-header="dark" className="w-full bg-white">
       {/* Top white header */}
-      <div className="container text-center pt-120 3xl:pt-160">
+      <div className="container text-center pt-[70px] lg:pt-120 3xl:pt-160">
         <SectionHeading
           title={investmentAppealData.sectionTitle}
           className="uppercase mb-20"
         />
         <SectionDescription
           text={investmentAppealData.sectionDescription}
-          className="max-w-[754px] mx-auto mb-50 text-foreground-light whitespace-pre-line"
+          className="max-w-[754px] mx-auto mb-[40px] md:mb-50 text-foreground-light whitespace-pre-line"
         />
       </div>
 
       {/* Image section */}
-      <div className="relative w-full h-[65vh] md:lg:h-[70vh] xl:h-[90vh] 3xl:h-[96.5vh]">
+      <div className="relative w-full h-[68vh] xl:h-[90vh] 3xl:h-[96.5vh]">
         {/* Full-width image */}
         <div ref={ref} className="relative w-full h-full overflow-hidden">
           <Image
@@ -72,21 +76,35 @@ export default function InvestmentSection() {
         />
 
         {/* Stats — pinned to bottom */}
-        <div className="absolute bottom-0 left-0 right-0 pb-60">
-          <div className="container">
+        <div className="absolute bottom-0 left-0 right-0 pb-[70px] lg:pb-60">
+          <div>
             <Swiper
               modules={[Autoplay]}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               speed={700}
               loop={true}
               slidesPerView={2}
-              onSwiper={(s) => computeInnerIndices(s)}
-              onSlideChange={(s) => computeInnerIndices(s)}
-              onBreakpoint={(s) => computeInnerIndices(s)}
+              onSwiper={(s) => {
+                setSwiper(s);
+                computeInnerIndices(s);
+                setSlidesPerView(
+                  Math.round(s.params.slidesPerView as number) || 1,
+                );
+              }}
+              onSlideChange={(s) => {
+                setActiveIndex(s.realIndex);
+                computeInnerIndices(s);
+              }}
+              onBreakpoint={(s) => {
+                computeInnerIndices(s);
+                setSlidesPerView(
+                  Math.round(s.params.slidesPerView as number) || 1,
+                );
+              }}
               breakpoints={{
-                768:  { slidesPerView: 3 },
+                768: { slidesPerView: 3 },
                 1024: { slidesPerView: 4 },
-                1280: { slidesPerView: 5 },
+                1560: { slidesPerView: 5 },
               }}
             >
               {investmentAppealData.stats.map((stat, index) => {
@@ -136,6 +154,19 @@ export default function InvestmentSection() {
                 );
               })}
             </Swiper>
+            {showPagination && (
+              <div className="flex justify-center mt-[30px] md:mt-50 gap-[10px]">
+                {investmentAppealData.stats.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => swiper?.slideToLoop(i)}
+                    className={`w-[10px] h-[10px] rounded-full border border-white transition-all duration-300 cursor-pointer ${
+                      i === activeIndex ? "bg-white" : "bg-transparent"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

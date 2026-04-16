@@ -118,30 +118,30 @@ const ImtiazProperties = () => {
   return (
     <section
       data-header="dark"
-      className="make-header-black w-full py-120 3xl:py-160 bg-white z-10 relative"
+      className="make-header-black w-full py-[70px] lg:py-120 3xl:py-160 bg-white z-10 relative"
     >
       <div className="container">
         <SectionHeading
           title={projectsData.sectionTitle}
-          className="text-foreground text-center mb-50"
+          className="text-foreground text-center mb-[20px] md:mb-50"
         />
         <div className="relative" ref={rootRef}>
-<Swiper
-  modules={[Navigation]}
-  spaceBetween={28}
-  slidesPerView={1}
-  loop={false}
-  onSwiper={(swiper) => {
-    swiperRef.current = swiper;
-    updateNavState(swiper);
-  }}
-  onSlideChange={updateNavState}
-  breakpoints={{
-    640: { slidesPerView: 2 },
-    1140: { slidesPerView: 3 },
-    1700: { slidesPerView: 4 },
-  }}
->
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={28}
+            slidesPerView={1}
+            loop={false}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              updateNavState(swiper);
+            }}
+            onSlideChange={updateNavState}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1140: { slidesPerView: 3 },
+              1700: { slidesPerView: 4 },
+            }}
+          >
             {projectsData.properties.slice(0, 4).map((project, i) => {
               return (
                 <SwiperSlide key={i}>
@@ -154,7 +154,7 @@ const ImtiazProperties = () => {
           </Swiper>
         </div>
         {/* BOTTOM BUTTONS */}
-        <div className="flex items-center justify-center mt-50">
+        <div className="flex items-center justify-between md:justify-center mt-[20px] md:mt-50">
           <motion.div
             variants={moveUp(0.1)}
             initial="hidden"
@@ -166,22 +166,24 @@ const ImtiazProperties = () => {
                 text="View All"
                 variant="dark"
                 borderColor="border-primary"
-                className="3xl:w-[171.97px] 3xl:h-[66.45px]"
+                className="3xl:w-[171.97px] 3xl:h-[66.45px] h-[50px]"
                 textColor="text-foreground-light"
-                px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+                px="px-[30px] 3xl:px-[36.6px]"
               />
             </Link>
           </motion.div>
-          <div className={`flex gap-[15px] transition-all duration-300 ${isBeginning && isEnd ? "hidden" : "ml-[30px]"}`}>
+          <div
+            className={`flex gap-[15px] transition-all duration-300 ${isBeginning && isEnd ? "hidden" : "ml-[30px]"}`}
+          >
             <motion.div
               variants={moveUp(0.16)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
             >
-<button
-  onClick={() => swiperRef.current?.slidePrev()}
-                className={`relative cursor-pointer lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden transition-opacity duration-300
+              <button
+                onClick={() => swiperRef.current?.slidePrev()}
+                className={`relative cursor-pointer w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden transition-opacity duration-300
         ${isBeginning ? "opacity-50 cursor-not-allowed pointer-events-none" : "opacity-100"}`}
               >
                 <span className="absolute right-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
@@ -190,7 +192,7 @@ const ImtiazProperties = () => {
                   alt="Arrow Left"
                   width={28}
                   height={28}
-                  className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                  className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[21px] h-[21px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
                 />
               </button>
             </motion.div>
@@ -201,9 +203,9 @@ const ImtiazProperties = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-<button
-  onClick={() => swiperRef.current?.slideNext()}
-                className={`relative cursor-pointer lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden transition-opacity duration-300
+              <button
+                onClick={() => swiperRef.current?.slideNext()}
+                className={`relative cursor-pointer w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] group border border-[#404040] rounded-[50px] flex items-center justify-center overflow-hidden transition-opacity duration-300
         ${isEnd ? "opacity-50 cursor-not-allowed pointer-events-none" : "opacity-100"}`}
               >
                 <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
@@ -212,7 +214,7 @@ const ImtiazProperties = () => {
                   alt="Arrow Right"
                   width={28}
                   height={28}
-                  className="relative z-10 rotate-180 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
+                  className="relative z-10 rotate-180 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[21px] h-[21px] group-hover:invert group-hover:brightness-0 transition-colors duration-300"
                 />
               </button>
             </motion.div>

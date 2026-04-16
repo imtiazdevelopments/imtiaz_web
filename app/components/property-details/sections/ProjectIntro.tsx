@@ -20,9 +20,9 @@ const ProjectIntro = () => {
         background:
           "radial-gradient(50% 50% at 50% 50%, rgba(97, 18, 13, 0.95) 0%, rgba(73, 9, 5, 0.95) 100%)",
       }}
-      className="w-full py-120 3xl:py-130"
+      className="w-full py-[70px] lg:py-120 3xl:py-130"
     >
-      <div className="container mx-auto flex flex-col items-center">
+      <div className="container flex flex-col items-center">
         <SectionHeading
           title={introData.title}
           className="text-white mb-20 text-center max-w-[25ch]"
@@ -32,13 +32,13 @@ const ProjectIntro = () => {
           className="text-white/80  max-w-[87ch] text-center whitespace-pre-line"
         />
         <div
-          className="flex flex-wrap gap-[15px] justify-center items-center mt-50"
+          className="grid grid-cols-2 md:flex md:flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}
         >
           <a href="#" className="selector">
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 xl:!px-[30px] 3xl:!px-[35px] 2xl:!py-[20.5px]"
+              className="w-full md:w-fit !px-5 xl:!px-[30px] 3xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
               text="Brochure"
               borderColor="border-white"
               textColor="text-white"
@@ -48,17 +48,20 @@ const ProjectIntro = () => {
           <a href="#" className="selector">
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px]"
+              className="w-full md:w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
               text="Fact Sheet"
               borderColor="border-white"
               textColor="text-white"
               variant="light"
             />
           </a>
-          <a href="#" className="selector">
+          <a
+            href="#"
+            className="selector col-span-2 flex justify-center md:col-span-1 md:flex-none"
+          >
             <CustomIconButton
               icondownload={true}
-              className="w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px]"
+              className="min-w-[190px] md:w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
               text="Unit layout"
               borderColor="border-white"
               textColor="text-white"
