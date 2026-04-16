@@ -14,7 +14,7 @@ const MeydanHorizon = () => {
   });
 
   return (
-    <section className="w-full py-120 3xl:py-160">
+    <section className="w-full py-[70px] lg:py-120 3xl:py-160">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
@@ -25,7 +25,7 @@ const MeydanHorizon = () => {
 
           <SectionDescription
             text={subtitle}
-            className="text-25 uppercase font-[optima] mb-40 text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
+            className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
           />
           <SectionDescription
             text={description}
@@ -35,7 +35,7 @@ const MeydanHorizon = () => {
           <div ref={desktopBtnRef} style={{ opacity: 0 }}>
             <CustomOutlineButton
               text="View Community"
-              px="px-[20px] 3xl:px-[39.54px] mx-auto mt-50"
+              px="px-[30px] 3xl:px-[39.54px] mx-auto mt-[50px] h-[50px] md:h-[66px]"
               borderColor="border-primary"
               className="3xl:h-[67px]"
               textColor="text-foreground-light"
