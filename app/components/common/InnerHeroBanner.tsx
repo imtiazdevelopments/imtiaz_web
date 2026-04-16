@@ -151,7 +151,7 @@ const InnerHeroBanner = ({
       <div
         ref={breadcrumbRef}
         style={{ opacity: 0 }}
-        className="absolute bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
+        className="absolute bottom-[60px] lg:bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
       >
         <Breadcrumb />
       </div>
