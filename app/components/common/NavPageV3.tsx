@@ -186,8 +186,16 @@ const handleNavigate = (href?: string) => {
                   initial="hidden"
                   animate="show"
                   className="mb-[5px] font-[avenir] font-[900] text-[16px] opacity-70"
-                >
-                  CONTACT US
+                > 
+                   <div  className="cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavigate('/contact-us');
+          }}
+          >
+          CONTACT US
+        </div> 
+ 
                 </motion.div>
 <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
   <motion.div variants={moveUp(0.25)} initial="hidden" animate="show" className="text-[16px] leading-[2.2]">
