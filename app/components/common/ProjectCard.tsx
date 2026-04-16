@@ -262,14 +262,11 @@ const handleCardClick = () => {
         />
 
         {/* Default overlay */}
-         <div
-          className="absolute inset-0 z-10 transition-opacity bg-black/20" 
-        />
         <div
           className="absolute inset-0 z-10 transition-opacity"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.8) 83.74%)",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.69%, rgba(0, 0, 0, 0.8) 84.83%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
           }}
         />
 
@@ -278,7 +275,7 @@ const handleCardClick = () => {
           className={`absolute inset-0 z-10 transition-opacity duration-500 ${show ? "opacity-100" : "opacity-0"}`}
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 44.3%, #000000 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.2) 83.74%),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
           }}
         />
 
