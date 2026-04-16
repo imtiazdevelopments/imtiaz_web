@@ -17,19 +17,8 @@ const MapOriginal = () => {
   const lng = parseFloat(longitude);
 
   return (
-    <section data-header="dark" className="w-full py-120 3xl:py-160">
-      <div className="h-[500px] lg:h-[839px] ">
-        {/* <div className=" flex flex-col justify-center">
-        <div>
-          <Image
-            src="/images/community-listing/map-2.jpg"
-            alt="Map"
-            width={2500}
-            height={1400}
-            className="w-full"
-          />
-        </div>
-      </div> */}
+    <section data-header="dark" className="w-full py-[70px] lg:py-120 3xl:py-160">
+      <div className="h-[488px] lg:h-[839px] ">
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}>
       <Map
         defaultCenter={{ lat, lng }}

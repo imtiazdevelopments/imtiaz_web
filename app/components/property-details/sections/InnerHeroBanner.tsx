@@ -97,7 +97,7 @@ const InnerHeroBanner = ({
 
   return (
     <section
-      className="relative w-full h-[78vh] 2xl:h-screen overflow-hidden"
+      className="relative w-full h-[82vh] 2xl:h-screen overflow-hidden"
       data-header="light"
     >
       <div

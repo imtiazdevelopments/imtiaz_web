@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import CountryCodeSelect from "@/app/components/auth/CountryCodeList"; 
+import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import CustomOutlineButton from "@/app/components/common/CustomOutlineButton";
 import { useRef, useEffect, useState } from "react";
 import { SectionHeading } from "@/app/components/animations/SectionHeading";
@@ -25,7 +25,7 @@ type PaymentValues = {
 
 const ErrorSlot = ({ msg, hint }: { msg?: string; hint?: string }) => (
   <p
-    className={`pt-[5px] h-20 ${msg ? "text-[#c0392b] text-[14px]" : "text-foreground-light/50 text-description"}`}
+    className={`pt-[5px] h-20 ${msg ? "text-[#c0392b] text-[12px] sm:text-[14px]" : "text-foreground-light/50 text-description"}`}
   >
     {msg ?? hint ?? "\u00A0"}
   </p>
@@ -44,7 +44,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-20 2xl:mt-[13px] text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-[12px] sm:mt-20 2xl:mt-[13px] text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const projects = [
   "Project Alpha",
@@ -84,21 +84,20 @@ export default function RegisterYourInterest() {
 
   return (
     <section
-      className="w-full   py-120 3xl:py-130 bg-gray dark-section-2"
+      className="w-full py-[70px] lg:py-120 3xl:py-130 bg-gray dark-section-2"
       data-header="dark"
     >
       <div className="container flex flex-col lg:flex-row gap-10 sm:gap-10 lg:gap-50 2xl:gap-0">
         {/* Left col — 49% */}
-        <div className="w-full lg:w-[47.865%] flex-shrink-0 flex flex-col">
+        <div className="w-full lg:w-[47.865%] flex-shrink-0 flex flex-col items-center lg:items-start">
           <SectionHeading
             title="Register your interest"
-            className="text-foreground mb-20 lg:max-w-[17ch]"
+            className="text-foreground mb-20 max-w-[17ch] text-center lg:text-left"
           />
           <SectionDescription
             text="Imtiaz Developments crafts more than buildings we create experiences. Register your interest and be part of our legacy."
-            className="text-foreground-light/80 max-w-[473px] lg:mb-50"
+            className="text-foreground-light/80 max-w-[473px] lg:mb-50 text-center lg:text-left"
           />
-           
         </div>
 
         {/* Right col — 51% */}
@@ -110,7 +109,7 @@ export default function RegisterYourInterest() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-70 3xl:gap-90"
+              className="grid sm:grid-cols-2 gap-[26px] sm:gap-70 3xl:gap-90"
             >
               <div className="group">
                 <label
@@ -187,7 +186,10 @@ export default function RegisterYourInterest() {
                 >
                   Enter Phone no*
                 </label>
-                <div ref={phoneRowRef} className="flex items-end pt-[12px] gap-2">
+                <div
+                  ref={phoneRowRef}
+                  className="flex items-end pt-[12px] gap-2"
+                >
                   <CountryCodeSelect
                     value={watch("countryCode")}
                     onChange={(val) => setValue("countryCode", val)}
@@ -213,7 +215,6 @@ export default function RegisterYourInterest() {
               </div>
             </motion.div>
 
-
             {/* Row 6 — Message */}
             <motion.div
               variants={moveUp(0.22)}
@@ -224,7 +225,7 @@ export default function RegisterYourInterest() {
             >
               <label
                 htmlFor="message"
-                className="block !leading-[1.75] text-description mt-120 sm:mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
+                className="block !leading-[1.75] text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
               >
                 Type your message here...
               </label>
@@ -235,7 +236,7 @@ export default function RegisterYourInterest() {
                 {...register("message")}
               />
               <FieldLine hasError={false} />
-              <ErrorSlot msg={undefined} />
+              {/* <ErrorSlot msg={undefined} /> */}
             </motion.div>
 
             {/* Submit */}
@@ -244,16 +245,17 @@ export default function RegisterYourInterest() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="mt-[20px]"
+              className="mt-[40px]"
             >
               <CustomOutlineButton
                 text="Submit Enquire"
                 minWidth={false}
                 onClick={() => {}}
+                className="h-[50px] md:h-[66px]"
                 variant="dark"
                 textColor="text-foreground-light"
                 borderColor="border-primary-2"
-                px="px-60 2xl:px-[54.22px] 2xl:py-[23px]"
+                px="px-[30px] md:px-60 2xl:px-[54.22px] 2xl:py-[23px]"
               />
             </motion.div>
           </form>

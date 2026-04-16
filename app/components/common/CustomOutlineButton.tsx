@@ -40,7 +40,7 @@ const CustomOutlineButton = ({
       onClick={onClick}
       onMouseDown={handlePress}
       onTouchStart={handlePress}
-      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border ${borderColor} ${textColor} font-[avenirBook] text-[19px] leading-[100%]`}
+      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border ${borderColor} ${textColor} font-[avenirBook] text-[16px] md:text-[19px] leading-[100%]`}
       style={{ transform: pressed ? "scale(0.95)" : "scale(1)" }}
     >
       {/* Left fill */}
@@ -66,7 +66,7 @@ const CustomOutlineButton = ({
           className={`absolute inset-y-0 right-0 w-[50%] ${fillColor} transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
         />
         <span
-          className={`relative z-10 transition-colors duration-300 ${minWidth ? "min-w-[98px]" : ""} inline-block text-center ${variant === "dark" ? "group-hover:text-white" : ""}`}
+          className={`relative z-10 transition-colors duration-300 ${minWidth ? "md:min-w-[98px]" : ""} inline-block text-center ${variant === "dark" ? "group-hover:text-white" : ""}`}
         >
           {text}
         </span>

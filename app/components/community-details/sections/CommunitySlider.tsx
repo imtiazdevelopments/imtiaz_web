@@ -70,7 +70,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
     <section data-header="light">
       <div
         ref={containerRef}
-        className="relative w-full h-[500px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[595px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
       >
         {/* z-0 — previous slide bg, fades out after each transition for zero flash */}
         <div className="absolute inset-0 z-0">
@@ -210,7 +210,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         </motion.div>
 
         {/* dots — z-30, pointer-events-auto */}
-        <div className="absolute bottom-120 3xl:bottom-130 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center justify-center gap-3">
+        <div className="absolute bottom-[60px] lg:bottom-120 3xl:bottom-130 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center justify-center gap-3">
           {images.map((_, i) => (
             <button
               key={i}
