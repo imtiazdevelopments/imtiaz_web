@@ -78,7 +78,7 @@ const CustomSearch = ({
         alt=""
         className="h-[20px] w-auto"
       />
-      <span className="text-16 relative z-10 transition-colors duration-300 inline-block text-start">
+      <span className="text-16 relative z-10 transition-colors duration-300 inline-block text-start w-full">
         <input
           ref={inputRef}
           type="text"

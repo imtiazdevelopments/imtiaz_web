@@ -73,10 +73,10 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* ----- MAIN LAYOUT ----- */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-50 md:gap-150">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-30 lg:gap-150">
           {/* PHONE - hidden on mobile, shown on md+ (left column) */}
           <div className="hidden md:flex justify-center">
-            <div className="relative w-[300px] md:w-[394px] h-[520px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
+            <div className="relative w-[316px] lg:w-[394px] h-[613px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
                 src={"/images/home/app/phone-4.png"}
@@ -105,7 +105,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="mb-[20px] text-heading uppercase text-primary-2"
+                className="mb-[20px] text-heading uppercase text-primary-2 text-center"
               >
                 Download Imtiaz App
               </motion.h2>
@@ -128,7 +128,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
 
             {/* PHONE - mobile only, between desc and buttons */}
             <div className="flex md:hidden justify-center  mb-[34px] md:50">
-              <div className="relative w-[300px] h-[520px] overflow-hidden phone-wrapper z-[100]">
+              <div className="relative w-[286px] h-[553px] overflow-hidden phone-wrapper z-[100]">
                 <Image
                   className="absolute z-10 h-full w-full"
                   src={"/images/home/app/phone-4.png"}

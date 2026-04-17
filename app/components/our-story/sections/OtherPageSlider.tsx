@@ -311,12 +311,14 @@ const goTo = useCallback(
             {slides[current].description}
           </motion.p>
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
-            <CustomOutlineButton
+           <Link href="/about/sustainability">
+             <CustomOutlineButton
               text="learn more"
               className="capitalize"
               variant="light"
               px="px-[12px] sm:px-[26px] lg:px-[34px]"
             />
+           </Link>
           </motion.div>
         </div>
 

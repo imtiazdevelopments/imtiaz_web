@@ -25,6 +25,9 @@ export default function ProjectCardMap({
   const [isActive, setIsActive] = useState(false);
   const cardId = useId();
 
+const breakWord = "by Imtiaz";
+
+const parts = title.split(new RegExp(`(${breakWord})`, "i"));
   const show = isHovered || isActive;
 
   useEffect(() => {
@@ -54,7 +57,7 @@ export default function ProjectCardMap({
 
   return (
     <div
-      className="block w-full h-[485px] md:h-[441px]"
+      className="block w-full h-[415px] md:h-[441px]"
       ref={ref}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -91,9 +94,9 @@ export default function ProjectCardMap({
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col my-[30px] md:my-[32px] xl:my-[40px] transition-opacity duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[30px] sm:mt-[38px] mb-[30px] md:my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}
         >
-          <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-100"}`}>
+          <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
               <div className="bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center">
                 <p className="text-white/80 text-description font-bold uppercase h-[18px] lg:h-[22px]">
@@ -115,10 +118,25 @@ export default function ProjectCardMap({
           </div>
 
           <div className={`absolute bottom-0 left-0 right-0 px-5 transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-150"}`}>
-            <h3
+            {/* <h3
               className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               dangerouslySetInnerHTML={{ __html: title }}
-            />
+            /> */}
+            <h3
+            className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${
+              show ? "translate-y-0" : "translate-y-2"
+            }`}
+          >
+            {parts.length > 1 ? (
+              <>
+                {parts[0]}
+                <br className="hidden sm:block" />
+                {breakWord} 
+              </>
+            ) : (
+              title
+            )}
+          </h3>
             <div
               className={`w-full h-px mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               style={{
@@ -128,12 +146,26 @@ export default function ProjectCardMap({
             <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
               {subtitle}
             </p>
+             <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-5  sm:hidden">
+            <Link
+  href={`/properties/${title
+    .replace(/<br\s*\/?>/gi, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")}`}
+>
+              <CustomOutlineButton
+                text="View Property"
+                px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+                className=" "
+              />
+            </Link>
+          </div>
           </div>
         </div>
 
         {/* ── HOVER STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-40 px-20 transition-opacity duration-500  ${show ? "opacity-100 delay-140" : "opacity-0 delay-0"}`}
+          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-40 px-20 transition-opacity duration-500   ${show ? "opacity-0 sm:opacity-100 delay-140" : "opacity-0"}`}
         >
           <div className={`flex flex-col items-center transition-opacity duration-300 ${show ? "opacity-100 delay-100" : "opacity-0 delay-0"}`}>
             <Image

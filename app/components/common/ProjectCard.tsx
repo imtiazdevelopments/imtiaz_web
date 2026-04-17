@@ -217,7 +217,9 @@ export default function ProjectCard({
   const cardId = useId(); // unique ID for each card instance
 
   const show = isHovered || isActive;
+const breakWord = "by Imtiaz";
 
+const parts = title.split(new RegExp(`(${breakWord})`, "i"));
   useEffect(() => {
     // When another card broadcasts its activation, deactivate this one
     const handleOtherCardActive = (e: Event) => {
@@ -275,15 +277,15 @@ const handleCardClick = () => {
           className={`absolute inset-0 z-10 transition-opacity duration-500 ${show ? "opacity-100" : "opacity-0"}`}
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.2) 83.74%),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 36.05%, rgba(0, 0, 0, 0.) 83.74%),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
           }}
         />
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[38px] mb-[30px] md:my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[30px] sm:mt-[38px] mb-[30px] md:my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-100 sm:opacity-0" : "opacity-100"}`}
         >
-          <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-100"}`}>
+          <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
               <div className={`bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
                 <p className="text-white/80 text-description font-bold uppercase h-[18px] lg:h-[22px]">
@@ -304,11 +306,26 @@ const handleCardClick = () => {
             </div>
           </div>
 
-          <div className={`absolute bottom-0 xl:bottom-[13px] left-0 right-0 px-5 transition-opacity duration-500 ${show ? "opacity-0 delay-0" : "opacity-100 delay-150"}`}>
-            <h3
+          <div className={`absolute bottom-0 xl:bottom-[13px] left-0 right-0 px-5 transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}>
+            {/* <h3
               className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               dangerouslySetInnerHTML={{ __html: title }}
-            />
+            /> */} 
+             <h3
+            className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${
+              show ? "translate-y-0" : "translate-y-2"
+            }`}
+          >
+            {parts.length > 1 ? (
+              <>
+                {parts[0]}
+                <br className="hidden sm:block" />
+                {breakWord} 
+              </>
+            ) : (
+              title
+            )}
+          </h3>
             <div
               className={`w-full h-px mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               style={{
@@ -318,12 +335,26 @@ const handleCardClick = () => {
             <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
               {subtitle}
             </p>
+            <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-5  sm:hidden">
+            <Link
+  href={`/properties/${title
+    .replace(/<br\s*\/?>/gi, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")}`}
+>
+              <CustomOutlineButton
+                text="View Property"
+                px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+                className=" "
+              />
+            </Link>
+          </div>
           </div>
         </div>
 
         {/* ── HOVER STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-80 3xl:py-[88px] px-20 transition-opacity duration-500 ${show ? "opacity-100 delay-140" : "opacity-0"}`}
+          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-80 3xl:py-[88px] px-20 transition-opacity duration-500 ${show ? "opacity-0 sm:opacity-100 delay-140" : "opacity-0"}`}
         >
           <div className={`flex flex-col items-center transition-opacity duration-300 ${show ? "opacity-100 delay-100" : "opacity-0 delay-0"}`}>
             <Image

@@ -269,7 +269,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
   return (
     <div
       ref={ref}
-      className="relative w-full h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden cursor-pointer select-none"
+      className="relative w-full h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden  select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleCardClick}
@@ -438,7 +438,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
           <CustomOutlineButton
             text="View Community"
             borderColor="rgba(255,255,255,0.9)"
-            px="px-6 lg:px-8 3xl:px-10"
+            px="px-6 lg:px-8 3xl:px-10 "
           />
         </Link>
       </div>

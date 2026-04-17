@@ -899,3 +899,9 @@ input:-webkit-autofill:active {
   @apply grid grid-cols-1 min-[640px]:grid-cols-2 min-[1140px]:grid-cols-3 min-[1700px]:grid-cols-4 3xl:gap-y-[var(--spacing-50)] gap-y-[var(--spacing-40)] gap-x-[var(--spacing-30)] xl:gap-x-[28px];
 }
 
+
+@media (min-width: 440px) and (max-width: 767px) {
+  .icnpojectbtn{
+    width: 190px !important;
+    }
+}

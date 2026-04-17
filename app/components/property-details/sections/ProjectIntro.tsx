@@ -5,7 +5,32 @@ import { introData } from "../data";
 import { useGsapStagger } from "../../../hooks/useGsapStagger";
 
 import CustomIconButton from "../../common/CustomIconButton";
-const ProjectIntro = () => {
+
+const pdfdocData = [
+  { 
+    id: "brochure",
+    image: "/images/projects/floor.png",
+    label: "Brochure",
+  },
+  { 
+    id: "factsheet",
+    image: "/images/projects/floor.png",
+    label: "Fact Sheet",
+  },
+  { 
+    id: "unitlayout",
+    image: "/images/projects/floor.png",
+    label: "Unit layout",
+  }, 
+];
+
+type PdfDoc = (typeof pdfdocData)[0];
+
+interface ProjectIntroProps {
+  pdfdocs?: PdfDoc[];
+}
+
+function ProjectIntro({ pdfdocs = pdfdocData }: ProjectIntroProps) { 
   const gridRef = useGsapStagger({
     selector: ".selector",
     from: { opacity: 0, y: 40 },
@@ -13,6 +38,12 @@ const ProjectIntro = () => {
     stagger: 0.15,
     start: "top 80%",
   });
+
+  const getFileName = (path: string, label: string) => {
+    const fileName = path.split('/').pop() || label.toLowerCase();
+    return fileName;
+  };
+
   return (
     <section
       data-header="dark"
@@ -32,46 +63,33 @@ const ProjectIntro = () => {
           className="text-white/80  max-w-[87ch] text-center whitespace-pre-line"
         />
         <div
-          className="grid grid-cols-2 md:flex md:flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
+          className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}
         >
-          <a href="#" className="selector">
-            <CustomIconButton
-              icondownload={true}
-              className="w-full md:w-fit !px-5 xl:!px-[30px] 3xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
-              text="Brochure"
-              borderColor="border-white"
-              textColor="text-white"
-              variant="light"
-            />
-          </a>
-          <a href="#" className="selector">
-            <CustomIconButton
-              icondownload={true}
-              className="w-full md:w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
-              text="Fact Sheet"
-              borderColor="border-white"
-              textColor="text-white"
-              variant="light"
-            />
-          </a>
-          <a
-            href="#"
-            className="selector col-span-2 flex justify-center md:col-span-1 md:flex-none"
-          >
-            <CustomIconButton
-              icondownload={true}
-              className="min-w-[190px] md:w-fit !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]"
-              text="Unit layout"
-              borderColor="border-white"
-              textColor="text-white"
-              variant="light"
-            />
-          </a>
+          {pdfdocs.map((doc, index) => (
+            <a 
+              key={doc.id}
+              href={doc.image} 
+              download={getFileName(doc.image, doc.label)}
+              // className={`selector ${index === 2 ? 'col-span-2 flex justify-center md:col-span-1 md:flex-none' : ''}`}
+               
+              className={`selector      justify-center   `}
+            >
+              <CustomIconButton
+                icondownload={true}
+                // className={`${index === 2 ? 'min-w-[190px] md:w-fit' : 'w-full md:w-fit'} !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]`}
+                 className={`icnpojectbtn w-full md:w-[210px] !px-5 xl:!px-[30px] 2xl:!px-[5px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]`}
+                text={doc.label}
+                borderColor="border-white"
+                textColor="text-white"
+                variant="light"
+              />
+            </a>
+          ))}
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default ProjectIntro;
