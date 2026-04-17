@@ -65,7 +65,7 @@ export default function ProjectCardMap({
           src={image}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover "
           style={{
             transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
           }}

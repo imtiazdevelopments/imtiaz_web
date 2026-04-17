@@ -395,7 +395,7 @@ function CircularProgress({
       </div>
 
       {!isLarge && (
-        <span className="text-description uppercase text-foreground-light text-center">
+        <span className="text-description uppercase text-foreground-light font-bold text-center leading-[1.63]">
           {label}
         </span>
       )}
@@ -523,13 +523,13 @@ export default function WynwoodProgress() {
             </div>
 
             {/* Bottom — Sub-stats - from md */}
-            <div className="hidden md:flex flex-wrap justify-between gap-y-8 gap-x-4">
+            <div className="hidden md:flex flex-wrap justify-between gap-y-8 gap-x-4  ">
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
-                  <div className="3xl:px-[18.65px]">
+                  <div className="3xl:px-[20.4px]">
                     <CircularProgress
                       percentage={stat.percentage}
-                      size={108}
+                      size={118}
                       strokeWidth={10}
                       label={stat.label}
                       isLarge={false}
@@ -544,7 +544,7 @@ export default function WynwoodProgress() {
             <div className="flex md:hidden flex-wrap justify-between gap-y-8 gap-x-4">
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
-                  <div className="3xl:px-[18.65px]">
+                  <div className="3xl:px-[20.4px]">
                     <CircularProgress
                       percentage={stat.percentage}
                       size={85}
