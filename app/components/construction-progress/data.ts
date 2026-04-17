@@ -1,66 +1,16 @@
-export const offPlanBannerData = {
-  image: "/images/off-plan/banner.jpg",
-  title: "Off-Plan Properties in Dubai",
-  description:
-    "Discover Premium Off-Plan Developments with Flexible Payment Plans",
-  buttonText: "schedule visit",
-  buttonLink: "#",
+export const bannerData = {
+  image: "/images/construction-progress/bannerprogress.jpg",
+  title: "construction progress",
+  subtitle: "Track the latest construction updates with real-time insights, milestone highlights, and transparent progress reports—all in one place.",
 };
-
-export const faqData = {
-  title: "FAQ",
-  subtitle:
-    "Lorem Ipsum is simply dummy text of the printing and\ntypesetting industry. Lorem Ipsum has",
-  items: [
-    {
-      id: "faq-1",
-      question: "What are off-plan properties?",
-      answer:
-        "Off-plan properties are residential or commercial units that are sold before construction is completed. Buyers purchase based on architectural plans and developer reputation, with flexible payment schedules typically linked to construction milestones",
-    },
-    {
-      id: "faq-2",
-      question: "What makes your brand unique?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-    },
-    {
-      id: "faq-3",
-      question: "Who are your properties designed for?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-    },
-    {
-      id: "faq-4",
-      question: "How do you ensure quality and longevity?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-    },
-    {
-      id: "faq-5",
-      question: "Is sustainability part of your vision?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-    },
-  ],
-};
-
-export const whyInvestData = {
-  title: "Why Invest in Off Plan\nProperties in Dubai",
-  description: `<p>Investing in off-plan properties in Dubai offers numerous advantages for both end-users and investors. The competitive pricing, flexible payment plans, and high potential for capital appreciation make it an attractive investment destination in Dubai's dynamic real estate market.</p> <p>With ongoing infrastructure development and proximity to major business districts, Dubai continues to attract professionals, families, and investors looking for premium properties with excellent rental yields and long-term value growth potential.</p>`,
-};
-
-
-// data.ts
 export const offPlanProperties = [
     {
         id: "1",
         image: "/images/property/1.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Under Construction",
-        location: "Downtown Dubai, UAE",
+        
         title: "WYNWOOD HORIZON BY IMTIAZ",
-        subtitle: "Luxury Urban Living",
+         
         href: "/projects/wynwood-horizon",
         startingFrom: "AED 3.5 M",
         units: "1BR - 3BR",
@@ -74,10 +24,9 @@ export const offPlanProperties = [
         id: "2",
         image: "/images/property/2.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+        
         title: "SUNSET BAY 5 BY IMTIAZ",
-        subtitle: "Waterfront Living In Dubai",
+         
         href: "/projects/sunset-bay-5",
         startingFrom: "AED 3.5 M",
         units: "1BR - 2BR",
@@ -91,10 +40,9 @@ export const offPlanProperties = [
         id: "3",
         image: "/images/property/3.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+        
         title: "COVE BY IMTIAZ",
-        subtitle: "Spacious Community Living",
+         
         href: "/projects/cove-by-imtiaz",
         startingFrom: "AED 3.5 M",
         units: "1BR - 3BR",
@@ -108,10 +56,9 @@ export const offPlanProperties = [
         id: "4",
         image: "/images/property/4.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Completed",
-        location: "Downtown Dubai, UAE",
+         
         title: "PEARL HOUSE BY IMTIAZ",
-        subtitle: "Family-Friendly Community",
+         
         href: "/projects/pearl-house",
         startingFrom: "AED 2.8 M",
         units: "1BR - 4BR",
@@ -125,10 +72,9 @@ export const offPlanProperties = [
         id: "5",
         image: "/images/property/5.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+        
         title: "BEACH WALK GRAND 2 BY IMTIAZ",
-        subtitle: "Waterfront Living In Dubai",
+         
         href: "/projects/beach-walk-grand-2",
         startingFrom: "AED 4.0 M",
         units: "2BR - 4BR",
@@ -142,10 +88,9 @@ export const offPlanProperties = [
         id: "6",
         image: "/images/property/6.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+         
         title: "WYNWOOD HORIZON BY IMTIAZ",
-        subtitle: "Luxury Urban Living",
+         
         href: "/projects/wynwood-horizon-2",
         startingFrom: "AED 3.5 M",
         units: "1BR - 3BR",
@@ -159,10 +104,9 @@ export const offPlanProperties = [
         id: "7",
         image: "/images/property/7.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+        
         title: "WYNWOOD HORIZON BY IMTIAZ",
-        subtitle: "Luxury Urban Living",
+         
         href: "/projects/wynwood-horizon-3",
         startingFrom: "AED 3.5 M",
         units: "1BR - 3BR",
@@ -176,10 +120,9 @@ export const offPlanProperties = [
         id: "8",
         image: "/images/property/8.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Completed",
-        location: "Downtown Dubai, UAE",
+         
         title: "COVE EDITION BY IMTIAZ",
-        subtitle: "Spacious Community Living",
+         
         href: "/projects/cove-edition",
         startingFrom: "AED 3.5 M",
         units: "1BR - 3BR",
@@ -193,10 +136,9 @@ export const offPlanProperties = [
         id: "9",
         image: "/images/property/9.jpg",
         hoverImage: "/images/community-listing/hoverimg.png",
-        status: "Off Plan",
-        location: "Downtown Dubai, UAE",
+        
         title: "SUNSET BAY 4 BY IMTIAZ",
-        subtitle: "Waterfront Living In Dubai",
+         
         href: "/projects/sunset-bay-4",
         startingFrom: "AED 3.2 M",
         units: "1BR - 2BR",

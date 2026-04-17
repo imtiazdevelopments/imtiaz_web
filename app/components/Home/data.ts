@@ -141,7 +141,7 @@ export const properties = [
   {
     id: 1,
     number: "01",
-    name: "BEACH WALK GRAND 2 BY IMTIAZ",
+    name: "BEACH WALK GRAND 2 by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/1.png",
     thumbnail: "/images/home/imtiaz-properties/1.png",
@@ -149,7 +149,7 @@ export const properties = [
   {
     id: 2,
     number: "02",
-    name: "WYNWOOD HORIZON BY IMTIAZ",
+    name: "WYNWOOD HORIZON by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/2.png",
     thumbnail: "/images/home/imtiaz-properties/2.png",
@@ -157,7 +157,7 @@ export const properties = [
   {
     id: 3,
     number: "03",
-    name: "SUNSET BAY 4 BY IMTIAZ",
+    name: "SUNSET BAY 4 by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/3.png",
     thumbnail: "/images/home/imtiaz-properties/3.png",
@@ -165,7 +165,7 @@ export const properties = [
   {
     id: 4,
     number: "04",
-    name: "COVE BOULEVARD BY IMTIAZ",
+    name: "COVE BOULEVARD by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/4.png",
     thumbnail: "/images/home/imtiaz-properties/4.png",
@@ -173,7 +173,7 @@ export const properties = [
   {
     id: 5,
     number: "05",
-    name: "BEACH WALK GRAND 2 BY IMTIAZ",
+    name: "BEACH WALK GRAND 2 by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/5.png",
     thumbnail: "/images/home/imtiaz-properties/5.png",
@@ -181,7 +181,7 @@ export const properties = [
   {
     id: 6,
     number: "06",
-    name: "SUNSET BAY 3 BY IMTIAZ",
+    name: "SUNSET BAY 3 by Imtiaz",
     location: "Dubai Islands",
     image: "/images/home/imtiaz-properties/1.png",
     thumbnail: "/images/home/imtiaz-properties/1.png",
@@ -202,7 +202,7 @@ export const aboutSectionJourney = {
 
 export const heroSlides = [
   {
-    title: "SUNSET BAY 2 BY IMTIAZ",
+    title: "SUNSET BAY 2 by Imtiaz",
     video: "/videos/sunset_bay.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
@@ -221,7 +221,7 @@ export const heroSlides = [
     },
   },
   {
-    title: "SUNSET BAY 2 BY IMTIAZ",
+    title: "SUNSET BAY 2 by Imtiaz",
     video: "/videos/sunset_bay.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
@@ -308,42 +308,42 @@ export const imtiazPropertiesData = {
   properties: [
     {
       id: 1,
-      title: "LE BLANC BY IMTIAZ",
+      title: "LE BLANC by Imtiaz",
       image: "/images/home/imtiaz-properties/p1.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p3_logo.webp",
     },
     {
       id: 2,
-      title: "SUNSET BAY GRAND BY IMTIAZ",
+      title: "SUNSET BAY GRAND by Imtiaz",
       image: "/images/home/imtiaz-properties/p2.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p1_logo.svg",
     },
     {
       id: 3,
-      title: "WYNWOOD HORIZON BY IMTIAZ",
+      title: "WYNWOOD HORIZON by Imtiaz",
       image: "/images/home/imtiaz-properties/p3.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p2_logo.png",
     },
     {
       id: 4,
-      title: "LE BLANC BY IMTIAZ",
+      title: "LE BLANC by Imtiaz",
       image: "/images/home/imtiaz-properties/p1.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p3_logo.webp",
     },
     {
       id: 5,
-      title: "SUNSET BAY GRAND BY IMTIAZ",
+      title: "SUNSET BAY GRAND by Imtiaz",
       image: "/images/home/imtiaz-properties/p2.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p1_logo.svg",
     },
     {
       id: 6,
-      title: "WYNWOOD HORIZON BY IMTIAZ",
+      title: "WYNWOOD HORIZON by Imtiaz",
       image: "/images/home/imtiaz-properties/p3.jpg",
       link: "#",
       logo: "/images/home/imtiaz-properties/p2_logo.png",
@@ -490,7 +490,7 @@ export const projectsData = [
     image: "/images/home/feat-property/property1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
  
-    title: "COVE<br>BY IMTIAZ",
+    title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/cove-by-imtiaz",
     startingFrom: "AED 3.5 M",
@@ -502,7 +502,7 @@ export const projectsData = [
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",
     location: "",
-    title: "COVE<br>BY IMTIAZ",
+    title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/azure-residences", 
     startingFrom: "AED 3.5 M",
@@ -513,7 +513,7 @@ export const projectsData = [
     image: "/images/home/feat-property/property3.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
      
-    title: "Cove Edition I<br>by Imtiaz",
+    title: "Cove Edition I by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/skyline-tower", 
     startingFrom: "AED 3.5 M",
@@ -524,7 +524,7 @@ export const projectsData = [
     image: "/images/home/feat-property/property4.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     
-    title: "Cove Edition 2<br>by Imtiaz",
+    title: "Cove Edition 2 by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/palm-villas",
   }, 
@@ -534,7 +534,7 @@ export const projectsData = [
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",
     location: "",
-    title: "COVE<br>BY IMTIAZ",
+    title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/azure-residences", 
     startingFrom: "AED 3.5 M",

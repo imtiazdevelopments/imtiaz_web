@@ -289,10 +289,10 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Bottom controls ── */}
-      <div className="absolute bottom-[70px] lg:bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-[37px]">
+      <div className="absolute bottom-[70px] lg:bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-[30px]">
         {/* Tab pill */}
         <div className="p-[6px] md:p-[8px] backdrop-blur-[30px] rounded-full">
-          <div className="relative flex overflow-hidden 2xl:gap-[38.4px]">
+          <div className="relative flex overflow-hidden 2xl:gap-[29.5px]">
             <div
               className="absolute top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
               style={{

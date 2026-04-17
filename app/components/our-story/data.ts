@@ -71,7 +71,7 @@ export const awardData = {
 };
 
 export const expertiseData = {
-  title: "Expertise",
+  title: "Our Expertise",
   description:
     "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 \n million sq. ft. masterplan that seamlessly unites urban \n vibrancy with nature’s calm. ",
 };
