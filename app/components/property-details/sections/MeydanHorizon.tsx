@@ -14,7 +14,8 @@ const MeydanHorizon = () => {
   });
 
   return (
-    <section className="w-full py-[70px] lg:py-120 3xl:py-160">
+    <section className="w-full py-[70px] lg:py-120 3xl:py-160"
+      data-header="dark">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">

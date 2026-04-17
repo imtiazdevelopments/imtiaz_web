@@ -21,7 +21,8 @@ const LandpropertyCards = () => {
   const totalSlides = LandpropertyData.cards.slice(-4).length;
   const showNav = totalSlides > slidesPerView;
   return (
-    <section className="w-full">
+    <section className="w-full"
+      data-header="dark">
       <div className="container flex flex-col justify-center md:pt-100 pb-[70px] lg:pb-120 3xl:pb-160 md:border-t md:border-black/10">
         <div className="text-center">
           <SectionHeading

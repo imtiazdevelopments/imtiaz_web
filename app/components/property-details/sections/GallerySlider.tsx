@@ -50,13 +50,13 @@ function SlideContent({
         sizes="100vw"
         style={{ transform: `scale(1.15) translateY(${parallaxY}vh)` }}
       />
-      <div
+      {/* <div
         className="absolute inset-0"
         style={{
           background:
             "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.45) 100%)",
         }}
-      />
+      /> */}
       <div
         className="absolute inset-x-0 bottom-0 h-full"
         style={{
@@ -98,12 +98,12 @@ function TabSwiper({
         swiper.pagination.render();
         swiper.pagination.update();
       }}
-      autoplay={{
-        delay: 4500,
-        disableOnInteraction: false,
-        waitForTransition: false,
-        pauseOnMouseEnter: true,
-      }}
+      // autoplay={{
+      //   delay: 4500,
+      //   disableOnInteraction: false,
+      //   waitForTransition: false,
+      //   pauseOnMouseEnter: true,
+      // }}
       loop={slides.length > 1}
       speed={300}
       className="w-full h-full"
@@ -289,10 +289,10 @@ export default function GallerySlider() {
       </div>
 
       {/* ── Bottom controls ── */}
-      <div className="absolute bottom-[70px] lg:bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-[30px]">
+      <div className="absolute bottom-[70px] lg:bottom-120 3xl:bottom-130 inset-x-0 z-30 flex flex-col items-center gap-[37px]">
         {/* Tab pill */}
         <div className="p-[6px] md:p-[8px] backdrop-blur-[30px] rounded-full">
-          <div className="relative flex overflow-hidden 2xl:gap-[29.5px]">
+          <div className="relative flex overflow-hidden 2xl:gap-[38.4px]">
             <div
               className="absolute top-0 h-full w-1/2 bg-white transition-transform duration-400 ease-in-out rounded-full"
               style={{
@@ -304,13 +304,13 @@ export default function GallerySlider() {
             />
             <button
               onClick={() => setActiveTab("interior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[60px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "interior" ? "text-primary" : "text-white"}`}
             >
               Interior
             </button>
             <button
               onClick={() => setActiveTab("exterior")}
-              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[67px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
+              className={`cursor-pointer uppercase tracking-[2%] relative z-10 text-25 leading-[1.4] px-[35px] md:px-[68px] py-3 md:py-[20px] 2xl:py-[21.6px] 2xl:px-[45px] 3xl:px-[60px] font-[optima] h-[57px] md:h-[75px] transition-colors duration-300 ${activeTab === "exterior" ? "text-primary" : "text-white"}`}
             >
               Exterior
             </button>
