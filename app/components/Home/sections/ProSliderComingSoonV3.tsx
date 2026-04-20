@@ -242,11 +242,11 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           className="absolute inset-0 flex items-start justify-center overflow-y-auto   pointer-events-auto dark-section-2"
                           onWheel={(e) => e.stopPropagation()}
                           onTouchMove={(e) => e.stopPropagation()}
-                          initial={{ opacity: 0, x: 40 }}
+                          initial={{ opacity: 0, x: 0 }}
                           animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -40 }}
+                          exit={{ opacity: 0, x: 0 }}
                           transition={{
-                            duration: 0.25,
+                            duration: 0.35,
                             ease: [0.25, 1, 0.5, 1],
                           }}
                         >
