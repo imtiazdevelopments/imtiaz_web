@@ -90,7 +90,7 @@ export default function FloatingMobileIcons() {
         }}
         className="w-[45px] h-[45px] rounded-full bg-foreground-light/60 text-white backdrop-blur-[20px] flex items-center justify-center cursor-pointer"
       >
-        +
+        <Image src={'images/icons/iconshare.svg'} alt="share" width={22} height={22}  className="brightness-0 invert-100"/>
       </div>
     </div>
     </>
