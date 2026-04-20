@@ -12,7 +12,7 @@ import AuthSlider from "../../auth/AuthSlider";
 import CareerForm from "../../auth/CareerForm";
 import Image from "next/image";
 
-type AuthView = "login" | "signup";
+type AuthView = "career";
 
 type jobDetail = {
   title: string;
@@ -23,7 +23,7 @@ interface Props {
   jobDescription: jobDetail;
 }
 
-const BlogHero = ({ jobDescription }: Props) => { 
+const CareerHero = ({ jobDescription }: Props) => { 
 
     const [authView, setAuthView] = useState<AuthView | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -66,7 +66,7 @@ const BlogHero = ({ jobDescription }: Props) => {
           className="w-fit"
         >
         <CustomOutlineButton
-                    onClick={() => setAuthView("login")}
+                    onClick={() => setAuthView("career")}
             className="w-fit uppercase 3xl:py-[23px] 3xl:px-[45.07px]"
             text="Apply now"
             borderColor="border-primary-2"
@@ -209,7 +209,7 @@ const BlogHero = ({ jobDescription }: Props) => {
                            
                             <CareerForm
                               onClose={closeAuth}
-                              onSwitch={() => setAuthView("login")}
+                              onSwitch={() => setAuthView("career")}
                             /> 
                         </motion.div>
                       </AnimatePresence>
@@ -226,4 +226,4 @@ const BlogHero = ({ jobDescription }: Props) => {
   );
 };
 
-export default BlogHero;
+export default CareerHero;
