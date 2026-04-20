@@ -13,10 +13,12 @@ interface OutlineButtonProps {
   minWidth?: boolean;
   icondownload?: boolean;
   iconColor?: string;
+  icon360?: boolean;
 }
 
 const CustomIconButton = ({
   icondownload = false,
+  icon360 = false,
   iconColor,
   className,
   text,
@@ -51,6 +53,19 @@ const CustomIconButton = ({
             alt="download"
             width={24}
             height={24}
+            className={`relative z-20 ${
+              iconColor === "dark"
+                ? "brightness-100 invert-0 group-hover:brightness-0 group-hover:invert"
+                : "brightness-0 invert "
+            }`}
+          />
+        )}
+        {icon360 && (
+          <Image
+            src="/images/icons/icon360.svg"
+            alt="download"
+            width={30}
+            height={30}
             className={`relative z-20 ${
               iconColor === "dark"
                 ? "brightness-100 invert-0 group-hover:brightness-0 group-hover:invert"

@@ -7,9 +7,10 @@ export type ProjectCardType = {
   status?: string;
   location?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   href?: string;
   startingFrom?: string;
   units?: string;
+  button360?:boolean;
   setActiveProject?:Dispatch<SetStateAction<string>>
 };

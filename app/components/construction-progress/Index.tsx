@@ -1,12 +1,13 @@
-import InnerHeroBanner from "../common/InnerHeroBanner";
-import { bannerData } from "./data";
-import Main from "./sections/Main";
+  
+import EventHero from "./sections/EventHero";
+import ConstructionProgress from "./sections/ConstructionProgress";
+ 
  
 const Index = () => {
   return (
-    <>
-      <InnerHeroBanner {...bannerData} maxTitle="max-w-[73ch]" /> 
-    {/* <Main /> */}
+    <>  
+      <EventHero />
+     <ConstructionProgress />
     </>
   );
 };

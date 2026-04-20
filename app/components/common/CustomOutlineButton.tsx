@@ -11,13 +11,11 @@ interface OutlineButtonProps {
   variant?: "light" | "dark";
   className?: string;
   minWidth?: boolean;
-  icondownload?: boolean;
-  iconColor?: string;
+    
 }
 
 const CustomOutlineButton = ({
-  icondownload = false,
-  iconColor,
+    
   className,
   text,
   borderColor = "border-white/90",
@@ -45,19 +43,7 @@ const CustomOutlineButton = ({
     >
       {/* Left fill */}
       <div className="flex items-center gap-[10px] 2xl:gap-[10px]">
-        {icondownload && (
-          <Image
-            src="/icons/download.svg"
-            alt="download"
-            width={24}
-            height={24}
-            className={`relative z-20 ${
-              iconColor === "dark"
-                ? "brightness-100 invert-0 group-hover:brightness-0 group-hover:invert"
-                : "brightness-0 invert "
-            }`}
-          />
-        )}
+       
         <span
           className={`absolute inset-y-0 left-0 w-[50%] ${fillColor} transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
         />

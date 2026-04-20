@@ -1,12 +1,12 @@
 import AboutJob from "./sections/AboutJob";
-import BlogHero from "./sections/BlogHero";
+import CareerHero from "./sections/CareerHero";
 import JobSpecifications from "./sections/JobSpecifications";
 import {  jobDescription, jobSpecifications ,aboutJob} from "./data"; 
 
 const Index = () => {
   return (
     <>
-      <BlogHero jobDescription={jobDescription} />
+      <CareerHero jobDescription={jobDescription} />
       <JobSpecifications jobSpecs={jobSpecifications} />
       <AboutJob data={aboutJob} /> 
     </>
