@@ -111,7 +111,7 @@ export default function OnboardingIndex({
       </div>
 
       {/* ── RIGHT: static container ── */}
-      <div className="flex flex-1 flex-col overflow-hidden bg-white py-100 px-70">
+      <div className="flex flex-1 flex-col overflow-hidden bg-white pt-100 px-70">
         {/* Tab switcher — never scrolls */}
         <div className="inline-flex self-start rounded-full h-[70px] max-w-[565px] bg-primary/5 mb-70">
           {(["agency", "individual"] as Tab[]).map((t) => (
@@ -144,7 +144,7 @@ export default function OnboardingIndex({
                     ? onAgencyStepChange(s.key as AgencyStep)
                     : onIndividualStepChange(s.key as IndividualStep)
                 }
-                className={`flex items-center gap-1.5 pb-[14px] text-description transition-all cursor-pointer ${
+                className={`flex items-center gap-[10px] pb-[14px] text-description transition-all cursor-pointer ${
                   isActive
                     ? "border-b-[3px] border-primary"
                     : isCompleted
@@ -154,20 +154,8 @@ export default function OnboardingIndex({
               >
                 {s.label}
                 {isCompleted && (
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#6b1a2a]">
-                    <svg
-                      className="h-2.5 w-2.5 text-white"
-                      fill="none"
-                      viewBox="0 0 10 10"
-                    >
-                      <path
-                        d="M2 5l2.5 2.5L8 3"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
+                    <Image src="/icons/check.svg" alt="Imtiaz" width={20} height={20} priority className="h-[7.2px] w-auto" />
                   </span>
                 )}
               </button>
@@ -176,7 +164,7 @@ export default function OnboardingIndex({
         </div>
 
         {/* ── Form slot — only this scrolls ── */}
-        <div data-lenis-prevent className="flex-1 overflow-y-auto mt-70">
+        <div data-lenis-prevent className="flex-1 overflow-y-auto mt-70 pb-100">
           {/* Agency forms */}
           {tab === "agency" && agencyStep === "company" && (
             <CompanyInformation
