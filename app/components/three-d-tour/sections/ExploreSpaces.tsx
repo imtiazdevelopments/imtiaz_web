@@ -9,7 +9,7 @@ import { SectionDescription } from "../../animations/SectionDescription";
      data-header="dark" 
     > 
 <div className="container">
-  <div className="flex flex-col justify-center items-center mb-50">
+  <div className="flex flex-col justify-center items-center mb-[50px]">
     <SectionHeading
             title={'Explore Spaces with Confidence'}
             className="text-heading  text-foreground mb-20 text-center  "

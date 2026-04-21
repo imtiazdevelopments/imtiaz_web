@@ -114,7 +114,7 @@ const handleCardClick = () => {
             )}
           </h3>
             <div
-              className={`w-full h-px my-3 xl:my-[20px] transition-transform duration-900  `}
+              className={`w-full h-px my-[10px] xl:my-[20px] transition-transform duration-900  `}
               style={{
                 background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
@@ -130,7 +130,7 @@ const handleCardClick = () => {
                 <CustomIconButton
                   text="SEE 360 VIEW"
                   icon360={true}
-                  px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px] cursor-pointer"
+                  px="!py-[9px] 3xl:!py-[17.5px] 3xl:py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px] cursor-pointer"
                   className=" "
                 /> 
               ):

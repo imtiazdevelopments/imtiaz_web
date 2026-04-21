@@ -905,3 +905,13 @@ input:-webkit-autofill:active {
     width: 190px !important;
     }
 }
+@media (max-width: 768px) {
+  .h-media {
+    height: 30px;
+  }
+}@media (max-width: 429px) {
+  .h-media {
+    height: 20px;
+  }
+  .csmtst{margin-top: 5px;}
+}
