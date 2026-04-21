@@ -3,7 +3,6 @@
 import type {
   AgencyFormData,
   AgencyStep,
-  CompanyInformationData,
   IndividualStep,
   Tab,
 } from "@/app/onboarding/page";
@@ -11,6 +10,10 @@ import Image from "next/image";
 import Link from "next/link";
 import CompanyInformation from "./sections/Agency/CompanyInformation";
 import SignatoryDetails from "./sections/Agency/SignatoryDetails";
+import BrokerDetails from "./sections/Agency/BrokerDetails";
+import BankInfo from "./sections/Agency/BankInfo";
+import Documents from "./sections/Agency/Documents";
+import PreviewSubmit from "./sections/Agency/PreviewSubmit";
 
 interface OnboardingIndexProps {
   tab: Tab;
@@ -23,6 +26,7 @@ interface OnboardingIndexProps {
   completedIndividualSteps: IndividualStep[];
   onStepComplete: (step: AgencyStep | IndividualStep) => void;
   agencyFormData: AgencyFormData;
+  onAgencyFormDataChange: (updated: AgencyFormData) => void;
   onSaveAgencyStepData: <K extends keyof AgencyFormData>(
     step: K,
     data: AgencyFormData[K],
@@ -56,6 +60,7 @@ export default function OnboardingIndex({
   completedIndividualSteps,
   onStepComplete,
   agencyFormData,
+  onAgencyFormDataChange,
   onSaveAgencyStepData,
 }: OnboardingIndexProps) {
   const steps = tab === "agency" ? AGENCY_STEPS : INDIVIDUAL_STEPS;
@@ -113,7 +118,7 @@ export default function OnboardingIndex({
             <button
               key={t}
               onClick={() => onTabChange(t)}
-              className={`rounded-full px-90 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-all ${
+              className={`rounded-full px-90 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-all cursor-pointer ${
                 tab === t ? "bg-primary text-white" : "text-foreground"
               }`}
             >
@@ -139,7 +144,7 @@ export default function OnboardingIndex({
                     ? onAgencyStepChange(s.key as AgencyStep)
                     : onIndividualStepChange(s.key as IndividualStep)
                 }
-                className={`flex items-center gap-1.5 pb-[14px] text-description transition-all ${
+                className={`flex items-center gap-1.5 pb-[14px] text-description transition-all cursor-pointer ${
                   isActive
                     ? "border-b-[3px] border-primary"
                     : isCompleted
@@ -195,16 +200,45 @@ export default function OnboardingIndex({
             />
           )}
           {tab === "agency" && agencyStep === "broker" && (
-            <div>Broker Details form</div>
+            <BrokerDetails
+              savedData={agencyFormData.broker}
+              onPrev={() => onAgencyStepChange("signatory")}
+              onNext={(data) => {
+                onSaveAgencyStepData("broker", data);
+                onStepComplete("broker");
+                onAgencyStepChange("bank");
+              }}
+            />
           )}
           {tab === "agency" && agencyStep === "bank" && (
-            <div>Bank Info form</div>
+            <BankInfo
+              savedData={agencyFormData.bank}
+              onPrev={() => onAgencyStepChange("broker")}
+              onNext={(data) => {
+                onSaveAgencyStepData("bank", data);
+                onStepComplete("bank");
+                onAgencyStepChange("documents");
+              }}
+            />
           )}
           {tab === "agency" && agencyStep === "documents" && (
-            <div>Documents form</div>
+            <Documents
+              savedData={agencyFormData.documents}
+              onPrev={() => onAgencyStepChange("bank")}
+              onNext={(data) => {
+                onSaveAgencyStepData("documents", data);
+                onStepComplete("documents");
+                onAgencyStepChange("submit");
+              }}
+            />
           )}
           {tab === "agency" && agencyStep === "submit" && (
-            <div>Submit form</div>
+            <PreviewSubmit
+              agencyFormData={agencyFormData}
+              onAgencyFormDataChange={onAgencyFormDataChange}
+              onPrev={() => onAgencyStepChange("documents")}
+              onSubmit={() => console.log("Final submit", agencyFormData)}
+            />
           )}
 
           {/* Individual forms */}

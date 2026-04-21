@@ -160,7 +160,7 @@ export default function FormDatePicker({
               ease: [0.76, 0, 0.24, 1],
               opacity: { duration: 0.3, ease: "easeIn" },
             }}
-            className="absolute top-[calc(80%)] left-0 z-50 w-full min-w-[280px] overflow-hidden rounded-[12px] border border-white/50 bg-gray-100 p-3"
+            className="absolute top-[calc(80%)] left-0 z-50 w-full min-w-[280px] max-w-[300px] overflow-hidden rounded-[12px] border border-white/50 bg-gray-100 p-3"
             onWheel={(e) => e.stopPropagation()}
           >
             {/* Month/Year navigation */}
@@ -235,7 +235,7 @@ export default function FormDatePicker({
       </AnimatePresence>
 
       {/* Reserved error space */}
-      <p className="mt-1 min-h-[16px] text-[12px] text-red-400">
+      <p className="mt-[2px] min-h-[16px] text-[12px] text-red-400">
         {error ?? ""}
       </p>
     </div>

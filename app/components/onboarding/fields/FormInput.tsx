@@ -35,7 +35,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         </div>
 
         {/* Reserved error space */}
-        <p className="mt-1 min-h-[16px] text-[12px] text-red-400">{error ?? ""}</p>
+        <p className="mt-[2px] min-h-[16px] text-[12px] text-red-400">{error ?? ""}</p>
       </div>
     );
   },

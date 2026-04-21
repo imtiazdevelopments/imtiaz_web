@@ -60,10 +60,47 @@ export interface SignatoryDetailsData {
   authSignatoryCardExpiry: string;
 }
 
+export interface BrokerEntry {
+  name: string; email: string; countryCode: string;
+  signatoryCardNo: string; signatoryCardExpiry: string;
+}
+export interface BrokerDetailsData {
+  brokers: BrokerEntry[];
+}
+
+export interface BankInfoData {
+  bankDetailAvailable: string;
+  bankName: string;
+  bankAccountNo: string;
+  beneficiaryName: string;
+  ibanNo: string;
+  swiftCode: string;
+  currency: string;
+  bankBranchName: string;
+  bankAddress: string;
+}
+
+export interface DocumentsData {
+  tradeLicense: File | null;
+  visaOwner: File | null;
+  eidOwner: File | null;
+  passportCopyOwner: File | null;
+  nonVatDeclaration: File | null;
+  passportCopySignatory: File | null;
+  visaSignatory: File | null;
+  eidSignatory: File | null;
+  vatCertificate: File | null;
+  moaPoa: File | null;
+  bankDetailsLetterHead: File | null;
+  otherDocuments: File | null;
+}
+
 export interface AgencyFormData {
   company?: Partial<CompanyInformationData>
-    signatory?: Partial<SignatoryDetailsData>;
-  // add more steps here as you build them
+  signatory?: Partial<SignatoryDetailsData>;
+  broker?: Partial<BrokerDetailsData>; 
+  bank?: Partial<BankInfoData>; 
+  documents?: Partial<DocumentsData>; 
 }
 
 export default function OnboardingPage() {
@@ -100,6 +137,10 @@ export default function OnboardingPage() {
     }
   }
 
+  const handleAgencyFormDataChange = (updated: AgencyFormData) => {
+  setAgencyFormData(updated);
+};
+
 const saveAgencyStepData = <K extends keyof AgencyFormData>(step: K, data: AgencyFormData[K]) => {
   setAgencyFormData(prev => ({ ...prev, [step]: data }))
 }
@@ -116,6 +157,7 @@ const saveAgencyStepData = <K extends keyof AgencyFormData>(step: K, data: Agenc
       completedIndividualSteps={completedSteps.individual}
       onStepComplete={markStepComplete}
       agencyFormData={agencyFormData}
+      onAgencyFormDataChange={handleAgencyFormDataChange}
       onSaveAgencyStepData={saveAgencyStepData}
     />
   )

@@ -52,7 +52,7 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
       <h2 className="text-heading text-primary mb-50">Signatory Details</h2>
 
       {/* ── OWNER DETAILS ── */}
-      <h3 className="text-description uppercase tracking-widest text-foreground mb-30">
+      <h3 className="text-25 font-[optima] leading-[1.4] mb-30 uppercase -tracking-[0.02em]">
         Owner Details
       </h3>
 
@@ -148,7 +148,7 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
       </div>
 
       {/* Row 4 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-[10px]">
         <FormInput
           placeholder="Owner Email"
           type="email"
@@ -178,14 +178,14 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
       </div>
 
       {/* Checkbox */}
-      <div className="mb-50">
-        <label className="flex items-center gap-10 cursor-pointer select-none">
+      <div className="mb-100">
+        <label className="flex items-center gap-[10px] cursor-pointer select-none">
           <input
             type="checkbox"
             className="h-[18px] w-[18px] accent-primary cursor-pointer"
             {...register("ownerAndSignatoryAreSame")}
           />
-          <span className="text-description text-foreground">
+          <span className="text-description text-foreground-light pt-[3px]">
             Owner and Authorized Signatory are Same
           </span>
         </label>
@@ -194,11 +194,11 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
       {/* ── AUTHORIZED SIGNATORY DETAILS (hidden when checkbox is ticked) ── */}
       {!sameAsOwner && (
         <>
-          <h3 className="text-description uppercase tracking-widest text-foreground mb-30">
+          <h3 className="text-25 font-[optima] leading-[1.4] mb-30 uppercase -tracking-[0.02em]">
             Authorized Signatory Details
           </h3>
 
-          {/* Row 1 */}
+          {/* Row 1 — 3 cols */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
             <FormInput
               placeholder="Authorized Signatory First Name"
@@ -217,8 +217,8 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
             />
           </div>
 
-          {/* Row 2 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
+          {/* Row 2 — 2 cols: EID Expiry + Passport No */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-60 gap-y-30 mb-40">
             <Controller
               name="authEidExpiry"
               control={control}
@@ -237,6 +237,10 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
               {...register("authPassportNo", { required: "Required" })}
               error={errors.authPassportNo?.message}
             />
+          </div>
+
+          {/* Row 3 — 2 cols: Passport Expiry + Country Code */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-60 gap-y-30 mb-40">
             <Controller
               name="authPassportExpiry"
               control={control}
@@ -250,10 +254,6 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
                 />
               )}
             />
-          </div>
-
-          {/* Row 3 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
             <Controller
               name="authCountryCode"
               control={control}
@@ -268,6 +268,10 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
                 />
               )}
             />
+          </div>
+
+          {/* Row 4 — 3 cols: Mobile + Nationality + Email */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
             <FormInput
               placeholder="Authorized Signatory Mobile"
               {...register("authMobile", { required: "Required" })}
@@ -287,10 +291,6 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
                 />
               )}
             />
-          </div>
-
-          {/* Row 4 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
             <FormInput
               placeholder="Authorized Signatory Email"
               type="email"
@@ -300,6 +300,10 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
               })}
               error={errors.authEmail?.message}
             />
+          </div>
+
+          {/* Row 5 — 2 cols: Card No + Card Expiry */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-60 gap-y-30 mb-40">
             <FormInput
               placeholder="Authorized Signatory Card No"
               {...register("authSignatoryCardNo")}

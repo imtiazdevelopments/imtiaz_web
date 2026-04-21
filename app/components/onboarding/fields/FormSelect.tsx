@@ -136,7 +136,7 @@ export default function FormSelect({
       </AnimatePresence>
 
       {/* Reserved error space */}
-      <p className="mt-1 min-h-[16px] text-xs text-red-400">{error ?? ""}</p>
+      <p className="mt-[2px] min-h-[16px] text-xs text-red-400">{error ?? ""}</p>
     </div>
   );
 }
