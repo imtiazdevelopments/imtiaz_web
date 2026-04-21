@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LenisProvider>
           <FloatingRightIcons />
           {children}
-          <InnerFooter />
+          {/* <InnerFooter /> */}
         </LenisProvider>
       </body>
     </html>

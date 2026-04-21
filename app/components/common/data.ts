@@ -75,7 +75,7 @@ export const footerData = {
 
 type FooterV2Column = {
   heading: string;
-items: { label: string; link: string }[];
+  items: { label: string; link: string }[];
 };
 
 type FooterV2Data = {
@@ -107,11 +107,20 @@ export const footerV2Data: FooterV2Data = {
       heading: "COMMUNITIES",
       items: [
         { label: "Dubai Islands", link: "/communities/dubai-islands" },
-        { label: "Meydan Horizon Community", link: "/communities/meydan-horizon" },
+        {
+          label: "Meydan Horizon Community",
+          link: "/communities/meydan-horizon",
+        },
         { label: "JVC Community", link: "/communities/jvc" },
         { label: "Al Furjan Community", link: "/communities/al-furjan" },
-        { label: "Jumeirah Garden City", link: "/communities/jumeirah-garden-city" },
-        { label: "Dubai Land Residence Complex", link: "/communities/dubai-land-residence-complex" },
+        {
+          label: "Jumeirah Garden City",
+          link: "/communities/jumeirah-garden-city",
+        },
+        {
+          label: "Dubai Land Residence Complex",
+          link: "/communities/dubai-land-residence-complex",
+        },
       ],
     },
     {
@@ -154,11 +163,9 @@ export const footerV2Data: FooterV2Data = {
         { label: "Events", link: "/media-center/events" },
       ],
     },
-        {
+    {
       heading: "TRENDING SEARCHES",
-      items: [
-        { label: "Off Plan Properties", link: "/off-plan-properties" },
-      ],
+      items: [{ label: "Off Plan Properties", link: "/off-plan-properties" }],
     },
   ],
 
@@ -227,30 +234,47 @@ export const menuItems: MenuItem[] = [
 export const subMenuItems = {
   about: [
     { id: "our-story", label: "OUR STORY", href: "/about/our-story" },
-    { id: "sustainability", label: "SUSTAINABILITY", href: "/about/sustainability" },
+    {
+      id: "sustainability",
+      label: "SUSTAINABILITY",
+      href: "/about/sustainability",
+    },
     { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
-    { id: "investor", label: "INVESTOR RELATIONS", href: "/media-center/investor-relations" },
+    {
+      id: "investor",
+      label: "INVESTOR RELATIONS",
+      href: "/media-center/investor-relations",
+    },
   ],
 
   communities: [
     { id: "Al-furjan", label: "Al Furjan", href: "/#" },
-    { id: "dubai-islands", label: "Dubai Islands", href: "/communities/dubai-islands" },
-    { id: "dubai-land-residence-complex", label: "Dubai Land Residence Complex", href: "/#" },
+    {
+      id: "dubai-islands",
+      label: "Dubai Islands",
+      href: "/communities/dubai-islands",
+    },
+    {
+      id: "dubai-land-residence-complex",
+      label: "Dubai Land Residence Complex",
+      href: "/#",
+    },
     { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/#" },
     { id: "jvc", label: "JVC", href: "/#" },
-    { id: "allcommunities", label: "View All Communities", href: "/communities" },
+    {
+      id: "allcommunities",
+      label: "View All Communities",
+      href: "/communities",
+    },
   ],
 
   properties: [
- 
     {
       id: "Alfurjan",
       label: "Al Furjan",
-      children: [
-        { id: "res-1", label: "Westwood", href: "/#" }, 
-      ],
+      children: [{ id: "res-1", label: "Westwood", href: "/#" }],
     },
- 
+
     {
       id: "dubaiislands",
       label: "Dubai Islands",
@@ -259,7 +283,7 @@ export const subMenuItems = {
         { id: "Dubai-2", label: "Beach Walk Residence II", href: "/#" },
         { id: "Dubai-3", label: "Beach Walk II", href: "/#" },
       ],
-    }, 
+    },
     {
       id: "dubai-complex",
       label: "Dubai Land Residence Complex",
@@ -268,31 +292,30 @@ export const subMenuItems = {
         { id: "lux-2", label: "Cove by Imtiaz", href: "/#" },
         { id: "lux-3", label: "Beach Walk III", href: "/#" },
       ],
-    }, 
+    },
     {
       id: "jumeirahcity",
       label: "Jumeirah Garden City",
-      children: [
-        { id: "jumeirahcity-1", label: "Hyde Walk", href: "/#" }, 
-      ],
-    }, 
+      children: [{ id: "jumeirahcity-1", label: "Hyde Walk", href: "/#" }],
+    },
     {
       id: "JVC",
       label: "JVC",
       children: [
-        { id: "jvc-1", label: "Pearl House", href: "/#" }, 
-        { id: "jvc-2", label: "Pearl House II", href: "/#" }, 
-        { id: "jvc-13", label: "Pearl House III", href: "/#" }, 
-        { id: "jvc-3", label: "Westwood Grande", href: "/#" }, 
-        { id: "jvc-4", label: "Westwood Grande II", href: "/#" }, 
-        { id: "jvc-5", label: "Luxor", href: "/#" }, 
+        { id: "jvc-1", label: "Pearl House", href: "/#" },
+        { id: "jvc-2", label: "Pearl House II", href: "/#" },
+        { id: "jvc-13", label: "Pearl House III", href: "/#" },
+        { id: "jvc-3", label: "Westwood Grande", href: "/#" },
+        { id: "jvc-4", label: "Westwood Grande II", href: "/#" },
+        { id: "jvc-5", label: "Luxor", href: "/#" },
       ],
-    }, 
+    },
     {
       id: "all",
       label: "ALL PROPERTIES",
       href: "/properties",
     },
+    { id: "3d-view", label: "3D View", href: "/3d-tour" },
   ],
 
   media: [
@@ -331,7 +354,7 @@ export const subMenuItems = {
 //     { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/communities/jumeirah-garden-city" },
 //     { id: "jvc", label: "JVC", href: "/communities/jvc" },
 //     { id: "allcommunities", label: "View All Communities", href: "/communities/allcommunities" },
-    
+
 //   ],
 //   properties: [
 //     { id: "all", label: "ALL PROPERTIES", href: "/properties" },

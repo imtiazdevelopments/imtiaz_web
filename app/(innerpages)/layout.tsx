@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useLenis } from "../contexts/LenisContext";
 import InnerHeader from "../components/layout/InnerHeader";
+import InnerFooter from "../components/layout/InnerFooter";
 
 export default function InnerLayout({
   children,
@@ -19,6 +20,7 @@ export default function InnerLayout({
     <>
       <InnerHeader />
       {children}
+      <InnerFooter />
     </>
   );
 }
