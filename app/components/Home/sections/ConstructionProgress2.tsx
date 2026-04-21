@@ -127,7 +127,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
         </div>
         <div className="overflow-hidden">
           <div className="anim-item">
-            <Link href="/properties/property-details">
+            <Link href="/construction-progress-listing">
               <CustomOutlineButton
                 text={data.button.label}
                 px="px-[30px] 3xl:px-[40.4px] mx-auto h-[50px] md:h-[66px]"
