@@ -34,13 +34,13 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-[10px] pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-[4.8px] md:mt-[10px] pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const labelClass =
   "block text-description 2xl:leading-[1.75] text-foreground-light/50 transition-colors group-focus-within:text-foreground-light";
 
 const ErrorSlot = ({ msg }: { msg?: string }) => (
-  <p className="text-[14px] text-[#c0392b] pt-2 h-20">{msg ?? "\u00A0"}</p>
+  <p className="text-[14px] text-[#c0392b] md:pt-2 h-media md:h-20">{msg ?? "\u00A0"}</p>
 );
 
 // Tab Button Component
@@ -64,7 +64,7 @@ const TabButton = ({ label, isActive, onClick }: TabButtonProps) => {
 };
 
 // Book a Viewing Component
-const BookViewing = () => {
+const BookViewing = ({ formHeight }: { formHeight: number }) => {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -91,9 +91,11 @@ const BookViewing = () => {
       transition={{ duration: 0.4 }}
       className="w-full"
     >
-      <div className="relative w-full h-full">
-  <div className="absolute top-1/2 left-0 w-full translate-y-1/2 flex justify-center">
+      <div className="relative w-full  " style={{ height: `${formHeight}px` }}
+ >
+  <div className="absolute top-0 left-0 w-full  translate-y-1/2 flex justify-center ">
     <div className="flex flex-col items-center text-center  ">
+       
              <SectionHeading
                      title={'Book a Viewing'}
                      className="text-heading  text-foreground mb-20 text-center  "
@@ -127,7 +129,26 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const whiteBoxRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+const [divHeight, setDivHeight] = useState(0);
 
+  useEffect(() => {
+    if (backgroundRef.current) {
+      const height = backgroundRef.current.offsetHeight;
+      setDivHeight(height);
+    }
+  }, []);
+
+  // Listen for window resize to recalculate height
+  useEffect(() => {
+    const handleResize = () => {
+      if (backgroundRef.current) {
+        setDivHeight(backgroundRef.current.offsetHeight);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Handle click outside white box to close
   useEffect(() => {
@@ -200,21 +221,32 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
     console.log("Form Data:", data);
     console.log("Resume File:", data.resume);
   };
+const [rows, setRows] = useState(3);
 
+useEffect(() => {
+  const handleResize = () => {
+    setRows(window.innerWidth < 768 ? 2 : 3);
+  };
+  
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
   return (
     <>
       {/* Close btn */}
-      <div className="px-3 py-60 3xl:pt-[77px] 3xl:pb-[111px]  md:px-60 3xl:px-0 h-full w-full">  <div 
+      <div className="px-3 py-5  md:px-60 3xl:px-0 h-full w-full">  <div 
         ref={containerRef} 
         onClick={onClose}
       > </div>
-        <div  ref={whiteBoxRef} className="w-full bg-white w-[95%] lg:w-[800px] mx-auto h-full overflow-scroll relative flex flex-col self-center 3xl:self-end p-4 md:p-10 items-center">
+      <div className="flex h-full items-center justify-center">
+          <div  ref={whiteBoxRef} className="w-full h-fit justify-center bg-white w-[95%] lg:w-[800px] mx-auto  overflow-scroll relative flex flex-col self-center   p-7 px-5 md:p-10 items-center">
           {/* Tabs */}
           <motion.div
   initial={{ opacity: 0, y: -20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
-  className="relative flex justify-center mb-30 bg-primary/5 rounded-full w-full lg:w-[567px] min-h-[55px] lg:min-h-[70px] overflow-hidden"
+  className="relative flex justify-center mb-5 md:mb-30 bg-primary/5 rounded-full w-full lg:w-[567px] min-h-[55px] lg:min-h-[70px] overflow-hidden"
 >
   {/* 🔥 Sliding Background */}
   <motion.div
@@ -245,7 +277,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="w-full"
+            className="w-full dddd"
           >
             <AnimatePresence mode="wait">
               {activeTab === "enquiry" ? (
@@ -253,8 +285,8 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                   <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full">
                       {/* First + Last name */}
-                      <div className="grid grid-cols-2 gap-40 sm:gap-70 3xl:gap-100">
-                        <label htmlFor="firstName" className="group cursor-text block mt-30">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-70 3xl:gap-100">
+                        <label htmlFor="firstName" className="group cursor-text block md:mt-30">
                           <span className={labelClass}>First name*</span>
                           <input
                             id="firstName"
@@ -266,7 +298,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                           <ErrorSlot msg={errors.firstName?.message} />
                         </label>
 
-                        <label htmlFor="lastName" className="group cursor-text block mt-30">
+                        <label htmlFor="lastName" className="group cursor-text block md:mt-30">
                           <span className={labelClass}>Last name*</span>
                           <input
                             id="lastName"
@@ -282,7 +314,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                       {/* Email + Phone */}
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-40 lg:gap-x-70 3xl:gap-x-100">
                         <label htmlFor="email" className="group cursor-text block">
-                          <span className="block text-description 2xl:leading-[1.75] mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                          <span className="block text-description 2xl:leading-[1.75] md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                             Email*
                           </span>
                           <input
@@ -302,7 +334,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                         </label>
 
                         <label htmlFor="phone" className="group cursor-text block">
-                          <span className="block text-description mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                          <span className="block text-description md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                             Enter Phone no*
                           </span>
                           <div className="flex items-end mt-[10px] gap-2">
@@ -330,7 +362,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
 
                       {/* Country */}
                       <div>
-                        <label htmlFor="applyPosition" className="group cursor-text mt-30 block">
+                        <label htmlFor="applyPosition" className="group cursor-text md:mt-30 block">
                           <span className={labelClass}>Country*</span>
                           <select
                             id="applyPosition"
@@ -349,18 +381,18 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
 
                       {/* Message */}
                       <label htmlFor="signupPassword" className="group cursor-text block">
-                        <span className="block text-description mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+                        <span className="block text-description md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
                           Add a message*
                         </span>
-                        <div className="relative mt-[8px]">
-                          <textarea 
-                            className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
-                            rows={3}
-                            {...register("password", {
-                              required: "Message is required",
-                              minLength: { value: 6, message: "Minimum 6 characters" },
-                            })}
-                          />
+                        <div className="relative mt-[5px] md:mt-[8px]">
+                           <textarea 
+                          className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
+                          rows={rows}
+                          {...register("password", {
+                            required: "Message is required",
+                            minLength: { value: 6, message: "Minimum 6 characters" },
+                          })}
+                        />
                         </div>
                         <FieldLine hasError={!!errors.password} />
                         <p className="text-[12px] text-[#c0392b] pt-2 h-20">
@@ -369,9 +401,9 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                       </label>
 
                       {/* Submit */}
-                      <div className="mt-40">
+                      <div className="csmtst mt-40 w-fit mx-auto">
                         <CustomOutlineButton
-                          px="px-[12px] lg:px-[23px] 3xl:px-[48px] 3xl:py-[23px]"
+                          px="py-[16px] px-[33px] lg:px-[23px] 3xl:px-[48px] 3xl:py-[23px]"
                           text="Submit"
                           borderColor="border-primary-2"
                           textColor="text-foreground-light"
@@ -383,12 +415,13 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                 </div>
               ) : (
                 <div key="viewing" className="w-full">
-                  <BookViewing />
+                  <BookViewing formHeight={divHeight}  />
                 </div>
               )}
             </AnimatePresence>
           </motion.div>
         </div>
+      </div>
       </div>
     </>
   );

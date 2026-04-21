@@ -110,7 +110,7 @@ const TabButton = ({ year, isActive, onClick }: TabButtonProps) => {
     //   {year}
     // </motion.button>
     <button 
-   onClick={onClick} className={`min-w-[100px] md:min-w-[136px] min-h-[45px] md:min-h-[58px] cursor-pointer flex items-center justify-center group relative transition-all duration-300 undefined overflow-hidden px-[12px] sm:px-[26px]
+   onClick={onClick} className={`min-w-[96px] md:min-w-[136px] min-h-[50px] md:min-h-[58px] cursor-pointer flex items-center justify-center group relative transition-all duration-300 undefined overflow-hidden px-[12px] sm:px-[26px]
     xl:px-[37px] py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border  text-foreground-light font-[avenirBook] text-[16px] md:text-[19px] leading-[100%]  ${
         isActive
            ? "border-white"
@@ -169,7 +169,7 @@ const MonthCard = ({ monthData, index }: MonthCardProps) => {
     >
       <div className="bg-white   overflow-hidden  ">
         {/* Swiper Slider for Images */}
-        <div className="relative   h-[400px] lg:h-[500px]  3xl:h-[582px] overflow-hidden">
+        <div className="relative   h-[344px] md:h-[400px] lg:h-[500px]  3xl:h-[582px] overflow-hidden">
          <Swiper
                      modules={[Navigation, Pagination, EffectFade]}
                      effect="fade"
@@ -264,10 +264,19 @@ const MonthCard = ({ monthData, index }: MonthCardProps) => {
         </div>
 
         {/* Month Info */}
-        <div className="mt-20 flex justify-between items-center">
+        <div className="mt-[10px] md:mt-20 flex justify-between md:items-center">
           <h3 className="text-25 text-foreground leading-[1.4]">
-            {monthData.date}
-          </h3>
+  {/* Mobile: First two words stacked */}
+  <span className="block md:hidden">
+    <div>{monthData.date.split(' ')[0]}</div>
+    <div>{monthData.date.split(' ')[1]}</div>
+  </span>
+  
+  {/* Desktop: Full text */}
+  <span className="hidden md:block">
+    {monthData.date}
+  </span>
+</h3>
           <p className="text-description text-foreground-lite opacity-80">{monthData.location}</p>
         </div>
       </div>
@@ -285,14 +294,14 @@ export default function ConstructionProgress() {
   
 
   return (
-    <section className="w-full   py-120 3xl:pb-160 3xl:pt-100" data-header="dark" >
+    <section className="w-full  pt-[40px] md:pt-120 pb-[70px] md:pb-120 3xl:pb-160 3xl:pt-100" data-header="dark" >
       <div className="container mx-auto px-4 md:px-6">
         {/* Year Tabs */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex justify-center gap-4 mb-50 py-20 border-b border-t border-black/10"
+          className="flex justify-center gap-5 md:gap-4 mb-[40px] lg:mb-50 py-20 border-b border-t border-black/10"
         >
           {constructionData.map((year) => (
             <TabButton
@@ -313,7 +322,7 @@ export default function ConstructionProgress() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-2  gap-x-50 gap-y-[30px] md:gap-y-50 3xl:gap-y-70"
+              className="grid grid-cols-1 md:grid-cols-2  gap-x-50 gap-y-5 md:gap-y-[30px] md:gap-y-50 3xl:gap-y-70"
             >
               {currentYearData?.months.map((month, idx) => (
                 <MonthCard key={`${activeYear}-${idx}`} monthData={month} index={idx} />

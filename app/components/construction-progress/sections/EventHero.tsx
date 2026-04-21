@@ -12,7 +12,7 @@ import { useParallax } from "@/app/hooks/useParallax";
 const EventHero = () => { 
 
   return (
-    <section className="w-full pt-200" data-header="dark">
+    <section className="w-full pt-[170px]  lg:!pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <motion.div
@@ -27,7 +27,7 @@ const EventHero = () => {
         {/* Title */}
         <SectionHeading
           title={'Construction history Sunset Bay 5 by Imtiaz'}
-          className="max-w-[32ch] text-foreground text-center uppercase mt-100"
+          className="max-w-[32ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
  
       </div>
