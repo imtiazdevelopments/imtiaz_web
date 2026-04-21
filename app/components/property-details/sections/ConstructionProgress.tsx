@@ -567,7 +567,7 @@ export default function WynwoodProgress() {
               viewport={{ once: true }}
               className="mt-[10px]"
             >
-              <Link href="/construction-progress">
+              <Link href={`/construction-progress-listing/sunset-bay-5-by-imtiaz`}>
                 <CustomOutlineButton
                   className="w-fit lg:mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[50px] md:h-[66px] "
                   text="Construction updates"

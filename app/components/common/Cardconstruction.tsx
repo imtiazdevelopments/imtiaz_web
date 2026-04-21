@@ -136,11 +136,10 @@ const handleCardClick = () => {
               ):
               (
                  <Link
-                  // href={`/properties/${title
-                  //   .replace(/<br\s*\/?>/gi, "")
-                  //   .toLowerCase()
-                  //   .replace(/\s+/g, "-")}`}
-                  href="/construction-progress"
+                  href={`/construction-progress-listing/${title
+                    .replace(/<br\s*\/?>/gi, "")
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
                 ><CustomOutlineButton
                 text="View Progress"
                 px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
