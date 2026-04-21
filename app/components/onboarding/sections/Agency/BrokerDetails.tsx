@@ -59,7 +59,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
         <button
           type="button"
           onClick={() => append({ ...DEFAULT_BROKER })}
-          className="flex items-center gap-20 bg-primary text-white py-[10px] px-[24px] h-[45px] max-w-[167px] text-description rounded-[10px] transition-opacity hover:opacity-80"
+          className="flex items-center gap-20 bg-primary text-white py-[10px] px-[24px] h-[45px] max-w-[167px] 3xl:w-[167px] text-description rounded-[10px] transition-opacity hover:opacity-80"
         >
           Add Broker
           <span className="text-[22px]">+</span>
@@ -71,7 +71,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="relative bg-gray rounded-[10px] px-30 py-90 3xl:py-[87px]"
+            className="relative bg-gray rounded-[10px] px-30 pt-90 pb-70 3xl:pt-[87px] 3xl:pb-[67px]"
           >
             {/* Delete button */}
             {fields.length > 1 && (
