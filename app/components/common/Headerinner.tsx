@@ -196,7 +196,7 @@ const Headerinner: React.FC = () => {
               ></div>
 
               {/* ------- LEFT MENU (DESKTOP ONLY) ------- */}
-              <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-[15px] 2xl:text-[16px] font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
+              <div className="mnhmns hidden lg:flex gap-[25px] 2xl:gap-[32px] text-white uppercase text-16 font-[avenirRoman] w-[40%] 2xl:w-[33.33%] overflow-hidden">
                 {menuItems.map((item) => (
                   <Link key={item.name} href={"#"} className="opacity-0">
                     {item.name}

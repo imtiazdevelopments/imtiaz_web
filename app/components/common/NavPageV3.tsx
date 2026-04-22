@@ -185,7 +185,7 @@ const handleNavigate = (href?: string) => {
                   variants={moveUp(0.2)}
                   initial="hidden"
                   animate="show"
-                  className="mb-[5px] font-[avenir] font-[900] text-[16px] opacity-70"
+                  className="mb-[5px] font-[avenir] font-[900] text-16 opacity-70"
                 > 
                    <div  className="cursor-pointer"
           onClick={(e) => {
@@ -198,7 +198,7 @@ const handleNavigate = (href?: string) => {
  
                 </motion.div>
 <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
-  <motion.div variants={moveUp(0.25)} initial="hidden" animate="show" className="text-[16px] leading-[2.2]">
+  <motion.div variants={moveUp(0.25)} initial="hidden" animate="show" className="text-16 leading-[2.2]">
     <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
   </motion.div>
   <div className="hidden lg:block w-[1px] h-[13px] bg-white" />

@@ -546,7 +546,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                             >
                               <motion.div className="flex items-center gap-3">
                                 <Image src={f.icon} width={20} height={20} alt={f.label} />
-                                <span className="text-white text-[16px] text-description uppercase">
+                                <span className="text-white text-16 text-description uppercase">
                                   {f.label}
                                 </span>
                               </motion.div>
