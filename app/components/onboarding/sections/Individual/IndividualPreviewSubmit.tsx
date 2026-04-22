@@ -31,7 +31,13 @@ interface FieldCardProps {
   onChange?: (val: string) => void;
 }
 
-function FieldCard({ label, value, isDate, showEdit = true, onChange }: FieldCardProps) {
+function FieldCard({
+  label,
+  value,
+  isDate,
+  showEdit = true,
+  onChange,
+}: FieldCardProps) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value ?? "");
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -42,42 +48,95 @@ function FieldCard({ label, value, isDate, showEdit = true, onChange }: FieldCar
     setEditing(false);
   };
 
+  // if (isDate) {
+  //   return (
+  //     <div className="bg-white/40 rounded-[10px] px-[10px] py-[13.5px] min-h-[79px] relative">
+  //       <span className="text-[12px] leading-[2.058] text-primary mb-[2px]">{label}</span>
+  //       <div className="flex items-center justify-between gap-6">
+  //         <span className="text-description text-[#2B2B2B]">{draft || "—"}</span>
+  //         {showEdit && (
+  //           <button
+  //             type="button"
+  //             onClick={() => setPickerOpen((p) => !p)}
+  //             className="shrink-0 hover:opacity-80 transition-opacity cursor-pointer"
+  //           >
+  //             <Image src="/icons/calender-primary.svg" alt="calendar" width={25} height={25} className="h-[20.48px] w-[20.48px]" />
+  //           </button>
+  //         )}
+  //       </div>
+  //       {pickerOpen && (
+  //         <div className="absolute top-full left-0 z-50 mt-2 bg-white shadow-xl rounded-[6px] min-w-[260px]">
+  //           <FormDatePicker
+  //             placeholder={label}
+  //             value={draft}
+  //             onChange={(val) => {
+  //               setDraft(val);
+  //               onChange?.(val);
+  //               setPickerOpen(false);
+  //             }}
+  //           />
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // }
+
   if (isDate) {
     return (
       <div className="bg-white/40 rounded-[10px] px-[10px] py-[13.5px] min-h-[79px] relative">
-        <span className="text-[12px] leading-[2.058] text-primary mb-[2px]">{label}</span>
+        <span className="text-[12px] leading-[2.058] text-primary mb-[2px]">
+          {label}
+        </span>
         <div className="flex items-center justify-between gap-6">
-          <span className="text-description text-[#2B2B2B]">{draft || "—"}</span>
-          {showEdit && (
-            <button
-              type="button"
-              onClick={() => setPickerOpen((p) => !p)}
-              className="shrink-0 hover:opacity-80 transition-opacity cursor-pointer"
-            >
-              <Image src="/icons/calender-primary.svg" alt="calendar" width={25} height={25} className="h-[20.48px] w-[20.48px]" />
-            </button>
+          {editing ? (
+            <input
+              ref={inputRef}
+              autoFocus
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onBlur={commit}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") commit();
+                if (e.key === "Escape") setEditing(false);
+              }}
+              className="w-full text-description text-[#2B2B2B] font-medium border-b border-primary h-[20px] outline-none bg-transparent"
+            />
+          ) : (
+            <div className="flex items-center w-full justify-between gap-6">
+              <span className="text-description text-[#2B2B2B]">
+                {draft || "—"}
+              </span>
+              {showEdit && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing(true);
+                    setTimeout(() => inputRef.current?.focus(), 0);
+                  }}
+                  className="shrink-0 hover:opacity-80 transition-opacity cursor-pointer"
+                  aria-label="Edit"
+                >
+                  <Image
+                    src="/icons/pencil-edit.svg"
+                    alt="Edit"
+                    width={20}
+                    height={20}
+                    className="w-[20.48px] h-[20.48px]"
+                  />
+                </button>
+              )}
+            </div>
           )}
         </div>
-        {pickerOpen && (
-          <div className="absolute top-full left-0 z-50 mt-2 bg-white shadow-xl rounded-[6px] min-w-[260px]">
-            <FormDatePicker
-              placeholder={label}
-              value={draft}
-              onChange={(val) => {
-                setDraft(val);
-                onChange?.(val);
-                setPickerOpen(false);
-              }}
-            />
-          </div>
-        )}
       </div>
     );
   }
 
   return (
     <div className="bg-white/40 rounded-[10px] px-[10px] py-[13.5px] min-h-[79px]">
-      <span className="text-[12px] leading-[2.058] text-primary mb-[2px]">{label}</span>
+      <span className="text-[12px] leading-[2.058] text-primary mb-[2px]">
+        {label}
+      </span>
       {editing ? (
         <input
           ref={inputRef}
@@ -93,14 +152,25 @@ function FieldCard({ label, value, isDate, showEdit = true, onChange }: FieldCar
         />
       ) : (
         <div className="flex items-center justify-between gap-6">
-          <span className="text-description text-[#2B2B2B]">{draft || "—"}</span>
+          <span className="text-description text-[#2B2B2B]">
+            {draft || "—"}
+          </span>
           {showEdit && (
             <button
               type="button"
-              onClick={() => { setEditing(true); setTimeout(() => inputRef.current?.focus(), 0); }}
+              onClick={() => {
+                setEditing(true);
+                setTimeout(() => inputRef.current?.focus(), 0);
+              }}
               className="shrink-0 hover:opacity-80 transition-opacity cursor-pointer"
             >
-              <Image src="/icons/pencil-edit.svg" alt="Edit" width={20} height={20} className="w-[20.48px] h-[20.48px]" />
+              <Image
+                src="/icons/pencil-edit.svg"
+                alt="Edit"
+                width={20}
+                height={20}
+                className="w-[20.48px] h-[20.48px]"
+              />
             </button>
           )}
         </div>
@@ -109,7 +179,13 @@ function FieldCard({ label, value, isDate, showEdit = true, onChange }: FieldCar
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="mb-60">
       <h3 className="text-25 font-[optima] text-foreground-light leading-[1.4] tracking-[-0.02em] uppercase mb-20">
@@ -142,7 +218,8 @@ function ObjectFields({
         .map(([key, value]) => {
           if (typeof value === "boolean") return null;
           if (value instanceof File) return null;
-          const strVal = value !== null && value !== undefined ? String(value) : "";
+          const strVal =
+            value !== null && value !== undefined ? String(value) : "";
           return (
             <FieldCard
               key={key}
@@ -159,16 +236,35 @@ function ObjectFields({
 }
 
 const OWNER_KEYS = [
-  "ownerFirstName", "ownerLastName", "ownerEmiratesId", "ownerEidExpiry",
-  "ownerPassportNo", "ownerPassportExpiry", "ownerCountryCode", "ownerMobile",
-  "ownerNationality", "ownerEmail", "ownerBrokerCardNo", "ownerBrokerCardExpiry",
+  "ownerFirstName",
+  "ownerLastName",
+  "ownerEmiratesId",
+  "ownerEidExpiry",
+  "ownerPassportNo",
+  "ownerPassportExpiry",
+  "ownerCountryCode",
+  "ownerMobile",
+  "ownerNationality",
+  "ownerEmail",
+  "ownerBrokerCardNo",
+  "ownerBrokerCardExpiry",
 ];
 
 const AUTH_KEYS = [
-  "authFirstName", "authLastName", "authSource", "authEmail",
-  "authCountryCode", "authPhone", "authCountry", "authCity",
-  "authEmiratesId", "authEidExpiry", "authPassportNo", "authPassportExpiry",
-  "authBrokerCardNo", "authBrokerCardExpiry",
+  "authFirstName",
+  "authLastName",
+  "authSource",
+  "authEmail",
+  "authCountryCode",
+  "authPhone",
+  "authCountry",
+  "authCity",
+  "authEmiratesId",
+  "authEidExpiry",
+  "authPassportNo",
+  "authPassportExpiry",
+  "authBrokerCardNo",
+  "authBrokerCardExpiry",
 ];
 
 export default function IndividualPreviewSubmit({
@@ -179,7 +275,11 @@ export default function IndividualPreviewSubmit({
 }: Props) {
   const { agentDetails, bankInfo, documents } = individualFormData;
 
-  const patch = <K extends keyof IndividualFormData>(section: K, key: string, val: string) => {
+  const patch = <K extends keyof IndividualFormData>(
+    section: K,
+    key: string,
+    val: string,
+  ) => {
     onIndividualFormDataChange({
       ...individualFormData,
       [section]: { ...(individualFormData[section] as object), [key]: val },
@@ -239,7 +339,13 @@ export default function IndividualPreviewSubmit({
                   >
                     {file && (
                       <div className="w-8 h-8 bg-[#FEF2F2] rounded-[4px] flex items-center justify-center shrink-0">
-                        <Image src="/icons/file-icon.svg" alt="pdf" width={25} height={25} className="w-[20px] h-[20px]" />
+                        <Image
+                          src="/icons/file-icon.svg"
+                          alt="pdf"
+                          width={25}
+                          height={25}
+                          className="w-[20px] h-[20px]"
+                        />
                       </div>
                     )}
                     <span className="text-description text-foreground-light truncate">

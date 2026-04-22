@@ -22,6 +22,7 @@ import IndividualDocuments from "./sections/Individual/IndividualDocuments";
 import IndividualPreviewSubmit from "./sections/Individual/IndividualPreviewSubmit";
 import { SectionHeading } from "../animations/SectionHeading";
 import { motion } from "framer-motion";
+import { moveUp } from "../motionVariants";
 
 interface OnboardingIndexProps {
   tab: Tab;
@@ -243,7 +244,12 @@ export default function OnboardingIndex({
         </div>
 
         {/* Step breadcrumb */}
-        <div
+        <motion.div
+          key={tab}
+          variants={moveUp(0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
           ref={breadcrumbRef}
           className="relative flex flex-wrap xl:flex-nowrap items-center xl:justify-between pr-30 3xl:pr-[34px] gap-y-20 gap-x-60 lg:gap-x-30 2xl:gap-x-40 3xl:gap-x-60 border-b border-gray-200"
         >
@@ -289,14 +295,21 @@ export default function OnboardingIndex({
               </button>
             );
           })}
-
           {segments.map((seg) => (
             <StepUnderline key={seg.key} left={seg.left} width={seg.width} />
           ))}
-        </div>
+        </motion.div>
 
         {/* Form slot — only this scrolls */}
-        <div data-lenis-prevent className="flex-1 overflow-y-auto mt-70 pb-100">
+        <motion.div
+          key={currentStep}
+          variants={moveUp(0.2)}
+          initial="hidden"
+          animate="show"
+          viewport={{ once: true }}
+          data-lenis-prevent
+          className="flex-1 overflow-y-auto mt-70 pb-100"
+        >
           {tab === "agency" && agencyStep === "company" && (
             <CompanyInformation
               savedData={agencyFormData.company}
@@ -402,7 +415,7 @@ export default function OnboardingIndex({
               }
             />
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
