@@ -139,14 +139,14 @@ export default function FloatingMobileIcons() {
           <div
             key={alt}
             onClick={onClick}
-            className="desk-icon w-[35px] h-[35px] md:w-[45px] md:h-[45px] rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300 hover:bg-foreground-light/90"
+            className="desk-icon w-[35px] h-[35px] md:w-[45px] md:h-[45px] group rounded-full backdrop-blur-[30px] flex items-center justify-center cursor-pointer bg-foreground-light/70 transition-colors duration-300 hover:bg-foreground-light/90"
           >
             <Image
               src={src}
               alt={alt}
               width={27}
               height={27}
-              className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]"
+              className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] group-hover:scale-[1.08] transition-transform duration-300"
             />
           </div>
         ))}
@@ -186,7 +186,7 @@ export default function FloatingMobileIcons() {
           className="w-[45px] h-[45px] rounded-full bg-foreground-light/60 text-white backdrop-blur-[20px] flex items-center justify-center cursor-pointer"
         >
           <Image
-            src="images/icons/iconshare.svg"
+            src="/images/icons/iconshare.svg"
             alt="share"
             width={22}
             height={22}

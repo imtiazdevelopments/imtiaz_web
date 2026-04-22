@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import CustomOutlineButton from "../common/CustomOutlineButton";
-import { SectionHeading } from "../animations/SectionHeading";
 import { SectionDescription } from "../animations/SectionDescription";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
