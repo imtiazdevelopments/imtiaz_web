@@ -7,6 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -37,6 +38,8 @@ export default function SwiperModal({
   const backdropRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const [renderModal, setRenderModal] = useState(false);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Open animation
   useEffect(() => {
@@ -126,6 +129,8 @@ export default function SwiperModal({
         <div className="relative h-[35vh] sm:h-[45vh] md:h-[65vh] lg:h-[70vh] xl:h-[75vh] overflow-hidden rounded-sm">
           <Swiper
             modules={[Navigation, Pagination, EffectFade]}
+            onSwiper={setSwiperInstance}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             navigation={{
@@ -201,18 +206,78 @@ export default function SwiperModal({
           <div className="modal-swiper-pagination absolute bottom-4 left-1/2 -translate-x-1/2 z-10" />
         </div>
 
-        {/* Month Info */}
-        <div className="mt-[10px] md:mt-20 flex justify-between md:items-center">
+        {/* Month Info — lg and above: single row with date / thumbs / location */}
+        <div className="mt-[10px] md:mt-20 hidden lg:flex justify-between items-center">
           <h3 className="text-25 font-[optima] leading-[1.4] text-white">
-            <span className="block md:hidden">
-              <div>{monthData.date.split(" ")[0]}</div>
-              <div>{monthData.date.split(" ")[1]}</div>
-            </span>
-            <span className="hidden md:block">{monthData.date}</span>
+            {monthData.date}
           </h3>
+
+          {/* Thumbnails — center */}
+          <div className="flex gap-2 justify-center flex-wrap">
+            {monthData.images.map((img, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  swiperInstance?.slideToLoop(i);
+                  setActiveIndex(i);
+                }}
+                className={`relative w-[50px] h-[50px] overflow-hidden rounded-sm cursor-pointer transition-all duration-200 ${
+                  i === activeIndex
+                    ? "border-2 border-white p-[4px]"
+                    : "border-2 border-transparent opacity-70"
+                }`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover rounded-sm"
+                />
+              </button>
+            ))}
+          </div>
+
           <p className="text-description text-white opacity-80">
             {monthData.location}
           </p>
+        </div>
+
+        {/* Month Info — below lg: date and location in a row, thumbs centered below */}
+        <div className="mt-[10px] flex flex-col lg:hidden gap-3">
+          <div className="flex justify-between items-start">
+            <h3 className="text-25 font-[optima] leading-[1.4] text-white">
+              <div>{monthData.date.split(" ")[0]}</div>
+              <div>{monthData.date.split(" ")[1]}</div>
+            </h3>
+            <p className="text-description text-white opacity-80">
+              {monthData.location}
+            </p>
+          </div>
+
+          {/* Thumbnails — centered below everything on mobile */}
+          <div className="flex gap-2 justify-center flex-wrap">
+            {monthData.images.map((img, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  swiperInstance?.slideToLoop(i);
+                  setActiveIndex(i);
+                }}
+                className={`relative w-[50px] h-[50px] overflow-hidden rounded-sm cursor-pointer transition-all duration-200 ${
+                  i === activeIndex
+                    ? "border-2 border-white p-[4px]"
+                    : "border-2 border-transparent opacity-70"
+                }`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover rounded-sm"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
