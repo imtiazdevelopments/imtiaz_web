@@ -1,33 +1,43 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import OnboardingIndex from '@/app/components/onboarding/Index'
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import OnboardingIndex from "@/app/components/onboarding/Index";
 
-export type Tab = 'agency' | 'individual'
-export type AgencyStep = 'company' | 'signatory' | 'broker' | 'bank' | 'documents' | 'submit'
-export type IndividualStep = 'agentDetails' | 'bankInfo' | 'documents' | 'previewSubmit'
+export type Tab = "agency" | "individual";
+export type AgencyStep =
+  | "company"
+  | "signatory"
+  | "broker"
+  | "bank"
+  | "documents"
+  | "submit";
+export type IndividualStep =
+  | "agentDetails"
+  | "bankInfo"
+  | "documents"
+  | "previewSubmit";
 
 export interface CompanyInformationData {
-  agencySubType: string
-  agencyName: string
-  tradeLicenseNo: string
-  tradeLicenseExpiry: string
-  headOfSales: string
-  agencyPhone: string
-  headOfSalesEmail: string
-  companyEmail: string
-  countryCode: string
-  companyPhone: string
-  source: string
-  officeUnitNo: string
-  buildingName: string
-  country: string
-  city: string
-  poBox: string
-  companyRERA: string
-  companyRERAExpiry: string
-  haveTRN: string
+  agencySubType: string;
+  agencyName: string;
+  tradeLicenseNo: string;
+  tradeLicenseExpiry: string;
+  headOfSales: string;
+  agencyPhone: string;
+  headOfSalesEmail: string;
+  companyEmail: string;
+  countryCode: string;
+  companyPhone: string;
+  source: string;
+  officeUnitNo: string;
+  buildingName: string;
+  country: string;
+  city: string;
+  poBox: string;
+  companyRERA: string;
+  companyRERAExpiry: string;
+  haveTRN: string;
 }
 
 export interface SignatoryDetailsData {
@@ -62,8 +72,11 @@ export interface SignatoryDetailsData {
 }
 
 export interface BrokerEntry {
-  name: string; email: string; countryCode: string;
-  signatoryCardNo: string; signatoryCardExpiry: string;
+  name: string;
+  email: string;
+  countryCode: string;
+  signatoryCardNo: string;
+  signatoryCardExpiry: string;
 }
 export interface BrokerDetailsData {
   brokers: BrokerEntry[];
@@ -151,11 +164,11 @@ export interface IndividualDocumentsData {
 }
 
 export interface AgencyFormData {
-  company?: Partial<CompanyInformationData>
+  company?: Partial<CompanyInformationData>;
   signatory?: Partial<SignatoryDetailsData>;
-  broker?: Partial<BrokerDetailsData>; 
-  bank?: Partial<BankInfoData>; 
-  documents?: Partial<DocumentsData>; 
+  broker?: Partial<BrokerDetailsData>;
+  bank?: Partial<BankInfoData>;
+  documents?: Partial<DocumentsData>;
 }
 
 export interface IndividualFormData {
@@ -164,66 +177,75 @@ export interface IndividualFormData {
   documents?: Partial<IndividualDocumentsData>;
 }
 
-export default function OnboardingPage() {
-    const router = useRouter()
-  const searchParams = useSearchParams()
+function OnboardingPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const initialTab = (searchParams.get('tab') as Tab) === 'individual' ? 'individual' : 'agency'
-const [tab, setTab] = useState<Tab>(initialTab) 
-  const [agencyStep, setAgencyStep] = useState<AgencyStep>('company')
-  const [individualStep, setIndividualStep] = useState<IndividualStep>('agentDetails')
+  const initialTab =
+    (searchParams.get("tab") as Tab) === "individual" ? "individual" : "agency";
+  const [tab, setTab] = useState<Tab>(initialTab);
+  const [agencyStep, setAgencyStep] = useState<AgencyStep>("company");
+  const [individualStep, setIndividualStep] =
+    useState<IndividualStep>("agentDetails");
   const [completedSteps, setCompletedSteps] = useState<{
-    agency: AgencyStep[]
-    individual: IndividualStep[]
-  }>({ agency: [], individual: [] })
-  const [agencyFormData, setAgencyFormData] = useState<AgencyFormData>({})
-  const [individualFormData, setIndividualFormData] = useState<IndividualFormData>({})
+    agency: AgencyStep[];
+    individual: IndividualStep[];
+  }>({ agency: [], individual: [] });
+  const [agencyFormData, setAgencyFormData] = useState<AgencyFormData>({});
+  const [individualFormData, setIndividualFormData] =
+    useState<IndividualFormData>({});
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('tab', tab)
-    router.replace(`?${params.toString()}`, { scroll: false })
-  }, [tab])
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tab);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [tab]);
 
   const handleTabChange = (newTab: Tab) => {
-    setTab(newTab)
-    setAgencyStep('company')
-    setIndividualStep('agentDetails')
-  }
+    setTab(newTab);
+    setAgencyStep("company");
+    setIndividualStep("agentDetails");
+  };
 
   const markStepComplete = (step: AgencyStep | IndividualStep) => {
-    if (tab === 'agency') {
-      setCompletedSteps(prev => ({
+    if (tab === "agency") {
+      setCompletedSteps((prev) => ({
         ...prev,
         agency: prev.agency.includes(step as AgencyStep)
           ? prev.agency
           : [...prev.agency, step as AgencyStep],
-      }))
+      }));
     } else {
-      setCompletedSteps(prev => ({
+      setCompletedSteps((prev) => ({
         ...prev,
         individual: prev.individual.includes(step as IndividualStep)
           ? prev.individual
           : [...prev.individual, step as IndividualStep],
-      }))
+      }));
     }
-  }
+  };
 
   const handleAgencyFormDataChange = (updated: AgencyFormData) => {
-  setAgencyFormData(updated);
-};
+    setAgencyFormData(updated);
+  };
 
-const handleIndividualFormDataChange = (updated: IndividualFormData) => {
-  setIndividualFormData(updated);
-}
+  const handleIndividualFormDataChange = (updated: IndividualFormData) => {
+    setIndividualFormData(updated);
+  };
 
-const saveAgencyStepData = <K extends keyof AgencyFormData>(step: K, data: AgencyFormData[K]) => {
-  setAgencyFormData(prev => ({ ...prev, [step]: data }))
-}
+  const saveAgencyStepData = <K extends keyof AgencyFormData>(
+    step: K,
+    data: AgencyFormData[K],
+  ) => {
+    setAgencyFormData((prev) => ({ ...prev, [step]: data }));
+  };
 
-const saveIndividualStepData = <K extends keyof IndividualFormData>(step: K, data: IndividualFormData[K]) => {
-  setIndividualFormData(prev => ({ ...prev, [step]: data }))
-}
+  const saveIndividualStepData = <K extends keyof IndividualFormData>(
+    step: K,
+    data: IndividualFormData[K],
+  ) => {
+    setIndividualFormData((prev) => ({ ...prev, [step]: data }));
+  };
 
   return (
     <OnboardingIndex
@@ -242,7 +264,14 @@ const saveIndividualStepData = <K extends keyof IndividualFormData>(step: K, dat
       individualFormData={individualFormData}
       onSaveIndividualStepData={saveIndividualStepData}
       onIndividualFormDataChange={handleIndividualFormDataChange}
-
     />
-  )
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OnboardingPageInner />
+    </Suspense>
+  );
 }
