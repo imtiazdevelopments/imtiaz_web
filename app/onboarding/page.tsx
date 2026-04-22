@@ -95,12 +95,72 @@ export interface DocumentsData {
   otherDocuments: File | null;
 }
 
+export interface AgentDetailsData {
+  // Owner Details
+  ownerFirstName: string;
+  ownerLastName: string;
+  ownerEmiratesId: string;
+  ownerEidExpiry: string;
+  ownerPassportNo: string;
+  ownerPassportExpiry: string;
+  ownerCountryCode: string;
+  ownerMobile: string;
+  ownerNationality: string;
+  ownerEmail: string;
+  ownerBrokerCardNo: string;
+  ownerBrokerCardExpiry: string;
+  ownerAndSignatoryAreSame: boolean;
+
+  // Authorized Signatory Details
+  authFirstName: string;
+  authLastName: string;
+  authSource: string;
+  authEmail: string;
+  authCountryCode: string;
+  authPhone: string;
+  authCountry: string;
+  authCity: string;
+  authEmiratesId: string;
+  authEidExpiry: string;
+  authPassportNo: string;
+  authPassportExpiry: string;
+  authBrokerCardNo: string;
+  authBrokerCardExpiry: string;
+}
+
+export interface IndividualBankInfoData {
+  bankDetailAvailable: string;
+  bankName: string;
+  bankAccountNo: string;
+  ibanNo: string;
+  swiftCode: string;
+  currency: string;
+  bankBranchName: string;
+  bankAddress: string;
+}
+
+export interface IndividualDocumentsData {
+  passportCopySignatory: File | null;
+  visaSignatory: File | null;
+  eidSignatory: File | null;
+  individualPassport: File | null;
+  passportCopyOwner: File | null;
+  eidOwner: File | null;
+  visaOwner: File | null;
+}
+
 export interface AgencyFormData {
   company?: Partial<CompanyInformationData>
   signatory?: Partial<SignatoryDetailsData>;
   broker?: Partial<BrokerDetailsData>; 
   bank?: Partial<BankInfoData>; 
   documents?: Partial<DocumentsData>; 
+}
+
+export interface IndividualFormData {
+  agentDetails?: Partial<AgentDetailsData>;
+  bankInfo?: Partial<IndividualBankInfoData>;
+  documents?: Partial<IndividualDocumentsData>;
 }
 
 export default function OnboardingPage() {
@@ -112,6 +172,7 @@ export default function OnboardingPage() {
     individual: IndividualStep[]
   }>({ agency: [], individual: [] })
   const [agencyFormData, setAgencyFormData] = useState<AgencyFormData>({})
+  const [individualFormData, setIndividualFormData] = useState<IndividualFormData>({})
 
   const handleTabChange = (newTab: Tab) => {
     setTab(newTab)
@@ -141,8 +202,16 @@ export default function OnboardingPage() {
   setAgencyFormData(updated);
 };
 
+const handleIndividualFormDataChange = (updated: IndividualFormData) => {
+  setIndividualFormData(updated);
+}
+
 const saveAgencyStepData = <K extends keyof AgencyFormData>(step: K, data: AgencyFormData[K]) => {
   setAgencyFormData(prev => ({ ...prev, [step]: data }))
+}
+
+const saveIndividualStepData = <K extends keyof IndividualFormData>(step: K, data: IndividualFormData[K]) => {
+  setIndividualFormData(prev => ({ ...prev, [step]: data }))
 }
 
   return (
@@ -159,6 +228,10 @@ const saveAgencyStepData = <K extends keyof AgencyFormData>(step: K, data: Agenc
       agencyFormData={agencyFormData}
       onAgencyFormDataChange={handleAgencyFormDataChange}
       onSaveAgencyStepData={saveAgencyStepData}
+      individualFormData={individualFormData}
+      onSaveIndividualStepData={saveIndividualStepData}
+      onIndividualFormDataChange={handleIndividualFormDataChange}
+
     />
   )
 }
