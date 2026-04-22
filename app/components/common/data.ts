@@ -248,7 +248,7 @@ export const subMenuItems = {
   ],
 
   communities: [
-    { id: "Al-furjan", label: "Al Furjan", href: "/#" },
+    { id: "Al-furjan", label: "Al Furjan", href: "#" },
     {
       id: "dubai-islands",
       label: "Dubai Islands",
@@ -257,13 +257,14 @@ export const subMenuItems = {
     {
       id: "dubai-land-residence-complex",
       label: "Dubai Land Residence Complex",
-      href: "/#",
+      href: "#",
     },
-    { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "/#" },
-    { id: "jvc", label: "JVC", href: "/#" },
+    { id: "jumeirah-garden-city", label: "Jumeirah Garden City", href: "#" },
+    { id: "jvc", label: "JVC", href: "#" },
     {
       id: "allcommunities",
       label: "View All Communities",
+      isButton: true,
       href: "/communities",
     },
   ],
@@ -272,50 +273,51 @@ export const subMenuItems = {
     {
       id: "Alfurjan",
       label: "Al Furjan",
-      children: [{ id: "res-1", label: "Westwood", href: "/#" }],
+      children: [{ id: "res-1", label: "Westwood", href: "#" }],
     },
 
     {
       id: "dubaiislands",
       label: "Dubai Islands",
       children: [
-        { id: "Dubai-1", label: "Beach Walk Residence", href: "/#" },
-        { id: "Dubai-2", label: "Beach Walk Residence II", href: "/#" },
-        { id: "Dubai-3", label: "Beach Walk II", href: "/#" },
+        { id: "Dubai-1", label: "Beach Walk Residence", href: "#" },
+        { id: "Dubai-2", label: "Beach Walk Residence II", href: "#" },
+        { id: "Dubai-3", label: "Beach Walk II", href: "#" },
       ],
     },
     {
       id: "dubai-complex",
       label: "Dubai Land Residence Complex",
       children: [
-        { id: "lux-1", label: "Cove Edition I", href: "/#" },
-        { id: "lux-2", label: "Cove by Imtiaz", href: "/#" },
-        { id: "lux-3", label: "Beach Walk III", href: "/#" },
+        { id: "lux-1", label: "Cove Edition I", href: "#" },
+        { id: "lux-2", label: "Cove by Imtiaz", href: "#" },
+        { id: "lux-3", label: "Beach Walk III", href: "#" },
       ],
     },
     {
       id: "jumeirahcity",
       label: "Jumeirah Garden City",
-      children: [{ id: "jumeirahcity-1", label: "Hyde Walk", href: "/#" }],
+      children: [{ id: "jumeirahcity-1", label: "Hyde Walk", href: "#" }],
     },
     {
       id: "JVC",
       label: "JVC",
       children: [
-        { id: "jvc-1", label: "Pearl House", href: "/#" },
-        { id: "jvc-2", label: "Pearl House II", href: "/#" },
-        { id: "jvc-13", label: "Pearl House III", href: "/#" },
-        { id: "jvc-3", label: "Westwood Grande", href: "/#" },
-        { id: "jvc-4", label: "Westwood Grande II", href: "/#" },
-        { id: "jvc-5", label: "Luxor", href: "/#" },
+        { id: "jvc-1", label: "Pearl House", href: "#" },
+        { id: "jvc-2", label: "Pearl House II", href: "#" },
+        { id: "jvc-13", label: "Pearl House III", href: "#" },
+        { id: "jvc-3", label: "Westwood Grande", href: "#" },
+        { id: "jvc-4", label: "Westwood Grande II", href: "#" },
+        { id: "jvc-5", label: "Luxor", href: "#" },
       ],
     },
     {
       id: "all",
       label: "ALL PROPERTIES",
+      isButton: true,
       href: "/properties",
     },
-    { id: "3d-view", label: "3D View", href: "/3d-tour" },
+    { id: "3d-view", label: "3D View", href: "/3d-tour", isButton: true },
   ],
 
   media: [
