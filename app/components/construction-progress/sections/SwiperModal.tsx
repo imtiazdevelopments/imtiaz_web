@@ -1,0 +1,220 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, EffectFade } from "swiper/modules";
+import Image from "next/image";
+import gsap from "gsap";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+interface SlideImage {
+  src: string;
+  alt: string;
+}
+
+interface MonthData {
+  month: string;
+  date: string;
+  location: string;
+  images: SlideImage[];
+}
+
+interface SwiperModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  monthData: MonthData;
+}
+
+export default function SwiperModal({
+  isOpen,
+  onClose,
+  monthData,
+}: SwiperModalProps) {
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [renderModal, setRenderModal] = useState(false);
+
+  // Open animation
+  useEffect(() => {
+    if (!isOpen) return;
+    setRenderModal(true);
+
+    requestAnimationFrame(() => {
+      if (!backdropRef.current || !modalRef.current) return;
+
+      gsap.fromTo(
+        backdropRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power2.out" },
+      );
+
+      gsap.fromTo(
+        modalRef.current,
+        {
+          opacity: 0,
+          scale: 1.08,
+          filter: "blur(8px)",
+          transformOrigin: "center center",
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 0.55,
+          ease: "power3.out",
+        },
+      );
+    });
+  }, [isOpen]);
+
+  // Close animation
+  const handleClose = () => {
+    if (!backdropRef.current || !modalRef.current) return;
+
+    gsap.to(backdropRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+    });
+
+    gsap.to(modalRef.current, {
+      opacity: 0,
+      scale: 1.06,
+      filter: "blur(16px)",
+      duration: 0.5,
+      ease: "power3.out",
+      onComplete: () => {
+        setRenderModal(false);
+        onClose();
+      },
+    });
+  };
+
+  if (!renderModal) return null;
+
+  return (
+    <div
+      ref={backdropRef}
+      className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center"
+      onClick={handleClose}
+    >
+      {/* Modal container */}
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] mx-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={handleClose}
+          className="absolute -top-12 right-0 z-10 text-white opacity-70 hover:opacity-100 transition-opacity duration-200"
+        >
+          <Image
+            src="/icons/close_nav.svg"
+            alt="close"
+            width={24}
+            height={24}
+            className="invert brightness-0 w-[20px] h-[20px]"
+          />
+        </button>
+
+        {/* Swiper */}
+        <div className="relative h-[35vh] sm:h-[45vh] md:h-[65vh] lg:h-[70vh] xl:h-[75vh] overflow-hidden rounded-sm">
+          <Swiper
+            modules={[Navigation, Pagination, EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            navigation={{
+              nextEl: `.modal-swiper-next`,
+              prevEl: `.modal-swiper-prev`,
+            }}
+            pagination={{
+              clickable: true,
+              el: `.modal-swiper-pagination`,
+            }}
+            className="w-full h-full"
+            loop
+          >
+            {monthData.images.map((image, imgIdx) => (
+              <SwiperSlide key={imgIdx}>
+                <div className="relative w-full h-full">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                  />
+
+                  {/* Left gradient */}
+                  <div className="pointer-events-none absolute inset-y-0 left-0 w-[50%] bg-gradient-to-r from-black/60 to-transparent z-10" />
+
+                  {/* Right gradient */}
+                  <div className="pointer-events-none absolute inset-y-0 right-0 w-[50%] bg-gradient-to-l from-black/60 to-transparent z-10" />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Prev Button */}
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            animate="show"
+            className="absolute left-20 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+          >
+            <button className="modal-swiper-prev cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
+              <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Previous"
+                width={28}
+                height={28}
+                className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
+
+          {/* Next Button */}
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            animate="show"
+            className="absolute right-20 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
+          >
+            <button className="modal-swiper-next cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Next"
+                width={28}
+                height={28}
+                className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
+
+          {/* Pagination */}
+          <div className="modal-swiper-pagination absolute bottom-4 left-1/2 -translate-x-1/2 z-10" />
+        </div>
+
+        {/* Month Info */}
+        <div className="mt-[10px] md:mt-20 flex justify-between md:items-center">
+          <h3 className="text-25 font-[optima] leading-[1.4] text-white">
+            <span className="block md:hidden">
+              <div>{monthData.date.split(" ")[0]}</div>
+              <div>{monthData.date.split(" ")[1]}</div>
+            </span>
+            <span className="hidden md:block">{monthData.date}</span>
+          </h3>
+          <p className="text-description text-white opacity-80">
+            {monthData.location}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

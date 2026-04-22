@@ -6,9 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Autoplay } from "swiper/modules";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-import { createPortal } from "react-dom";
-import EnquiryForm from "../../auth/EnquiryForm";
-// import type { Swiper as SwiperType } from "swiper";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -53,10 +50,9 @@ const fadeUp = {
 };
 
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
-
-      const [authView, setAuthView] = useState<AuthView | null>(null);
-      const [mounted, setMounted] = useState(false);
-    // 👇 Only render portal after client mount
+  const [authView, setAuthView] = useState<AuthView | null>(null);
+  const [mounted, setMounted] = useState(false);
+  // 👇 Only render portal after client mount
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -194,7 +190,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         animate={inView ? "show" : "hidden"}
                       >
                         <CustomOutlineButton
-                    onClick={() => setAuthView("enquiry")}
                           text="Register Interest"
                           borderColor="border-white"
                           textColor="text-white"
@@ -209,62 +204,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-  {mounted &&
-        createPortal(
-          <AnimatePresence mode="wait">
-            {authView && (
-              <>
-                <motion.div
-                  key="auth-backdrop"
-                  className="fixed inset-0 bg-black/80   z-[1000]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={closeAuth}
-                />
-
-                <motion.div
-                  className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-screen"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
-                >
-                  <div className="    h-full">
-                    
-
-                    <div className="relative w-full   h-full   overflow-hidden pointer-events-none">
-                     
-
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={authView}
-                          className="absolute inset-0 flex items-start justify-center overflow-y-auto   pointer-events-auto dark-section-2"
-                          onWheel={(e) => e.stopPropagation()}
-                          onTouchMove={(e) => e.stopPropagation()}
-                          initial={{ opacity: 0, x: 0 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 0 }}
-                          transition={{
-                            duration: 0.35,
-                            ease: [0.25, 1, 0.5, 1],
-                          }}
-                        >
-                           
-                            <EnquiryForm
-                              onClose={closeAuth}
-                              onSwitch={() => setAuthView("enquiry")}
-                            /> 
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>,
-          document.body,
-        )}
       {/* -------------------------------- ARROWS  -------------------------------- */}
 
       {slides.length > 1 && (
