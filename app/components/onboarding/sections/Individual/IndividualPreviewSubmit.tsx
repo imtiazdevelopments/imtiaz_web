@@ -274,6 +274,7 @@ export default function IndividualPreviewSubmit({
   onSubmit,
 }: Props) {
   const { agentDetails, bankInfo, documents } = individualFormData;
+  const [submitError, setSubmitError] = useState<string[]>([]);
 
   const patch = <K extends keyof IndividualFormData>(
     section: K,
@@ -286,99 +287,156 @@ export default function IndividualPreviewSubmit({
     });
   };
 
+  const missingSections: string[] = [];
+  if (!agentDetails || Object.keys(agentDetails).length === 0)
+    missingSections.push("Owner Details");
+  if (!agentDetails || Object.keys(agentDetails).length === 0)
+    missingSections.push("Signatory Details");
+  if (!bankInfo || Object.keys(bankInfo).length === 0)
+    missingSections.push("Bank Info");
+  if (!documents || Object.keys(documents).length === 0)
+    missingSections.push("Documents");
+
+  const isComplete = missingSections.length === 0;
+
+  const hasAnything =
+    (agentDetails && Object.keys(agentDetails).length > 0) ||
+    (bankInfo && Object.keys(bankInfo).length > 0) ||
+    (documents && Object.keys(documents).length > 0);
+
+  const handleSubmit = () => {
+    if (!isComplete) {
+      setSubmitError(missingSections);
+      return;
+    }
+    setSubmitError([]);
+    onSubmit();
+  };
+
   return (
     <div className="w-full">
       <h2 className="text-heading text-primary mb-50">Preview &amp; Submit</h2>
 
-      {/* OWNER DETAILS */}
-      {agentDetails && (
-        <Section title="Owner Details">
-          <ObjectFields
-            data={agentDetails as Record<string, unknown>}
-            exclude={["ownerAndSignatoryAreSame", ...AUTH_KEYS]}
-            onChange={(k, v) => patch("agentDetails", k, v)}
+      {!hasAnything ? (
+        <div className="flex flex-col text-foreground-light">
+          <Image
+            src="/icons/file-icon.svg"
+            alt=""
+            width={40}
+            height={40}
+            className="mb-20"
           />
-        </Section>
-      )}
-
-      {/* AUTHORIZED SIGNATORY */}
-      {agentDetails && !agentDetails.ownerAndSignatoryAreSame && (
-        <Section title="Authorized Signatory Details">
-          <ObjectFields
-            data={agentDetails as Record<string, unknown>}
-            exclude={["ownerAndSignatoryAreSame", ...OWNER_KEYS]}
-            onChange={(k, v) => patch("agentDetails", k, v)}
-          />
-        </Section>
-      )}
-
-      {/* BANK — no edit */}
-      {bankInfo && (
-        <Section title="Bank Details">
-          <ObjectFields
-            data={bankInfo as Record<string, unknown>}
-            showEdit={false}
-          />
-        </Section>
-      )}
-
-      {/* DOCUMENTS — no edit */}
-      {documents && (
-        <div className="mb-60">
-          <h3 className="text-25 font-[optima] text-foreground-light leading-[1.4] tracking-[-0.02em] uppercase mb-20">
-            Documents
-          </h3>
-          <div className="bg-gray rounded-[10px] p-20">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-20">
-              {Object.entries(documents).map(([key, value]) => {
-                const file = value as File | null;
-                return (
-                  <div
-                    key={key}
-                    className="bg-white/40 rounded-[10px] px-[10px] py-[13.5px] max-h-[56px] flex items-center gap-10"
-                  >
-                    {file && (
-                      <div className="w-8 h-8 bg-[#FEF2F2] rounded-[4px] flex items-center justify-center shrink-0">
-                        <Image
-                          src="/icons/file-icon.svg"
-                          alt="pdf"
-                          width={25}
-                          height={25}
-                          className="w-[20px] h-[20px]"
-                        />
-                      </div>
-                    )}
-                    <span className="text-description text-foreground-light truncate">
-                      {file?.name ?? "—"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <p className="text-description">Nothing to preview yet.</p>
+          <p className="text-description">
+            Complete the previous steps to see a summary here.
+          </p>
         </div>
+      ) : (
+        <>
+          {/* OWNER DETAILS */}
+          {agentDetails && (
+            <Section title="Owner Details">
+              <ObjectFields
+                data={agentDetails as Record<string, unknown>}
+                exclude={["ownerAndSignatoryAreSame", ...AUTH_KEYS]}
+                onChange={(k, v) => patch("agentDetails", k, v)}
+              />
+            </Section>
+          )}
+
+          {/* AUTHORIZED SIGNATORY */}
+          {agentDetails && !agentDetails.ownerAndSignatoryAreSame && (
+            <Section title="Authorized Signatory Details">
+              <ObjectFields
+                data={agentDetails as Record<string, unknown>}
+                exclude={["ownerAndSignatoryAreSame", ...OWNER_KEYS]}
+                onChange={(k, v) => patch("agentDetails", k, v)}
+              />
+            </Section>
+          )}
+
+          {/* BANK — no edit */}
+          {bankInfo && (
+            <Section title="Bank Details">
+              <ObjectFields
+                data={bankInfo as Record<string, unknown>}
+                showEdit={false}
+              />
+            </Section>
+          )}
+
+          {/* DOCUMENTS — no edit */}
+          {documents && (
+            <div className="mb-60">
+              <h3 className="text-25 font-[optima] text-foreground-light leading-[1.4] tracking-[-0.02em] uppercase mb-20">
+                Documents
+              </h3>
+              <div className="bg-gray rounded-[10px] p-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-20">
+                  {Object.entries(documents).map(([key, value]) => {
+                    const file = value as File | null;
+                    return (
+                      <div
+                        key={key}
+                        className="bg-white/40 rounded-[10px] px-[10px] py-[13.5px] max-h-[56px] flex items-center gap-10"
+                      >
+                        {file && (
+                          <div className="w-8 h-8 bg-[#FEF2F2] rounded-[4px] flex items-center justify-center shrink-0">
+                            <Image
+                              src="/icons/file-icon.svg"
+                              alt="pdf"
+                              width={25}
+                              height={25}
+                              className="w-[20px] h-[20px]"
+                            />
+                          </div>
+                        )}
+                        <span className="text-description text-foreground-light truncate">
+                          {file?.name ?? "—"}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* Navigation */}
-      <div className="mt-70 flex items-center gap-20">
-        <CustomOutlineButton
-          onClick={onPrev}
-          variant="dark"
-          text="Previous"
-          borderColor="border-primary-2"
-          textColor="text-foreground"
-          px="px-[25px] 3xl:px-[64px]"
-          className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
-        />
-        <CustomOutlineButton
-          onClick={onSubmit}
-          variant="dark"
-          text="Submit"
-          borderColor="border-primary-2"
-          textColor="text-foreground-light"
-          px="px-[25px] 3xl:px-[64px]"
-          className="h-[50px] md:h-[67px] uppercase max-w-[200px]"
-        />
+      <div className="mt-50 flex flex-col">
+        {/* Incomplete sections error */}
+        <div className="h-[20px] flex items-center">
+          {submitError.length > 0 && (
+            <p className="text-[12px] text-red-400 pb-2">
+              Please complete the following sections before submitting:{" "}
+              <span>{submitError.join(", ")}</span>.
+            </p>
+          )}
+        </div>
+        <div className="flex items-center gap-20">
+          <CustomOutlineButton
+            onClick={onPrev}
+            variant="dark"
+            text="Previous"
+            borderColor="border-primary-2"
+            textColor="text-foreground"
+            px="px-[25px] 3xl:px-[64px]"
+            className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
+          />
+          <CustomOutlineButton
+            onClick={handleSubmit}
+            variant="dark"
+            text="Submit"
+            borderColor="border-primary-2"
+            textColor={
+              isComplete ? "text-foreground-light" : "text-foreground-light/30"
+            }
+            px="px-[25px] 3xl:px-[64px]"
+            className={`h-[50px] md:h-[67px] uppercase max-w-[200px] ${!isComplete ? "opacity-50 cursor-not-allowed" : ""}`}
+          />
+        </div>
       </div>
     </div>
   );
