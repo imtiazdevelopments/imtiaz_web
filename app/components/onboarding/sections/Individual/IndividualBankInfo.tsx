@@ -17,6 +17,14 @@ const BANK_DETAIL_OPTIONS = [
   { label: "No", value: "no" },
 ];
 
+const BANK_NAME_OPTIONS = [
+  { label: "Emirates NBD", value: "emirates_nbd" },
+  { label: "Abu Dhabi Commercial Bank", value: "adcb" },
+  { label: "First Abu Dhabi Bank", value: "fab" },
+  { label: "Dubai Islamic Bank", value: "dib" },
+  { label: "Mashreq Bank", value: "mashreq" },
+];
+
 const CURRENCY_OPTIONS = [
   { label: "AED", value: "aed" },
   { label: "USD", value: "usd" },
@@ -25,7 +33,7 @@ const CURRENCY_OPTIONS = [
   { label: "INR", value: "inr" },
 ];
 
-export default function BankInfo({ onNext, onPrev, savedData }: Props) {
+export default function IndividualBankInfo({ onNext, onPrev, savedData }: Props) {
   const {
     register,
     handleSubmit,
@@ -39,15 +47,11 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
   const bankDetailAvailable = useWatch({ control, name: "bankDetailAvailable" });
   const detailsEnabled = bankDetailAvailable === "yes";
 
-  const onSubmit = (data: BankInfoData) => {
-    onNext(data);
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+    <form onSubmit={handleSubmit(onNext)} className="w-full">
       <h2 className="text-heading text-primary mb-50">Bank Info</h2>
 
-      {/* Row 1 */}
+      {/* Row 1: Bank Details Available | Bank Name | Bank Account Number */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
         <Controller
           name="bankDetailAvailable"
@@ -55,7 +59,7 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
           rules={{ required: "Required" }}
           render={({ field }) => (
             <FormSelect
-              placeholder="Bank Detail Available"
+              placeholder="Bank Details Available"
               options={BANK_DETAIL_OPTIONS}
               value={field.value}
               onChange={field.onChange}
@@ -63,35 +67,35 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
             />
           )}
         />
-
-        {/* Remaining fields — dimmed and non-interactive until "yes" is selected */}
-        <div className={`contents`}>
-          <div className={`transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
-            <FormInput
-              placeholder="Bank Name"
-              {...register("bankName", { required: detailsEnabled ? "Required" : false })}
-              error={errors.bankName?.message}
-            />
-          </div>
-          <div className={`transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
-            <FormInput
-              placeholder="Bank Account No"
-              {...register("bankAccountNo", { required: detailsEnabled ? "Required" : false })}
-              error={errors.bankAccountNo?.message}
-            />
-          </div>
+        <div className={`transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
+          <Controller
+            name="bankName"
+            control={control}
+            rules={{ required: detailsEnabled ? "Required" : false }}
+            render={({ field }) => (
+              <FormSelect
+                placeholder="Bank Name"
+                options={BANK_NAME_OPTIONS}
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.bankName?.message}
+              />
+            )}
+          />
+        </div>
+        <div className={`transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
+          <FormInput
+            placeholder="Bank Account Number"
+            {...register("bankAccountNo", { required: detailsEnabled ? "Required" : false })}
+            error={errors.bankAccountNo?.message}
+          />
         </div>
       </div>
 
-      {/* Row 2 */}
+      {/* Row 2: IBAN Number | Swift Code | Currency */}
       <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40 transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
         <FormInput
-          placeholder="Beneficiary Name"
-          {...register("beneficiaryName", { required: detailsEnabled ? "Required" : false })}
-          error={errors.beneficiaryName?.message}
-        />
-        <FormInput
-          placeholder="IBAN No"
+          placeholder="IBAN Number"
           {...register("ibanNo", { required: detailsEnabled ? "Required" : false })}
           error={errors.ibanNo?.message}
         />
@@ -100,10 +104,6 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
           {...register("swiftCode")}
           error={errors.swiftCode?.message}
         />
-      </div>
-
-      {/* Row 3 */}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
         <Controller
           name="currency"
           control={control}
@@ -118,6 +118,10 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
             />
           )}
         />
+      </div>
+
+      {/* Row 3: Bank Branch Name | Bank Address (2 cols) */}
+      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-60 gap-y-30 transition-opacity duration-300 ${detailsEnabled ? "opacity-100" : "opacity-50 pointer-events-none"}`}>
         <FormInput
           placeholder="Bank Branch Name"
           {...register("bankBranchName")}
@@ -142,7 +146,7 @@ export default function BankInfo({ onNext, onPrev, savedData }: Props) {
           className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
         />
         <CustomOutlineButton
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(onNext)}
           variant="dark"
           text="Next"
           borderColor="border-primary-2"

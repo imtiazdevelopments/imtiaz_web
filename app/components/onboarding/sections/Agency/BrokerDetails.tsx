@@ -143,7 +143,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
       </div>
 
       {/* Navigation buttons */}
-      <div className="mt-50 flex items-center gap-20">
+      <div className="mt-70 flex items-center gap-20">
         <CustomOutlineButton
           onClick={onPrev}
           variant="dark"

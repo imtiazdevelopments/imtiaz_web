@@ -4,16 +4,22 @@ import type {
   AgencyFormData,
   AgencyStep,
   IndividualStep,
+  IndividualFormData,
   Tab,
 } from "@/app/onboarding/page";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useEffect, useState, useCallback } from "react";
 import CompanyInformation from "./sections/Agency/CompanyInformation";
 import SignatoryDetails from "./sections/Agency/SignatoryDetails";
 import BrokerDetails from "./sections/Agency/BrokerDetails";
 import BankInfo from "./sections/Agency/BankInfo";
 import Documents from "./sections/Agency/Documents";
 import PreviewSubmit from "./sections/Agency/PreviewSubmit";
+import AgentDetails from "./sections/Individual/AgentDetails";
+import IndividualBankInfo from "./sections/Individual/IndividualBankInfo";
+import IndividualDocuments from "./sections/Individual/IndividualDocuments";
+import IndividualPreviewSubmit from "./sections/Individual/IndividualPreviewSubmit";
 
 interface OnboardingIndexProps {
   tab: Tab;
@@ -31,6 +37,12 @@ interface OnboardingIndexProps {
     step: K,
     data: AgencyFormData[K],
   ) => void;
+  individualFormData: IndividualFormData;
+  onSaveIndividualStepData: <K extends keyof IndividualFormData>(
+    step: K,
+    data: IndividualFormData[K],
+  ) => void;
+  onIndividualFormDataChange: (updated: IndividualFormData) => void;
 }
 
 const AGENCY_STEPS: { key: AgencyStep; label: string }[] = [
@@ -49,6 +61,33 @@ const INDIVIDUAL_STEPS: { key: IndividualStep; label: string }[] = [
   { key: "previewSubmit", label: "Preview & Submit" },
 ];
 
+type UnderlineSegment = { left: number; width: number; key: string };
+
+// Defined outside to keep a stable reference — prevents re-mounting on parent re-render
+function StepUnderline({ left, width }: { left: number; width: number }) {
+  const [currentWidth, setCurrentWidth] = useState(0);
+
+  // Animate in from 0 on mount
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setCurrentWidth(width));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Animate width change (e.g. adjacent gap extension)
+  useEffect(() => {
+    setCurrentWidth(width);
+  }, [width]);
+
+  return (
+    <span
+      className="absolute bottom-[-1px] h-[3px] bg-primary"
+      style={{ left, width: currentWidth, transition: "width 0.4s ease-out" }}
+    />
+  );
+}
+
 export default function OnboardingIndex({
   tab,
   agencyStep,
@@ -62,13 +101,73 @@ export default function OnboardingIndex({
   agencyFormData,
   onAgencyFormDataChange,
   onSaveAgencyStepData,
+  individualFormData,
+  onSaveIndividualStepData,
+  onIndividualFormDataChange,
 }: OnboardingIndexProps) {
   const steps = tab === "agency" ? AGENCY_STEPS : INDIVIDUAL_STEPS;
   const currentStep = tab === "agency" ? agencyStep : individualStep;
 
+  const breadcrumbRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [segments, setSegments] = useState<UnderlineSegment[]>([]);
+
+  // Measures each completed button's exact pixel position and builds underline segments.
+  // Adjacent completed steps extend to cover the gap between them.
+  const computeSegments = useCallback(() => {
+    const container = breadcrumbRef.current;
+    if (!container) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const completedSteps =
+      tab === "agency" ? completedAgencySteps : completedIndividualSteps;
+
+    const measured: { index: number; left: number; width: number }[] = [];
+
+    steps.forEach((s, i) => {
+      const btn = buttonRefs.current[i];
+      if (
+        !btn ||
+        !completedSteps.includes(s.key as AgencyStep & IndividualStep)
+      )
+        return;
+      const rect = btn.getBoundingClientRect();
+      measured.push({
+        index: i,
+        left: rect.left - containerRect.left,
+        width: rect.width,
+      });
+    });
+
+    const newSegments: UnderlineSegment[] = measured.map((m, i) => {
+      const next = measured[i + 1];
+      // Stretch to next segment's start if consecutive, to close the gap
+      const extendedWidth =
+        next && next.index === m.index + 1 ? next.left - m.left : m.width;
+      return { left: m.left, width: extendedWidth, key: `${m.index}` };
+    });
+
+    setSegments(newSegments);
+  }, [tab, completedAgencySteps, completedIndividualSteps, steps]);
+
+  const completedSteps =
+    tab === "agency" ? completedAgencySteps : completedIndividualSteps;
+
+  // Only recompute when completed steps change, not on every tab/step click
+  useEffect(() => {
+    computeSegments();
+  }, [completedSteps, computeSegments]);
+
+  // Recompute on container resize for responsive correctness
+  useEffect(() => {
+    const observer = new ResizeObserver(() => computeSegments());
+    if (breadcrumbRef.current) observer.observe(breadcrumbRef.current);
+    return () => observer.disconnect();
+  }, [computeSegments]);
+
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* ── LEFT: sticky panel, never scrolls ── */}
+      {/* LEFT: sticky decorative panel */}
       <div className="relative hidden h-screen w-[35%] max-w-[671px] shrink-0 sticky top-0 lg:block">
         <Image
           src="/images/onboarding/left-image-agent.jpg"
@@ -110,16 +209,25 @@ export default function OnboardingIndex({
         </div>
       </div>
 
-      {/* ── RIGHT: static container ── */}
+      {/* RIGHT: scrollable form area */}
       <div className="flex flex-1 flex-col overflow-hidden bg-white pt-100 px-70">
-        {/* Tab switcher — never scrolls */}
-        <div className="inline-flex self-start rounded-full h-[70px] max-w-[565px] bg-primary/5 mb-70">
+        {/* Tab switcher */}
+        <div className="inline-flex self-start relative rounded-full h-[70px] max-w-[565px] bg-primary/5 mb-70">
+          {/* Sliding background pill */}
+          <div
+            className="absolute top-0 h-full w-1/2 rounded-full bg-primary transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+            style={{
+              transform:
+                tab === "agency" ? "translateX(0%)" : "translateX(100%)",
+            }}
+          />
+
           {(["agency", "individual"] as Tab[]).map((t) => (
             <button
               key={t}
               onClick={() => onTabChange(t)}
-              className={`rounded-full px-90 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-all cursor-pointer ${
-                tab === t ? "bg-primary text-white" : "text-foreground"
+              className={`relative z-10 w-1/2 rounded-full px-90 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
+                tab === t ? "text-white" : "text-foreground"
               }`}
             >
               {t === "agency" ? "Agency" : "Individual"}
@@ -127,9 +235,12 @@ export default function OnboardingIndex({
           ))}
         </div>
 
-        {/* Step breadcrumb — never scrolls */}
-        <div className="flex flex-wrap items-center xl:justify-between pr-30 3xl:pr-[34px] gap-y-20 gap-x-60 border-b border-gray-200">
-          {steps.map((s) => {
+        {/* Step breadcrumb */}
+        <div
+          ref={breadcrumbRef}
+          className="relative flex flex-wrap xl:flex-nowrap items-center xl:justify-between pr-30 3xl:pr-[34px] gap-y-20 gap-x-60 lg:gap-x-30 2xl:gap-x-40 3xl:gap-x-60 border-b border-gray-200"
+        >
+          {steps.map((s, i) => {
             const isActive = s.key === currentStep;
             const isCompleted =
               tab === "agency"
@@ -139,6 +250,9 @@ export default function OnboardingIndex({
             return (
               <button
                 key={s.key}
+                ref={(el) => {
+                  buttonRefs.current[i] = el;
+                }}
                 onClick={() =>
                   tab === "agency"
                     ? onAgencyStepChange(s.key as AgencyStep)
@@ -146,7 +260,7 @@ export default function OnboardingIndex({
                 }
                 className={`flex items-center gap-[10px] pb-[14px] text-description transition-all cursor-pointer ${
                   isActive
-                    ? "border-b-[3px] border-primary"
+                    ? "font-bold text-primary"
                     : isCompleted
                       ? "text-primary"
                       : "text-foreground-light"
@@ -155,17 +269,27 @@ export default function OnboardingIndex({
                 {s.label}
                 {isCompleted && (
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                    <Image src="/icons/check.svg" alt="Imtiaz" width={20} height={20} priority className="h-[7.2px] w-auto" />
+                    <Image
+                      src="/icons/check.svg"
+                      alt="Imtiaz"
+                      width={20}
+                      height={20}
+                      priority
+                      className="h-[7.2px] w-auto"
+                    />
                   </span>
                 )}
               </button>
             );
           })}
+
+          {segments.map((seg) => (
+            <StepUnderline key={seg.key} left={seg.left} width={seg.width} />
+          ))}
         </div>
 
-        {/* ── Form slot — only this scrolls ── */}
+        {/* Form slot — only this scrolls */}
         <div data-lenis-prevent className="flex-1 overflow-y-auto mt-70 pb-100">
-          {/* Agency forms */}
           {tab === "agency" && agencyStep === "company" && (
             <CompanyInformation
               savedData={agencyFormData.company}
@@ -229,18 +353,47 @@ export default function OnboardingIndex({
             />
           )}
 
-          {/* Individual forms */}
           {tab === "individual" && individualStep === "agentDetails" && (
-            <div>Agent Details form</div>
+            <AgentDetails
+              savedData={individualFormData.agentDetails}
+              onNext={(data) => {
+                onSaveIndividualStepData("agentDetails", data);
+                onStepComplete("agentDetails");
+                onIndividualStepChange("bankInfo");
+              }}
+            />
           )}
           {tab === "individual" && individualStep === "bankInfo" && (
-            <div>Bank Info form</div>
+            <IndividualBankInfo
+              savedData={individualFormData.bankInfo}
+              onPrev={() => onIndividualStepChange("agentDetails")}
+              onNext={(data) => {
+                onSaveIndividualStepData("bankInfo", data);
+                onStepComplete("bankInfo");
+                onIndividualStepChange("documents");
+              }}
+            />
           )}
           {tab === "individual" && individualStep === "documents" && (
-            <div>Documents form</div>
+            <IndividualDocuments
+              savedData={individualFormData.documents}
+              onPrev={() => onIndividualStepChange("bankInfo")}
+              onNext={(data) => {
+                onSaveIndividualStepData("documents", data);
+                onStepComplete("documents");
+                onIndividualStepChange("previewSubmit");
+              }}
+            />
           )}
           {tab === "individual" && individualStep === "previewSubmit" && (
-            <div>Preview & Submit form</div>
+            <IndividualPreviewSubmit
+              individualFormData={individualFormData}
+              onIndividualFormDataChange={onIndividualFormDataChange}
+              onPrev={() => onIndividualStepChange("documents")}
+              onSubmit={() =>
+                console.log("Final individual submit", individualFormData)
+              }
+            />
           )}
         </div>
       </div>
