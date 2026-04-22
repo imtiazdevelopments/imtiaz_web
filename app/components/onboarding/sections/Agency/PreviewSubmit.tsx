@@ -464,14 +464,16 @@ export default function PreviewSubmit({
       )}
 
       {/* Navigation */}
-      <div className="mt-70 flex flex-col gap-20">
+      <div className="mt-50 flex flex-col">
         {/* Incomplete sections error */}
-        {submitError.length > 0 && (
-          <p className="text-[12px] text-red-400">
-            Please complete the following sections before submitting:{" "}
-            <span>{submitError.join(", ")}</span>.
-          </p>
-        )}
+        <div className="h-[20px] flex items-center">
+          {submitError.length > 0 && (
+            <p className="text-[12px] text-red-400 pb-2">
+              Please complete the following sections before submitting:{" "}
+              <span>{submitError.join(", ")}</span>.
+            </p>
+          )}
+        </div>
         <div className="flex items-center gap-20">
           <CustomOutlineButton
             onClick={onPrev}
