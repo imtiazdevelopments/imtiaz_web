@@ -111,7 +111,7 @@ const TabButton = ({ year, isActive, onClick }: TabButtonProps) => {
     // </motion.button>
     <button 
    onClick={onClick} className={`min-w-[96px] md:min-w-[136px] min-h-[50px] md:min-h-[58px] cursor-pointer flex items-center justify-center group relative transition-all duration-300 undefined overflow-hidden px-[12px] sm:px-[26px]
-    xl:px-[37px] py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border  text-foreground-light font-[avenirBook] text-[16px] md:text-[19px] leading-[100%]  ${
+    xl:px-[37px] py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border  text-foreground-light font-[avenirBook] text-16 md:text-[19px] leading-[100%]  ${
         isActive
            ? "border-white"
            : "border-primary"

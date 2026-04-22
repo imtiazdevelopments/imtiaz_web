@@ -139,7 +139,7 @@ const Footer = () => {
       <div className="bg-[#842D43] py-[17px]">
         <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
           {/* LEFT LINKS */}
-          <div className="flex gap-3 xl:gap-7 text-[15px] 3xl:text-[16px] font-[avenirRoman] text-white opacity-45 justify-center md:justify-start w-full">
+          <div className="flex gap-3 xl:gap-7 text-16 font-[avenirRoman] text-white opacity-45 justify-center md:justify-start w-full">
             {footerV2Data.bottom.left.map((txt, i) => (
               <motion.span
                 variants={moveUp(i * 0.2)}

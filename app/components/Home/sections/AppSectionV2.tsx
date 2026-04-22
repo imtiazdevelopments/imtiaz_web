@@ -86,7 +86,7 @@ const Circle = ({
                 mt-3 text-[#404040]
                 text-[12px]
                 sm:text-[14px]
-                md:text-[16px]
+                md:text-16
                 xl:text-[19px]
                 font-avenirRoman
                 leading-[1.2]

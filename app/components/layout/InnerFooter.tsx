@@ -83,7 +83,7 @@ const InnerFooter = () => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-[16px] text-white"
+                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-16 text-white"
               >
                 {footerV2Data.top.sendText}
               </button>
@@ -168,7 +168,7 @@ const InnerFooter = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex gap-3 xl:gap-6 3xl:gap-7 text-[16px] justify-between md:justify-start w-full mb-[9px] md:mb-0"
+            className="flex gap-[5px] sm:gap-3 xl:gap-6 3xl:gap-7 text-16 justify-between md:justify-start w-full mb-[9px] md:mb-0"
           >
             {footerV2Data.bottom.left.map((txt, i) => (
               <span
@@ -186,7 +186,7 @@ const InnerFooter = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-white/45 text-[16px] leading-[1.56] text-center w-full mb-[20px] md:mb-0"
+            className="text-white/45 text-16 leading-[1.56] text-center w-full mb-[20px] md:mb-0"
           >
             ©{new Date().getFullYear()} Imtiaz Development. All Rights Reserved
           </motion.div>
