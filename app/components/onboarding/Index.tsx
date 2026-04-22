@@ -20,6 +20,8 @@ import AgentDetails from "./sections/Individual/AgentDetails";
 import IndividualBankInfo from "./sections/Individual/IndividualBankInfo";
 import IndividualDocuments from "./sections/Individual/IndividualDocuments";
 import IndividualPreviewSubmit from "./sections/Individual/IndividualPreviewSubmit";
+import { SectionHeading } from "../animations/SectionHeading";
+import { motion } from "framer-motion";
 
 interface OnboardingIndexProps {
   tab: Tab;
@@ -182,29 +184,34 @@ export default function OnboardingIndex({
               "linear-gradient(180.26deg, rgba(0, 0, 0, 0) -0.21%, #000000 94.36%)",
           }}
         />
-        <div className="absolute inset-0 z-[2] flex flex-col py-90 3xl:py-[93px]">
-          <div className="flex justify-center">
+        <div className="absolute inset-0 z-[2] flex flex-col justify-between py-90 3xl:py-[93px]">
+          <div className="flex justify-center shrink-0">
             <Link href="/">
               <Image
-                src="/icons/layout_icons/header-logo.svg"
+                src="/icons/layout_icons/logo-onboarding.svg"
                 alt="Imtiaz"
-                width={183}
-                height={50}
+                width={300}
+                height={150}
                 priority
-                className="h-[45px] lg:h-[50px] 2xl:h-[62px] w-auto"
+                className="h-[45px] lg:h-[50px] 2xl:h-[62.06px] w-auto 3xl:w-[221.31px] shrink-0"
               />
             </Link>
           </div>
-          <div className="mt-auto pl-70">
-            <h1 className="text-heading text-white">
-              {tab === "agency" ? "Agency" : "Individual"}
-              <br />
-              Onboarding
-            </h1>
-            <p className="mt-20 text-description text-white/80 max-w-[445px]">
+          <div className="pl-70">
+            <SectionHeading
+              title={`${tab === "agency" ? "Agency" : "Individual"} Onboarding`}
+              className="text-white max-w-[445px]"
+            />
+            <motion.p
+              key={tab}
+              initial={{ opacity: 0.6, y: 35 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="mt-20 text-description text-white/80 max-w-[445px]"
+            >
               Note: Please complete the form in one session, as progress may not
               be saved if you exit midway.
-            </p>
+            </motion.p>
           </div>
         </div>
       </div>
@@ -226,7 +233,7 @@ export default function OnboardingIndex({
             <button
               key={t}
               onClick={() => onTabChange(t)}
-              className={`relative z-10 w-1/2 rounded-full px-90 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
+              className={`relative z-10 w-1/2 flex items-center justify-center rounded-full px-80 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
                 tab === t ? "text-white" : "text-foreground"
               }`}
             >

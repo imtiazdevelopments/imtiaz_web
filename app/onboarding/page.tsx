@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import OnboardingIndex from '@/app/components/onboarding/Index'
 
 export type Tab = 'agency' | 'individual'
@@ -164,7 +165,11 @@ export interface IndividualFormData {
 }
 
 export default function OnboardingPage() {
-  const [tab, setTab] = useState<Tab>('agency')
+    const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const initialTab = (searchParams.get('tab') as Tab) === 'individual' ? 'individual' : 'agency'
+const [tab, setTab] = useState<Tab>(initialTab) 
   const [agencyStep, setAgencyStep] = useState<AgencyStep>('company')
   const [individualStep, setIndividualStep] = useState<IndividualStep>('agentDetails')
   const [completedSteps, setCompletedSteps] = useState<{
@@ -173,6 +178,12 @@ export default function OnboardingPage() {
   }>({ agency: [], individual: [] })
   const [agencyFormData, setAgencyFormData] = useState<AgencyFormData>({})
   const [individualFormData, setIndividualFormData] = useState<IndividualFormData>({})
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('tab', tab)
+    router.replace(`?${params.toString()}`, { scroll: false })
+  }, [tab])
 
   const handleTabChange = (newTab: Tab) => {
     setTab(newTab)
