@@ -149,8 +149,6 @@ export const footerV2Data: FooterV2Data = {
       heading: "WORLD OF IMTIAZ",
       items: [
         { label: "About", link: "/about/our-story" },
-        { label: "Leadership", link: "/about/our-story" },
-        { label: "Vision Mission", link: "/about/our-story" },
         { label: "Careers", link: "/about/careers" },
         { label: "Contact", link: "/contact-us" },
       ],
