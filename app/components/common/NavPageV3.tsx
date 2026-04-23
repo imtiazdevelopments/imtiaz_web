@@ -1200,6 +1200,7 @@ type MenuItem = {
   label: string;
   href?: string;
   isButton?: boolean;
+  newTab?: boolean;
   children?: MenuItem[];
 };
 
@@ -1229,15 +1230,19 @@ function MobileMegaMenu({
     };
   }, []);
 
-  const handleNavigate = (href?: string) => {
-    if (!mounted.current) return;
-    if (href && href !== "#") {
-      setIsMenuOpen?.(false);
-      router.push(href);
+const handleNavigate = (href?: string, newTab?: boolean) => {
+  if (!mounted.current) return;
+  if (href && href !== "#") {
+    if (newTab) {
+      window.open(href, "_blank", "noopener,noreferrer");
     } else {
       setIsMenuOpen?.(false);
+      router.push(href);
     }
-  };
+  } else {
+    setIsMenuOpen?.(false);
+  }
+};
 
   const openSubmenu = (item: (typeof menuItems)[0]) => {
     setExpandedChild(null);
@@ -1430,7 +1435,7 @@ function MobileMegaMenu({
                     if (hasChildren) {
                       setExpandedChild(isExpanded ? null : item.id);
                     } else {
-                      handleNavigate(item.href);
+                      handleNavigate(item.href, item.newTab);
                     }
                   }}
                 >
@@ -1465,7 +1470,7 @@ function MobileMegaMenu({
                             <div
                               key={child.id}
                               className="py-[7px] cursor-pointer border-b border-white/5 last:border-b-0"
-                              onClick={() => handleNavigate(child.href)}
+                              onClick={() => handleNavigate(child.href, child.newTab)}
                             >
                               <span className="text-white/70 font-[avenirRoman] uppercase text-[14px] tracking-wide hover:text-white transition-colors duration-200">
                                 {child.label}
@@ -1484,7 +1489,7 @@ function MobileMegaMenu({
           {buttonItems.length > 0 && (
             <div className="flex flex-row flex-wrap gap-4 mt-8">
               {buttonItems.map((item) => (
-                <div key={item.id} onClick={() => handleNavigate(item.href)}>
+                <div key={item.id} onClick={() => handleNavigate(item.href, item.newTab)}>
                   <CustomOutlineButton
                     text={item.label}
                     borderColor="border-white"
@@ -1542,15 +1547,19 @@ function DesktopMegaMenu({
     }
   };
 
-  const handleNavigate = (href?: string) => {
-    if (!mounted.current) return;
-    if (href && href !== "#") {
-      setIsMenuOpen?.(false);
-      router.push(href);
+const handleNavigate = (href?: string, newTab?: boolean) => {
+  if (!mounted.current) return;
+  if (href && href !== "#") {
+    if (newTab) {
+      window.open(href, "_blank", "noopener,noreferrer");
     } else {
       setIsMenuOpen?.(false);
+      router.push(href);
     }
-  };
+  } else {
+    setIsMenuOpen?.(false);
+  }
+};
 
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
@@ -1783,7 +1792,7 @@ function DesktopMegaMenu({
                         href={item.href}
                         onClick={(e) => {
                           e.preventDefault();
-                          handleNavigate(item.href);
+                          handleNavigate(item.href, item.newTab);
                         }}
                         className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
                       >
@@ -1825,7 +1834,7 @@ function DesktopMegaMenu({
                           href={child.href || "#"}
                           onClick={(e) => {
                             e.preventDefault();
-                            handleNavigate(child.href);
+                            handleNavigate(child.href, child.newTab);
                           }}
                           className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
                         >
@@ -1841,7 +1850,7 @@ function DesktopMegaMenu({
             {buttonItems.length > 0 && (
               <div className="flex flex-row gap-5 mt-40 flex-wrap">
                 {buttonItems.map((item) => (
-                  <div key={item.id} onClick={() => handleNavigate(item.href)}>
+                  <div key={item.id} onClick={() => handleNavigate(item.href, item.newTab)}>
                     <CustomOutlineButton
                       text={item.label}
                       borderColor="border-white"

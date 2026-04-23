@@ -327,18 +327,12 @@ export const subMenuItems = {
   ],
 
   partnership: [
-    { id: "corp", label: "CORPORATE PARTNERSHIP" },
-    { id: "invest", label: "INVEST WITH US" },
-  ],
-
-  channel: [
-    { id: "agent", label: "AGENT PORTAL" },
-    { id: "register", label: "REGISTER AS PARTNER" },
+    { id: "Agency", label: "AGENCY", href: "/onboarding?tab=agency", newTab: true },
+    { id: "individual", label: "INDIVIDUAL", href: "/onboarding?tab=individual", newTab: true },
   ],
 
   paynow: [
     { id: "online", label: "PAY ONLINE", href: "/pay-now" },
-    { id: "payment-methods", label: "Payment Methods", href: "/pay-now" },
   ],
 };
 // export const subMenuItems: Record<string, SubMenuItem[]> = {

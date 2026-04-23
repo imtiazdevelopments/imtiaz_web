@@ -153,7 +153,7 @@ export default function FloatingMobileIcons() {
       </div>
 
       {/* ── Mobile — toggled */}
-      <div ref={wrapperRef} className="fixed bottom-3 right-3 z-[900] lg:hidden">
+      <div ref={wrapperRef} className="fixed bottom-3 right-2 z-[900] lg:hidden">
         <div className="flex flex-col items-end gap-3 mb-3">
           <AnimatePresence>
             {open &&
@@ -169,9 +169,9 @@ export default function FloatingMobileIcons() {
                     ease: [0.34, 1.56, 0.64, 1],
                   }}
                   onClick={onClick}
-                  className="floating-icon w-[45px] h-[45px] rounded-full backdrop-blur-[30px] flex items-center justify-center bg-foreground-light/70 cursor-pointer"
+                  className="floating-icon w-[35px] h-[35px] rounded-full backdrop-blur-[30px] flex items-center justify-center bg-foreground-light/70 cursor-pointer"
                 >
-                  <Image src={src} alt={alt} width={22} height={22} />
+                  <Image src={src} alt={alt} width={18} height={18} />
                 </motion.div>
               ))}
           </AnimatePresence>
@@ -183,13 +183,13 @@ export default function FloatingMobileIcons() {
             e.stopPropagation();
             setOpen((p) => !p);
           }}
-          className="w-[45px] h-[45px] rounded-full bg-foreground-light/60 text-white backdrop-blur-[20px] flex items-center justify-center cursor-pointer"
+          className="w-[35px] h-[35px] rounded-full bg-foreground-light/60 text-white backdrop-blur-[20px] flex items-center justify-center cursor-pointer"
         >
           <Image
             src="/images/icons/iconshare.svg"
             alt="share"
-            width={22}
-            height={22}
+            width={18}
+            height={18}
             className="brightness-0 invert-100"
           />
         </div>
