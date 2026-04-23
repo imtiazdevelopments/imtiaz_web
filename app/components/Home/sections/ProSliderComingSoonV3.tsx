@@ -369,6 +369,7 @@ const fadeUp = {
 
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [authView, setAuthView] = useState<AuthView | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
   // 👇 Only render portal after client mount
   useEffect(() => {
@@ -378,9 +379,9 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // ── GSAP open animation — runs when authView becomes truthy
+  // ── GSAP open animation
   useEffect(() => {
-    if (!authView) return;
+    if (!isModalVisible) return;
 
     requestAnimationFrame(() => {
       if (!backdropRef.current || !modalRef.current) return;
@@ -393,22 +394,11 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
       gsap.fromTo(
         modalRef.current,
-        {
-          opacity: 0,
-          scale: 1.08,
-          filter: "blur(8px)",
-          transformOrigin: "center center",
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.55,
-          ease: "power3.out",
-        },
+        { opacity: 0, scale: 1.08, filter: "blur(8px)", transformOrigin: "center center" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" },
       );
     });
-  }, [authView]);
+  }, [isModalVisible]);
 
   // ── GSAP close animation
   const closeAuth = () => {
@@ -426,7 +416,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       filter: "blur(16px)",
       duration: 0.5,
       ease: "power3.out",
-      onComplete: () => setAuthView(null),
+      onComplete: () => {
+        setAuthView(null);
+        setIsModalVisible(false); // unmount after animation done
+      },
     });
   };
 
@@ -563,7 +556,10 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         animate={inView ? "show" : "hidden"}
                       >
                         <CustomOutlineButton
-                          onClick={() => setAuthView("enquiry")}
+                                                    onClick={() => {
+                            setAuthView("enquiry");
+                            setIsModalVisible(true);
+                          }}
                           text="Register Interest"
                           borderColor="border-white"
                           textColor="text-white"
@@ -581,48 +577,39 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
       {mounted &&
         createPortal(
-          <AnimatePresence mode="wait">
-            {authView && (
+          <>
+            {isModalVisible && (
               <>
                 {/* Backdrop */}
                 <div
                   ref={backdropRef}
-                  className="fixed inset-0 bg-black/80 z-[1000]"
+                  className="fixed inset-0 bg-black/80 z-[1000] cursor-pointer"
                   onClick={closeAuth}
                 />
 
                 {/* Modal */}
                 <div
+                 onClick={closeAuth}
                   ref={modalRef}
                   className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-screen"
                 >
                   <div className="h-full">
                     <div className="relative w-full h-full overflow-hidden pointer-events-none">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={authView}
-                          className="absolute inset-0 overflow-y-auto pointer-events-auto"
-                          onWheel={(e) => e.stopPropagation()}
-                          onTouchMove={(e) => e.stopPropagation()}
-                          initial={{ opacity: 0, x: 0 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 0 }}
-                          transition={{
-                            duration: 0.35,
-                            ease: [0.25, 1, 0.5, 1],
-                          }}
-                        >
-                          <div className="min-h-full flex items-center justify-center py-10">
-                            <RegisterInterestForm onClose={closeAuth} />
-                          </div>
-                        </motion.div>
-                      </AnimatePresence>
+                      <div
+                        className="absolute inset-0 overflow-y-auto pointer-events-auto"
+                        onWheel={(e) => e.stopPropagation()}
+                        onTouchMove={(e) => e.stopPropagation()}
+                      >
+                        <div className="min-h-full flex items-center justify-center py-10">
+                          <RegisterInterestForm onClose={closeAuth} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </>
             )}
-          </AnimatePresence>,
+          </>,
           document.body,
         )}
 

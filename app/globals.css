@@ -136,7 +136,7 @@ html {
  
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
---text-px32: clamp(32px, 0.81vw + 17.3px, 32px);
+--text-px32: clamp(28px, 28px + (100vw - 320px) * (4 / 119), 32px);
  
 /* 30px → 24px at 390px, 30px at 1810px */
 --text-30: clamp(24px, 0.81vw + 17.3px, 30px);
