@@ -91,7 +91,7 @@ export default function HistorySection() {
       className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden"
     >
       {/* ── Header ── */}
-      <div className="container mx-auto px-6 text-center mb-150 lg:mb-50">
+      <div className="container mx-auto px-6 text-center mb-[85px] md:mb-150 lg:mb-50">
         <SectionHeading title={sectionTitle} className="mb-20 uppercase" />
         <SectionDescription
           text={sectionDescription}
@@ -154,10 +154,11 @@ function CardsSlider({
         }}
         className="hidden lg:block absolute w-200 right-0 top-0 h-full z-10"
       />
-      {/* ── Prev btn ── */}
+     <div className="absolute   -top-[65px] lg:top-1/2 lg:-translate-y-1/2 lg:-translate-y-1/2 z-30 flex gap-3 min-w-full justify-center lg:justify-between">
+       {/* ── Prev btn ── */}
       <div
         style={{ paddingLeft: paddingInset }}
-        className="absolute left-0 -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30"
+        className=""
       >
         <button
           onClick={() => swiperRef.current?.slidePrev()}
@@ -165,7 +166,7 @@ function CardsSlider({
               group border border-foreground rounded-full
               flex items-center justify-center overflow-hidden transition-all duration-300"
         >
-          <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+          <span className="absolute left-0 left-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
           <Image
             width={28}
             height={28}
@@ -179,7 +180,7 @@ function CardsSlider({
       {/* ── Next btn ── */}
       <div
         style={{ paddingRight: paddingInset }}
-        className="absolute right-0 -top-[55px] lg:top-1/2 lg:-translate-y-1/2 z-30"
+        className=" "
       >
         <button
           onClick={() => swiperRef.current?.slideNext()}
@@ -199,6 +200,7 @@ function CardsSlider({
           />
         </button>
       </div>
+     </div>
       <div className="relative w-full">
         <Swiper
           modules={[Navigation, Autoplay]}

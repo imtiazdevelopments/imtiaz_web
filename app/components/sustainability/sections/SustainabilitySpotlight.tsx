@@ -250,7 +250,8 @@ export default function SustainabilitySpotlight() {
   const slide = slides[current];
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#EBEBEC] py-120 3xl:py-130">
+    <section ref={sectionRef} className="w-full bg-[#EBEBEC] py-120 3xl:py-130" 
+      data-header="dark">
       <div className="container">
         {/* ══ MOBILE ══════════════════════════════════════════════════════════════ */}
         <div className="flex flex-col items-center lg:hidden">
@@ -327,17 +328,18 @@ export default function SustainabilitySpotlight() {
             slides={slides}
             targetRef={mImgsRef}
             parallaxRef={mParallaxRef}
-            className="w-full relative h-[320px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-50"
+            className="w-full relative h-[328px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-5 md:mb-50"
             pointerHandlers={pointerHandlers}
           />
 
-          <div className="flex justify-center gap-30">
+          <div className="flex justify-between md:justify-center gap-30 w-full">
             <CustomOutlineButton
               variant="dark"
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
               px="px-[12px] sm:px-[26px]"
+              className="min-w-[139px] md:w-full"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton

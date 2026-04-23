@@ -191,7 +191,7 @@ html {
 --space-100: clamp(44px, 3.94vw + 28.6px, 100px);
  
 /* 120px → 50px at 390px, 120px at 1810px */
---space-120: clamp(50px, 4.93vw + 30.8px, 120px);
+--space-120: clamp(70px, 4.93vw + 30.8px, 120px);
  
 /* 130px → 52px at 390px, 130px at 1810px */
 --space-130: clamp(52px, 5.49vw + 30.6px, 130px);
@@ -267,7 +267,7 @@ html {
 }
  
 @utility text-heading {
-  @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-px32 md:text-50;
+  @apply font-[optima] font-[550] uppercase leading-[1.252] md:leading-[1.36] lg:leading-[1.2] text-px32 md:text-50;
 }
  
 @utility text-description {
@@ -914,6 +914,9 @@ input:-webkit-autofill:active {
   .csmtst{margin-top: 5px;}
 }
 
+@media (max-width: 640px) {
+ .awd p{margin-top: 0px !important; font-size: 14px;}
+}
 
 @keyframes expandX {
   from {

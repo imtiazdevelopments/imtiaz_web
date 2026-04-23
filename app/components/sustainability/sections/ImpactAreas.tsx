@@ -39,7 +39,7 @@ const ColItem = ({
   onEnter: (i: number) => void;
 }) => (
   <div
-    className="flex-1 relative flex items-end pb-[60px] md:pb-0 md:items-center justify-center cursor-default min-h-[368px]"
+    className="flex-1 relative flex items-end pb-[130px] md:pb-0 md:items-center justify-center cursor-default min-h-[368px]"
     onMouseEnter={() => onEnter(i)}
   >
     {showDivider && (
@@ -107,7 +107,7 @@ const ColItem = ({
               delay: isActive ? 0.25 : 0,
             },
           }}
-          className="pt-[10px]"
+          className="pt4 md:pt-[10px]"
         >
           <p className="text-white/80 text-16 font-[avenirBook] leading-[1.54] max-w-[507px] mx-auto px-30 3xl:px-5">
             {item.description}
@@ -335,7 +335,22 @@ export default function ImpactAreas({ data }: { data: ImpactAreas }) {
             </SwiperSlide>
           ))}
         </Swiper>
+          {/* Pagination Dots */}
+          <div className="flex gap-3 justify-center items-center z-[50] absolute bottom-[70px] md:bottom-70 left-1/2 -translate-x-1/2">
+            {data.items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => swiperRef.current?.slideToLoop(i)}
+                className={`w-[10px] h-[10px] rounded-full border transition-all cursor-pointer ${
+                  activeIndex === i
+                    ? "bg-white border-white"
+                    : "border-white bg-transparent"
+                }`}
+              />
+            ))}
+          </div>
       </div>
+    
     </section>
   );
 }

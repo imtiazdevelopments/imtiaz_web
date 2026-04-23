@@ -13,10 +13,10 @@ const Expertise = () => {
           />
           <SectionDescription
             text={expertiseData.description}
-            className="text-foreground-light max-w-[720px] text-center whitespace-pre-line mb-50"
+            className="text-foreground-light max-w-[720px] text-center whitespace-pre-line mb-[40px] md:mb-50"
           /> 
             <Link href="/about/expertise">
-                  <CustomOutlineButton text="Learn More" borderColor="border-primary" variant="dark" textColor="text-foreground-light" px="px-[12px] sm:px-[26px] lg:px-[34px]" />
+                  <CustomOutlineButton text="Learn More" borderColor="border-primary" variant="dark" textColor="text-foreground-light" px="px-[12px] sm:px-[26px] lg:px-[34px] min-w-[142px] lg:w-auto" />
             </Link>
       </div>
     </section>

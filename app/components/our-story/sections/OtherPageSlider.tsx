@@ -236,12 +236,14 @@ const goTo = useCallback(
       {/* Container — all visible UI lives here */}
       <div className="container h-full relative z-20">
         {/* Left nav */}
-        <motion.div
+     <div className="absolute  left-0  top-5/7   md:top-1/2 lg:-translate-y-1/2   z-30 flex gap-3 min-w-full justify-center gap-5 md:justify-between">
+    
+          <motion.div
           variants={moveUp(0.3)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute left-[15px] bottom-20 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-30"
+          className=" "
         >
           <button
             onClick={(e) => {
@@ -249,7 +251,7 @@ const goTo = useCallback(
               goPrev();
             }}
             style={{ cursor: "pointer" }}
-            className="relative w-[62px] h-[62px] w-[45px] h-[45px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -268,7 +270,7 @@ const goTo = useCallback(
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute right-[15px] bottom-20 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-30"
+          className=" "
         >
           <button
             onClick={(e) => {
@@ -276,7 +278,7 @@ const goTo = useCallback(
               goNext();
             }}
             style={{ cursor: "pointer" }}
-            className="relative  w-[62px] h-[62px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            className="relative  lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -288,6 +290,7 @@ const goTo = useCallback(
             />
           </button>
         </motion.div>
+      </div>
 
         {/* Center content */}
         <div
@@ -306,7 +309,7 @@ const goTo = useCallback(
             variants={moveUp(0.15)}
             initial="hidden"
             animate="show"
-            className="text-description text-white/80 mb-50 max-w-[50ch]"
+            className="text-description text-white/80 mb-[40px] md:mb-50 max-w-[50ch]"
           >
             {slides[current].description}
           </motion.p>
@@ -316,14 +319,14 @@ const goTo = useCallback(
               text="learn more"
               className="capitalize"
               variant="light"
-              px="px-[12px] sm:px-[26px] lg:px-[34px]"
+              px="px-[12px] sm:px-[26px] lg:px-[34px] min-w-[142px] lg:w-auto"
             />
            </Link>
           </motion.div>
         </div>
 
         {/* Pagination dots */}
-        <div className="absolute bottom-70 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-3">
+        <div className="absolute bottom-[70px] md:bottom-70 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-3">
           {slides.map((_, i) => (
             <button
               key={i}

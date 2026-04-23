@@ -10,7 +10,7 @@ export default function AwardSection() {
   return (
     <section
       data-header="dark"
-      className="relative w-full overflow-hidden flex flex-col"
+      className="relative w-full overflow-hidden flex flex-col max-[640px]:h-[931px]"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -18,8 +18,14 @@ export default function AwardSection() {
           src={awardData.bgImage}
           alt="background"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center hidden min-[640px]:block"
         />
+         <Image
+          src={awardData.bgImagemob}
+          alt="background"
+          fill
+          className="object-cover object-center max-[640px]:block hidden"
+        /> 
       </div>
 
       <div
@@ -30,11 +36,12 @@ export default function AwardSection() {
         }}
       />
 
-      {/* Title block — top */}
-      <div className="relative z-10 flex flex-col items-center pt-120 3xl:pt-130 mb-250 3xl:mb-[384px]">
+      <div className="max-[640px]:flex flex-col justify-between h-full">
+        {/* Title block — top */}
+      <div className="relative z-10 flex flex-col items-center px-5 md:px-0 pt-120 3xl:pt-130 mb-250 3xl:mb-[384px]">
         <SectionHeading
           title={awardData.title}
-          className="max-w-[45ch] text-center mb-20"
+          className="max-[640px]:font-normal max-[640px]:!text-[29px] max-w-[45ch] text-center mb-20"
         />
 
         {/* Divider line */}
@@ -58,7 +65,7 @@ export default function AwardSection() {
           background:
             "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 90%)",
         }}
-        className="relative z-20 w-full h-[471px] flex items-end pb-50"
+        className="relative z-20 w-full h-[471px] flex items-end pb-[70px] md:pb-50"
       >
         <div className="mx-auto text-center container">
           <motion.div
@@ -66,10 +73,11 @@ export default function AwardSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="award-description mx-auto max-w-[1301px] text-description text-white/95 lg:text-white/70"
+            className="award-description awd mx-auto max-w-[1301px] text-description text-white/95 lg:text-white/70"
             dangerouslySetInnerHTML={{ __html: awardData.descriptions }}
           />
         </div>
+      </div>
       </div>
     </section>
   );
