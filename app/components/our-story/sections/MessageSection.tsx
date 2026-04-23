@@ -15,17 +15,18 @@ type Props = {
 export default function MessageSection({ data }: Props) {
   const { ref, parallaxY } = useParallax(15);
   return (
+    <>
     <section
       data-header="dark"
       className="relative h-auto lg:min-h-screen w-full overflow-hidden flex flex-col"
     >
       {/* Background Image */}
-      <div ref={ref} className="absolute inset-0 z-0 overflow-hidden">
+      <div ref={ref} className="absolute inset-0 z-0 overflow-hidden" >
         <Image
           src={data.bgImage}
           alt="background"
           fill
-          className="object-cover"
+          className={`${data?.id === "chairman" ? "" : "object-[80%] object-fill" } object-cover`} 
           style={{
             transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
           }}
@@ -34,11 +35,12 @@ export default function MessageSection({ data }: Props) {
 
       {/* Title */}
       <div className="relative z-10 w-fit mx-auto">
-        <div className="w-full text-center pt-120 3xl:pt-130 mb-20">
+        <div className="w-full text-center px-5 md:px-0 pt-120 3xl:pt-130 mb-20">
           <SectionHeading title={data.title} className="uppercase" />
         </div>
-        <div
-          className="relative w-full max-w-[527px] mx-auto overflow-hidden"
+        <div className="mx-5 md:mx-0">
+          <div
+          className="relative w-full max-w-[527px] mx-auto overflow-hidden "
           style={{ height: "1px" }}
         >
           {/* Left half — draws leftward from center */}
@@ -65,6 +67,7 @@ export default function MessageSection({ data }: Props) {
                 "linear-gradient(90deg, #171717 0%, rgba(23, 23, 23, 0) 100%)",
             }}
           />
+        </div>
         </div>
       </div>
 
@@ -163,27 +166,8 @@ export default function MessageSection({ data }: Props) {
 
           {/* ── MOBILE/TABLET (below lg): stacked layout ── */}
           <div className="lg:hidden flex  mt-50 md:mt-80 flex-col-reverse sm:flex-col">
-             <div className="sm:hidden mb-50">
-              <motion.p
-                variants={moveUp(0)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="font-[optima] leading-[1.4] uppercase tracking-[2%] text-primary text-[20px] mb-1"
-              >
-                {data.name}
-              </motion.p>
-              <motion.p
-                variants={moveUp(0.12)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="text-description text-foreground-light"
-              >
-                {data.designation}
-              </motion.p>
-            </div>
-            <div className="min-[820]:hidden">
+            
+            <div className="max-[640]:hidden min-[820]:hidden">
               <SectionDescription
                 text={data.description}
                 className="text-description text-foreground-light whitespace-pre-line mb-20 sm:mb-50 mt-20 sm:mt-0"
@@ -193,10 +177,10 @@ export default function MessageSection({ data }: Props) {
            
 
             <div
-              className={`${data?.id === "chairman" ? "flex-row" : "flex-row-reverse"} flex justify-between min-[820px]:items-end`}
+              className={`${data?.id === "chairman" ? "max-[640px]:flex-col flex-row" : "max-[640px]:flex-col flex-row-reverse"} flex justify-between max-[640px]:items-center min-[820px]:items-end`}
             >
-              <div className="flex w-[40%] flex-col h-hull justify-between">
-                <div className="flex flex-col gap-20">
+              <div className="flex min-[640px]:w-[40%] flex-col h-hull justify-between">
+                <div className="flex flex-col max-[640px]:mb-[40px] max-[640px]:gap-[10px] gap-20 max-[640px]:items-center">
                   <motion.div
                     variants={moveUp(0)}
                     initial="hidden"
@@ -217,7 +201,7 @@ export default function MessageSection({ data }: Props) {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="font-[optima] uppercase tracking-[2%] text-primary text-sm leading-snug"
+                    className="font-[optima] uppercase tracking-[2%] text-primary text-[18px] min-[640px]:text-sm text-center min-[640px]:text-left leading-snug"
                   >
                     {data.quote}
                   </motion.p>
@@ -251,14 +235,33 @@ export default function MessageSection({ data }: Props) {
                   </motion.p>
                 </div>
               </div>
-
+        <div className="min-[640px]:hidden mb-50 text-center">
+                    <motion.p
+                      variants={moveUp(0)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      className="font-[optima] leading-[1.4] uppercase tracking-[2%] text-primary text-[18px] mb-1"
+                    >
+                      {data.name}
+                    </motion.p>
+                    <motion.p
+                      variants={moveUp(0.12)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      className="text-[14px] text-description text-foreground-light"
+                    >
+                      {data.designation}
+                    </motion.p>
+                  </div>
               {/* Right: person image, bottom-aligned */}
               <motion.div
                 variants={moveUp(0.12)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="flex items-end justify-center h-full w-[60%]"
+                className="flex items-end justify-center h-full max-[640px]:w-[74%] w-[60%]"
               >
                 <Image
                   src={data.personImage}
@@ -268,11 +271,20 @@ export default function MessageSection({ data }: Props) {
                   className="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain object-bottom"
                   priority
                 />
+                 
               </motion.div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+                <div className="min-[640]:hidden container">
+                  <SectionDescription
+                    text={data.description}
+                    className="text-description text-foreground-light whitespace-pre-line mb-[70px] sm:mb-50 mt-20 sm:mt-0"
+                  />
+                </div>
+                </>
   );
 }

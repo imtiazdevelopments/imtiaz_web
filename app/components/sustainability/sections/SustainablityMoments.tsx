@@ -33,7 +33,7 @@ export default function SustainablityMoments() {
   const frameCount = useRef(0);
   const scale = useTrackScale();
   const hoveredCol = useRef<number | null>(null);
-
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -104,7 +104,7 @@ export default function SustainablityMoments() {
       className="w-full py-120 3xl:py-160 overflow-hidden"
       data-header="dark"
     >
-      <div className="container text-center mb-60">
+      <div className="container text-center mb-[40px] md:mb-60">
         <SectionHeading
           title={momentsOfSustainability.title}
           className="uppercase text-foreground mb-20"
@@ -202,7 +202,7 @@ export default function SustainablityMoments() {
                       className="relative flex-shrink-0 overflow-hidden"
                       style={{
                         width: `${img.width}px`,
-                        height: `${img.height}px`,
+                       height: isMobile ? "100%" : `${img.height}px`,
                       }}
                     >
                       <Image
@@ -266,7 +266,7 @@ export default function SustainablityMoments() {
                     className="relative overflow-hidden"
                     style={{
                       width: `${slide.peekImage.width}px`,
-                      height: `${slide.peekImage.height}px`,
+                      height: slide.peekImage.width < 768 ? "100%" : `${slide.peekImage.height}px`,
                     }}
                   >
                     <Image

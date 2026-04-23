@@ -186,9 +186,9 @@ export default function EnquirySection() {
               />
               <SectionDescription
                 text={enquiryData.subheading}
-                className="text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]"
+                className="text-white/80 max-w-[47ch] mb-[40px] xl:mb-[40px]"
               />
-              <div className="flex flex-col gap-40">
+              <div className="flex flex-col gap-5 md:gap-40">
                 {enquiryData.contacts.map((c) => (
                   <Reveal variants={moveUpV2} key={c.id}>
                     <Link
@@ -196,9 +196,24 @@ export default function EnquirySection() {
                       href={c.href}
                       className="flex items-center gap-20 group"
                     >
-                      <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
-                        {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
-                      </span>
+                      <div className="w-[50px] h-[50px] lg:w-[79px] lg:h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                        {c.icon === "phone" ? <Image
+                src="/images/icons/call01.svg"
+                alt="overimg"
+                width={32}
+                height={32}
+                className=" w-[24px] h-[24px] lg:w-[32px] lg:h-[32px]  "
+                
+              /> : 
+              <Image
+                src="/images/icons/sms.svg"
+                alt="overimg"
+                width={32}
+                height={32}
+                className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px]  "
+                
+              />}
+                      </div>
                       <span className="text-white text-25 uppercase font-[avenirBook] leading-[1.2]">
                         {c.label}
                       </span>
@@ -245,7 +260,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-2 gap-x-100 mb-40"
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-x-100 mb-40"
                 >
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>

@@ -66,6 +66,7 @@ export const philosophyData = {
 export const awardData = {
   title: "Mohammed Bin Rashid Al \n Maktoum Medal for Philanthropy.",
   bgImage: "/images/our-story/award-bg.jpg",
+  bgImagemob: "/images/our-story/awardmob.jpg",
   descriptions:
     "<p>Imtiaz Developments has been honoured with the prestigious Mohammed bin Rashid Al Maktoum Medal for Philanthropy, awarded by His Highness Shaikh Mohammad Bin Rashid Al Maktoum, Vice President and Prime Minister of the UAE and Ruler of Dubai. The accolade was presented at the Mohammed bin Rashid Al Maktoum Global Initiatives (MBRGI) Year in Review event on 18 March 2025 at the Dubai World Trade Centre.</p><p>This esteemed recognition celebrates the company's unwavering commitment to philanthropy, sustainability, and community development. A defining element of the award is Imtiaz Developments' substantial donation of Dh50 million to MBRGI's Father's Endowment campaign.</p>",
 };

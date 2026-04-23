@@ -14,9 +14,22 @@ export default function VisionSection() {
   return (
     <section
       data-header="dark"
-      className="make relative w-full overflow-hidden text-white h-[88vh] xl:h-[95vh]"
+      className="make   "
     >
-      {/* Background Image */}
+          <div className=" pt-[70px] pb-[40px] md:hidden">
+            <div className="container">
+            <SectionHeading
+              title={title}
+              className="uppercase text-foreground mb-20"
+            />
+            <SectionDescription
+              text={description}
+              className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
+            />
+          </div>
+        </div>
+     <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[88vh] xl:h-[95vh]">
+       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
         <Image
           src={bgImage}
@@ -38,17 +51,19 @@ export default function VisionSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 pt-120 3xl:pt-130 pb-60 text-center flex flex-col justify-between items-center h-full container">
+      <div className="relative z-10 pt-120 3xl:pt-130 pb-60 text-center flex flex-col justify-end md:justify-between items-center h-full container">
         {/* Title and Description */}
-        <div>
-          <SectionHeading
-            title={title}
-            className="uppercase text-foreground mb-20"
-          />
-          <SectionDescription
-            text={description}
-            className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
-          />
+        <div className="hidden md:block">
+            <div>
+            <SectionHeading
+              title={title}
+              className="uppercase text-foreground mb-20"
+            />
+            <SectionDescription
+              text={description}
+              className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
+            />
+          </div>
         </div>
 
         {/* Stats */}
@@ -57,7 +72,7 @@ export default function VisionSection() {
             <Reveal variants={moveUpV2} key={index}>
               <div className="flex items-stretch">
                 {/* Column */}
-                <div className="py-35 px-30 text-center flex flex-col justify-center">
+                <div className="py-35 ps-0 pe-5 md:px-30 last:pe-0 last:ps-5 last:md:px-30 text-center flex flex-col justify-center">
                   <motion.h3
                     variants={moveUp(0)}
                     initial="hidden"
@@ -72,7 +87,7 @@ export default function VisionSection() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-25 leading-[1.4] uppercase font-[optima] tracking-[2%]"
+                    className="text-[18px] md:text-25 leading-[1.4] uppercase font-[optima] tracking-[2%]"
                   >
                     {item.label}
                   </motion.p>
@@ -95,6 +110,7 @@ export default function VisionSection() {
           ))}
         </div>
       </div>
+     </div>
     </section>
   );
 }
