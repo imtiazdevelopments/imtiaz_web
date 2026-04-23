@@ -334,6 +334,8 @@ import { useInView } from "framer-motion";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import "swiper/css";
 import "swiper/css/navigation";
+import { createPortal } from "react-dom";
+import RegisterInterestForm from "@/app/components/Home/sections/RegisterInterestForm";
 
 import { moveUpExit, moveUp } from "../../motionVariants";
 import Link from "next/link";
@@ -372,6 +374,11 @@ const fadeUp = {
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [enquiryVisible, setEnquiryVisible] = useState(false);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const sectionRef = useRef(null);
   const startAnim = useInView(sectionRef, { once: true, amount: 0.3 });
@@ -394,6 +401,61 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!enquiryOpen) return;
+    setEnquiryVisible(true);
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    if (!backdropRef.current || !modalRef.current) return;
+    gsap.fromTo(
+      backdropRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power2.out" },
+      );
+      gsap.fromTo(
+        modalRef.current,
+        {
+          opacity: 0,
+          scale: 1.08,
+          filter: "blur(8px)",
+          transformOrigin: "center center",
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 0.55,
+          ease: "power3.out",
+        },
+      );
+    });
+    });
+  }, [enquiryOpen]);
+
+  const closeModal = () => {
+    if (!backdropRef.current || !modalRef.current) return;
+    gsap.to(backdropRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+    });
+    gsap.to(modalRef.current, {
+      opacity: 0,
+      scale: 1.06,
+      filter: "blur(16px)",
+      duration: 0.5,
+      ease: "power3.out",
+      onComplete: () => {
+        setEnquiryVisible(false);
+        setEnquiryOpen(false);
+      },
+    });
+  };
+
   // Fast nav
   const handlePrev = () => {
     if (!swiperInstance) return;
@@ -408,16 +470,15 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
   return (
     <div className="w-full relative h-screen" ref={sectionRef}>
-
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* <Image
+        {/* <Image
             src="/images/home/pro-slider/bg-1.jpg"
             alt=""
             width={2520}
             height={1580}
             className="w-full h-full object-cover pointer-events-none"
           /> */}
-          <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0 bg-black" />
       </div>
 
       {/* ── Swiper with per-slide videos (z-10) ──────────────────────────────── */}
@@ -438,7 +499,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full h-full flex flex-col pt-15 lg:pt-0 justify-center items-center">
-
                 {/* VIDEO BG per slide */}
                 <div
                   className="absolute inset-0 -z-10 overflow-hidden"
@@ -545,7 +605,12 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                               key={`${idx}-${activeIndex}`}
                             >
                               <motion.div className="flex items-center gap-3">
-                                <Image src={f.icon} width={20} height={20} alt={f.label} />
+                                <Image
+                                  src={f.icon}
+                                  width={20}
+                                  height={20}
+                                  alt={f.label}
+                                />
                                 <span className="text-white text-16 text-description uppercase">
                                   {f.label}
                                 </span>
@@ -562,17 +627,26 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                             animate={startAnim ? "show" : "hidden"}
                             className="flex gap-4 font-[avenirRoman] overflow-hidden px-[15px] md:px-0 w-full"
                           >
-                            <motion.div variants={moveUp(0.2)} className="w-full">
+                            <motion.div
+                              variants={moveUp(0.2)}
+                              className="w-full"
+                            >
                               <CustomOutlineButton
                                 className="w-full"
                                 text="Register"
                                 borderColor="border-white"
                                 textColor="text-white"
                                 px="px-[18px] h-[50px] md:h-[66px] !leading-[1.58]"
+                                onClick={() => setEnquiryOpen(true)}
                               />
                             </motion.div>
-                            <motion.div variants={moveUp(0.5)} className="w-full">
-                              <Link href={`/properties/${slide.title.toLowerCase().replace(/\s+/g, "-")}`}>
+                            <motion.div
+                              variants={moveUp(0.5)}
+                              className="w-full"
+                            >
+                              <Link
+                                href={`/properties/${slide.title.toLowerCase().replace(/\s+/g, "-")}`}
+                              >
                                 <CustomOutlineButton
                                   text="Explore"
                                   className="w-full"
@@ -588,7 +662,6 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     </div>
                   </motion.div>
                 </div>
-
               </div>
             </SwiperSlide>
           ))}
@@ -636,7 +709,36 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           </button>
         </div>
       </motion.div>
-
+      {mounted &&
+        enquiryVisible &&
+        createPortal(
+          <>
+            <div
+              ref={backdropRef}
+              className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-[6px] opacity-0"
+              onClick={closeModal}
+            />
+            <div
+              ref={modalRef}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1001] w-full h-screen"
+            >
+              <div className="h-full">
+                <div className="relative w-full h-full overflow-hidden pointer-events-none">
+                  <div
+                    className="absolute inset-0 overflow-y-auto pointer-events-auto"
+                    onWheel={(e) => e.stopPropagation()}
+                    onTouchMove={(e) => e.stopPropagation()}
+                  >
+                    <div className="min-h-full flex items-center justify-center py-10">
+                      <RegisterInterestForm onClose={closeModal} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>,
+          document.body,
+        )}
     </div>
   );
 }
