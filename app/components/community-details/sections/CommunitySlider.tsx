@@ -168,7 +168,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
               swiper.animating = false;
               swiper.slidePrev();
             }}
-            className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px]   border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -196,7 +196,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
               swiper.animating = false;
               swiper.slideNext();
             }}
-            className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px]   border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image

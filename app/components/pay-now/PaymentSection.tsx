@@ -46,7 +46,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-0 md:mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-[5px] md:mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const projects = [
   "Project Alpha",
@@ -454,7 +454,7 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="mt-[50px] md:mt-30 "
+              className="mt-[30px] md:mt-30 "
             >
               <CustomOutlineButton
                 text="Next"
@@ -463,7 +463,7 @@ export default function PaymentForm() {
                 variant="dark"
                 textColor="text-foreground-light"
                 borderColor="border-primary-2"
-                px="px-60"
+                px="px-10 md:px-60 h-[50px] md:h-[67px]"
               />
             </motion.div>
           </form>
