@@ -93,7 +93,7 @@ export default function EnquirySection() {
   }, []);
 
   const inputClass =
-    "w-full mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto placeholder-transparent";
+    "w-full mt-[5px] md:mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto placeholder-transparent";
   const labelClass =
     "block text-description text-foreground-light/50 transition-colors group-focus-within:text-black";
 
@@ -166,7 +166,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-1 gap-x-100 mb-40"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-[20px] md:gap-70 3xl:gap-90"
                 >
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>
@@ -206,7 +206,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-40"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-x-100 mb-1  md:mb-40"
                 >
                   <div className="group">
                     <label htmlFor="email" className={labelClass}>
@@ -228,13 +228,13 @@ export default function EnquirySection() {
                     <ErrorSlot msg={errors.email?.message} />
                   </div>
 
-                  <div className="group mt-40 md:mt-0">
+                  <div className="group mt-[20px] md:mt-0">
                     <label htmlFor="phone" className={labelClass}>
                       Enter Phone no*
                     </label>
                     <div
                       ref={phoneRowRef}
-                      className="flex items-end pt-20 gap-2"
+                      className="flex items-end pt-[3px] md:pt-20 gap-2"
                     >
                       <CountryCodeSelect
                         value={watch("phoneCode")}
@@ -266,7 +266,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="group mb-40"
+                  className="group mb-5 md:mb-40"
                 >
                   <div className="group relative flex flex-col self-end">
                     <Image
@@ -304,14 +304,14 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="group mb-40"
+                  className="group mb-5 md:mb-40"
                 >
                   <label htmlFor="message" className={labelClass}>
                     Type your message here...*
                   </label>
                   <input
                     id="message"
-                    className="w-full text-description mt-40 pb-[5px] text-foreground-light bg-transparent outline-none p-0 resize-none"
+                    className="w-full text-description mt-[55px] md:mt-40 pb-[5px] text-foreground-light bg-transparent outline-none p-0 resize-none"
                     {...register("message", {
                       required: "Message is required",
                     })}
@@ -328,7 +328,7 @@ export default function EnquirySection() {
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true }}
-                      className="text-25 font-[optima] leading-[1.4] uppercase text-foreground-light mb-20"
+                      className="text-14 md:text-25 font-[optima] leading-[1.4] uppercase text-foreground-light mb-[10px] md:mb-20"
                     >
                       Preferred Mode of Contact
                     </motion.p>
@@ -463,7 +463,7 @@ export default function EnquirySection() {
                   text="Enquire"
                   textColor="text-foreground-light"
                   borderColor="border-foreground-light"
-                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px]"
+                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px] h-[50px] md-h-[67px]"
                 />
               </form>
             </div>

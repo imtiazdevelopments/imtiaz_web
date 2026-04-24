@@ -171,7 +171,7 @@ export default function SwiperModal({
             animate="show"
             className="absolute left-20 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
           >
-            <button className="modal-swiper-prev cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
+            <button className="modal-swiper-prev cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px]  border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
               <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
                 src="/icons/left_arrow_slider_primary.svg"
@@ -190,7 +190,7 @@ export default function SwiperModal({
             animate="show"
             className="absolute right-20 top-1/2 -translate-y-1/2 z-30 pointer-events-auto"
           >
-            <button className="modal-swiper-next cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
+            <button className="modal-swiper-next cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative">
               <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
               <Image
                 src="/icons/left_arrow_slider_primary.svg"
