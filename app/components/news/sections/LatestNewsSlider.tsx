@@ -34,7 +34,7 @@ const LatestNewsSlider = ({ news }: { news: PressItem[] }) => {
       {/* Swiper */}
       <div
         ref={ref}
-        className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px] cursor-grab"
+        className="relative w-full h-[453px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px] cursor-grab"
       >
         <Swiper
           modules={[Autoplay, EffectFade]}
@@ -79,8 +79,8 @@ const LatestNewsSlider = ({ news }: { news: PressItem[] }) => {
         {/* Content overlay — outside Swiper slides */}
         <div className="absolute inset-0 flex flex-col items-center justify-between py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
           {/* Top label */}
-          <div>
-            <span className="text-19 leading-[100%] text-white font-[avenirBook] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
+          <div  >
+            <span className="hidden md:block text-19 leading-[100%] text-white font-[avenirBook] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
               Latest News
             </span>
           </div>
@@ -90,7 +90,7 @@ const LatestNewsSlider = ({ news }: { news: PressItem[] }) => {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`cat-${activeIndex}`}
-                className="text-white/80 text-description mb-20 capitalize"
+                className="text-white/80 text-description mb-20 capitalize hidden md:block"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}

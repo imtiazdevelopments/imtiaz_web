@@ -20,7 +20,7 @@ const EventCard = ({ item }: { item: PressItem }) => {
       {/* Image + Category Bar */}
       <div
         ref={ref}
-        className="relative w-full h-[250px] xl:h-[333px] overflow-hidden"
+        className="relative w-full h-[207px] md:h-[250px] xl:h-[333px] overflow-hidden"
         style={{ willChange: "transform" }} // 👈 promote to GPU layer early
       >
         <Image
@@ -45,7 +45,7 @@ const EventCard = ({ item }: { item: PressItem }) => {
 
         {/* Category & Date Bar */}
         <div
-          className="absolute bottom-0 left-0 right-0 py-[12px] flex items-center justify-center"
+          className="absolute bottom-0 left-0 right-0 py-[10px] md:py-[12px] flex items-center justify-center"
           style={{
             backdropFilter: "blur(30px)",
             WebkitBackdropFilter: "blur(20px)", // 👈 Safari needs this explicitly
@@ -54,23 +54,23 @@ const EventCard = ({ item }: { item: PressItem }) => {
             isolation: "isolate", // 👈 prevents bleed from parent transform
           }}
         >
-          <span className="text-white/80 font-[avenirBook] text-16 leading-[1.54]">
+          <span className="text-white/80 font-[avenirBook] text-[14px] md:text-16 leading-[1.54]">
             {item.category} - {formatted}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="relative bg-[#EBEBEC] p-40 flex flex-col items-center gap-20 overflow-hidden group">
+      <div className="relative bg-[#EBEBEC] py-[30px] p-40 flex flex-col items-center gap-[20px] md:gap-20 overflow-hidden group">
         {/* white/30 fill animation */}
         <div className="absolute inset-0 bg-white/30 origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
         {/* content */}
-        <h3 className="relative text-25 leading-[1.4] font-[optima] font-[400] text-foreground text-center uppercase line-clamp-2">
+        <h3 className="relative text-[18px] md:text-25 leading-[1.4] font-[optima] font-[400] text-foreground text-center uppercase line-clamp-2">
           {item.title}
         </h3>
 
-        <span className="relative text-primary-2 font-[avenirBook] font-[800] leading-[100%] text-19">
+        <span className="relative text-primary-2 font-[avenirBook] font-[800] leading-[100%] text-[16px] md:text-19">
           <span>Read More</span>
 
           {/* base line */}

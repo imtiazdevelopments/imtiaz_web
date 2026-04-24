@@ -57,7 +57,7 @@ const Pagination = ({
   const pages = getPages();
 
   return (
-    <div className="flex items-end mt-50 md:mt-60 2xl:mt-100">
+    <div className="flex items-end mt-[40px] md:mt-60 2xl:mt-100  ">
       {pages.map((page, i) => {
         const isEllipsis = page === "...";
         const isActive = page === currentPage;
@@ -79,7 +79,7 @@ const Pagination = ({
           <div key={page} className="flex flex-col items-center">
             <button
               onClick={() => handleClick(page as number)}
-              className="text-[#490905] font-[avenirBook] text-19 leading-[100%] px-4 py-2 transition-opacity duration-200 hover:opacity-60 cursor-pointer"
+              className="text-[#490905] font-[avenirBook] text-[16px] text-19 leading-[100%] px-[9px] md:px-4 py-2 transition-opacity duration-200 hover:opacity-60 cursor-pointer"
             >
               {page}
             </button>

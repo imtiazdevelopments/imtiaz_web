@@ -132,7 +132,7 @@ html {
 --text-70: clamp(33px, 2.76vw + 20px, 70px);
  
 /* 50px → 28px at 390px, 50px at 1810px */
---text-50: clamp(28px, 1.55vw + 22px, 50px);
+--text-50: clamp(30px, 1.55vw + 22px, 50px);
  
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
@@ -173,7 +173,7 @@ html {
 --space-40: clamp(24px, 1.22vw + 19.6px, 40px);
  
 /* 50px → 28px at 390px, 50px at 1810px */
---space-50: clamp(28px, 1.55vw + 21.9px, 50px);
+--space-50: clamp(30px, 1.55vw + 21.9px, 50px);
  
 /* 60px → 32px at 390px, 60px at 1810px */
 --space-60: clamp(32px, 1.97vw + 24.3px, 60px);
@@ -722,6 +722,20 @@ body {
   text-decoration: underline;
   text-underline-offset: 2px;
   font-size: var(--text-19);
+}
+@media (max-width: 767.78px) {
+ .blog-content h2,.blog-content h3 {
+  font-size: 18px; 
+}
+.blog-content ul li,
+.blog-content p {
+    font-size: 14px;
+}
+.blog-content img { 
+    min-height: 352px;
+    max-height: 400px; 
+}
+
 }
  
 /* sustainability moments slider */

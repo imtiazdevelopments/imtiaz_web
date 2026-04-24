@@ -95,7 +95,7 @@ const imgRefs = useRef<(HTMLDivElement | null)[]>([]);
                   className="service-card flex flex-col md:flex-row flex-1"
                 >
                   {/* Image */}
-                  <div className="relative w-full md:w-[42.7%] overflow-hidden shrink-0 self-stretch min-h-[191px] lg:min-h-[320px]">
+                  <div className="relative w-full md:w-[42.7%] overflow-hidden shrink-0 self-stretch min-h-[191px] sm:min-h-[250px] md:min-h-[320px]">
                     {/* This div gets scaled — image fills it completely */}
                     <div
                       ref={(el) => {

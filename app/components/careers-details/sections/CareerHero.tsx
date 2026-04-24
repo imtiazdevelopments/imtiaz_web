@@ -32,7 +32,7 @@ const CareerHero = ({ jobDescription }: Props) => {
 
   const closeAuth = () => setAuthView(null);
   return (
-    <section className="w-full pt-200" data-header="dark">
+    <section className="w-full pt-[174px] md:pt-200" data-header="dark">
       <div className="container ">
         <div className="flex flex-col pt-120 md:pt-0 2xl:!max-w-[1322px] mx-auto">
           {/* Breadcrumb */}

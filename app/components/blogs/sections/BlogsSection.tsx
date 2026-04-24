@@ -178,20 +178,20 @@ const BlogsSection = () => {
 
   return (
     <section
-      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      className="w-full bg-white pt-5 md:pt-70 pb-120 3xl:pb-160"
       data-header="dark"
     >
       <div className="container">
         {/* Filters Row */}
         <motion.div
-          className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70"
+          className="flex flex-col md:flex-row gap-30 items-center justify-between mb-[30px] md:mb-70"
           variants={containerStagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
           <motion.div
-            className="flex flex-col md:flex-row items-center gap-30 w-full md:w-auto"
+            className="flex flex-col md:flex-row items-center gap-5 gap-30 w-full md:w-auto"
             variants={containerStagger}
           >
             <motion.div className="w-full md:w-auto" variants={moveUp(0)}>
@@ -233,7 +233,7 @@ const BlogsSection = () => {
           )}
         </motion.div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[30px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -264,7 +264,7 @@ const BlogsSection = () => {
             <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
           </motion.div>
           {/* Divider */}
-          <div className="w-full my-50">
+          <div className="w-full my-[40px] my-50">
             <div className="relative w-full h-px overflow-hidden">
               <motion.div
                 className="absolute inset-0 bg-black/10 origin-center"
@@ -280,7 +280,7 @@ const BlogsSection = () => {
         {/* Blog Cards Grid */}
         <div id="blog-list" className="scroll-mt-20">
           {paginated.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-40 gap-40">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[20px] md:gap-x-40   gap-40">
               {paginated.map((blog) => (
                 <Reveal key={blog.id} variants={moveUpV2}>
                   <div>

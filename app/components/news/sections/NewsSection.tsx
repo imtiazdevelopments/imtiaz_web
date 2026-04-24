@@ -199,7 +199,7 @@ const NewsSection = () => {
 
   return (
     <section
-      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      className="w-full bg-white pt-5 md:pt-70 pb-120 3xl:pb-160"
       data-header="dark"
     >
       <div className="container">
@@ -271,7 +271,7 @@ const NewsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="lg:hidden mb-70"
+          className="lg:hidden mb-[30px] md:b-70"
         >
           {/* Toggle button */}
           <button
@@ -333,7 +333,7 @@ const NewsSection = () => {
           </div>
         </motion.div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[30px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -364,7 +364,7 @@ const NewsSection = () => {
           >
             <LatestNewsSlider news={latestNews.slice(0, 3)} />
           </motion.div>
-          <div className="w-full my-50">
+          <div className="w-full my-[40px] md:my-50">
             <div className="relative w-full h-px overflow-hidden">
               <motion.div
                 className="absolute inset-0 bg-black/10 origin-center"
@@ -379,7 +379,7 @@ const NewsSection = () => {
 
         <div id="news-list" className="scroll-mt-20">
           {paginated.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-40">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-5 md:gap-y-40">
               {paginated.map((item) => (
                 <Reveal variants={moveUpV2} key={item.id}>
                   <NewsCard item={item} />

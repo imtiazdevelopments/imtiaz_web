@@ -9,7 +9,7 @@ const EventCard = ({ item }: { item: EventItem }) => {
 
   return (
     <Link href={`/media-center/events/${item.slug}`} className="group block">
-      <div ref={ref} className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden">
+      <div ref={ref} className="relative w-full h-[453px] lg:h-[480px] 3xl:h-[522px] overflow-hidden">
                 {/* hover fill overlay */}
         {/* <div className="absolute inset-0 bg-black/10 origin-left scale-x-0 transition-transform duration-500 z-20 ease-out group-hover:scale-x-100 pointer-events-none" /> */}
         <Image
@@ -30,11 +30,11 @@ const EventCard = ({ item }: { item: EventItem }) => {
           className="absolute inset-0 lg:hidden"
           style={{ background: "linear-gradient(182.34deg, rgba(0, 0, 0, 0) 15.48%, #000000 98.07%)" }}
         />
-        <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50 z-20">
-          <h3 className="text-white uppercase text-25 font-[optima] tracking-[2%] leading-[1.4] mb-40 text-center line-clamp-2">
+        <div className="absolute inset-0 flex flex-col justify-end items-center py-[30px] md:py-40 px-50 z-20">
+          <h3 className="text-white uppercase text-[18px] text-25 font-[optima] tracking-[2%] leading-[1.4] mb-5 md:mb-40 text-center line-clamp-2">
             {item.title}
           </h3>
-          <CustomOutlineButton text="Read More" px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"/>
+          <CustomOutlineButton text="Read More" px="px-[30px] md:px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[50px] md:h-[67px]"/>
         </div>
       </div>
     </Link>
