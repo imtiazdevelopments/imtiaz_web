@@ -98,7 +98,7 @@ const FilterDropdown = ({
   return (
     <div
       ref={ref}
-      className={`relative w-full min-w-[220px] 3xl:w-[253px] ${className ?? ""}`}
+      className={`relative w-full sm:min-w-[220px] 3xl:w-[253px] ${className ?? ""}`}
     >
       {/* Trigger */}
       <button
