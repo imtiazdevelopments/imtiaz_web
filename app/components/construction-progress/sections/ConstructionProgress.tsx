@@ -708,7 +708,7 @@ export default function ConstructionProgress() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex justify-center gap-5 md:gap-4 mb-[40px] lg:mb-50 py-20 border-b border-t border-black/10"
+          className="flex justify-center gap-20 md:gap-4 mb-[40px] lg:mb-50 py-20 border-b border-t border-black/10"
         >
           {constructionData.map((year) => (
             <TabButton
@@ -729,7 +729,7 @@ export default function ConstructionProgress() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-2  gap-x-50 gap-y-5 md:gap-y-[30px] md:gap-y-50 3xl:gap-y-70"
+              className="grid grid-cols-1 md:grid-cols-2  gap-x-50 gap-y-20 gap-y-50 3xl:gap-y-70"
             >
               {currentYearData?.months.map((month, idx) => (
                 <MonthCard

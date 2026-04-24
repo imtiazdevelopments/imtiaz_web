@@ -119,7 +119,7 @@ export default function VacanciesSection() {
   return (
     <section className="bg-gray py-120 2xl:py-130">
       {/* Heading + Description */}
-      <div className="container text-center mb-50">
+      <div className="container text-center mb-[40px] md:mb-50">
         <SectionHeading
           title={vacanciesConfig.section.title}
           className="mb-20 text-foreground"
@@ -130,9 +130,9 @@ export default function VacanciesSection() {
         />
 
         {/* Filters */}
-        <div className="flex items-center justify-center gap-[10px] flex-wrap">
+        <div className="flex items-center justify-center gap-[10px]">
           <motion.div
-            className="w-full sm:w-auto"
+            className="w-[170px] sm:w-auto"
             variants={moveUp(0)}
             initial="hidden"
             whileInView="show"
@@ -147,7 +147,7 @@ export default function VacanciesSection() {
             />
           </motion.div>
           <motion.div
-            className="w-full sm:w-auto"
+            className="w-[170px] sm:w-auto"
             variants={moveUp(0.12)}
             initial="hidden"
             whileInView="show"
@@ -167,7 +167,7 @@ export default function VacanciesSection() {
       {/* Cards Grid */}
       <div id="vacancies-list" className="container scroll-mt-20">
         {paginated.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-30 gap-y-40">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-30 gap-y-20 md:gap-y-40">
             {paginated.map((career, i) => (
               <Reveal key={career.id} variants={moveUpV2} delayRange={0.11 * i}>
                 <CareerCard career={career} />

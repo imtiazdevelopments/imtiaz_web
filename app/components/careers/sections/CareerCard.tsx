@@ -10,9 +10,9 @@ interface CareerCardProps {
 
 export default function CareerCard({ career }: CareerCardProps) {
   return (
-    <div className="bg-white p-30 flex flex-col hover:scale-[1.03] transition-all duration-500">
+    <div className="bg-white p-20 sm:p-30 flex flex-col hover:scale-[1.03] transition-all duration-500">
       {/* Top row — location + job type */}
-      <div className="flex items-center justify-between mb-30">
+      <div className="flex items-center justify-between mb-[30px]">
         <div className="flex items-center gap-[10px]">
           <Image
             src="/images/careers/location.svg"
@@ -25,7 +25,7 @@ export default function CareerCard({ career }: CareerCardProps) {
             {career.location}
           </span>
         </div>
-        <span className="text-description text-foreground-light">
+        <span className="text-[14px] sm:text-description text-foreground-light">
           {career.jobType}
         </span>
       </div>
@@ -36,7 +36,7 @@ export default function CareerCard({ career }: CareerCardProps) {
       </h3>
 
       {/* Description */}
-      <p className="text-description mb-20">
+      <p className="text-foreground-light text-[14px] sm:text-description mb-20">
         {career.description}
       </p>
 
@@ -44,7 +44,7 @@ export default function CareerCard({ career }: CareerCardProps) {
       <div>
         <Link href="careers/career-details">
         <CustomOutlineButton 
-          className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px]"
+          className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px] h-[50px] md:h-[67px]"
           text="Apply Now"
           borderColor="border-primary"
           textColor="text-foreground-light"
