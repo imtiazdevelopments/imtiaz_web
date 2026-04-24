@@ -10,6 +10,7 @@ export const visionSectionData = {
   description:
     "At Imtiaz, we do more than develop properties — we craft experiences. Every project echoes our deep passion for architecture, purposeful design, and sustainable living. From luxury residences to waterfront communities and \n concept-driven spaces, each development is created to enrich lives and leave a lasting impact.",
   bgImage: "/images/our-story/vision-bg.jpg",
+  bgImageMobile: "/images/our-story/vision-bg-mobile.jpg",
   stats: [
     {
       value: "AED 10BN",
@@ -31,6 +32,7 @@ export type messageData = {
   description: string;
   personImage: string;
   bgImage: string;
+  bgImageMobile: string;
 };
 
 export const chairmanMessageData: messageData = {
@@ -43,6 +45,7 @@ export const chairmanMessageData: messageData = {
     "The fundamental pillars of our rich history of accomplishments remains in our experienced, professional, and highly motivated team who strive to harness their diverse synergies in their fields. We work hard to push the human boundaries with innovation and superior quality services. Our ambition is to be an unstoppable organization that creates enormous value for our clients, our team, and our environment.",
   personImage: "/images/our-story/chairman.png",
   bgImage: "/images/our-story/chairman-bg.png",
+  bgImageMobile: "/images/our-story/chairman-bg-mobile.png",
 };
 
 export const ceoMessageData: messageData = {
@@ -55,6 +58,7 @@ export const ceoMessageData: messageData = {
     "Driven by innovation, sustainability, and uncompromising quality, we transform possibilities into inspiring realities. Every project is more than a structure—it’s a thoughtfully crafted living space that enriches lives and reflects the values of our community. \n With a commitment to excellence and forward-thinking design, we continue to shape environments that elevate lifestyles and set new standards for the future.",
   personImage: "/images/our-story/ceo.png",
   bgImage: "/images/our-story/ceo-bg.png",
+  bgImageMobile: "/images/our-story/ceo-bg-mobile.png",
 };
 
 export const philosophyData = {

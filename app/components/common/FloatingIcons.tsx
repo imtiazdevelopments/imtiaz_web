@@ -31,25 +31,24 @@ export default function FloatingMobileIcons() {
         stagger: 0.1,
         ease: "back.out(1.7)",
         delay: 0.4,
-      }
+      },
     );
   }, []);
 
-// ── Modal open animation
+  // ── Modal open animation
   useEffect(() => {
     if (!enquiryOpen) return;
     setEnquiryVisible(true);
 
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       if (!backdropRef.current || !modalRef.current) return;
 
       gsap.fromTo(
         backdropRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.5, ease: "power2.out" }
+        { opacity: 1, duration: 0.5, ease: "power2.out" },
       );
 
-      // Modal: scales up from center with a blur clear
       gsap.fromTo(
         modalRef.current,
         {
@@ -64,9 +63,9 @@ export default function FloatingMobileIcons() {
           filter: "blur(0px)",
           duration: 0.55,
           ease: "power3.out",
-        }
+        },
       );
-    });
+    }, 50);
   }, [enquiryOpen]);
 
   // ── Modal close animation
@@ -120,7 +119,11 @@ export default function FloatingMobileIcons() {
 
   const icons = [
     { src: "/icons/layout_icons/phone.svg", alt: "phone", onClick: () => {} },
-    { src: "/icons/layout_icons/whatsapp.svg", alt: "whatsapp", onClick: () => {} },
+    {
+      src: "/icons/layout_icons/whatsapp.svg",
+      alt: "whatsapp",
+      onClick: () => {},
+    },
     {
       src: "/icons/layout_icons/message.svg",
       alt: "message",
@@ -153,7 +156,10 @@ export default function FloatingMobileIcons() {
       </div>
 
       {/* ── Mobile — toggled */}
-      <div ref={wrapperRef} className="fixed bottom-3 right-2 z-[900] lg:hidden">
+      <div
+        ref={wrapperRef}
+        className="fixed bottom-3 right-2 z-[900] lg:hidden"
+      >
         <div className="flex flex-col items-end gap-3 mb-3">
           <AnimatePresence>
             {open &&
@@ -168,7 +174,10 @@ export default function FloatingMobileIcons() {
                     delay: i * 0.06,
                     ease: [0.34, 1.56, 0.64, 1],
                   }}
-                  onClick={onClick}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClick();
+                  }}
                   className="floating-icon w-[35px] h-[35px] rounded-full backdrop-blur-[30px] flex items-center justify-center bg-foreground-light/70 cursor-pointer"
                 >
                   <Image src={src} alt={alt} width={18} height={18} />
