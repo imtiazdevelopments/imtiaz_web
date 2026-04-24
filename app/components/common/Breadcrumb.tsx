@@ -15,15 +15,14 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
   // ✅ ONLY real existing routes
   const VALID_ROUTES = new Set([
     "/",
-    "/about",
-    "/about/sustainability",
-    "/about/expertise",
     "/media-center/blog",
     "/media-center/news",
     "/media-center/events",
     "/communities",
     "/properties",
     "/pay-now",
+    "/construction-progress-listing",
+    "/about/careers"
   ]);
 
   const crumbs = segments.map((seg, i) => {

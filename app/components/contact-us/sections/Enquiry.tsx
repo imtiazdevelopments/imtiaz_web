@@ -52,8 +52,6 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
   </div>
 );
 
- 
-
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function EnquirySection() {
@@ -107,46 +105,55 @@ export default function EnquirySection() {
   }, []);
 
   return (
-    <section className="w-full light-section py-120 3xl:pt-130 3xl:pb-160" data-header="dark">
-       
+    <section
+      className="w-full light-section py-120 3xl:pt-130 3xl:pb-160"
+      data-header="dark"
+    >
       <div className="container">
-         
-
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-0">
+        <div className="flex flex-col lg:flex-row gap-[40px] sm:gap-12 lg:gap-0">
           {/* ── Left Panel ── */}
-           <div className="w-full lg:w-[43.7%] flex-shrink-0 flex flex-col">
-                    <SectionHeading
-                      title={enquiryData.heading}
-                      className="text-foreground mb-20 lg:max-w-[17ch]"
-                    />
-                    <SectionDescription
-                      text={enquiryData.subheading}
-                      className="text-foreground-light/80 max-w-[473px]  mb-50"
-                    />
-                    <div className="flex flex-col gap-6 xl:gap-[40px]">
-                      {enquiryData.contactInfo.map((item, index) => (
-                        <div key={index} className=" group      w-fit">
-                       <Link href={item.href}>
-                       <div className={`flex gap-[15px]   cursor-pointer ${item.alignment ? 'items-center' : ''}`}>
-                           <div><Image src={item.icon} alt="video call" width={30} height={30} className="w-[30px] h-30" /></div>
-                          <div className="max-w-[40ch] "><span className="text-description text-foreground uppercase text-19 font-bold group-hover:text-primary ">{item.text}</span></div>
-                      </div>  
-                      <div className="h-[1px] bg-primary w-0 group-hover:w-full transition-all duration-300 translate-y-[4px]"></div>
-                       
-                       </Link>
-                        </div> 
-                        
-                      ))}
+          <div className="w-full lg:w-[43.7%] flex-shrink-0 flex flex-col">
+            <SectionHeading
+              title={enquiryData.heading}
+              className="text-foreground mb-20 lg:max-w-[17ch]"
+            />
+            <SectionDescription
+              text={enquiryData.subheading}
+              className="text-foreground-light/80 max-w-[473px] mb-[40px] md:mb-50"
+            />
+            <div className="flex flex-col gap-[30px] xl:gap-[40px]">
+              {enquiryData.contactInfo.map((item, index) => (
+                <div key={index} className=" group w-fit">
+                  <Link href={item.href}>
+                    <div
+                      className={`flex gap-[15px]   cursor-pointer ${item.alignment ? "items-center" : ""}`}
+                    >
+                      <div>
+                        <Image
+                          src={item.icon}
+                          alt="video call"
+                          width={30}
+                          height={30}
+                          className="w-[30px] h-30"
+                        />
+                      </div>
+                      <div className="max-w-[40ch] ">
+                        <span className="text-description text-foreground uppercase text-19 font-bold group-hover:text-primary ">
+                          {item.text}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                    <div className="h-[1px] bg-primary w-0 group-hover:w-full transition-all duration-300 translate-y-[4px]"></div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full lg:hidden h-[1px] bg-black/10 mb-[30px]" />
 
           {/* ── Right Panel ── */}
-          <div
-            className="flex-1 relative flex items-center lg:w-[57.26%] justify-center   overflow-hidden "
-             
-          >
-      
-
+          <div className="flex-1 relative flex items-center lg:w-[57.26%] justify-center   overflow-hidden ">
             {/* Form */}
             <div
               className="relative z-10 w-full"
@@ -159,7 +166,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-2 gap-x-100 mb-40"
+                  className="grid grid-cols-1 gap-x-100 mb-40"
                 >
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>

@@ -259,10 +259,10 @@ export default function ImpactAreas({ data }: { data: ImpactAreas }) {
 
       <div className="absolute inset-0 bg-black/50 z-10" />
 
-      <div className="absolute top-130 left-1/2 -translate-x-1/2 z-20">
+      <div className="absolute top-120 md:top-130 left-1/2 -translate-x-1/2 z-20 container">
         <SectionHeading
           title={data.title}
-          className="text-white text-center pointer-events-none whitespace-nowrap mb-20"
+          className="text-white text-center pointer-events-none mb-20"
         />
         {data.description && (
           <SectionDescription
@@ -335,22 +335,21 @@ export default function ImpactAreas({ data }: { data: ImpactAreas }) {
             </SwiperSlide>
           ))}
         </Swiper>
-          {/* Pagination Dots */}
-          <div className="flex gap-3 justify-center items-center z-[50] absolute bottom-[70px] md:bottom-70 left-1/2 -translate-x-1/2">
-            {data.items.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => swiperRef.current?.slideToLoop(i)}
-                className={`w-[10px] h-[10px] rounded-full border transition-all cursor-pointer ${
-                  activeIndex === i
-                    ? "bg-white border-white"
-                    : "border-white bg-transparent"
-                }`}
-              />
-            ))}
-          </div>
+        {/* Pagination Dots */}
+        <div className="flex gap-3 justify-center items-center z-[50] absolute bottom-[70px] md:bottom-70 left-1/2 -translate-x-1/2">
+          {data.items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => swiperRef.current?.slideToLoop(i)}
+              className={`w-[10px] h-[10px] rounded-full border transition-all cursor-pointer ${
+                activeIndex === i
+                  ? "bg-white border-white"
+                  : "border-white bg-transparent"
+              }`}
+            />
+          ))}
+        </div>
       </div>
-    
     </section>
   );
 }

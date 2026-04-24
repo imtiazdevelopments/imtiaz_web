@@ -1,5 +1,3 @@
- 
-
 "use client";
 
 import Image from "next/image";
@@ -28,9 +26,9 @@ export default function Cardconstruction({
   const cardId = useId(); // unique ID for each card instance
 
   const show = isHovered || isActive;
-const breakWord = "by Imtiaz";
+  const breakWord = "by Imtiaz";
 
-const parts = title.split(new RegExp(`(${breakWord})`, "i"));
+  const parts = title.split(new RegExp(`(${breakWord})`, "i"));
   useEffect(() => {
     // When another card broadcasts its activation, deactivate this one
     const handleOtherCardActive = (e: Event) => {
@@ -39,21 +37,22 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
     };
 
     window.addEventListener("card:activated", handleOtherCardActive);
-    return () => window.removeEventListener("card:activated", handleOtherCardActive);
+    return () =>
+      window.removeEventListener("card:activated", handleOtherCardActive);
   }, [cardId]);
 
-const handleCardClick = () => {
-  if (!window.matchMedia("(hover: none)").matches) return;
+  const handleCardClick = () => {
+    if (!window.matchMedia("(hover: none)").matches) return;
 
-  const next = !isActive;
-  setIsActive(next);
+    const next = !isActive;
+    setIsActive(next);
 
-  if (next) {
-    window.dispatchEvent(
-      new CustomEvent("card:activated", { detail: { id: cardId } })
-    );
-  }
-};
+    if (next) {
+      window.dispatchEvent(
+        new CustomEvent("card:activated", { detail: { id: cardId } }),
+      );
+    }
+  };
 
   return (
     <div
@@ -93,66 +92,67 @@ const handleCardClick = () => {
         />
 
         {/* ── DEFAULT STATE ── */}
-        <div  > 
-
-          <div className={`absolute z-20 bottom-[30px] xl:bottom-[40px] left-0 right-0 px-5 transition-opacity duration-500  `}>
+        <div>
+          <div
+            className={`absolute z-20 bottom-[30px] xl:bottom-[40px] left-0 right-0 px-5 transition-opacity duration-500  `}
+          >
             {/* <h3
               className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               dangerouslySetInnerHTML={{ __html: title }}
-            /> */} 
-             <h3
-            className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center  transition-transform duration-900 `}
-          >
-            {parts.length > 1 ? (
-              <>
-                {parts[0]}
-                <br className="hidden sm:block" />
-                {breakWord} 
-              </>
-            ) : (
-              title
-            )}
-          </h3>
+            /> */}
+            <h3
+              className={`font-[optima] text-white max-w-[201px] md:max-w-full mx-auto text-25 leading-[1.4] uppercase text-center  transition-transform duration-900 `}
+            >
+              {parts.length > 1 ? (
+                <>
+                  {parts[0]}
+                  <br className="hidden sm:block" />
+                  {breakWord}
+                </>
+              ) : (
+                title
+              )}
+            </h3>
             <div
               className={`w-full h-px my-[10px] xl:my-[20px] transition-transform duration-900  `}
               style={{
-                background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
             />
-            <p className={`text-white/80 text-description text-center transition-transform duration-900  `}>
+            <p
+              className={`text-white/80 text-description text-center transition-transform duration-900  `}
+            >
               {subtitle}
             </p>
-            <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-5   ">
-         
-              
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="mx-auto w-fit mt-20"
+            >
               {button360 ? (
-                   
                 <CustomIconButton
                   text="SEE 360 VIEW"
                   icon360={true}
                   px="!py-[9px] 3xl:!py-[17.5px] 3xl:py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px] cursor-pointer"
-                  className=" "
-                /> 
-              ):
-              (
-                 <Link
+                  className="!h-[50px] md:h-[67px]"
+                />
+              ) : (
+                <Link
                   href={`/construction-progress-listing/${title
                     .replace(/<br\s*\/?>/gi, "")
                     .toLowerCase()
                     .replace(/\s+/g, "-")}`}
-                ><CustomOutlineButton
-                text="View Progress"
-                px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
-                className=" "
-              />
-            </Link>
+                >
+                  <CustomOutlineButton
+                    text="View Progress"
+                    px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+                    className="!h-[50px] md:h-[67px]"
+                  />
+                </Link>
               )}
-         
-          </div>
+            </div>
           </div>
         </div>
-
-        
       </div>
     </div>
   );
