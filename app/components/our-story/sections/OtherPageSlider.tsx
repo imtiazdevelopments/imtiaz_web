@@ -88,46 +88,46 @@ export default function OtherPageSlider() {
 
   const goNextAutoRef = useRef<() => void>(() => {});
 
-const goTo = useCallback(
-  (index: number, fromAuto = false) => {
-    if (transitioning.current) return;
-    if (index === currentRef.current) return;
+  const goTo = useCallback(
+    (index: number, fromAuto = false) => {
+      if (transitioning.current) return;
+      if (index === currentRef.current) return;
 
-    transitioning.current = true;
-    if (fromAuto) cooldownRef.current = true;
+      transitioning.current = true;
+      if (fromAuto) cooldownRef.current = true;
 
-    const layerA = layerARef.current!;
-    const layerB = layerBRef.current!;
-    const incoming = activeLayerRef.current === "A" ? layerB : layerA;
-    const outgoing = activeLayerRef.current === "A" ? layerA : layerB;
-    setLayerBg(incoming, slides[index].bgImage);
-    gsap.set(incoming, { opacity: 0, zIndex: 10 });
-    gsap.set(outgoing, { zIndex: 5 });
+      const layerA = layerARef.current!;
+      const layerB = layerBRef.current!;
+      const incoming = activeLayerRef.current === "A" ? layerB : layerA;
+      const outgoing = activeLayerRef.current === "A" ? layerA : layerB;
+      setLayerBg(incoming, slides[index].bgImage);
+      gsap.set(incoming, { opacity: 0, zIndex: 10 });
+      gsap.set(outgoing, { zIndex: 5 });
 
-    currentRef.current = index;
-    setCurrent(index);
+      currentRef.current = index;
+      setCurrent(index);
 
-    const duration = fromAuto ? 1 : 0.45; // fast for manual, smooth for auto
+      const duration = fromAuto ? 1 : 0.45; // fast for manual, smooth for auto
 
-    gsap.to(incoming, {
-      opacity: 1,
-      duration,
-      ease: "power2.inOut",
-      onComplete: () => {
-        gsap.set(outgoing, { opacity: 0 });
-        activeLayerRef.current = activeLayerRef.current === "A" ? "B" : "A";
-        transitioning.current = false;
+      gsap.to(incoming, {
+        opacity: 1,
+        duration,
+        ease: "power2.inOut",
+        onComplete: () => {
+          gsap.set(outgoing, { opacity: 0 });
+          activeLayerRef.current = activeLayerRef.current === "A" ? "B" : "A";
+          transitioning.current = false;
 
-        if (fromAuto) {
-          setTimeout(() => {
-            cooldownRef.current = false;
-          }, 600);
-        }
-      },
-    });
-  },
-  [slides],
-);
+          if (fromAuto) {
+            setTimeout(() => {
+              cooldownRef.current = false;
+            }, 600);
+          }
+        },
+      });
+    },
+    [slides],
+  );
 
   const goPrev = useCallback(() => {
     resetAutoplay();
@@ -211,7 +211,7 @@ const goTo = useCallback(
   return (
     <section
       data-header="dark"
-      className="relative w-full overflow-hidden select-none h-[90vh] cursor-grab"
+      className="relative w-full overflow-hidden select-none h-screen cursor-grab"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -236,61 +236,60 @@ const goTo = useCallback(
       {/* Container — all visible UI lives here */}
       <div className="container h-full relative z-20">
         {/* Left nav */}
-     <div className="absolute  left-0  top-5/7   md:top-1/2 lg:-translate-y-1/2   z-30 flex gap-3 min-w-full justify-center gap-5 md:justify-between">
-    
+        <div className="hidden md:flex absolute left-0 top-1/2 lg:-translate-y-1/2  z-30 min-w-full justify-between">
           <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className=" "
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-            style={{ cursor: "pointer" }}
-            className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className=" "
           >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              width={58}
-              height={58}
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Prev"
-              className="relative z-10 object-contain w-[28px] h-[28px]   invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-        </motion.div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goPrev();
+              }}
+              style={{ cursor: "pointer" }}
+              className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                width={58}
+                height={58}
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Prev"
+                className="relative z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
 
-        {/* Right nav */}
-        <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className=" "
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-            style={{ cursor: "pointer" }}
-            className="relative  lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+          {/* Right nav */}
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className=" "
           >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <Image
-              width={58}
-              height={58}
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Next"
-              className="relative rotate-180 z-10 object-contain w-[28px] h-[28px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-        </motion.div>
-      </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goNext();
+              }}
+              style={{ cursor: "pointer" }}
+              className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                width={58}
+                height={58}
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Next"
+                className="relative rotate-180 z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
+        </div>
 
         {/* Center content */}
         <div
@@ -314,15 +313,70 @@ const goTo = useCallback(
             {slides[current].description}
           </motion.p>
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
-           <Link href="/about/sustainability">
-             <CustomOutlineButton
-              text="learn more"
-              className="capitalize"
-              variant="light"
-              px="px-[12px] sm:px-[26px] lg:px-[34px] min-w-[142px] lg:w-auto"
-            />
-           </Link>
+            <Link href="/about/sustainability">
+              <CustomOutlineButton
+                text="learn more"
+                className="capitalize"
+                variant="light"
+                px="px-[12px] sm:px-[26px] lg:px-[34px] 3xl:w-[172px] lg:w-auto h-[50px] md:h-[67px]"
+              />
+            </Link>
           </motion.div>
+
+          <div className="md:hidden flex mt-[60px] justify-center gap-20">
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className=" "
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goPrev();
+                }}
+                style={{ cursor: "pointer" }}
+                className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              >
+                <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                <Image
+                  width={58}
+                  height={58}
+                  src="/icons/left_arrow_slider_primary.svg"
+                  alt="Prev"
+                  className="relative z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                />
+              </button>
+            </motion.div>
+
+            {/* Right nav */}
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className=" "
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goNext();
+                }}
+                style={{ cursor: "pointer" }}
+                className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              >
+                <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                <Image
+                  width={58}
+                  height={58}
+                  src="/icons/left_arrow_slider_primary.svg"
+                  alt="Next"
+                  className="relative rotate-180 z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                />
+              </button>
+            </motion.div>
+          </div>
         </div>
 
         {/* Pagination dots */}

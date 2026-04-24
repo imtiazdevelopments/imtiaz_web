@@ -14,7 +14,7 @@ function useTrackScale() {
 
   useEffect(() => {
     const update = () => {
-      setScale(Math.max(0.38, Math.min(1, window.innerWidth / DESIGN_WIDTH)));
+      setScale(Math.max(0.5, Math.min(1, window.innerWidth / DESIGN_WIDTH)));
     };
     update();
     window.addEventListener("resize", update);

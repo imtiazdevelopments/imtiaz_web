@@ -184,7 +184,7 @@ function CardsSlider({
       >
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="relative w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px]  cursor-pointer
+          className="relative w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer
               group border border-foreground rounded-full
               flex items-center justify-center overflow-hidden transition-all duration-300"
         >
