@@ -288,7 +288,7 @@ const handleCardClick = () => {
           <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
               <div className={`bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
-                <p className="text-white/80 text-description font-bold uppercase h-[18px] lg:h-[22px]">
+                <p className="text-white/80 text-description   uppercase h-[18px] lg:h-[22px]">
                   {status}
                 </p>
               </div>
@@ -335,7 +335,7 @@ const handleCardClick = () => {
             <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
               {subtitle}
             </p>
-            <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-5  sm:hidden">
+            <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-6 md:mt-5  sm:hidden">
             <Link
   href={`/properties/${title
     .replace(/<br\s*\/?>/gi, "")

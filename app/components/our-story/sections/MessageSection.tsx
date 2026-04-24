@@ -250,7 +250,7 @@ export default function MessageSection({ data }: Props) {
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true }}
-                      className="text-[14px] text-description text-foreground-light"
+                      className="  text-description text-foreground-light"
                     >
                       {data.designation}
                     </motion.p>

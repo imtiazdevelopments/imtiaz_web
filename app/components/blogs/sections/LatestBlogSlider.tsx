@@ -34,7 +34,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
       {/* Swiper */}
       <div
         ref={ref}
-        className="relative w-full h-[360px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px] cursor-grab"
+        className="relative w-full h-[495px] md:h-[540px] lg:h-[600px] 2xl:h-[650px] 3xl:h-[763px] cursor-grab"
       >
         <Swiper
           modules={[Autoplay, EffectFade]}
@@ -77,7 +77,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
         </Swiper>
 
         {/* Content overlay — outside Swiper slides, AnimatePresence handles stagger per slide */}
-        <div className="absolute inset-0 flex flex-col items-center justify-between py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-between py-[30px] md:py-50 px-20 sm:px-40 md:px-50 text-center pointer-events-none z-10">
           {/* Top label */}
           <div>
             <span className="text-19 leading-[100%] text-white font-[avenirBook] font-[800] px-6 py-1 uppercase bg-[#FFFFFF3D] backdrop-blur-[30px] rounded-full">
@@ -90,7 +90,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`cat-${activeIndex}`}
-                className="text-white/80 text-description mb-20 capitalize"
+                className="text-white/80   text-description mb-20 capitalize"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -107,7 +107,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
             <AnimatePresence mode="wait">
               <motion.h2
                 key={`title-${activeIndex}`}
-                className="text-heading text-white max-w-[1000px] mb-20 line-clamp-2"
+                className="text-[18px]  md:text-50 text-heading text-white max-w-[1000px] mb-20 line-clamp-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -137,7 +137,7 @@ const LatestBlogSlider = ({ blogs }: { blogs: Blog[] }) => {
                   <CustomOutlineButton
                     text="Read More"
                     borderColor="border-white/90"
-                    px="px-[12px] lg:px-[22px] 3xl:px-[36.6px]"
+                    px="h-[50px] md:h-[67px] px-[29px] md:px-[12px] lg:px-[22px] 3xl:px-[36.6px]"
                   />
                 </Link>
               </motion.div>

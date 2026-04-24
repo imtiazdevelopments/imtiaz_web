@@ -46,7 +46,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-0 md:mt-20 text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const projects = [
   "Project Alpha",
@@ -89,7 +89,7 @@ export default function PaymentForm() {
       className="w-full min-h-screen py-120 3xl:py-130 bg-[#EBEBEC] dark-section-2"
       data-header="dark"
     >
-      <div className="container flex flex-col lg:flex-row gap-150 sm:gap-80 lg:gap-50 2xl:gap-0">
+      <div className="container flex flex-col lg:flex-row gap-150 gap-[40px] md:gap-80 lg:gap-50 2xl:gap-0">
         {/* Left col — 49% */}
         <div className="w-full lg:w-[48.5%] flex-shrink-0 flex flex-col">
           <SectionHeading
@@ -98,11 +98,11 @@ export default function PaymentForm() {
           />
           <SectionDescription
             text="Complete your payment quickly and securely through our trusted online payment gateway."
-            className="text-foreground-light/80 max-w-[473px] mb-50"
+            className="text-foreground-light/80 max-w-[473px] mb-[30px] md:mb-50"
           />
           <SectionHeading
             title="Pay by Card"
-            className="text-25 font-[optima] font-[400] text-foreground uppercase tracking-[2%] mb-20 leading-[1.4]"
+            className="text-25 font-[optima] font-[400] text-foreground uppercase tracking-[2%] mb-[10px] md:mb-20 leading-[1.4]"
             as="h3"
           />
           <div className="flex items-center gap-4">
@@ -111,14 +111,14 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="w-[70px] h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
+              className="w-[43px] h-[30px] md:w-[70px] md:h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
             >
               <Image
                 src="/images/pay-now/cards/mastercard.svg"
                 alt="Mastercard"
                 width={45}
                 height={30}
-                className="w-[45px] h-[27.61px] object-contain pointer-events-none"
+                className="w-[28px] h-[17px] md:w-[45px] md:h-[27.61px] object-contain pointer-events-none"
               />
             </motion.div>
             <motion.div
@@ -126,14 +126,14 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="w-[70px] h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
+              className="w-[43px] h-[30px] md:w-[70px] md:h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
             >
               <Image
                 src="/images/pay-now/cards/maestro.svg"
                 alt="Maestro"
                 width={50}
                 height={20}
-                className="w-[45px] h-[27.61px] object-contain pointer-events-none"
+                className="w-[28px] h-[17px] md:w-[45px] md:h-[27.61px] object-contain pointer-events-none"
               />
             </motion.div>
             <motion.div
@@ -141,14 +141,14 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="w-[70px] h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
+              className="w-[43px] h-[30px] md:w-[70px] md:h-[48px] bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
             >
               <Image
                 src="/images/pay-now/cards/visa.svg"
                 alt="Visa"
                 width={32}
                 height={20}
-                className="w-[49px] h-[15.64px] object-contain pointer-events-none"
+                className="w-[30px] h-[10px] md:w-[49px] md:h-[15.64px] object-contain pointer-events-none"
               />
             </motion.div>
             <motion.div
@@ -156,7 +156,7 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="w-[70px] h-[48px] relative bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
+              className="w-[43px] h-[30px] md:w-[70px] md:h-[48px] relative bg-white rounded-[6px] flex items-center justify-center border border-[#EBEBEC]"
             >
               <div className="absolute bottom-0 right-0 flex items-center justify-center">
                 <Image
@@ -164,7 +164,7 @@ export default function PaymentForm() {
                   alt="Discover"
                   width={70}
                   height={30}
-                  className="w-[62.37px] h-[28px] object-contain pointer-events-none"
+                  className="w-[38px] h-[17px] md:w-[62.37px] md:h-[28px] object-contain pointer-events-none"
                 />
               </div>
             </motion.div>
@@ -180,7 +180,7 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-70 3xl:gap-90"
+              className="grid grid-cols-1 md:grid-cols-2 gap-[20px] md:gap-70 3xl:gap-90"
             >
               <div className="group">
                 <label
@@ -231,7 +231,7 @@ export default function PaymentForm() {
               <div className="group">
                 <label
                   htmlFor="email"
-                  className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
+                  className="block text-description mt-[20px] md:mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
                   Enter Email*
                 </label>
@@ -285,7 +285,7 @@ export default function PaymentForm() {
                 >
                   Enter Phone no*
                 </label>
-                <div ref={phoneRowRef} className="flex items-end pt-20 gap-2">
+                <div ref={phoneRowRef} className="flex items-end pt-[3px] md:pt-20 gap-2">
                   <CountryCodeSelect
                     value={watch("countryCode")}
                     onChange={(val) => setValue("countryCode", val)}
@@ -311,7 +311,7 @@ export default function PaymentForm() {
               </div>
 
               {/* Country dropdown */}
-              <div className="group relative flex flex-col self-end">
+              <div className="group relative flex flex-col self-end mt-5 md:mt-0">
                 <Image
                   src="/images/icons/down-tip-arrow.svg"
                   alt="arrow-down"
@@ -344,9 +344,9 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-70 3xl:gap-90"
+              className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-70 3xl:gap-90"
             >
-              <div className="group relative flex flex-col self-end">
+              <div className="group relative flex flex-col self-end mt-5">
                 <Image
                   src="/images/icons/down-tip-arrow.svg"
                   alt="arrow-down"
@@ -375,7 +375,7 @@ export default function PaymentForm() {
               <div className="group">
                 <label
                   htmlFor="unit"
-                  className="block text-description mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
+                  className="block text-description mt-5 md:mt-40 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light"
                 >
                   Enter unit number*
                 </label>
@@ -441,7 +441,7 @@ export default function PaymentForm() {
               <input
                 id="message"
                 type="text"
-                className="w-full mt-40 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0"
+                className="w-full mt-[52px] md:mt-40 pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0"
                 {...register("message")}
               />
               <FieldLine hasError={false} />
@@ -454,7 +454,7 @@ export default function PaymentForm() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="mt-30"
+              className="mt-[50px] md:mt-30 "
             >
               <CustomOutlineButton
                 text="Next"

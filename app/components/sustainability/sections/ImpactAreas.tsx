@@ -228,7 +228,7 @@ export default function ImpactAreas({ data }: { data: ImpactAreas }) {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[90vh] md:h-[70vh] lg:h-[75vh] xl:h-[95vh] 3xl:h-[907px] overflow-hidden"
+      className="relative w-full h-screen overflow-hidden"
       data-header="light"
     >
       <div className="absolute inset-0 bg-[#0a0a0a] z-0" />

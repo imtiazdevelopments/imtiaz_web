@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+  import { useState, useEffect } from "react";
 import Breadcrumb from "../../common/Breadcrumb";
 import { NewsDetail } from "../data";
 import { GoShareAndroid } from "react-icons/go";
@@ -15,8 +16,20 @@ interface Props {
 
 const NewsHero = ({ news }: Props) => {
   const { ref, parallaxY } = useParallax(15);
+
+  const [size, setSize] = useState(32);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setSize(window.innerWidth < 768 ? 20 : 32);
+    };
+  
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
-    <section className="w-full pt-200" data-header="dark">
+    <section className="w-full pt-[174px] md:pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <motion.div
@@ -31,17 +44,17 @@ const NewsHero = ({ news }: Props) => {
         {/* Title */}
         <SectionHeading
           title={news.title}
-          className="max-w-[50ch] text-foreground text-center uppercase mt-100"
+          className="max-w-[50ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 
         {/* Meta row */}
-        <div className="mt-20 flex items-center justify-between w-full">
+        <div className="mt-[40px] md:mt-20 flex items-center justify-between w-full">
           <motion.div
             variants={moveUp(0.12)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-16"
+            className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-[14px] md:text-16"
           >
             <div>
               <span>{news.category}</span>
@@ -63,13 +76,13 @@ const NewsHero = ({ news }: Props) => {
             className="text-foreground-light cursor-pointer hover:scale-110 transition-all duration-300"
             aria-label="Share"
           >
-            <GoShareAndroid size={32} />
+            <GoShareAndroid size={size} />
           </motion.button>
         </div>
         {/* Full-width Hero Image */}
         <div
           ref={ref}
-          className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative overflow-hidden"
+          className="w-full h-[352px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-5 md:mt-50 relative overflow-hidden"
         >
           <Image
             src={news.image}

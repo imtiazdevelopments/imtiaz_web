@@ -17,7 +17,7 @@ const EventHero = ({ event }: Props) => {
   const formattedDate = event.date.replace(/-/g, " - ");
 
   return (
-    <section className="w-full pt-200" data-header="dark">
+    <section className="w-full pt-[174px] md:pt-200" data-header="dark">
       <div className="container flex flex-col items-center container-spacing-details-page">
         {/* Breadcrumb */}
         <motion.div
@@ -32,13 +32,13 @@ const EventHero = ({ event }: Props) => {
         {/* Title */}
         <SectionHeading
           title={event.title}
-          className="max-w-[50ch] text-foreground text-center uppercase mt-100"
+          className="max-w-[50ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 
         {/* Image with overlay and meta bar */}
         <div
           ref={ref}
-          className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-50 relative overflow-hidden"
+          className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-[40px] md:mt-50 relative overflow-hidden"
         >
           <Image
             src={event.heroImage}
@@ -69,7 +69,7 @@ const EventHero = ({ event }: Props) => {
           />
 
           {/* Meta bar */}
-          <div className="absolute bottom-0 left-0 right-0 flex py-[10px] md:py-20 items-end justify-center bg-white/20 backdrop-blur-[30px]">
+          <div className="absolute bottom-0 left-0 right-0 flex py-[25px] md:py-20 items-end justify-center bg-white/20 backdrop-blur-[30px]">
             <div className="flex items-center gap-x-50">
               {/* Date */}
               <motion.div
@@ -85,13 +85,13 @@ const EventHero = ({ event }: Props) => {
                     alt="calendar"
                     width={26}
                     height={26}
-                    className="h-[15px] w-auto mb-1"
+                    className="h-[15px] w-auto "
                   />
                   <span className="text-white text-description leading-[1.54] uppercase">
                     Date
                   </span>
                 </div>
-                <span className="text-white/80 text-description leading-[1.54]">
+                <span className="text-white/80  text-description leading-[1.54]">
                   {formattedDate}
                 </span>
               </motion.div>
@@ -115,7 +115,7 @@ const EventHero = ({ event }: Props) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="flex flex-col items-center gap-1 lg:gap-[6px]"
+                className="flex flex-col items-center gap-[1px] md:gap-1 lg:gap-[6px]"
               >
                 <div className="flex items-center gap-[10px]">
                   <Image
@@ -123,7 +123,7 @@ const EventHero = ({ event }: Props) => {
                     alt="map"
                     width={26}
                     height={26}
-                    className="h-[15px] w-auto mb-1"
+                    className="h-[15px] w-auto  "
                   />
                   <span className="text-white text-description leading-[1.54] uppercase">
                     Location

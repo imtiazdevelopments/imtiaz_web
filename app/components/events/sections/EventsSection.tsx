@@ -187,7 +187,7 @@ const EventsSection = () => {
 
   return (
     <section
-      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      className="w-full bg-white pt-5 md:pt-70 pb-120 3xl:pb-160"
       data-header="dark"
     >
       <div className="container">
@@ -259,7 +259,7 @@ const EventsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="lg:hidden mb-70"
+          className="lg:hidden mb-[30px] md:mb-70"
         >
           {/* Toggle button */}
           <button
@@ -321,7 +321,7 @@ const EventsSection = () => {
           </div>
         </motion.div>
 
-        <div className="w-full my-50">
+        <div className="w-full my-[30px] md:my-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"

@@ -260,10 +260,10 @@ const Main = () => {
   }, [filtered, currentPage, itemsPerPage]);
 
   return (
-    <section className="w-full bg-white pt-70" data-header="dark">
+    <section className="w-full bg-white pt-5 md:pt-70" data-header="dark">
       <div className="w-full container">
         {/* ── Mobile: collapsible filter (below lg) ── */}
-        <div className="lg:hidden mb-70">
+        <div className="lg:hidden mb-[23px] md:mb-70">
           <motion.div
             variants={moveUp(0.12)}
             initial="hidden"
@@ -272,7 +272,7 @@ const Main = () => {
           >
             <button
               onClick={() => setFiltersOpen((prev) => !prev)}
-              className="flex items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
+              className="flex items-center justify-between w-full px-6 py-3 md:py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
             >
               <span>Filters</span>
               <span
@@ -330,7 +330,7 @@ const Main = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className={`flex lg:hidden justify-center mt-40`}
+            className={`flex lg:hidden justify-center mt-[23px] md:mt-40`}
           >
             <ListMapToggle view={view} setView={setView} />
           </motion.div>
@@ -437,7 +437,7 @@ const Main = () => {
           </motion.div>
         </div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[70px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -451,7 +451,7 @@ const Main = () => {
       </div>
 
       {/* ── Heading ── */}
-      <div className="container mb-50 text-center" id="properties-list">
+      <div className="container mb-[40px] md:mb-50 text-center" id="properties-list">
         <SectionHeading
           title="Available Off Plan Properties"
           className="mb-20 text-foreground"
@@ -471,7 +471,7 @@ const Main = () => {
         {view === "list" ? (
           <div className="flex flex-col justify-center container">
             <div className="text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-5 md:gap-y-50 gap-x-30 xl:gap-x-[28px]">
                 {paginated.length > 0 ? (
                   paginated.map((project, i) => (
                     <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
