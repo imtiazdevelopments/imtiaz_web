@@ -279,7 +279,7 @@ export default function SustainabilitySpotlight() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-16 font-[avenirBook] text-foreground-light mb-[30px] lg:mb-20"
+                className="text-16 font-[avenirBook] text-foreground-light mb-5 md:mb-[30px] lg:mb-20"
               >
                 {slide.date}
               </motion.span>
@@ -341,7 +341,7 @@ export default function SustainabilitySpotlight() {
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              px="px-[30px] lg:px-[26px] h-[50px] md:h-[66px]"
+              px="px-10 md:px-[30px] lg:px-[26px] h-[50px] md:h-[66px]"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton

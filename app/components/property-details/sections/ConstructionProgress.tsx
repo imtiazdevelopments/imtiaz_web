@@ -239,7 +239,7 @@
 //           </div>
 
 //           {/* RIGHT — Info Panel */}
-//           <div className="py-120 3xl:py-[130px] w-full px-[15px]  bg-gray flex flex-col justify-center gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-[40px] 2xl:!px-[70px] lg:!max-w-none">
+//           <div className="py-120 3xl:py-[130px] w-full px-[15px]  bg-gray flex flex-col justify-center gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-10 2xl:!px-[70px] lg:!max-w-none">
 //             {/* Top — Overall Progress */}
 //             <div
 //               className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-15 2xl:gap-[142px]"
@@ -456,7 +456,7 @@ export default function WynwoodProgress() {
           />
           <SectionDescription
             text={statsData.description}
-            className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-[40px] md:mb-50"
+            className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-10 md:mb-50"
           />
         </div>
         <div className="w-full flex flex-col lg:flex-row 3xl:grid 3xl:grid-cols-[auto_920px] overflow-hidden bg-gray">
@@ -474,7 +474,7 @@ export default function WynwoodProgress() {
           </div>
 
           {/* RIGHT — Info Panel */}
-          <div className="py-[40px] md:py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-[20px] md:gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-[40px] 2xl:!px-[70px] lg:!max-w-none">
+          <div className="py-10 md:py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-[20px] md:gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-10 2xl:!px-[70px] lg:!max-w-none">
             {/* Top — Overall Progress */}
             <div className="flex flex-row items-center lg:justify-center gap-10 lg:gap-15 2xl:gap-[142px]">
               <motion.div

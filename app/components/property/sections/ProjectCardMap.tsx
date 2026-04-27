@@ -94,7 +94,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
 
         {/* ── DEFAULT STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[30px] sm:mt-[38px] mb-[30px] md:my-[30px] xl:my-[40px] duration-700 pointer-events-none ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}
+          className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[30px] sm:mt-[38px] mb-[30px] md:my-[30px] xl:my-10 duration-700 pointer-events-none ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}
         >
           <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}>
             {status && (
@@ -155,7 +155,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
 >
               <CustomOutlineButton
                 text="View Property"
-                px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+                px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10"
                 className=" "
               />
             </Link>
@@ -208,7 +208,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
             <Link href={`/properties/${title}`}>
               <CustomOutlineButton
                 text="View Property"
-                px="px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[40px]"
+                px="px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10"
                 className="translate-y-2 transition-all duration-300 delay-100 cursor-pointer flex items-center justify-center relative overflow-hidden"
               />
             </Link>
