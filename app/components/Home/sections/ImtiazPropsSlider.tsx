@@ -178,7 +178,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                 variant="dark"
                 borderColor="border-primary"
                 textColor="text-foreground-light"
-                px="px-[30px] sm:px-[26px] xl:px-[37px] h-[50px] sm:h-[66px]"
+                px="px-10 xl:px-[37px] h-[50px] sm:h-[66px]"
               />
             </Link>
           </motion.div>

@@ -83,7 +83,7 @@ const InnerFooter = () => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-7 xl:px-10 py-[19.5px] rounded-[50px] text-16 text-white"
+                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-10 md:px-7 xl:px-10 py-[19.5px] rounded-[50px] text-16 text-white"
               >
                 {footerV2Data.top.sendText}
               </button>

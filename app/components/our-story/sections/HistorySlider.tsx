@@ -91,7 +91,7 @@ export default function HistorySection() {
       className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden"
     >
       {/* ── Header ── */}
-      <div className="container mx-auto px-6 text-center mb-[85px] md:mb-150 lg:mb-50">
+      <div className="container mx-auto px-6 text-center mb-[90px] md:mb-150 lg:mb-50">
         <SectionHeading title={sectionTitle} className="mb-20 uppercase" />
         <SectionDescription
           text={sectionDescription}
@@ -154,7 +154,7 @@ function CardsSlider({
         }}
         className="hidden lg:block absolute w-200 right-0 top-0 h-full z-10"
       />
-     <div className="absolute   -top-[65px] lg:top-1/2 lg:-translate-y-1/2 lg:-translate-y-1/2 z-30 flex gap-3 min-w-full justify-center lg:justify-between">
+     <div className="absolute   -top-[70px] lg:top-1/2 lg:-translate-y-1/2 lg:-translate-y-1/2 z-30 flex gap-3 min-w-full justify-center lg:justify-between">
        {/* ── Prev btn ── */}
       <div
         style={{ paddingLeft: paddingInset }}
@@ -258,7 +258,7 @@ function HistoryCard({
       {/* Image */}
       <div
         ref={ref}
-        className="flex-shrink-0 w-full lg:w-[51.84%] h-[200px] sm:h-[250px] md:h-[300px] lg:h-full overflow-hidden"
+        className="flex-shrink-0 w-full lg:w-[51.84%] h-[211px] sm:h-[250px] md:h-[300px] lg:h-full overflow-hidden"
       >
         <Image
           width={800}
@@ -274,7 +274,7 @@ function HistoryCard({
 
       {/* Content */}
       <div className="flex flex-col justify-between p-30 flex-1 h-full bg-gray">
-        <span className="text-heading text-primary mb-50">{card.year}</span>
+        <span className="text-heading text-primary mb-[40px] mb-50">{card.year}</span>
 
         <div className="mb-[10px]">
           <h3 className="text-25 font-[optima] text-foreground-light uppercase mb-[10px]">
@@ -376,7 +376,7 @@ function YearTimeline({
 
   return (
     <div className="w-full mt-50 select-none">
-      <div className="overflow-x-hidden overflow-y-visible pt-50 pb-2 px-40">
+      <div className="  overflow-y-visible pt-50 pb-2 px-40">
         <Swiper
           loop={false}
           slidesPerView="auto"

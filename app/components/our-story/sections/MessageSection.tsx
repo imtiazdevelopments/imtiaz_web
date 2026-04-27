@@ -179,7 +179,7 @@ export default function MessageSection({ data }: Props) {
             </div>
 
             {/* ── MOBILE/TABLET (below lg): stacked layout ── */}
-            <div className="lg:hidden flex  mt-50 md:mt-80 flex-col-reverse sm:flex-col">
+            <div className="lg:hidden flex  mt-5 md:mt-80 flex-col-reverse sm:flex-col">
               <div className="max-[640]:hidden min-[820]:hidden">
                 <SectionDescription
                   text={data.description}

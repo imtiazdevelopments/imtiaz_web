@@ -595,8 +595,8 @@ requestAnimationFrame(() => {
                   >
                     <div className="relative">
                       <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full pointer-events-none" />
-                      <motion.div className="bg-white/5 backdrop-blur-[30px] py-[30px] md:py-6 lg:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full flex flex-col lg:flex-row md:items-center justify-between gap-5 lg:min-h-[90px]">
-                        <div className="grid grid-cols-2 md:flex gap-7 md:gap-4 3xl:gap-[80px] md:items-center flex-wrap lg:flex-nowrap px-5 lg:px-[30px] 3xl:px-[68px]">
+                      <motion.div className="bg-white/5 backdrop-blur-[30px] py-[30px] md:py-6 xl:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full flex flex-col xl:flex-row md:items-center justify-between gap-5 xl:min-h-[90px]">
+                        <div className="grid grid-cols-2 md:flex gap-7 md:gap-4 lg:gap-10 3xl:gap-[80px] md:items-center flex-wrap lg:flex-nowrap px-5 lg:px-[30px] 3xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               variants={moveUp(idx * 0.11)}

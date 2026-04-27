@@ -80,13 +80,13 @@ export default function VisionSection() {
               <Reveal variants={moveUpV2} key={index}>
                 <div className="flex items-stretch">
                   {/* Column */}
-                  <div className="py-35 ps-0 pe-5 md:px-30 last:pe-0 last:ps-5 last:md:px-30 text-center flex flex-col justify-center">
+                  <div className="py-[7.4px] md:py-35 ps-0 pe-5 md:px-30 last:pe-0 last:ps-5 last:md:px-30 text-center flex flex-col justify-center">
                     <motion.h3
                       variants={moveUp(0)}
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true }}
-                      className="text-heading text-white mb-[10px]"
+                      className="text-heading text-white mb-[5px] md:mb-[10px]"
                     >
                       {item.value}
                     </motion.h3>
