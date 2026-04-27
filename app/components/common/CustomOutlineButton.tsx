@@ -52,7 +52,7 @@ const CustomOutlineButton = ({
           className={`absolute inset-y-0 right-0 w-[50%] ${fillColor} transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
         />
         <span
-          className={`relative z-10 transition-colors duration-300 ${minWidth ? "md:min-w-[98px]" : ""} inline-block text-center ${variant === "dark" ? "group-hover:text-white" : ""}`}
+          className={`relative z-10 transition-colors duration-300 font-bold ${minWidth ? "md:min-w-[98px]" : ""} inline-block text-center ${variant === "dark" ? "group-hover:text-white" : ""}`}
         >
           {text}
         </span>

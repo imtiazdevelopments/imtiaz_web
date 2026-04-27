@@ -66,7 +66,7 @@ const ColItem = ({
     <div className="relative flex flex-col items-center justify-center text-center">
       {/* Title — moves up smoothly */}
       <motion.h3
-        className="text-white font-[optima] uppercase max-w-[201px] text-25"
+        className="text-white font-[optima] uppercase max-w-[201px] md:max-w-full text-25"
         initial={false}
         animate={{ y: isActive ? -16 : 0 }}
         transition={{

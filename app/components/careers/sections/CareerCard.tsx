@@ -31,7 +31,7 @@ export default function CareerCard({ career }: CareerCardProps) {
       </div>
 
       {/* Title */}
-      <h3 className="font-[optima] text-25 leading-[1.4] uppercase text-foreground mb-20">
+      <h3 className="font-[optima] text-25 leading-[1.4] uppercase text-foreground mb-[10px]">
         {career.title}
       </h3>
 
@@ -43,13 +43,13 @@ export default function CareerCard({ career }: CareerCardProps) {
       {/* CTA */}
       <div>
         <Link href="careers/career-details">
-        <CustomOutlineButton 
-          className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px] h-[50px] md:h-[67px]"
-          text="Apply Now"
-          borderColor="border-primary"
-          textColor="text-foreground-light"
-          variant="dark"
-        />
+          <CustomOutlineButton
+            className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px] h-[50px] md:h-[67px] 3xl:w-[204.11px] uppercase"
+            text="Apply Now"
+            borderColor="border-primary"
+            textColor="text-foreground-light"
+            variant="dark"
+          />
         </Link>
       </div>
     </div>
