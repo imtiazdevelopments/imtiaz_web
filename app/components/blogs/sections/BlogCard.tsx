@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParallax } from "@/app/hooks/useParallax";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 type Blog = {
   id: number;
@@ -71,8 +72,16 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           <h3 className="text-white uppercase text-[18px] md:text-25 leading-[1.5] md:leading-[1.4] mb-5 md:mb-40 text-center">
             {blog.title}
           </h3>
-          <span className="text-white font-[avenirBook] text-19 leading-[100%] underline underline-offset-3">
+          {/* <span className="text-white font-[avenirBook] text-19 leading-[100%] underline underline-offset-3">
             Read More
+          </span> */}
+          <span className="text-white font-[avenirBook] text-19 leading-[100%]">
+            <CustomOutlineButton
+                    text="Read More"
+                    borderColor="border-white/90"
+                    px="h-[50px] md:h-[57px] px-[29px] md:px-[12px] lg:px-[18px] 3xl:px-[36.6px]"
+                  readMore
+                  />
           </span>
         </div>
       </div>

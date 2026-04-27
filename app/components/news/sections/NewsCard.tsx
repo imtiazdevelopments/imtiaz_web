@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PressItem } from "../data";
 import { useParallax } from "@/app/hooks/useParallax";
+import CustomOutlineButton from "../../common/CustomOutlineButton";
 
 const EventCard = ({ item }: { item: PressItem }) => {
   const { ref, parallaxY } = useParallax(15);
@@ -71,13 +72,21 @@ const EventCard = ({ item }: { item: PressItem }) => {
         </h3>
 
         <span className="relative text-primary-2 font-[avenirBook] font-[800] leading-[100%] text-[16px] md:text-19">
-          <span>Read More</span>
+          {/* <span>Read More</span> */}
+          <CustomOutlineButton
+            variant="dark"
+            text="Read More"
+            borderColor="border-primary-2"
+            textColor="text-foreground-light"
+            px="px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[47px]"
+            readMore
+          />
 
           {/* base line */}
-          <span className="absolute left-0 bottom-0 w-full h-[1px] bg-primary-2/50" />
+          {/* <span className="absolute left-0 bottom-0 w-full h-[1px] bg-primary-2/50" /> */}
 
           {/* animated fill */}
-          <span className="absolute left-0 bottom-0 w-full h-[1px] bg-primary-2 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+          {/* <span className="absolute left-0 bottom-0 w-full h-[1px] bg-primary-2 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
         </span>
       </div>
     </Link>

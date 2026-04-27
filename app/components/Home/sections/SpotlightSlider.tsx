@@ -304,7 +304,13 @@ export default function SustainabilitySpotlight() {
                   href={slide.href}
                   className="text-primary-2 text-19 leading-[100%] font-[avenirBook] hover:opacity-70 transition-opacity duration-300"
                 >
-                  Read More...
+                  <CustomOutlineButton
+                    variant="dark"
+                    text="Read More"
+                    borderColor="border-primary-2"
+                    textColor="text-foreground-light"
+                    px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+                  />
                 </Link>
               </motion.div>
             </motion.div>
@@ -418,9 +424,16 @@ export default function SustainabilitySpotlight() {
                       >
                         <Link
                           href={`/media-center/news/${slide.title.toLowerCase().replace(/ /g, "-")}`}
-                          className="text-primary-2 text-19 font-[avenirBook] leading-[100%] hover:opacity-70 transition-colors duration-300"
+                          className="text-primary-2 text-19 font-[avenirBook] leading-[100%]  transition-colors duration-300"
                         >
-                          Read More...
+                          <CustomOutlineButton
+                    variant="dark"
+                    text="Read More"
+                    borderColor="border-primary-2"
+                    textColor="text-foreground-light"
+                    px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+                    readMore
+                  />
                         </Link>
                       </motion.div>
                     </div>
