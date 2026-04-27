@@ -4,12 +4,6 @@ import Image from "next/image";
 import { Map, Marker } from "@vis.gl/react-google-maps";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
-interface Props {
-  latitude: string;
-  longitude: string;
-  title?: string;
-}
-
 const MapOriginal = () => {
   const latitude = "25.1972";
   const longitude = "55.2744";;
