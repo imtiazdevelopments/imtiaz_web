@@ -86,6 +86,8 @@ export default function Index({
 }: Props) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
+  const searchRef = useRef<HTMLImageElement>(null);
+  
   const { unlock } = useLenis();
 
   useEffect(() => {
@@ -111,6 +113,11 @@ useEffect(() => {
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.2 },
       ).fromTo(
+        searchRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        "-=0.3",
+      ).fromTo(
         scrollRef.current,
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 1 },
@@ -133,7 +140,7 @@ useEffect(() => {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} scrollRef={scrollRef} />
+      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} />
       <AboutJourneyV3 />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       <ProSliderComingSoonV3
