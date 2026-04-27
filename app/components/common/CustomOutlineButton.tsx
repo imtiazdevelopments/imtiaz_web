@@ -11,6 +11,7 @@ interface OutlineButtonProps {
   variant?: "light" | "dark";
   className?: string;
   minWidth?: boolean;
+  readMore?:boolean;
     
 }
 
@@ -24,6 +25,7 @@ const CustomOutlineButton = ({
   onClick,
   variant = "light",
   minWidth = true,
+  readMore
 }: OutlineButtonProps) => {
   const fillColor = variant === "dark" ? "bg-primary-2" : "bg-white/10";
   const [pressed, setPressed] = useState(false);
@@ -38,7 +40,7 @@ const CustomOutlineButton = ({
       onClick={onClick}
       onMouseDown={handlePress}
       onTouchStart={handlePress}
-      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 ${className} overflow-hidden ${px} py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border ${borderColor} ${textColor} font-[avenirBook] text-[16px] md:text-[19px] leading-[100%]`}
+      className={`cursor-pointer flex items-center justify-center group relative transition-all duration-300 overflow-hidden ${px} py-[14px] lg:py-4 2xl:py-[19px] 3xl:py-[20.62px] rounded-full border ${borderColor} ${textColor} font-[avenirBook] leading-[100%] ${className} ${readMore ? "text-[16px]" : "text-[16px] md:text-[19px]" }`}
       style={{ transform: pressed ? "scale(0.95)" : "scale(1)" }}
     >
       {/* Left fill */}
