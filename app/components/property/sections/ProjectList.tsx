@@ -171,11 +171,10 @@ export default function FeaturedProjects({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr]  2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[749px_1fr] gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr] 2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
           <div
-            className="lg:border-r dark:border-white/20 max-md:z-20 relative bg-light-white"
             style={{ paddingLeft: isDesktop ? leftSpacing : "" }}
           >
             {/* Projects List */}
@@ -228,26 +227,55 @@ export default function FeaturedProjects({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="lg:sticky top-[10px] h-[70vh] lg:h-[calc(100vh-20px)] z-10"
+            className="lg:sticky top-[10px] h-[371px] md:h-[70vh] lg:h-[calc(100vh-20px)] z-10"
           >
-            <div ref={mapContainerRef} className="w-full h-full">
+            {/* Grayscale overlay - affects tiles only, not markers */}
+            <div ref={mapContainerRef} className="w-full h-full relative">
               <Map
                 defaultCenter={{
                   lat: parseFloat(projects[0]?.latitude),
                   lng: parseFloat(projects[0]?.longitude),
                 }}
                 defaultZoom={15}
-                mapId="2567b86b459988d06657407f"
-                className="w-full h-full "
+                className="w-full h-full"
                 gestureHandling="greedy"
                 onCameraChanged={handleCameraChanged}
                 disableDefaultUI={true}
+                styles={[
+                  { elementType: "geometry", stylers: [{ saturation: -100 }] },
+                  {
+                    elementType: "labels.icon",
+                    stylers: [{ saturation: -100 }],
+                  },
+                  {
+                    elementType: "labels.text.fill",
+                    stylers: [{ saturation: -100 }],
+                  },
+                  {
+                    elementType: "labels.text.stroke",
+                    stylers: [{ saturation: -100 }],
+                  },
+                  {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [{ saturation: -100 }],
+                  },
+                  {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ saturation: -100 }],
+                  },
+                  {
+                    featureType: "poi",
+                    elementType: "geometry",
+                    stylers: [{ saturation: -100 }],
+                  },
+                ]}
               >
                 {projects?.map((project) => {
-                  // Only show markers that are either hovered or inside bounds
                   const isHovered = activeProject === project.id;
                   const isHighlighted = highlighted.includes(project.id);
-                  if (!isHovered && !isHighlighted) return null; // Don't render
+                  if (!isHovered && !isHighlighted) return null;
                   return (
                     <Marker
                       key={project.id}
@@ -258,19 +286,17 @@ export default function FeaturedProjects({
                       title={project.title}
                       icon={{
                         url: isHovered
-                          ? "/active-icon.svg" // Hovered project
-                          : "/inactive-icon.svg", // Project in bounds
+                          ? "/active-icon.svg"
+                          : "/inactive-icon.svg",
                       }}
                       onClick={() => {
-                        // Move clicked project to the start of visibleProjects
                         setVisibleProjects((prev) => {
                           const newArr = prev.filter(
                             (p) => p.id !== project.id,
-                          ); // remove clicked project
-                          return [project, ...newArr]; // add it to the start
+                          );
+                          return [project, ...newArr];
                         });
-                        setActiveProject(project.id); // set as active
-                        // window.scrollTo({ top: 700, behavior: "smooth" }); // scroll to top
+                        setActiveProject(project.id);
                         scrollTo(700, { duration: 1.2 });
                       }}
                     />

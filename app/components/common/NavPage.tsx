@@ -13,7 +13,7 @@ export default function MegaMenu({
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
-  const currentSubmenu = subMenuItems[activeMenu.id];
+  const currentSubmenu = subMenuItems[activeMenu.id as keyof typeof subMenuItems];
   const [prevImage, setPrevImage] = useState(menuItems[0].bgImage);
 
   useEffect(() => {

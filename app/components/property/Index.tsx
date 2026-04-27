@@ -10,7 +10,6 @@ const Index = () => {
       <Suspense fallback={<div className="h-screen bg-white" />}>
         <Main />
       </Suspense>
-      {/* <ProjectList projects={projectsData}/> */}
     </>
   );
 };

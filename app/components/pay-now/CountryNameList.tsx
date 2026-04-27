@@ -55,7 +55,7 @@ export function SearchableDropdown({
       <div className="cursor-pointer" onClick={() => setOpen((o) => !o)}>
         {label && (
           <span
-            className={`block text-description mt-25 select-none transition-colors duration-300 ${
+            className={`block text-description mt-0 md:mt-25 select-none transition-colors duration-300 ${
               open
                 ? isLight
                   ? "text-white"
@@ -69,7 +69,7 @@ export function SearchableDropdown({
           </span>
         )}
         <div
-          className={`w-full mt-20 text-description p-0 pb-[5px] truncate ${
+          className={`w-full mt-[2px] mt-20 text-description p-0 pb-[5px] truncate ${
             value
               ? isLight
                 ? "text-white"
@@ -158,7 +158,7 @@ export function SearchableDropdown({
                     }}
                     className={`w-full text-left px-5 py-3 text-description transition-colors duration-150 flex items-center gap-2 ${
                       value === c.name
-                        ? "text-primary-2 font-[avenirHeavy]"
+                        ? "text-primary-2 font-[avenirBook]"
                         : isLight
                           ? "text-foreground hover:bg-foreground/5"
                           : "text-foreground-light hover:bg-black/5"

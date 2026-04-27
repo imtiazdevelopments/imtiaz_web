@@ -15,14 +15,14 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
   // ✅ ONLY real existing routes
   const VALID_ROUTES = new Set([
     "/",
-    "/about",
-    "/about/sustainability",
-    "/about/expertise",
     "/media-center/blog",
     "/media-center/news",
     "/media-center/events",
     "/communities",
+    "/properties",
     "/pay-now",
+    "/construction-progress-listing",
+    "/about/careers"
   ]);
 
   const crumbs = segments.map((seg, i) => {
@@ -54,30 +54,32 @@ const Breadcrumb = ({ variant = "white" }: BreadcrumbProps) => {
         <div key={i} className="flex items-center gap-[10px]">
           {i > 0 && (
             <span
-              className={`text-[9px] ${
+              className={`text-[9px] rounded-full ${
                 crumb.isLast
                   ? isBlack
-                    ? "text-foreground-light"
-                    : "text-white"
+                    ? "bg-foreground-light"
+                    : "bg-white"
                   : isBlack
-                    ? "text-foreground-light/30"
-                    : "text-white/50"
+                    ? "bg-foreground-light/30"
+                    : "bg-white/50"
               }`}
             >
-              ●
+              <div className="w-[7px] h-[7px] "></div>
             </span>
           )}
 
           {crumb.isLast || !crumb.clickable ? (
             <span
-              className={`text-description ${
-                crumb.isLast
-                  ? isBlack ? "text-foreground-light" : "text-white"
-                  : isBlack
-                    ? "text-foreground-light/30"
-                    : "text-white/50"
-              }`}
-            >
+  className={`text-[14px] md:text-16 text-description whitespace-nowrap overflow-hidden text-ellipsis ${
+    crumb.isLast
+      ? isBlack
+        ? "text-foreground-light"
+        : "text-white"
+      : isBlack
+        ? "text-foreground-light/30"
+        : "text-white/50"
+  }`}
+>
               {/* mobile */}
 <span className="md:hidden">
   {crumb.label.length > 15

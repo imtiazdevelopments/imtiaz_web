@@ -131,7 +131,7 @@ export default function EnquirySection() {
   }, []);
 
   const inputClass =
-    "w-full mt-20 text-description pb-[5px] text-white bg-transparent outline-none p-0 h-auto placeholder-transparent";
+    "w-full mt-[2px] md:mt-20 text-description pb-[5px] text-white bg-transparent outline-none p-0 h-auto placeholder-transparent";
   const labelClass =
     "block text-description text-white/50 transition-colors group-focus-within:text-white";
 
@@ -186,9 +186,9 @@ export default function EnquirySection() {
               />
               <SectionDescription
                 text={enquiryData.subheading}
-                className="text-white/80 max-w-[47ch] mb-40 xl:mb-[40px]"
+                className="text-white/80 max-w-[47ch] mb-[40px] xl:mb-[40px]"
               />
-              <div className="flex flex-col gap-40">
+              <div className="flex flex-col gap-5 md:gap-40">
                 {enquiryData.contacts.map((c) => (
                   <Reveal variants={moveUpV2} key={c.id}>
                     <Link
@@ -196,10 +196,25 @@ export default function EnquirySection() {
                       href={c.href}
                       className="flex items-center gap-20 group"
                     >
-                      <span className="w-[79px] h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
-                        {c.icon === "phone" ? <PhoneIcon /> : <EmailIcon />}
-                      </span>
-                      <span className="text-white text-25 uppercase font-[avenirHeavy] leading-[1.2]">
+                      <div className="w-[50px] h-[50px] lg:w-[79px] lg:h-[79px] rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                        {c.icon === "phone" ? <Image
+                src="/images/icons/call01.svg"
+                alt="overimg"
+                width={32}
+                height={32}
+                className=" w-[20px] h-[20px] lg:w-[32px] lg:h-[32px]  "
+                
+              /> : 
+              <Image
+                src="/images/icons/sms.svg"
+                alt="overimg"
+                width={32}
+                height={32}
+                className="w-[24px] h-[24px] lg:w-[32px] lg:h-[32px]  "
+                
+              />}
+                      </div>
+                      <span className="text-white text-25 uppercase font-[avenirBook] leading-[1.2]">
                         {c.label}
                       </span>
                     </Link>
@@ -228,7 +243,7 @@ export default function EnquirySection() {
                 height={703}
                 className="!w-full h-full absolute inset-0 z-[1] select-none pointer-events-none"
                 style={{
-                  transform: `scale(${1.20}) translateY(${parallaxY}vh)`,
+                  transform: `scale(${1.2}) translateY(${parallaxY}vh)`,
                 }}
               />
             </div>
@@ -245,7 +260,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="grid grid-cols-2 gap-x-100 mb-40"
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-x-100 mb-40"
                 >
                   <div className="group">
                     <label htmlFor="firstName" className={labelClass}>
@@ -313,7 +328,7 @@ export default function EnquirySection() {
                     </label>
                     <div
                       ref={phoneRowRef}
-                      className="flex items-end pt-20 gap-2"
+                      className="flex items-end pt-[3px] md:pt-20 gap-2"
                     >
                       <CountryCodeSelect
                         value={watch("phoneCode")}
@@ -345,7 +360,7 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="group mb-40"
+                  className="group mb-5 md:mb-40"
                 >
                   <div className="group relative flex flex-col self-end">
                     <Image
@@ -383,14 +398,14 @@ export default function EnquirySection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
-                  className="group mb-40"
+                  className="group mb-5 md:mb-40"
                 >
                   <label htmlFor="message" className={labelClass}>
                     Type your message here...*
                   </label>
                   <input
                     id="message"
-                    className="w-full text-description mt-40 pb-[5px] text-white bg-transparent outline-none p-0 resize-none"
+                    className="w-full text-description mt-[52px] md:mt-40 pb-[5px] text-white bg-transparent outline-none p-0 resize-none"
                     {...register("message", {
                       required: "Message is required",
                     })}
@@ -400,14 +415,14 @@ export default function EnquirySection() {
                 </motion.div>
 
                 {/* Preferred Mode of Contact */}
-                <div className="flex gap-2 md:gap-90 flex-col md:flex-row lg:flex-col lg:gap-0 items-start">
-                  <div className="mb-30">
+                <div className="flex gap-2 md:gap-90 flex-col md:flex-row lg:flex-col lg:gap-0 items-start pt-[10px] md:pt-0">
+                  <div className="mb-5 md:mb-30">
                     <motion.p
                       variants={moveUp(0.2)}
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true }}
-                      className="text-25 font-[optima] leading-[1.4] uppercase text-white mb-20"
+                      className="text-[18px] md:text-25 font-[optima] leading-[1.4] uppercase text-white mb-20"
                     >
                       Preferred Mode of Contact
                     </motion.p>
@@ -415,7 +430,7 @@ export default function EnquirySection() {
                       name="contactMode"
                       control={control}
                       render={({ field }) => (
-                        <div className="flex items-center gap-40">
+                        <div className="flex items-center gap-[30px] md:gap-40">
                           {enquiryData.contactModes.map((mode) => (
                             <Reveal variants={moveUpV2} key={mode}>
                               <label
@@ -444,7 +459,7 @@ export default function EnquirySection() {
                     />
                   </div>
                   {/* Checkboxes */}
-                  <div className="flex flex-col 2xl:flex-row 2xl:items-center items-start justify-between 3xl:justify-start gap-20 3xl:gap-90 mb-80 2xl:mb-40 ">
+                  <div className="flex flex-col 2xl:flex-row 2xl:items-center items-start justify-between 3xl:justify-start gap-20 3xl:gap-90 mb-[30px] md:mb-80 2xl:mb-40 ">
                     <motion.div
                       variants={moveUp(0.2)}
                       initial="hidden"
@@ -542,7 +557,7 @@ export default function EnquirySection() {
                   text="Submit Enquire"
                   textColor="text-white"
                   borderColor="border-white"
-                  px="px-50"
+                  px="px-[32.2px] md:px-50 h-[50px] md:h-[67px]" 
                 />
               </form>
             </div>

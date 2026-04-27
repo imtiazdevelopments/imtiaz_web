@@ -73,12 +73,12 @@
   font-style: unset;
   font-display: swap;
 }
- 
+
 @font-face {
   font-family: "AvenirBook";
-  src: url("/fonts/Avenir_Book.woff2") format("woff2"),
-    url("/fonts/Avenir_Book.woff") format("woff");
-  font-weight: 200;
+  src: url("/fonts/avenir-book-new.woff2") format("woff2"),
+    url("/fonts/avenir-book-new.woff2") format("woff");
+  font-weight: 350;
   font-style: unset;
   font-display: swap;
 }
@@ -132,16 +132,17 @@ html {
 --text-70: clamp(33px, 2.76vw + 20px, 70px);
  
 /* 50px → 28px at 390px, 50px at 1810px */
---text-50: clamp(28px, 1.55vw + 22px, 50px);
+--text-50: clamp(30px, 1.55vw + 22px, 50px);
  
 /* 32px → 24px at 390px, 32px at 1810px */
 --text-32: clamp(25px, 0.81vw + 17.3px, 32px);
+--text-px32: clamp(28px, 28px + (100vw - 320px) * (4 / 119), 32px);
  
 /* 30px → 24px at 390px, 30px at 1810px */
 --text-30: clamp(24px, 0.81vw + 17.3px, 30px);
  
 /* 25px → 16px at 390px, 25px at 1810px */
---text-25: clamp(16px, 0.63vw + 13.5px, 25px);
+--text-25: clamp(18px, 0.63vw + 13.5px, 25px);
  
 /* 19px → 13px at 390px, 19px at 1810px */
 --text-19: clamp(14.5px, 0.42vw + 11.4px, 19px);
@@ -150,16 +151,14 @@ html {
 --text-18: clamp(15px, 0.35vw + 11.6px, 18px);
  
 /* 16px → 12px at 390px, 16px at 1810px */
---text-16: clamp(14px, 0.28vw + 10.9px, 16px);
- 
- 
+--text-16: clamp(14px, 14px + (100vw - 441px) * 999, 16px);
  
  
 /* 20px → 12px at 390px, 20px at 1810px */
---space-20: clamp(17px, 0.56vw + 9.8px, 20px);
+--space-20: clamp(20px, 0.56vw + 9.8px, 20px);
  
 /* 25px → 14px at 390px, 25px at 1810px */
---space-25: clamp(15px, 0.77vw + 11px, 25px);
+--space-25: clamp(18px, 0.77vw + 11px, 25px);
  
 /* 30px → 18px at 390px, 30px at 1810px */
 --space-30: clamp(18px, 0.84vw + 14.7px, 30px);
@@ -174,7 +173,7 @@ html {
 --space-40: clamp(24px, 1.22vw + 19.6px, 40px);
  
 /* 50px → 28px at 390px, 50px at 1810px */
---space-50: clamp(28px, 1.55vw + 21.9px, 50px);
+--space-50: clamp(30px, 1.55vw + 21.9px, 50px);
  
 /* 60px → 32px at 390px, 60px at 1810px */
 --space-60: clamp(32px, 1.97vw + 24.3px, 60px);
@@ -192,7 +191,7 @@ html {
 --space-100: clamp(44px, 3.94vw + 28.6px, 100px);
  
 /* 120px → 50px at 390px, 120px at 1810px */
---space-120: clamp(50px, 4.93vw + 30.8px, 120px);
+--space-120: clamp(70px, 4.93vw + 30.8px, 120px);
  
 /* 130px → 52px at 390px, 130px at 1810px */
 --space-130: clamp(52px, 5.49vw + 30.6px, 130px);
@@ -237,6 +236,7 @@ html {
   --text-70: var(--text-70);
   --text-50: var(--text-50);
   --text-32: var(--text-32);
+  --text-px32: var(--text-px32);
   --text-30: var(--text-30);
   --text-25: var(--text-25);
   --text-19: var(--text-19);
@@ -267,11 +267,11 @@ html {
 }
  
 @utility text-heading {
-  @apply font-[optima] font-[550] uppercase leading-[1.36] lg:leading-[1.2] text-32 md:text-50;
+  @apply font-[optima] font-[550] uppercase leading-[1.252] md:leading-[1.36] lg:leading-[1.2] text-px32 md:text-50;
 }
  
 @utility text-description {
-  @apply font-[avenirHeavy] text-16 leading-[1.54375];
+  @apply font-[avenirBook] text-16 leading-[1.54375];
 }
  
 @utility container-spacing-details-page {
@@ -290,11 +290,11 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-avenirBook);
 }
  
 .container {
-  @apply mx-auto w-full px-[15px];
+  @apply mx-auto w-full px-[20px] md:px-[15px];
 }
  
 @media (min-width: 640px) {
@@ -312,7 +312,7 @@ body {
 @media (min-width: 820px) {
   .container { max-width: 800px; }
 }
- 
+  
 @media (min-width: 860px) {
   .container { max-width: 840px; }
 }
@@ -350,7 +350,7 @@ body {
 }
  
 @media (min-width: 1500px) {
-  .container { max-width: 1440px; }
+  .container { max-width: 1420px; }
 }
  
 @media (min-width: 1600px) {
@@ -474,7 +474,7 @@ body {
   z-index: 3;
 }
  
- 
+
 /* ---------------------------------------
    HERO SLIDER – BUILT-IN PAGINATION STYLES
 -----------------------------------------*/
@@ -652,7 +652,7 @@ body {
 /* Paragraphs */
 .blog-content p {
   font-size: var(--text-16);
-  font-family: var(--font-avenirHeavy);
+  font-family: var(--font-avenirBook);
   line-height: 1.54;
   color: var(--foreground-light);
 }
@@ -701,7 +701,7 @@ body {
 .blog-content ul li {
   list-style-type: disc;
   font-size: var(--text-16);
-  font-family: var(--font-avenirHeavy);
+  font-family: var(--font-avenirBook);
   line-height: 1.54;
   color: var(--foreground-light);
 }
@@ -722,6 +722,20 @@ body {
   text-decoration: underline;
   text-underline-offset: 2px;
   font-size: var(--text-19);
+}
+@media (max-width: 767.78px) {
+ .blog-content h2,.blog-content h3 {
+  font-size: 18px; 
+}
+.blog-content ul li,
+.blog-content p {
+    font-size: 14px;
+}
+.blog-content img { 
+    min-height: 352px;
+    max-height: 400px; 
+}
+
 }
  
 /* sustainability moments slider */
@@ -888,4 +902,47 @@ input:-webkit-autofill:active {
 .mobslider .swiper-pagination-bullet-active {
   background: white !important;
   border-color: white;
+}
+
+/* .btncard:hover{@apply !translate-y-0}
+.btncard:hover span.absolute{@apply !scale-x-100} */
+
+.project-card-grid{
+  @apply grid grid-cols-1 min-[640px]:grid-cols-2 min-[1140px]:grid-cols-3 min-[1700px]:grid-cols-4 3xl:gap-y-[var(--spacing-50)] gap-y-[var(--spacing-40)] gap-x-[var(--spacing-30)] xl:gap-x-[28px];
+}
+
+
+@media (min-width: 440px) and (max-width: 767px) {
+  .icnpojectbtn{
+    width: 190px !important;
+    }
+}
+@media (max-width: 768px) {
+  .h-media {
+    height: 30px;
+  }
+}@media (max-width: 429px) {
+  .h-media {
+    height: 20px;
+  }
+  .csmtst{margin-top: 5px;}
+}
+
+@media (max-width: 640px) {
+ .awd p{margin-top: 0px !important; font-size: 14px;}
+}
+
+@keyframes expandX {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.animate-expand-x {
+  animation: expand-x 0.4s ease-out forwards;
 }

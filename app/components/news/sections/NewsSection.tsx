@@ -15,7 +15,7 @@ import LatestNewsSlider from "./LatestNewsSlider";
 import NewsCard from "./NewsCard";
 import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
-import { Plus } from "lucide-react";
+import { Plus, SearchX } from "lucide-react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion } from "framer-motion";
 import {
@@ -28,12 +28,59 @@ import { useLenis } from "@/app/contexts/LenisContext";
 
 const NEWS_PER_PAGE = 6;
 
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
+    <div className="flex flex-col gap-2 font-[avenirBook]">
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground"
+      >
+        No News found
+      </motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
+      </motion.p>
+    </div>
+  </div>
+);
+
+// ── NewsSection ──────────────────────────────────────────────────────────────
 const NewsSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
 
   const selectedYear = (searchParams.get("year") as PressYear) || "";
   const selectedMonth = (searchParams.get("month") as PressMonth) || "";
@@ -43,31 +90,53 @@ const NewsSection = () => {
   const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [pathname]);
 
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      requestAnimationFrame(() => {
+        // Use Lenis scrollTo for smooth-scroll pages, with instant duration
+        scrollTo(y, { duration: 0 });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams, scrollTo]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const scrollY = window.scrollY;
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+
+      savedScrollY.current = window.scrollY;
       lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
       setTimeout(() => {
-        scrollTo(scrollY, { duration: 0 });
         unlock();
       }, 520);
     },
-    [searchParams, pathname, router, lock, unlock, scrollTo],
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
@@ -121,16 +190,16 @@ const NewsSection = () => {
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
   return (
     <section
-      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      className="w-full bg-white pt-5 md:pt-70 pb-120 3xl:pb-160"
       data-header="dark"
     >
       <div className="container">
@@ -202,7 +271,7 @@ const NewsSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="lg:hidden mb-70"
+          className="lg:hidden mb-[30px] md:b-70"
         >
           {/* Toggle button */}
           <button
@@ -264,7 +333,7 @@ const NewsSection = () => {
           </div>
         </motion.div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[30px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -284,7 +353,6 @@ const NewsSection = () => {
             opacity: hasFilter ? 0 : 1,
             overflow: "hidden",
             marginBottom: hasFilter ? "0px" : undefined,
-            // 👇 This prevents the collapse from affecting scroll position
             willChange: "max-height",
           }}
         >
@@ -296,7 +364,7 @@ const NewsSection = () => {
           >
             <LatestNewsSlider news={latestNews.slice(0, 3)} />
           </motion.div>
-          <div className="w-full my-50">
+          <div className="w-full my-[40px] md:my-50">
             <div className="relative w-full h-px overflow-hidden">
               <motion.div
                 className="absolute inset-0 bg-black/10 origin-center"
@@ -309,10 +377,9 @@ const NewsSection = () => {
           </div>
         </div>
 
-        {/* News Cards Grid */}
-        <div id="news-list" className="scroll-mt-20 min-h-[100px]">
+        <div id="news-list" className="scroll-mt-20">
           {paginated.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-40">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-25 gap-y-5 md:gap-y-40">
               {paginated.map((item) => (
                 <Reveal variants={moveUpV2} key={item.id}>
                   <NewsCard item={item} />
@@ -320,9 +387,7 @@ const NewsSection = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-foreground-light text-description py-20">
-              No news found.
-            </p>
+            <EmptyState />
           )}
         </div>
 

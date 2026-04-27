@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect, useCallback } from "react";
+import { useMemo, useEffect, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
   blogs,
@@ -22,13 +22,61 @@ import {
 } from "@/app/components/motionVariants";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { useLenis } from "@/app/contexts/LenisContext";
+import { SearchX } from "lucide-react";
 
 const BLOGS_PER_PAGE = 4;
 
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
+    <div className="flex flex-col gap-2 font-[avenirBook]">
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground"
+      >
+        No Blog found
+      </motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
+      </motion.p>
+    </div>
+  </div>
+);
+
+// ── BlogsSection ─────────────────────────────────────────────────────────────
 const BlogsSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
 
   const selectedTopic = (searchParams.get("topic") as BlogTopic) || "";
   const selectedCategory = (searchParams.get("category") as BlogCategory) || "";
@@ -36,31 +84,55 @@ const BlogsSection = () => {
   const { scrollTo, lock, unlock } = useLenis();
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [pathname]);
 
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      requestAnimationFrame(() => {
+        scrollTo(y, { duration: 0 });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams, scrollTo]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const scrollY = window.scrollY;
-      const params = new URLSearchParams(searchParams.toString());
+      // Read from ref — always latest, never stale
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+
+      // Save scroll before navigation so the layout-shrink jump is masked
+      savedScrollY.current = window.scrollY;
+
       lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
       setTimeout(() => {
-        scrollTo(scrollY, { duration: 0 });
         unlock();
       }, 520);
     },
-    [searchParams, pathname, router, lock, unlock, scrollTo],
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
@@ -97,29 +169,29 @@ const BlogsSection = () => {
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
   return (
     <section
-      className="w-full bg-white pt-70 pb-120 3xl:pb-160"
+      className="w-full bg-white pt-5 md:pt-70 pb-120 3xl:pb-160"
       data-header="dark"
     >
       <div className="container">
         {/* Filters Row */}
         <motion.div
-          className="flex flex-col md:flex-row gap-30 items-center justify-between mb-70"
+          className="flex flex-col md:flex-row gap-30 items-center justify-between mb-[30px] md:mb-70"
           variants={containerStagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
           <motion.div
-            className="flex flex-col md:flex-row items-center gap-30 w-full md:w-auto"
+            className="flex flex-col md:flex-row items-center gap-5 gap-30 w-full md:w-auto"
             variants={containerStagger}
           >
             <motion.div className="w-full md:w-auto" variants={moveUp(0)}>
@@ -161,7 +233,7 @@ const BlogsSection = () => {
           )}
         </motion.div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[30px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -192,7 +264,7 @@ const BlogsSection = () => {
             <LatestBlogSlider blogs={sortedBlogs.slice(0, 3)} />
           </motion.div>
           {/* Divider */}
-          <div className="w-full my-50">
+          <div className="w-full my-[40px] my-50">
             <div className="relative w-full h-px overflow-hidden">
               <motion.div
                 className="absolute inset-0 bg-black/10 origin-center"
@@ -208,7 +280,7 @@ const BlogsSection = () => {
         {/* Blog Cards Grid */}
         <div id="blog-list" className="scroll-mt-20">
           {paginated.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-40 gap-40">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[20px] md:gap-x-40   gap-40">
               {paginated.map((blog) => (
                 <Reveal key={blog.id} variants={moveUpV2}>
                   <div>
@@ -218,9 +290,7 @@ const BlogsSection = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-foreground-light text-description py-20">
-              No blogs found for selected filters.
-            </p>
+            <EmptyState />
           )}
         </div>
 

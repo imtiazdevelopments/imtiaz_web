@@ -14,12 +14,12 @@ interface AboutSectionProps {
     };
   };
 }
-import React from 'react'
+import React from "react";
 
 const AbtJour = ({ data }: AboutSectionProps) => {
   return (
-  <>
-  <div className=" mx-auto text-center px-4 w-[1000px]">
+    <>
+      <div className=" mx-auto text-center px-4 w-[1000px]">
         <p className="text-[25px] font-[avenir] leading-[1] font-[800] text-white mb-10 md:mb-16 2xl:mb-[120px] uppercase">
           {data.tag}
         </p>
@@ -28,7 +28,7 @@ const AbtJour = ({ data }: AboutSectionProps) => {
           {data.title}
         </h2>
 
-        <h3 className="text-[25px] font-[avenirHeavy] leading-[1] text-white mb-[40px] uppercase">
+        <h3 className="text-[25px] font-[avenirBook] leading-[1] text-white mb-[40px] uppercase">
           {data.subtitle}
         </h3>
 
@@ -43,8 +43,8 @@ const AbtJour = ({ data }: AboutSectionProps) => {
           {data.button.label}
         </Link>
       </div>
-      </>
-  )
-}
+    </>
+  );
+};
 
-export default AbtJour
+export default AbtJour;

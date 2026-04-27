@@ -15,8 +15,9 @@ import { SectionDescription } from "../../animations/SectionDescription";
 import { containerStagger, moveUp, moveUpV2 } from "../../motionVariants";
 import Pagination from "../../common/Pagination";
 import Image from "next/image";
-import { Plus } from "lucide-react";
+import { Plus, SearchX } from "lucide-react";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import { useLenis } from "@/app/contexts/LenisContext";
 
 type PropertyType =
   | "Villa"
@@ -49,8 +50,10 @@ const priceRanges: PriceRange[] = [
 const bedrooms: Bedroom[] = ["1", "2", "3", "4", "5+"];
 
 const parsePrice = (raw: string): number => {
-  const match = raw?.replace(/,/g, "").match(/[\d.]+/);
-  return match ? parseFloat(match[0]) : 0;
+  const cleaned = raw?.replace(/,/g, "").match(/[\d.]+/);
+  if (!cleaned) return 0;
+  const num = parseFloat(cleaned[0]);
+  return num > 1000 ? num / 1_000_000 : num;
 };
 
 const priceInRange = (raw: string, range: PriceRange): boolean => {
@@ -62,12 +65,65 @@ const priceInRange = (raw: string, range: PriceRange): boolean => {
   return true;
 };
 
+// Derive itemsPerPage from window width — no state, no spurious re-renders
+const getItemsPerPage = () =>
+  typeof window !== "undefined" && window.innerWidth >= 1600 ? 8 : 6;
+
+// ── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <div className="col-span-full flex flex-col items-center justify-center gap-6 text-center">
+    <motion.div
+      variants={moveUp(0)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex items-center justify-center w-18 h-18 rounded-full bg-gray"
+    >
+      <SearchX size={32} className="text-primary" />
+    </motion.div>
+    <div className="flex flex-col gap-2 font-[avenirBook]">
+      <motion.p
+        variants={moveUp(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="text-25 text-foreground"
+      >
+        No Properties found
+      </motion.p>
+      <motion.p
+        variants={moveUp(0.16)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        animate="show"
+        className="text-description text-foreground-light max-w-xs"
+      >
+        No results match your current filters. Try adjusting or clearing your
+        selection.
+      </motion.p>
+    </div>
+  </div>
+);
+
+// ── Main ─────────────────────────────────────────────────────────────────────
 const Main = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Always-current ref so callbacks never capture stale searchParams
+  const searchParamsRef = useRef(searchParams);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+  }, [searchParams]);
+
+  // Saved scroll position while a filter navigation is in flight
+  const savedScrollY = useRef<number | null>(null);
+
+  const { scrollTo, lock, unlock } = useLenis();
 
   const selectedPropertyType =
     (searchParams.get("propertyType") as PropertyType) || "";
@@ -77,47 +133,86 @@ const Main = () => {
   const currentPage = Number(searchParams.get("page") || "1");
   const [view, setView] = useState<"list" | "map">("list");
 
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const itemsPerPageRef = useRef(6); // always 6 on server to match SSR
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
+    // Correct value after hydration (server always renders with 6)
+    const initial = getItemsPerPage();
+    if (initial !== itemsPerPageRef.current) {
+      itemsPerPageRef.current = initial;
+      forceUpdate((n) => n + 1);
+    }
+
     const update = () => {
-      setItemsPerPage(window.innerWidth >= 1600 ? 8 : 6);
+      const next = getItemsPerPage();
+      if (next !== itemsPerPageRef.current) {
+        itemsPerPageRef.current = next;
+        forceUpdate((n) => n + 1);
+      }
     };
-    update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParamsRef.current.toString());
     if (!params.get("page")) {
       params.set("page", "1");
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [pathname]);
 
+  // Restore scroll position after URL change, if we saved one
+  useEffect(() => {
+    if (savedScrollY.current !== null) {
+      const y = savedScrollY.current;
+      requestAnimationFrame(() => {
+        scrollTo(y, { duration: 0 });
+      });
+      savedScrollY.current = null;
+    }
+  }, [searchParams, scrollTo]);
+
+  // Clear saved scroll on any manual scroll (user intentionally moved)
+  useEffect(() => {
+    const onScroll = () => {
+      savedScrollY.current = null;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const updateParam = useCallback(
     (key: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (value) params.set(key, value);
       else params.delete(key);
       params.set("page", "1");
+
+      savedScrollY.current = window.scrollY;
+
+      lock();
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      setTimeout(() => {
+        unlock();
+      }, 520);
     },
-    [searchParams, pathname, router],
+    [pathname, router, lock, unlock],
   );
 
   const clearFilters = useCallback(() => {
+    savedScrollY.current = window.scrollY;
     router.replace(`${pathname}?page=1`, { scroll: false });
   }, [pathname, router]);
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       params.set("page", String(page));
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [searchParams, pathname, router],
+    [pathname, router],
   );
 
   const hasFilter =
@@ -141,17 +236,18 @@ const Main = () => {
       )
         return false;
       if (selectedBedroom) {
-        const match = item.units?.match(/(\d+)BR\s*-\s*(\d+)BR/);
-        if (match) {
-          const min = parseInt(match[1]);
-          const max = parseInt(match[2]);
-          const bed = selectedBedroom === "5+" ? 5 : parseInt(selectedBedroom);
-          if (bed < min || bed > max) return false;
-        }
+        const match = item.units?.match(/(\d+)BR\s*-\s*(\d+)BR/i);
+        if (!match) return false;
+        const min = parseInt(match[1]);
+        const max = parseInt(match[2]);
+        const bed = selectedBedroom === "5+" ? 5 : parseInt(selectedBedroom);
+        if (bed < min || bed > max) return false;
       }
       return true;
     });
   }, [selectedPropertyType, selectedPriceRange, selectedBedroom, sorted]);
+
+  const itemsPerPage = itemsPerPageRef.current;
 
   const totalPages = useMemo(
     () => Math.ceil(filtered.length / itemsPerPage),
@@ -164,10 +260,10 @@ const Main = () => {
   }, [filtered, currentPage, itemsPerPage]);
 
   return (
-    <section className="w-full bg-white pt-70" data-header="dark">
+    <section className="w-full bg-white pt-5 md:pt-70" data-header="dark">
       <div className="w-full container">
         {/* ── Mobile: collapsible filter (below lg) ── */}
-        <div className="lg:hidden mb-70">
+        <div className="lg:hidden mb-[23px] md:mb-70">
           <motion.div
             variants={moveUp(0.12)}
             initial="hidden"
@@ -176,7 +272,7 @@ const Main = () => {
           >
             <button
               onClick={() => setFiltersOpen((prev) => !prev)}
-              className="flex items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
+              className="flex items-center justify-between w-full px-6 py-3 md:py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
             >
               <span>Filters</span>
               <span
@@ -190,7 +286,7 @@ const Main = () => {
             </button>
             <div
               ref={contentRef}
-              className="transition-all duration-400 ease-in-out overflow-hidden"
+              className="transition-all duration-400 ease-in-out"
               style={{
                 maxHeight: filtersOpen ? "500px" : "0px",
                 opacity: filtersOpen ? 1 : 0,
@@ -234,7 +330,7 @@ const Main = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className={`flex lg:hidden justify-center mt-40`}
+            className={`flex lg:hidden justify-center mt-[23px] md:mt-40`}
           >
             <ListMapToggle view={view} setView={setView} />
           </motion.div>
@@ -271,6 +367,7 @@ const Main = () => {
                   onChange={(val) => updateParam("priceRange", val)}
                 />
               </motion.div>
+
               <motion.div variants={moveUp(0.15)} className="w-full">
                 <FilterDropdown
                   placeholder="Property Type"
@@ -282,7 +379,7 @@ const Main = () => {
 
               {/* More Filters — dummy */}
               <motion.div variants={moveUp(0.2)} className="w-full">
-                <button className="w-full min-w-[220px] 3xl:w-[253px] h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirHeavy] text-16 text-foreground-light">
+                <button className="w-full min-w-[220px] 3xl:w-[253px] h-[50px] lg:h-[66px] flex items-center justify-between px-[26.5px] rounded-full bg-[#EBEBEC] font-[avenirBook] text-16 text-foreground-light">
                   <span>More Filters</span>
                   <Image
                     src="/icons/filter.svg"
@@ -328,7 +425,7 @@ const Main = () => {
             </div>
           </motion.div>
 
-          {/* List/Map toggle — only between xl and 2xl */}
+          {/* List/Map toggle — only between xl and 2xl when filter active */}
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -340,7 +437,7 @@ const Main = () => {
           </motion.div>
         </div>
 
-        <div className="w-full mb-50">
+        <div className="w-full mb-[70px] md:mb-50">
           <div className="relative w-full h-px overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-black/10 origin-center"
@@ -354,28 +451,36 @@ const Main = () => {
       </div>
 
       {/* ── Heading ── */}
-      <div className="container mb-50 text-center" id="properties-list">
+      <div className="container mb-[40px] md:mb-50 text-center" id="properties-list">
         <SectionHeading
           title="Available Off Plan Properties"
           className="mb-20 text-foreground"
         />
         <SectionDescription
           className="text-description text-foreground-light"
-          text={`Showing ${filtered.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–${Math.min(currentPage * itemsPerPage, filtered.length)} of ${filtered.length} premium developments`}
+          text={
+            filtered.length !== 0
+              ? `Showing ${(currentPage - 1) * itemsPerPage + 1}–${Math.min(currentPage * itemsPerPage, filtered.length)} of ${filtered.length} premium developments`
+              : ""
+          }
         />
       </div>
 
       {/* ── Cards / Map ── */}
-      <section className="w-full mb-120 3xl:mb-160">
+      <section className="w-full pb-120 3xl:pb-160">
         {view === "list" ? (
           <div className="flex flex-col justify-center container">
             <div className="text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-50 gap-x-30 xl:gap-x-[28px]">
-                {paginated.map((project, i) => (
-                  <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                    <ProjectCard {...project} />
-                  </Reveal>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-y-5 md:gap-y-50 gap-x-30 xl:gap-x-[28px]">
+                {paginated.length > 0 ? (
+                  paginated.map((project, i) => (
+                    <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
+                      <ProjectCard {...project} />
+                    </Reveal>
+                  ))
+                ) : (
+                  <EmptyState />
+                )}
               </div>
             </div>
           </div>

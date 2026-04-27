@@ -5,7 +5,7 @@ import { moveUp } from "../../motionVariants";
 
 const NewsContent = ({ content }: { content: string }) => {
   return (
-    <section className="w-full bg-white pt-20 pb-50" data-header="dark">
+    <section className="w-full bg-white pt-20 pb-[40px] md:pb-50" data-header="dark">
       <div className="container container-spacing-details-page">
         <motion.div
           variants={moveUp(0.1)}

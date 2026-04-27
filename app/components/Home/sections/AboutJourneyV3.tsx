@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,7 +36,7 @@ const AboutJourneyV3 = () => {
             start: "top bottom",
             end: "bottom top",
           },
-        }
+        },
       );
 
       /* --- TEXT FADE IN --- */
@@ -53,7 +54,7 @@ const AboutJourneyV3 = () => {
             start: "top center",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     });
 
@@ -72,7 +73,7 @@ const AboutJourneyV3 = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[82vh] md:min-h-[70vh] lg:min-h-[75vh] xl:min-h-screen overflow-hidden flex justify-center items-center"
+      className="relative min-h-[82vh]  min-h-screen overflow-hidden flex justify-center items-center"
       // Added bottom padding like working component so section actually scrolls
     >
       {/* VIDEO */}
@@ -96,19 +97,19 @@ const AboutJourneyV3 = () => {
         className="relative z-10 container mx-auto text-center px-4 pb-2"
       >
         <div className="overflow-hidden">
-          <h2 className="anim-item   text-white text-heading mb-30 uppercase">
+          <h2 className="anim-item   text-white text-heading mb-[20px] md:mb-30 uppercase">
             A JOURNEY TO PERFECTION
           </h2>
         </div>
 
         {/* <div className="overflow-hidden">
-          <h3 className="anim-item text-25 text-white font-[avenirHeavy] leading-[1] mb-[40px] uppercase">
+          <h3 className="anim-item text-25 text-white font-[avenirBook] leading-[1] mb-[40px] uppercase">
             CREATING DESTINATIONS OF DISTINCTION
           </h3>
         </div> */}
 
         <div className="overflow-hidden">
-          <p className="anim-item text-white text-description max-w-[73ch] mx-auto mb-50">
+          <p className="anim-item text-white text-description max-w-[73ch] mx-auto mb-[50px]">
             We transform visions into living, breathing destinations. At Imtiaz
             Developments, our legacy is built on excellence, innovation, and
             uncompromising quality — delivering iconic properties that inspire
@@ -118,13 +119,15 @@ const AboutJourneyV3 = () => {
 
         <div className="overflow-hidden ">
           <div className="anim-item mx-auto w-fit">
-            <CustomOutlineButton
-              text="About Imtiaz"
-              borderColor="border-white"
-              textColor="text-white"
-              px="px-[26px] xl:px-[28px] h-[45px] lg:h-[66px] !leading-[1.58]"
-              />
-            </div>
+            <Link href={"/about/our-story"}>
+              <CustomOutlineButton
+                text="About Imtiaz"
+                borderColor="border-white"
+                textColor="text-white"
+                px="px-[28px] h-[50px] md:h-[66px] !leading-[1.58]"
+                />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

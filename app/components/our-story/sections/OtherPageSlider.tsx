@@ -7,9 +7,10 @@ import { moveUp } from "../../motionVariants";
 import { otherPageSliderData } from "../data";
 import gsap from "gsap";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Image from "next/image";
 
 export default function OtherPageSlider() {
-  const { slides, learnMoreText } = otherPageSliderData;
+  const { slides } = otherPageSliderData;
   const [current, setCurrent] = useState(0);
   const currentRef = useRef(0);
   const transitioning = useRef(false);
@@ -39,10 +40,42 @@ export default function OtherPageSlider() {
     });
   }, [slides]);
 
+  // Parallax on scroll
+  useEffect(() => {
+    const PARALLAX_STRENGTH = 15; // vh units
+
+    const handleScroll = () => {
+      const section = layerARef.current?.closest(
+        "section",
+      ) as HTMLElement | null;
+      if (!section) return;
+
+      const { top, height } = section.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+
+      // progress: -1 (section bottom at top of viewport) → +1 (section top at bottom)
+      const progress = (viewportH / 2 - (top + height / 2)) / (viewportH / 2);
+      const offset = progress * PARALLAX_STRENGTH;
+
+      [layerARef.current, layerBRef.current].forEach((layer) => {
+        if (!layer) return;
+        layer.style.backgroundPositionY = `calc(50% + ${offset}vh)`;
+        // scale is applied via transform on a wrapper — use backgroundSize for zoom
+        layer.style.backgroundSize = `cover`;
+        layer.style.transform = `scale(1.15)`;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // run once on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const setLayerBg = (layer: HTMLDivElement, src: string) => {
     layer.style.backgroundImage = `url(${src})`;
     layer.style.backgroundSize = "cover";
     layer.style.backgroundPosition = "center";
+    layer.style.transform = "scale(1.15)"; // headroom for parallax movement
   };
 
   // Reset autoplay — always restarts the 4500ms clock from zero
@@ -57,13 +90,11 @@ export default function OtherPageSlider() {
 
   const goTo = useCallback(
     (index: number, fromAuto = false) => {
-      // Block if already transitioning OR cooldown active (except autoplay which manages its own rhythm)
       if (transitioning.current) return;
-      if (!fromAuto && cooldownRef.current) return;
       if (index === currentRef.current) return;
 
       transitioning.current = true;
-      cooldownRef.current = true;
+      if (fromAuto) cooldownRef.current = true;
 
       const layerA = layerARef.current!;
       const layerB = layerBRef.current!;
@@ -73,22 +104,25 @@ export default function OtherPageSlider() {
       gsap.set(incoming, { opacity: 0, zIndex: 10 });
       gsap.set(outgoing, { zIndex: 5 });
 
-      // ✅ Update content immediately when image starts fading
       currentRef.current = index;
       setCurrent(index);
 
+      const duration = fromAuto ? 1 : 0.45; // fast for manual, smooth for auto
+
       gsap.to(incoming, {
         opacity: 1,
-        duration: 1,
+        duration,
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(outgoing, { opacity: 0 });
           activeLayerRef.current = activeLayerRef.current === "A" ? "B" : "A";
           transitioning.current = false;
 
-          setTimeout(() => {
-            cooldownRef.current = false;
-          }, 600);
+          if (fromAuto) {
+            setTimeout(() => {
+              cooldownRef.current = false;
+            }, 600);
+          }
         },
       });
     },
@@ -176,8 +210,8 @@ export default function OtherPageSlider() {
 
   return (
     <section
-    data-header="dark"
-      className="relative w-full overflow-hidden select-none h-[90vh] cursor-grab"
+      data-header="dark"
+      className="relative w-full overflow-hidden select-none h-screen cursor-grab"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -202,54 +236,60 @@ export default function OtherPageSlider() {
       {/* Container — all visible UI lives here */}
       <div className="container h-full relative z-20">
         {/* Left nav */}
-        <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="absolute left-[15px] bottom-20 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-30"
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-            style={{ cursor: "pointer" }}
-            className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+        <div className="hidden md:flex absolute left-0 top-1/2 lg:-translate-y-1/2  z-30 min-w-full justify-between">
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className=" "
           >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <img
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Prev"
-              className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-        </motion.div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goPrev();
+              }}
+              style={{ cursor: "pointer" }}
+              className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                width={58}
+                height={58}
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Prev"
+                className="relative z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
 
-        {/* Right nav */}
-        <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="absolute right-[15px] bottom-20 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-30"
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-            style={{ cursor: "pointer" }}
-            className="relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+          {/* Right nav */}
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className=" "
           >
-            <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-            <img
-              src="/icons/left_arrow_slider_primary.svg"
-              alt="Next"
-              className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-            />
-          </button>
-        </motion.div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goNext();
+              }}
+              style={{ cursor: "pointer" }}
+              className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+            >
+              <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+              <Image
+                width={58}
+                height={58}
+                src="/icons/left_arrow_slider_primary.svg"
+                alt="Next"
+                className="relative rotate-180 z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+          </motion.div>
+        </div>
 
         {/* Center content */}
         <div
@@ -268,17 +308,79 @@ export default function OtherPageSlider() {
             variants={moveUp(0.15)}
             initial="hidden"
             animate="show"
-            className="text-description text-white/80 mb-50 max-w-[50ch]"
+            className="text-description text-white/80 mb-[40px] md:mb-50 max-w-[50ch]"
           >
             {slides[current].description}
           </motion.p>
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
-            <CustomOutlineButton text="learn more" className="capitalize" variant="light" px="px-[12px] sm:px-[26px] lg:px-[34px]" />
+            <Link href="/about/sustainability">
+              <CustomOutlineButton
+                text="learn more"
+                className="capitalize"
+                variant="light"
+                px="px-[12px] sm:px-[26px] lg:px-[34px] 3xl:w-[172px] lg:w-auto h-[50px] md:h-[67px]"
+              />
+            </Link>
           </motion.div>
+
+          <div className="md:hidden flex mt-[60px] justify-center gap-20">
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className=" "
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goPrev();
+                }}
+                style={{ cursor: "pointer" }}
+                className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              >
+                <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                <Image
+                  width={58}
+                  height={58}
+                  src="/icons/left_arrow_slider_primary.svg"
+                  alt="Prev"
+                  className="relative z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                />
+              </button>
+            </motion.div>
+
+            {/* Right nav */}
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className=" "
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goNext();
+                }}
+                style={{ cursor: "pointer" }}
+                className="relative lg:w-[62px] lg:h-[62px] w-[50px] h-[50px]   group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+              >
+                <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                <Image
+                  width={58}
+                  height={58}
+                  src="/icons/left_arrow_slider_primary.svg"
+                  alt="Next"
+                  className="relative rotate-180 z-10 object-contain lg:w-[28px] lg:h-[28px] w-[21px] h-[21px]  invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                />
+              </button>
+            </motion.div>
+          </div>
         </div>
 
         {/* Pagination dots */}
-        <div className="absolute bottom-70 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-3">
+        <div className="absolute bottom-[70px] md:bottom-70 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-3">
           {slides.map((_, i) => (
             <button
               key={i}

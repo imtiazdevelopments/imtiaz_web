@@ -71,7 +71,7 @@ const Footer = () => {
               viewport={{ amount: 0.2, once: true }}
               exit="exit"
             >
-              <p className="uppercase text-[19px] font-[avenirHeavy] text-white">
+              <p className="uppercase text-[19px] font-[avenirBook] text-white">
                 STAY UPDATED
               </p>
             </motion.div>
@@ -111,7 +111,7 @@ const Footer = () => {
               exit="exit"
               key={i}
             >
-              <h4 className="uppercase text-white text-[17px] md:text-[19px] font-[800] font-[avenirHeavy] mb-[30px]">
+              <h4 className="uppercase text-white text-[17px] md:text-[19px] font-[800] font-[avenirBook] mb-[30px]">
                 {col.heading}
               </h4>
 
@@ -126,7 +126,7 @@ const Footer = () => {
                     key={idx}
                     className="text-[#FFD8E1] text-[17px] 3xl:text-[19px] font-[avenirRoman] hover:text-white transition-colors duration-300 cursor-pointer leading-[2.105]"
                   >
-                    {item}
+                    {item.label}
                   </motion.li>
                 ))}
               </ul>
@@ -139,7 +139,7 @@ const Footer = () => {
       <div className="bg-[#842D43] py-[17px]">
         <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
           {/* LEFT LINKS */}
-          <div className="flex gap-3 xl:gap-7 text-[15px] 3xl:text-[16px] font-[avenirRoman] text-white opacity-45 justify-center md:justify-start w-full">
+          <div className="flex gap-3 xl:gap-7 text-16 font-[avenirRoman] text-white opacity-45 justify-center md:justify-start w-full">
             {footerV2Data.bottom.left.map((txt, i) => (
               <motion.span
                 variants={moveUp(i * 0.2)}

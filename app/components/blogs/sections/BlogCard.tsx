@@ -32,7 +32,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
     <Link href={`/media-center/blog/${blog.slug}`} className="group block">
       <div
         ref={ref}
-        className="relative w-full h-[340px] lg:h-[480px] 3xl:h-[522px] overflow-hidden"
+        className="relative w-full h-[495px] lg:h-[480px] 3xl:h-[522px] overflow-hidden"
       >
         {/* hover fill overlay */}
         <div className="absolute inset-0 bg-black/10 origin-left scale-x-0 transition-transform duration-500 z-20 ease-out group-hover:scale-x-100 pointer-events-none" />
@@ -64,14 +64,14 @@ const BlogCard = ({ blog }: BlogCardProps) => {
         />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end items-center py-40 px-50 z-30">
-          <p className="text-white/80 font-[avenirHeavy] text-16 mb-20 leading-[1.54] capitalize">
+        <div className="absolute inset-0 flex flex-col justify-end items-center py-[30px] md:py-40 px-50 z-30">
+          <p className="text-white/80 font-[avenirBook] text-[14px] md:text-16 mb-20 leading-[1.54] capitalize">
             {blog.category} - {formatted(blog.date)}
           </p>
-          <h3 className="text-white uppercase text-25 leading-[1.5] md:leading-[1.4] mb-40 text-center">
+          <h3 className="text-white uppercase text-[18px] md:text-25 leading-[1.5] md:leading-[1.4] mb-5 md:mb-40 text-center">
             {blog.title}
           </h3>
-          <span className="text-white font-[avenirHeavy] text-19 leading-[100%] underline underline-offset-3">
+          <span className="text-white font-[avenirBook] text-19 leading-[100%] underline underline-offset-3">
             Read More
           </span>
         </div>

@@ -18,7 +18,7 @@ const SliderArrowButton = forwardRef<HTMLButtonElement, SliderArrowButtonProps>(
       <button
         ref={ref}
         onClick={onClick}
-        className={`relative lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden ${isDark ? "border border-[#404040]" : "border border-white"}`}
+        className={`relative w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer group rounded-[50px] flex items-center justify-center overflow-hidden ${isDark ? "border border-[#404040]" : "border border-white"}`}
       >
         {/* Hover fill */}
         <span
@@ -30,7 +30,7 @@ const SliderArrowButton = forwardRef<HTMLButtonElement, SliderArrowButtonProps>(
           alt={isNext ? "Next" : "Previous"}
           width={28}
           height={28}
-          className={`relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300 ${isNext ? "rotate-180" : ""} ${isDark ? "group-hover:invert group-hover:brightness-0" : "invert brightness-0 group-hover:invert-0 group-hover:brightness-100"}`}
+          className={`relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[21px] h-[21px] transition-all duration-300 ${isNext ? "rotate-180" : ""} ${isDark ? "group-hover:invert group-hover:brightness-0" : "invert brightness-0 group-hover:invert-0 group-hover:brightness-100"}`}
         />
       </button>
     );

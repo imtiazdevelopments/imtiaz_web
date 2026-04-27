@@ -43,10 +43,10 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
           scrollTrigger: {
             trigger: section,
             scrub: true,
-              start: "top 85%",
+            start: "top 85%",
             end: "bottom top",
           },
-        }
+        },
       );
     });
 
@@ -65,7 +65,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
   return (
     <section
       ref={section5Ref}
-      className="make-header-black w-full py-120 3xl:py-[130px] bg-gray relative z-10"
+      className="make-header-black w-full py-[70px] lg:py-120 3xl:py-[130px] bg-gray relative z-10"
     >
       <div
         className="container"
@@ -73,10 +73,10 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
       >
         {/* ----- MAIN LAYOUT ----- */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-50 md:gap-150">
-          {/* PHONE - ALWAYS CENTERED */}
-          <div className="flex justify-center">
-            <div className="relative w-[300px] md:w-[394px] h-[520px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-30 lg:gap-150">
+          {/* PHONE - hidden on mobile, shown on md+ (left column) */}
+          <div className="hidden md:flex justify-center">
+            <div className="relative w-[316px] lg:w-[394px] h-[613px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
                 src={"/images/home/app/phone-4.png"}
@@ -96,16 +96,16 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             </div>
           </div>
 
+          {/* RIGHT COLUMN (md+) / Full column (mobile) */}
           <div className="flex flex-col h-full justify-center items-center">
             <div className="overflow-hidden">
               <motion.h2
                 variants={fadeUp}
-                // custom={0.5}
                 custom={0.2}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="  mb-[20px] text-heading uppercase text-primary-2  "
+                className="mb-[20px] text-heading uppercase text-primary-2 text-center"
               >
                 Download Imtiaz App
               </motion.h2>
@@ -114,12 +114,11 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="overflow-hidden">
               <motion.p
                 variants={fadeUp}
-                // custom={0.6}
                 custom={0.21}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-description text-[#404040] mb-50 max-w-[58ch]   text-center"
+                className="text-description text-[#404040] mb-[30px] md:mb-50 max-w-[58ch] text-center"
               >
                 Imtiaz Developments delivers a total solution to all kinds of
                 Real Estate projects, from initial concept through completion
@@ -127,10 +126,31 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               </motion.p>
             </div>
 
+            {/* PHONE - mobile only, between desc and buttons */}
+            <div className="flex md:hidden justify-center  mb-[34px] md:50">
+              <div className="relative w-[286px] h-[553px] overflow-hidden phone-wrapper z-[100]">
+                <Image
+                  className="absolute z-10 h-full w-full"
+                  src={"/images/home/app/phone-4.png"}
+                  alt="phone"
+                  width={900}
+                  height={900}
+                />
+                <div className="left-[25px] right-[25px] absolute">
+                  <Image
+                    src={d.mobileImage}
+                    alt="mobile"
+                    width={1500}
+                    height={2000}
+                    className="absolute w-full"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="flex gap-[14px] justify-center">
               <motion.div
                 variants={fadeUp}
-                // custom={0.7}
                 custom={0.23}
                 initial="hidden"
                 whileInView="show"
@@ -142,14 +162,13 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                     alt="Download on App Store"
                     width={194}
                     height={65}
-                    className="w-auto h-[45px] lg:w-[194px] lg:h-[65px] "
+                    className="w-auto h-[55px] lg:w-[194px] lg:h-[65px] "
                   />
                 </a>
               </motion.div>
 
               <motion.div
                 variants={fadeUp}
-                // custom={0.8}
                 custom={0.23}
                 initial="hidden"
                 whileInView="show"
@@ -161,7 +180,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                     alt="Get it on Google Play"
                     width={194}
                     height={65}
-                    className="w-auto h-[45px] lg:w-[194px] lg:h-[65px]"
+                    className="w-auto h-[55px] lg:w-[194px] lg:h-[65px]"
                   />
                 </a>
               </motion.div>

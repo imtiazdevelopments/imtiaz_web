@@ -68,17 +68,17 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
   }, []);
 
   return (
-    <section className="w-full bg-white pb-100" data-header="light">
+    <section className="w-full bg-white md:pb-100  " data-header="light">
       <div className="container">
         <SectionHeading
           title="Signature Moments"
-          className="text-center mb-50 text-foreground"
+          className="text-center mb-5 md:mb-50 text-foreground"
         />
       </div>
 
       <div
         ref={containerRef}
-        className="relative w-full h-[500px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[396px] md:h-[680px] 2xl:h-screen overflow-hidden bg-black cursor-grab active:cursor-grabbing"
       >
         {/* z-0 — previous slide bg, fades out after each transition for zero flash */}
         <div className="absolute inset-0 z-0">
@@ -103,9 +103,13 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
             modules={[Autoplay, EffectFade]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
-            speed={1400}
+            speed={500}
             loop={true}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            autoplay={{
+              delay: 4500,
+              disableOnInteraction: false,
+              waitForTransition: false, // ← key fix
+            }}
             onSwiper={handleSwiper}
             onSlideChange={(swiper) => {
               setActiveIndex(swiper.realIndex);
@@ -167,7 +171,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         >
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute right-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image
@@ -190,7 +194,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         >
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="cursor-pointer group lg:w-[50px] lg:h-[50px] 3xl:w-[62px] 3xl:h-[62px] w-[45px] h-[45px] border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
+            className="cursor-pointer group w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px]  border border-white rounded-[50px] flex items-center justify-center overflow-hidden relative"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
             <Image

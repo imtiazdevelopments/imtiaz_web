@@ -17,18 +17,18 @@ const Pagination = ({
 }: PaginationProps) => {
   const { scrollTo } = useLenis();
 
-const handleClick = (page: number) => {
-  onPageChange(page);
+  const handleClick = (page: number) => {
+    onPageChange(page);
 
-  if (!scrollToId) return;
+    if (!scrollToId) return;
 
-  setTimeout(() => {
-    const el = document.getElementById(scrollToId);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 150;
-    scrollTo(top, { duration: 1.2 });
-  }, 60);
-};
+    setTimeout(() => {
+      const el = document.getElementById(scrollToId);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 150;
+      scrollTo(top, { duration: 1.2 });
+    }, 20);
+  };
 
   const getPages = (): (number | "...")[] => {
     if (totalPages <= 6) {
@@ -50,22 +50,25 @@ const handleClick = (page: number) => {
     pages.push(totalPages);
 
     return pages.filter((p, i, arr) =>
-      p === "..." ? arr[i - 1] !== "..." : arr.indexOf(p) === i
+      p === "..." ? arr[i - 1] !== "..." : arr.indexOf(p) === i,
     );
   };
 
   const pages = getPages();
 
   return (
-    <div className="flex items-end mt-50 md:mt-60 2xl:mt-100">
+    <div className="flex items-end mt-[40px] md:mt-60 2xl:mt-100  ">
       {pages.map((page, i) => {
         const isEllipsis = page === "...";
         const isActive = page === currentPage;
 
         if (isEllipsis) {
           return (
-            <div key={`ellipsis-${i}`} className="flex flex-col items-end pb-[1px]">
-              <span className="text-[#490905] font-[avenirHeavy] text-19 leading-[100%] px-4 py-2 cursor-default">
+            <div
+              key={`ellipsis-${i}`}
+              className="flex flex-col items-end pb-[1px]"
+            >
+              <span className="text-[#490905] font-[avenirBook] text-19 leading-[100%] px-4 py-2 cursor-default">
                 ···
               </span>
             </div>
@@ -76,7 +79,7 @@ const handleClick = (page: number) => {
           <div key={page} className="flex flex-col items-center">
             <button
               onClick={() => handleClick(page as number)}
-              className="text-[#490905] font-[avenirHeavy] text-19 leading-[100%] px-4 py-2 transition-opacity duration-200 hover:opacity-60 cursor-pointer"
+              className="text-[#490905] font-[avenirBook] text-[16px] text-19 leading-[100%] px-[9px] md:px-4 py-2 transition-opacity duration-200 hover:opacity-60 cursor-pointer"
             >
               {page}
             </button>

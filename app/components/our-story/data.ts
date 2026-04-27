@@ -8,8 +8,9 @@ export const bannerData = {
 export const visionSectionData = {
   title: "A Vision Built in 1993",
   description:
-    "At Imtiaz, we do more than develop properties — we craft experiences. Every project echoes our deep passion for architecture, purposeful design, and sustainable living. From luxury residences to waterfront communities and concept-driven spaces, each development is created to enrich lives and leave a lasting impact.",
+    "At Imtiaz, we do more than develop properties — we craft experiences. Every project echoes our deep passion for architecture, purposeful design, and sustainable living. From luxury residences to waterfront communities and \n concept-driven spaces, each development is created to enrich lives and leave a lasting impact.",
   bgImage: "/images/our-story/vision-bg.jpg",
+  bgImageMobile: "/images/our-story/vision-bg-mobile.jpg",
   stats: [
     {
       value: "AED 10BN",
@@ -23,6 +24,7 @@ export const visionSectionData = {
 };
 
 export type messageData = {
+  id: string;
   title: string;
   quote: string;
   name: string;
@@ -30,9 +32,11 @@ export type messageData = {
   description: string;
   personImage: string;
   bgImage: string;
+  bgImageMobile: string;
 };
 
 export const chairmanMessageData: messageData = {
+  id: "chairman",
   title: "Message From Chairman",
   quote: "Asian and Middle Eastern economies grew rapidly despite challenges.",
   name: "Ustad Rahimullah Shahsawar",
@@ -40,10 +44,12 @@ export const chairmanMessageData: messageData = {
   description:
     "The fundamental pillars of our rich history of accomplishments remains in our experienced, professional, and highly motivated team who strive to harness their diverse synergies in their fields. We work hard to push the human boundaries with innovation and superior quality services. Our ambition is to be an unstoppable organization that creates enormous value for our clients, our team, and our environment.",
   personImage: "/images/our-story/chairman.png",
-  bgImage: "/images/our-story/chairman-bg.jpg",
+  bgImage: "/images/our-story/chairman-bg.png",
+  bgImageMobile: "/images/our-story/chairman-bg-mobile.png",
 };
 
 export const ceoMessageData: messageData = {
+  id: "ceo",
   title: "Message From CEO",
   quote: "Imtiaz Developments creates vibrant, modern communities.",
   name: "Mr. Masih Ullah Imtiaz",
@@ -51,7 +57,8 @@ export const ceoMessageData: messageData = {
   description:
     "Driven by innovation, sustainability, and uncompromising quality, we transform possibilities into inspiring realities. Every project is more than a structure—it’s a thoughtfully crafted living space that enriches lives and reflects the values of our community. \n With a commitment to excellence and forward-thinking design, we continue to shape environments that elevate lifestyles and set new standards for the future.",
   personImage: "/images/our-story/ceo.png",
-  bgImage: "/images/our-story/ceo-bg.jpg",
+  bgImage: "/images/our-story/ceo-bg.png",
+  bgImageMobile: "/images/our-story/ceo-bg-mobile.png",
 };
 
 export const philosophyData = {
@@ -63,14 +70,15 @@ export const philosophyData = {
 export const awardData = {
   title: "Mohammed Bin Rashid Al \n Maktoum Medal for Philanthropy.",
   bgImage: "/images/our-story/award-bg.jpg",
+  bgImagemob: "/images/our-story/awardmob.jpg",
   descriptions:
     "<p>Imtiaz Developments has been honoured with the prestigious Mohammed bin Rashid Al Maktoum Medal for Philanthropy, awarded by His Highness Shaikh Mohammad Bin Rashid Al Maktoum, Vice President and Prime Minister of the UAE and Ruler of Dubai. The accolade was presented at the Mohammed bin Rashid Al Maktoum Global Initiatives (MBRGI) Year in Review event on 18 March 2025 at the Dubai World Trade Centre.</p><p>This esteemed recognition celebrates the company's unwavering commitment to philanthropy, sustainability, and community development. A defining element of the award is Imtiaz Developments' substantial donation of Dh50 million to MBRGI's Father's Endowment campaign.</p>",
 };
 
 export const expertiseData = {
-  title: "Expertise",
+  title: "Our Expertise",
   description:
-    "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 million sq. ft. masterplan that seamlessly unites urban \n vibrancy with nature’s calm. ",
+    "Meydan Horizon is one of Dubai’s most significant lifestyle destinations. It's a visionary 21.5 \n million sq. ft. masterplan that seamlessly unites urban \n vibrancy with nature’s calm. ",
 };
 
 export const otherPageSliderData = {

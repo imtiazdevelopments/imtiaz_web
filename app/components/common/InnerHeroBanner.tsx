@@ -43,30 +43,30 @@ const InnerHeroBanner = ({
     gsap.context(() => {
       // Zoom-out → slow Ken-Burns creep
       // 👉 First: run intro ONCE
-      gsap.fromTo(
-        imageWrapperRef.current,
-        { scale: ZOOM_OUT_START, transformOrigin: "center center" },
-        {
-          scale: ZOOM_OUT_END,
-          duration: ZOOM_OUT_DURATION,
-          ease: "expo.out",
-          onComplete: () => {
-            // 👉 Then start infinite subtle loop
-            gsap
-              .timeline({ repeat: -1 })
-              .to(imageWrapperRef.current, {
-                scale: ZOOM_IN_END,
-                duration: ZOOM_IN_DURATION,
-                ease: "sine.inOut",
-              })
-              .to(imageWrapperRef.current, {
-                scale: ZOOM_OUT_END,
-                duration: ZOOM_IN_DURATION,
-                ease: "sine.inOut",
-              });
+        gsap.fromTo(
+          imageWrapperRef.current,
+          { scale: ZOOM_OUT_START, transformOrigin: "center center" },
+          {
+            scale: ZOOM_OUT_END,
+            duration: ZOOM_OUT_DURATION,
+            ease: "expo.out",
+            onComplete: () => {
+              // 👉 Then start infinite subtle loop
+              gsap
+                .timeline({ repeat: -1 })
+                .to(imageWrapperRef.current, {
+                  scale: ZOOM_IN_END,
+                  duration: ZOOM_IN_DURATION,
+                  ease: "sine.inOut",
+                })
+                .to(imageWrapperRef.current, {
+                  scale: ZOOM_OUT_END,
+                  duration: ZOOM_IN_DURATION,
+                  ease: "sine.inOut",
+                });
+            },
           },
-        },
-      );
+        );
 
       // Description
       if (descRef.current) {
@@ -103,7 +103,7 @@ const InnerHeroBanner = ({
 
   return (
     <section
-      className="relative w-full h-[75vh] 2xl:h-[89.5dvh] overflow-hidden"
+      className="relative w-full h-[82vh] 2xl:h-[89.5dvh] overflow-hidden"
       data-header="light"
     >
       <div
@@ -115,7 +115,6 @@ const InnerHeroBanner = ({
           src={image}
           alt={title}
           fill
-          sizes="100vw"
           className="object-cover object-center 2xl:object-bottom"
           priority
           onLoad={handleImageLoad}
@@ -131,7 +130,7 @@ const InnerHeroBanner = ({
           <div className={`${maxTitle} mx-auto`}>
             <AnimatedHeading
               title={title}
-              className="mb-20 text-white"
+              className="mb-[8px] md:mb-20 text-white"
               mode="blade"
               delay={HEADING_DELAY}
             />
@@ -140,7 +139,7 @@ const InnerHeroBanner = ({
             <p
               ref={descRef}
               style={{ opacity: 0 }}
-              className={`text-white/80 text-description ${maxW} mx-auto text-center flex items-center justify-center px-30 xl:px-0 whitespace-pre-line`}
+              className={`text-white/80 text-description ${maxW} mx-auto text-center flex items-center justify-center px-[13px] md:px-30 xl:px-0 whitespace-pre-line`}
             >
               {description}
             </p>
@@ -151,7 +150,7 @@ const InnerHeroBanner = ({
       <div
         ref={breadcrumbRef}
         style={{ opacity: 0 }}
-        className="absolute bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
+        className="absolute bottom-[60px] lg:bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
       >
         <Breadcrumb />
       </div>

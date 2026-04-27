@@ -33,7 +33,9 @@ function ImageTrack({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             key={i}
-            ref={(el) => { if (el) targetRef.current[i] = el; }}
+            ref={(el) => {
+              if (el) targetRef.current[i] = el;
+            }}
             src={slide.image}
             alt={slide.alt}
             className="absolute inset-0 w-full h-full object-cover object-center"
@@ -57,21 +59,21 @@ export default function SustainabilitySpotlight() {
   const currentIdxRef = useRef(0);
   // While true, ALL user input (clicks, drags) is ignored completely.
   // This is the simplest, most robust way to prevent animation corruption.
-  const isAnimRef     = useRef(false);
+  const isAnimRef = useRef(false);
 
-  const dImgsRef     = useRef<HTMLImageElement[]>([]);
-  const mImgsRef     = useRef<HTMLImageElement[]>([]);
+  const dImgsRef = useRef<HTMLImageElement[]>([]);
+  const mImgsRef = useRef<HTMLImageElement[]>([]);
   // MutableRefObject<HTMLDivElement | null> matches useRef<HTMLDivElement>(null)
   const dParallaxRef = useRef<HTMLDivElement>(null);
   const mParallaxRef = useRef<HTMLDivElement>(null);
 
-  const dragStartX     = useRef<number | null>(null);
-  const isDragging     = useRef(false);
+  const dragStartX = useRef<number | null>(null);
+  const isDragging = useRef(false);
   const DRAG_THRESHOLD = 50;
 
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const goNextRef   = useRef<() => void>(() => {});
-  const sectionRef  = useRef<HTMLElement>(null);
+  const goNextRef = useRef<() => void>(() => {});
+  const sectionRef = useRef<HTMLElement>(null);
 
   // ── Parallax ──────────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -79,9 +81,9 @@ export default function SustainabilitySpotlight() {
     if (!section) return;
     const onScroll = () => {
       const rect = section.getBoundingClientRect();
-      const vh   = window.innerHeight;
-      const y    = ((vh / 2 - (rect.top + rect.height / 2)) / vh) * 15;
-      const t    = `scale(1.15) translateY(${y}vh)`;
+      const vh = window.innerHeight;
+      const y = ((vh / 2 - (rect.top + rect.height / 2)) / vh) * 15;
+      const t = `scale(1.15) translateY(${y}vh)`;
       if (dParallaxRef.current) dParallaxRef.current.style.transform = t;
       if (mParallaxRef.current) mParallaxRef.current.style.transform = t;
     };
@@ -91,19 +93,22 @@ export default function SustainabilitySpotlight() {
   }, []);
 
   // ── Settle all images to a clean known state ──────────────────────────────────
-  const settle = useCallback((activeIdx: number) => {
-    slides.forEach((_, i) => {
-      const active = i === activeIdx;
-      [dImgsRef.current[i], mImgsRef.current[i]].forEach((img) => {
-        if (!img) return;
-        gsap.set(img, {
-          clipPath: active ? "inset(0% 0% 0% 0%)" : "inset(0% 100% 0% 0%)",
-          zIndex:   active ? 1 : 0,
-          scale:    1,
+  const settle = useCallback(
+    (activeIdx: number) => {
+      slides.forEach((_, i) => {
+        const active = i === activeIdx;
+        [dImgsRef.current[i], mImgsRef.current[i]].forEach((img) => {
+          if (!img) return;
+          gsap.set(img, {
+            clipPath: active ? "inset(0% 0% 0% 0%)" : "inset(0% 100% 0% 0%)",
+            zIndex: active ? 1 : 0,
+            scale: 1,
+          });
         });
       });
-    });
-  }, [slides]);
+    },
+    [slides],
+  );
 
   // ── Core go() ─────────────────────────────────────────────────────────────────
   const go = useCallback(
@@ -118,10 +123,11 @@ export default function SustainabilitySpotlight() {
       const dir: 1 | -1 = forcedDir ?? (nextIdx > prevIdx ? 1 : -1);
 
       currentIdxRef.current = nextIdx;
-      isAnimRef.current     = true;
+      isAnimRef.current = true;
       setCurrent(nextIdx);
 
-      const fromClip = dir === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)";
+      const fromClip =
+        dir === 1 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)";
 
       [dImgsRef.current[nextIdx], mImgsRef.current[nextIdx]].forEach((img) => {
         if (img) gsap.set(img, { clipPath: fromClip, zIndex: 2, scale: 1.06 });
@@ -136,34 +142,61 @@ export default function SustainabilitySpotlight() {
         isAnimRef.current = false;
       };
 
-      const animate = (img: HTMLImageElement | undefined, onDone: () => void) => {
-        if (!img) { onDone(); return; }
+      const animate = (
+        img: HTMLImageElement | undefined,
+        onDone: () => void,
+      ) => {
+        if (!img) {
+          onDone();
+          return;
+        }
         const tl = gsap.timeline({ onComplete: onDone });
-        tl.to(img, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.7, ease: "expo.inOut" });
-        tl.to(img, { scale: 1,                        duration: 1.4, ease: "power2.out" }, "<");
+        tl.to(img, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.7,
+          ease: "expo.inOut",
+        });
+        tl.to(img, { scale: 1, duration: 1.4, ease: "power2.out" }, "<");
       };
 
-      animate(dImgsRef.current[nextIdx], () => { dDone = true; onBothDone(); });
-      animate(mImgsRef.current[nextIdx], () => { mDone = true; onBothDone(); });
+      animate(dImgsRef.current[nextIdx], () => {
+        dDone = true;
+        onBothDone();
+      });
+      animate(mImgsRef.current[nextIdx], () => {
+        mDone = true;
+        onBothDone();
+      });
     },
     [slides, settle],
   );
 
   const goPrev = useCallback(() => {
-    const i = currentIdxRef.current === 0 ? slides.length - 1 : currentIdxRef.current - 1;
+    const i =
+      currentIdxRef.current === 0
+        ? slides.length - 1
+        : currentIdxRef.current - 1;
     go(i, -1);
   }, [slides.length, go]);
 
   const goNext = useCallback(() => {
-    const i = currentIdxRef.current === slides.length - 1 ? 0 : currentIdxRef.current + 1;
+    const i =
+      currentIdxRef.current === slides.length - 1
+        ? 0
+        : currentIdxRef.current + 1;
     go(i, 1);
   }, [slides.length, go]);
 
-  useEffect(() => { goNextRef.current = goNext; }, [goNext]);
+  useEffect(() => {
+    goNextRef.current = goNext;
+  }, [goNext]);
 
   // ── Autoplay ──────────────────────────────────────────────────────────────────
   const stopAutoplay = useCallback(() => {
-    if (autoplayRef.current) { clearInterval(autoplayRef.current); autoplayRef.current = null; }
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
   }, []);
 
   const startAutoplay = useCallback(() => {
@@ -171,7 +204,10 @@ export default function SustainabilitySpotlight() {
     autoplayRef.current = setInterval(() => goNextRef.current(), 4200);
   }, [stopAutoplay]);
 
-  useEffect(() => { startAutoplay(); return stopAutoplay; }, [startAutoplay, stopAutoplay]);
+  useEffect(() => {
+    startAutoplay();
+    return stopAutoplay;
+  }, [startAutoplay, stopAutoplay]);
 
   // ── Pointer / drag — also respect isAnimRef so dragging mid-anim does nothing ─
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -187,7 +223,11 @@ export default function SustainabilitySpotlight() {
   const handlePointerUp = (e: React.PointerEvent) => {
     if (dragStartX.current === null) return;
     const delta = e.clientX - dragStartX.current;
-    if (isDragging.current && Math.abs(delta) >= DRAG_THRESHOLD && !isAnimRef.current) {
+    if (
+      isDragging.current &&
+      Math.abs(delta) >= DRAG_THRESHOLD &&
+      !isAnimRef.current
+    ) {
       delta < 0 ? goNext() : goPrev();
     }
     dragStartX.current = null;
@@ -201,47 +241,66 @@ export default function SustainabilitySpotlight() {
   };
 
   const pointerHandlers = {
-    onPointerDown : handlePointerDown,
-    onPointerMove : handlePointerMove,
-    onPointerUp   : handlePointerUp,
+    onPointerDown: handlePointerDown,
+    onPointerMove: handlePointerMove,
+    onPointerUp: handlePointerUp,
     onPointerLeave: handlePointerLeave,
   };
 
   const slide = slides[current];
 
   return (
-    <section
-      ref={sectionRef}
-      className="w-full bg-[#EBEBEC] py-120 3xl:py-130"
-        
-    >
+    <section ref={sectionRef} className="w-full bg-[#EBEBEC] py-120 3xl:py-130" 
+      data-header="dark">
       <div className="container">
-
         {/* ══ MOBILE ══════════════════════════════════════════════════════════════ */}
         <div className="flex flex-col items-center lg:hidden">
           <motion.h2
-            variants={moveUp(0)} initial="hidden" whileInView="show" viewport={{ once: true }}
+            variants={moveUp(0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="uppercase text-heading text-foreground mb-50 text-center"
           >
             {sustainabilitySpotlight.title}
           </motion.h2>
 
           <AnimatePresence mode="wait">
-            <motion.div key={slide.id} className="flex flex-col items-center text-center mb-50">
+            <motion.div
+              key={slide.id}
+              className="flex flex-col items-center text-center mb-50"
+            >
               <motion.span
-                custom={0} variants={itemVariants} initial="hidden" animate="visible" exit="exit"
-                className="text-16 font-[avenirHeavy] text-foreground-light mb-20"
+                custom={0}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="text-16 font-[avenirBook] text-foreground-light mb-20"
               >
                 {slide.date}
               </motion.span>
               <motion.h3
-                custom={1} variants={itemVariants} initial="hidden" animate="visible" exit="exit"
+                custom={1}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
                 className="text-25 font-[optima] uppercase text-foreground line-clamp-2 leading-[1.2] mb-50 max-w-[598px]"
               >
                 {slide.title}
               </motion.h3>
-              <motion.div custom={2} variants={itemVariants} initial="hidden" animate="visible" exit="exit">
-                <Link href={slide.href} className="text-primary-2 text-19 leading-[100%] font-[avenirHeavy] hover:opacity-70 transition-opacity duration-300">
+              <motion.div
+                custom={2}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <Link
+                  href={slide.href}
+                  className="text-primary-2 text-19 leading-[100%] font-[avenirBook] hover:opacity-70 transition-opacity duration-300"
+                >
                   Read More...
                 </Link>
               </motion.div>
@@ -252,9 +311,14 @@ export default function SustainabilitySpotlight() {
             {slides.map((_, i) => (
               <button
                 key={i}
-                onClick={() => { go(i); startAutoplay(); }}
+                onClick={() => {
+                  go(i);
+                  startAutoplay();
+                }}
                 className={`rounded-full transition-all duration-300 cursor-pointer w-[10px] h-[10px] ${
-                  i === current ? "bg-primary-2" : "bg-white border border-primary-2"
+                  i === current
+                    ? "bg-primary-2"
+                    : "bg-white border border-primary-2"
                 }`}
               />
             ))}
@@ -264,18 +328,36 @@ export default function SustainabilitySpotlight() {
             slides={slides}
             targetRef={mImgsRef}
             parallaxRef={mParallaxRef}
-            className="w-full relative h-[320px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-50"
+            className="w-full relative h-[328px] sm:h-[400px] overflow-hidden cursor-grab active:cursor-grabbing select-none mb-5 md:mb-50"
             pointerHandlers={pointerHandlers}
           />
 
-          <div className="flex justify-center gap-30">
+          <div className="flex justify-between md:justify-center gap-30 w-full">
             <CustomOutlineButton
-              variant="dark" text="View All" borderColor="border-primary-2"
-              textColor="text-foreground-light" px="px-[12px] sm:px-[26px]"
+              variant="dark"
+              text="View All"
+              borderColor="border-primary-2"
+              textColor="text-foreground-light"
+              px="px-[12px] sm:px-[26px]"
+              className="min-w-[139px] md:w-full"
             />
             <div className="flex items-center gap-[15px]">
-              <SliderArrowButton onClick={() => { goPrev(); startAutoplay(); }} direction="prev" variant="dark" />
-              <SliderArrowButton onClick={() => { goNext(); startAutoplay(); }} direction="next" variant="dark" />
+              <SliderArrowButton
+                onClick={() => {
+                  goPrev();
+                  startAutoplay();
+                }}
+                direction="prev"
+                variant="dark"
+              />
+              <SliderArrowButton
+                onClick={() => {
+                  goNext();
+                  startAutoplay();
+                }}
+                direction="next"
+                variant="dark"
+              />
             </div>
           </div>
         </div>
@@ -283,37 +365,59 @@ export default function SustainabilitySpotlight() {
         {/* ══ DESKTOP ══════════════════════════════════════════════════════════════ */}
         <div className="hidden lg:block">
           <div className="flex items-center justify-center gap-50 3xl:gap-160">
-
             <div className="w-auto flex flex-col items-center justify-center">
               <div className="flex flex-col items-center text-center">
                 <motion.h2
-                  variants={moveUp(0)} initial="hidden" whileInView="show" viewport={{ once: true }}
+                  variants={moveUp(0)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
                   className="uppercase text-heading text-foreground mb-90"
                 >
                   {sustainabilitySpotlight.title}
                 </motion.h2>
 
                 <AnimatePresence mode="wait">
-                  <motion.div key={slide.id} className="flex flex-col items-center text-center">
+                  <motion.div
+                    key={slide.id}
+                    className="flex flex-col items-center text-center"
+                  >
                     <div className="overflow-hidden mb-20">
                       <motion.span
-                        custom={0} variants={moveUp(0)} initial="hidden" animate="show" exit="exit"
-                        className="text-16 font-[avenirHeavy] text-foreground-light"
+                        custom={0}
+                        variants={moveUp(0)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        className="text-16 font-[avenirBook] text-foreground-light"
                       >
                         {slide.date}
                       </motion.span>
                     </div>
                     <div className="overflow-hidden">
                       <motion.h3
-                        custom={1} variants={moveUp(0.1)} initial="hidden" animate="show" exit="exit"
+                        custom={1}
+                        variants={moveUp(0.1)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
                         className="text-25 font-[optima] uppercase text-foreground line-clamp-2 leading-[1.2] mb-50 max-w-[598px]"
                       >
                         {slide.title}
                       </motion.h3>
                     </div>
                     <div className="overflow-hidden">
-                      <motion.div custom={2} variants={moveUp(0.14)} initial="hidden" animate="show" exit="exit">
-                        <Link href={slide.href} className="text-primary-2 text-19 font-[avenirHeavy] leading-[100%] hover:opacity-70 transition-colors duration-300">
+                      <motion.div
+                        custom={2}
+                        variants={moveUp(0.14)}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                      >
+                        <Link
+                          href={slide.href}
+                          className="text-primary-2 text-19 font-[avenirBook] leading-[100%] hover:opacity-70 transition-colors duration-300"
+                        >
                           Read More...
                         </Link>
                       </motion.div>
@@ -325,9 +429,14 @@ export default function SustainabilitySpotlight() {
                   {slides.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => { go(i); startAutoplay(); }}
+                      onClick={() => {
+                        go(i);
+                        startAutoplay();
+                      }}
                       className={`rounded-full transition-all duration-300 cursor-pointer w-[10px] h-[10px] ${
-                        i === current ? "bg-primary-2" : "bg-white border border-primary-2"
+                        i === current
+                          ? "bg-primary-2"
+                          : "bg-white border border-primary-2"
                       }`}
                     />
                   ))}
@@ -346,24 +455,58 @@ export default function SustainabilitySpotlight() {
 
           <div className="overflow-hidden">
             <div className="flex justify-center mt-50 gap-20 3xl:gap-30">
-              <motion.div variants={moveUp(0)} initial="hidden" whileInView="show" viewport={{ once: true }} exit="exit">
+              <motion.div
+                variants={moveUp(0)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                exit="exit"
+              >
                 <CustomOutlineButton
-                  variant="dark" text="View All" borderColor="border-primary-2"
-                  textColor="text-foreground-light" px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
+                  variant="dark"
+                  text="View All"
+                  borderColor="border-primary-2"
+                  textColor="text-foreground-light"
+                  px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
                 />
               </motion.div>
               <div className="flex items-center gap-[10px] 3xl:gap-[15px]">
-                <motion.div variants={moveUp(0.1)} initial="hidden" whileInView="show" viewport={{ once: true }} exit="exit">
-                  <SliderArrowButton onClick={() => { goPrev(); startAutoplay(); }} direction="prev" variant="dark" />
+                <motion.div
+                  variants={moveUp(0.1)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  exit="exit"
+                >
+                  <SliderArrowButton
+                    onClick={() => {
+                      goPrev();
+                      startAutoplay();
+                    }}
+                    direction="prev"
+                    variant="dark"
+                  />
                 </motion.div>
-                <motion.div variants={moveUp(0.13)} initial="hidden" whileInView="show" viewport={{ once: true }} exit="exit">
-                  <SliderArrowButton onClick={() => { goNext(); startAutoplay(); }} direction="next" variant="dark" />
+                <motion.div
+                  variants={moveUp(0.13)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  exit="exit"
+                >
+                  <SliderArrowButton
+                    onClick={() => {
+                      goNext();
+                      startAutoplay();
+                    }}
+                    direction="next"
+                    variant="dark"
+                  />
                 </motion.div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

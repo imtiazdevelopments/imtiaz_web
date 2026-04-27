@@ -32,7 +32,7 @@ function AccordionItem({
       {/* Question Row */}
       <button
         onClick={onToggle}
-        className={`${isOpen ? "2xl:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-40 ${!isOpen ? "pb-30" : ""}` : "py-40"} text-left group focus:outline-none`}
+        className={`${isOpen ? "pb-[10px] md:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-20 md:pt-40` : "py-20 md:py-40"} text-left group focus:outline-none`}
         aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
@@ -79,7 +79,9 @@ function AccordionItem({
         }}
       >
         <div ref={contentRef}>
-          <p className="text-description text-foreground-light max-w-[846px] pb-30">
+          <p
+            className={`${!isLast ? "pb-20 md:pb-30" : ""} text-description text-foreground-light max-w-[846px]`}
+          >
             {item.answer}
           </p>
         </div>
@@ -107,29 +109,31 @@ export default function InvestorFaq() {
   };
 
   return (
-    <section
-      className="w-full bg-gray pt-120 pb-90 3xl:pt-130 3xl:pb-100"
-      data-header="dark"
-    >
+    <section className="w-full bg-gray py-[70px] lg:py-120 3xl:py-130" data-header="dark">
       <div className="container">
         {/* Header */}
-        <div className="w-full flex flex-col items-center text-center mb-[10px]">
-          <SectionHeading title={faqData.title} className="mb-20 text-foreground" />
-          <SectionDescription text={faqData.subtitle} className="shrink-0 max-w-[407px] text-foreground-light" />
+        <div className="w-full flex flex-col items-center text-center mb-[30px] lg:mb-[10px]">
+          <SectionHeading
+            title={faqData.title}
+            className="mb-20 text-foreground"
+          />
+          <SectionDescription
+            text={faqData.subtitle}
+            className="shrink-0 max-w-[407px] text-foreground-light"
+          />
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
           {faqData.items.map((item, index) => (
-            <Reveal variants={moveUpV2} key={item.id} >
-
-            <AccordionItem
-              item={item}
-              isOpen={openId === item.id}
-              onToggle={() => toggle(item.id)}
-              isLast={index === faqData.items.length - 1}
+            <Reveal variants={moveUpV2} key={item.id}>
+              <AccordionItem
+                item={item}
+                isOpen={openId === item.id}
+                onToggle={() => toggle(item.id)}
+                isLast={index === faqData.items.length - 1}
               />
-              </Reveal>
+            </Reveal>
           ))}
         </div>
       </div>

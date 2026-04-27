@@ -170,13 +170,13 @@ const InnerHeroBanner = ({
           )}
           <div
             ref={btnRef}
-            className="mt-50 overflow-hidden flex justify-center w-full"
+            className="mt-[40px] md:mt-50 overflow-hidden flex justify-center w-full"
           >
             <Link href={buttonLink}>
               <CustomOutlineButton
                 text={buttonText}
                 className="capitalize"
-                px="px-[12px] sm:px-[26px] xl:px-[33px]"
+                px="px-[22px] sm:px-[25px] xl:px-[33px]"
               />
             </Link>
           </div>
@@ -186,7 +186,7 @@ const InnerHeroBanner = ({
       <div
         ref={breadcrumbRef}
         style={{ opacity: 0 }}
-        className="absolute bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
+        className="absolute bottom-[60px] 3xl:bottom-[63px] left-0 right-0 flex justify-center"
       >
         <Breadcrumb />
       </div>
