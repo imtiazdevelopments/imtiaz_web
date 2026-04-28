@@ -78,7 +78,7 @@ function ProjectIntro({ pdfdocs = pdfdocData }: ProjectIntroProps) {
               <CustomIconButton
                 icondownload={true}
                 // className={`${index === 2 ? 'min-w-[190px] md:w-fit' : 'w-full md:w-fit'} !px-5 xl:!px-[30px] 2xl:!px-[35px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]`}
-                 className={`icnpojectbtn w-full md:w-[210px] !px-5 xl:!px-[30px] 2xl:!px-[5px] 2xl:!py-[20.5px] h-[50px] md:h-[67px]`}
+                 className={`icnpojectbtn w-full md:w-[210px] !px-5 xl:!px-[30px] 2xl:!px-[5px] 2xl:!py-[20.5px] h-[44px] md:h-[50px]  xl:h-[66px]`}
                 text={doc.label}
                 borderColor="border-white"
                 textColor="text-white"

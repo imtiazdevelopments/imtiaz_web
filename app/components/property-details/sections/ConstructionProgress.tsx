@@ -396,7 +396,7 @@ function CircularProgress({
       </div>
 
       {!isLarge && (
-        <span className="text-description uppercase text-foreground-light font-bold text-center leading-[1.63]">
+        <span className="text-[12px] md:text-16 text-description uppercase text-foreground-light font-bold text-center leading-[1.63]">
           {label}
         </span>
       )}
@@ -409,7 +409,7 @@ export default function WynwoodProgress() {
   const [strokeWidth, setStrokeWidth] = useState(15);
   const lineRef = useRef(null);
   const inView = useInView(lineRef, { once: true });
-  const { ref, parallaxY } = useParallax(15);
+  const { ref, parallaxY } = useParallax(10);
 
   const stats = [
     { percentage: 92, label: "Sub-Structure" },
@@ -424,10 +424,30 @@ export default function WynwoodProgress() {
       "As the project progresses, significant milestones are reached, showcasing our team's dedication and expertise. We are steadily moving closer to our completion goal, ensuring quality and safety at every step.",
   };
 
+function useWindowSize() {
+  const [width, setWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+  useEffect(() => {
+    const fn = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
+  return width;
+}
+
+// Inside your component:
+const windowWidth = useWindowSize();
+const isMobile = windowWidth < 768;
+
+const smallCircleSize   = isMobile ? 67 : 118;
+const circleStroke = isMobile ? 5  : 7.5;
+
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setCircleSize(163);
+        setCircleSize(137);
         setStrokeWidth(10);
       } else if (window.innerWidth < 1024) {
         setCircleSize(160);
@@ -468,15 +488,15 @@ export default function WynwoodProgress() {
               fill
               priority
               className="object-cover object-center"
-              style={{ transform: `scale(${1.15}) translateY(${parallaxY}vh)` }}
+              style={{ transform: `scale(${1.25}) translateY(${parallaxY}vh)` }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#F0EDE8]/30 pointer-events-none" />
           </div>
 
           {/* RIGHT — Info Panel */}
-          <div className="py-10 md:py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-[20px] md:gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-10 2xl:!px-[70px] lg:!max-w-none">
+          <div className="py-[30px] md:py-120 3xl:py-[130px] w-full px-[15px] bg-gray flex flex-col justify-center gap-[30px] md:gap-12 2xl:gap-[45px] 3xl:gap-[60px] container lg:!px-10 2xl:!px-[70px] lg:!max-w-none">
             {/* Top — Overall Progress */}
-            <div className="flex flex-row items-center lg:justify-center gap-10 lg:gap-15 2xl:gap-[142px]">
+            <div className="flex flex-row items-center lg:justify-center gap-[36px] lg:gap-15 2xl:gap-[142px]">
               <motion.div
                 variants={moveUp(0.1)}
                 initial="hidden"
@@ -542,18 +562,18 @@ export default function WynwoodProgress() {
             </div>
 
             {/* Bottom — Sub-stats - until md */}
-            <div className="flex md:hidden flex-wrap justify-between gap-y-8 gap-x-4">
+            <div className="flex md:hidden  justify-between gap-y-8 gap-x-1 md:gap-x-4">
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
                   <div className="3xl:px-[20.4px]">
                     <CircularProgress
-                      percentage={stat.percentage}
-                      size={85}
-                      strokeWidth={7.87}
-                      label={stat.label}
-                      isLarge={false}
-                      animationDelay={i * 0.15}
-                    />
+        percentage={stat.percentage}
+        size={smallCircleSize}
+        strokeWidth={circleStroke}
+        label={stat.label}
+        isLarge={false}
+        animationDelay={i * 0.15}
+      />
                   </div>
                 </Reveal>
               ))}
@@ -569,7 +589,7 @@ export default function WynwoodProgress() {
             >
               <Link href={`/construction-progress-listing/sunset-bay-5-by-imtiaz`}>
                 <CustomOutlineButton
-                  className="w-fit lg:mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] "
+                  className="w-fit  mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] "
                   text="Construction updates"
                   borderColor="border-primary"
                   textColor="text-foreground-light"

@@ -238,7 +238,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const cardId = useId();
-  const { ref, parallaxY } = useParallax(15);
+  const { ref, parallaxY } = useParallax(10);
 
   const active = isHovered || isActive;
 
@@ -267,9 +267,10 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
   };
 
   return (
+    <> 
     <div
       ref={ref}
-      className="relative w-full h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden  select-none"
+      className="relative w-full h-[199px] md:h-[400px] lg:h-[520px] 3xl:h-[579px] overflow-hidden  select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleCardClick}
@@ -282,7 +283,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         sizes="100vw"
         className="object-cover object-center"
         style={{
-          transform: `scale(1.15) translateY(${parallaxY}vh)`,
+          transform: `scale(1.5) translateY(${parallaxY}vh)`,
         }}
       />
 
@@ -317,7 +318,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
       {/* DEFAULT STATE — lg and above */}
       <div
-        className="hidden lg:flex absolute inset-0 flex-col justify-end px-30 pb-30 lg:px-40 lg:pb-40 transition-opacity duration-500 ease-in-out pointer-events-none"
+        className="hidden md:flex absolute inset-0 flex-col justify-end px-30 pb-30 lg:px-40 lg:pb-40 transition-opacity duration-500 ease-in-out pointer-events-none"
         style={{ transform: active ? "translateY(110%)" : "translateY(0)" }}
       >
         <h3
@@ -425,7 +426,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
 
       {/* ACTIVE STATE — lg and above only */}
       <div
-        className="hidden lg:flex absolute inset-0 flex-col items-center justify-center gap-5 transition-opacity duration-300 ease-in-out"
+        className="hidden md:flex absolute inset-0 flex-col items-center justify-center gap-5 transition-opacity duration-300 ease-in-out"
         style={{
           opacity: active ? 1 : 0,
           pointerEvents: active ? "auto" : "none",
@@ -443,17 +444,22 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         </Link>
       </div>
 
-      {/* BELOW LG — always-visible state matching the image */}
-      <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
+     <div className="md:hidden   absolute bottom-0 w-full text-center">
         {/* Title at top */}
-        <h3 className="text-white font-[optima] text-25 leading-[1.4] text-center pt-[20px] max-w-[214px]">
+        <h3 className="text-white mx-auto mb-3 font-[optima] text-25 leading-[1.4] text-center  max-w-[214px]">
           {card.title}
         </h3>
+        </div>
+    </div>
+     {/* BELOW LG — always-visible state matching the image */}
+      <div className="md:hidden  bg-gray flex flex-col items-center justify-between pointer-events-none">
+        {/* Title at top */}
+         
 
         {/* Bottom section: pill + divider + CTA */}
-        <div className="w-full flex flex-col items-center gap-[14px]">
+        <div className="w-full  flex flex-col items-center gap-[14px]">
           {/* Tags pill — full width, flex wrap, centered */}
-          <div className="flex flex-wrap items-center justify-center gap-x-[20px] gap-y-[20px] bg-white/5 backdrop-blur-[30px] border border-[#FFFFFF0D] rounded-t-[20px] w-full px-[1px] py-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-[30px] gap-y-[20px]      w-full px-[1px] py-5">
             {card.tags.map((tag, i) => (
               <div key={i} className="flex items-center gap-[10px]">
                 <Image
@@ -461,40 +467,38 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
                   alt={tag.label}
                   width={25}
                   height={25}
-                  className="h-[18px] w-auto"
+                  className="h-[18px] w-auto brightness-100 invert"
                 />
-                <span className="text-white font-[avenirBook] text-16 uppercase">
+                <span className="pt-1 text-foreground font-[avenirBook] text-[12px] md:text-16 uppercase leading-[1.72]">
                   {tag.label}
                 </span>
 
                 
               </div>
             ))}
-                      {/* Gradient divider */}
-          <div
-            className="w-full h-px"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)",
-            }}
-          />
+                      
 
           {/* CTA button */}
-          <Link
+          <div className="min-w-full">
+            <Link
             href={card.href}
             className="pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <CustomOutlineButton
-              text="View Community"
-              borderColor="rgba(255,255,255,0.9)"
-              px="px-[30px] h-[50px]"
+              text="View Community" 
+              px="px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] w-fit mx-auto" 
+              borderColor="border-primary-2"
+              textColor="text-foreground-light"
+              variant="dark" 
             />
           </Link>
           </div>
+          </div>
         </div>
       </div>
-    </div>
+      </>
+    
   );
 };
 

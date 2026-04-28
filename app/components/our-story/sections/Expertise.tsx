@@ -21,7 +21,7 @@ const Expertise = () => {
             borderColor="border-primary"
             variant="dark"
             textColor="text-foreground-light"
-            className="h-[50px] md:h-[67px]"
+            className="h-[44px] md:h-[50px]  xl:h-[66px]"
             px="px-[30px] min-w-[142px] lg:w-auto"
           />
         </Link>
