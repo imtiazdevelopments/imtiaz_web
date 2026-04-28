@@ -122,11 +122,11 @@ const Dropdown = ({
   };
 
   return (
-    <div ref={ref} className="relative flex-1 pt-5 py-0 lg:py-5 last:pb-5 ">
+    <div ref={ref} className="relative flex-1 pt-[12px] py-0 lg:py-[12px] last:pb-[12px] ">
       {/* Trigger */}
       <button
         onClick={handleToggle}
-        className="w-full flex items-center justify-center gap-2 px-4 lg:px-10 text-xs font-semibold tracking-widest text-white whitespace-nowrap  cursor-pointer transition-colors duration-150"
+        className="w-full flex items-center justify-center gap-2 px-4 lg:px-10 text-description  tracking-widest text-white whitespace-nowrap  cursor-pointer transition-colors duration-150"
       >
         <span>{selected ? selectedLabel.toUpperCase() : filter.label}</span>
         <ChevronDown open={isOpen} />
@@ -135,10 +135,10 @@ const Dropdown = ({
       {/* Dropdown Panel */}
       {isOpen && (
         <div
-          className={`absolute bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 min-w-[180px] ${
+          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[180px] ${
             dropUp
-              ? "bottom-[calc(100%+12px)]"
-              : "top-[calc(100%+12px)]"
+              ? "bottom-[calc(100%+24px)]"
+              : "top-[calc(100%+24px)]"
           } ${
             isLast ? "right-0" : "left-1/2 -translate-x-1/2"
           }`}
@@ -150,10 +150,10 @@ const Dropdown = ({
                 onSelect(option.value);
                 onClose();
               }}
-              className={`w-full text-left px-5 py-2.5 text-sm transition-colors duration-150 ${
+              className={`w-full text-left px-5 py-2.5 text-16 transition-colors duration-150 rounded-sm cursor-pointer ${
                 selected === option.value
-                  ? "text-black font-semibold bg-gray-50"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-black"
+                  ? "text-black  bg-gray-50"
+                  : "text-white hover:bg-gray-50 hover:text-black"
               }`}
             >
               {option.label}
@@ -179,7 +179,9 @@ const PropertySearchBar = () => {
   
 
   return (
-    <div className="flex flex-col lg:flex-row items-center bg-white/20 backdrop-blur-[30px] rounded-sm lg:rounded-full shadow-lg overflow-visible pb-4      s lg:pb-0 px-2 lg:gap-5">
+    <div  className="rounded-sm lg:rounded-full shadow-lg bg-white/5 backdrop-blur-[30px]  overflow-visible border border-white/10 px-[15px] py-[11px]"   >
+      <div className="flex flex-col lg:flex-row items-center gap-3     ">
+              <div className="flex flex-col md:flex-row items-center gap-3     ">
       {filters.map((filter, i) => (
         <div key={filter.id} className="flex items-center flex-1">
           <Dropdown
@@ -192,33 +194,39 @@ const PropertySearchBar = () => {
             isLast={i === filters.length - 1}
           />
           {/* Divider */}
-          {i < filters.length - 1 && (
-            <div className="w-px h-6 bg-gray-300 flex-shrink-0 hidden lg:block " />
-          )}
-        </div>
-      ))}
-
+          {i < filters.length - 0 && (
+           <div
+                className="w-px self-stretch mx-4 2xl:mx-[97px] hidden lg:block"
+                style={{
+                  background: "linear-gradient(to bottom, transparent, #fff, transparent)"
+                }}
+              />
+                )}
+              </div>
+            ))}
+      </div>
       {/* Search Button */}
-      
+       
       <motion.div
               variants={moveUp(0.01)}
               initial="hidden"
               whileInView="show"
             >
               {/* <button 
-        className="ml-2 bg-black text-white text-xs font-semibold tracking-widest px-6 py-4 rounded-full hover:bg-gray-900 active:scale-95 transition-all duration-200 whitespace-nowrap flex-shrink-0"
+        className="ml-2 bg-black text-white text-xs  tracking-widest px-6 py-4 rounded-full hover:bg-gray-900 active:scale-95 transition-all duration-200 whitespace-nowrap flex-shrink-0"
       >
         SEARCH PROPERTIES
       </button>  */}
               <CustomOutlineButton
                 className="w-fit "
-                px="!px-4 !py-3 !text-sm bg-primary-2"
-                text="SEARCH PROPERTIES"
-                borderColor="border-primary-2"
+                px="!px-4 !py-3 !text-19 xl:!px-[45px] xl:!py-5 h-[50px] lg:h-[66px] mt-5 lg:mt-0"
+                text="Search Properties"
+                borderColor="white"
                 textColor="text-white"
                 variant="light"
               />
             </motion.div>
+    </div>
     </div>
   );
 };

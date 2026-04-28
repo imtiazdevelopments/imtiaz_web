@@ -20,6 +20,8 @@ type SignupValues = {
   phone: string;
   password: string;
   privacy: boolean;
+  appointmentDateTime?: string; 
+
 };
 
 const FieldLine = ({ hasError }: { hasError: boolean }) => (
@@ -66,68 +68,7 @@ const TabButton = ({ label, isActive, onClick }: TabButtonProps) => {
   );
 };
 
-// Book a Viewing Component
-const BookViewing = ({ formHeight }: { formHeight: number }) => {
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (imageRef.current) {
-      gsap.fromTo(
-        imageRef.current,
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-      );
-    }
-  }, []);
-
-  return (
-    <motion.div
-      ref={imageRef}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4 }}
-      className="w-full"
-    >
-      <div className="relative w-full  " style={{ height: `${formHeight}px` }}>
-        <div className="absolute top-0 left-0 w-full  translate-y-1/2 flex justify-center ">
-          <div className="flex flex-col items-center text-center  ">
-            <AnimatedHeading
-              mode="blade"
-              title={"Book a Viewing"}
-              className="text-heading  text-foreground mb-20 text-center  "
-            />
-            <SectionDescription
-              text={
-                "Explore the property at your convenience with a guided viewing experience. Toggle to reveal available time slots, key details, and what to expect during your visit. Once you’re ready, click the button below to proceed to our trusted partner platform and confirm your booking securely."
-              }
-              className="text-description max-w-[82ch] text-center   font-[optima] text-foreground-light leading-[1.5] md:leading-[1.57] font-normal"
-            />
-            <motion.div
-              variants={moveUp(0.1)}
-              initial="hidden"
-              whileInView="show"
-            >
-              <CustomOutlineButton
-                className="w-fit mt-50"
-                px="px-5 3xl:py-[23px] 3xl:px-[72px]"
-                text="Schedule Now"
-                borderColor="border-primary-2"
-                textColor="text-foreground-light"
-                variant="dark"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+ 
 
 interface CareerFormProps {
   onClose: () => void;
@@ -454,7 +395,151 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                   </div>
                 ) : (
                   <div key="viewing" className="w-full">
-                    <BookViewing formHeight={divHeight} />
+                   <FormProvider {...methods}>
+                     <form
+  onSubmit={handleSubmit(onSubmit)}
+  noValidate
+  className="w-full"
+>
+  {/* First + Last name */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-70 3xl:gap-100">
+    <label htmlFor="firstName" className="group cursor-text block md:mt-30">
+      <span className={labelClass}>First name*</span>
+      <input
+        id="firstName"
+        type="text"
+        className={inputClass}
+        {...register("firstName", { required: "Required" })}
+      />
+      <FieldLine hasError={!!errors.firstName} />
+      <ErrorSlot msg={errors.firstName?.message} />
+    </label>
+
+    <label htmlFor="lastName" className="group cursor-text block md:mt-30">
+      <span className={labelClass}>Last name*</span>
+      <input
+        id="lastName"
+        type="text"
+        className={inputClass}
+        {...register("lastName", { required: "Required" })}
+      />
+      <FieldLine hasError={!!errors.lastName} />
+      <ErrorSlot msg={errors.lastName?.message} />
+    </label>
+  </div>
+
+  {/* Email + Phone */}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-40 lg:gap-x-70 3xl:gap-x-100">
+    <label htmlFor="email" className="group cursor-text block">
+      <span className="block text-description 2xl:leading-[1.75] md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+        Email*
+      </span>
+      <input
+        id="email"
+        type="email"
+        className={inputClass}
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: "Enter a valid email",
+          },
+        })}
+      />
+      <FieldLine hasError={!!errors.email} />
+      <ErrorSlot msg={errors.email?.message} />
+    </label>
+
+    <label htmlFor="phone" className="group cursor-text block">
+      <span className="block text-description md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+        Enter Phone no*
+      </span>
+      <div className="flex items-end mt-[10px] gap-2">
+        <CountryCodeSelect
+          value={watch("countryCode")}
+          onChange={(val) => setValue("countryCode", val)}
+        />
+        <input
+          id="phone"
+          type="number"
+          className="flex-1 pb-[5px] pl-[100px] border-none outline-none bg-transparent text-description text-foreground-light p-0 min-w-0"
+          {...register("phone", {
+            required: "Phone number is required",
+            pattern: {
+              value: /^[0-9]{7,15}$/,
+              message: "Invalid number",
+            },
+          })}
+        />
+      </div>
+      <FieldLine hasError={!!errors.phone} />
+      <ErrorSlot msg={errors.phone?.message} />
+    </label>
+  </div>
+
+  {/* Date & Time — single input */}
+  <div>
+    <label htmlFor="appointmentDateTime" className="group cursor-text block md:mt-30">
+      <span className={labelClass}>Date & Time*</span>
+<div className="relative">
+  <input
+  id="appointmentDateTime"
+  type="datetime-local"
+  onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
+  className={`${inputClass} pr-10 [color-scheme:dark] cursor-pointer`}
+  min={new Date().toISOString().slice(0, 16)}
+  {...register("appointmentDateTime", {
+    required: "Date & time is required",
+  })}
+/>
+ <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-foreground-light/60">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+<path d="M12.7197 3.27H15.9197C16.1319 3.27 16.3354 3.35955 16.4854 3.51896C16.6354 3.67837 16.7197 3.89457 16.7197 4.12V16.87C16.7197 17.0954 16.6354 17.3116 16.4854 17.471C16.3354 17.6304 16.1319 17.72 15.9197 17.72H1.51973C1.30755 17.72 1.10407 17.6304 0.954041 17.471C0.804012 17.3116 0.719727 17.0954 0.719727 16.87V4.12C0.719727 3.89457 0.804012 3.67837 0.954041 3.51896C1.10407 3.35955 1.30755 3.27 1.51973 3.27L4.71973 3.27M12.7197 3.27V0.720001M12.7197 3.27L4.71973 3.27M4.71973 3.27V0.720001M16.7197 7.52H0.719727" stroke="#404040" stroke-width="1.44" stroke-linecap="round"/>
+</svg>
+      </div>
+      </div>
+      <FieldLine hasError={!!errors.appointmentDateTime} />
+      <ErrorSlot msg={errors.appointmentDateTime?.message} />
+    </label>
+  </div>
+
+  {/* Message */}
+  <label htmlFor="signupPassword" className="group cursor-text block">
+    <span className="block text-description md:mt-30 text-foreground-light/50 transition-colors group-focus-within:text-foreground-light">
+      Add a message*
+    </span>
+    <div className="relative mt-[5px] md:mt-[8px]">
+      <textarea
+        className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
+        rows={rows}
+        {...register("password", {
+          required: "Message is required",
+          minLength: {
+            value: 6,
+            message: "Minimum 6 characters",
+          },
+        })}
+      />
+    </div>
+    <FieldLine hasError={!!errors.password} />
+    <p className="text-[12px] text-[#c0392b] pt-2 h-20">
+      {errors.password?.message ?? "\u00A0"}
+    </p>
+  </label>
+
+  {/* Submit */}
+  <div className="csmtst mt-40 w-fit mx-auto">
+    <CustomOutlineButton
+      px="py-[16px] px-[33px] lg:px-[23px] 3xl:px-[48px] 3xl:py-[23px]"
+      text="Submit"
+      borderColor="border-primary-2"
+      textColor="text-foreground-light"
+      variant="dark"
+    />
+  </div>
+</form>
+
+                    </FormProvider> 
                   </div>
                 )}
               </AnimatePresence>
