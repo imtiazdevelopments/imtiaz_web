@@ -83,7 +83,7 @@ const LandpropertyCards = () => {
             >
               {cards.map((project) => (
                 <SwiperSlide key={project.id}>
-                  <ProjectCard {...project} />
+                  <ProjectCard {...project} isCommunity/>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -160,7 +160,7 @@ const LandpropertyCards = () => {
                 key={project.id}
                 delayRange={index * 0.1}
               >
-                <ProjectCard {...project} />
+                <ProjectCard {...project} isCommunity/>
               </Reveal>
             ))}
           </div>

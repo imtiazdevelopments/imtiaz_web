@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import Link from "next/link";
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface FilterOption {
   label: string;
@@ -23,35 +24,35 @@ const filters: FilterItem[] = [
     label: "PROPERTY TYPE",
     options: [
       { label: "All Types", value: "" },
-      { label: "Apartment", value: "apartment" },
-      { label: "Villa", value: "villa" },
-      { label: "Townhouse", value: "townhouse" },
-      { label: "Penthouse", value: "penthouse" }, 
-      
+      { label: "Apartment", value: "Apartment" },
+      { label: "Villa", value: "Villa" },
+      { label: "Townhouse", value: "Townhouse" },
+      { label: "Penthouse", value: "Penthouse" },
+
     ],
   },
   {
     id: "status",
     label: "STATUS",
     options: [
-      { label: "Available", value: "ava" },
-      { label: "Off Plan", value: "offplan" },
-      { label: "Completed", value: "completed" },
-      { label: "Under Construction", value: "uc" },
+      { label: "Available", value: "Available" },
+      { label: "Off Plan", value: "Off Plan" },
+      { label: "Completed", value: "Completed" },
+      { label: "Under Construction", value: "Under Construction" },
     ],
-  },  
+  },
 
   {
     id: "community",
     label: "COMMUNITY",
     options: [
       { label: "All Communities", value: "" },
-      { label: "Downtown Dubai", value: "downtown" },
+      { label: "Downtown Dubai", value: "Downtown Dubai" },
       { label: "Waterfront", value: "Waterfront" },
       { label: "Suburbs", value: "Suburbs" },
-      { label: "Business Bay", value: "business-bay" },
-      { label: "Old Town", value: "OldTown" },
-    ], 
+      { label: "Business Bay", value: "Business Bay" },
+      { label: "Old Town", value: "Old Town" },
+    ],
   },
 ];
 
@@ -135,13 +136,11 @@ const Dropdown = ({
       {/* Dropdown Panel */}
       {isOpen && (
         <div
-          className={`absolute bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 min-w-[180px] ${
-            dropUp
-              ? "bottom-[calc(100%+12px)]"
-              : "top-[calc(100%+12px)]"
-          } ${
-            isLast ? "right-0" : "left-1/2 -translate-x-1/2"
-          }`}
+          className={`absolute bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 min-w-[180px] ${dropUp
+            ? "bottom-[calc(100%+12px)]"
+            : "top-[calc(100%+12px)]"
+            } ${isLast ? "right-0" : "left-1/2 -translate-x-1/2"
+            }`}
         >
           {filter.options.map((option) => (
             <button
@@ -150,11 +149,10 @@ const Dropdown = ({
                 onSelect(option.value);
                 onClose();
               }}
-              className={`w-full text-left px-5 py-2.5 text-sm transition-colors duration-150 ${
-                selected === option.value
-                  ? "text-black font-semibold bg-gray-50"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-black"
-              }`}
+              className={`w-full text-left px-5 py-2.5 text-sm transition-colors duration-150 ${selected === option.value
+                ? "text-black font-semibold bg-gray-50"
+                : "text-gray-600 hover:bg-gray-50 hover:text-black"
+                }`}
             >
               {option.label}
             </button>
@@ -176,7 +174,22 @@ const PropertySearchBar = () => {
   const handleSelect = (id: string, value: string) =>
     setSelected((prev) => ({ ...prev, [id]: value }));
 
-  
+  const params = new URLSearchParams();
+
+  if (selected.propertyType) {
+    params.append("propertyType", selected.propertyType);
+  }
+  if (selected.status) {
+    params.append("status", selected.status);
+  }
+  if (selected.community) {
+    params.append("community", selected.community);
+  }
+
+  const href =
+    params.toString().length > 0
+      ? `/properties?${params.toString()}`
+      : "#";
 
   return (
     <div className="flex flex-col lg:flex-row items-center bg-white/20 backdrop-blur-[30px] rounded-sm lg:rounded-full shadow-lg overflow-visible pb-4      s lg:pb-0 px-2 lg:gap-5">
@@ -199,26 +212,31 @@ const PropertySearchBar = () => {
       ))}
 
       {/* Search Button */}
-      
+
       <motion.div
-              variants={moveUp(0.01)}
-              initial="hidden"
-              whileInView="show"
-            >
-              {/* <button 
+        variants={moveUp(0.01)}
+        initial="hidden"
+        whileInView="show"
+      >
+        {/* <button 
         className="ml-2 bg-black text-white text-xs font-semibold tracking-widest px-6 py-4 rounded-full hover:bg-gray-900 active:scale-95 transition-all duration-200 whitespace-nowrap flex-shrink-0"
       >
         SEARCH PROPERTIES
       </button>  */}
-              <CustomOutlineButton
-                className="w-fit "
-                px="!px-4 !py-3 !text-sm bg-primary-2"
-                text="SEARCH PROPERTIES"
-                borderColor="border-primary-2"
-                textColor="text-white"
-                variant="light"
-              />
-            </motion.div>
+        <Link
+          href={href}
+        >
+          <CustomOutlineButton
+            className="w-fit "
+            px="!px-4 !py-3 !text-sm bg-primary-2"
+            text="SEARCH PROPERTIES"
+            borderColor="border-primary-2"
+            textColor="text-white"
+            variant="light"
+          />
+
+        </Link>
+      </motion.div>
     </div>
   );
 };

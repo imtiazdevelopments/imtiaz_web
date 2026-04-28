@@ -13,4 +13,5 @@ export type ProjectCardType = {
   units?: string;
   button360?:boolean;
   setActiveProject?:Dispatch<SetStateAction<string>>
+  isCommunity?:boolean;
 };
