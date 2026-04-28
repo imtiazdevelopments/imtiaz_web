@@ -210,6 +210,7 @@ export default function ProjectCard({
   startingFrom,
   units,
   hoverImage,
+  isCommunity
 }: ProjectCardType) {
   const { ref, parallaxY } = useParallax(2);
   const [isHovered, setIsHovered] = useState(false);
@@ -334,10 +335,10 @@ const handleCardClick = () => {
                 background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
             />
-            {/* <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
+            {isCommunity && <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
               {subtitle}
-            </p> */}
-            <div className={`flex items-center justify-center gap-[10px] mt-[30px] transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
+            </p>}
+            {!isCommunity && <div className={`flex items-center justify-center gap-[10px] mt-[30px] transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
               {location && (
                 <>
                   <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
@@ -347,7 +348,7 @@ const handleCardClick = () => {
                   <span className="text-white/80 text-description">{location}</span>
                 </>
               )}
-            </div>
+            </div>}
             <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-6 md:mt-5  sm:hidden">
             <Link
   href={`/properties/${title

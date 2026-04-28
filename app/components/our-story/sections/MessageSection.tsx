@@ -14,6 +14,9 @@ type Props = {
 
 export default function MessageSection({ data }: Props) {
   const { ref, parallaxY } = useParallax(15);
+
+  const { ref:mobileRef, parallaxY:parallaxYMobile } = useParallax(15);
+
   return (
     <>
       <section
@@ -33,14 +36,14 @@ export default function MessageSection({ data }: Props) {
           />
         </div>
 
-        <div ref={ref} className="sm:hidden absolute inset-0 z-0 overflow-hidden">
+        <div ref={mobileRef} className="sm:hidden absolute inset-0 z-0 overflow-hidden">
           <Image
             src={data.bgImageMobile}
             alt="background"
             fill
             className={`object-cover`}
             style={{
-              transform: `scale(${1.15}) translateY(${parallaxY}vh)`,
+              transform: `scale(${1.15}) translateY(${parallaxYMobile}vh)`,
             }}
           />
         </div>
@@ -88,24 +91,24 @@ export default function MessageSection({ data }: Props) {
           <div className="w-full container">
             {/* ── DESKTOP (lg+): original 3-col grid, unchanged ── */}
             <div
-              className={`hidden lg:grid grid-cols-[1fr_auto_1fr] ${data.id === "chairman" ? "mt-150" : "mt-130"}`}
+              className={`hidden lg:grid grid-cols-[1fr_auto_1fr] ${data.id === "chairman" ? "mt-[66px]" : "mt-[68px]"}`}
             >
               {/* Col 1 — Left Content */}
               <div className="h-full flex flex-col justify-between pb-130 ml-[12%] 3xl:ml-[27.6%]">
-                <div>
+                <div className="pt-90 3xl:pt-[96px]">
                   <motion.div
                     variants={moveUp(0)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="mb-20"
+                    className="mb-20 flex justify-center max-w-[385px]"
                   >
                     <Image
                       src="/icons/quote.svg"
                       alt="quote"
                       width={68}
                       height={52}
-                      className="object-contain w-auto h-[45px] 3xl:w-[68px] 3xl:h-[52px]"
+                      className="object-contain w-auto h-[45px] 3xl:w-[68px] 3xl:h-[52px] scale-x-[-1]"
                       priority
                     />
                   </motion.div>
@@ -114,13 +117,13 @@ export default function MessageSection({ data }: Props) {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary max-w-[385px]"
+                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary max-w-[385px] text-center"
                   >
                     {data.quote}
                   </motion.p>
                 </div>
 
-                <div>
+                {/* <div>
                   <motion.p
                     variants={moveUp(0)}
                     initial="hidden"
@@ -139,7 +142,7 @@ export default function MessageSection({ data }: Props) {
                   >
                     {data.designation}
                   </motion.p>
-                </div>
+                </div> */}
               </div>
 
               {/* Col 2 — Person Image */}
@@ -164,7 +167,7 @@ export default function MessageSection({ data }: Props) {
                   alt={data.name}
                   width={1500}
                   height={1500}
-                  className="w-auto object-contain object-bottom h-[500px] 3xl:h-[689px]"
+                  className="w-auto object-contain object-bottom h-[500px] 3xl:h-[694px]"
                   priority
                 />
               </motion.div>
@@ -173,8 +176,30 @@ export default function MessageSection({ data }: Props) {
               <div className="pb-130 pt-90 3xl:pt-[96px] justify-self-end ml-[15%] 3xl:ml-0 3xl:pr-[27px]">
                 <SectionDescription
                   text={data.description}
-                  className="text-description text-foreground-light xl:max-w-[561px] whitespace-pre-line"
+                  className="text-description text-foreground-light xl:max-w-[561px] whitespace-pre-line mb-[190px]"
                 />
+
+                <div>
+                  <motion.p
+                    variants={moveUp(0)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="text-25 font-[optima] leading-[1.4] uppercase tracking-[2%] text-primary mb-[10px]"
+                  >
+                    {data.name}
+                  </motion.p>
+                  <motion.p
+                    variants={moveUp(0.12)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="text-description text-foreground-light"
+                  >
+                    {data.designation}
+                  </motion.p>
+                </div>
+
               </div>
             </div>
 
@@ -203,7 +228,7 @@ export default function MessageSection({ data }: Props) {
                         alt="quote"
                         width={50}
                         height={38}
-                        className="object-contain w-auto h-[32px]"
+                        className="object-contain w-auto h-[32px] scale-x-[-1]"
                         priority
                       />
                     </motion.div>
