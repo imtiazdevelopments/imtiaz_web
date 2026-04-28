@@ -61,7 +61,7 @@ export default function VisionSection() {
         {/* Content */}
         <div className="relative z-10 pt-120 3xl:pt-130 pb-[35px] sm:pb-60 text-center flex flex-col justify-end md:justify-between items-center h-full container">
           {/* Title and Description */}
-          <div className="hidden md:block">
+          <div className="hidden md:block md:-mt-10 lg:-mt-8 2xl:-mt-5">
             <div>
               <SectionHeading
                 title={title}
@@ -80,7 +80,7 @@ export default function VisionSection() {
               <Reveal variants={moveUpV2} key={index}>
                 <div className="flex items-stretch">
                   {/* Column */}
-                  <div className="py-[7.4px] md:py-35 ps-0 pe-5 md:px-30 last:pe-0 last:ps-5 last:md:px-30 text-center flex flex-col justify-center">
+                  <div className="py-[7.4px] md:py-35 ps-0 pe-5 md:px-[75px] last:pe-0 last:ps-5 last:md:px-[76px] text-center flex flex-col justify-center">
                     <motion.h3
                       variants={moveUp(0)}
                       initial="hidden"

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import Link from "next/link";
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface FilterOption {
   label: string;
@@ -23,35 +24,35 @@ const filters: FilterItem[] = [
     label: "PROPERTY TYPE",
     options: [
       { label: "All Types", value: "" },
-      { label: "Apartment", value: "apartment" },
-      { label: "Villa", value: "villa" },
-      { label: "Townhouse", value: "townhouse" },
-      { label: "Penthouse", value: "penthouse" }, 
-      
+      { label: "Apartment", value: "Apartment" },
+      { label: "Villa", value: "Villa" },
+      { label: "Townhouse", value: "Townhouse" },
+      { label: "Penthouse", value: "Penthouse" },
+
     ],
   },
   {
     id: "status",
     label: "STATUS",
     options: [
-      { label: "Available", value: "ava" },
-      { label: "Off Plan", value: "offplan" },
-      { label: "Completed", value: "completed" },
-      { label: "Under Construction", value: "uc" },
+      { label: "Available", value: "Available" },
+      { label: "Off Plan", value: "Off Plan" },
+      { label: "Completed", value: "Completed" },
+      { label: "Under Construction", value: "Under Construction" },
     ],
-  },  
+  },
 
   {
     id: "community",
     label: "COMMUNITY",
     options: [
       { label: "All Communities", value: "" },
-      { label: "Downtown Dubai", value: "downtown" },
+      { label: "Downtown Dubai", value: "Downtown Dubai" },
       { label: "Waterfront", value: "Waterfront" },
       { label: "Suburbs", value: "Suburbs" },
-      { label: "Business Bay", value: "business-bay" },
-      { label: "Old Town", value: "OldTown" },
-    ], 
+      { label: "Business Bay", value: "Business Bay" },
+      { label: "Old Town", value: "Old Town" },
+    ],
   },
 ];
 
@@ -135,13 +136,11 @@ const Dropdown = ({
       {/* Dropdown Panel */}
       {isOpen && (
         <div
-          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[180px] ${
-            dropUp
+          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[180px] ${dropUp
               ? "bottom-[calc(100%+24px)]"
               : "top-[calc(100%+24px)]"
-          } ${
-            isLast ? "right-0" : "left-1/2 -translate-x-1/2"
-          }`}
+            } ${isLast ? "right-0" : "left-1/2 -translate-x-1/2"
+            }`}
         >
           {filter.options.map((option) => (
             <button
@@ -150,11 +149,10 @@ const Dropdown = ({
                 onSelect(option.value);
                 onClose();
               }}
-              className={`w-full text-left px-5 py-2.5 text-16 transition-colors duration-150 rounded-sm cursor-pointer ${
-                selected === option.value
+              className={`w-full text-left px-5 py-2.5 text-16 transition-colors duration-150 rounded-sm cursor-pointer ${selected === option.value
                   ? "text-black  bg-gray-50"
                   : "text-white hover:bg-gray-50 hover:text-black"
-              }`}
+                }`}
             >
               {option.label}
             </button>
@@ -176,57 +174,74 @@ const PropertySearchBar = () => {
   const handleSelect = (id: string, value: string) =>
     setSelected((prev) => ({ ...prev, [id]: value }));
 
-  
+  const params = new URLSearchParams();
+
+  if (selected.propertyType) {
+    params.append("propertyType", selected.propertyType);
+  }
+  if (selected.status) {
+    params.append("status", selected.status);
+  }
+  if (selected.community) {
+    params.append("community", selected.community);
+  }
+
+  const href =
+    params.toString().length > 0
+      ? `/properties?${params.toString()}`
+      : "#";
 
   return (
-    <div  className="rounded-sm lg:rounded-full shadow-lg bg-white/5 backdrop-blur-[30px]  overflow-visible border border-white/10 px-[15px] py-[11px]"   >
+    <div className="rounded-sm lg:rounded-full shadow-lg bg-white/5 backdrop-blur-[30px]  overflow-visible border border-white/10 px-[15px] py-[11px]"   >
       <div className="flex flex-col lg:flex-row items-center gap-3     ">
-              <div className="flex flex-col md:flex-row items-center gap-3     ">
-      {filters.map((filter, i) => (
-        <div key={filter.id} className="flex items-center flex-1">
-          <Dropdown
-            filter={filter}
-            selected={selected[filter.id] || ""}
-            onSelect={(val) => handleSelect(filter.id, val)}
-            isOpen={openId === filter.id}
-            onToggle={() => handleToggle(filter.id)}
-            onClose={() => setOpenId(null)}
-            isLast={i === filters.length - 1}
-          />
-          {/* Divider */}
-          {i < filters.length - 0 && (
-           <div
-                className="w-px self-stretch mx-4 2xl:mx-[97px] hidden lg:block"
-                style={{
-                  background: "linear-gradient(to bottom, transparent, #fff, transparent)"
-                }}
+        <div className="flex flex-col md:flex-row items-center gap-3     ">
+          {filters.map((filter, i) => (
+            <div key={filter.id} className="flex items-center flex-1">
+              <Dropdown
+                filter={filter}
+                selected={selected[filter.id] || ""}
+                onSelect={(val) => handleSelect(filter.id, val)}
+                isOpen={openId === filter.id}
+                onToggle={() => handleToggle(filter.id)}
+                onClose={() => setOpenId(null)}
+                isLast={i === filters.length - 1}
               />
-                )}
-              </div>
-            ))}
-      </div>
-      {/* Search Button */}
-       
-      <motion.div
-              variants={moveUp(0.01)}
-              initial="hidden"
-              whileInView="show"
-            >
-              {/* <button 
+              {/* Divider */}
+              {i < filters.length - 0 && (
+                <div
+                  className="w-px self-stretch mx-4 2xl:mx-[97px] hidden lg:block"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent, #fff, transparent)"
+                  }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        {/* Search Button */}
+
+        <motion.div
+          variants={moveUp(0.01)}
+          initial="hidden"
+          whileInView="show"
+        >
+          {/* <button 
         className="ml-2 bg-black text-white text-xs  tracking-widest px-6 py-4 rounded-full hover:bg-gray-900 active:scale-95 transition-all duration-200 whitespace-nowrap flex-shrink-0"
       >
         SEARCH PROPERTIES
       </button>  */}
-              <CustomOutlineButton
-                className="w-fit "
-                px="!px-4 !py-3 !text-19 xl:!px-[45px] xl:!py-5 h-[50px] lg:h-[66px] mt-5 lg:mt-0"
-                text="Search Properties"
-                borderColor="white"
-                textColor="text-white"
-                variant="light"
-              />
-            </motion.div>
-    </div>
+          <Link href={href}>
+            <CustomOutlineButton
+              className="w-fit "
+              px="!px-4 !py-3 !text-19 xl:!px-[45px] xl:!py-5 h-[50px] lg:h-[66px] mt-5 lg:mt-0"
+              text="Search Properties"
+              borderColor="white"
+              textColor="text-white"
+              variant="light"
+            />
+          </Link>
+        </motion.div>
+      </div>
     </div>
   );
 };
