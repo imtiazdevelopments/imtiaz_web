@@ -262,7 +262,7 @@ const Main = () => {
           >
             <button
               onClick={() => setFiltersOpen((prev) => !prev)}
-              className="flex items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
+              className="flex text-[12px] md:text-16 items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
             >
               <span>Filters</span>
               <span

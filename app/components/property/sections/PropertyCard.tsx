@@ -24,7 +24,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[220px_auto]  xl:grid-cols-[252px_auto] 2xl:grid-cols-[292px_auto]      ">
       {/* Image Section */}
-      <div className="relative h-[300px] md:h-[400px] lg:h-full w-full bg-gray-200">
+      <div className="relative h-[198px] md:h-[400px] lg:h-full w-full bg-gray-200">
         <Image
           src={image}
           alt="Beach Walk Grand 2 by Imtiaz"
@@ -37,15 +37,15 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
 
       {/* Content Section  */}
       <div className="p-5 2xl:p-[30px] bg-gray">
-         <div className="m-auto mb-10 md:mb-50  bg-foreground-light/10 backdrop-blur-[30px] text-foreground text-description uppercase  px-[15px] py-[1.5] rounded-full w-fit">
+         <div className="m-auto mb-5 lg:mb-50  bg-foreground-light/10 backdrop-blur-[30px] text-foreground text-description uppercase  px-[15px] py-[1.5] rounded-full w-fit">
           {status}
         </div>
         {/* Title */}
-        <h3 className="text-25 2xl:text-[24px] tracking-[2%] text-center pb-5">
+        <h3 className="text-25 2xl:text-[24px] tracking-[2%] text-center pb-1 md:pb-5">
          {parts.length > 1 ? (
               <>
                 {parts[0]}
-                <br className="hidden sm:block" />
+                <br className="" />
                 {breakWord} 
               </>
             ) : (
@@ -62,7 +62,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
           <span className="text-16">{location}</span>
         </div>
 
-        <div className={`mt-10 mb-10 md:mb-50 flex sm:flex-col lg:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-5 3xl:gap-40 w-full sm:w-fit md:w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
+        <div className={`my-5 md:mb-50 flex   lg:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
             <div className="flex items-center gap-[10px]">
               <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-foreground/10 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                 <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
