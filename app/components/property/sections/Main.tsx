@@ -253,7 +253,7 @@ const Main = () => {
     <section className="w-full bg-white pt-[20px] md:pt-70" data-header="dark">
       <div className="w-full container">
         {/* ── Mobile: collapsible filter (below lg) ── */}
-        <div className="lg:hidden mb-[20px] md:mb-70">
+        <div className="lg:hidden mb-[20px] lg:mb-70">
           <motion.div
             variants={moveUp(0.12)}
             initial="hidden"
@@ -335,7 +335,7 @@ const Main = () => {
         </div>
 
         {/* ── Desktop: filter bar (lg+) ── */}
-        <div className="hidden lg:block mb-70">
+        <div className="hidden lg:block mb-50 xl:mb-70">
           <motion.div
             variants={containerStagger}
             initial="hidden"

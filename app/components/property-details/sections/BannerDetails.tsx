@@ -133,7 +133,7 @@ function PropertyStat({ label, value, icon }: PropertyStatProps) {
           height={24}
           className="w-[24px] h-[24px]"
         />
-        <span className="text-white text-25 font-[optima] tracking-[2%] uppercase leading-[1.4] whitespace-nowrap">
+        <span className="text-white text-25 2xl:text-[24px] font-[optima] tracking-[2%] uppercase leading-[1.4] whitespace-nowrap">
           {value}
         </span>
       </div>

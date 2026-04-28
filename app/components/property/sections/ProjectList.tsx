@@ -7,10 +7,8 @@ import {
   MapCameraChangedEvent,
   Marker,
   useMap,
-} from "@vis.gl/react-google-maps";
-import { useContainerInset } from "@/app/hooks/useContainerInset";
-import ContainerAnchor from "../../layout/ContainerAnchor";
-import ProjectCardMap from "./ProjectCardMap";
+} from "@vis.gl/react-google-maps";  
+import PropertyCard from "./PropertyCard";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { useLenis } from "@/app/contexts/LenisContext";
 import ProjectCard from "../../common/ProjectCard";
@@ -81,10 +79,7 @@ export default function FeaturedProjects({
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-  const containerRef = useRef(null);
-  const leftSpacing = useContainerInset(containerRef);
-
+ 
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
 
   const [highlighted, setHighlighted] = useState<string[]>([]);
@@ -161,24 +156,38 @@ export default function FeaturedProjects({
       el.removeEventListener("mouseleave", handleLeave);
       unlock();
     };
-  }, [lock, unlock]);
+  }, [lock, unlock]); 
+  const [marginLeft, setMarginLeft] = useState(0);
 
+const containerRef = useRef<HTMLDivElement>(null); 
+  useEffect(() => {
+    const updateMargin = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        // rect.left = distance from viewport left edge = effective margin-left
+        setMarginLeft(rect.left);
+      }
+    };
+
+    updateMargin();
+    window.addEventListener("resize", updateMargin);
+    return () => window.removeEventListener("resize", updateMargin);
+  }, []);
   return (
     <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
-      <ContainerAnchor ref={containerRef} />
+    <div className="container" ref={containerRef}></div>
       <div>
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[450px_1fr] 2xl:grid-cols-[650px_1fr] 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-[650px_auto] xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
-          <div
-            style={{ paddingLeft: isDesktop ? leftSpacing : "" }}
+          <div  style={{ marginLeft: isDesktop ? `${marginLeft}px` : "" }}
           >
             {/* Projects List */}
-            <div className="relative grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-20 gap-x-20 hidden sm:grid 2xl:hidden">
+            <div className="relative grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-20 gap-x-20 hidden   2xl:hidden">
               {visibleProjects.length > 0 ? (
                 visibleProjects?.map((project, index) => (
                   <Reveal
@@ -194,7 +203,7 @@ export default function FeaturedProjects({
               )}
             </div>
 
-            <div className="relative grid grid-cols-1 sm:hidden gap-y-20 2xl:grid">
+            <div className="relative grid grid-cols-1   gap-y-20 2xl:grid">
               {visibleProjects.length > 0 ? (
                 visibleProjects?.map((project, index) => (
                   <Reveal
@@ -202,8 +211,8 @@ export default function FeaturedProjects({
                     key={project.id}
                     delayRange={index * 0.11}
                   >
-                    <ProjectCardMap
-                      id={project.id}
+                    <PropertyCard 
+                     id={project.id}
                       image={project.image}
                       status={project.status}
                       location={project.location}
@@ -212,8 +221,8 @@ export default function FeaturedProjects({
                       startingFrom={project.startingFrom}
                       units={project.units}
                       hoverImage={project.hoverImage}
-                      setActiveProject={setActiveProject}
-                    />
+                      setActiveProject={setActiveProject}/>
+                      
                   </Reveal>
                 ))
               ) : (
