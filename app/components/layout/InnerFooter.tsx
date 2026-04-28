@@ -33,7 +33,7 @@ const InnerFooter = () => {
   return (
     <footer data-header="dark" className="w-full make-header-black text-white bg-primary-2 relative z-10 overflow-hidden">
       {/* ================= TOP HERO SECTION ================= */}
-      <div className="w-full overflow-hidden py-[70px] lg:py-120 3xl:py-150 bg-primary-2">
+      <div className="w-full overflow-hidden py-[40px] lg:py-120 3xl:py-150 bg-primary-2">
         <div className="z-[20] h-full container flex flex-col md:flex-row md:justify-between items-center shrink-0">
           {/* Logo */}
           <motion.div
@@ -78,12 +78,12 @@ const InnerFooter = () => {
                   if (error) setError(""); // clear on typing
                 }}
                 placeholder={footerV2Data.top.placeholderEmail}
-                className="bg-transparent flex-1 pl-5 xl:pl-9 py-[19px] font-[avenirBook] text-16 text-white placeholder-white/60 focus:outline-none"
+                className="bg-transparent flex-1 pl-5 xl:pl-9   font-[avenirBook] text-16 text-white placeholder-white/60 focus:outline-none"
               />
 
               <button
                 onClick={handleSubmit}
-                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-10 md:px-7 xl:px-10 py-[19.5px] rounded-[50px] text-16 text-white"
+                className="bg-white/10 cursor-pointer backdrop-blur-[30px] px-10 md:px-7 xl:px-[44px] py-[16px] rounded-[50px] text-16 text-white"
               >
                 {footerV2Data.top.sendText}
               </button>

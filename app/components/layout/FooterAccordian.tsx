@@ -92,7 +92,7 @@ const FooterGrid = () => (
 // ---- Section wrapper (drop-in replacement) ----
 const FooterColumns = () => {
   return (
-  <div className=" pt-[55px] md:py-100">
+  <div className=" pt-[40px] md:py-100">
     <div>
           <FooterAccordion />
           <FooterGrid />

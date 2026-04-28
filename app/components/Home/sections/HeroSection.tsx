@@ -108,7 +108,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
         />
 
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_1.12%,rgba(0,0,0,0.15)_40.24%,rgba(0,0,0,0.75)_100%)] pointer-events-none" />
-        <div className="absolute w-full bottom-[80px] md:bottom-[90px] 3xl:bottom-[90px]  flex flex-col gap-10 md:gap-8 lg:gap-[72px] items-center justify-center">
+        <div className="absolute w-full bottom-[80px] md:bottom-[90px] 3xl:bottom-[192px]  flex flex-col gap-10 md:gap-8 lg:gap-50 items-center justify-center">
           <div className="relative overflow-hidden">
             <h1
               ref={titleRef}
@@ -118,14 +118,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
               Elevating Lives
             </h1>
           </div>
-        <div   className="hidden lg:block opacity-0"  ref={searchRef}>
-          <div className="w-full   "  >
-          <PropertyFilterBar />
-        </div>
-         
-        </div>
-
-          <div className="overflow-hidden">
+           <div className="overflow-hidden">
             <Image
               ref={scrollRef}
               className="opacity-0 w-[30px]"
@@ -135,6 +128,14 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
               height={50}
             />
           </div>
+        <div   className="hidden lg:block opacity-0"  ref={searchRef}>
+          <div className="w-full   "  >
+          <PropertyFilterBar />
+        </div>
+         
+        </div>
+
+         
           <div  className="w-full  lg:hidden px-5 opacity-0"
               ref={mobsearchRef}>
           <div  
