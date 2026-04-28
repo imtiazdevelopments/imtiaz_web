@@ -87,6 +87,8 @@ export default function Index({
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
   const searchRef = useRef<HTMLImageElement>(null);
+  const mobsearchRef = useRef<HTMLImageElement>(null);
+  
   
   const { unlock } = useLenis();
 
@@ -122,6 +124,11 @@ useEffect(() => {
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 1 },
         "-=0.3",
+      ).fromTo(
+        mobsearchRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        "-=0.3",
       );
     });
 
@@ -140,7 +147,7 @@ useEffect(() => {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} />
+      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} mobsearchRef={mobsearchRef}/>
       <AboutJourneyV3 />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       <ProSliderComingSoonV3

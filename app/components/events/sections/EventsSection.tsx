@@ -247,7 +247,7 @@ const EventsSection = () => {
                 px="px-60"
                 borderColor="border-primary-2"
                 textColor="text-foreground-light"
-                className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+                className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
               />
             </motion.div>
           )}
@@ -314,7 +314,7 @@ const EventsSection = () => {
                   px="px-60"
                   borderColor="border-primary-2"
                   textColor="text-foreground-light"
-                  className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+                  className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
                 />
               )}
             </div>

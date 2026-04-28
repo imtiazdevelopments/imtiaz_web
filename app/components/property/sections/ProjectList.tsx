@@ -175,17 +175,18 @@ const containerRef = useRef<HTMLDivElement>(null);
   }, []);
   return (
     <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
-    <div className="container" ref={containerRef}></div>
-      <div>
+    {/* <div className="container" ref={containerRef}></div> */}
+      <div className="container">
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-[650px_auto] xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
-          <div  style={{ marginLeft: isDesktop ? `${marginLeft}px` : "" }}
-          >
+          {/* <div  style={{ marginLeft: isDesktop ? `${marginLeft}px` : "" }}
+          > */}
+           <div >
             {/* Projects List */}
             <div className="relative grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-20 gap-x-20 hidden   2xl:hidden">
               {visibleProjects.length > 0 ? (

@@ -1333,7 +1333,7 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
 
       {/* ── MAIN MENU PANEL ── */}
       <motion.div
-        className="absolute inset-0 flex flex-col justify-between container pt-[60px] pb-12 z-10"
+        className="absolute inset-0 flex flex-col justify-between container pt-19 pb-12 z-10"
         animate={activeMenu ? "hiddenLeft" : "visible"}
         variants={mainPanelVariants}
         initial={false}
@@ -1855,7 +1855,7 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                       text={item.label}
                       borderColor="border-white"
                       textColor="text-white"
-                      px="px-[18px] sm:px-[20px]  md:px-[36px] h-[50px] md:h-[66px] !leading-[1.58]"
+                      px="px-[18px] sm:px-[20px]  md:px-[36px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                     />
                   </div>
                 ))}

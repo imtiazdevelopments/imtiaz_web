@@ -140,13 +140,13 @@ const InnerHeader: React.FC = () => {
       <motion.div
         id="inner-header"
         style={{ y: springY }}
-        className="fixed top-0 left-0 w-full z-[999] md:pt-[20px]"
+        className="fixed top-0 left-0 w-full z-[999]  pt-5"
       >
         <header className="w-full">
-          <div className={isMobile ? "" : "container"}>
-            <div className="relative flex items-center justify-between w-full md:rounded-full h-[104px] md:h-[65px] lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:pl-40 xl:pr-30">
+          <div className={isMobile ? "container" : "container"}>
+            <div className="relative flex items-center justify-between w-full rounded-full h-[80px]   lg:h-[75px] 3xl:h-[80px] py-[15px] px-20 xl:pl-40 xl:pr-30">
               <div
-                className={`absolute inset-0 md:rounded-full backdrop-blur-[30px] z-[-1] transition-colors duration-500 ${
+                className={`absolute inset-0 rounded-full backdrop-blur-[30px] z-[-1] transition-colors duration-500 ${
                   headerTheme === "dark" ? "bg-black/60" : "bg-white/10"
                 }`}
               />
@@ -176,7 +176,7 @@ const InnerHeader: React.FC = () => {
                     width={183}
                     height={50}
                     priority
-                    className="w-auto xl:w-[183px] h-[44px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
+                    className="w-[131px] xl:w-[183px] h-[44px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
                   />
                 </Link>
               </div>

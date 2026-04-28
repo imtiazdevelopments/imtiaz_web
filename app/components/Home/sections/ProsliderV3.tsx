@@ -489,16 +489,16 @@ requestAnimationFrame(() => {
           slidesPerView={1}
           loop
           modules={[EffectFade, Autoplay, Navigation]}
-          autoplay={{ delay: 8000, disableOnInteraction: false }}
+          // autoplay={{ delay: 8000, disableOnInteraction: false }}
           onSwiper={setSwiperInstance}
           className="w-full swiper-fade h-full"
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.realIndex);
           }}
         >
-          {slides.map((slide, index) => (
+          {slides.slice(0, 1).map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-full flex flex-col pt-15 lg:pt-0 justify-center items-center">
+              <div className="relative w-full h-full flex flex-col pt-15 lg:pt-0 justify-end lg:justify-center items-center">
                 {/* VIDEO BG per slide */}
                 <div
                   className="absolute inset-0 -z-10 overflow-hidden"
@@ -517,7 +517,7 @@ requestAnimationFrame(() => {
                 </div>
 
                 {/* TOP AREA */}
-                <div className="container px-4 md:px-6 lg:px-10 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pb-200 min-[450px]:pb-0">
+                <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 pb-200 min-[450px]:pb-0">
                   <motion.div
                     key={`top-${activeIndex}`}
                     initial="hidden"
@@ -586,7 +586,7 @@ requestAnimationFrame(() => {
                 </div>
 
                 {/* PILL SECTION */}
-                <div className="absolute w-full bottom-0 md:bottom-15 lg:bottom-[50px]">
+                <div className="lg:absolute w-full   lg:bottom-[50px]">
                   <motion.div
                     variants={moveUp(1.2)}
                     initial="hidden"
@@ -636,7 +636,7 @@ requestAnimationFrame(() => {
                                 text="Register"
                                 borderColor="border-white"
                                 textColor="text-white"
-                                px="px-[18px] h-[50px] md:h-[66px] !leading-[1.58]"
+                                px="px-[18px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                                 onClick={() => setEnquiryOpen(true)}
                               />
                             </motion.div>
@@ -652,7 +652,7 @@ requestAnimationFrame(() => {
                                   className="w-full"
                                   borderColor="border-white"
                                   textColor="text-white"
-                                  px="px-[16px] h-[50px] md:h-[66px] !leading-[1.58]"
+                                  px="px-[16px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                                 />
                               </Link>
                             </motion.div>

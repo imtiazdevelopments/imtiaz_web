@@ -319,7 +319,7 @@ const Main = () => {
                     px="px-60"
                     borderColor="border-primary-2"
                     textColor="text-foreground-light"
-                    className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+                    className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
                   />
                 )}
               </div>
@@ -409,7 +409,7 @@ const Main = () => {
                     px="px-60"
                     borderColor="border-primary-2"
                     textColor="text-foreground-light"
-                    className="w-full md:w-auto !py-[17px] md:!py-5 h-[50px] lg:h-[66px] uppercase"
+                    className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
                   />
                 </motion.div>
               )}
@@ -451,7 +451,7 @@ const Main = () => {
       </div>
 
       {/* ── Heading ── */}
-      <div className="container mb-[40px] md:mb-50 text-center" id="properties-list">
+      <div className="container mb-50 text-center" id="properties-list">
         <SectionHeading
           title="Available Off Plan Properties"
           className="mb-20 text-foreground"

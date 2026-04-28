@@ -251,7 +251,7 @@ export default function RegisterYourInterest() {
                 text="Submit Enquire"
                 minWidth={false}
                 onClick={() => {}}
-                className="h-[50px] md:h-[66px]"
+                className="h-[44px] md:h-[50px]  xl:h-[66px]"
                 variant="dark"
                 textColor="text-foreground-light"
                 borderColor="border-primary-2"

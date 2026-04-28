@@ -134,7 +134,7 @@ export default function Cardconstruction({
                   text="SEE 360 VIEW"
                   icon360={true}
                   px="!py-[9px] 3xl:!py-[17.5px] 3xl:py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10 cursor-pointer"
-                  className="!h-[50px] md:h-[67px]"
+                  className="h-[44px] md:h-[50px]  xl:h-[66px]"
                 />
               ) : (
                 <Link
@@ -146,7 +146,7 @@ export default function Cardconstruction({
                   <CustomOutlineButton
                     text="View Progress"
                     px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10"
-                    className="!h-[50px] md:h-[67px]"
+                    className="h-[44px] md:h-[50px]  xl:h-[66px]"
                   />
                 </Link>
               )}

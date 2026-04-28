@@ -119,7 +119,7 @@ export default function VacanciesSection() {
   return (
     <section data-header="dark" className="bg-gray py-120 2xl:py-130">
       {/* Heading + Description */}
-      <div className="container text-center mb-[40px] md:mb-50">
+      <div className="container text-center mb-50">
         <SectionHeading
           title={vacanciesConfig.section.title}
           className="mb-20 text-foreground"

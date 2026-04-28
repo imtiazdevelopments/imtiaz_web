@@ -482,7 +482,7 @@ export default function PreviewSubmit({
             borderColor="border-primary-2"
             textColor="text-foreground"
             px="px-[25px] 3xl:px-[64px]"
-            className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
+            className="h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[180px]"
           />
           <CustomOutlineButton
             onClick={handleSubmit}
@@ -493,7 +493,7 @@ export default function PreviewSubmit({
               isComplete ? "text-foreground-light" : "text-foreground-light/30"
             }
             px="px-[25px] 3xl:px-[64px]"
-            className={`h-[50px] md:h-[67px] uppercase max-w-[200px] ${!isComplete ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[200px] ${!isComplete ? "opacity-50 cursor-not-allowed" : ""}`}
           />
         </div>
       </div>

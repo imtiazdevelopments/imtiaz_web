@@ -44,7 +44,7 @@ export default function JobSpecifications({ jobSpecs }: Props) {
           <div className="text-center">
             <SectionHeading
               title={jobSpecs.title}
-              className="text-heading  mb-[40px] md:mb-50"
+              className="text-heading  mb-50"
             />
           </div>
 

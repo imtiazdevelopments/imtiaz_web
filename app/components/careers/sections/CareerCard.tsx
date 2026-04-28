@@ -44,7 +44,7 @@ export default function CareerCard({ career }: CareerCardProps) {
       <div>
         <Link href="careers/career-details">
           <CustomOutlineButton
-            className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px] h-[50px] md:h-[67px] 3xl:w-[204.11px] uppercase"
+            className="w-fit px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-[46px] h-[44px] md:h-[50px]  xl:h-[66px] 3xl:w-[204.11px] uppercase"
             text="Apply Now"
             borderColor="border-primary"
             textColor="text-foreground-light"
