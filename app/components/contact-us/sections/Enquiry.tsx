@@ -119,7 +119,7 @@ export default function EnquirySection() {
             />
             <SectionDescription
               text={enquiryData.subheading}
-              className="text-foreground-light/80 max-w-[473px] mb-[40px] md:mb-50"
+              className="text-foreground-light/80 max-w-[473px] mb-50"
             />
             <div className="flex flex-col gap-[30px] xl:gap-[40px]">
               {enquiryData.contactInfo.map((item, index) => (
@@ -463,7 +463,7 @@ export default function EnquirySection() {
                   text="Enquire"
                   textColor="text-foreground-light"
                   borderColor="border-foreground-light"
-                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px] h-[50px] md:h-[67px]"
+                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px] h-[44px] md:h-[50px]  xl:h-[66px]"
                 />
               </form>
             </div>

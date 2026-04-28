@@ -86,12 +86,12 @@ const HeaderWithHamburger: React.FC = () => {
       hdrcntsH = "65px";
     } else if (w < 410 && w >=375) {
       startH = "50px";
-      endH = "44px";
-      hdrcntsH = "104px";
+      endH = "36px";
+      hdrcntsH = "80px";
     } else {
       startH = "55px";
-      endH = "44px";
-      hdrcntsH = "104px";
+      endH = "36px";
+      hdrcntsH = "80px";
     }
 
     gsap.set(".hdrlgs svg", { height: startH });
@@ -121,7 +121,7 @@ const HeaderWithHamburger: React.FC = () => {
       .add(() => {
         const w = window.innerWidth;
         const finalH =
-          w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "104px";
+          w >= 1620 ? "80px" : w >= 1024 ? "75px" : w >= 768 ? "65px" : "80px";
         gsap.set(".bckbg", { height: finalH });
         window.dispatchEvent(new Event("headerAnimationComplete"));
       });
@@ -208,11 +208,11 @@ useEffect(() => {
       >
         <div className="ovrlyabg bg-black/60 w-full h-screen z-0 absolute"></div>
         <header className="overflow-hidden w-full">
-          <div className={isMobile ? "max-w-full flex justify-center !px-0" : "container   flex justify-center  lg:!px-[15px] "}>
-            <div className="hdrcnts flex items-center justify-between md:rounded-[150px] py-[30px] px-[20px] md:py-[15px] md:px-20 xl:pl-30 w-full relative h-screen md:mt-[20px]">
+          <div className="container   flex justify-center  lg:!px-[15px]">
+            <div className="hdrcnts flex items-center justify-between rounded-[150px] py-[30px] px-[20px] md:py-[15px] md:px-20 xl:pl-30 w-full relative h-screen  mt-5">
               <div
                 className={clsx(
-                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute md:rounded-[150px] z-[-1] transition-colors duration-500",
+                  "bckbg backdrop-blur-[30px] left-1/2 w-0 -translate-x-1/2 absolute rounded-[150px] z-[-1] transition-colors duration-500",
                   darkHeader ? "bg-black/60" : "bg-white/10",
                 )}
               ></div>

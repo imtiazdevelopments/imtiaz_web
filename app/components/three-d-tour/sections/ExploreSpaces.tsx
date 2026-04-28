@@ -6,7 +6,7 @@ const ExploreSpaces = () => {
   return (
     <section className=" py-120 3xl:py-160  " data-header="dark">
       <div className="container">
-        <div className="flex flex-col justify-center items-center mb-[40px] md:mb-[50px]">
+        <div className="flex flex-col justify-center items-center mb-50">
           <SectionHeading
             title={"Explore Spaces with Confidence"}
             className="text-heading  text-foreground mb-20 text-center  "

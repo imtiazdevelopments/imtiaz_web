@@ -245,7 +245,7 @@ export default function CommunitySlider() {
 
                     <Link href={'/communities'}   >
             <CustomOutlineButton
-              className="w-fit mx-auto 2xl:!px-[35.5px] 2xl:!py-[22.5px] px-[30px] h-[50px] md:h-[66px]"
+              className="w-fit mx-auto 2xl:!px-[35.5px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px]"
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
@@ -305,7 +305,7 @@ export default function CommunitySlider() {
                   >  
                        <Link href={`${slide.url}`}  >
                       <CustomOutlineButton
-                      className="px-[30px] py-2 h-[50px] md:h-[66px]"
+                      className="px-[30px] py-2 h-[44px] md:h-[50px]  xl:h-[66px]"
                       text="View Community"
                       borderColor="border-white/80"
                       textColor="text-white"

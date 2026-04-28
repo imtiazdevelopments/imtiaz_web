@@ -96,7 +96,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
     .replace(/\s+/g, "-")}`}
 >
               <CustomOutlineButton
-              className="w-fit mx-auto h-[50px] lg:h-[60px] xl:h-[66px]"
+              className="w-fit mx-auto h-[44px] md:h-[50px]  xl:h-[66px]"
                 text="View Property"
                 px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10 "
                 

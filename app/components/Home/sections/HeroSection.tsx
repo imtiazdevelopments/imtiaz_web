@@ -60,9 +60,10 @@ type Props = {
   titleRef: React.RefObject<HTMLHeadingElement | null>;
   scrollRef: React.RefObject<HTMLImageElement | null>;
   searchRef?: React.RefObject<HTMLDivElement | null>;
+  mobsearchRef?: React.RefObject<HTMLDivElement | null>;
 };
 
-export default function HeroSection({ titleRef, scrollRef,searchRef }: Props) {
+export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +108,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef }: Props) {
         />
 
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_1.12%,rgba(0,0,0,0.15)_40.24%,rgba(0,0,0,0.75)_100%)] pointer-events-none" />
-        <div className="absolute bottom-[90px] 3xl:bottom-[90px]  flex flex-col gap-8 lg:gap-[72px] items-center justify-center">
+        <div className="absolute w-full bottom-[80px] md:bottom-[90px] 3xl:bottom-[90px]  flex flex-col gap-10 md:gap-8 lg:gap-[72px] items-center justify-center">
           <div className="relative overflow-hidden">
             <h1
               ref={titleRef}
@@ -117,25 +118,11 @@ export default function HeroSection({ titleRef, scrollRef,searchRef }: Props) {
               Elevating Lives
             </h1>
           </div>
-        <div   className="opacity-0"  ref={searchRef}>
-          <div className="w-full hidden lg:block  "  >
+        <div   className="hidden lg:block opacity-0"  ref={searchRef}>
+          <div className="w-full   "  >
           <PropertyFilterBar />
         </div>
-         <motion.div 
-              variants={moveUp(0.1)}
-              initial="hidden"
-              whileInView="show"
-              className="  lg:hidden"
-            > 
-              <CustomOutlineButton onClick={() => setIsVisible(true)}
-                className="w-fit "
-                px="!px-4 !py-3 !text-sm  h-[50px] md:h-[67px]"
-                text="Search Properties" 
-                borderColor="white"
-                textColor="text-white"
-                variant="light"
-              />
-            </motion.div>
+         
         </div>
 
           <div className="overflow-hidden">
@@ -148,12 +135,33 @@ export default function HeroSection({ titleRef, scrollRef,searchRef }: Props) {
               height={50}
             />
           </div>
+          <div  className="w-full  lg:hidden px-5 opacity-0"
+              ref={mobsearchRef}>
+          <div  
+              className="w-full  lg:hidden px-5  " 
+            >  
+              <div className="flex items-center justify-between bg-white/5 backdrop-blur-[30px]    border border-white/10 rounded-full px-5 py-3 min-w-full" onClick={() => setIsVisible(true)}>
+                    <span className="text-white text-[12px] leading-[2]   uppercase">
+                      Filters
+                    </span>
+                    <span className="text-white text-xl leading-none">
+                      
+<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.720001 5.72003H10.72" stroke="white" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.72003 10.72V0.719971" stroke="white" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+
+                    </span>
+                  </div>
+            </ div>
+            </div>
         </div> 
       </div>
       
     </section>
     <div
-        className={`fixed bottom-0 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out ${
+        className={`fixed -bottom-1 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out ${
           isVisible ? "translate-y-0" : "translate-y-full"
         }`}
       >

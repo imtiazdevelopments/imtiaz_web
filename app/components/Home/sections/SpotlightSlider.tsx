@@ -347,7 +347,7 @@ export default function SustainabilitySpotlight() {
               text="View All"
               borderColor="border-primary-2"
               textColor="text-foreground-light"
-              px="px-10 md:px-[30px] lg:px-[26px] h-[50px] md:h-[66px]"
+              px="px-10 md:px-[30px] lg:px-[26px] h-[44px] md:h-[50px]  xl:h-[66px]"
             />
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton

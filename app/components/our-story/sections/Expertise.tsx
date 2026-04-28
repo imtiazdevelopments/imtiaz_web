@@ -13,7 +13,7 @@ const Expertise = () => {
         />
         <SectionDescription
           text={expertiseData.description}
-          className="text-foreground-light max-w-[720px] text-center whitespace-pre-line mb-[40px] md:mb-50"
+          className="text-foreground-light max-w-[720px] text-center whitespace-pre-line mb-50"
         />
         <Link href="/about/expertise">
           <CustomOutlineButton

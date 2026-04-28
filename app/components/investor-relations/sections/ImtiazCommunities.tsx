@@ -344,7 +344,7 @@ export default function HeroFeatureSlider() {
                                   text="Read More"
                                   borderColor="border-white"
                                   textColor="text-white"
-                                  px="h-[50px] md:h-[66px] px-[30px] md:px-[37px]"
+                                  px="h-[44px] md:h-[50px]  xl:h-[66px] px-[30px] md:px-[37px]"
                                 />
                               </Link>
                             </div>

@@ -546,7 +546,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       initial="hidden"
                       animate={inView ? "show" : "hidden"}
                       exit="exit"
-                      className="flex gap-4 mt-12 md:mt-15  font-[avenirRoman] overflow-hidden"
+                      className="flex gap-4 mt-5 md:mt-15  font-[avenirRoman] overflow-hidden"
                     >
                       <motion.div
                         variants={fadeUp}
@@ -563,7 +563,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           text="Register Interest"
                           borderColor="border-white"
                           textColor="text-white"
-                          px="px-[30px] md:px-[25px] h-[50px] md:h-[66px] !leading-[1.58]"
+                          px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                         />
                       </motion.div>
                     </motion.div>

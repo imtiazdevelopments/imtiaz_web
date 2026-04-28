@@ -151,7 +151,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
           borderColor="border-primary-2"
           textColor="text-foreground"
           px="px-[25px] 3xl:px-[64px]"
-          className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
+          className="h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[180px]"
         />
         <CustomOutlineButton
           onClick={handleSubmit(onSubmit)}
@@ -160,7 +160,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
           borderColor="border-primary-2"
           textColor="text-foreground-light"
           px="px-[25px] 3xl:px-[64px]"
-          className="h-[50px] md:h-[67px] uppercase max-w-[180px]"
+          className="h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[180px]"
         />
       </div>
     </form>

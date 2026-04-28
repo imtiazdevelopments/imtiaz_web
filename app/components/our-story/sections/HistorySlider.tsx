@@ -274,7 +274,7 @@ function HistoryCard({
 
       {/* Content */}
       <div className="flex flex-col justify-between p-30 flex-1 h-full bg-gray">
-        <span className="text-heading text-primary mb-[40px] mb-50">{card.year}</span>
+        <span className="text-heading text-primary   mb-50">{card.year}</span>
 
         <div className="mb-[10px]">
           <h3 className="text-25 font-[optima] text-foreground-light uppercase mb-[10px]">

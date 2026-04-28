@@ -308,7 +308,7 @@ export default function OtherPageSlider() {
             variants={moveUp(0.15)}
             initial="hidden"
             animate="show"
-            className="text-description text-white/80 mb-[40px] md:mb-50 max-w-[50ch]"
+            className="text-description text-white/80 mb-50 max-w-[50ch]"
           >
             {slides[current].description}
           </motion.p>
@@ -318,7 +318,7 @@ export default function OtherPageSlider() {
                 text="learn more"
                 className="capitalize"
                 variant="light"
-                px="px-[12px] sm:px-[26px] lg:px-[34px] 3xl:w-[172px] lg:w-auto h-[50px] md:h-[67px]"
+                px="px-[12px] sm:px-[26px] lg:px-[34px] 3xl:w-[172px] lg:w-auto h-[44px] md:h-[50px]  xl:h-[66px]"
               />
             </Link>
           </motion.div>

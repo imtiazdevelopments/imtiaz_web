@@ -196,7 +196,7 @@ const PropertySearchBar = () => {
           {/* Divider */}
           {i < filters.length - 0 && (
            <div
-                className="w-px self-stretch mx-4 2xl:mx-[97px] hidden lg:block"
+                className="w-px self-stretch mx-4 2xl:mx-30 3xl:mx-[97px] hidden lg:block"
                 style={{
                   background: "linear-gradient(to bottom, transparent, #fff, transparent)"
                 }}
@@ -219,7 +219,7 @@ const PropertySearchBar = () => {
       </button>  */}
               <CustomOutlineButton
                 className="w-fit "
-                px="!px-4 !py-3 !text-19 xl:!px-[45px] xl:!py-5 h-[50px] lg:h-[66px] mt-5 lg:mt-0"
+                px="!px-4 !py-3 !text-19 xl:!px-[45px] xl:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] mt-5 lg:mt-0"
                 text="Search Properties"
                 borderColor="white"
                 textColor="text-white"

@@ -48,7 +48,7 @@ export default function InvestmentSection() {
         />
         <SectionDescription
           text={investmentAppealData.sectionDescription}
-          className="max-w-[754px] mx-auto mb-[40px] md:mb-50 text-foreground-light whitespace-pre-line"
+          className="max-w-[754px] mx-auto mb-50 text-foreground-light whitespace-pre-line"
         />
       </div>
 
