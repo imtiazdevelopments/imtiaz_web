@@ -193,7 +193,7 @@ html {
 --space-100: clamp(44px, 3.94vw + 28.6px, 100px);
  
 /* 120px → 50px at 390px, 120px at 1810px */
---space-120: clamp(70px, 4.93vw + 30.8px, 120px);
+--space-120: clamp(60px, 4.93vw + 30.8px, 120px);
  
 /* 130px → 52px at 390px, 130px at 1810px */
 --space-130: clamp(52px, 5.49vw + 30.6px, 130px);

@@ -259,7 +259,7 @@ const NewsSection = () => {
                 px="px-60"
                 borderColor="border-primary-2"
                 textColor="text-foreground-light"
-                className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
+                className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] lg:h-[50px]  xl:h-[66px] uppercase"
               />
             </motion.div>
           )}
@@ -276,7 +276,7 @@ const NewsSection = () => {
           {/* Toggle button */}
           <button
             onClick={() => setFiltersOpen((prev) => !prev)}
-            className="flex items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
+            className="flex text-[12px] md:text-16 items-center justify-between w-full px-6 py-4 rounded-full border border-primary-2 text-foreground-light text-description uppercase cursor-pointer"
           >
             <span>Filters</span>
             <span
@@ -326,7 +326,7 @@ const NewsSection = () => {
                   px="px-60"
                   borderColor="border-primary-2"
                   textColor="text-foreground-light"
-                  className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] md:h-[50px]  xl:h-[66px] uppercase"
+                  className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] lg:h-[50px]  xl:h-[66px] uppercase"
                 />
               )}
             </div>
