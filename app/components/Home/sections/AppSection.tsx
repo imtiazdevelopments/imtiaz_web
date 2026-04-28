@@ -79,7 +79,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
             <div className="relative w-[316px] lg:w-[394px] h-[613px] lg:h-[761px] overflow-hidden phone-wrapper z-[100]">
               <Image
                 className="absolute z-10 h-full w-full"
-                src={"/images/home/app/phone-4.png"}
+                src={"/images/home/app/sa.png"}
                 alt="phone"
                 width={900}
                 height={900}

@@ -463,7 +463,7 @@ export default function EnquirySection() {
                   text="Enquire"
                   textColor="text-foreground-light"
                   borderColor="border-foreground-light"
-                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px] h-[50px] md-h-[67px]"
+                  px="px-50 2xl:py-[23px] 2xl:px-[90.5px] h-[50px] md:h-[67px]"
                 />
               </form>
             </div>
