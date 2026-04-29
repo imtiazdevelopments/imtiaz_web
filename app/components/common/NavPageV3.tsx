@@ -1284,9 +1284,15 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
     collapsed: { height: 0, opacity: 0, transition: { duration: 0.28, ease: "easeInOut" as const } },
     expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
   };
-
+useEffect(() => {
+  document.documentElement.style.setProperty(
+    "--app-height",
+    `${window.innerHeight}px`
+  );
+}, []);
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden">
+    <div className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden" 
+    style={{ height: "var(--app-height)" }}>
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
       <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
