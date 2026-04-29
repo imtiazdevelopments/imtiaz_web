@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
@@ -8,11 +8,18 @@ import {
   Marker,
   useMap,
 } from "@vis.gl/react-google-maps";  
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import PropertyCard from "./PropertyCard";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { useLenis } from "@/app/contexts/LenisContext";
 import ProjectCard from "../../common/ProjectCard";
 import Reveal from "../../animations/RevealOneByOneAnimation";
+import SliderArrowButton from "../../common/SliderNavigationButton"; 
 
 export interface Project {
   id: string;
@@ -64,6 +71,8 @@ export default function FeaturedProjects({
 }: {
   projects: Project[];
 }) {
+    const swiperRef = useRef<SwiperType | null>(null);
+      const [activeIndex, setActiveIndex] = useState(0);
   const [activeProject, setActiveProject] = useState<string>("");
 
   useEffect(() => {
@@ -174,7 +183,9 @@ const containerRef = useRef<HTMLDivElement>(null);
     return () => window.removeEventListener("resize", updateMargin);
   }, []);
   return (
-    <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
+    // <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
+
+    <section className={`mx-auto overflow-hidden`}>
     {/* <div className="container" ref={containerRef}></div> */}
       <div className="container">
         <motion.div
@@ -204,32 +215,86 @@ const containerRef = useRef<HTMLDivElement>(null);
               )}
             </div>
 
-            <div className="relative grid grid-cols-1   gap-y-20 2xl:grid">
-              {visibleProjects.length > 0 ? (
-                visibleProjects?.map((project, index) => (
-                  <Reveal
-                    variants={moveUpV2}
-                    key={project.id}
-                    delayRange={index * 0.11}
-                  >
-                    <PropertyCard 
-                     id={project.id}
-                      image={project.image}
-                      status={project.status}
-                      location={project.location}
-                      title={project.title}
-                      subtitle={project.subtitle}
-                      startingFrom={project.startingFrom}
-                      units={project.units}
-                      hoverImage={project.hoverImage}
-                      setActiveProject={setActiveProject}/>
-                      
-                  </Reveal>
-                ))
-              ) : (
-                <EmptyState />
-              )}
+           {visibleProjects.length > 0 ? (
+  <>
+    {/* ── Mobile: Swiper (< md) ── */}
+    <div className="lg:hidden ">
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={10}
+        grabCursor={true}
+        breakpoints={{
+            0: { slidesPerView: 1 }, 
+            768: { slidesPerView: 2 }, 
+          }}
+         modules={[Autoplay]}
+          effect="fade"
+          fadeEffect={{ crossFade: true }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+
+        className="!overflow-visible w-full"
+      >
+        {visibleProjects.map((project, index) => (
+          <SwiperSlide key={project.id}>
+            <PropertyCard
+              id={project.id}
+              image={project.image}
+              status={project.status}
+              location={project.location}
+              title={project.title}
+              subtitle={project.subtitle}
+              startingFrom={project.startingFrom}
+              units={project.units}
+              hoverImage={project.hoverImage}
+              setActiveProject={setActiveProject}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="flex items-center gap-[15px] justify-center mt-5">
+             <SliderArrowButton
+  direction="prev"
+  variant="dark"
+  onClick={() => swiperRef.current?.slidePrev()}
+/>
+<SliderArrowButton
+  direction="next"
+  variant="dark"
+  onClick={() => swiperRef.current?.slideNext()}
+/>
             </div>
+    </div>
+
+    {/* ── md+: original grid ── */}
+    <div className="hidden lg:grid relative grid-cols-1 gap-y-20 2xl:grid">
+      {visibleProjects.map((project, index) => (
+        <Reveal
+          variants={moveUpV2}
+          key={project.id}
+          delayRange={index * 0.11}
+        >
+          <PropertyCard
+            id={project.id}
+            image={project.image}
+            status={project.status}
+            location={project.location}
+            title={project.title}
+            subtitle={project.subtitle}
+            startingFrom={project.startingFrom}
+            units={project.units}
+            hoverImage={project.hoverImage}
+            setActiveProject={setActiveProject}
+          />
+        </Reveal>
+      ))}
+    </div>
+  </>
+) : (
+  <EmptyState />
+)}
           </div>
 
           {/* Right Column Map for Desktop */}

@@ -80,7 +80,7 @@ export default function Amenities({ data, maxTitle }: Props) {
                   {/* <span className="absolute inset-y-0 right-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
 
                   {/* Icon */}
-                  <div className="relative z-10 w-9 h-9 md:w-11 md:h-11 xl:w-14 xl:h-14 flex items-center justify-center transition-transform duration-300 
+                  <div className="relative z-10 w-[40px] h-[40px] md:w-11 md:h-11 xl:w-14 xl:h-14 flex items-center justify-center transition-transform duration-300 
                   transform group-hover:-translate-y-2  ">
                     <Image
                       src={item.icon}
@@ -92,7 +92,7 @@ export default function Amenities({ data, maxTitle }: Props) {
                   </div>
 
                   {/* Label */}
-                  <p className="relative z-10 px-2 sm:px-0 font-[optima] text-24 text-foreground leading-[1.4] uppercase transition-colors duration-300">
+                  <p className="relative z-10 px-2 sm:px-0 font-[optima] text-25 text-foreground leading-[1.4] uppercase transition-colors duration-300">
                     {item.label}
                   </p>
                 </div>

@@ -332,6 +332,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useInView } from "framer-motion";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import CarouselSlider from "./CarouselSlider"
 import "swiper/css";
 import "swiper/css/navigation";
 import { createPortal } from "react-dom";
@@ -359,6 +360,7 @@ type HeroSliderProps = {
   slides: SlideData[];
   RightLabel?: string;
   heroBgImage?: string; // static fallback image shown behind all slides
+
 };
 
 const fadeUp = {
@@ -370,7 +372,7 @@ const fadeUp = {
   }),
   exit: moveUpExit.exit,
 };
-
+ 
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -489,14 +491,14 @@ requestAnimationFrame(() => {
           slidesPerView={1}
           loop
           modules={[EffectFade, Autoplay, Navigation]}
-          // autoplay={{ delay: 8000, disableOnInteraction: false }}
+          autoplay={{ delay: 8000, disableOnInteraction: false }}
           onSwiper={setSwiperInstance}
           className="w-full swiper-fade h-full"
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.realIndex);
           }}
         >
-          {slides.slice(0, 1).map((slide, index) => (
+          {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full h-full flex flex-col pt-15 lg:pt-0 justify-end lg:justify-center items-center">
                 {/* VIDEO BG per slide */}
@@ -513,11 +515,17 @@ requestAnimationFrame(() => {
                     playsInline
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
+                  <div
+                    className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgb(0 0 0 / 36%) 0%, rgb(0 0 0 / 90%) 100%)",
+                    }}
+                  />
                 </div>
 
                 {/* TOP AREA */}
-                <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 pb-200 min-[450px]:pb-0">
+                <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2   min-[450px]:pb-0">
                   <motion.div
                     key={`top-${activeIndex}`}
                     initial="hidden"
@@ -525,32 +533,8 @@ requestAnimationFrame(() => {
                     className="flex flex-col justify-between items-center"
                   >
                     {/* Right Label */}
-                    <div className="overflow-hidden mb-5 md:mb-50">
-                      <motion.div
-                        variants={moveUp(0.25)}
-                        initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
-                      >
-                        <span className="text-white uppercase text-description !text-25 !leading-[1]">
-                          {RightLabel}
-                        </span>
-                      </motion.div>
-                    </div>
-
-                    {/* Title */}
-                    <div className="overflow-hidden">
-                      <motion.h1
-                        variants={moveUp(0.2)}
-                        initial="hidden"
-                        animate={startAnim ? "show" : "hidden"}
-                        className="text-white uppercase text-heading text-center"
-                      >
-                        {slide.title}
-                      </motion.h1>
-                    </div>
-
-                    {/* Mobile nav */}
-                    <motion.div className="block md:hidden mt-[50px] left-0 w-full z-[70] pointer-events-auto relative">
+                      {/* Mobile nav */}
+                    <motion.div className="block lg:hidden mb-[50px] left-0 w-full z-[70] pointer-events-auto relative">
                       <div className="container flex items-center justify-center gap-5">
                         <button
                           aria-label="Previous slide"
@@ -582,21 +566,46 @@ requestAnimationFrame(() => {
                         </button>
                       </div>
                     </motion.div>
+                    <div className="overflow-hidden mb-[11px] lg:mb-50">
+                      <motion.div
+                        variants={moveUp(0.25)}
+                        initial="hidden"
+                        animate={startAnim ? "show" : "hidden"}
+                      >
+                        <span className="text-white uppercase text-description !text-25 !leading-[1]">
+                          {RightLabel}
+                        </span>
+                      </motion.div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="overflow-hidden">
+                      <motion.h1
+                        variants={moveUp(0.2)}
+                        initial="hidden"
+                        animate={startAnim ? "show" : "hidden"}
+                        className="text-white uppercase text-heading text-center"
+                      >
+                        {slide.title}
+                      </motion.h1>
+                    </div>
+
+                  
                   </motion.div>
                 </div>
 
                 {/* PILL SECTION */}
-                <div className="lg:absolute w-full   lg:bottom-[50px]">
+                <div className="lg:absolute w-full pb-[30px] lg:pb-0  lg:bottom-[67px]">
                   <motion.div
                     variants={moveUp(1.2)}
                     initial="hidden"
                     animate={startAnim ? "show" : "hidden"}
-                    className={`${isMobile ? "" : "container md:!px-[15px]"} mt-10 lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] overflow-hidden`}
+                    className={`${isMobile ? "" : "container md:!px-[15px]"} mt-[30px] lg:mt-[150px] 2xl:mt-[170px] 3xl:mt-[184px] overflow-hidden`}
                   >
                     <div className="relative">
-                      <div className="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full pointer-events-none" />
-                      <motion.div className="bg-white/5 backdrop-blur-[30px] py-[30px] md:py-6 xl:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full flex flex-col xl:flex-row md:items-center justify-between gap-5 xl:min-h-[90px]">
-                        <div className="grid grid-cols-2 md:flex gap-7 md:gap-4 lg:gap-10 3xl:gap-[80px] md:items-center flex-wrap lg:flex-nowrap px-5 lg:px-[30px] 3xl:px-[68px]">
+                      <div className="absolute inset-0 lg:bg-white/5 lg:backdrop-blur-[30px] rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full pointer-events-none" />
+                      <motion.div className="lg:bg-white/5 lg:backdrop-blur-[30px] py-0 lg:py-6 xl:py-0 rounded-tl-[20px] rounded-tr-[20px] md:rounded-xl lg:rounded-full flex flex-col xl:flex-row md:items-center justify-between gap-[30px] md:gap-5 xl:min-h-[90px]">
+                        <div className="hidden lg:block grid grid-cols-2 lg:flex gap-7 md:gap-4 lg:gap-10 3xl:gap-[80px] md:items-center flex-wrap lg:flex-nowrap px-5 lg:px-[30px] 3xl:px-[68px]">
                           {slide.pillFeatures.features.map((f, idx) => (
                             <motion.div
                               variants={moveUp(idx * 0.11)}
@@ -618,6 +627,14 @@ requestAnimationFrame(() => {
                             </motion.div>
                           ))}
                         </div>
+                        <div className="lg:hidden">
+                          <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>
+                          <div className="overflow-hidden px-5 lg:px-[30px] 3xl:px-[68px] py-5">
+                        <CarouselSlider features={slide.pillFeatures.features} activeIndex={activeIndex} />
+                      </div>
+                       <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>
+                         
+                        </div>
 
                         <motion.div className="md:pr-6 md:pr-[15px] flex items-center justify-center">
                           <motion.div
@@ -625,34 +642,32 @@ requestAnimationFrame(() => {
                             variants={moveUp(0)}
                             initial="hidden"
                             animate={startAnim ? "show" : "hidden"}
-                            className="flex gap-4 font-[avenirRoman] overflow-hidden px-[15px] md:px-0 w-full"
+                            className="flex gap-4 font-[avenirRoman] overflow-hidden px-[15px] md:px-0 w-full justify-center"
                           >
                             <motion.div
-                              variants={moveUp(0.2)}
-                              className="w-full"
+                              variants={moveUp(0.2)} 
                             >
                               <CustomOutlineButton
-                                className="w-full"
+                                className=" w-fit"
                                 text="Register"
                                 borderColor="border-white"
                                 textColor="text-white"
-                                px="px-[18px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
+                                px="px-[27px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                                 onClick={() => setEnquiryOpen(true)}
                               />
                             </motion.div>
                             <motion.div
-                              variants={moveUp(0.5)}
-                              className="w-full"
+                              variants={moveUp(0.5)} 
                             >
                               <Link
                                 href={`/properties/${slide.title.toLowerCase().replace(/\s+/g, "-")}`}
                               >
                                 <CustomOutlineButton
                                   text="Explore"
-                                  className="w-full"
+                                  className="w-fit"
                                   borderColor="border-white"
                                   textColor="text-white"
-                                  px="px-[16px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
+                                  px="px-[27px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                                 />
                               </Link>
                             </motion.div>
@@ -675,7 +690,7 @@ requestAnimationFrame(() => {
         initial="hidden"
         animate={startAnim ? "show" : "hidden"}
         exit="exit"
-        className="hidden md:block absolute top-1/2 -translate-y-1/2 left-0 w-full z-20 pointer-events-none"
+        className="hidden lg:block absolute top-1/2 -translate-y-1/2 left-0 w-full z-20 pointer-events-none"
       >
         <div className="container flex items-center justify-center gap-5 md:justify-between">
           <button
