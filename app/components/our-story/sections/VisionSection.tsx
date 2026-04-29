@@ -32,7 +32,7 @@ export default function VisionSection() {
             src={bgImage}
             alt={title}
             width={1920}
-            height={1080}
+            height={942}
             priority
             className="object-cover object-top h-full w-full absolute"
           />
@@ -43,7 +43,7 @@ export default function VisionSection() {
             src={bgImageMobile}
             alt={title}
             width={520}
-            height={580}
+            height={442}
             priority
             className="object-cover object-bottom h-full w-full"
           />
