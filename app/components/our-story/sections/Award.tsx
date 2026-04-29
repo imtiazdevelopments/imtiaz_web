@@ -73,7 +73,7 @@ export default function AwardSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="award-description awd mx-auto max-w-[1301px] text-description text-white/95 lg:text-white/70"
+            className="award-description awd mx-auto max-w-[1301px] font-[avenirBook] text-16 leading-[1.54375] text-white/95 lg:text-white/70"
             dangerouslySetInnerHTML={{ __html: awardData.descriptions }}
           />
         </div>
