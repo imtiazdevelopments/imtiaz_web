@@ -131,19 +131,19 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
               <div className="relative w-[286px] h-[553px] overflow-hidden phone-wrapper z-[100]">
                 <Image
                   className="absolute z-10 h-full w-full"
-                  src={"/images/home/app/phone-4.png"}
+                  src={"/images/home/app/sa.png"}
                   alt="phone"
                   width={900}
                   height={900}
                 />
-                <div className="left-[25px] right-[25px] absolute">
+                <div className="left-[25px] right-[25px] absolute" >
                   <Image
                     src={d.mobileImage}
                     alt="mobile"
                     width={1500}
                     height={2000}
                     className="absolute w-full"
-                  />
+                  /> 
                 </div>
               </div>
             </div>

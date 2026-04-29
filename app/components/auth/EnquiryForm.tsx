@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { useRef, useEffect } from "react";
 import { AnimatedHeading } from "../animations/AnimateHeading";
 import { moveUp } from "../motionVariants";
+import Image from "next/image";
 
 type SignupValues = {
   applyPosition: string;
@@ -185,16 +186,29 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
   return (
     <>
       {/* Close btn */}
-      <div className="px-3 py-7  md:px-60 3xl:px-0 h-full w-full">
-        {" "}
-        <div ref={containerRef} onClick={onClose} className="text-black z-[1000] absolute right-10 top-4">
-          {"X"}
-        </div>
+      <div className="px-3 py-7  md:px-60 3xl:px-0 h-full w-full"> 
         <div className="flex h-full overflow-y-auto items-center justify-center">
           <div
             ref={whiteBoxRef}
             className="w-full h-fit pt-16 justify-center bg-white w-[95%] lg:w-[800px] mx-auto  overflow-scroll relative flex flex-col self-center   p-7 px-5 md:p-10 items-center"
           >
+
+        <div ref={containerRef}  >
+          <button
+                 onClick={onClose}
+                  className="absolute hover:scale-110 transition-all duration-300 cursor-pointer top-4 right-4   sm:w-12.5 sm:h-12.5 w-8 h-8 rounded-full flex items-center justify-center bg-[#17171766] backdrop-blur-[30px] text-white"
+                  aria-label="Close"
+                >
+                  <Image
+                    src="/icons/close.svg"
+                    alt="Close"
+                    width={16}
+                    height={16}
+                    className="w-auto h-[10px] sm:w-[16px] sm:h-[16px]"
+                  />
+                </button>
+       
+        </div>
             {/* Tabs */}
             <motion.div className="relative flex justify-center mb-5 md:mb-30 bg-primary/5 rounded-full w-full lg:w-[567px] h-[40px] md:min-h-[55px] lg:min-h-[70px] overflow-hidden">
               {/* 🔥 Sliding Background */}
