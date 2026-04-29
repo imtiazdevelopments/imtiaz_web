@@ -94,14 +94,14 @@ export default function MessageSection({ data }: Props) {
               className={`hidden lg:grid grid-cols-[1fr_auto_1fr] ${data.id === "chairman" ? "mt-[66px]" : "mt-[68px]"}`}
             >
               {/* Col 1 — Left Content */}
-              <div className="h-full flex flex-col justify-between pb-130 ml-[12%] 3xl:ml-[27.6%]">
+              <div className="h-full flex flex-col justify-between pb-130">
                 <div className="pt-90 3xl:pt-[96px]">
                   <motion.div
                     variants={moveUp(0)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="mb-20 flex justify-center max-w-[385px]"
+                    className="mb-20 flex justify-center"
                   >
                     <Image
                       src="/icons/quote.svg"
@@ -112,15 +112,17 @@ export default function MessageSection({ data }: Props) {
                       priority
                     />
                   </motion.div>
+                  <div>
                   <motion.p
                     variants={moveUp(0.12)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary max-w-[385px] text-center"
+                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary  text-center"
                   >
                     {data.quote}
                   </motion.p>
+                  </div>
                 </div>
 
                 {/* <div>
@@ -173,7 +175,7 @@ export default function MessageSection({ data }: Props) {
               </motion.div>
 
               {/* Col 3 — Right Content */}
-              <div className="pb-130 pt-90 3xl:pt-[96px] justify-self-end ml-[15%] 3xl:ml-0 3xl:pr-[27px]">
+              <div className="pb-130 pt-90 3xl:pt-[96px] justify-self-end">
                 <SectionDescription
                   text={data.description}
                   className="text-description text-foreground-light xl:max-w-[561px] whitespace-pre-line mb-[190px]"
