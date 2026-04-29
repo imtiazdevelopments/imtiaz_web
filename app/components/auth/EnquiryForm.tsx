@@ -37,7 +37,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 );
 
 const inputClass =
-  "w-full mt-[4.8px] md:mt-[10px] pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
+  "w-full mt-[4.8px] md:mt-[10px] md:pb-[5px] text-description text-foreground-light bg-transparent outline-none p-0 h-auto";
 
 const labelClass =
   "block text-description 2xl:leading-[1.75] text-foreground-light/50 transition-colors group-focus-within:text-foreground-light";
@@ -59,7 +59,7 @@ const TabButton = ({ label, isActive, onClick }: TabButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`relative min-h-[55px] cursor-pointer lg:min-h-[70px] z-10 w-1/2 px-2 py-3 lg:py-[17.5px] uppercase text-16 md:text-25 font-[optima] leading-[1.5] md:leading-[1.4] transition-colors duration-300 ${
+      className={`relative md:min-h-[55px] cursor-pointer lg:min-h-[70px] z-10 w-1/2 px-2 py-3 lg:py-[17.5px] uppercase text-16 md:text-25 font-[optima] leading-[1.5] md:leading-[1.4] transition-colors duration-300 ${
         isActive ? "text-white" : "text-foreground-light"
       }`}
     >
@@ -185,23 +185,23 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
   return (
     <>
       {/* Close btn */}
-      <div className="px-3 py-5  md:px-60 3xl:px-0 h-full w-full">
+      <div className="px-3 py-7  md:px-60 3xl:px-0 h-full w-full">
         {" "}
-        <div ref={containerRef} onClick={onClose}>
-          {" "}
+        <div ref={containerRef} onClick={onClose} className="text-black z-[1000] absolute right-10 top-4">
+          {"X"}
         </div>
-        <div className="flex h-full items-center justify-center">
+        <div className="flex h-full overflow-y-auto items-center justify-center">
           <div
             ref={whiteBoxRef}
-            className="w-full h-fit justify-center bg-white w-[95%] lg:w-[800px] mx-auto  overflow-scroll relative flex flex-col self-center   p-7 px-5 md:p-10 items-center"
+            className="w-full h-fit pt-16 justify-center bg-white w-[95%] lg:w-[800px] mx-auto  overflow-scroll relative flex flex-col self-center   p-7 px-5 md:p-10 items-center"
           >
             {/* Tabs */}
-            <motion.div className="relative flex justify-center mb-5 md:mb-30 bg-primary/5 rounded-full w-full lg:w-[567px] min-h-[55px] lg:min-h-[70px] overflow-hidden">
+            <motion.div className="relative flex justify-center mb-5 md:mb-30 bg-primary/5 rounded-full w-full lg:w-[567px] h-[40px] md:min-h-[55px] lg:min-h-[70px] overflow-hidden">
               {/* 🔥 Sliding Background */}
               <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className={`absolute top-0 bottom-0 w-1/2 min-h-[55px] lg:min-h-[70px] bg-primary rounded-full ${
+                className={`absolute top-0 bottom-0 w-1/2  h-[40px] md:min-h-[55px] lg:min-h-[70px] bg-primary rounded-full ${
                   activeTab === "enquiry" ? "left-0" : "left-1/2"
                 }`}
               />
@@ -363,7 +363,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
                           </span>
                           <div className="relative mt-[5px] md:mt-[8px]">
                             <textarea
-                              className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
+                              className="w-full text-description pb-[5px] h-[20px] text-foreground-light bg-transparent outline-none p-0 pr-7 md:h-auto resize-none"
                               rows={rows}
                               {...register("password", {
                                 required: "Message is required",
@@ -510,7 +510,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
     </span>
     <div className="relative mt-[5px] md:mt-[8px]">
       <textarea
-        className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-auto resize-none"
+        className="w-full text-description pb-[5px] text-foreground-light bg-transparent outline-none p-0 pr-7 h-[20px] md:h-auto resize-none"
         rows={rows}
         {...register("password", {
           required: "Message is required",

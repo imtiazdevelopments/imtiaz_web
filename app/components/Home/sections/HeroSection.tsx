@@ -143,7 +143,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
             >  
               <div className="flex items-center justify-between bg-white/5 backdrop-blur-[30px]    border border-white/10 rounded-full px-5 py-3 min-w-full" onClick={() => setIsVisible(true)}>
                     <span className="text-white text-[12px] leading-[2]   uppercase">
-                      Filters
+                      Search Property
                     </span>
                     <span className="text-white text-xl leading-none">
                       
