@@ -380,7 +380,8 @@ const handleCardClick = () => {
             />
           </div>
 
-          <div className={`flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
+          <div className="flex flex-col justify-center gap-7 w-full">
+            <div className={`lg:px-5 flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
             <div className="flex items-center gap-[10px]">
               <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-white/25 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                 <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
@@ -409,17 +410,18 @@ const handleCardClick = () => {
 
           <div onClick={(e) => e.stopPropagation()}>
             <Link
-  href={`/properties/${title
-    .replace(/<br\s*\/?>/gi, "")
-    .toLowerCase()
-    .replace(/\s+/g, "-")}`}
->
+                  href={`/properties/${title
+                    .replace(/<br\s*\/?>/gi, "")
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                >
               <CustomOutlineButton
                 text="View Property"
                 px="px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10"
-                className="translate-y-2 transition-all duration-300 delay-100 cursor-pointer flex items-center justify-center relative overflow-hidden"
+                className="mx-auto translate-y-2 transition-all duration-300 delay-100 cursor-pointer flex items-center justify-center relative overflow-hidden"
               />
             </Link>
+          </div>
           </div>
         </div>
       </div>

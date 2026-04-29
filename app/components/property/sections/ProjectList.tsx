@@ -171,7 +171,7 @@ export default function FeaturedProjects({
   }, [lock, unlock]);
 
   return (
-    <section className={`mx-auto ${isDesktop ? "" : "container"}`}>
+    <section className={`mx-auto `}>
       {/* <ContainerAnchor ref={containerRef} /> */}
       <div className="container">
         <motion.div
