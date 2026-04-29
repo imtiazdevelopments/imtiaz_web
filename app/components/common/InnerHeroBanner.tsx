@@ -248,7 +248,7 @@ requestAnimationFrame(() => {
   <div ref={regbtnRef}>
     <CustomOutlineButton
       onClick={() => setEnquiryOpen(true)}
-      px={`px-5 h-[44px] backdrop-blur-[30px] transition-all duration-500 ${
+      px={`px-5 h-[44px] bg-primary/80 backdrop-blur-[30px] transition-all duration-500 ${
         atBottom ? "translate-y-[70px]" : ""
       }`}
       text="Register Now"
