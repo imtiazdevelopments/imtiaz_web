@@ -43,7 +43,7 @@ export const chairmanMessageData: messageData = {
   designation: "Chairman, Imtiaz Developments",
   description:
     "The fundamental pillars of our rich history of accomplishments remains in our experienced, professional, and highly motivated team who strive to harness their diverse synergies in their fields. We work hard to push the human boundaries with innovation and superior quality services. Our ambition is to be an unstoppable organization that creates enormous value for our clients, our team, and our environment.",
-  personImage: "/images/our-story/chairman2.png",
+  personImage: "/images/our-story/chairman4.png",
   bgImage: "/images/our-story/Chairman-bg2.jpg",
   bgImageMobile: "/images/our-story/chairman-bg-mobile.png",
 };
@@ -56,7 +56,7 @@ export const ceoMessageData: messageData = {
   designation: "CEO, Imtiaz Developments",
   description:
     "Driven by innovation, sustainability, and uncompromising quality, we transform possibilities into inspiring realities. Every project is more than a structure—it’s a thoughtfully crafted living space that enriches lives and reflects the values of our community. \n With a commitment to excellence and forward-thinking design, we continue to shape environments that elevate lifestyles and set new standards for the future.",
-  personImage: "/images/our-story/ceo2.png",
+  personImage: "/images/our-story/ceo4.png",
   bgImage: "/images/our-story/ceo-bg2.jpg",
   bgImageMobile: "/images/our-story/ceo-bg-mobile.png",
 };
