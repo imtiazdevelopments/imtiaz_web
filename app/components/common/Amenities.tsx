@@ -67,7 +67,7 @@ export default function Amenities({ data, maxTitle }: Props) {
           <div>
             <div
               ref={gridRef}
-              className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto justify-center items-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60"
+            className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto justify-center items-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60 [&>*:last-child]:col-start-3"
             >
               {data.amenities.map((item, i) => (
                 <div
