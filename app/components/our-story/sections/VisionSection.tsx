@@ -89,7 +89,7 @@ export default function VisionSection() {
                     </motion.h3>
                     <motion.p
                       viewport={{ once: true }}
-                      className="text-[18px] md:text-25 3xl:text-[24px] leading-[1.4] uppercase font-[optima] tracking-[2%] max-sm:text-[16px]"
+                      className="text-[14px] md:text-25 3xl:text-[24px] leading-[1.4] uppercase font-[optima] tracking-[2%] "
                     >
                       {item.label}
                     </motion.p>

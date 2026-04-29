@@ -14,7 +14,7 @@ import ProjectIntro from "./sections/ProjectIntro";
 const Index = () => {
   return (
     <>
-      <InnerHeroBanner {...bannerData} maxTitle="max-w-[73ch]" />
+      <InnerHeroBanner {...bannerData} maxTitle="max-w-[73ch]"  />
       <ProjectIntro />
       <ConstructionProgress />
       <IconGrid data={EverythingWithinData} />
