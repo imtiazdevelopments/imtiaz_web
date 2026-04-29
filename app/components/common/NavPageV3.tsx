@@ -1285,17 +1285,20 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
     expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
   };
 useEffect(() => {
-  const setHeight = () => {
-    const el = document.getElementById("mobile-menu");
-    if (el) el.style.height = `${window.innerHeight}px`;
+  // Capture height once on mount — before toolbar hides
+  const lockHeight = () => {
+    const menu = document.getElementById("mobile-nav");
+    if (menu) menu.style.height = `${window.innerHeight}px`;
   };
 
-  setHeight();
-  window.addEventListener("resize", setHeight);
-  return () => window.removeEventListener("resize", setHeight);
+  lockHeight();
+
+  // Re-lock on orientation change only (not scroll)
+  window.addEventListener("orientationchange", lockHeight);
+  return () => window.removeEventListener("orientationchange", lockHeight);
 }, []);
   return (
-    <div id="mobile-menu" className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+    <div id="mobile-nav" className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
       style={{ height: "100dvh" }} >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
