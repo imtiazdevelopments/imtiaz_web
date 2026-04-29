@@ -65,7 +65,7 @@ export default function AwardSection() {
           background:
             "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 90%)",
         }}
-        className="relative z-20 w-full h-[471px] flex items-end pb-[70px] md:pb-50"
+        className="relative z-20 w-full h-[471px] flex items-end max-md:pb-[30px] pb-[70px] md:pb-50"
       >
         <div className="mx-auto text-center container">
           <motion.div

@@ -220,7 +220,7 @@ export default function OnboardingIndex({
       {/* RIGHT: scrollable form area */}
       <div className="flex flex-1 flex-col overflow-hidden bg-white pt-100 px-70">
         {/* Tab switcher */}
-        <div className="inline-flex self-start relative rounded-full h-[70px] max-w-[565px] bg-primary/5 mb-70">
+        <div className="inline-flex self-start relative rounded-full h-[50px] md:h-[70px] max-w-[565px] bg-primary/5 mb-70">
           {/* Sliding background pill */}
           <div
             className="absolute top-0 h-full w-1/2 rounded-full bg-primary transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
@@ -234,7 +234,7 @@ export default function OnboardingIndex({
             <button
               key={t}
               onClick={() => onTabChange(t)}
-              className={`relative z-10 w-1/2 flex items-center justify-center rounded-full px-80 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
+              className={`relative z-10 w-1/2 flex items-center justify-center rounded-full px-60 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
                 tab === t ? "text-white" : "text-foreground"
               }`}
             >

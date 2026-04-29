@@ -15,7 +15,7 @@ type Props = {
 export default function MessageSection({ data }: Props) {
   const { ref, parallaxY } = useParallax(15);
 
-  const { ref:mobileRef, parallaxY:parallaxYMobile } = useParallax(15);
+  const { ref: mobileRef, parallaxY: parallaxYMobile } = useParallax(15);
 
   return (
     <>
@@ -271,7 +271,7 @@ export default function MessageSection({ data }: Props) {
                     </motion.p>
                   </div>
                 </div>
-                <div className="min-[640px]:hidden mb-50 text-center">
+                {/* <div className="min-[640px]:hidden mb-50 text-center">
                   <motion.p
                     variants={moveUp(0)}
                     initial="hidden"
@@ -290,7 +290,7 @@ export default function MessageSection({ data }: Props) {
                   >
                     {data.designation}
                   </motion.p>
-                </div>
+                </div> */}
                 {/* Right: person image, bottom-aligned */}
                 <motion.div
                   variants={moveUp(0.12)}
@@ -317,8 +317,28 @@ export default function MessageSection({ data }: Props) {
       <div className="min-[640]:hidden container">
         <SectionDescription
           text={data.description}
-          className="text-description text-foreground-light whitespace-pre-line mb-[70px] sm:mb-50 mt-20 sm:mt-0"
+          className="text-description text-foreground-light whitespace-pre-line mb-[30px] sm:mb-50 mt-20 sm:mt-0"
         />
+        <div className="min-[640px]:hidden mb-50 text-center">
+          <motion.p
+            variants={moveUp(0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="font-[optima] leading-[1.4] uppercase tracking-[2%] text-primary text-[18px] mb-1"
+          >
+            {data.name}
+          </motion.p>
+          <motion.p
+            variants={moveUp(0.12)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="  text-description text-foreground-light"
+          >
+            {data.designation}
+          </motion.p>
+        </div>
       </div>
     </>
   );

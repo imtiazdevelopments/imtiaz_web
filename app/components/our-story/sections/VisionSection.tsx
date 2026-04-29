@@ -75,27 +75,21 @@ export default function VisionSection() {
           </div>
 
           {/* Stats */}
-          <div className="flex justify-center items-stretch">
+          <div className="flex justify-center items-stretch absolute bottom-0 md:relative">
             {stats.map((item, index) => (
               <Reveal variants={moveUpV2} key={index}>
                 <div className="flex items-stretch">
                   {/* Column */}
                   <div className="py-[7.4px] md:py-35 ps-0 pe-5 md:px-[75px] last:pe-0 last:ps-5 last:md:px-[76px] text-center flex flex-col justify-center">
                     <motion.h3
-                      variants={moveUp(0)}
-                      initial="hidden"
-                      whileInView="show"
                       viewport={{ once: true }}
-                      className="text-heading text-white mb-[5px] md:mb-[10px]"
+                      className="text-heading text-white mb-[5px] md:mb-[10px] max-sm:text-30"
                     >
                       {item.value}
                     </motion.h3>
                     <motion.p
-                      variants={moveUp(0.12)}
-                      initial="hidden"
-                      whileInView="show"
                       viewport={{ once: true }}
-                      className="text-[18px] md:text-25 leading-[1.4] uppercase font-[optima] tracking-[2%]"
+                      className="text-[18px] md:text-25 leading-[1.4] uppercase font-[optima] tracking-[2%] max-sm:text-[16px]"
                     >
                       {item.label}
                     </motion.p>
