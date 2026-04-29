@@ -67,12 +67,12 @@ export default function Amenities({ data, maxTitle }: Props) {
           <div>
             <div
               ref={gridRef}
-              className="flex flex-wrap md:justify-center mt-[40px] md:mt-50 gap-y-[16px] lg:gap-y-60"
+              className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto justify-center items-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60"
             >
               {data.amenities.map((item, i) => (
                 <div
                   key={i}
-                  className="amenity-card group relative flex flex-col items-center justify-start gap-[10px] md:gap-4 xl:gap-[30px] px-1   py-3 md:px-6 md:py-[20px] text-center cursor-default w-1/2 sm:w-1/3 lg:w-1/4 overflow-hidden"
+                  className="amenity-card group relative w-full flex flex-col items-center justify-center gap-[10px] md:gap-4 xl:gap-[25px] p-3 md:px-6 md:py-[20px] text-center cursor-default  overflow-hidden"
                 >
                   {/* Left fill */}
                   {/* <span className="absolute inset-y-0 left-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
