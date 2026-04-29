@@ -127,7 +127,7 @@ html {
   --primary: #490905;
   --primary-2: #490905;
    --gray: #EBEBEC;
- 
+ --app-height: 100vh;
 /* 70px → 30px at 390px, 70px at 1810px */
 --text-70: clamp(33px, 2.76vw + 20px, 70px);
  
