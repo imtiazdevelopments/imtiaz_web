@@ -1285,14 +1285,18 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
     expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
   };
 useEffect(() => {
-  document.documentElement.style.setProperty(
-    "--app-height",
-    `${window.innerHeight}px`
-  );
+  const setHeight = () => {
+    const el = document.getElementById("mobile-menu");
+    if (el) el.style.height = `${window.innerHeight}px`;
+  };
+
+  setHeight();
+  window.addEventListener("resize", setHeight);
+  return () => window.removeEventListener("resize", setHeight);
 }, []);
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden" 
-    style={{ height: "var(--app-height)" }}>
+    <div id="mobile-menu" className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+      style={{ height: "100dvh" }} >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
       <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
