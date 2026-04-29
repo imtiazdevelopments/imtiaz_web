@@ -85,7 +85,7 @@ const HeaderWithHamburger: React.FC = () => {
       endH = "40px";
       hdrcntsH = "65px";
     } else if (w < 410 && w >=375) {
-      startH = "50px";
+      startH = "44px";
       endH = "36px";
       hdrcntsH = "80px";
     } else {
@@ -218,7 +218,7 @@ useEffect(() => {
               ></div>
 
               {/* ------- LEFT MENU ------- */}
-              <div className="flex items-center w-[40%] 2xl:w-[33.33%] mnhmns">
+              <div className="flex items-center max-[380px]:w-[75px] w-[40%] sm:w-[40%] 2xl:w-[33.33%] mnhmns">
                 <button
                   className="flex items-center justify-center w-[40px] h-[40px] cursor-pointer opacity-0"
                   onClick={() => setIsMenuOpen(true)}

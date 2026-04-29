@@ -397,7 +397,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 992);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -491,7 +491,7 @@ requestAnimationFrame(() => {
           slidesPerView={1}
           loop
           modules={[EffectFade, Autoplay, Navigation]}
-          autoplay={{ delay: 8000, disableOnInteraction: false }}
+          // autoplay={{ delay: 8000, disableOnInteraction: false }}
           onSwiper={setSwiperInstance}
           className="w-full swiper-fade h-full"
           onSlideChange={(swiper) => {
@@ -629,7 +629,7 @@ requestAnimationFrame(() => {
                         </div>
                         <div className="lg:hidden">
                           <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>
-                          <div className="overflow-hidden px-5 lg:px-[30px] 3xl:px-[68px] py-5">
+                          <div className="overflow-hidden  lg:px-[30px] 3xl:px-[68px] py-5">
                         <CarouselSlider features={slide.pillFeatures.features} activeIndex={activeIndex} />
                       </div>
                        <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>

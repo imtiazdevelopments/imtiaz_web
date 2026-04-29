@@ -152,7 +152,7 @@ const InnerHeader: React.FC = () => {
               />
 
               {/* LEFT — Hamburger */}
-              <div className="flex items-center w-[40%] 2xl:w-[33.33%]">
+              <div className="flex items-center  w-[40%] 2xl:w-[33.33%]">
                 <button
                   className="flex items-center justify-center w-[40px] h-[40px] cursor-pointer"
                   onClick={() => setIsMenuOpen(true)}
@@ -168,7 +168,7 @@ const InnerHeader: React.FC = () => {
               </div>
 
               {/* CENTER — Logo */}
-              <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <div className="absolute max-[380px]:left-[44%] left-1/2 -translate-x-1/2 flex flex-col items-center">
                 <Link href="/">
                   <Image
                     src="/icons/layout_icons/header-logo.svg"

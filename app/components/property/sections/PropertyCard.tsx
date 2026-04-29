@@ -41,7 +41,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
           {status}
         </div>
         {/* Title */}
-        <h3 className="text-25 2xl:text-[24px] tracking-[2%] text-center pb-1 md:pb-5">
+        <h3 className="text-25 2xl:text-[24px] font-[optima] tracking-[2%] text-center pb-1 md:pb-5">
          {parts.length > 1 ? (
               <>
                 {parts[0]}
@@ -55,14 +55,14 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
 
         {/* Location */}
         <div className="flex items-center gap-3     justify-center">
-          <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
-                    <path d="M9.34539 12.1493C11.0689 12.1493 12.4662 10.7521 12.4662 9.0285C12.4662 7.30494 11.0689 5.90771 9.34539 5.90771C7.62183 5.90771 6.22461 7.30494 6.22461 9.0285C6.22461 10.7521 7.62183 12.1493 9.34539 12.1493Z" stroke="#404040" strokeWidth="1.44"/>
-                    <path d="M0.96352 7.21184C2.93401 -1.45033 15.7672 -1.44032 17.7277 7.22184C18.878 12.3031 15.7172 16.6042 12.9465 19.2649C10.936 21.2053 7.75522 21.2053 5.73471 19.2649C2.97402 16.6042 -0.186768 12.2931 0.96352 7.21184Z" stroke="#404040" strokeWidth="1.44"/>
-                  </svg>
-          <span className="text-16">{location}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
+          <path d="M9.34539 12.149C11.0689 12.149 12.4662 10.7518 12.4662 9.02825C12.4662 7.30469 11.0689 5.90747 9.34539 5.90747C7.62183 5.90747 6.22461 7.30469 6.22461 9.02825C6.22461 10.7518 7.62183 12.149 9.34539 12.149Z" stroke="#404040" stroke-width="1.44"/>
+          <path d="M0.96352 7.2116C2.93401 -1.45057 15.7672 -1.44057 17.7277 7.2216C18.878 12.3029 15.7172 16.6039 12.9465 19.2646C10.936 21.2051 7.75522 21.2051 5.73471 19.2646C2.97402 16.6039 -0.186768 12.2929 0.96352 7.2116Z" stroke="#404040" stroke-width="1.44"/>
+          </svg>
+          <span className="text-16 leading-[1.563]">{location}</span>
         </div>
 
-        <div className={`my-5 md:mb-50 flex   lg:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
+        <div className={`my-5 md:mt-40 md:mb-50 flex   lg:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
             <div className="flex items-center gap-[10px]">
               <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-foreground/10 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                 <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
