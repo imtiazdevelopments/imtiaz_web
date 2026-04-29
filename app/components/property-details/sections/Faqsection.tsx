@@ -35,7 +35,7 @@ function AccordionItem({
         className={`${isOpen ? "pb-[10px] md:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-20 md:pt-40` : "py-20 md:py-40"} text-left group focus:outline-none`}  
         aria-expanded={isOpen}
       >
-        <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
+        <span className="text-19 md:text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
           {item.question}
         </span>
         <span className="flex-shrink-0 select-none">
