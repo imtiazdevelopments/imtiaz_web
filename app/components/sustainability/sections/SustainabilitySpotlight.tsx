@@ -414,12 +414,15 @@ export default function SustainabilitySpotlight() {
                         animate="show"
                         exit="exit"
                       >
-                        <Link
-                          href={slide.href}
-                          className="text-primary-2 text-19 font-[avenirBook] leading-[100%] hover:opacity-70 transition-colors duration-300"
-                        >
-                          Read More...
-                        </Link>
+                        <Link  href={slide.href}  > 
+                        <CustomOutlineButton
+                            px="py-[16px] px-[33px] lg:px-[23px] 3xl:px-[48px] 3xl:py-[23px] h-[44px] md:h-[50px]  xl:h-[66px]"
+                            text="Read More"
+                            borderColor="border-primary-2"
+                            textColor="text-foreground-light"
+                            variant="dark"
+                          />  
+                          </Link>
                       </motion.div>
                     </div>
                   </motion.div>
