@@ -50,7 +50,7 @@ export default function Amenities({ data, maxTitle }: Props) {
   }, [data.amenities]);
 
   return (
-    <section data-header="dark" className="w-full py-[70px] lg:py-120 3xl:py-160 ">
+    <section data-header="dark" className="w-full py-[50px] lg:py-120 3xl:py-[140px] ">
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
@@ -65,14 +65,18 @@ export default function Amenities({ data, maxTitle }: Props) {
         </div>
         <div>
           <div>
+            {/* <div
+              ref={gridRef}
+              className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto justify-center items-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60"
+            > */}
             <div
               ref={gridRef}
-            className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto justify-center items-center mt-[40px] md:mt-50 gap-y-[40px] lg:gap-y-60 [&>*:last-child]:col-start-3"
-            >
+           // Container
+className="flex flex-wrap justify-center items-center mt-[40px] md:mt-50 gap-y-[35px] lg:gap-y-[40px] lg:gap-y-60" >
               {data.amenities.map((item, i) => (
                 <div
                   key={i}
-                  className="amenity-card group relative w-full flex flex-col items-center justify-center gap-[10px] md:gap-4 xl:gap-[25px] p-3 md:px-6 md:py-[20px] text-center cursor-default  overflow-hidden"
+                  className="amenity-card w-[calc(100%/2)] md:w-[calc(100%/3)] xl:w-[calc(100%/5)] group relative   flex flex-col items-center justify-center gap-[10px] md:gap-4 xl:gap-[25px] p-3 md:px-6 md:py-[20px] text-center cursor-default  overflow-hidden"
                 >
                   {/* Left fill */}
                   {/* <span className="absolute inset-y-0 left-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
