@@ -1286,8 +1286,8 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
   };
  
   return (
-    <div   className="fixed w-full h-[100vh] overflow-hidden flex flex-col md:hidden"
-      style={{ height: "100dvh" }} >
+    <div   className="fixed w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+     >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
       <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
