@@ -1298,7 +1298,7 @@ useEffect(() => {
   return () => window.removeEventListener("orientationchange", lockHeight);
 }, []);
   return (
-    <div id="mobile-nav" className="relative w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+    <div id="mobile-nav" className="fixed  w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
       style={{ height: "100dvh" }} >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
