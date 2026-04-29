@@ -1349,11 +1349,11 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
               className="flex items-center gap-3 cursor-pointer group"
               onClick={() => openSubmenu(item)}
             >
-              <span className="text-white font-[optima] uppercase text-[22px] leading-none tracking-wide group-active:opacity-70 transition-opacity duration-150">
+              <span className="text-white font-[optima] uppercase text-[18px] leading-none tracking-wide group-active:opacity-70 transition-opacity duration-150">
                 {item.label}
               </span>
               <svg
-                className="w-5 h-5 text-white/50 flex-shrink-0"
+                className="w-4 h-4 text-white/50 flex-shrink-0 relative top-[-1px]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

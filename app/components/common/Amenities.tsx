@@ -87,7 +87,7 @@ export default function Amenities({ data, maxTitle }: Props) {
                       alt={item.label.replace("\n", " ")}
                       width={60}
                       height={60}
-                      className="object-contain"
+                      className="object-contain w-fit"
                     />
                   </div>
 

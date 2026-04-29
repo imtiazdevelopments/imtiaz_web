@@ -25,14 +25,14 @@ export default function VisionSection() {
           />
         </div>
       </div>
-      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[88vh] xl:h-[95vh]">
+      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[700px] xl:h-[949px]">
         {/* Background Image */}
         <div className="hidden sm:block absolute inset-0 overflow-hidden">
           <Image
             src={bgImage}
             alt={title}
             width={1920}
-            height={1080}
+            height={942}
             priority
             className="object-cover object-top h-full w-full absolute"
           />
@@ -43,7 +43,7 @@ export default function VisionSection() {
             src={bgImageMobile}
             alt={title}
             width={520}
-            height={580}
+            height={442}
             priority
             className="object-cover object-bottom h-full w-full"
           />
@@ -59,7 +59,7 @@ export default function VisionSection() {
         />
 
         {/* Content */}
-        <div className="relative z-10 pt-120 3xl:pt-130 pb-4 3xl:pb-50 text-center flex flex-col justify-end md:justify-between items-center h-full container">
+        <div className="relative z-10 pt-120 3xl:pt-130 pb-4 xl:pb-50 text-center flex flex-col justify-end md:justify-between items-center h-full container">
           {/* Title and Description */}
           <div className="hidden md:block md:-mt-10 lg:-mt-8 2xl:-mt-5">
             <div>
@@ -80,7 +80,7 @@ export default function VisionSection() {
               <Reveal variants={moveUpV2} key={index}>
                 <div className="flex items-stretch">
                   {/* Column */}
-                  <div className="  ps-0 pe-5 md:px-[75px] last:pe-0 last:ps-5 last:md:px-[76px] text-center flex flex-col justify-center">
+                  <div className=" pb-5 xl:pb-0 ps-0 pe-5 md:px-[75px] last:pe-0 last:ps-5 last:md:px-[76px] text-center flex flex-col justify-center">
                     <motion.h3
                       viewport={{ once: true }}
                       className="text-heading text-white mb-[5px] md:mb-[10px] max-sm:text-30"
