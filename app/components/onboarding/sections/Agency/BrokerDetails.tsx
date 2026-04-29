@@ -55,7 +55,7 @@ export default function BrokerDetails({ onNext, onPrev, savedData }: Props) {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       {/* Title row */}
       <div className="flex items-center justify-between mb-50">
-        <h2 className="text-heading text-primary">Broker Details</h2>
+        <h2 className="text-[24px] lg:text-[30px] text-heading text-primary">Broker Details</h2>
         <button
           type="button"
           onClick={() => append({ ...DEFAULT_BROKER })}

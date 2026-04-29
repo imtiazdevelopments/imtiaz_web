@@ -49,7 +49,7 @@ export default function SignatoryDetails({ onNext, onPrev, savedData }: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       {/* Title */}
-      <h2 className="text-heading text-primary mb-50">Signatory Details</h2>
+      <h2 className="text-[24px] lg:text-[30px] text-heading text-primary mb-50">Signatory Details</h2>
 
       {/* ── OWNER DETAILS ── */}
       <h3 className="text-25 font-[optima] leading-[1.4] mb-30 uppercase -tracking-[0.02em]">

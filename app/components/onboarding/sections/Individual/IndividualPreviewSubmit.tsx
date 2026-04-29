@@ -315,7 +315,7 @@ export default function IndividualPreviewSubmit({
 
   return (
     <div className="w-full">
-      <h2 className="text-heading text-primary mb-50">Preview &amp; Submit</h2>
+      <h2 className="text-[24px] lg:text-[30px] text-heading text-primary mb-50">Preview &amp; Submit</h2>
 
       {!hasAnything ? (
         <div className="flex flex-col text-foreground-light">

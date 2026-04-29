@@ -48,7 +48,7 @@ const Philosophy = () => {
         background:
           "radial-gradient(50% 50% at 50% 50%, #61120D 0%, #490905 100%)",
       }}
-      className="relative w-full py-120 3xl:py-130 overflow-hidden"
+      className="relative w-full py-[100px] lg:py-120 3xl:py-130 overflow-hidden"
     >
       {/* White/30 wipe overlay — clips away right→left on scroll */}
       <div
@@ -63,7 +63,7 @@ const Philosophy = () => {
         />
         <SectionDescription
           text={philosophyData.description}
-          className="text-white/80 max-w-[1220px] 3xl:max-w-[1308px] text-center lg:whitespace-pre-line"
+          className="text-white/80 max-w-[82ch] lg:max-w-[102ch] 3xl:max-w-[140ch] text-center lg:whitespace-pre-line"
         />
       </div>
     </section>

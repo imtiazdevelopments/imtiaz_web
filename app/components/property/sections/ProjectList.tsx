@@ -178,7 +178,7 @@ export default function FeaturedProjects({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[calc(749px+70px)_1fr] gap-[30px] md:gap-20"
+          className="flex flex-col-reverse lg:grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[749px_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
           <div className="overflow-hidden">

@@ -49,7 +49,7 @@ export default function IndividualBankInfo({ onNext, onPrev, savedData }: Props)
 
   return (
     <form onSubmit={handleSubmit(onNext)} className="w-full">
-      <h2 className="text-heading text-primary mb-50">Bank Info</h2>
+      <h2 className="text-[24px] lg:text-[30px] text-heading text-primary mb-50">Bank Info</h2>
 
       {/* Row 1: Bank Details Available | Bank Name | Bank Account Number */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-60 gap-y-30 mb-40">
