@@ -59,7 +59,7 @@ const TabButton = ({ label, isActive, onClick }: TabButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`relative min-h-[55px] cursor-pointer lg:min-h-[70px] z-10 w-1/2 px-2 py-3 lg:py-[17.5px] uppercase text-25 font-[optima] leading-[1.5] md:leading-[1.4] transition-colors duration-300 ${
+      className={`relative min-h-[55px] cursor-pointer lg:min-h-[70px] z-10 w-1/2 px-2 py-3 lg:py-[17.5px] uppercase text-16 md:text-25 font-[optima] leading-[1.5] md:leading-[1.4] transition-colors duration-300 ${
         isActive ? "text-white" : "text-foreground-light"
       }`}
     >
