@@ -25,14 +25,14 @@ export default function VisionSection() {
           />
         </div>
       </div>
-      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[88vh] xl:h-[95vh]">
+      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[100vh] xl:h-[100dvh]">
         {/* Background Image */}
         <div className="hidden sm:block absolute inset-0 overflow-hidden">
           <Image
             src={bgImage}
             alt={title}
             width={1920}
-            height={1080}
+            height={942}
             priority
             className="object-cover object-top h-full w-full absolute"
           />
@@ -43,7 +43,7 @@ export default function VisionSection() {
             src={bgImageMobile}
             alt={title}
             width={520}
-            height={580}
+            height={442}
             priority
             className="object-cover object-bottom h-full w-full"
           />

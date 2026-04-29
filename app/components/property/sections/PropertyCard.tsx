@@ -41,7 +41,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
           {status}
         </div>
         {/* Title */}
-        <h3 className="text-25 2xl:text-[24px] font-[optima] tracking-[2%] text-center pb-1 md:pb-5">
+        <h3 className="text-25 2xl:text-[24px] font-[optima] tracking-[2%] text-center pb-1 md:pb-5 uppercase">
          {parts.length > 1 ? (
               <>
                 {parts[0]}
@@ -62,7 +62,7 @@ const parts = title.split(new RegExp(`(${breakWord})`, "i"));
           <span className="text-16 leading-[1.563]">{location}</span>
         </div>
 
-        <div className={`my-5 md:mt-40 md:mb-50 flex   lg:flex-row items-center sm:items-start md:items-center justify-center gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
+        <div className={`my-5 md:mt-40 md:mb-50 flex   lg:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}>
             <div className="flex items-center gap-[10px]">
               <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-foreground/10 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                 <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
