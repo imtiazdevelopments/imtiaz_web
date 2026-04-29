@@ -45,7 +45,18 @@ const InnerHeroBanner = ({
     const [enquiryVisible, setEnquiryVisible] = useState(false);
       const backdropRef = useRef<HTMLDivElement>(null);
       const modalRef = useRef<HTMLDivElement>(null);
- 
+ const [atBottom, setAtBottom] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const scrolledToBottom =
+      window.innerHeight + window.scrollY >= document.body.scrollHeight - 50; // 50px threshold
+    setAtBottom(scrolledToBottom);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
  useEffect(() => {
     setMounted(true);
   }, []);
@@ -233,19 +244,20 @@ requestAnimationFrame(() => {
         <Breadcrumb />
         
       </div>
-      <div className={`flex lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40   transition-all duration-500
-            `} >
-         <div ref={regbtnRef}  >
-           <CustomOutlineButton
-          onClick={() => setEnquiryOpen(true)}
-            px="px-5  h-[44px] backdrop-blur-[30px] !bg-primary/50" 
-            text="Register Now"
-            borderColor="border-primary-2"
-            textColor="text-white"
-            variant="light"
-          />
-         </div>
-        </div>
+      <div className="flex lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 transition-all duration-500">
+  <div ref={regbtnRef}>
+    <CustomOutlineButton
+      onClick={() => setEnquiryOpen(true)}
+      px={`px-5 h-[44px] backdrop-blur-[30px] transition-all duration-500 ${
+        atBottom ? "translate-y-[70px]" : ""
+      }`}
+      text="Register Now"
+      borderColor="border-white/30"
+      textColor="text-white"
+      variant="light"
+    />
+  </div>
+</div>
          {mounted &&
                 enquiryVisible &&
                 createPortal(
