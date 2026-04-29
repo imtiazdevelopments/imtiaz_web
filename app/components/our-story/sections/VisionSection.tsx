@@ -25,7 +25,7 @@ export default function VisionSection() {
           />
         </div>
       </div>
-      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[88vh] xl:h-[95vh]">
+      <div className="relative w-full overflow-hidden text-white h-[316px] md:h-[100vh] xl:h-[100dvh]">
         {/* Background Image */}
         <div className="hidden sm:block absolute inset-0 overflow-hidden">
           <Image
