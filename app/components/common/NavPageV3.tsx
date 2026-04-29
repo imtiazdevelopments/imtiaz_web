@@ -1284,21 +1284,9 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
     collapsed: { height: 0, opacity: 0, transition: { duration: 0.28, ease: "easeInOut" as const } },
     expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
   };
-useEffect(() => {
-  // Capture height once on mount — before toolbar hides
-  const lockHeight = () => {
-    const menu = document.getElementById("mobile-nav");
-    if (menu) menu.style.height = `${window.innerHeight}px`;
-  };
-
-  lockHeight();
-
-  // Re-lock on orientation change only (not scroll)
-  window.addEventListener("orientationchange", lockHeight);
-  return () => window.removeEventListener("orientationchange", lockHeight);
-}, []);
+ 
   return (
-    <div id="mobile-nav" className="fixed  w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+    <div   className="fixed w-full h-[100vh] overflow-hidden flex flex-col md:hidden"
       style={{ height: "100dvh" }} >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
