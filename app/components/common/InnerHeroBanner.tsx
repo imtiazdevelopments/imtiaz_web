@@ -168,7 +168,7 @@ const InnerHeroBanner = ({
       <div
         ref={breadcrumbRef}
         style={{ opacity: 0 }}
-        className="absolute flex flex-col justify-center   items-center gap-5 bottom-[90px] lg:bottom-60 3xl:bottom-[63px] left-0 right-0 flex justify-center"
+        className="absolute flex flex-col justify-center   items-center gap-5 bottom-[60px] 3xl:bottom-[63px] left-0 right-0 flex justify-center"
       >
         <Breadcrumb />
         
