@@ -64,7 +64,7 @@ const FooterAccordion = () => {
 
 // ---- Grid (sm+) ----
 const FooterGrid = () => (
-  <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 xl:gap-10 container">
+  <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 xl:gap-10 container">
     {footerV2Data.columns.map((col, i) => (
       <Reveal variants={moveUpV2} key={i}>
         <div>

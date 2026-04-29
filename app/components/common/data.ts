@@ -124,7 +124,7 @@ export const footerV2Data: FooterV2Data = {
       ],
     },
     {
-      heading: "NEW LAUNCHES",
+      heading: "Latest Projects",
       items: [
         { label: "Cove Edition 6", link: "/properties/cove-edition-6" },
         { label: "Wynwood", link: "/properties/wynwood" },
@@ -134,17 +134,17 @@ export const footerV2Data: FooterV2Data = {
         { label: "Beach Walk 4", link: "/properties/beach-walk-4" },
       ],
     },
-    {
-      heading: "COMING SOON",
-      items: [
-        { label: "Le Blanc", link: "/properties/le-blanc" },
-        { label: "Sunset Bay Grand", link: "/properties/sunset-bay-grand" },
-        { label: "Wynwood Horizon", link: "/properties/wynwood-horizon" },
-        { label: "Sunset Bay 5", link: "/properties/sunset-bay-5" },
-        { label: "Pearl House 4", link: "/properties/pearl-house-4" },
-        { label: "Beach Walk Grand 2", link: "/properties/beach-walk-grand-2" },
-      ],
-    },
+    // {
+    //   heading: "COMING SOON",
+    //   items: [
+    //     { label: "Le Blanc", link: "/properties/le-blanc" },
+    //     { label: "Sunset Bay Grand", link: "/properties/sunset-bay-grand" },
+    //     { label: "Wynwood Horizon", link: "/properties/wynwood-horizon" },
+    //     { label: "Sunset Bay 5", link: "/properties/sunset-bay-5" },
+    //     { label: "Pearl House 4", link: "/properties/pearl-house-4" },
+    //     { label: "Beach Walk Grand 2", link: "/properties/beach-walk-grand-2" },
+    //   ],
+    // },
     {
       heading: "WORLD OF IMTIAZ",
       items: [

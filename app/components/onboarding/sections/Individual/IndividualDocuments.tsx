@@ -31,7 +31,7 @@ export default function IndividualDocuments({ onNext, onPrev, savedData }: Props
 
   return (
     <div className="w-full">
-      <h2 className="text-heading text-primary mb-50">Documents</h2>
+      <h2 className="text-[24px] lg:text-[30px] text-heading text-primary mb-50">Documents</h2>
 
       <div className="flex flex-col gap-60">
         <FileUpload title="Passport Copy (Authorized Signatory)" onChange={setFile("passportCopySignatory")} />
