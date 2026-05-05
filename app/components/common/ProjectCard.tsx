@@ -218,8 +218,7 @@ export default function ProjectCard({
   const isMobile =
     typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
-  // const show = isMobile ? false : isHovered || isActive;
-  const show = true
+  const show = isMobile ? false : isHovered || isActive;
   const breakWord = "by Imtiaz";
 
   const parts = title.split(new RegExp(`(${breakWord})`, "i"));
