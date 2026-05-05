@@ -35,7 +35,7 @@ export default function PropertyCard({
       </div>
 
       {/* Content Section  */}
-      <div className="p-5 md:p-[30px] xl:p-20 bg-gray">
+      <div className="p-5 md:p-[30px] xl:p-[15px] 2xl:p-20 bg-gray">
         <div className="m-auto mb-5 lg:mb-30  bg-foreground-light/10 backdrop-blur-[30px] text-foreground text-description uppercase  px-[15px] py-[1.5] rounded-full w-fit">
           {status}
         </div>
@@ -76,7 +76,7 @@ export default function PropertyCard({
         </div>
 
         <div
-          className={`my-5 md:my-30 flex   lg:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}
+          className={`my-5 md:my-30 flex   lg:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-5 xl:gap-3 2xl:gap-5 3xl:gap-40 w-full py-[2.32px] transition-transform duration-500 delay-100 `}
         >
           <div className="flex items-center gap-[10px]">
             <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-foreground/10 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
@@ -98,10 +98,10 @@ export default function PropertyCard({
               </svg>
             </div>
             <div className="flex flex-col items-baseline gap-1">
-              <span className="text-foreground text-description text-left">
+              <span className="text-foreground text-description min-[1280px]:max-[1340px]:text-[14px] text-left">
                 Starting From
               </span>
-              <span className="text-foreground text-description text-left">
+              <span className="text-foreground text-description min-[1280px]:max-[1340px]:text-[14px] text-left">
                 {startingFrom}
               </span>
             </div>
@@ -123,10 +123,10 @@ export default function PropertyCard({
               </svg>
             </div>
             <div className="flex flex-col items-baseline gap-1">
-              <span className="text-foreground text-description text-left">
+              <span className="text-foreground text-description min-[1280px]:max-[1340px]:text-[14px] text-left">
                 Units
               </span>
-              <span className="text-foreground text-description text-left">
+              <span className="text-foreground text-description min-[1280px]:max-[1340px]:text-[14px] text-left">
                 {units}
               </span>
             </div>
