@@ -533,6 +533,8 @@ export const projectsData = [
     title: "Cove Edition 2 by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/palm-villas",
+    startingFrom: "AED 3.5 M",
+    units: "1BR - 3BR",
   }, 
   {
     id:"5",

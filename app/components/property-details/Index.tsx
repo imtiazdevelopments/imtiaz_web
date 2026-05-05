@@ -11,6 +11,7 @@ import { EverythingWithinData, amenitiesData } from "./data";
 import GallerySlider from "./sections/GallerySlider";
 import UnitLayout from "./sections/UnitLayout";
 import ProjectIntro from "./sections/ProjectIntro";
+import RegBtn from "./sections/RegBtn";
 const Index = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const Index = () => {
       <Map />
       <Faqsection />
       <LandpropertyCards />
+      <RegBtn />
     </>
   );
 };
