@@ -148,8 +148,8 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
                     <span className="text-white text-xl leading-none">
                       
 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.720001 5.72003H10.72" stroke="white" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.72003 10.72V0.719971" stroke="white" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0.720001 5.72003H10.72" stroke="white" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5.72003 10.72V0.719971" stroke="white" strokeWidth="1.44" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
 

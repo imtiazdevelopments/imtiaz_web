@@ -171,7 +171,7 @@ export default function HeroFeatureSlider({
       className="w-full relative overflow-hidden h-screen max-h-[745px] md:max-h-full   z-10"
     >
       {/* Nav Buttons */}
-      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px]">
+      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px] opacity-90">
         <div>
           {/* Prev Button */}
           <motion.div

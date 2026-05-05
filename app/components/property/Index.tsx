@@ -2,7 +2,7 @@ import InnerHeroBanner from "../common/InnerHeroBanner";
 import { bannerData, projectsData } from "./data";
 import Main from "./sections/Main";
 import { Suspense } from "react";
-import RegBtn from "./sections/RegBtn";
+
 const Index = () => {
   return (
     <>
@@ -10,7 +10,6 @@ const Index = () => {
       <Suspense fallback={<div className="h-screen bg-white" />}>
         <Main />
       </Suspense>
-      <RegBtn />
     </>
   );
 };
