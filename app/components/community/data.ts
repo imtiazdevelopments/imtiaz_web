@@ -79,7 +79,7 @@ export const communitySectionData = {
     },
     {
       id: 6,
-      title: "Meydan Horizon",
+      title: "MEYDAN HORIZON",
       image: "/images/community/meydanhorizan.jpg",
       tags: [
         { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
@@ -90,7 +90,7 @@ export const communitySectionData = {
     },
     {
       id: 7,
-      title: "Dubai South",
+      title: "DUBAI SOUTH",
       image: "/images/community/dubai-south.jpg",
       tags: [
         { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
