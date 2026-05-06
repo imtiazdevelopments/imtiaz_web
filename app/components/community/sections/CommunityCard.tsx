@@ -322,7 +322,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         style={{ transform: active ? "translateY(110%)" : "translateY(0)" }}
       >
         <h3
-          className="text-white font-[optima] text-25 leading-[1.4] text-center mb-[10px] lg:mb-20 px-10 md:px-4"
+          className="text-white font-[optima] text-25 leading-[1.4] text-center mb-[10px] lg:mb-20 px-10 md:px-4 uppercase"
           style={{
             opacity: active ? 0 : 1,
             transition: active
