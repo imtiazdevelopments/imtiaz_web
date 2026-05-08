@@ -177,7 +177,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
                 text="View All"
                 variant="dark"
                 borderColor="border-primary"
-                textColor="text-foreground-light"
+                textColor="text-primary"
                 px="px-10 xl:px-[37px] h-[44px] md:h-[50px]  xl:h-[66px]"
               />
             </Link>

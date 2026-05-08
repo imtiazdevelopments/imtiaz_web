@@ -352,7 +352,7 @@ export default function AgentDetails({ onNext, savedData }: Props) {
           variant="dark"
           text="Next"
           borderColor="border-primary-2"
-          textColor="text-foreground-light"
+          textColor="text-primary-2"
           px="px-[25px] 3xl:px-[64px]"
           className="h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[180px]"
         />

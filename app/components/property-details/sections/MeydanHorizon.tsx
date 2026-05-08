@@ -40,7 +40,7 @@ const MeydanHorizon = () => {
               px="px-[30px] 3xl:px-[39.54px] mx-auto mt-[50px] h-[44px] md:h-[50px]  xl:h-[66px]"
               borderColor="border-primary"
               className="h-[44px] md:h-[50px]  xl:h-[66px]"
-              textColor="text-foreground-light"
+              textColor="text-primary"
               variant="dark"
             /></Link>
 

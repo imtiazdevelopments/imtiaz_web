@@ -308,7 +308,7 @@ export default function SustainabilitySpotlight() {
                     variant="dark"
                     text="Read More"
                     borderColor="border-primary-2"
-                    textColor="text-foreground-light"
+                    textColor="text-primary-2"
                     px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
                   />
                 </Link>
@@ -346,7 +346,7 @@ export default function SustainabilitySpotlight() {
               variant="dark"
               text="View All"
               borderColor="border-primary-2"
-              textColor="text-foreground-light"
+              textColor="text-primary-2"
               px="px-10 md:px-[30px] lg:px-[26px] h-[44px] md:h-[50px]  xl:h-[66px]"
             />
             <div className="flex items-center gap-[15px]">
@@ -430,7 +430,7 @@ export default function SustainabilitySpotlight() {
                     variant="dark"
                     text="Read More"
                     borderColor="border-primary-2"
-                    textColor="text-foreground-light"
+                    textColor="text-primary-2"
                     px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
                     readMore
                   />
@@ -482,7 +482,7 @@ export default function SustainabilitySpotlight() {
                     variant="dark"
                     text="View All"
                     borderColor="border-primary-2"
-                    textColor="text-foreground-light"
+                    textColor="text-primary-2"
                     px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
                   />
                 </Link>

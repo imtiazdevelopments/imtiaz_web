@@ -703,7 +703,7 @@ function SideInfo({ unit }: { unit: Unit }) {
           className="w-fit 2xl:!px-[37.5px] 3xl:!px-[41px] 2xl:!py-[20px]"
           text="Download Unit layout"
           borderColor="border-primary-2"
-          textColor="text-foreground-light"
+          textColor="text-primary-2"
           variant="dark"
         />
       </a>

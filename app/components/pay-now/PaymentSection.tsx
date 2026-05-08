@@ -461,7 +461,7 @@ export default function PaymentForm() {
                 minWidth={false}
                 onClick={() => {}}
                 variant="dark"
-                textColor="text-foreground-light"
+                textColor="text-primary-2"
                 borderColor="border-primary-2"
                 px="px-10 md:px-60 h-[44px] md:h-[50px]  xl:h-[66px]"
               />

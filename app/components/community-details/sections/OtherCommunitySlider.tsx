@@ -248,7 +248,7 @@ export default function CommunitySlider() {
               className="w-fit mx-auto 2xl:!px-[35.5px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px]"
               text="View All"
               borderColor="border-primary-2"
-              textColor="text-foreground-light"
+              textColor="text-primary-2"
               variant="dark"
             />
             </Link>

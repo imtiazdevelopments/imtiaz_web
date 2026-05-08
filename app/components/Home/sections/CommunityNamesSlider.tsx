@@ -171,7 +171,7 @@ export default function HeroFeatureSlider({
       className="w-full relative overflow-hidden h-screen max-h-[745px] md:max-h-full   z-10"
     >
       {/* Nav Buttons */}
-      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px]">
+      <div className="absolute w-full z-50 h-fit inset-0 flex justify-between top-1/2 -translate-y-1/2 mx-auto container items-center !px-[20px] md:!px-[15px] opacity-90">
         <div>
           {/* Prev Button */}
           <motion.div
@@ -230,7 +230,7 @@ export default function HeroFeatureSlider({
             initial={{ opacity: 1, filter: "blur(0px)" }}
             animate={{ opacity: 0.9, filter: "blur(1px)" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
+            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.1]"
             style={{ backgroundImage: `url('${prevBg}')` }}
           />
         )}
@@ -240,7 +240,7 @@ export default function HeroFeatureSlider({
             initial={{ opacity: 0, filter: "blur(1px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.2]"
+            className="absolute inset-0 w-full h-full bg-cover bg-center scale-[1.1]"
             style={{ backgroundImage: `url('${bgBase}')` }}
           />
         )}

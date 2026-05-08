@@ -949,3 +949,9 @@ input:-webkit-autofill:active {
 .animate-expand-x {
   animation: expand-x 0.4s ease-out forwards;
 }
+
+.projectCardFontSize {
+  @media (min-width: 1140px ) and (max-width: 1300px) {
+    font-size: 14px;
+  }
+}

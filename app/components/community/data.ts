@@ -25,7 +25,7 @@ export const communitySectionData = {
     {
       id: 1,
       title: "DUBAI ISLANDS",
-      image: "/images/community/1.jpg",
+      image: "/images/community/dubai-islands.jpg",
       tags: [
         { label: "Sought After" ,icon: "/images/community/icons/1.svg" },
         { label: "Souk Al Marsa" ,icon: "/images/community/icons/2.svg" },
@@ -36,7 +36,7 @@ export const communitySectionData = {
     {
       id: 2,
       title: "DUBAI LAND RESIDENCE COMPLEX",
-      image: "/images/community/2.jpg",
+      image: "/images/community/dubailand.jpg",
       tags: [
         { label: "Green Parks" ,icon: "/images/community/icons/7.svg" },
         { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
@@ -47,7 +47,7 @@ export const communitySectionData = {
     {
       id: 3,
       title: "AL FURJAN",
-      image: "/images/community/3.jpg",
+      image: "/images/community/furjan.jpg",
       tags: [
         { label: "Green Parks" ,icon: "/images/community/icons/4.svg" },
         { label: "Cycling Track" ,icon: "/images/community/icons/5.svg" },
@@ -58,7 +58,7 @@ export const communitySectionData = {
     {
       id: 4,
       title: "JUMEIRAH GARDEN CITY",
-      image: "/images/community/4.jpg",
+      image: "/images/community/jumeirahgardencity.jpg",
       tags: [
         { label: "Built Sustainably" ,icon: "/images/community/icons/7.svg" },
         { label: "Near Oud bin Khar" ,icon: "/images/community/icons/8.svg" },
@@ -69,7 +69,29 @@ export const communitySectionData = {
     {
       id: 5,
       title: "JVC",
-      image: "/images/community/5.jpg",
+      image: "/images/community/jvc.jpg",
+      tags: [
+        { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
+        { label: "Circle Mall" ,icon: "/images/community/icons/2.svg" },
+        { label: "Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
+      ],
+      href: "/communities/dubai-islands",
+    },
+    {
+      id: 6,
+      title: "MEYDAN HORIZON",
+      image: "/images/community/meydanhorizan.jpg",
+      tags: [
+        { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
+        { label: "Circle Mall" ,icon: "/images/community/icons/2.svg" },
+        { label: "Sheikh Zayed Rd" ,icon: "/images/community/icons/3.svg" },
+      ],
+      href: "/communities/dubai-islands",
+    },
+    {
+      id: 7,
+      title: "DUBAI SOUTH",
+      image: "/images/community/dubai-south.jpg",
       tags: [
         { label: "Local Childcare" ,icon: "/images/community/icons/9.svg" },
         { label: "Circle Mall" ,icon: "/images/community/icons/2.svg" },

@@ -524,18 +524,9 @@ requestAnimationFrame(() => {
                   />
                 </div>
 
-                {/* TOP AREA */}
-                <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2   min-[450px]:pb-0">
-                  <motion.div
-                    key={`top-${activeIndex}`}
-                    initial="hidden"
-                    animate={startAnim ? "show" : "hidden"}
-                    className="flex flex-col justify-between items-center"
-                  >
-                    {/* Right Label */}
-                      {/* Mobile nav */}
-                    <motion.div className="block lg:hidden mb-[50px] left-0 w-full z-[70] pointer-events-auto relative">
-                      <div className="container flex items-center justify-center gap-5">
+                                      {/* Mobile nav */}
+                    <motion.div className="block lg:hidden absolute left-0 top-1/2 -translate-y-1/2 w-full opacity-60">
+                      <div className="container flex items-center justify-between w-full">
                         <button
                           aria-label="Previous slide"
                           onClick={handlePrev}
@@ -566,6 +557,16 @@ requestAnimationFrame(() => {
                         </button>
                       </div>
                     </motion.div>
+
+                {/* TOP AREA */}
+                <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2   min-[450px]:pb-0">
+                  <motion.div
+                    key={`top-${activeIndex}`}
+                    initial="hidden"
+                    animate={startAnim ? "show" : "hidden"}
+                    className="flex flex-col justify-between items-center"
+                  >
+                    {/* Right Label */}
                     <div className="overflow-hidden mb-[11px] lg:mb-50">
                       <motion.div
                         variants={moveUp(0.25)}

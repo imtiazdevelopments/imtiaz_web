@@ -1379,8 +1379,11 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
           >
             CONTACT US
           </div>
-          <a href={`mailto:${contactInfo.email}`} className="font-[avenirRoman] text-[14px] opacity-70 leading-loose">
-            {contactInfo.email}
+          <a href={`mailto:${contactInfo.emailInfo}`} className="font-[avenirRoman] text-[14px] opacity-70 leading-loose">
+            {contactInfo.emailInfo}
+          </a>
+          <a href={`mailto:${contactInfo.emailSales}`} className="font-[avenirRoman] text-[14px] opacity-70 leading-loose">
+            {contactInfo.emailSales}
           </a>
           <a href={`tel:${contactInfo.phone}`} className="font-[avenirRoman] text-[15px] opacity-70 leading-loose">
             {contactInfo.phone}
@@ -1701,9 +1704,10 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                     variants={moveUp(0.25)}
                     initial="hidden"
                     animate="show"
-                    className="text-16 leading-[2.2]"
+                    className="text-16 leading-[2.2] flex flex-col"
                   >
-                    <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+                    <a href={`mailto:${contactInfo.emailInfo}`}>{contactInfo.emailInfo}</a>
+                    
                   </motion.div>
                   <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
                   <motion.div
@@ -1714,6 +1718,17 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                   >
                     <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
                   </motion.div>
+                  
+                </div>
+                <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
+                  <motion.div
+                    variants={moveUp(0.25)}
+                    initial="hidden"
+                    animate="show"
+                    className="text-16 leading-[2.2] flex flex-col"
+                  >
+                    <a href={`mailto:${contactInfo.emailSales}`}>{contactInfo.emailSales}</a>
+                  </motion.div>                  
                 </div>
                 <div className="flex gap-[5px] w-full mt-[30px]">
                   {socialLinks.map((icon, i) => (

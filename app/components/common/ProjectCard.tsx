@@ -189,8 +189,6 @@
 //   );
 // }
 
-
-
 "use client";
 
 import Image from "next/image";
@@ -210,14 +208,15 @@ export default function ProjectCard({
   startingFrom,
   units,
   hoverImage,
-  isCommunity
+  isCommunity,
 }: ProjectCardType) {
   const { ref, parallaxY } = useParallax(2);
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const cardId = useId(); // unique ID for each card instance
 
-  const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  const isMobile =
+    typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
   const show = isMobile ? false : (isHovered || isActive);
   const breakWord = "by Imtiaz";
@@ -231,7 +230,8 @@ export default function ProjectCard({
     };
 
     window.addEventListener("card:activated", handleOtherCardActive);
-    return () => window.removeEventListener("card:activated", handleOtherCardActive);
+    return () =>
+      window.removeEventListener("card:activated", handleOtherCardActive);
   }, [cardId]);
 
   const handleCardClick = () => {
@@ -242,7 +242,7 @@ export default function ProjectCard({
 
     if (next) {
       window.dispatchEvent(
-        new CustomEvent("card:activated", { detail: { id: cardId } })
+        new CustomEvent("card:activated", { detail: { id: cardId } }),
       );
     }
   };
@@ -288,9 +288,13 @@ export default function ProjectCard({
         <div
           className={`absolute inset-0 z-20 flex flex-col transition-opacity mt-[30px] sm:mt-[38px] mb-[30px] md:my-[30px] xl:my-10 duration-700 pointer-events-none ${show ? "opacity-100 sm:opacity-0" : "opacity-100"}`}
         >
-          <div className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}>
+          <div
+            className={`absolute top-0 left-0 right-0 flex justify-center flex-col items-center transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-100"}`}
+          >
             {status && (
-              <div className={`bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
+              <div
+                className={`bg-white/30 backdrop-blur-[30px] px-[15px] py-[1.5px] rounded-full h-[28px] flex items-center justify-center transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}
+              >
                 <p className="text-white/80 text-description   uppercase h-[18px] lg:h-[22px]">
                   {status}
                 </p>
@@ -309,14 +313,17 @@ export default function ProjectCard({
             </div> */}
           </div>
 
-          <div className={`absolute bottom-0 xl:bottom-[13px] left-0 right-0 px-5 transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}>
+          <div
+            className={`absolute bottom-0 xl:bottom-[13px] left-0 right-0 px-5 transition-opacity duration-500 ${show ? "opacity-100 sm:opacity-0 delay-0" : "opacity-100 delay-150"}`}
+          >
             {/* <h3
               className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               dangerouslySetInnerHTML={{ __html: title }}
             /> */}
             <h3
-              className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"
-                }`}
+              className={`font-[optima] text-white text-25 leading-[1.4] uppercase text-center mb-[10px] transition-transform duration-900 ${
+                show ? "translate-y-0" : "translate-y-2"
+              }`}
             >
               {parts.length > 1 ? (
                 <>
@@ -331,24 +338,46 @@ export default function ProjectCard({
             <div
               className={`w-full h-px mb-[10px] transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
               style={{
-                background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 50%, rgba(255,255,255,0) 100%)",
               }}
             />
-            {isCommunity && <p className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}>
-              {subtitle}
-            </p>}
-            {!isCommunity && <div className={`flex items-center justify-center gap-[10px] mt-[30px] transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}>
-              {location && (
-                <>
-                  <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
-                    <path d="M9.34539 12.1493C11.0689 12.1493 12.4662 10.7521 12.4662 9.0285C12.4662 7.30494 11.0689 5.90771 9.34539 5.90771C7.62183 5.90771 6.22461 7.30494 6.22461 9.0285C6.22461 10.7521 7.62183 12.1493 9.34539 12.1493Z" stroke="white" strokeWidth="1.44" />
-                    <path d="M0.96352 7.21184C2.93401 -1.45033 15.7672 -1.44032 17.7277 7.22184C18.878 12.3031 15.7172 16.6042 12.9465 19.2649C10.936 21.2053 7.75522 21.2053 5.73471 19.2649C2.97402 16.6042 -0.186768 12.2931 0.96352 7.21184Z" stroke="white" strokeWidth="1.44" />
-                  </svg>
-                  <span className="text-white/80 text-description">{location}</span>
-                </>
-              )}
-            </div>}
-            <div onClick={(e) => e.stopPropagation()} className="mx-auto w-fit mt-6 md:mt-5  sm:hidden">
+            {isCommunity && (
+              <p
+                className={`text-white/80 text-description text-center transition-transform duration-900 ${show ? "translate-y-0" : "translate-y-2"}`}
+              >
+                {subtitle}
+              </p>
+            )}
+            {!isCommunity && (
+              <div
+                className={`flex items-center justify-center gap-[10px] mt-[30px] transition-transform duration-900 ${show ? "translate-y-0" : "-translate-y-2"}`}
+              >
+                {location && (
+                  <>
+                    <svg width="19" height="22" viewBox="0 0 19 22" fill="none">
+                      <path
+                        d="M9.34539 12.1493C11.0689 12.1493 12.4662 10.7521 12.4662 9.0285C12.4662 7.30494 11.0689 5.90771 9.34539 5.90771C7.62183 5.90771 6.22461 7.30494 6.22461 9.0285C6.22461 10.7521 7.62183 12.1493 9.34539 12.1493Z"
+                        stroke="white"
+                        strokeWidth="1.44"
+                      />
+                      <path
+                        d="M0.96352 7.21184C2.93401 -1.45033 15.7672 -1.44032 17.7277 7.22184C18.878 12.3031 15.7172 16.6042 12.9465 19.2649C10.936 21.2053 7.75522 21.2053 5.73471 19.2649C2.97402 16.6042 -0.186768 12.2931 0.96352 7.21184Z"
+                        stroke="white"
+                        strokeWidth="1.44"
+                      />
+                    </svg>
+                    <span className="text-white/80 text-description">
+                      {location}
+                    </span>
+                  </>
+                )}
+              </div>
+            )}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="mx-auto w-fit mt-6 md:mt-5  sm:hidden"
+            >
               <Link
                 href={`/properties/${title
                   .replace(/<br\s*\/?>/gi, "")
@@ -367,9 +396,11 @@ export default function ProjectCard({
 
         {/* ── HOVER STATE ── */}
         <div
-          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-40 3xl:py-[40px] px-20 transition-opacity duration-500 ${show ? "opacity-0 sm:opacity-100 delay-140" : "opacity-0"}`}
+          className={`absolute inset-0 z-20 flex flex-col items-center justify-between py-40 3xl:py-[40px] px-20 min-[1850px]:px-40 transition-opacity duration-500 ${show ? "opacity-0 sm:opacity-100 delay-140" : "opacity-0"}`}
         >
-          <div className={`flex flex-col items-center transition-opacity duration-300 ${show ? "opacity-100 delay-100" : "opacity-0 delay-0"}`}>
+          <div
+            className={`flex flex-col items-center transition-opacity duration-300 ${show ? "opacity-100 delay-100" : "opacity-0 delay-0"}`}
+          >
             <Image
               src={hoverImage}
               alt="Hover Image"

@@ -258,7 +258,7 @@ const NewsSection = () => {
                 variant="dark"
                 px="px-60"
                 borderColor="border-primary-2"
-                textColor="text-foreground-light"
+                textColor="text-primary-2"
                 className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] lg:h-[50px]  xl:h-[66px] uppercase"
               />
             </motion.div>
@@ -325,7 +325,7 @@ const NewsSection = () => {
                   variant="dark"
                   px="px-60"
                   borderColor="border-primary-2"
-                  textColor="text-foreground-light"
+                  textColor="text-primary-2"
                   className="w-full md:w-auto !py-[17px] md:!py-5 h-[44px] lg:h-[50px]  xl:h-[66px] uppercase"
                 />
               )}

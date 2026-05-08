@@ -153,10 +153,10 @@ export default function FeaturedProjects({
   }, [projects]);
 
   const handleEnter = () => {
-    if (window.innerWidth >= 1024) lock();
+    if (window.innerWidth >= 1280) lock();
   };
   const handleLeave = () => {
-    if (window.innerWidth >= 1024) unlock();
+    if (window.innerWidth >= 1280) unlock();
   };
   useEffect(() => {
     const el = mapContainerRef.current;
@@ -178,12 +178,12 @@ export default function FeaturedProjects({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col-reverse lg:grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[749px_1fr] gap-[30px] md:gap-20"
+          className="flex flex-col-reverse xl:grid xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-[749px_1fr] gap-[30px] md:gap-20"
         >
           {/* Left Column */}
           <div className="overflow-hidden">
             {/* Projects List */}
-            <div className="relative grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-y-20 gap-x-20 hidden   2xl:hidden">
+            <div className="relative grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-y-20 gap-x-20 hidden   2xl:hidden">
               {visibleProjects.length > 0 ? (
                 visibleProjects?.map((project, index) => (
                   <Reveal
@@ -202,7 +202,7 @@ export default function FeaturedProjects({
            {visibleProjects.length > 0 ? (
               <>
                 {/* ── Mobile: Swiper (< md) ── */}
-                <div className="lg:hidden ">
+                <div className="xl:hidden ">
                   <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
@@ -253,7 +253,7 @@ export default function FeaturedProjects({
                 </div>
 
                 {/* ── md+: original grid ── */}
-                <div className="hidden lg:grid relative grid-cols-1 gap-y-20 2xl:grid">
+                <div className="hidden xl:grid relative grid-cols-1 gap-y-20 2xl:grid">
                   {visibleProjects.map((project, index) => (
                     <Reveal
                       variants={moveUpV2}
@@ -286,7 +286,7 @@ export default function FeaturedProjects({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="lg:sticky top-[10px] h-[371px] md:h-[70vh] lg:h-[calc(100vh-20px)] z-10"
+            className="xl:sticky top-[10px] h-[371px] md:h-[70vh] xl:h-[calc(100vh-20px)] z-10"
           >
             {/* Grayscale overlay - affects tiles only, not markers */}
             <div ref={mapContainerRef} className="w-full h-full relative">

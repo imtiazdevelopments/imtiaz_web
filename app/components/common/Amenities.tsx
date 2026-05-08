@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionHeading } from "../animations/SectionHeading";
@@ -22,6 +22,15 @@ type Props = {
 
 export default function Amenities({ data, maxTitle }: Props) {
   const gridRef = useRef<HTMLDivElement>(null);
+
+    const [isXL, setIsXL] = useState(false);
+  
+    useEffect(() => {
+      const check = () => setIsXL(window.innerWidth >= 1280);
+      check();
+      window.addEventListener("resize", check);
+      return () => window.removeEventListener("resize", check);
+    }, []);
 
   useEffect(() => {
     if (!gridRef.current) return;
@@ -84,14 +93,15 @@ className="flex flex-wrap justify-center items-center mt-[40px] md:mt-50 gap-y-[
                   {/* <span className="absolute inset-y-0 right-0 w-[50%] bg-[#EAEAEA] transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100" /> */}
 
                   {/* Icon */}
-                  <div className="relative z-10 w-[30px] h-[30px] md:w-11 md:h-11 xl:w-14 xl:h-14 flex items-center justify-center transition-transform duration-300 
-                  transform group-hover:-translate-y-2  ">
+                  {/* <div className="relative z-10 w-[30px] h-[30px] md:w-11 md:h-11 xl:w-14 xl:h-14 flex items-center justify-center transition-transform duration-300 
+                  transform group-hover:-translate-y-2  "> */}
+                  <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] lg:w-[70px] mb-20 lg:h-[70px] xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center bg-primary/5">
                     <Image
                       src={item.icon}
                       alt={item.label.replace("\n", " ")}
-                      width={60}
-                      height={60}
-                      className="object-contain w-fit"
+                      width={isXL ? 40 : 23}
+                  height={isXL ? 34 : 23}
+                      className="object-contain"
                     />
                   </div>
 
