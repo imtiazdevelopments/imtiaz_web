@@ -660,7 +660,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       )}
 
       <div
-        className={`container absolute bottom-10 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out`}
+        className={`container absolute bottom-10 lg:bottom-[67px] left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out`}
       >
           <div className="w-full"
           >
@@ -670,7 +670,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         className="text-white"
                       />
                       <SectionDescription
-                        text={"Promotion content description"}
+                        text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et.\nlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor."}
                         className={`shrink-0 mx-auto text-white whitespace-pre-line`}
                       />
                       <CustomOutlineButton
