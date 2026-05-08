@@ -208,7 +208,7 @@ export default function MegaMenu({
                   animate="show"
                   className="text-[18px] leading-[2.2]"
                 >
-                  {contactInfo.email}
+                  {contactInfo.emailSales}
                 </motion.div>
 
                 <div className="w-[1px] h-[13px] bg-white" />
