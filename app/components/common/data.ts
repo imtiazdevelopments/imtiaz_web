@@ -374,7 +374,8 @@ export const subMenuItems = {
 
 // Right side contact section
 export const contactInfo = {
-  email: "sales@imtiaz.ae",
+  emailSales: "sales@imtiaz.ae",
+  emailInfo: "Info@imtiaz.ae",
   phone: "+971 800 468429",
 };
 

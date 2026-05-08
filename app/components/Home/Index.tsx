@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "../../contexts/LenisContext";
 import ProSliderComingSoonV3 from "../../components/Home/sections/ProSliderComingSoonV3";
+import FpfSection from "../../components/Home/sections/FpfSection";
 import ProSliderV3 from "../../components/Home/sections/ProsliderV3";
 import ImtiazProperties from "../../components/Home/sections/ImtiazPropsSlider";
 import ConstructionProgress2 from "../../components/Home/sections/ConstructionProgress2";
@@ -154,6 +155,10 @@ useEffect(() => {
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       />
+      {/* <FpfSection
+        slides={heroSlidesComingSoon}
+        RightLabel="Coming Soon"
+      /> */}
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />

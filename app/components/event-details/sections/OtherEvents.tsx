@@ -47,7 +47,7 @@ const OtherEvents = () => {
             variant="dark"
             text="View All"
             borderColor="border-primary-2"
-            textColor="text-foreground-light"
+            textColor="text-primary-2"
             px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
           />
         </motion.div>
@@ -80,7 +80,7 @@ const OtherEvents = () => {
               variant="dark"
               text="View All"
               borderColor="border-primary-2"
-              textColor="text-foreground-light"
+              textColor="text-primary-2"
               px="px-[12px] sm:px-[26px]"
               className="min-w-[139px] md:w-full"
             /></Link>

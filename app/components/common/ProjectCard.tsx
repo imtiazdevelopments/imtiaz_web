@@ -218,7 +218,7 @@ export default function ProjectCard({
   const isMobile =
     typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
-  const show = isMobile ? false : isHovered || isActive;
+  const show = isMobile ? false : (isHovered || isActive);
   const breakWord = "by Imtiaz";
 
   const parts = title.split(new RegExp(`(${breakWord})`, "i"));
@@ -411,60 +411,40 @@ export default function ProjectCard({
           </div>
 
           <div className="flex flex-col justify-center gap-7 w-full">
-            <div
-              className={`flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}
-            >
+            <div className={`lg:px-5 flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
               <div className="flex items-center gap-[10px]">
                 <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-white/25 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
-                  <svg
+                  {/* <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
+                  <path d="M8.72021 8.72022C8.72021 6.51022 10.5102 4.72021 12.7202 4.72021C14.9302 4.72021 16.7202 6.51022 16.7202 8.72022C16.7202 10.9302 14.9302 12.7202 12.7202 12.7202C10.5102 12.7202 8.72021 10.9302 8.72021 8.72022Z" stroke="white" strokeWidth="1.44"/>
+                  <path d="M23.7202 16.7202H0.720215V0.720215H23.7202V16.7202Z" stroke="white" strokeWidth="1.44"/>
+                </svg> */}
+                  {/* <Image src={'/icons/startingFrom.svg'} width={22} height={15} alt="" className="md:w-[25px] md:h-[18px]"/> */}
+                  <img
+                    src="/icons/startingFrom.svg"
+                    alt=""
                     className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]"
-                    viewBox="0 0 25 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M8.72021 8.72022C8.72021 6.51022 10.5102 4.72021 12.7202 4.72021C14.9302 4.72021 16.7202 6.51022 16.7202 8.72022C16.7202 10.9302 14.9302 12.7202 12.7202 12.7202C10.5102 12.7202 8.72021 10.9302 8.72021 8.72022Z"
-                      stroke="white"
-                      strokeWidth="1.44"
-                    />
-                    <path
-                      d="M23.7202 16.7202H0.720215V0.720215H23.7202V16.7202Z"
-                      stroke="white"
-                      strokeWidth="1.44"
-                    />
-                  </svg>
+                  />
                 </div>
                 <div className="flex flex-col items-baseline gap-1">
-                  <span className="text-white text-description projectCardFontSize text-left">
-                    Starting From
-                  </span>
-                  <span className="text-white text-description projectCardFontSize text-left">
-                    {startingFrom}
-                  </span>
+                  <span className="text-white text-description text-left">Starting From</span>
+                  <span className="text-white text-description text-left">{startingFrom}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-[10px]">
                 <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-white/25 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
-                  <svg
+                  {/* <svg className="w-[19px] h-[16px] md:w-[22px] md:h-[19px]" viewBox="0 0 22 19" fill="none">
+                    <path d="M17.7058 8.91778V2.33544C17.7058 1.44478 17.5743 0.720215 16.8603 0.720215H4.27831C3.56435 0.720215 2.98352 1.44484 2.98352 2.33544L2.85947 8.91778M19.0473 14.7982H20.009C20.3926 14.7982 20.7047 14.4088 20.7047 13.9303V11.0997C20.7048 10.2045 21.0277 8.91778 18.7251 8.91778H3.052H1.38263C0.719653 8.91778 0.720215 10.4744 0.720215 11.3229V13.9303C0.720215 14.1871 0.887648 14.396 1.09354 14.396H20.0091M2.85947 17.7202V14.8341M18.1551 17.7202L18.1551 14.8341H18.7251" stroke="white" strokeWidth="1.44" strokeLinecap="round" />
+                  </svg> */}
+                  <img
+                    src="/icons/units.svg"
+                    alt=""
                     className="w-[19px] h-[16px] md:w-[22px] md:h-[19px]"
-                    viewBox="0 0 22 19"
-                    fill="none"
-                  >
-                    <path
-                      d="M17.7058 8.91778V2.33544C17.7058 1.44478 17.5743 0.720215 16.8603 0.720215H4.27831C3.56435 0.720215 2.98352 1.44484 2.98352 2.33544L2.85947 8.91778M19.0473 14.7982H20.009C20.3926 14.7982 20.7047 14.4088 20.7047 13.9303V11.0997C20.7048 10.2045 21.0277 8.91778 18.7251 8.91778H3.052H1.38263C0.719653 8.91778 0.720215 10.4744 0.720215 11.3229V13.9303C0.720215 14.1871 0.887648 14.396 1.09354 14.396H20.0091M2.85947 17.7202V14.8341M18.1551 17.7202L18.1551 14.8341H18.7251"
-                      stroke="white"
-                      strokeWidth="1.44"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  />
                 </div>
                 <div className="flex flex-col items-baseline gap-1">
-                  <span className="text-white text-description projectCardFontSize text-left">
-                    Units
-                  </span>
-                  <span className="text-white text-description projectCardFontSize text-left">
-                    {units}
-                  </span>
+                  <span className="text-white text-description text-left">Units</span>
+                  <span className="text-white text-description text-left">{units}</span>
                 </div>
               </div>
             </div>

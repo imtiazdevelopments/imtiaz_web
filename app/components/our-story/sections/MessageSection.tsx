@@ -101,7 +101,7 @@ export default function MessageSection({ data }: Props) {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="mb-20 flex justify-center"
+                    className="mb-20 flex justify-start"
                   >
                     <Image
                       src="/icons/quote.svg"
@@ -118,7 +118,7 @@ export default function MessageSection({ data }: Props) {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary  text-center"
+                    className="text-25 font-[optima] uppercase tracking-[2%] text-primary  text-start"
                   >
                     {data.quote}
                   </motion.p>

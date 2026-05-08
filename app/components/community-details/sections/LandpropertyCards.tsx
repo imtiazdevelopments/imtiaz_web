@@ -178,7 +178,7 @@ const LandpropertyCards = () => {
                   text="View More"
                   variant="dark"
                   borderColor="border-primary"
-                  textColor="text-foreground-light"
+                  textColor="text-primary"
                   px="px-[12px] sm:px-[26px] xl:px-[37px]"
                   onClick={() => setShowAll(true)}
                 />

@@ -480,7 +480,7 @@ export default function PreviewSubmit({
             variant="dark"
             text="Previous"
             borderColor="border-primary-2"
-            textColor="text-foreground"
+            textColor="text-primary-2"
             px="px-[25px] 3xl:px-[64px]"
             className="h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[180px]"
           />
@@ -490,7 +490,7 @@ export default function PreviewSubmit({
             text="Submit"
             borderColor="border-primary-2"
             textColor={
-              isComplete ? "text-foreground-light" : "text-foreground-light/30"
+              isComplete ? "text-primary-2" : "text-primary-2/30"
             }
             px="px-[25px] 3xl:px-[64px]"
             className={`h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[200px] ${!isComplete ? "opacity-50 cursor-not-allowed" : ""}`}
