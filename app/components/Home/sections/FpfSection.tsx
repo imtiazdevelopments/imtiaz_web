@@ -520,7 +520,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               </div>
 
               {/* -------------------------------- TOP AREA -------------------------------- */}
-              <div className="container px-4 md:px-6 lg:px-10 w-full overflow-hidden flex flex-col items-center justify-center">
+              {/* <div className="container px-4 md:px-6 lg:px-10 w-full overflow-hidden flex flex-col items-center justify-center">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`top-${activeIndex}`}
@@ -529,11 +529,11 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                     exit="exit"
                     className="flex flex-col justify-between items-center "
                   >
-                    {/* Title */}
+                    
                     <div className="overflow-hidden">
                       <motion.h1
                         variants={fadeUp}
-                        // custom={0.3}
+                        
                         custom={0.2}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
@@ -550,9 +550,9 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       exit="exit"
                       className="flex gap-4 mt-5 md:mt-15  font-[avenirRoman] overflow-hidden"
                     >
-                      {/* <motion.div
+                      <motion.div
                         variants={fadeUp}
-                        // custom={0.3}
+                        
                         custom={0.23}
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
@@ -567,11 +567,11 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           textColor="text-white"
                           px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                         />
-                      </motion.div> */}
+                      </motion.div>
                     </motion.div>
                   </motion.div>
                 </AnimatePresence>
-              </div>
+              </div> */}
             </div>
           </SwiperSlide>
         ))}
@@ -660,21 +660,21 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
       )}
 
       <div
-        className={`container absolute bottom-1 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out`}
+        className={`container absolute bottom-10 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out`}
       >
           <div className="w-full"
           >
             <div className="text-center flex justify-center flex-col items-center gap-3">
                       <SectionHeading
-                        title={"Title"}
-                        className="text-white text-32"
+                        title={"Promotion Title "}
+                        className="text-white"
                       />
                       <SectionDescription
-                        text={"Description"}
+                        text={"Promotion content description"}
                         className={`shrink-0 mx-auto text-white whitespace-pre-line`}
                       />
                       <CustomOutlineButton
-                          text="Register Interest"
+                          text="Explore"
                           borderColor="border-white"
                           textColor="text-white"
                           px="px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[47px]"

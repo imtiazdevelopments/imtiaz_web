@@ -155,10 +155,10 @@ useEffect(() => {
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       />
-      {/* <FpfSection
+      <FpfSection
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
-      /> */}
+      />
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
