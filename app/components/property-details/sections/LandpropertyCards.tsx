@@ -67,6 +67,9 @@ const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],
                     
                     image={project.featured_image_desktop}
                     hoverImage={project.brand_logo}
+                    startingFrom={project.icon1_text}
+                    units={project.icon2_text}
+                    location={project.property_location}
                     {...project} />
                   </Reveal>
                 </SwiperSlide>
