@@ -29,6 +29,7 @@ export type AboutPageResponse = {
     chairman_name: string;
     chairman_profile: string;
     chairman_image_desktop: string;
+    chairman_image_background:string;
     chairman_image_mobile: string;
     chairman_image_alt: string;
 
@@ -38,6 +39,7 @@ export type AboutPageResponse = {
     ceo_name: string;
     ceo_profile: string;
     ceo_image_desktop: string;
+    ceo_image_background:string;
     ceo_image_mobile: string;
     ceo_image_alt: string;
 

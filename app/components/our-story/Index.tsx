@@ -41,8 +41,8 @@ const chairmanMessageData = {
   personImageMobile: data?.chairman_image_mobile,
   personImageAlt: data?.chairman_image_alt,
 
-  bgImage: "",
-  bgImageMobile: "",
+  bgImage: data?.chairman_image_background,
+  bgImageMobile: "/images/our-story/chairman-bg-mobile.png",
 };
 
 const ceoMessageData = {
@@ -57,8 +57,8 @@ const ceoMessageData = {
   personImageMobile: data?.ceo_image_mobile,
   personImageAlt: data?.ceo_image_alt,
 
-  bgImage: "",
-  bgImageMobile: "",
+  bgImage: data.ceo_image_background,
+  bgImageMobile: "/images/our-story/ceo-bg-mobile.png",
 };
 
 const otherPageSliderData = {
