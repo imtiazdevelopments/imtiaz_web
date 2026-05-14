@@ -72,6 +72,7 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
           className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}
         >
+          
           {pdfdocData.map((doc, index) => (
             <a 
               key={index}
