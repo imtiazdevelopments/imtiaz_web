@@ -4,10 +4,25 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
-import { spotlight } from "../data";
+// import { spotlight } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import SliderArrowButton from "../../common/SliderNavigationButton";
 import { moveUp, itemVariants } from "../../motionVariants";
+
+export type SpotlightSlide = {
+  id: string;
+  date: string;
+  title: string;
+  href: string;
+  image: string;
+  alt: string;
+};
+
+export type SpotlightData = {
+  title: string;
+  viewAllHref: string;
+  slides: SpotlightSlide[];
+};
 
 function ImageTrack({
   slides,
@@ -51,8 +66,8 @@ function ImageTrack({
   );
 }
 
-export default function SustainabilitySpotlight() {
-  const slides = spotlight.slides;
+export default function SustainabilitySpotlight({data}:{data:SpotlightData}) {
+  const slides = data.slides;
 
   const [current, setCurrent] = useState(0);
 
@@ -265,7 +280,7 @@ export default function SustainabilitySpotlight() {
             viewport={{ once: true }}
             className="uppercase text-heading text-foreground mb-50 text-center"
           >
-            {spotlight.title}
+            {data.title}
           </motion.h2>
 
           <AnimatePresence mode="wait">
@@ -382,7 +397,7 @@ export default function SustainabilitySpotlight() {
                   viewport={{ once: true }}
                   className="uppercase text-heading text-foreground mb-90"
                 >
-                  {spotlight.title}
+                  {data.title}
                 </motion.h2>
 
                 <AnimatePresence mode="wait">

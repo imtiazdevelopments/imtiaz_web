@@ -954,6 +954,12 @@ import {
 } from "../components/Home/data";
 
 export default async function Page() {
+
+  const response = await fetch(`${process.env.BASE_URL}/api/home.php?lang=en`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
+
   return (
     <Index
       heroSlides={heroSlides}
@@ -962,6 +968,7 @@ export default async function Page() {
       imtiazPropertiesData={imtiazPropertiesData}
       ConstructionProgressData={ConstructionProgressData}
       appSectionData={appSectionData}
+      data={data.data}
     />
   );
 }

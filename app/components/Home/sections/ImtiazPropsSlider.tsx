@@ -5,7 +5,7 @@ import Image from "next/image";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { projectsData } from "../data";
+// import { projectsData } from "../data";
 import ProjectCard from "../../common/ProjectCard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -22,11 +22,11 @@ type ImtiazPropertiesData = {
   data: {
     sectionTitle: string;
     properties: {
-      id: number;
+      id: string;
       title: string;
       image: string;
       link: string;
-      logo: string;
+      hoverImage: string;
     }[];
   };
 };
@@ -155,7 +155,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
               1700: { slidesPerView: 4 },
             }}
           >
-            {projectsData.map((project, i) => {
+            {data.properties.map((project, i) => {
               return (
                 <SwiperSlide key={i}>
                   <ProjectCard key={i} {...project} />
