@@ -161,7 +161,7 @@ const communityNamesData = {
 };
 
 const imtiazPropertiesData = {
-  sectionTitle: "IMTIAZ PROPERTIES",
+  sectionTitle: "OFF-PLAN PROPERTIES",
 
   properties: data.properties.map((property, index) => ({
     id: (index + 1).toString(),
