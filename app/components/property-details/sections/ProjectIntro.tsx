@@ -61,17 +61,18 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
     >
       <div className="container flex flex-col items-center">
         <SectionHeading
-          title={introData.title}
+          title={title}
           className="text-white mb-20 text-center max-w-[25ch]"
         />
         <SectionDescription
-          text={introData.description}
+          text={description}
           className="text-white/80  max-w-[87ch] text-center whitespace-pre-line"
         />
         <div
           className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}
         >
+          
           {pdfdocData.map((doc, index) => (
             <a 
               key={index}
