@@ -107,7 +107,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 viewport={{ once: true }}
                 className="mb-[20px] text-heading uppercase text-primary-2 text-center"
               >
-                Download Imtiaz App
+                DOWNLOAD THE IMTIAZ APP
               </motion.h2>
             </div>
 
@@ -120,9 +120,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 viewport={{ once: true }}
                 className="text-description text-[#404040] mb-[30px] md:mb-50 max-w-[58ch] text-center"
               >
-                Imtiaz Developments delivers a total solution to all kinds of
-                Real Estate projects, from initial concept through completion
-                and handover to after sale maintenance and support.
+                Experience the Imtiaz difference. Track projects, access updates, and stay connected from development to handover and beyond.
               </motion.p>
             </div>
 

@@ -197,10 +197,7 @@ const spotlight = {
         slides={heroSlidesComingSoon}
         RightLabel="Coming Soon"
       />
-      <FpfSection
-        slides={promotion}
-        RightLabel="Promotion"
-      />
+      <FpfSection />
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />

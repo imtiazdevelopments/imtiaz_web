@@ -332,7 +332,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useInView } from "framer-motion";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-import CarouselSlider from "./CarouselSlider"
+import CarouselSlider from "./CarouselSlider";
 import "swiper/css";
 import "swiper/css/navigation";
 import { createPortal } from "react-dom";
@@ -360,7 +360,6 @@ type HeroSliderProps = {
   slides: SlideData[];
   RightLabel?: string;
   heroBgImage?: string; // static fallback image shown behind all slides
-
 };
 
 const fadeUp = {
@@ -372,7 +371,7 @@ const fadeUp = {
   }),
   exit: moveUpExit.exit,
 };
- 
+
 export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -410,31 +409,31 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
   useEffect(() => {
     if (!enquiryOpen) return;
     setEnquiryVisible(true);
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    if (!backdropRef.current || !modalRef.current) return;
-    gsap.fromTo(
-      backdropRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5, ease: "power2.out" },
-      );
-      gsap.fromTo(
-        modalRef.current,
-        {
-          opacity: 0,
-          scale: 1.08,
-          filter: "blur(8px)",
-          transformOrigin: "center center",
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.55,
-          ease: "power3.out",
-        },
-      );
-    });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!backdropRef.current || !modalRef.current) return;
+        gsap.fromTo(
+          backdropRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: "power2.out" },
+        );
+        gsap.fromTo(
+          modalRef.current,
+          {
+            opacity: 0,
+            scale: 1.08,
+            filter: "blur(8px)",
+            transformOrigin: "center center",
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.55,
+            ease: "power3.out",
+          },
+        );
+      });
     });
   }, [enquiryOpen]);
 
@@ -524,39 +523,41 @@ requestAnimationFrame(() => {
                   />
                 </div>
 
-                                      {/* Mobile nav */}
-                    <motion.div className="block lg:hidden absolute left-0 top-1/2 -translate-y-1/2 w-full opacity-60">
-                      <div className="container flex items-center justify-between w-full">
-                        <button
-                          aria-label="Previous slide"
-                          onClick={handlePrev}
-                          className="relative w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
-                        >
-                          <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-                          <Image
-                            src="/icons/left_arrow_slider_primary.svg"
-                            alt="Prev"
-                            width={28}
-                            height={28}
-                            className="relative z-10 object-contain w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-                          />
-                        </button>
-                        <button
-                          aria-label="Next slide"
-                          onClick={handleNext}
-                          className="relative w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
-                        >
-                          <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
-                          <Image
-                            src="/icons/left_arrow_slider_primary.svg"
-                            alt="Next"
-                            width={28}
-                            height={28}
-                            className="relative rotate-180 z-10 object-contain w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
-                          />
-                        </button>
-                      </div>
-                    </motion.div>
+                {/* Mobile nav */}
+                {slides.length > 1 && (
+                <motion.div className="block lg:hidden absolute left-0 top-1/2 -translate-y-1/2 w-full opacity-60">
+                  <div className="container flex items-center justify-between w-full">
+                    <button
+                      aria-label="Previous slide"
+                      onClick={handlePrev}
+                      className="relative w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+                    >
+                      <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                      <Image
+                        src="/icons/left_arrow_slider_primary.svg"
+                        alt="Prev"
+                        width={28}
+                        height={28}
+                        className="relative z-10 object-contain w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                      />
+                    </button>
+                    <button
+                      aria-label="Next slide"
+                      onClick={handleNext}
+                      className="relative w-[50px] h-[50px] group border border-white rounded-[50px] flex items-center justify-center overflow-hidden"
+                    >
+                      <span className="absolute left-0 top-0 h-full w-0 bg-white/30 transition-all duration-300 group-hover:w-full z-0" />
+                      <Image
+                        src="/icons/left_arrow_slider_primary.svg"
+                        alt="Next"
+                        width={28}
+                        height={28}
+                        className="relative rotate-180 z-10 object-contain w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
+                      />
+                    </button>
+                  </div>
+                </motion.div>
+                )}
 
                 {/* TOP AREA */}
                 <div className="container px-4 md:px-6 lg:px-10 w-full lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2   min-[450px]:pb-0">
@@ -590,8 +591,6 @@ requestAnimationFrame(() => {
                         {slide.title}
                       </motion.h1>
                     </div>
-
-                  
                   </motion.div>
                 </div>
 
@@ -629,12 +628,26 @@ requestAnimationFrame(() => {
                           ))}
                         </div>
                         <div className="lg:hidden">
-                          <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>
+                          <div
+                            className="h-[1px]"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)",
+                            }}
+                          ></div>
                           <div className="overflow-hidden  lg:px-[30px] 3xl:px-[68px] py-5">
-                        <CarouselSlider features={slide.pillFeatures.features} activeIndex={activeIndex} />
-                      </div>
-                       <div  className="h-[1px]"  style={{background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)"}}></div>
-                         
+                            <CarouselSlider
+                              features={slide.pillFeatures.features}
+                              activeIndex={activeIndex}
+                            />
+                          </div>
+                          <div
+                            className="h-[1px]"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%)",
+                            }}
+                          ></div>
                         </div>
 
                         <motion.div className="md:pr-6 md:pr-[15px] flex items-center justify-center">
@@ -645,9 +658,7 @@ requestAnimationFrame(() => {
                             animate={startAnim ? "show" : "hidden"}
                             className="flex gap-4 font-[avenirRoman] overflow-hidden px-[15px] md:px-0 w-full justify-center"
                           >
-                            <motion.div
-                              variants={moveUp(0.2)} 
-                            >
+                            <motion.div variants={moveUp(0.2)}>
                               <CustomOutlineButton
                                 className=" w-fit"
                                 text="Register"
@@ -657,9 +668,7 @@ requestAnimationFrame(() => {
                                 onClick={() => setEnquiryOpen(true)}
                               />
                             </motion.div>
-                            <motion.div
-                              variants={moveUp(0.5)} 
-                            >
+                            <motion.div variants={moveUp(0.5)}>
                               <Link
                                 href={`/properties/${slide.title.toLowerCase().replace(/\s+/g, "-")}`}
                               >
@@ -685,6 +694,7 @@ requestAnimationFrame(() => {
       </div>
 
       {/* ── DESKTOP NAV ARROWS (z-20, above Swiper z-10) ────────────────────── */}
+      {slides.length > 1 && (
       <motion.div
         variants={fadeUp}
         custom={0.5}
@@ -725,6 +735,7 @@ requestAnimationFrame(() => {
           </button>
         </div>
       </motion.div>
+      )}
       {mounted &&
         enquiryVisible &&
         createPortal(

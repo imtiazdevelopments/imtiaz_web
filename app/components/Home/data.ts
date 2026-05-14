@@ -278,43 +278,43 @@ export const aboutSectionJourney = {
 
 export const heroSlides = [
   {
-    title: "SUNSET BAY 2 by Imtiaz",
+    title: "SEA CLIFF",
     video: "/videos/seaClif-web.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
       features: [
-        { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
-        { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
+        { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "Dynamic Waterfront Living" },
+        { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "Resort-inspired Amenities" },
         {
           icon: "/icons/pro_slider/sunset_icons/3.svg",
-          label: "FULLY EQUIPPED GYM",
+          label: "Fully Furnished Residences",
         },
         {
           icon: "/icons/pro_slider/sunset_icons/4.svg",
-          label: "SAUNA & STEAM",
+          label: "Strategically Located",
         },
       ],
     },
   },
-  {
-    title: "SUNSET BAY 2 by Imtiaz",
-    video: "/videos/seaClif-web.mp4",
-    pillFeatures: {
-      title: "/icons/pro_slider/sunset_bay.svg",
-      features: [
-        { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
-        { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
-        {
-          icon: "/icons/pro_slider/sunset_icons/3.svg",
-          label: "FULLY EQUIPPED GYM",
-        },
-        {
-          icon: "/icons/pro_slider/sunset_icons/4.svg",
-          label: "SAUNA & STEAM",
-        },
-      ],
-    },
-  },
+  // {
+  //   title: "SUNSET BAY 2 by Imtiaz",
+  //   video: "/videos/seaClif-web.mp4",
+  //   pillFeatures: {
+  //     title: "/icons/pro_slider/sunset_bay.svg",
+  //     features: [
+  //       { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
+  //       { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/3.svg",
+  //         label: "FULLY EQUIPPED GYM",
+  //       },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/4.svg",
+  //         label: "SAUNA & STEAM",
+  //       },
+  //     ],
+  //   },
+  // },
 ];
 
 export const heroSlidesComingSoon = [
@@ -413,7 +413,7 @@ export const ConstructionProgressData = {
   videoSrc: "/videos/Construction_Update.mp4",
   posterSrc: "/images/home/work-progress/progress.jpg",
   description:
-    "Watch our projects turn from concept to reality and witness the future of real estate unfold at every milestone.",
+    "Watch our projects transform from concept to reality. Stay informed at every stage as we provide a clear view of project milestones, progress on site, and delivery timelines.",
   button: {
     label: "Construction Updates",
     link: "#",

@@ -46,7 +46,7 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
   });
 
   const getFileName = (path: string, label: string) => {
-    const fileName = path.split('/').pop() || label.toLowerCase();
+    const fileName = path?.split('/').pop() || label.toLowerCase();
     return fileName;
   };
 
