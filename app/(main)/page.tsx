@@ -951,6 +951,7 @@ import {
   appSectionData,
   communityNamesData,
   heroSlidesComingSoon,
+  promotion,
 } from "../components/Home/data";
 
 export default async function Page() {
@@ -964,6 +965,7 @@ export default async function Page() {
     <Index
       heroSlides={heroSlides}
       heroSlidesComingSoon={heroSlidesComingSoon}
+      promotion={promotion}
       communityNamesData={communityNamesData}
       imtiazPropertiesData={imtiazPropertiesData}
       ConstructionProgressData={ConstructionProgressData}

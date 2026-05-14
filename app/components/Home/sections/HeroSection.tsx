@@ -89,7 +89,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
         {/* Portrait video — mobile only */}
         <video
           className="absolute top-0 left-0 w-full object-cover h-[99.9%] block md:hidden"
-          src="/videos/hero_new_mob.mp4"
+          src="/videos/heroBanner-mob.mp4"
           poster="/videos/banner-vid.jpg"
           autoPlay
           loop
@@ -99,7 +99,7 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
         {/* Landscape video — tablet and above */}
         <video
           className="absolute top-0 left-0 w-full object-cover h-[99.9%] hidden md:block"
-          src="/videos/hero_new_desk.mp4"
+          src="/videos/heroBanner-web.mp4"
           poster="/videos/banner-vid.jpg"
           autoPlay
           loop

@@ -15,6 +15,7 @@ import AboutJourneyV3 from "../../components/Home/sections/AboutJourneyV3";
 import SpotlightSlider from "../../components/Home/sections/SpotlightSlider";
 import HeroSection from "./sections/HeroSection";
 import { HomePageResponse } from "./data";
+import { promotion } from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,6 +73,7 @@ type AppSectionData = {
 type Props = {
   heroSlides: HeroSlide[];
   heroSlidesComingSoon: HeroSlide[];
+  promotion: HeroSlide[];
   communityNamesData: CommunityNamesData;
   imtiazPropertiesData: ImtiazPropertiesData;
   ConstructionProgressData: ConstructionProgressData;
@@ -196,8 +198,8 @@ const spotlight = {
         RightLabel="Coming Soon"
       />
       <FpfSection
-        slides={heroSlidesComingSoon}
-        RightLabel="Coming Soon"
+        slides={promotion}
+        RightLabel="Promotion"
       />
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
