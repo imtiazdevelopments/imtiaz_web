@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { investmentAppealData } from "../data";
+// import { investmentAppealData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { useParallax } from "../../../hooks/useParallax";
@@ -15,9 +15,27 @@ import { useCallback, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 
-const total = investmentAppealData.stats.length;
+type InvestmentAppealData = {
+  sectionTitle: string;
 
-export default function InvestmentSection() {
+  sectionDescription: string;
+
+  image: {
+    src: string;
+    mobileSrc: string;
+    alt: string;
+  };
+
+  stats: {
+    id: number;
+    value: string;
+    label: string;
+  }[];
+};
+
+
+export default function InvestmentSection({data}:{data:InvestmentAppealData}) {
+  const total = data.stats.length;
   const { ref, parallaxY } = useParallax(15);
   const [innerIndices, setInnerIndices] = useState<Set<number>>(new Set());
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
@@ -43,11 +61,11 @@ export default function InvestmentSection() {
       {/* Top white header */}
       <div className="container text-center pt-[70px] lg:pt-120 3xl:pt-160">
         <SectionHeading
-          title={investmentAppealData.sectionTitle}
+          title={data.sectionTitle}
           className="uppercase mb-20"
         />
         <SectionDescription
-          text={investmentAppealData.sectionDescription}
+          text={data.sectionDescription}
           className="max-w-[754px] mx-auto mb-50 text-foreground-light whitespace-pre-line"
         />
       </div>
@@ -57,7 +75,7 @@ export default function InvestmentSection() {
         {/* Full-width image */}
         <div ref={ref} className="relative w-full h-full overflow-hidden">
           <Image
-            src={investmentAppealData.image.src}
+            src={data.image.src}
             alt="bg-image-investment"
             fill
             className="object-cover"
@@ -107,7 +125,7 @@ export default function InvestmentSection() {
                 1560: { slidesPerView: 5 },
               }}
             >
-              {investmentAppealData.stats.map((stat, index) => {
+              {data.stats.map((stat, index) => {
                 const showLine = innerIndices.has(index);
 
                 return (
@@ -156,7 +174,7 @@ export default function InvestmentSection() {
             </Swiper>
             {showPagination && (
               <div className="flex justify-center mt-[30px] md:mt-50 gap-[10px]">
-                {investmentAppealData.stats.map((_, i) => (
+                {data.stats.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => swiper?.slideToLoop(i)}

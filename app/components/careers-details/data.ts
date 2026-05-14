@@ -1,6 +1,28 @@
 import { desc } from "framer-motion/client";
 import { BlogCategory } from "../blogs/data";
 
+export type CareerDetailsResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string | null;
+    job_title: string;
+    job_overview: string | null;
+    job_location: string;
+    job_caption: string;
+    job_brief: string;
+    job_responsibility: string | null;
+    job_qualification: string | null;
+    job_id: string;
+    job_category: string;
+    job_type: string;
+    department: string;
+  };
+};
+
 export interface BlogDetail {
   id: number;
   title: string;

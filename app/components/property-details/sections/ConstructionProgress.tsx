@@ -329,6 +329,23 @@ interface CircularProgressProps {
   animationDelay?: number;
 }
 
+interface Props {
+  title:string;
+      description:string;
+      estimated_completion:string;
+      percent_overall:number;
+      percent1:number;
+      percent1_label:string;
+      percent2:number;
+      percent2_label:string;
+      percent3:number;
+      percent3_label:string;
+      percent4:number;
+      percent4_label:string;
+      construction_button_text:string;
+      construction_button_url:string;
+}
+
 function CircularProgress({
   percentage,
   size = 100,
@@ -404,7 +421,22 @@ function CircularProgress({
   );
 }
 
-export default function WynwoodProgress() {
+export default function WynwoodProgress({
+      title,
+      description,
+      estimated_completion,
+      percent_overall,
+      percent1,
+      percent1_label,
+      percent2,
+      percent2_label,
+      percent3,
+      percent3_label,
+      percent4,
+      percent4_label,
+      construction_button_text,
+      construction_button_url
+}:Props) {
   const [circleSize, setCircleSize] = useState(203);
   const [strokeWidth, setStrokeWidth] = useState(15);
   const lineRef = useRef(null);
@@ -412,16 +444,15 @@ export default function WynwoodProgress() {
   const { ref, parallaxY } = useParallax(10);
 
   const stats = [
-    { percentage: 92, label: "Sub-Structure" },
-    { percentage: 45, label: "Sub-Structure" },
-    { percentage: 1, label: "MEP Works" },
-    { percentage: 0, label: "Finishing Works" },
+    { percentage: percent1, label: percent1_label },
+    { percentage: percent2, label: percent2_label },
+    { percentage: percent3, label: percent3_label },
+    { percentage: percent4, label: percent4_label },
   ];
 
   const statsData = {
-    title: "construction progress",
-    description:
-      "As the project progresses, significant milestones are reached, showcasing our team's dedication and expertise. We are steadily moving closer to our completion goal, ensuring quality and safety at every step.",
+    title,
+    description
   };
 
 function useWindowSize() {
@@ -505,7 +536,7 @@ const circleStroke = isMobile ? 5  : 7.5;
                 className="flex-shrink-0"
               >
                 <CircularProgress
-                  percentage={19}
+                  percentage={percent_overall}
                   size={circleSize}
                   strokeWidth={strokeWidth}
                   label="overall"
@@ -526,7 +557,7 @@ const circleStroke = isMobile ? 5  : 7.5;
                   <br />
                   Completion Date
                 </p>
-                <p className="text-heading text-black leading-[1.4]">Q4 - 2026</p>
+                <p className="text-heading text-black leading-[1.4]">{estimated_completion}</p>
               </motion.div>
             </div>
 
@@ -587,10 +618,10 @@ const circleStroke = isMobile ? 5  : 7.5;
               viewport={{ once: true }}
               className="mt-[10px]"
             >
-              <Link href={`/construction-progress-listing/sunset-bay-5-by-imtiaz`}>
+              <Link href={construction_button_url}>
                 <CustomOutlineButton
                   className="w-fit  mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] "
-                  text="Construction updates"
+                  text={construction_button_text}
                   borderColor="border-primary"
                   textColor="text-primary"
                   variant="dark"

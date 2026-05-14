@@ -10,6 +10,7 @@ import { useScrollFadeUp } from "../../../hooks/useScrollFadeUp";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import { OtherCommunity } from "../data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,37 +33,18 @@ function useBreakpoint() {
   return bp;
 }
 
-const slides: Slide[] = [
-  {
-    id: 2,
-    image: "/images/community-listing/slide2.jpg",
-    title: "DUBAI LAND RESIDENCE COMPLEX",
-    featured: true,
-    url:"1"
-  },
-  {
-    id: 1,
-    image: "/images/community-listing/slide1.jpg",
-    title: "DUBAI ISLANDS",
-    featured: false,
-    url:"2"
-  },
-  {
-    id: 3,
-    image: "/images/community-listing/slide3.jpg",
-    title: "JUMEIRAH GARDEN CITY",
-    featured: false,
-    url:"3"
-  },
-];
+
+type PanelPos = "left" | "center" | "right";
+
+export default function CommunitySlider({data,title}:{title:string,data:OtherCommunity[]}) {
+
+  const slides = data
 
 const TOTAL = slides.length;
 function mod(n: number, m: number) {
   return ((n % m) + m) % m;
 }
-type PanelPos = "left" | "center" | "right";
 
-export default function CommunitySlider() {
   const [active, setActive] = useState(0);
   const [hovered, setHovered] = useState<PanelPos | null>(null);
   const bp = useBreakpoint();
@@ -232,7 +214,7 @@ export default function CommunitySlider() {
       <div className="container flex flex-col justify-center">
         <div className="text-center">
           <SectionHeading
-            title="OUR OTHER COMMUNITIES"
+            title={title}
             className="text-heading mb-20"
           />
 
@@ -260,7 +242,7 @@ export default function CommunitySlider() {
           <div className="flex flex-col gap-6">
             {slides.map((slide, i) => (
               <div
-                key={slide.id}
+                key={i}
                 ref={(el) => {
                   cardRefs.current[i] = el;
                 }}
@@ -275,8 +257,8 @@ export default function CommunitySlider() {
                   style={{ opacity: 0 }}
                 >
                   <Image
-                    src={slide.image}
-                    alt={slide.title}
+                    src={slide.featured_image_desktop}
+                    alt={slide.featured_image_alt}
                     fill
                     className="object-cover"
                   />
@@ -303,7 +285,7 @@ export default function CommunitySlider() {
                     }}
                     style={{ opacity: 0 }}
                   >  
-                       <Link href={`${slide.url}`}  >
+                       <Link href={`${slide.slug}`}  >
                       <CustomOutlineButton
                       className="px-[30px] py-2 h-[44px] md:h-[50px]  xl:h-[66px]"
                       text="View Community"
@@ -356,8 +338,8 @@ export default function CommunitySlider() {
                   className={` relative h-full overflow-hidden ${pos !== "center" ? "cursor-pointer" : "cursor-default"}`}
                 >
                   <Image
-                    src={slide.image}
-                    alt={slide.title}
+                    src={slide.featured_image_desktop}
+                    alt={slide.featured_image_alt}
                     fill
                     className={`object-cover transition-transform duration-700 ease-in-out ${active_ ? "scale-105" : "scale-100"}`}
                   />
@@ -369,9 +351,9 @@ export default function CommunitySlider() {
                     className={`absolute inset-0 bg-[linear-gradient(180deg,rgb(0_0_0/25%)_35.92%,#00000000_100%),linear-gradient(0deg,rgb(0_0_0/95%),rgba(0,0,0,0.5))] transition-opacity duration-500 ${active_ ? "opacity-100" : "opacity-0"}`}
                   />
 
-                  {slide.featured && !active_ && (
+                  {/* {slide.featured && !active_ && (
                     <div className="absolute inset-0 bg-black/40 transition-all duration-500" />
-                  )}
+                  )} */}
 
                   <div
                     className={`absolute left-0 right-0 px-6 bottom-6 text-center transition-all duration-500 ${active_ ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"}`}
@@ -390,7 +372,7 @@ export default function CommunitySlider() {
                       {slide.title}
                     </h2>
                     <div>
-                       <Link href={`${slide.url}`}  >
+                       <Link href={`${slide.slug}`}  >
                       <CustomOutlineButton
                         className="2xl:!px-[41px] 2xl:!py-[22.5px]"
                         text="View Community"

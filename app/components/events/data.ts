@@ -1,3 +1,34 @@
+export interface EventListingItem {
+  slug: string;
+  title: string;
+  description: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  post_date: string;
+  event_location: string;
+  category_name: string;
+}
+
+export interface EventListingData {
+  meta_title: string;
+  meta_description: string | null;
+  page_banner_title: string;
+  page_banner_caption: string;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+  listing: EventListingItem[];
+}
+
+export interface EventListingResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: EventListingData;
+}
+
+
 export const bannerData = {
     image: "/images/events/banner.jpg",
     title: "Events",

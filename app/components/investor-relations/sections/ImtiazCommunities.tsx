@@ -17,14 +17,17 @@ import { cubicBezier } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "../../animations/RevealOneByOneAnimation";
-import { communityNamesData } from "../data";
+import { communityNamesData, InvestorRelationsPageResponse } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroFeatureSlider() {
-  const { heading, communities = [] } = communityNamesData;
+export default function HeroFeatureSlider({data,title}:{title:string,data:InvestorRelationsPageResponse['data']['communities']}) {
+  // const { heading, communities = [] } = communityNamesData;
+
+  const heading = title;
+  const communities = data
 
   const initialActive = communities?.[1] ? 1 : 0;
 
@@ -33,7 +36,7 @@ export default function HeroFeatureSlider() {
 
   /* Background fade logic */
   const [bgBase, setBgBase] = useState<string | null>(
-    communities?.[initialActive]?.bgImage ?? communities?.[0]?.bgImage ?? null,
+    communities?.[initialActive]?.featured_image_desktop ?? communities?.[0]?.featured_image_desktop ?? null,
   );
   const [prevBg, setPrevBg] = useState<string | null>(null);
 
@@ -119,7 +122,7 @@ export default function HeroFeatureSlider() {
 
   const handleMouseLeave = () => {
     const current = communities[activeFeat] ?? communities[0];
-    if (current?.bgImage) switchBg(current.bgImage);
+    if (current?.featured_image_desktop) switchBg(current.featured_image_desktop);
   };
 
   useEffect(() => {
@@ -268,7 +271,7 @@ export default function HeroFeatureSlider() {
           onSlideChange={(s) => {
             const idx = s.realIndex;
             setActiveFeat(idx);
-            switchBg(communities[idx]?.bgImage);
+            switchBg(communities[idx]?.featured_image_desktop);
           }}
           className="w-full"
         >
@@ -276,14 +279,14 @@ export default function HeroFeatureSlider() {
             const active = activeFeat === i;
 
             return (
-              <SwiperSlide key={c.id}>
-                <Reveal key={c.id} variants={moveUpV2}>
+              <SwiperSlide key={i}>
+                <Reveal key={i} variants={moveUpV2}>
                   <div className="relative flex flex-1 ">
                     <div
                       className="relative flex-1 min-h-[360px] md:min-h-[420px] 3xl:h-[500px] flex justify-center items-end px-4 cursor-pointer"
                       onMouseEnter={() => {
                         setActiveFeat(i);
-                        switchBg(c.bgImage);
+                        switchBg(c.featured_image_desktop);
                       }}
                     >
                       <div
@@ -310,7 +313,7 @@ export default function HeroFeatureSlider() {
                             }}
                             className="text-white font-[optima] uppercase text-center text-[25px] leading-[1.4] px-4"
                           >
-                            {c.name}
+                            {c.title}
                           </motion.h3>
 
                           {/* Button wrapper — remove the instant class swap, use opacity+y only */}
@@ -338,7 +341,7 @@ export default function HeroFeatureSlider() {
                               }}
                             >
                               <Link
-                                href={`/properties/${c.name.toLowerCase().replace(/\s+/g, "-")}`}
+                                href={`/communities/${c.title.toLowerCase().replace(/\s+/g, "-")}`}
                               >
                                 <CustomOutlineButton
                                   text="Read More"

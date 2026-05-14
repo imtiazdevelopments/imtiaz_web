@@ -130,12 +130,9 @@ type EverythingWithinData = {
   title: string;
   description: string;
   cards: {
-    id: number;
-    icon: string;
-    label: string;
-    minutes: string;
-    iconWidth?: number;
-    iconHeight?: number;
+    title:string;
+    caption:string;
+    icon_url:string;
   }[];
 };
 
@@ -187,7 +184,7 @@ export default function IconGrid({ data, bgClass }: Props) {
         >
           {data.cards.map((loc, i) => (
             <div
-              key={loc.id}
+              key={i}
               className="location-card relative flex flex-col items-center justify-start pb-20 pt-20 first:pt-0 last:pb-0 md:px-4 sm:px-8 text-center"
             >
               {/* Desktop divider */}
@@ -237,22 +234,22 @@ export default function IconGrid({ data, bgClass }: Props) {
               {/* Icon */}
               <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] lg:w-[70px] mb-20 lg:h-[70px] xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center bg-primary/5">
                 <Image
-                  src={loc.icon}
-                  alt={loc.label}
-                  width={isXL ? loc.iconWidth : 20}
-                  height={isXL ? loc.iconWidth : 20}
+                  src={loc.icon_url}
+                  alt={loc.caption}
+                  width={isXL ? 34 : 20}
+                  height={isXL ? 34 : 20}
                 />
               </div>
 
               {/* Label */}
               <p
                 className="text-foreground font-[optima] text-25 leading-[1.4] uppercase mb-2"
-                dangerouslySetInnerHTML={{ __html: loc.label }}
+                dangerouslySetInnerHTML={{ __html: loc.title }}
               />
 
               {/* Minutes */}
               <p className="text-description text-foreground-light">
-                {loc.minutes}
+                {loc.caption}
               </p>
             </div>
           ))}

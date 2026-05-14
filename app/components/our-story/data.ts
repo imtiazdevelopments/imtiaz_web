@@ -1,3 +1,85 @@
+export type AboutPageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string;
+
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_banner_alt: string;
+
+    vision_title1: string;
+    vision_brief: string;
+    vision_title2: string;
+    vision_caption2: string;
+    vision_title3: string;
+    vision_caption3: string;
+    vision_image_desktop: string;
+    vision_image_mobile: string;
+    vision_image_alt: string;
+
+    chairman_title: string;
+    chairman_caption: string;
+    chairman_brief: string;
+    chairman_name: string;
+    chairman_profile: string;
+    chairman_image_desktop: string;
+    chairman_image_mobile: string;
+    chairman_image_alt: string;
+
+    ceo_title: string;
+    ceo_caption: string;
+    ceo_brief: string;
+    ceo_name: string;
+    ceo_profile: string;
+    ceo_image_desktop: string;
+    ceo_image_mobile: string;
+    ceo_image_alt: string;
+
+    philosophy_title: string;
+    philosophy_caption: string;
+
+    history_title: string;
+    history_caption: string;
+
+    medal_title: string;
+    medal_brief: string;
+    medal_image_desktop: string;
+    medal_image_mobile: string;
+    medal_image_alt: string;
+
+    expertise_title: string;
+    expertise_caption: string;
+    expertise_button_text: string | null;
+    expertise_button_url: string | null;
+
+    show_vision_section: string;
+    show_chairman_section: string;
+    show_ceo_section: string;
+    show_philosophy_section: string;
+    show_history_section: string;
+    show_medal_section: string;
+    show_expertise_section: string;
+    show_extras_section: string;
+
+    listing: {
+      extra_title: string;
+      extra_caption: string;
+      extra_button_text: string;
+      extra_button_url: string;
+      extra_image_desktop: string;
+      extra_image_mobile: string;
+      extra_image_alt: string;
+    }[];
+  };
+};
+
+
 export const bannerData = {
   title: "Our Story",
   description:

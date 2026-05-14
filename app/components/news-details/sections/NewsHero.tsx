@@ -3,7 +3,7 @@
 import Image from "next/image";
   import { useState, useEffect } from "react";
 import Breadcrumb from "../../common/Breadcrumb";
-import { NewsDetail } from "../data";
+import { NewsDetail, NewsDetailResponse } from "../data";
 import { GoShareAndroid } from "react-icons/go";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import { moveDown, moveUp } from "../../motionVariants";
 import { useParallax } from "@/app/hooks/useParallax";
 
 interface Props {
-  news: NewsDetail;
+  news: NewsDetailResponse['data'];
 }
 
 const NewsHero = ({ news }: Props) => {
@@ -43,7 +43,7 @@ const NewsHero = ({ news }: Props) => {
 
         {/* Title */}
         <SectionHeading
-          title={news.title}
+          title={news.page_banner_title}
           className="max-w-[50ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 
@@ -57,13 +57,13 @@ const NewsHero = ({ news }: Props) => {
             className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-[14px] md:text-16"
           >
             <div>
-              <span>{news.category}</span>
+              {/* <span>{news.category}</span> */}
               <span> - </span>
-              <span>{news.date}</span>
+              <span>{news.post_date}</span>
             </div>
             <span>|</span>
             <div>
-              <span>Reading Time: {news.readingTime}</span>
+              <span>Reading Time: </span>
             </div>
           </motion.div>
 
@@ -85,8 +85,8 @@ const NewsHero = ({ news }: Props) => {
           className="w-full h-[352px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-5 md:mt-50 relative overflow-hidden"
         >
           <Image
-            src={news.image}
-            alt={news.title}
+            src={news.page_banner_desktop}
+            alt={news.page_banner_title}
             fill
             priority
             sizes="100vw"

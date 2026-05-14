@@ -1,3 +1,96 @@
+export type InvestorRelationsPageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+
+  data: {
+    meta_title: string;
+    meta_description: string;
+
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_banner_alt: string;
+
+    reason_title: string;
+    reason_brief: string;
+
+    appeal_title: string;
+    appeal_brief: string;
+    appeal_image_desktop: string;
+    appeal_image_mobile: string;
+    appeal_image_alt: string;
+
+    highlight_title_1: string;
+    highlight_caption_1: string;
+
+    highlight_title_2: string;
+    highlight_caption_2: string;
+
+    highlight_title_3: string;
+    highlight_caption_3: string;
+
+    highlight_title_4: string;
+    highlight_caption_4: string;
+
+    highlight_title_5: string;
+    highlight_caption_5: string;
+
+    communities_title: string;
+    properties_title: string;
+
+    faq_title: string;
+    faq_caption: string;
+
+    show_reasons_section: string;
+    show_appeal_section: string;
+    show_communities_section: string;
+    show_properties_section: string;
+    show_faq_section: string;
+
+    reasons: {
+      reason_title: string;
+      reason_caption: string;
+      icon_url: string;
+    }[];
+
+    faqs: {
+      faq_question: string;
+      faq_answer: string;
+    }[];
+
+    communities: {
+      slug: string;
+      title: string;
+      featured_image_desktop: string;
+      featured_image_mobile: string;
+      featured_image_alt: string | null;
+    }[];
+
+    properties: {
+      slug: string;
+      brand_logo: string;
+      title: string;
+      featured_image_desktop: string;
+      featured_image_mobile: string;
+      featured_image_alt: string;
+
+      icon1_url: string;
+      icon1_text: string;
+
+      icon2_url: string;
+      icon2_text: string;
+
+      property_caption: string;
+      property_type: string;
+      property_status: string;
+    }[];
+  };
+};
+
+
 export const bannerData = {
   title: "Investor Relations",
   description:

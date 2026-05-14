@@ -144,7 +144,7 @@ export default function PropertyCard({
             text="View Property"
             px="py-[16px] px-[29.4px] sm:px-[20px] lg:px-[25px] 2xl:px-[30px] 3xl:px-10 "
             borderColor="border-primary-2"
-            textColor="text-foreground-light"
+            textColor="text-primary-2"
             variant="dark"
           />
         </Link>

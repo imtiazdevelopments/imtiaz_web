@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { investReasonsData } from "../data";
+// import { investReasonsData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,13 +13,26 @@ import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
 
+type InvestReasonsData = {
+  sectionTitle: string;
+
+  sectionDescription: string;
+
+  reasons: {
+    id: number;
+    icon: string;
+    title: string;
+    description: string;
+  }[];
+};
+
 const LINE_GRADIENT_H =
   "linear-gradient(90deg, rgba(73,9,5,0) 0%, #490905 50%, rgba(73,9,5,0) 100%)";
 const LINE_GRADIENT_V =
   "linear-gradient(180deg, rgba(73,9,5,0) 0%, #490905 50%, rgba(73,9,5,0) 100%)";
 
-export default function Reasons() {
-  const { sectionTitle, sectionDescription, reasons } = investReasonsData;
+export default function Reasons({data}:{data:InvestReasonsData}) {
+  const { sectionTitle, sectionDescription, reasons } = data;
   const [activeIndex, setActiveIndex] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const swiperRef = useRef<SwiperType | null>(null);

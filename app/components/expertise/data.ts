@@ -1,3 +1,45 @@
+export type ExpertisePageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+
+  data: {
+    meta_title: string;
+    meta_description: string;
+
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_banner_alt: string;
+
+    reason_title: string;
+    reason_brief: string;
+
+    faq_title: string;
+    faq_caption: string;
+
+    show_expertise_section: string;
+    show_faq_section: string;
+
+    expertises: {
+      title: string;
+      caption: string | null;
+      brief: string;
+      featured_image_desktop: string;
+      featured_image_mobile: string;
+      featured_image_alt: string | null;
+    }[];
+
+    faqs: {
+      faq_question: string;
+      faq_answer: string;
+    }[];
+  };
+};
+
+
 export const bannerData = {
   title: "Expertise",
   description:

@@ -2,19 +2,19 @@
 
 import Image from "next/image";
 import Breadcrumb from "../../common/Breadcrumb";
-import { EventDetail } from "../data";
+import { EventDetail, EventDetailData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveDown, moveUp } from "../../motionVariants";
 import { useParallax } from "@/app/hooks/useParallax";
 
 interface Props {
-  event: EventDetail;
+  event: EventDetailData;
 }
 
 const EventHero = ({ event }: Props) => {
   const { ref, parallaxY } = useParallax(15);
-  const formattedDate = event.date.replace(/-/g, " - ");
+  const formattedDate = event.post_date?.replace(/-/g, " - ");
 
   return (
     <section className="w-full pt-[174px] md:pt-200" data-header="dark">
@@ -31,7 +31,7 @@ const EventHero = ({ event }: Props) => {
 
         {/* Title */}
         <SectionHeading
-          title={event.title}
+          title={event.page_banner_title}
           className="max-w-[50ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 
@@ -41,8 +41,8 @@ const EventHero = ({ event }: Props) => {
           className="w-full h-[300px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-[40px] md:mt-50 relative overflow-hidden"
         >
           <Image
-            src={event.heroImage}
-            alt={event.title}
+            src={event.page_banner_desktop}
+            alt={event.page_banner_title}
             fill
             priority
             sizes="100vw"
@@ -130,7 +130,7 @@ const EventHero = ({ event }: Props) => {
                   </span>
                 </div>
                 <span className="text-white/80 text-description leading-[1.54]">
-                  {event.location}
+                  {event.event_location}
                 </span>
               </motion.div>
             </div>

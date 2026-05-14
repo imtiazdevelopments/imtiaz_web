@@ -1,3 +1,23 @@
+export interface EventDetailData {
+  meta_title: string;
+  meta_description: string | null;
+  page_banner_title: string;
+  post_date: string | null;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+  description: string;
+  event_location: string | null;
+  related_events: any[] | null;
+}
+
+export interface EventDetailResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: EventDetailData;
+}
+
 export interface EventDetail {
   id: number;
   title: string;

@@ -3,13 +3,14 @@
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
-  eventItems,
-  eventCategories,
+  // eventItems,
+  // eventCategories,
   eventYears,
   eventMonths,
   EventCategory,
   EventYear,
   EventMonth,
+  EventListingData,
 } from "../data";
 import Pagination from "../../common/Pagination";
 import FilterDropdown from "../../common/FilterDropdown";
@@ -65,7 +66,7 @@ const EmptyState = () => (
 );
 
 // ── EventsSection ────────────────────────────────────────────────────────────
-const EventsSection = () => {
+const EventsSection = ({data}:{data:EventListingData}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -86,6 +87,32 @@ const EventsSection = () => {
   const selectedMonth = (searchParams.get("month") as EventMonth) || "";
   const currentPage = Number(searchParams.get("page") || "1");
   const { scrollTo, lock, unlock } = useLenis();
+
+  const eventItems = useMemo(() => {
+  return (data?.listing || []).map((item: any, index: number) => ({
+    id: index + 1,
+    title: item.title,
+    image: item.featured_image_desktop,
+    category: item.category_name,
+    date: item.post_date
+      ? item.post_date.split("-").reverse().join("-") // 05-05-2026 -> 2026-05-05
+      : "",
+    slug: item.slug,
+    description: item.description,
+    mobileImage: item.featured_image_mobile,
+    alt: item.featured_image_alt,
+  }));
+}, [data]);
+
+const eventCategories = useMemo(() => {
+  return [
+    ...new Set(
+      eventItems
+        .map((item) => item.category)
+        .filter(Boolean),
+    ),
+  ];
+}, [eventItems]);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParamsRef.current.toString());

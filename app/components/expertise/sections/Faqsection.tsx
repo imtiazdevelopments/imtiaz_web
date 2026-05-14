@@ -1,11 +1,22 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { faqData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUpV2 } from "../../motionVariants";
+
+type FAQData = {
+  title: string;
+
+  subtitle: string;
+
+  items: {
+    id: string;
+    question: string;
+    answer: string;
+  }[];
+};
 
 function AccordionItem({
   item,
@@ -13,7 +24,7 @@ function AccordionItem({
   onToggle,
   isLast,
 }: {
-  item: (typeof faqData.items)[0];
+  item: FAQData['items'][0];
   isOpen: boolean;
   onToggle: () => void;
   isLast: boolean;
@@ -99,8 +110,8 @@ function AccordionItem({
   );
 }
 
-export default function Faq() {
-  const [openId, setOpenId] = useState<string | null>(faqData.items[0].id);
+export default function Faq({data}:{data:FAQData}) {
+  const [openId, setOpenId] = useState<string | null>(data.items[0].id);
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -114,20 +125,20 @@ export default function Faq() {
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[20px] md:mb-[10px]">
-          <SectionHeading title={faqData.title} className="mb-20 text-foreground" />
-          <SectionDescription text={faqData.subtitle} className="shrink-0 max-w-[407px] text-foreground-light text-[14px] md:text-16 leading-[1.7]" />
+          <SectionHeading title={data.title} className="mb-20 text-foreground" />
+          <SectionDescription text={data.subtitle} className="shrink-0 max-w-[407px] text-foreground-light text-[14px] md:text-16 leading-[1.7]" />
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
-          {faqData.items.map((item, index) => (
+          {data.items.map((item, index) => (
             <Reveal variants={moveUpV2} key={item.id} >
 
             <AccordionItem
               item={item}
               isOpen={openId === item.id}
               onToggle={() => toggle(item.id)}
-              isLast={index === faqData.items.length - 1}
+              isLast={index === data.items.length - 1}
               />
               </Reveal>
           ))}

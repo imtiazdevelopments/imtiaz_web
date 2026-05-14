@@ -5,8 +5,15 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { useScrollFadeUp } from "../../../hooks/useScrollFadeUp";
 import Link from "next/link";
-const MeydanHorizon = () => {
-  const { title, description, subtitle } = communitySectionData;
+
+type Props = {
+  title:string;
+  description:string;
+  subTitle:string;
+}
+
+const MeydanHorizon = ({title,description,subTitle}:Props) => {
+  // const { title, description, subtitle } = communitySectionData;
   const desktopBtnRef = useScrollFadeUp({
     y: 40,
     duration: 0.7,
@@ -25,7 +32,7 @@ const MeydanHorizon = () => {
           />
 
           <SectionDescription
-            text={subtitle}
+            text={subTitle}
             className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
           />
           <SectionDescription

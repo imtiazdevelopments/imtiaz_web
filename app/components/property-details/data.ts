@@ -1,3 +1,137 @@
+export interface PropertyDetailsResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: PropertyDetailsData;
+}
+
+export interface PropertyDetailsData {
+  meta_title: string;
+  meta_description: string | null;
+
+  page_banner_title: string;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+
+  brochure: string;
+  fact_sheet: string;
+  unit_layout: string;
+
+  location: string;
+  payment_plan: string;
+  starting_price: string;
+  delivery_date: string;
+
+  basic_title: string;
+  basic_brief: string;
+
+  construction_title: string;
+  construction_brief: string;
+  estimated_completion: string;
+
+  percent_overall: number;
+
+  percent1: number;
+  percent1_label: string;
+
+  percent2: number;
+  percent2_label: string;
+
+  percent3: number;
+  percent3_label: string;
+
+  percent4: number;
+  percent4_label: string;
+
+  construction_button_text: string;
+  construction_button_url: string;
+
+  reach_title: string;
+  reach_caption: string;
+
+  amenities_title: string;
+  amenities_brief: string;
+
+  map: string | null;
+
+  faq_title: string;
+  faq_caption: string;
+
+  unit_layout_title: string;
+
+  community_name: string;
+  community_basic_title: string;
+  community_basic_brief: string;
+
+  show_basic_section: "true" | "false";
+  show_construction_section: "true" | "false";
+  show_reach_section: "true" | "false";
+  show_gallery_section: "true" | "false";
+  show_amenities_section: "true" | "false";
+  show_unitlayout_section: "true" | "false";
+  show_communities_section: "true" | "false";
+  show_faq_section: "true" | "false";
+  show_similar_property_section: "true" | "false";
+
+  reach: ReachItem[];
+  gallery: GalleryItem[];
+  amenities: AmenityItem[];
+  unit_layouts: UnitLayoutItem[];
+
+  similar_properties: SimilarProperty[] | null;
+
+  faq: FAQItem[];
+}
+
+export interface ReachItem {
+  title: string;
+  caption: string;
+  icon_url: string;
+}
+
+export interface GalleryItem {
+  caption: string;
+  image_url: string;
+}
+
+export interface AmenityItem {
+  title: string;
+  icon_url: string;
+}
+
+export interface UnitLayoutItem {
+  title: string;
+  units: string;
+  total_area: string;
+  brand_logo: string;
+  image_url: string;
+}
+
+export interface SimilarProperty {
+  slug: string;
+  brand_logo: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+
+  icon1_url: string;
+  icon1_text: string;
+
+  icon2_url: string;
+  icon2_text: string;
+
+  property_name: string;
+  property_caption: string;
+  property_status: string;
+}
+
+export interface FAQItem {
+  title: string;
+  caption: string;
+}
+
+
 export const bannerData = {
     image: "/images/projects/banner.jpg",
     title: "",

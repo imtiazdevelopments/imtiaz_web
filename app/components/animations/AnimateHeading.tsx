@@ -18,7 +18,7 @@ export function AnimatedHeading({
 }: AnimatedHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null);
   const isSingleWordBlade =
-    mode === "blade" && title.trim().split(" ").length === 1;
+    mode === "blade" && title?.trim().split(" ").length === 1;
 
   useEffect(() => {
     const el = ref.current;
@@ -112,11 +112,11 @@ export function AnimatedHeading({
     return () => ctx.revert();
   }, [title, mode, delay, isSingleWordBlade]);
 
-  const words = title.split(" ");
+  const words = title?.split(" ");
 
   return (
     <h1 ref={ref} className={`text-heading ${className}`}>
-      {words.map((word, wi) => (
+      {words?.map((word, wi) => (
         <span
           key={wi}
           className="ah-word-wrap"

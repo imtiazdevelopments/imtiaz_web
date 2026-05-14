@@ -8,19 +8,32 @@ import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
 
-export default function VisionSection() {
-  const { title, description, bgImage, bgImageMobile, stats } = visionSectionData;
+type VisionSectionData = {
+  title: string;
+  description: string;
+  bgImage: string;
+  bgImageMobile: string;
+  alt: string;
+
+  stats: {
+    value: string;
+    label: string;
+  }[];
+};
+
+export default function VisionSection({data}:{data:VisionSectionData}) {
+  // const { title, description, bgImage, bgImageMobile, stats } = visionSectionData;
 
   return (
     <section data-header="dark" className="make   ">
       <div className="pt-[70px] pb-[40px] md:hidden">
         <div className="container text-center">
           <SectionHeading
-            title={title}
+            title={data.title}
             className="uppercase text-foreground mb-20"
           />
           <SectionDescription
-            text={description}
+            text={data.description}
             className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
           />
         </div>
@@ -29,8 +42,8 @@ export default function VisionSection() {
         {/* Background Image */}
         <div className="hidden sm:block absolute inset-0 overflow-hidden">
           <Image
-            src={bgImage}
-            alt={title}
+            src={data.bgImage}
+            alt={data.title}
             width={1920}
             height={942}
             priority
@@ -40,8 +53,8 @@ export default function VisionSection() {
 
         <div className="sm:hidden absolute inset-0 overflow-hidden">
           <Image
-            src={bgImageMobile}
-            alt={title}
+            src={data.bgImageMobile}
+            alt={data.title}
             width={520}
             height={442}
             priority
@@ -64,11 +77,11 @@ export default function VisionSection() {
           <div className="hidden md:block md:-mt-10 lg:-mt-8 2xl:-mt-5">
             <div>
               <SectionHeading
-                title={title}
+                title={data.title}
                 className="uppercase text-foreground mb-20"
               />
               <SectionDescription
-                text={description}
+                text={data.description}
                 className="max-w-[870px] mx-auto text-foreground-light whitespace-pre-line"
               />
             </div>
@@ -76,7 +89,7 @@ export default function VisionSection() {
 
           {/* Stats */}
           <div className="flex justify-center items-stretch absolute bottom-0 md:relative">
-            {stats.map((item, index) => (
+            {data.stats.map((item, index) => (
               <Reveal variants={moveUpV2} key={index}>
                 <div className="flex items-stretch">
                   {/* Column */}
@@ -96,7 +109,7 @@ export default function VisionSection() {
                   </div>
 
                   {/* Separator */}
-                  {index !== stats.length - 1 && (
+                  {index !== data.stats.length - 1 && (
                     <div
                       className="w-px self-stretch"
                       style={{

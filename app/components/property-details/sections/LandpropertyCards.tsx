@@ -13,8 +13,9 @@ import Reveal from "../../animations/RevealOneByOneAnimation";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
+import { PropertiesPageData } from "../../property/data";
 
-const LandpropertyCards = () => {
+const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],community:string}) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [slidesPerView, setSlidesPerView] = useState(1);
 
@@ -59,10 +60,14 @@ const LandpropertyCards = () => {
                 )
               }
             >
-              {LandpropertyData.cards.slice(-4).map((project, i) => (
+              {data.filter((item)=>item.property_community == community).slice(-4).map((project, i) => (
                 <SwiperSlide key={i}>
                   <Reveal variants={moveUpV2} delayRange={i * 0.12}>
-                    <ProjectCard {...project} />
+                    <ProjectCard 
+                    id={i.toString()}
+                    image={project.featured_image_desktop}
+                    hoverImage={project.brand_logo}
+                    {...project} />
                   </Reveal>
                 </SwiperSlide>
               ))}

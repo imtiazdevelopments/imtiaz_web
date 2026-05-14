@@ -6,7 +6,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import { historyData, sectionDescription, sectionTitle } from "../data";
+import { historyData } from "../data";
 import Image from "next/image";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
@@ -32,7 +32,7 @@ interface CardData {
    HistorySection
 ═══════════════════════════════════════════════════════════════ */
 
-export default function HistorySection() {
+export default function HistorySection({title,description}:{title:string,description:string}) {
   const allCards: CardData[] = historyData.flatMap((y) => y.cards);
   const years = historyData.map((y) => y.year);
 
@@ -92,9 +92,9 @@ export default function HistorySection() {
     >
       {/* ── Header ── */}
       <div className="container mx-auto px-6 text-center mb-[90px] md:mb-150 lg:mb-50">
-        <SectionHeading title={sectionTitle} className="mb-20 uppercase" />
+        <SectionHeading title={title} className="mb-20 uppercase" />
         <SectionDescription
-          text={sectionDescription}
+          text={description}
           className="max-w-[870px] text-foreground-light mx-auto text-center"
         />
       </div>

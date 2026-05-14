@@ -9,8 +9,9 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { GalleryItem } from "../data";
 
-const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
+const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideImageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const bgImgRef = useRef<HTMLImageElement>(null);
@@ -44,7 +45,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         // Smoothly crossfade bg to previous slide image
         bgImgRef.current.style.transition = "none";
         bgImgRef.current.style.opacity = "1";
-        bgImgRef.current.src = images[prev];
+        bgImgRef.current.src = images[prev]?.image_url;
         // After swiper fade completes, fade bg out too so next slide shows cleanly
         requestAnimationFrame(() => {
           if (bgImgRef.current) {
@@ -77,7 +78,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={bgImgRef}
-            src={images[0]}
+            src={images[0].image_url}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
@@ -121,7 +122,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
                   ref={(el) => {
                     slideImageRefs.current[i] = el;
                   }}
-                  src={src}
+                  src={src.image_url}
                   alt={`Gallery image ${i + 1}`}
                   fill
                   sizes="100vw"

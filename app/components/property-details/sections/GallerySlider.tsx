@@ -13,20 +13,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import { GalleryItem } from "../data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const INTERIOR_SLIDES = [
-  { id: 1, src: "/images/projects/int1.jpg", alt: "Interior – Study Room" },
-  { id: 2, src: "/images/projects/int2.jpg", alt: "Interior – Living Room" },
-  { id: 3, src: "/images/projects/int3.jpg", alt: "Interior – Master Bedroom" },
-];
-
-const EXTERIOR_SLIDES = [
-  { id: 1, src: "/images/projects/ext1.jpg", alt: "Exterior – Building Front" },
-  { id: 2, src: "/images/projects/ext2.jpg", alt: "Exterior – Pool Deck" },
-  { id: 3, src: "/images/projects/ext3.jpg", alt: "Exterior – Garden View" },
-];
 
 type TabType = "interior" | "exterior";
 
@@ -74,7 +64,7 @@ function TabSwiper({
   swiperRef,
   parallaxY,
 }: {
-  slides: typeof INTERIOR_SLIDES;
+  slides:GalleryItem[];
   paginationRef: React.RefObject<HTMLDivElement | null>;
   swiperRef: React.MutableRefObject<SwiperType | null>;
   parallaxY: number;
@@ -108,16 +98,22 @@ function TabSwiper({
       speed={300}
       className="w-full h-full"
     >
-      {slides.map((slide) => (
-        <SwiperSlide key={slide.id} className="relative w-full h-full">
-          <SlideContent src={slide.src} alt={slide.alt} parallaxY={parallaxY} />
+      {slides.map((slide,index) => (
+        <SwiperSlide key={index} className="relative w-full h-full">
+          <SlideContent src={slide.image_url} alt={slide.caption} parallaxY={parallaxY} />
         </SwiperSlide>
       ))}
     </Swiper>
   );
 }
 
-export default function GallerySlider() {
+export default function GallerySlider({data}:{data:GalleryItem[]}) {
+
+  console.log(data)
+  const INTERIOR_SLIDES = data.filter((item)=>item.caption == "Interior")
+
+const EXTERIOR_SLIDES = data.filter((item)=>item.caption == "Exterior")
+
   const [activeTab, setActiveTab] = useState<TabType>("interior");
   const [mounted, setMounted] = useState(false);
 

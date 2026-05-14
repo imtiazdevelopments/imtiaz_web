@@ -6,8 +6,8 @@ import { SectionDescription } from "../../animations/SectionDescription";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 
-const DubaiResidence = () => {
-  const { title, description, subtitle } = communitySectionData;
+const DubaiResidence = ({title,description,subTitle}:{title:string,description:string,subTitle:string}) => {
+  // const { title, description, subtitle } = communitySectionData;
 
   return (
     <section data-header="dark" className="w-full pt-[70px]   pb-[65px]  lg:py-120 3xl:py-160">
@@ -19,7 +19,7 @@ const DubaiResidence = () => {
             className="text-heading  text-primary-2 mb-20 max-w-[666px] mx-auto"
           />
           <SectionDescription
-            text={subtitle}
+            text={subTitle}
             className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
           />
 

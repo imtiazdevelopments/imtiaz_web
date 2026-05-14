@@ -6,12 +6,40 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import FilterDropdown from "../../common/FilterDropdown";
 import CareerCard from "./CareerCard";
-import { careersData, vacanciesConfig } from "../data";
+// import { careersData, vacanciesConfig } from "../data";
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
 import Pagination from "../../common/Pagination";
 import { SearchX } from "lucide-react";
+
+type Career = {
+  id: string;
+
+  title: string;
+
+  description: string;
+
+  location: string;
+
+  jobType: string;
+
+  department: string;
+
+  slug: string;
+};
+
+type VacanciesConfig = {
+  section: {
+    title: string;
+    description: string;
+  };
+
+  filters: {
+    department: string[];
+    jobType: string[];
+  };
+};
 
 const CAREERS_PER_PAGE = 6;
 
@@ -51,7 +79,7 @@ const EmptyState = () => (
   </div>
 );
 
-export default function VacanciesSection() {
+export default function VacanciesSection({careersData, vacanciesConfig}:{careersData:Career[], vacanciesConfig:VacanciesConfig}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

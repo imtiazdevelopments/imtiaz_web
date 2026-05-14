@@ -9,8 +9,22 @@ import gsap from "gsap";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import Image from "next/image";
 
-export default function OtherPageSlider() {
-  const { slides } = otherPageSliderData;
+type OtherPageSliderData = {
+  learnMoreText: string;
+
+  slides: {
+    title: string;
+    description: string;
+    link: string;
+    bgImage: string;
+    bgImageMobile: string;
+    alt: string;
+    buttonText: string;
+  }[];
+};
+
+export default function OtherPageSlider({data}:{data:OtherPageSliderData}) {
+  const slides = data.slides
   const [current, setCurrent] = useState(0);
   const currentRef = useRef(0);
   const transitioning = useRef(false);
@@ -313,7 +327,7 @@ export default function OtherPageSlider() {
             {slides[current].description}
           </motion.p>
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
-            <Link href="/about/sustainability">
+            <Link href={slides[current].link}>
               <CustomOutlineButton
                 text="learn more"
                 className="capitalize"

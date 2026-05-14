@@ -1,3 +1,53 @@
+export type InnovationPageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+
+  data: {
+    meta_title: string;
+    meta_description: string;
+
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_banner_alt: string;
+
+    impact_title: string;
+
+    highlight_title_1: string;
+    highlight_caption_1: string;
+    highlight_image_alt_1: string;
+    highlight_image_desktop_1: string;
+    highlight_image_mobile_1: string;
+
+    highlight_title_2: string;
+    highlight_caption_2: string;
+    highlight_image_alt_2: string;
+    highlight_image_desktop_2: string;
+    highlight_image_mobile_2: string;
+
+    highlight_title_3: string;
+    highlight_caption_3: string;
+    highlight_image_alt_3: string;
+    highlight_image_desktop_3: string;
+    highlight_image_mobile_3: string;
+
+    moments_title: string;
+    spotlight_title: string;
+
+    show_reasons_section: string;
+    show_appeal_section: string;
+    show_communities_section: string;
+
+    moments: {
+      moment_caption: string;
+      moment_url: string;
+    }[];
+  };
+};
+
 export const bannerData = {
   title: "Sustainability",
   description:

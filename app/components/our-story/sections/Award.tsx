@@ -6,7 +6,14 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 
-export default function AwardSection() {
+interface Props {
+title:string;
+descriptions:string;
+bgImage:string;
+bgImagemob:string;
+}
+
+export default function AwardSection({title,descriptions,bgImage,bgImagemob}:Props) {
   return (
     <section
       data-header="dark"
@@ -15,13 +22,13 @@ export default function AwardSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src={awardData.bgImage}
+          src={bgImage}
           alt="background"
           fill
           className="object-cover object-center hidden min-[640px]:block"
         />
          <Image
-          src={awardData.bgImagemob}
+          src={bgImagemob}
           alt="background"
           fill
           className="object-cover object-center max-[640px]:block hidden"
@@ -40,7 +47,7 @@ export default function AwardSection() {
         {/* Title block — top */}
       <div className="relative z-10 flex flex-col items-center px-5 md:px-0 pt-120 3xl:pt-130 mb-250 3xl:mb-[384px]">
         <SectionHeading
-          title={awardData.title}
+          title={title}
           className="max-[640px]:font-normal max-[640px]:!text-[29px] max-w-[45ch] text-center mb-20"
         />
 
@@ -74,7 +81,7 @@ export default function AwardSection() {
             whileInView="show"
             viewport={{ once: true }}
             className="award-description awd mx-auto max-w-[1301px] font-[avenirBook] text-16 leading-[1.54375] text-white/95 lg:text-white/70"
-            dangerouslySetInnerHTML={{ __html: awardData.descriptions }}
+            dangerouslySetInnerHTML={{ __html: descriptions }}
           />
         </div>
       </div>

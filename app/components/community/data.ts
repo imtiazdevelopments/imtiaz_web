@@ -15,6 +15,15 @@ export interface CommunityCard {
   image: string;
   tags: CommunityTag[];
   href: string;
+  icon1_url:string;
+  icon2_url:string;
+  icon3_url:string;
+  icon1_text:string;
+  icon2_text:string;
+  icon3_text:string;
+  featured_image_desktop:string;
+  featured_image_alt:string;
+  slug:string;
 }
 
 export const communitySectionData = {

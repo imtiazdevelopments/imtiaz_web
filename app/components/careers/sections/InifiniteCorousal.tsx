@@ -51,8 +51,8 @@ function getCardHeight(index: number, cardWidth: number): number {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function InfiniteCarousel() {
-  const carouselImages = whatToExpectData.carousalImages;
+export default function InfiniteCarousel({data}:{data:{src:string,alt:string}[]}) {
+  const carouselImages = data;
   const displayImages  = [...carouselImages, ...carouselImages];
 
   const trackRef      = useRef<HTMLDivElement>(null);

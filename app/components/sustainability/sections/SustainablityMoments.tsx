@@ -12,26 +12,24 @@ import { SectionDescription } from "../../animations/SectionDescription";
 
 type ColumnData = {
   title: string;
-  description: string;
-  images: { src: string; alt: string }[][];
 };
 
 const columnData: ColumnData = {
   title: "Moments of Sustainability",
-  description:
-    "Explore how thoughtful planning and green solutions come together to build spaces that care for both people and the planet. Discover projects built on sustainable principles that create value \n today while protecting tomorrow.",
-  images: [
-    [
-      { src: "/images/sustainability/img1.jpg", alt: "Property 1" },
-      { src: "/images/sustainability/img2.jpg", alt: "Property 2" },
-      { src: "/images/sustainability/img3.jpg", alt: "Property 3" },
-      { src: "/images/sustainability/img4.jpg", alt: "Property 4" },
-      { src: "/images/sustainability/img1.jpg", alt: "Property 1" },
-      { src: "/images/sustainability/img2.jpg", alt: "Property 2" },
-      { src: "/images/sustainability/img3.jpg", alt: "Property 3" },
-      { src: "/images/sustainability/img4.jpg", alt: "Property 4" },
-    ],
-  ],
+  // description:
+  //   "Explore how thoughtful planning and green solutions come together to build spaces that care for both people and the planet. Discover projects built on sustainable principles that create value \n today while protecting tomorrow.",
+  // images: [
+  //   [
+  //     { src: "/images/sustainability/img1.jpg", alt: "Property 1" },
+  //     { src: "/images/sustainability/img2.jpg", alt: "Property 2" },
+  //     { src: "/images/sustainability/img3.jpg", alt: "Property 3" },
+  //     { src: "/images/sustainability/img4.jpg", alt: "Property 4" },
+  //     { src: "/images/sustainability/img1.jpg", alt: "Property 1" },
+  //     { src: "/images/sustainability/img2.jpg", alt: "Property 2" },
+  //     { src: "/images/sustainability/img3.jpg", alt: "Property 3" },
+  //     { src: "/images/sustainability/img4.jpg", alt: "Property 4" },
+  //   ],
+  // ],
 };
 
 function GalleryCard({
@@ -57,8 +55,8 @@ function GalleryCard({
   );
 }
 
-export default function ScrollingGallery() {
-  const slides = columnData.images[0];
+export default function ScrollingGallery({description,data}:{description:string;data:{moment_caption:string,moment_url:string}[]}) {
+  const slides = data;
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const handleSlideChange = (swiper: SwiperType) => {
@@ -76,7 +74,7 @@ export default function ScrollingGallery() {
           className="uppercase text-foreground mb-20"
         />
         <SectionDescription
-          text={columnData.description}
+          text={description}
           className="text-description text-foreground-light max-w-[86ch] mx-auto whitespace-pre-line"
         />
       </div>
@@ -104,8 +102,8 @@ export default function ScrollingGallery() {
         {slides.map((img, i) => (
           <SwiperSlide key={i} className="!w-auto">
             <GalleryCard
-              src={img.src}
-              alt={img.alt}
+              src={img.moment_url}
+              alt={img.moment_caption}
               isCenter={i === activeIndex}
             />
           </SwiperSlide>

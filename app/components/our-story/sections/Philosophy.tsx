@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Philosophy = () => {
+const Philosophy = ({title,description}:{title:string,description:string}) => {
   const sectionRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -58,11 +58,11 @@ const Philosophy = () => {
 
       <div className="relative z-20 container mx-auto flex flex-col items-center">
         <SectionHeading
-          title={philosophyData.title}
+          title={title}
           className="text-white mb-20"
         />
         <SectionDescription
-          text={philosophyData.description}
+          text={description}
           className="text-white/80 max-w-[82ch] lg:max-w-[102ch] 3xl:max-w-[140ch] text-center lg:whitespace-pre-line"
         />
       </div>

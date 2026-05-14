@@ -666,7 +666,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
           >
             <div className="text-center flex justify-center flex-col items-center gap-3">
                       <SectionHeading
-                        title={"Promotion Title "}
+                        title={"Promotion Title"}
                         className="text-white"
                       />
                       <SectionDescription

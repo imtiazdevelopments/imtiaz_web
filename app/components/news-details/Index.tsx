@@ -1,14 +1,15 @@
 import NewsContent from "./sections/NewsContent";
 import NewsHero from "./sections/NewsHero";
-import { newsDetails } from "./data";
+import { NewsDetailResponse, newsDetails } from "./data";
 import RelatedNews from "./sections/RelatedNews";
+import { NewsListingResponse } from "../news/data";
 
-const Index = () => {
+const Index = ({data,allNewsData}:{data:NewsDetailResponse['data'],allNewsData:NewsListingResponse['data']}) => {
   return (
     <>
-      <NewsHero news={newsDetails[0]} />
-      <NewsContent content={newsDetails[0].content}/>
-      <RelatedNews />
+      <NewsHero news={data} />
+      <NewsContent content={data.description}/>
+      <RelatedNews data={allNewsData} />
     </>
   );
 };

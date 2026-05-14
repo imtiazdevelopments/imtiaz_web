@@ -495,7 +495,7 @@ const Main = () => {
             <APIProvider
               apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
             >
-              <ProjectList projects={filtered} />
+              {/* <ProjectList projects={filtered} /> */}
             </APIProvider>
           </motion.div>
         )}

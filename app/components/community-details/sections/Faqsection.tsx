@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { faqData } from "../data";
+import { faqData, FAQItem } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
@@ -13,7 +13,7 @@ function AccordionItem({
   onToggle,
   isLast,
 }: {
-  item: (typeof faqData.items)[0];
+  item: FAQItem;
   isOpen: boolean;
   onToggle: () => void;
   isLast: boolean;
@@ -25,7 +25,7 @@ function AccordionItem({
     if (contentRef.current) {
       setHeight(contentRef.current.scrollHeight);
     }
-  }, [item.answer]);
+  }, [item.caption]);
 
   return (
     <div>
@@ -35,7 +35,7 @@ function AccordionItem({
       className={`${isOpen ? "pb-[10px] md:pb-20" : ""} w-full flex items-start sm:items-center justify-between cursor-pointer gap-20 ${isLast ? `pt-20 md:pt-40` : "py-20 md:py-40"} text-left group focus:outline-none`}  aria-expanded={isOpen}
       >
         <span className="text-25 uppercase text-foreground pr-2 leading-[1.4] font-[optima] font-[400]">
-          {item.question}
+          {item.title}
         </span>
         <span className="flex-shrink-0 select-none">
           <svg
@@ -79,7 +79,7 @@ function AccordionItem({
       >
         <div ref={contentRef}>
           <p className={`text-description text-foreground-light max-w-[846px] ${!isLast ? "pb-20 md:pb-30" : ""}`}>
-            {item.answer}
+            {item.caption}
           </p>
         </div>
       </div>
@@ -98,10 +98,10 @@ function AccordionItem({
   );
 }
 
-export default function Faq() {
-  const [openId, setOpenId] = useState<string | null>(faqData.items[0].id);
+export default function Faq({title,description,data}:{title:string,description:string,data:FAQItem[]}) {
+  const [openId, setOpenId] = useState<number | null>(0);
 
-  const toggle = (id: string) => {
+  const toggle = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
 
@@ -113,19 +113,19 @@ export default function Faq() {
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[10px]">
-          <SectionHeading title={faqData.title} className="mb-20 text-foreground" />
-          <SectionDescription text={faqData.subtitle} className="shrink-0 max-w-[407px] text-foreground-light" />
+          <SectionHeading title={title} className="mb-20 text-foreground" />
+          <SectionDescription text={description} className="shrink-0 max-w-[407px] text-foreground-light" />
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
-          {faqData.items.map((item, index) => (
-            <Reveal variants={moveUpV2} key={item.id} >
+          {data.map((item, index) => (
+            <Reveal variants={moveUpV2} key={index} >
 
             <AccordionItem
               item={item}
-              isOpen={openId === item.id}
-              onToggle={() => toggle(item.id)}
+              isOpen={openId === index}
+              onToggle={() => toggle(index)}
               isLast={index === faqData.items.length - 1}
               />
               </Reveal>

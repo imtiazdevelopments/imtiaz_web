@@ -51,7 +51,7 @@ function ImageTrack({
   );
 }
 
-export default function SustainabilitySpotlight() {
+export default function SustainabilitySpotlight({title}:{title:string}) {
   const slides = sustainabilitySpotlight.slides;
 
   const [current, setCurrent] = useState(0);
@@ -262,7 +262,7 @@ export default function SustainabilitySpotlight() {
             viewport={{ once: true }}
             className="uppercase text-heading text-foreground mb-50 text-center"
           >
-            {sustainabilitySpotlight.title}
+            {title}
           </motion.h2>
 
           <AnimatePresence mode="wait">
@@ -377,7 +377,7 @@ export default function SustainabilitySpotlight() {
                   viewport={{ once: true }}
                   className="uppercase text-heading text-foreground mb-90"
                 >
-                  {sustainabilitySpotlight.title}
+                  {title}
                 </motion.h2>
 
                 <AnimatePresence mode="wait">

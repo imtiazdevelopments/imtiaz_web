@@ -4,7 +4,7 @@ import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import FilterDropdown from "../../common/FilterDropdown";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-import { properties } from "../data";
+import { properties, PropertiesPageData } from "../data";
 import ListMapToggle from "../../common/ListMapToggle";
 import ProjectCard from "../../common/ProjectCard";
 import { motion } from "framer-motion";
@@ -38,26 +38,7 @@ type Community =
   | "Old Town"
   | "";
 
-const propertyTypes: PropertyType[] = [
-  "Villa",
-  "Apartment",
-  "Townhouse",
-  "Penthouse",
-  "Studio",
-];
-const propertyStatuses: PropertyStatus[] = [
-  "Available",
-  "Off Plan",
-  "Completed",
-  "Under Construction",
-];
-const communities: Community[] = [
-  "Downtown",
-  "Waterfront",
-  "Suburbs",
-  "Business Bay",
-  "Old Town",
-];
+
 
 // ── Empty state ──────────────────────────────────────────────────────────────
 const EmptyState = () => (
@@ -96,7 +77,38 @@ const EmptyState = () => (
   </div>
 );
 
-const Main = () => {
+const Main = ({ data }: {data:PropertiesPageData}) => {
+
+  const propertyTypes = useMemo(() => {
+    return [
+      ...new Set(
+        data.listing
+          .map((item: { property_type: string }) => item.property_type)
+          .filter(Boolean),
+      ),
+    ];
+  }, [data]);
+
+  const propertyStatuses = useMemo(() => {
+    return [
+      ...new Set(
+        data.listing
+          .map((item: { property_status: string }) => item.property_status)
+          .filter(Boolean),
+      ),
+    ];
+  }, [data]);
+
+  const communities = useMemo(() => {
+    return [
+      ...new Set(
+        data.listing
+          .map((item: { property_community: string }) => item.property_community)
+          .filter(Boolean),
+      ),
+    ];
+  }, [data]);
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -204,27 +216,38 @@ const Main = () => {
   const hasFilter =
     selectedPropertyType || selectedStatus || selectedCommunity || searchQuery;
 
-  const sorted = useMemo(
-    () =>
-      [...properties].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-      ),
-    [],
-  );
+  // const sorted = useMemo(
+  //   () =>
+  //     [...data.listing]
+  //   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+  //   [],
+  // );
+
+  const sorted = [...data.listing]
 
   const filtered = useMemo(() => {
     return sorted.filter((item) => {
-      if (selectedPropertyType && item.propertyType !== selectedPropertyType)
+      if (
+        selectedPropertyType &&
+        item.property_type !== selectedPropertyType
+      )
         return false;
-      if (selectedStatus && item.status !== selectedStatus) return false;
-      if (selectedCommunity && item.community !== selectedCommunity)
+      if (
+        selectedStatus &&
+        item.property_status !== selectedStatus
+      ) return false;
+
+      if (
+        selectedCommunity &&
+        item.property_community !== selectedCommunity
+      )
         return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         const matches =
           item.title.toLowerCase().includes(q) ||
-          item.community.toLowerCase().includes(q) ||
-          item.propertyType.toLowerCase().includes(q);
+          item.property_community.toLowerCase().includes(q) ||
+          item.property_type.toLowerCase().includes(q);
         if (!matches) return false;
       }
       return true;
@@ -457,7 +480,16 @@ const Main = () => {
                 <div className="project-card-grid">
                   {paginated.map((project, i) => (
                     <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                      <ProjectCard {...project} />
+                      <ProjectCard
+                        id={i.toString()}
+                        image={project.featured_image_desktop}
+                        hoverImage={project.brand_logo}
+                        subtitle={project.property_caption}
+                        status={project.property_status}
+                        location={project.property_location}
+                        startingFrom={project.icon1_text}
+                        units={project.icon2_text}
+                        {...project} />
                     </Reveal>
                   ))}
                 </div>
@@ -475,7 +507,8 @@ const Main = () => {
             <APIProvider
               apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
             >
-              <ProjectList projects={filtered} />
+              <ProjectList 
+              projects={filtered} />
             </APIProvider>
           </motion.div>
         )}

@@ -1,3 +1,31 @@
+export type NewsListingResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string | null;
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    listing: NewsItem[];
+  };
+};
+
+export type NewsItem = {
+  slug: string;
+  title: string;
+  description: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  post_date: string;
+  category_name: string;
+};
+
+
 export const bannerData = {
     title: "Imtiaz Updates",
     description: "Explore the latest news, launches, and milestones from Imtiaz Developments, showcasing our continued growth and commitment to excellence.",

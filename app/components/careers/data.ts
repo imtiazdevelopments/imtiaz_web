@@ -1,3 +1,67 @@
+export type CareersPageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+
+  data: {
+    meta_title: string;
+    meta_description: string;
+
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_banner_alt: string;
+
+    join_title: string;
+    join_brief: string;
+
+    highlight_title_1: string;
+    highlight_caption_1: string;
+    highlight_image_alt_1: string;
+    highlight_image_desktop_1: string;
+    highlight_image_mobile_1: string;
+
+    highlight_title_2: string;
+    highlight_caption_2: string;
+    highlight_image_alt_2: string;
+    highlight_image_desktop_2: string;
+    highlight_image_mobile_2: string;
+
+    highlight_title_3: string;
+    highlight_caption_3: string;
+    highlight_image_alt_3: string;
+    highlight_image_desktop_3: string;
+    highlight_image_mobile_3: string;
+
+    expectation_title: string;
+    expectation_caption: string;
+
+    vacancy_title: string;
+    vacancy_brief: string;
+
+    show_reasons_section: string;
+    show_appeal_section: string;
+    show_communities_section: string;
+
+    gallery: {
+      moment_caption: string | null;
+      moment_url: string;
+    }[];
+
+    vacancies: {
+      location: string;
+      job_title: string;
+      caption: string;
+      slug: string;
+      department: string;
+      job_type: string;
+      job_category: string;
+    }[];
+  };
+};
+
 export const bannerData = {
     image: "/images/careers/banner.jpg",
     title: "career at imtiaz",
@@ -32,25 +96,9 @@ export const careerImpactAreas = {
   ],
 };
 
-export type JobType = "Full Time" | "Part Time" | "Contract" | "Remote";
-export type Department =
-  | "Marketing"
-  | "Design & Architecture"
-  | "Sales"
-  | "Real Estate"
-  | "Leasing"
-  | "Operations";
 
-export interface Career {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  jobType: JobType;
-  department: Department;
-}
 
-export const careersData: Career[] = [
+export const careersData = [
   {
     id: "1",
     title: "Marketing Lead",

@@ -955,3 +955,53 @@ input:-webkit-autofill:active {
     font-size: 14px;
   }
 }
+
+
+.career-details-responsibility {
+  counter-reset: responsibility-counter;
+}
+
+.career-details-responsibility h2 {
+  @apply text-heading text-foreground uppercase mb-20;
+}
+
+.career-details-responsibility h3 {
+  counter-increment: responsibility-counter;
+  @apply mb-20 uppercase text-25 font-[optima] leading-[1.4];
+}
+
+.career-details-responsibility h3::before {
+  content: counter(responsibility-counter) ". ";
+}
+
+.career-details-responsibility ul {
+  @apply mb-30 list-disc pl-5 sm:pl-10;
+}
+
+.career-details-responsibility li {
+  @apply text-description;
+}
+
+.career-details-responsibility p {
+  @apply text-description mb-20;
+}
+
+/* .career-details-qualification h2{
+  @apply text-heading   text-foreground   uppercase  mb-20
+} */
+
+.career-details-qualification h2 {
+  @apply text-heading text-foreground uppercase mb-20;
+}
+
+.career-details-qualification ul {
+  @apply list-disc pl-5 sm:pl-0 mb-30;
+}
+
+.career-details-qualification li {
+  @apply text-description;
+}
+
+.career-details-qualification p {
+  @apply text-description mb-20;
+}

@@ -1,3 +1,33 @@
+export interface BlogListingItem {
+  slug: string;
+  title: string;
+  description: string | null;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  post_date: string;
+  topic_name: string;
+  category_name: string;
+}
+
+export interface BlogListingData {
+  meta_title: string;
+  meta_description: string | null;
+  page_banner_title: string;
+  page_banner_caption: string;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+  listing: BlogListingItem[];
+}
+
+export interface BlogListingResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: BlogListingData;
+}
+
 export const bannerData = {
     image: "/images/blogs/banner.jpg",
     title: "Our Insightful Blog",

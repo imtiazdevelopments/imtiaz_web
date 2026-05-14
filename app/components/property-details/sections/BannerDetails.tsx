@@ -113,6 +113,13 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { useState } from "react";
 
+interface Stats {
+  location:string,
+  payment_plan:string,
+  starting_price:string,
+  delivery_date:string
+}
+
 interface PropertyStatProps {
   label: string;
   value: string;
@@ -141,30 +148,33 @@ function PropertyStat({ label, value, icon }: PropertyStatProps) {
   );
 }
 
-const stats = [
+
+
+export default function BannerDetails({location,payment_plan,starting_price,delivery_date}:Stats) {
+
+  const stats = [
   {
     label: "Location",
-    value: "Dubai Island",
+    value: location,
     icon: "/images/projects/mark1.svg",
   },
   {
     label: "Payment Plan",
-    value: "Flexible Over 5 Years",
+    value: payment_plan,
     icon: "/images/projects/mark2.svg",
   },
   {
     label: "Starting At",
-    value: "$150,000",
+    value: starting_price,
     icon: "/images/projects/mark3.svg",
   },
   {
     label: "Delivery Date",
-    value: "Delivery Date",
+    value: delivery_date,
     icon: "/images/projects/mark4.svg",
   },
 ];
 
-export default function BannerDetails() {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);

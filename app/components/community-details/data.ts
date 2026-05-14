@@ -1,3 +1,104 @@
+export interface CommunityPageResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: CommunityPageData;
+}
+
+export interface CommunityPageData {
+  meta_title: string;
+  meta_description: string | null;
+
+  page_banner_title: string;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+
+  basic_title: string;
+  basic_caption: string;
+  basic_brief: string;
+
+  reach_title: string;
+  reach_caption: string;
+
+  doorstep_title: string;
+  doorstep_caption: string;
+
+  properties_title: string;
+
+  map: string | null;
+
+  other_communities_title: string;
+
+  faq_title: string;
+  faq_caption: string;
+
+  show_basic_section: "true" | "false";
+  show_reach_section: "true" | "false";
+  show_nearby_section: "true" | "false";
+  show_properties_section: "true" | "false";
+  show_other_communities_section: "true" | "false";
+  show_faq_section: "true" | "false";
+
+  reach: ReachItem[];
+  gallery: GalleryItem[];
+  near_by: NearbyItem[];
+  related_property: RelatedProperty[];
+  other_cummunities: OtherCommunity[];
+  faq: FAQItem[];
+}
+
+export interface ReachItem {
+  title: string;
+  caption: string;
+  icon_url: string;
+}
+
+export interface GalleryItem {
+  caption: string;
+  image_url: string;
+}
+
+export interface NearbyItem {
+  title: string;
+  icon_url: string;
+}
+
+export interface RelatedProperty {
+  slug: string;
+
+  brand_logo: string;
+
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+
+  icon1_url: string;
+  icon1_text: string;
+
+  icon2_url: string;
+  icon2_text: string;
+
+  property_name: string;
+  property_caption: string;
+  property_status: string;
+}
+
+export interface OtherCommunity {
+  slug: string;
+  title: string | null;
+
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+}
+
+export interface FAQItem {
+  title: string;
+  caption: string;
+}
+
+
 export const bannerData = {
   image: "/images/community-listing/community-listing-banner.jpg",
   title: "Dubai Land Residence Complex",

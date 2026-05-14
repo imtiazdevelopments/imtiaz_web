@@ -3,18 +3,15 @@
   import { useState, useEffect } from "react";
 import Image from "next/image";
 import Breadcrumb from "../../common/Breadcrumb";
-import { BlogDetail } from "../data";
+import { BlogDetail, BlogDetailData, BlogListingItem } from "../data";
 import { GoShareAndroid } from "react-icons/go";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveDown, moveUp } from "../../motionVariants";
 import { useParallax } from "@/app/hooks/useParallax";
 
-interface Props {
-  blog: BlogDetail;
-}
 
-const BlogHero = ({ blog }: Props) => {
+const BlogHero = ({ blog }: {blog:BlogDetailData}) => {
   const { ref, parallaxY } = useParallax(15);
 
 const [size, setSize] = useState(32);
@@ -43,7 +40,7 @@ useEffect(() => {
 
         {/* Title */}
         <SectionHeading
-          title={blog.title}
+          title={blog.page_banner_title}
           className="max-w-[50ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 
@@ -57,13 +54,13 @@ useEffect(() => {
             className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-[14px] md:text-16"
           >
             <div>
-              <span>{blog.category}</span>
+              {/* <span>{blog.category_name}</span> */}
               <span> - </span>
-              <span>{blog.date}</span>
+              <span>{blog.post_date}</span>
             </div>
             <span>|</span>
             <div>
-              <span>Reading Time: {blog.readingTime}</span>
+              <span>Reading Time: </span>
             </div>
           </motion.div>
 
@@ -85,8 +82,8 @@ useEffect(() => {
           className="w-full h-[352px] md:h-[500px] lg:h-[500px] 2xl:h-[560px] 3xl:h-[722px] mt-5 md:mt-50 relative overflow-hidden"
         >
           <Image
-            src={blog.heroImage}
-            alt={blog.title}
+            src={blog.page_banner_desktop}
+            alt={blog.page_banner_title}
             fill
             priority
             sizes="100vw"

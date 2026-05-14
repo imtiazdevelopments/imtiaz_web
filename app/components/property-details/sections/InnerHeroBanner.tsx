@@ -3,7 +3,7 @@
 import { useCallback, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import Breadcrumb from "../../common/Breadcrumb"; 
+import Breadcrumb from "../../common/Breadcrumb";
 import BannerDetails from "./BannerDetails";
 
 interface InnerHeroProps {
@@ -12,6 +12,10 @@ interface InnerHeroProps {
   description?: string;
   maxW?: string;
   maxTitle?: string;
+  location: string;
+  payment_plan: string;
+  starting_price: string;
+  delivery_date: string;
 }
 
 const ZOOM_OUT_DURATION = 2.2;
@@ -26,6 +30,10 @@ const BANNER_DETAILS_DELAY = BREADCRUMB_DELAY + 0.17;
 
 const InnerHeroBanner = ({
   image,
+  location,
+  payment_plan,
+  starting_price,
+  delivery_date
 }: InnerHeroProps) => {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -126,7 +134,12 @@ const InnerHeroBanner = ({
         </div>
 
         <div ref={bannerDetailsRef} style={{ transform: "translateY(200px)" }}>
-          <BannerDetails />
+          <BannerDetails
+            location={location}
+            payment_plan={payment_plan}
+            starting_price={starting_price}
+            delivery_date={delivery_date}
+          />
         </div>
       </div>
     </section>

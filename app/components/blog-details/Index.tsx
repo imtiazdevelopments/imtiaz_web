@@ -1,14 +1,15 @@
 import BlogContent from "./sections/BlogContent";
 import BlogHero from "./sections/BlogHero";
-import { blogDetails } from "./data";
+import { BlogDetailData, blogDetails } from "./data";
 import RelatedBlogs from "./sections/RelatedBlogs";
+import { BlogListingData } from "../blogs/data";
 
-const Index = () => {
+const Index = ({data,allBlogsData}:{data:BlogDetailData,allBlogsData:BlogListingData}) => {
   return (
     <>
-      <BlogHero blog={blogDetails[0]} />
-      <BlogContent content={blogDetails[0].content} />
-      <RelatedBlogs />
+      <BlogHero blog={data} />
+      <BlogContent content={data.description} />
+      <RelatedBlogs data={allBlogsData.listing}/>
     </>
   );
 };

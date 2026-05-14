@@ -483,69 +483,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomIconButton from "../../common/CustomIconButton";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { useLenis } from "@/app/contexts/LenisContext";
+import { UnitLayoutItem } from "../data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const units = [
-  {
-    id: "1bhk",
-    label: "1 Bedroom",
-    tag: "1 BHK",
-    units: 94,
-    area: "755 sq ft — 1100 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "2bhk",
-    label: "2 Bedroom",
-    tag: "2 BHK",
-    units: 72,
-    area: "1100 sq ft — 1450 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "3bhk",
-    label: "3 Bedroom",
-    tag: "3 BHK",
-    units: 48,
-    area: "1450 sq ft — 1900 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "3bhk-ph",
-    label: "3 bedroom penthouse",
-    tag: "3 BHK PH",
-    units: 12,
-    area: "2200 sq ft — 2800 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "3bhk-dx",
-    label: "3 Bedroom Duplex",
-    tag: "3 BHK DX",
-    units: 20,
-    area: "1900 sq ft — 2400 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "4bhk-dx",
-    label: "4 Bedroom Duplex",
-    tag: "4 BHK DX",
-    units: 16,
-    area: "2400 sq ft — 3200 sq ft",
-    image: "/images/projects/floor.png",
-  },
-  {
-    id: "3bhk-th",
-    label: "3 bedroom town house",
-    tag: "3 BHK TH",
-    units: 8,
-    area: "2600 sq ft — 3000 sq ft",
-    image: "/images/projects/floor.png",
-  },
-];
 
-type Unit = (typeof units)[0];
+
+type Unit = {
+  id: number,
+    label: string,
+    units: string,
+    area: string,
+    image: string,
+    brand_logo:string
+}
 
 function FloorPlanImage({ unit }: { unit: Unit }) {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -696,7 +647,7 @@ function SideInfo({ unit }: { unit: Unit }) {
         </div>
       </div>
 
-      <a href={unit.image} download={`${unit.image}`}>
+      <a href={unit.brand_logo} download={`${unit.brand_logo}`}>
         <CustomIconButton
           icondownload={true}
           iconColor="dark"
@@ -711,9 +662,18 @@ function SideInfo({ unit }: { unit: Unit }) {
   );
 }
 
-export default function UnitLayout() {
-  const [activeId, setActiveId] = useState<string | null>("1bhk");
-  const activeUnit = units.find((u) => u.id === activeId);
+export default function UnitLayout({ data }: {data:UnitLayoutItem[]}) {
+
+  const units = data.map((item, index: number) => ({
+    id: index,
+    label: item.title,
+    area: item.total_area,
+    image: item.image_url,
+    ...item,
+  }));
+
+  const [activeId, setActiveId] = useState<number | null>(0);
+  const activeUnit = units.find((u:{id:number}) => u.id === activeId);
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const buttonsContainerRef = useRef<HTMLDivElement>(null);
@@ -721,7 +681,7 @@ export default function UnitLayout() {
   const panelRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const { scrollTo } = useLenis();
 
-  const handleUnitClick = (unitId: string) => {
+  const handleUnitClick = (unitId: number) => {
     const isCurrentlyActive = activeId === unitId;
     setActiveId(isCurrentlyActive ? null : unitId);
 
@@ -824,19 +784,16 @@ export default function UnitLayout() {
                     >
                       <div className="flex items-center gap-[10px] 2xl:gap-[10px]">
                         <span
-                          className={`${
-                            isActive ? "scale-x-100" : ""
-                          } absolute inset-y-0 left-0 w-[50%] bg-primary-2 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
+                          className={`${isActive ? "scale-x-100" : ""
+                            } absolute inset-y-0 left-0 w-[50%] bg-primary-2 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100`}
                         ></span>
                         <span
-                          className={`${
-                            isActive ? "scale-x-100" : ""
-                          } absolute inset-y-0 right-0 w-[50%] bg-primary-2 transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
+                          className={`${isActive ? "scale-x-100" : ""
+                            } absolute inset-y-0 right-0 w-[50%] bg-primary-2 transform scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100`}
                         ></span>
                         <span
-                          className={`${
-                            isActive ? "text-white" : ""
-                          } relative z-10 transition-colors duration-300 min-w-[98px] inline-block text-center group-hover:text-white`}
+                          className={`${isActive ? "text-white" : ""
+                            } relative z-10 transition-colors duration-300 min-w-[98px] inline-block text-center group-hover:text-white`}
                         >
                           {unit.label}
                         </span>

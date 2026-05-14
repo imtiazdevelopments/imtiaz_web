@@ -3,13 +3,14 @@
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
-  pressItems,
+  // pressItems,
   pressYears,
   pressMonths,
-  pressCategories,
+  // pressCategories,
   PressYear,
   PressMonth,
   PressCategory,
+  NewsListingResponse,
 } from "../data";
 import LatestNewsSlider from "./LatestNewsSlider";
 import NewsCard from "./NewsCard";
@@ -66,7 +67,7 @@ const EmptyState = () => (
 );
 
 // ── NewsSection ──────────────────────────────────────────────────────────────
-const NewsSection = () => {
+const NewsSection = ({data}:{data:NewsListingResponse['data']}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -88,6 +89,32 @@ const NewsSection = () => {
     (searchParams.get("category") as PressCategory) || "";
   const currentPage = Number(searchParams.get("page") || "1");
   const { scrollTo, lock, unlock } = useLenis();
+
+const pressItems = useMemo(() => {
+  return (data?.listing || []).map((item: any, index: number) => ({
+    id: index + 1,
+    title: item.title,
+    image: item.featured_image_desktop,
+    category: item.category_name,
+    date: item.post_date
+      ? item.post_date.split("-").reverse().join("-") // 05-05-2026 -> 2026-05-05
+      : "",
+    slug: item.slug,
+    description: item.description,
+    mobileImage: item.featured_image_mobile,
+    alt: item.featured_image_alt,
+  }));
+}, [data]);
+
+const pressCategories = useMemo(() => {
+  return [
+    ...new Set(
+      pressItems
+        .map((item) => item.category)
+        .filter(Boolean),
+    ),
+  ];
+}, [pressItems]);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParamsRef.current.toString());

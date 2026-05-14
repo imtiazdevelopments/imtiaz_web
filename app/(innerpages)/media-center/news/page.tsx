@@ -1,9 +1,15 @@
 import Index from '@/app/components/news/Index'
 
-const page = () => {
+const page = async () => {
+
+  const response = await fetch(`${process.env.BASE_URL}/api/news.php?lang=en`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
+
   return (
     <>
-    <Index />
+      <Index data={data.data}/>
     </>
   )
 }

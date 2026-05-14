@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 import { SectionHeading } from "../../animations/SectionHeading";
+import { CareerDetailsResponse } from "../data";
 
 type jobDetail = {
   title: string;
@@ -21,7 +22,7 @@ interface Props {
   data: jobDetail;
 }
 
-const AboutJob = ({ data }: Props) => {
+const AboutJob = ({ data }: { data: CareerDetailsResponse['data'] }) => {
   return (
     <section
       className="w-full bg-white py-120 3xl:py-[160px]"
@@ -34,9 +35,10 @@ const AboutJob = ({ data }: Props) => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
+            className="career-details-about"
           >
             <SectionHeading
-              title={data.title}
+              title={"About Job"}
               className=" text-heading   text-foreground   uppercase  mb-20"
             />
             <motion.div
@@ -45,7 +47,7 @@ const AboutJob = ({ data }: Props) => {
               whileInView="show"
               viewport={{ once: true }}
               className="blog-content"
-              dangerouslySetInnerHTML={{ __html: data.description }}
+              dangerouslySetInnerHTML={{ __html: data.job_overview || "" }}
             />
           </motion.div>
           <motion.div
@@ -55,37 +57,50 @@ const AboutJob = ({ data }: Props) => {
             viewport={{ once: true }}
             className="mt-[40px] sm:mt-50 pb-[40px] sm:pb-50 border-t border-black/10"
           ></motion.div>
-          <motion.div
+
+
+          <motion.div className="career-details-responsibility"
             variants={moveUp(0.1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
+            dangerouslySetInnerHTML={{ __html: data.job_responsibility || "" }}
           >
-            <SectionHeading
-              title={data.title2}
-              className=" text-heading   text-foreground   uppercase  mb-20"
-            />
-            <motion.div
+
+
+            {/* <motion.div
               variants={moveUp(0.1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
             >
-              {data.keyResponsibilities.map((section, index) => (
-                <div key={index} className="pl-2">
-                  <h3 className="mb-20 uppercase text-25 font-[optima] leading-[1.4]">
-                    {index + 1}. {section.title}
-                  </h3>
-                  <ul className="mb-30 list-disc pl-5 sm:pl-10">
-                    {section.tasks.map((task, index) => (
-                      <li key={index} className="text-description">
-                        {task}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </motion.div>
+              <SectionHeading
+                title={data.title2}
+                className=" text-heading   text-foreground   uppercase  mb-20"
+              />
+              <motion.div
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                {data.keyResponsibilities.map((section, index) => (
+                  <div key={index} className="pl-2">
+                    <h3 className="mb-20 uppercase text-25 font-[optima] leading-[1.4]">
+                      {index + 1}. {section.title}
+                    </h3>
+                    <ul className="mb-30 list-disc pl-5 sm:pl-10">
+                      {section.tasks.map((task, index) => (
+                        <li key={index} className="text-description">
+                          {task}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div> */}
+
           </motion.div>
 
           <motion.div
@@ -95,33 +110,44 @@ const AboutJob = ({ data }: Props) => {
             viewport={{ once: true }}
             className="mt-[40px] sm:mt-50 pb-[40px] sm:pb-50 border-t border-black/10"
           ></motion.div>
+
           <motion.div
             variants={moveUp(0.1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
+            className="career-details-qualification"
+            dangerouslySetInnerHTML={{__html:data.job_qualification || ""}}
           >
-            <SectionHeading
-              title={data.title3}
-              className=" text-heading   text-foreground   uppercase  mb-20"
-            />
-            <motion.div
+            {/* <motion.div
               variants={moveUp(0.1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
             >
-              <div className="pl-2">
-                <ul className="list-disc pl-5 sm:pl-0">
-                  {data.qualifications.map((task, index) => (
-                    <li key={index} className="text-description">
-                      {task}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              <SectionHeading
+                title={data.title3}
+                className=" text-heading   text-foreground   uppercase  mb-20"
+              />
+              <motion.div
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <div className="pl-2">
+                  <ul className="list-disc pl-5 sm:pl-0">
+                    {data.qualifications.map((task, index) => (
+                      <li key={index} className="text-description">
+                        {task}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </motion.div> */}
           </motion.div>
+
         </div>
       </div>
     </section>

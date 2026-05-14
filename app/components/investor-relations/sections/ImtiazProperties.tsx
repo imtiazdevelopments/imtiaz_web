@@ -5,7 +5,7 @@ import Image from "next/image";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { projectsData } from "../data";
+import { InvestorRelationsPageResponse } from "../data";
 import ProjectCard from "../../common/ProjectCard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,7 +20,7 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ImtiazProperties = () => {
+const ImtiazProperties = ({ data, title }: { data: InvestorRelationsPageResponse['data']['properties'], title: string }) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -122,7 +122,7 @@ const ImtiazProperties = () => {
     >
       <div className="container">
         <SectionHeading
-          title={projectsData.sectionTitle}
+          title={title}
           className="text-foreground text-center mb-[20px] md:mb-50"
         />
         <div className="relative" ref={rootRef}>
@@ -142,11 +142,34 @@ const ImtiazProperties = () => {
               1700: { slidesPerView: 4 },
             }}
           >
-            {projectsData.properties.slice(0, 4).map((project, i) => {
+            {data.slice(0, 4).map((item: any, index: number) => {
+              const formattedProject = {
+                id: String(index + 1),
+
+                image: item.featured_image_desktop,
+
+                hoverImage:
+                  item.brand_logo || item.featured_image_mobile,
+
+                status: item.property_status,
+
+                location: "",
+
+                title: item.title,
+
+                subtitle: item.property_type,
+
+                href: item.slug,
+
+                startingFrom: item.icon1_text,
+
+                units: item.icon2_text,
+              };
+
               return (
-                <SwiperSlide key={i}>
+                <SwiperSlide key={formattedProject.id}>
                   <Reveal variants={moveUpV2}>
-                    <ProjectCard key={i} {...project} />
+                    <ProjectCard {...formattedProject} />
                   </Reveal>
                 </SwiperSlide>
               );

@@ -8,7 +8,7 @@ import {
   Marker,
   useMap,
 } from "@vis.gl/react-google-maps";
-import { useContainerInset } from "@/app/hooks/useContainerInset"; 
+import { useContainerInset } from "@/app/hooks/useContainerInset";
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import { useLenis } from "@/app/contexts/LenisContext";
 import ProjectCard from "../../common/ProjectCard";
@@ -19,26 +19,10 @@ import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import PropertyCard from "./PropertyCard"; 
-import SliderArrowButton from "../../common/SliderNavigationButton"; 
+import PropertyCard from "./PropertyCard";
+import SliderArrowButton from "../../common/SliderNavigationButton";
+import { PropertyListingItem } from "../data";
 
-export interface Project {
-  id: string;
-  image: string;
-  hoverImage: string;
-  status: string;
-  location: string;
-  title: string;
-  subtitle: string;
-  href: string;
-  startingFrom: string;
-  units: string;
-  date: string;
-  propertyType: string;
-  community: string;
-  latitude: string;
-  longitude: string;
-}
 
 const EmptyState = () => (
   <motion.div
@@ -70,15 +54,15 @@ const EmptyState = () => (
 export default function FeaturedProjects({
   projects,
 }: {
-  projects: Project[];
+  projects: PropertyListingItem[];
 }) {
   const [activeProject, setActiveProject] = useState<string>("");
   const swiperRef = useRef<SwiperType | null>(null);
-      const [activeIndex, setActiveIndex] = useState(0); 
+  const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     setVisibleProjects([]);
     setHighlighted([]);
-    setActiveProject(projects[0]?.id || "");
+    setActiveProject(0 || "");
   }, [projects]);
 
   const [isDesktop, setIsDesktop] = useState(false);
@@ -92,7 +76,7 @@ export default function FeaturedProjects({
   const containerRef = useRef(null);
   const leftSpacing = useContainerInset(containerRef);
 
-  const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
+  const [visibleProjects, setVisibleProjects] = useState<PropertyListingItem[]>([]);
 
   const [highlighted, setHighlighted] = useState<string[]>([]);
   const map = useMap();
@@ -113,18 +97,18 @@ export default function FeaturedProjects({
         parseFloat(p.longitude) <= bounds.east,
     );
 
-    const visibleIds = visibleProjectsInBounds.map((p) => p.id);
+    // const visibleIds = visibleProjectsInBounds.map((p) => p.id);
 
-    setVisibleProjects(visibleProjectsInBounds);
-    setHighlighted(visibleIds);
+    // setVisibleProjects(visibleProjectsInBounds);
+    // setHighlighted(visibleIds);
 
-    if (visibleProjectsInBounds.length > 0) {
-      if (!visibleIds.includes(activeProject)) {
-        setActiveProject(visibleProjectsInBounds[0].id);
-      }
-    } else {
-      setActiveProject("");
-    }
+    // if (visibleProjectsInBounds.length > 0) {
+    //   if (!visibleIds.includes(activeProject)) {
+    //     setActiveProject(visibleProjectsInBounds[0].id);
+    //   }
+    // } else {
+    //   setActiveProject("");
+    // }
   };
 
   useEffect(() => {
@@ -188,10 +172,19 @@ export default function FeaturedProjects({
                 visibleProjects?.map((project, index) => (
                   <Reveal
                     variants={moveUpV2}
-                    key={project.id}
+                    key={index}
                     delayRange={index * 0.11}
                   >
-                    <ProjectCard {...project} />
+                    <ProjectCard
+                      id={index.toString()}
+                      image={project.featured_image_desktop}
+                      hoverImage={project.brand_logo}
+                      subtitle={project.property_caption}
+                      status={project.property_status}
+                      location={project.property_location}
+                      startingFrom={project.icon1_text}
+                      units={project.icon2_text}
+                      {...project} />
                   </Reveal>
                 ))
               ) : (
@@ -199,7 +192,7 @@ export default function FeaturedProjects({
               )}
             </div>
 
-           {visibleProjects.length > 0 ? (
+            {visibleProjects.length > 0 ? (
               <>
                 {/* ── Mobile: Swiper (< md) ── */}
                 <div className="xl:hidden ">
@@ -208,48 +201,48 @@ export default function FeaturedProjects({
                     spaceBetween={10}
                     grabCursor={true}
                     breakpoints={{
-                        0: { slidesPerView: 1 }, 
-                        768: { slidesPerView: 2 }, 
-                      }}
+                      0: { slidesPerView: 1 },
+                      768: { slidesPerView: 2 },
+                    }}
                     modules={[Autoplay]}
-                      effect="fade"
-                      fadeEffect={{ crossFade: true }}
-                        autoplay={{ delay: 5000, disableOnInteraction: false }}
-                      loop
-                      onSwiper={(swiper) => (swiperRef.current = swiper)}
-                      onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                    effect="fade"
+                    fadeEffect={{ crossFade: true }}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    loop
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
 
                     className="!overflow-visible w-full"
                   >
                     {visibleProjects.map((project, index) => (
-                      <SwiperSlide key={project.id}>
+                      <SwiperSlide key={index}>
                         <PropertyCard
-                          id={project.id}
-                          image={project.image}
-                          status={project.status}
-                          location={project.location}
+                          id={index.toString()}
+                          image={project.featured_image_desktop}
+                          status={project.property_status}
+                          location={project.property_location}
                           title={project.title}
-                          subtitle={project.subtitle}
-                          startingFrom={project.startingFrom}
-                          units={project.units}
-                          hoverImage={project.hoverImage}
+                          subtitle={""}
+                          startingFrom={project.icon1_text}
+                          units={project.icon2_text}
+                          hoverImage={project.brand_logo}
                           setActiveProject={setActiveProject}
                         />
                       </SwiperSlide>
                     ))}
                   </Swiper>
                   <div className="flex items-center gap-[15px] justify-center mt-5">
-                        <SliderArrowButton
-              direction="prev"
-              variant="dark"
-              onClick={() => swiperRef.current?.slidePrev()}
-            />
-            <SliderArrowButton
-              direction="next"
-              variant="dark"
-              onClick={() => swiperRef.current?.slideNext()}
-            />
-                        </div>
+                    <SliderArrowButton
+                      direction="prev"
+                      variant="dark"
+                      onClick={() => swiperRef.current?.slidePrev()}
+                    />
+                    <SliderArrowButton
+                      direction="next"
+                      variant="dark"
+                      onClick={() => swiperRef.current?.slideNext()}
+                    />
+                  </div>
                 </div>
 
                 {/* ── md+: original grid ── */}
@@ -257,19 +250,19 @@ export default function FeaturedProjects({
                   {visibleProjects.map((project, index) => (
                     <Reveal
                       variants={moveUpV2}
-                      key={project.id}
+                      key={index}
                       delayRange={index * 0.11}
                     >
                       <PropertyCard
-                        id={project.id}
-                        image={project.image}
-                        status={project.status}
-                        location={project.location}
+                        id={index.toString()}
+                        image={project.featured_image_desktop}
+                        status={project.property_status}
+                        location={project.property_location}
                         title={project.title}
-                        subtitle={project.subtitle}
-                        startingFrom={project.startingFrom}
-                        units={project.units}
-                        hoverImage={project.hoverImage}
+                        subtitle={""}
+                        startingFrom={project.icon1_text}
+                        units={project.icon2_text}
+                        hoverImage={project.brand_logo}
                         setActiveProject={setActiveProject}
                       />
                     </Reveal>
@@ -331,36 +324,47 @@ export default function FeaturedProjects({
                   },
                 ]}
               >
-                {projects?.map((project) => {
-                  const isHovered = activeProject === project.id;
-                  const isHighlighted = highlighted.includes(project.id);
-                  if (!isHovered && !isHighlighted) return null;
-                  return (
-                    <Marker
-                      key={project.id}
-                      position={{
-                        lat: parseFloat(project.latitude),
-                        lng: parseFloat(project.longitude),
-                      }}
-                      title={project.title}
-                      icon={{
-                        url: isHovered
-                          ? "/active-icon.svg"
-                          : "/inactive-icon.svg",
-                      }}
-                      onClick={() => {
-                        setVisibleProjects((prev) => {
-                          const newArr = prev.filter(
-                            (p) => p.id !== project.id,
-                          );
-                          return [project, ...newArr];
-                        });
-                        setActiveProject(project.id);
-                        scrollTo(700, { duration: 1.2 });
-                      }}
-                    />
-                  );
-                })}
+                {projects?.map((project, index) => {
+  const projectWithId = {
+    ...project,
+    id: index.toString(),
+  };
+
+  const isHovered = activeProject === projectWithId.id;
+  const isHighlighted = highlighted.includes(projectWithId.id);
+
+  if (!isHovered && !isHighlighted) return null;
+
+  return (
+    <Marker
+      key={projectWithId.id}
+      position={{
+        lat: parseFloat(projectWithId.latitude),
+        lng: parseFloat(projectWithId.longitude),
+      }}
+      title={projectWithId.title}
+      icon={{
+        url: isHovered
+          ? "/active-icon.svg"
+          : "/inactive-icon.svg",
+      }}
+      // onClick={() => {
+      //   setVisibleProjects((prev) => {
+      //     const newArr = prev.filter(
+      //       (p) =>
+      //         p.id !== projectWithId.id
+      //     );
+
+      //     return [projectWithId, ...newArr];
+      //   });
+
+      //   setActiveProject(projectWithId.id);
+
+      //   scrollTo(700, { duration: 1.2 });
+      // }}
+    />
+  );
+})}
               </Map>
             </div>
           </motion.div>

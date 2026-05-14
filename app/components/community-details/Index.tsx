@@ -1,5 +1,5 @@
 import InnerHeroBanner from "../common/InnerHeroBanner";
-import { bannerData, eventDetails } from "./data";
+import { bannerData, CommunityPageData, eventDetails } from "./data";
 import DubaiResidence from "./sections/DubaiResidence";
 import IconGrid from "../common/IconGrid";
 import CommunitySlider from "./sections/CommunitySlider";
@@ -10,19 +10,35 @@ import OtherCommunitySlider from "./sections/OtherCommunitySlider";
 import Faqsection from "./sections/Faqsection";
 import RegisterYourInterest from "./sections/RegisterYourInterest";
 
-import { EverythingWithinData, amenitiesData } from "./data";
-const Index = () => {
+// import { EverythingWithinData, amenitiesData } from "./data";
+const Index = ({data}:{data:CommunityPageData}) => {
+
+  const everythingWithinData = {
+    title:data.reach_title,
+    description:data.reach_caption,
+    cards:data.reach
+  }
+
+const amenetiesData = {
+  title: data.doorstep_title,
+  description: data.doorstep_caption,
+  amenities: data.near_by.map((item) => ({
+    icon: item.icon_url,
+    label: item.title,
+  })),
+};
+
   return (
     <>
-      <InnerHeroBanner {...bannerData} maxTitle="max-w-[73ch]" />
-      <DubaiResidence />
-      <IconGrid data={EverythingWithinData} bgClass="bg-gray" />
-      <CommunitySlider images={eventDetails[0].signatureImages} />
-      <Amenities data={amenitiesData} maxTitle="max-w-[74ch]" />
-      <LandpropertyCards />
+      <InnerHeroBanner image={data.page_banner_desktop} title={data.page_banner_title} description="" maxTitle="max-w-[73ch]" />
+      <DubaiResidence title={data.basic_title} description={data.basic_brief} subTitle={data.basic_caption}/>
+      <IconGrid data={everythingWithinData} bgClass="bg-gray" />
+      <CommunitySlider images={data.gallery} />
+      <Amenities data={amenetiesData} maxTitle="max-w-[74ch]" />
+      <LandpropertyCards title={data.properties_title} items={data.related_property}/>
       <Map />
-      <OtherCommunitySlider />
-      <Faqsection />
+      <OtherCommunitySlider data={data.other_cummunities} title={data.other_communities_title}/>
+      <Faqsection title={data.faq_title} description={data.faq_caption} data={data.faq}/>
       <RegisterYourInterest />
     </>
   );

@@ -1,3 +1,31 @@
+export type NewsDetailResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string | null;
+    page_banner_title: string;
+    post_date: string | null;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    description: string;
+    related_news: RelatedNews[] | null;
+  };
+};
+
+export type RelatedNews = {
+  slug: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  post_date: string;
+  category_name: string;
+};
+
+
 export interface NewsDetail {
   title: string;
   date: string;

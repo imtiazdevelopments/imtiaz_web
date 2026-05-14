@@ -234,6 +234,9 @@ import { CommunityCard as CommunityCardType } from "../data";
 import { useParallax } from "@/app/hooks/useParallax";
 import CustomOutlineButton from "@/app/components/common/CustomOutlineButton";
 
+type IconUrlKey = `icon${1 | 2 | 3}_url`;
+type IconTextKey = `icon${1 | 2 | 3}_text`;
+
 const CommunityCard = ({ card }: { card: CommunityCardType }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -241,6 +244,20 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
   const { ref, parallaxY } = useParallax(10);
 
   const active = isHovered || isActive;
+  
+const tags = [];
+
+for (let i = 1; i <= 3; i++) {
+  const icon = card[`icon${i}_url` as IconUrlKey];
+  const label = card[`icon${i}_text` as IconTextKey];
+
+  if (icon && label) {
+    tags.push({
+      icon,
+      label,
+    });
+  }
+}
 
   useEffect(() => {
     const handleOtherCardActive = (e: Event) => {
@@ -277,8 +294,8 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
     >
       {/* Background Image */}
       <Image
-        src={card.image}
-        alt={card.title}
+        src={card.featured_image_desktop}
+        alt={card.featured_image_alt}
         fill
         sizes="100vw"
         className="object-cover object-center"
@@ -334,9 +351,9 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         </h3>
 
         <div className="3xl:hidden grid grid-cols-1 2xl:grid-cols-2 bg-[#FFFFFF0D] backdrop-blur-[30px] border border-[#FFFFFF0D] rounded-[20px] w-full overflow-hidden">
-          {card.tags.map((tag, i) => {
+          {tags.map((tag, i) => {
             const isLastOdd =
-              card.tags.length % 2 !== 0 && i === card.tags.length - 1;
+              tags.length % 2 !== 0 && i === tags.length - 1;
             const showHorizontal = i > 0;
             const hideHorizontalAt2xl = i === 1;
             const isLeftCol = i % 2 === 0 && !isLastOdd;
@@ -397,7 +414,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         </div>
 
         <div className="hidden 3xl:flex bg-[#FFFFFF0D] justify-center backdrop-blur-[30px] rounded-full px-[30px] py-[34px] w-full gap-50">
-          {card.tags.map((tag, i) => (
+          {tags.map((tag, i) => (
             <div
               key={i}
               className="flex items-center gap-[10px]"
@@ -435,7 +452,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         <h3 className="text-white font-[optima] text-25 text-center mb-120">
           {card.title}
         </h3>
-        <Link href={card.href} onClick={(e) => e.stopPropagation()}>
+        <Link href={`/communities/${card.slug}`} onClick={(e) => e.stopPropagation()}>
           <CustomOutlineButton
             text="View Community"
             borderColor="rgba(255,255,255,0.9)"
@@ -460,7 +477,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
         <div className="w-full  flex flex-col items-center gap-[14px]">
           {/* Tags pill — full width, flex wrap, centered */}
           <div className="flex flex-wrap items-center justify-center gap-x-[30px] gap-y-[20px]      w-full px-[1px] py-5">
-            {card.tags.map((tag, i) => (
+            {tags.map((tag, i) => (
               <div key={i} className="flex items-center gap-[10px]">
                 <Image
                   src={tag.icon}
@@ -481,7 +498,7 @@ const CommunityCard = ({ card }: { card: CommunityCardType }) => {
           {/* CTA button */}
           <div className="min-w-full">
             <Link
-            href={card.href}
+            href={`/communities/${card.slug}`}
             className="pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >

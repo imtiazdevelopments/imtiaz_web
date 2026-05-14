@@ -1,3 +1,55 @@
+export interface PropertyListingItem {
+  slug: string;
+
+  brand_logo: string;
+
+  title: string;
+
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+
+  icon1_url: string;
+  icon1_text: string;
+
+  icon2_url: string;
+  icon2_text: string;
+
+  property_caption: string;
+  property_type: string;
+  property_community: string;
+  property_status: string;
+  property_location:string;
+  latitude:string;
+  longitude:string;
+}
+
+export interface PropertiesPageData {
+  meta_title: string;
+  meta_description: string;
+
+  page_banner_title: string;
+  page_banner_caption: string;
+
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+
+  page_title: string;
+  page_caption: string;
+
+  listing: PropertyListingItem[];
+}
+
+export interface PropertiesResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+
+  data: PropertiesPageData;
+}
+
+
 export const bannerData = {
     title: "Properties",
     description:

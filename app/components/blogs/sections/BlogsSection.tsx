@@ -3,11 +3,12 @@
 import { useMemo, useEffect, useRef, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
-  blogs,
-  blogTopics,
-  blogCategories,
+  // blogs,
+  // blogTopics,
+  // blogCategories,
   BlogTopic,
   BlogCategory,
+  BlogListingData,
 } from "../data";
 import LatestBlogSlider from "./LatestBlogSlider";
 import BlogCard from "./BlogCard";
@@ -64,7 +65,7 @@ const EmptyState = () => (
 );
 
 // ── BlogsSection ─────────────────────────────────────────────────────────────
-const BlogsSection = () => {
+const BlogsSection = ({data}:{data:BlogListingData}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -130,6 +131,43 @@ const BlogsSection = () => {
     },
     [pathname, router, lock, unlock],
   );
+
+  const blogs = useMemo(() => {
+  return (data?.listing || []).map((item: any, index: number) => ({
+    id: index + 1,
+    title: item.title,
+    image: item.featured_image_desktop,
+    category: item.category_name,
+    date: item.post_date
+      ? item.post_date.split("-").reverse().join("-") // 05-05-2026 -> 2026-05-05
+      : "",
+    slug: item.slug,
+    description: item.description,
+    mobileImage: item.featured_image_mobile,
+    alt: item.featured_image_alt,
+    topic:item.topic_name,
+  }));
+}, [data]);
+
+const blogCategories = useMemo(() => {
+  return [
+    ...new Set(
+      blogs
+        .map((item) => item.category)
+        .filter(Boolean),
+    ),
+  ];
+}, [blogs]);
+
+const blogTopics = useMemo(() => {
+  return [
+    ...new Set(
+      blogs
+        .map((item) => item.topic)
+        .filter(Boolean),
+    ),
+  ];
+}, [blogs]);
 
   const clearFilters = useCallback(() => {
     savedScrollY.current = window.scrollY;

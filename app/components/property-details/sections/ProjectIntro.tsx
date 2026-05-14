@@ -6,31 +6,37 @@ import { useGsapStagger } from "../../../hooks/useGsapStagger";
 
 import CustomIconButton from "../../common/CustomIconButton";
 
-const pdfdocData = [
+
+// type PdfDoc = (typeof pdfdocData)[0];
+
+interface ProjectIntroProps {
+  title:string,
+  description:string,
+  brochure:string,
+  fact_sheet:string,
+  unit_layout:string
+}
+
+function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: ProjectIntroProps) {
+  
+  const pdfdocData = [
   { 
     id: "brochure",
-    image: "/images/projects/floor.png",
+    image: brochure,
     label: "Brochure",
   },
   { 
     id: "factsheet",
-    image: "/images/projects/floor.png",
+    image: fact_sheet,
     label: "Fact Sheet",
   },
   { 
     id: "unitlayout",
-    image: "/images/projects/floor.png",
+    image: unit_layout,
     label: "Unit layout",
   }, 
 ];
 
-type PdfDoc = (typeof pdfdocData)[0];
-
-interface ProjectIntroProps {
-  pdfdocs?: PdfDoc[];
-}
-
-function ProjectIntro({ pdfdocs = pdfdocData }: ProjectIntroProps) { 
   const gridRef = useGsapStagger({
     selector: ".selector",
     from: { opacity: 0, y: 40 },
@@ -66,9 +72,9 @@ function ProjectIntro({ pdfdocs = pdfdocData }: ProjectIntroProps) {
           className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}
         >
-          {pdfdocs.map((doc, index) => (
+          {pdfdocData.map((doc, index) => (
             <a 
-              key={doc.id}
+              key={index}
               href={doc.image} 
               download={getFileName(doc.image, doc.label)}
               // className={`selector ${index === 2 ? 'col-span-2 flex justify-center md:col-span-1 md:flex-none' : ''}`}

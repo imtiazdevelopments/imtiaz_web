@@ -55,11 +55,11 @@ export function SectionHeading({
   }, [title, delay]);
 
   // Split into lines first, then words within each line
-  const lines = title.split("\n");
+  const lines = title?.split("\n");
 
  return (
     <Tag ref={ref} className={`text-heading ${className}`}>
-      {lines.map((line, lineIndex) => (
+      {lines?.map((line, lineIndex) => (
         <span key={lineIndex} style={{ display: "block" }}>
           {line.trim().split(" ").map((word, wordIndex) => (
             <span

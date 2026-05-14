@@ -3,6 +3,12 @@
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 
+const decodeHtml = (html: string) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 const BlogContent = ({ content }: { content: string }) => {
   return (
     <section className="w-full bg-white pt-20 pb-[40px] md:pb-50  " data-header="dark">
@@ -13,7 +19,9 @@ const BlogContent = ({ content }: { content: string }) => {
           whileInView="show"
           viewport={{ once: true }}
           className="blog-content dynamicmn"
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{
+            __html: decodeHtml(content),
+          }}
         />
       </div>
     </section>
