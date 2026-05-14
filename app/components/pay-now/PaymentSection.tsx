@@ -55,7 +55,7 @@ const projects = [
   "Project Delta",
 ];
 
-export default function PaymentForm() {
+export default function PaymentForm({title,description}:{title:string;description:string}) {
   const {
     register,
     handleSubmit,
@@ -93,11 +93,11 @@ export default function PaymentForm() {
         {/* Left col — 49% */}
         <div className="w-full lg:w-[48.5%] flex-shrink-0 flex flex-col">
           <SectionHeading
-            title="PAY WITH CONFIDENCE"
+            title={title}
             className="text-foreground mb-20 lg:max-w-[11ch]"
           />
           <SectionDescription
-            text="Complete your payment quickly and securely through our trusted online payment gateway."
+            text={description}
             className="text-foreground-light/80 max-w-[473px] mb-[30px] md:mb-50"
           />
           <SectionHeading

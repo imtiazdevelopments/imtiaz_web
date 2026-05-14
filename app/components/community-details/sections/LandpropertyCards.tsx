@@ -34,8 +34,8 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
   }, []);
 
   const cards = items;
-  const hasMore = cards.length > initialCount;
-  const visibleCards = showAll ? cards : cards.slice(0, initialCount);
+  const hasMore = cards?.length > initialCount;
+  const visibleCards = showAll ? cards : cards?.slice(0, initialCount);
 
   return (
     <section data-header="dark" className="w-full">
@@ -81,7 +81,7 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
                 640: { slidesPerView: 2 },
               }}
             >
-              {items.map((project,index) => (
+              {items?.map((project,index) => (
                 <SwiperSlide key={index}>
                   <ProjectCard 
                   id={index.toString()}
@@ -163,7 +163,7 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
 
           {/* 💻 DESKTOP 1140+: GRID */}
           <div className="hidden min-[1140px]:grid min-[1140px]:grid-cols-3 min-[1700px]:grid-cols-4 3xl:gap-y-50 gap-y-40 gap-x-30 xl:gap-x-[28px]">
-            {visibleCards.map((project, index) => (
+            {visibleCards?.map((project, index) => (
               <Reveal
                 variants={moveUpV2}
                 key={index}
