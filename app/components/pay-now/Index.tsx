@@ -1,12 +1,19 @@
 import InnerHeroBanner from "../common/InnerHeroBanner"
 import PaymentForm from "./PaymentSection"
-import { bannerData } from "./data"
+import { bannerData, OnlinePaymentResponse } from "./data"
 
-const Index = () => {
+const Index = ({data}:{data:OnlinePaymentResponse['data']}) => {
   return (
     <>
-    <InnerHeroBanner {...bannerData} maxW="max-w-[641px]" />
-    <PaymentForm />
+    <InnerHeroBanner 
+    title={data.page_banner_title}
+    image={data.page_banner_desktop}
+    description={data.page_banner_caption}
+    maxW="max-w-[641px]" />
+    <PaymentForm 
+    title={data.page_title}
+    description={data.page_caption}
+    />
     </>
   )
 }

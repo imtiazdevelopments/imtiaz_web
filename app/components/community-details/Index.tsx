@@ -16,7 +16,7 @@ const Index = ({data}:{data:CommunityPageData}) => {
   const everythingWithinData = {
     title:data.reach_title,
     description:data.reach_caption,
-    cards:data.reach
+    cards:data.reach ?? []
   }
 
 const amenetiesData = {

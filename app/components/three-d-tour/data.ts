@@ -1,3 +1,30 @@
+export type TourListingItem = {
+  slug: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  property_community: string;
+};
+
+export type TourPageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string;
+    page_banner_title: string;
+    page_banner_caption: string;
+    page_banner_desktop: string;
+    page_banner_mobile: string;
+    page_title: string;
+    page_caption: string;
+    listing: TourListingItem[];
+  };
+};
+
 export const bannerData = {
   image: "/images/banner3d.jpg",
   title: "3D Tour",
