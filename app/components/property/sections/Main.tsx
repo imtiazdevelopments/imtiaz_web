@@ -481,7 +481,7 @@ const Main = ({ data }: {data:PropertiesPageData}) => {
                   {paginated.map((project, i) => (
                     <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
                       <ProjectCard
-                        id={i.toString()}
+                        
                         image={project.featured_image_desktop}
                         hoverImage={project.brand_logo}
                         subtitle={project.property_caption}

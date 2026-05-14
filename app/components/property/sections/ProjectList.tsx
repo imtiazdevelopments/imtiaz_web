@@ -24,6 +24,10 @@ import SliderArrowButton from "../../common/SliderNavigationButton";
 import { PropertyListingItem } from "../data";
 
 
+type ProjectWithId = PropertyListingItem & {
+  id: string;
+};
+
 const EmptyState = () => (
   <motion.div
     initial="hidden"
@@ -54,7 +58,7 @@ const EmptyState = () => (
 export default function FeaturedProjects({
   projects,
 }: {
-  projects: PropertyListingItem[];
+  projects: ProjectWithId[];
 }) {
   const [activeProject, setActiveProject] = useState<string>("");
   const swiperRef = useRef<SwiperType | null>(null);
@@ -62,7 +66,7 @@ export default function FeaturedProjects({
   useEffect(() => {
     setVisibleProjects([]);
     setHighlighted([]);
-    setActiveProject(0 || "");
+    setActiveProject(projects[0]?.id || "");
   }, [projects]);
 
   const [isDesktop, setIsDesktop] = useState(false);
@@ -76,7 +80,7 @@ export default function FeaturedProjects({
   const containerRef = useRef(null);
   const leftSpacing = useContainerInset(containerRef);
 
-  const [visibleProjects, setVisibleProjects] = useState<PropertyListingItem[]>([]);
+  const [visibleProjects, setVisibleProjects] = useState<ProjectWithId[]>([]);
 
   const [highlighted, setHighlighted] = useState<string[]>([]);
   const map = useMap();
@@ -91,24 +95,24 @@ export default function FeaturedProjects({
     // Filter only from already filtered projects
     const visibleProjectsInBounds = projects.filter(
       (p) =>
-        parseFloat(p.latitude) >= bounds.south &&
-        parseFloat(p.latitude) <= bounds.north &&
-        parseFloat(p.longitude) >= bounds.west &&
-        parseFloat(p.longitude) <= bounds.east,
+        parseFloat(p.property_latitude) >= bounds.south &&
+        parseFloat(p.property_latitude) <= bounds.north &&
+        parseFloat(p.property_longitude) >= bounds.west &&
+        parseFloat(p.property_longitude) <= bounds.east,
     );
 
-    // const visibleIds = visibleProjectsInBounds.map((p) => p.id);
+    const visibleIds = visibleProjectsInBounds.map((p) => p.id);
 
-    // setVisibleProjects(visibleProjectsInBounds);
-    // setHighlighted(visibleIds);
+    setVisibleProjects(visibleProjectsInBounds);
+    setHighlighted(visibleIds);
 
-    // if (visibleProjectsInBounds.length > 0) {
-    //   if (!visibleIds.includes(activeProject)) {
-    //     setActiveProject(visibleProjectsInBounds[0].id);
-    //   }
-    // } else {
-    //   setActiveProject("");
-    // }
+    if (visibleProjectsInBounds.length > 0) {
+      if (!visibleIds.includes(activeProject)) {
+        setActiveProject(visibleProjectsInBounds[0].id);
+      }
+    } else {
+      setActiveProject("");
+    }
   };
 
   useEffect(() => {
@@ -116,8 +120,8 @@ export default function FeaturedProjects({
 
     const firstProject = projects[0];
     const newCenter = {
-      lat: parseFloat(firstProject.latitude),
-      lng: parseFloat(firstProject.longitude),
+      lat: parseFloat(firstProject.property_latitude),
+      lng: parseFloat(firstProject.property_longitude),
     };
 
     const currentCenter = map.getCenter();
@@ -176,7 +180,7 @@ export default function FeaturedProjects({
                     delayRange={index * 0.11}
                   >
                     <ProjectCard
-                      id={index.toString()}
+                      
                       image={project.featured_image_desktop}
                       hoverImage={project.brand_logo}
                       subtitle={project.property_caption}
@@ -285,8 +289,8 @@ export default function FeaturedProjects({
             <div ref={mapContainerRef} className="w-full h-full relative">
               <Map
                 defaultCenter={{
-                  lat: parseFloat(projects[0]?.latitude),
-                  lng: parseFloat(projects[0]?.longitude),
+                  lat: parseFloat(projects[0]?.property_latitude),
+                  lng: parseFloat(projects[0]?.property_longitude),
                 }}
                 defaultZoom={15}
                 className="w-full h-full"
@@ -324,47 +328,36 @@ export default function FeaturedProjects({
                   },
                 ]}
               >
-                {projects?.map((project, index) => {
-  const projectWithId = {
-    ...project,
-    id: index.toString(),
-  };
-
-  const isHovered = activeProject === projectWithId.id;
-  const isHighlighted = highlighted.includes(projectWithId.id);
-
-  if (!isHovered && !isHighlighted) return null;
-
-  return (
-    <Marker
-      key={projectWithId.id}
-      position={{
-        lat: parseFloat(projectWithId.latitude),
-        lng: parseFloat(projectWithId.longitude),
-      }}
-      title={projectWithId.title}
-      icon={{
-        url: isHovered
-          ? "/active-icon.svg"
-          : "/inactive-icon.svg",
-      }}
-      // onClick={() => {
-      //   setVisibleProjects((prev) => {
-      //     const newArr = prev.filter(
-      //       (p) =>
-      //         p.id !== projectWithId.id
-      //     );
-
-      //     return [projectWithId, ...newArr];
-      //   });
-
-      //   setActiveProject(projectWithId.id);
-
-      //   scrollTo(700, { duration: 1.2 });
-      // }}
-    />
-  );
-})}
+                {projects?.map((project) => {
+                  const isHovered = activeProject === project.id;
+                  const isHighlighted = highlighted.includes(project.id);
+                  if (!isHovered && !isHighlighted) return null;
+                  return (
+                    <Marker
+                      key={project.id}
+                      position={{
+                        lat: parseFloat(project.property_latitude),
+                        lng: parseFloat(project.property_longitude),
+                      }}
+                      title={project.title}
+                      icon={{
+                        url: isHovered
+                          ? "/active-icon.svg"
+                          : "/inactive-icon.svg",
+                      }}
+                      onClick={() => {
+                        setVisibleProjects((prev) => {
+                          const newArr = prev.filter(
+                            (p) => p.id !== project.id,
+                          );
+                          return [project, ...newArr];
+                        });
+                        setActiveProject(project.id);
+                        scrollTo(700, { duration: 1.2 });
+                      }}
+                    />
+                  );
+                })}
               </Map>
             </div>
           </motion.div>

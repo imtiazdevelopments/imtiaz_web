@@ -64,7 +64,7 @@ const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],
                 <SwiperSlide key={i}>
                   <Reveal variants={moveUpV2} delayRange={i * 0.12}>
                     <ProjectCard 
-                    id={i.toString()}
+                    
                     image={project.featured_image_desktop}
                     hoverImage={project.brand_logo}
                     {...project} />

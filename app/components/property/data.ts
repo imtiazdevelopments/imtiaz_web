@@ -1,4 +1,5 @@
 export interface PropertyListingItem {
+  id:string;
   slug: string;
 
   brand_logo: string;
@@ -20,8 +21,8 @@ export interface PropertyListingItem {
   property_community: string;
   property_status: string;
   property_location:string;
-  latitude:string;
-  longitude:string;
+  property_latitude:string;
+  property_longitude:string;
 }
 
 export interface PropertiesPageData {
