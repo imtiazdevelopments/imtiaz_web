@@ -110,10 +110,11 @@ const AboutJourneyV3 = () => {
 
         <div className="overflow-hidden">
           <p className="anim-item text-white text-description max-w-[73ch] mx-auto   mb-50">
-            We transform visions into living, breathing destinations. At Imtiaz
-            Developments, our legacy is built on excellence, innovation, and
-            uncompromising quality — delivering iconic properties that inspire
-            and endure.
+            At Imtiaz Developments, excellence is never incidental. It is shaped
+            through considered design, elevated craftsmanship, and an unwavering
+            attention to detail. With innovation as our guide and integrity at
+            our core, we pursue perfection with intention at every step, in
+            every detail.
           </p>
         </div>
 
@@ -125,7 +126,7 @@ const AboutJourneyV3 = () => {
                 borderColor="border-white"
                 textColor="text-white"
                 px="px-[28px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
-                />
+              />
             </Link>
           </div>
         </div>

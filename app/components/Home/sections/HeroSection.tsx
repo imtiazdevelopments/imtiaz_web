@@ -114,8 +114,8 @@ export default function HeroSection({ titleRef, scrollRef,searchRef,mobsearchRef
               ref={titleRef}
               className="text-heading uppercase text-white opacity-0 max-w-[135ch]"
             >
-              Redefining Spaces <br />
-              Elevating Lives
+              BUILDING WITH PURPOSE. <br />
+              DELIVERING WITH PRECISION.
             </h1>
           </div>
            <div className="overflow-hidden">
