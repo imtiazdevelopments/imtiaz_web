@@ -279,7 +279,7 @@ export const aboutSectionJourney = {
 export const heroSlides = [
   {
     title: "SUNSET BAY 2 by Imtiaz",
-    video: "/videos/sunset_bay.mp4",
+    video: "/videos/seaClif-web.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
       features: [
@@ -298,7 +298,7 @@ export const heroSlides = [
   },
   {
     title: "SUNSET BAY 2 by Imtiaz",
-    video: "/videos/sunset_bay.mp4",
+    video: "/videos/seaClif-web.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",
       features: [
@@ -320,7 +320,49 @@ export const heroSlides = [
 export const heroSlidesComingSoon = [
   {
     title: "Cotier House 2 by Imtiaz",
-    video: "/videos/slidervdo-2.mp4",
+    video: "/videos/coming-soon.mp4",
+    pillFeatures: {
+      title: "/icons/pro_slider/cotier.svg",
+      features: [
+        { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
+        { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
+        {
+          icon: "/icons/pro_slider/sunset_icons/3.svg",
+          label: "FULLY EQUIPPED GYM",
+        },
+        {
+          icon: "/icons/pro_slider/sunset_icons/4.svg",
+          label: "SAUNA & STEAM",
+        },
+      ],
+    },
+  },
+  // {
+  //   title: "Cotier House 2 by Imtiaz",
+  //   video: "/videos/slidervdo-2.mp4",
+  //   pillFeatures: {
+  //     title: "/icons/pro_slider/cotier.svg",
+  //     features: [
+  //       { icon: "/icons/pro_slider/sunset_icons/1.svg", label: "KIDS' ZONE" },
+  //       { icon: "/icons/pro_slider/sunset_icons/2.svg", label: "club house" },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/3.svg",
+  //         label: "FULLY EQUIPPED GYM",
+  //       },
+  //       {
+  //         icon: "/icons/pro_slider/sunset_icons/4.svg",
+  //         label: "SAUNA & STEAM",
+  //       },
+  //     ],
+  //   },
+  // },
+];
+
+
+export const promotion = [
+  {
+    title: "Cotier House 2 by Imtiaz",
+    video: "/videos/promotion.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/cotier.svg",
       features: [
@@ -662,3 +704,4 @@ export const spotlight = {
     },
   ],
 };
+
