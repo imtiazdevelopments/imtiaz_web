@@ -48,7 +48,7 @@ export default function Index({data}:{data:InnovationPageResponse['data']}) {
       image={data.page_banner_desktop}
       maxW="max-w-[816px]" />
       <ImpactAreas data={impactAreas} />
-      <SustainablityMoments description={data.moments_title} data={data.moments}/>
+      <SustainablityMoments title={data.moments_title} description={data.moments_caption} data={data.moments}/>
       <PressSpotlight title={data.spotlight_title}/>
     </>
   );

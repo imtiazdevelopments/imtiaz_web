@@ -55,7 +55,7 @@ function GalleryCard({
   );
 }
 
-export default function ScrollingGallery({description,data}:{description:string;data:{moment_caption:string,moment_url:string}[]}) {
+export default function ScrollingGallery({title,description,data}:{title:string;description:string;data:{moment_caption:string,moment_url:string}[]}) {
   const slides = data;
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -70,7 +70,7 @@ export default function ScrollingGallery({description,data}:{description:string;
     >
       <div className="container text-center mb-[40px] md:mb-60">
         <SectionHeading
-          title={columnData.title}
+          title={title}
           className="uppercase text-foreground mb-20"
         />
         <SectionDescription

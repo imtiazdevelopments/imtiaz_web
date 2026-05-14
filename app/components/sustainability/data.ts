@@ -35,6 +35,7 @@ export type InnovationPageResponse = {
     highlight_image_mobile_3: string;
 
     moments_title: string;
+    moments_caption:string;
     spotlight_title: string;
 
     show_reasons_section: string;
