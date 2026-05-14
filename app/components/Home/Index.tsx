@@ -14,6 +14,7 @@ import CommunityNamesSlider from "../../components/Home/sections/CommunityNamesS
 import AboutJourneyV3 from "../../components/Home/sections/AboutJourneyV3";
 import SpotlightSlider from "../../components/Home/sections/SpotlightSlider";
 import HeroSection from "./sections/HeroSection";
+import { HomePageResponse } from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,15 +76,15 @@ type Props = {
   imtiazPropertiesData: ImtiazPropertiesData;
   ConstructionProgressData: ConstructionProgressData;
   appSectionData: AppSectionData;
+  data:HomePageResponse['data']
 };
 
 export default function Index({
   heroSlides,
   heroSlidesComingSoon,
-  communityNamesData,
-  imtiazPropertiesData,
   ConstructionProgressData,
   appSectionData,
+  data
 }: Props) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
@@ -146,6 +147,45 @@ useEffect(() => {
   };
 }, []);
 
+
+const communityNamesData = {
+  heading: "IMTIAZ COMMUNITIES",
+  communities: data.communities.map((community, index) => ({
+    id: (index + 1).toString(),
+    name: community.title,
+    bgImage: community.featured_image_desktop,
+    link: `/community/${community.slug}`,
+  })),
+};
+
+const imtiazPropertiesData = {
+  sectionTitle: "IMTIAZ PROPERTIES",
+
+  properties: data.properties.map((property, index) => ({
+    id: (index + 1).toString(),
+    title: property.title,
+    image: property.featured_image_desktop,
+    link: `/property/${property.slug}`,
+    location: property.property_community,
+    hoverImage: property.brand_logo,
+    startingFrom:property.icon1_text,
+    units:property.icon2_text
+  })),
+};
+
+const spotlight = {
+  title: "Press Spotlight",
+  viewAllHref: "/news",
+  slides: data.news.map((item, index) => ({
+    id: `spotlight-${index + 1}`,
+    date: item.post_date,
+    title: item.title,
+    href: `/news/${item.slug}`,
+    image: item.featured_image_desktop,
+    alt: item.featured_image_alt,
+  })),
+};
+
   return (
     <>
       <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} mobsearchRef={mobsearchRef}/>
@@ -162,7 +202,7 @@ useEffect(() => {
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
       <ConstructionProgress2 data={ConstructionProgressData} />
-      <SpotlightSlider />
+      <SpotlightSlider data={spotlight}/>
       <AppSectionV2 data={appSectionData} />
     </>
   );

@@ -1,3 +1,79 @@
+export type NewLaunchItem = {
+  slug: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  property_status: string;
+};
+
+export type CommunityItem = {
+  slug: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string | null;
+  icon1_url: string;
+  icon1_text: string;
+  icon2_url: string;
+  icon2_text: string;
+  icon3_url: string;
+  icon3_text: string;
+};
+
+export type PropertyItem = {
+  slug: string;
+  brand_logo: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  icon1_url: string;
+  icon1_text: string;
+  icon2_url: string;
+  icon2_text: string;
+  property_caption: string;
+  property_type: string;
+  property_community: string;
+  property_status: string;
+};
+
+export type NewsItem = {
+  slug: string;
+  title: string;
+  description: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  post_date: string;
+  category_name: string;
+};
+
+export type HomePageResponse = {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: {
+    meta_title: string;
+    meta_description: string;
+    page_banner_video: string;
+    page_section1_video: string;
+    page_section3_video: string;
+    page_section4_video: string;
+    page_section7_video: string;
+
+    new_launches: NewLaunchItem[];
+
+    communities: CommunityItem[];
+
+    properties: PropertyItem[];
+
+    news: NewsItem[];
+  };
+};
+
+
 export interface Property {
   id: number;
   image: string;
