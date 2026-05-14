@@ -336,6 +336,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { moveUpExit } from "../../motionVariants";
+import Link from "next/link";
 
 export interface feats {
   icon: string;
@@ -673,12 +674,14 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et.\nlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor."}
                         className={`shrink-0 mx-auto text-white whitespace-pre-line`}
                       />
-                      <CustomOutlineButton
-                          text="Explore"
-                          borderColor="border-white"
-                          textColor="text-white"
-                          px="px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[47px]"
-                        />
+                      <Link href={"https://mustaqbal.imtiaz.ae/"} target="_blank">
+                        <CustomOutlineButton
+                            text="Explore"
+                            borderColor="border-white"
+                            textColor="text-white"
+                            px="px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[47px]"
+                          />
+                      </Link>
                     </div>
           {/* <PropertyFilterBar /> */}
         </div>
