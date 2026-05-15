@@ -13,6 +13,8 @@ export interface PropertyDetailsData {
   page_banner_title: string;
   page_banner_desktop: string;
   page_banner_mobile: string;
+  page_banner_video_desktop: string;
+  page_banner_video_mobile: string;
 
   brochure: string;
   fact_sheet: string;
