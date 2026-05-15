@@ -81,7 +81,7 @@ export default function Amenities({ data, maxTitle }: Props) {
             <div
               ref={gridRef}
            // Container
-className="flex flex-wrap justify-center items-center mt-[40px] md:mt-50 gap-y-[35px] lg:gap-y-[40px] lg:gap-y-60" >
+className="flex flex-wrap justify-center items-start mt-[40px] md:mt-50 gap-y-[35px] lg:gap-y-[40px] lg:gap-y-60" >
               {data.amenities.map((item, i) => (
                 <div
                   key={i}

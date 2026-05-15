@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { faqData, FAQItem } from "../data";
+import { FAQItem } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
@@ -130,7 +130,7 @@ export default function Faq({title,description,data}:{title:string,description:s
               item={item}
               isOpen={openId === index}
               onToggle={() => toggle(index)}
-              isLast={index === faqData.items.length - 1}
+              isLast={index === data.length - 1}
               />
               </Reveal>
           ))}

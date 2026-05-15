@@ -212,4 +212,4 @@ const spotlight = {
       <AppSectionV2 data={appSectionData} />
     </>
   );
-}
+}   

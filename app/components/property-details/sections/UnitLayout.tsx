@@ -818,7 +818,7 @@ export default function UnitLayout({ data }: {data:UnitLayoutItem[]}) {
             className="hidden lg:flex flex-1 items-center justify-center"
           >
             {activeUnit ? (
-              <div className="relative w-full max-w-[454px] aspect-square">
+              <div className="relative w-full max-w-[454px] 3xl:max-w-[530px] aspect-square">
                 <FloorPlanImage unit={activeUnit} />
               </div>
             ) : (
