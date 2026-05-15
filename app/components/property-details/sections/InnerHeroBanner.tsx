@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import Breadcrumb from "../../common/Breadcrumb";
 import BannerDetails from "./BannerDetails";
 
 interface InnerHeroProps {
+  video?: string;
   image: string;
   title: string;
   description?: string;
@@ -24,29 +25,34 @@ const ZOOM_OUT_START = 1.4;
 const ZOOM_OUT_END = 1.0;
 const ZOOM_IN_END = 1.06;
 
-
 const BREADCRUMB_DELAY = ZOOM_OUT_DURATION - 1.6;
 const BANNER_DETAILS_DELAY = BREADCRUMB_DELAY + 0.17;
 
 const InnerHeroBanner = ({
+  video,
   image,
   location,
   payment_plan,
   starting_price,
-  delivery_date
+  delivery_date,
 }: InnerHeroProps) => {
+  console.log(video, image, "video image");
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const breadcrumbRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
   const bannerDetailsRef = useRef<HTMLDivElement>(null);
 
+  const hasVideo =
+    video &&
+    video.trim().length > 0 &&
+    /\.(mp4|webm|ogg|mov)$/i.test(video.trim());
+
   const handleImageLoad = useCallback(() => {
     if (hasAnimated.current) return;
     hasAnimated.current = true;
 
     gsap.context(() => {
-      // Zoom-out → slow Ken-Burns creep
       gsap.fromTo(
         imageWrapperRef.current,
         { scale: ZOOM_OUT_START, transformOrigin: "center center" },
@@ -55,7 +61,6 @@ const InnerHeroBanner = ({
           duration: ZOOM_OUT_DURATION,
           ease: "expo.out",
           onComplete: () => {
-            // 👉 Then start infinite subtle loop
             gsap
               .timeline({ repeat: -1 })
               .to(imageWrapperRef.current, {
@@ -72,8 +77,6 @@ const InnerHeroBanner = ({
         },
       );
 
-
-      // Breadcrumb — subtle slide up
       if (breadcrumbRef.current) {
         gsap.fromTo(
           breadcrumbRef.current,
@@ -103,6 +106,29 @@ const InnerHeroBanner = ({
     });
   }, []);
 
+  // when video, trigger the breadcrumb/bannerDetails animations on mount
+  useEffect(() => {
+    if (!video) return;
+
+    gsap.fromTo(
+      breadcrumbRef.current,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: "power3.out",
+        delay: BREADCRUMB_DELAY,
+      },
+    );
+
+    gsap.fromTo(
+      bannerDetailsRef.current,
+      { y: 200 },
+      { y: 0, duration: 1, ease: "power3.out", delay: BANNER_DETAILS_DELAY },
+    );
+  }, [video]);
+
   return (
     <section
       className="relative w-full h-[100vh] md:h-[82vh] 2xl:h-screen overflow-hidden"
@@ -113,15 +139,26 @@ const InnerHeroBanner = ({
         className="absolute inset-0 will-change-transform"
         style={{ transformOrigin: "center center" }}
       >
-        <Image
-          src={image}
-          alt={"title"}
-          fill
-          sizes="100vw"
-          className="object-cover object-center 2xl:object-bottom"
-          priority
-          onLoad={handleImageLoad}
-        />
+        {hasVideo ? (
+          <video
+            src={video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover object-center 2xl:object-bottom"
+          />
+        ) : image && image.trim().length > 0 ? (
+          <Image
+            src={image}
+            alt="title"
+            fill
+            sizes="100vw"
+            className="object-cover object-center 2xl:object-bottom"
+            priority
+            onLoad={handleImageLoad}
+          />
+        ) : null}
       </div>
 
       {/* Static overlay */}

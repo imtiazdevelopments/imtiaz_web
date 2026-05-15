@@ -35,6 +35,7 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
   return (
     <>
       <InnerHeroBanner
+      video={data?.page_banner_video_desktop}
         image={data?.page_banner_desktop}
         title={data?.page_banner_title}
         description=""
