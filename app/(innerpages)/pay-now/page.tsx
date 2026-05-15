@@ -1,17 +1,20 @@
-import Index from '@/app/components/pay-now/Index'
+import Index from "@/app/components/pay-now/Index";
+export const dynamic = "force-dynamic";
 
-const page = async() => {
-
-  const response = await fetch(`${process.env.BASE_URL}/api/paynow.php?lang=en`, {
-    next: { revalidate: 60 },
-  });
+const page = async () => {
+  const response = await fetch(
+    `${process.env.BASE_URL}/api/paynow.php?lang=en`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const data = await response.json();
 
   return (
     <>
-      <Index data={data.data}/>
+      <Index data={data.data} />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -169,11 +169,11 @@ export default function IconGrid({ data, bgClass }: Props) {
         <div className="text-center">
           <SectionHeading
             title={data.title}
-            className="text-heading leading-[1.4] mb-20"
+            className="text-heading leading-[1.4] mb-20 max-w-[45ch] mx-auto"
           />
           <SectionDescription
             text={data.description}
-            className="text-description text-foreground-light max-w-[43ch] mx-auto"
+            className="text-description text-foreground-light max-w-[60ch] mx-auto"
           />
         </div>
 

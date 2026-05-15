@@ -48,6 +48,13 @@ export type AboutPageResponse = {
 
     history_title: string;
     history_caption: string;
+    history: Record<string, {
+      featured_image: string;
+      featured_image_alt: string | null;
+      year: string;
+      title: string | null;
+      brief: string;
+    }[]>;
 
     medal_title: string;
     medal_brief: string;
@@ -80,6 +87,7 @@ export type AboutPageResponse = {
     }[];
   };
 };
+
 
 
 export const bannerData = {
