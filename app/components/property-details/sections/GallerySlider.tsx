@@ -110,9 +110,9 @@ function TabSwiper({
 export default function GallerySlider({data}:{data:GalleryItem[]}) {
 
   console.log(data)
-  const INTERIOR_SLIDES = data.filter((item)=>item.caption == "Interior")
+  const INTERIOR_SLIDES = data?.filter((item)=>item.caption == "Interior")
 
-const EXTERIOR_SLIDES = data.filter((item)=>item.caption == "Exterior")
+const EXTERIOR_SLIDES = data?.filter((item)=>item.caption == "Exterior")
 
   const [activeTab, setActiveTab] = useState<TabType>("interior");
   const [mounted, setMounted] = useState(false);
