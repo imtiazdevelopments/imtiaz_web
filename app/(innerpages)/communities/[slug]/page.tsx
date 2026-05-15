@@ -8,9 +8,15 @@ const page = async({params}: {params: Promise<{slug: string}>}) => {
   );
   const data = await response.json();
 
+    const communitiesResponse = await fetch(`${process.env.BASE_URL}/api/communities.php?lang=en`, {
+    next: { revalidate: 60 },
+  });
+  const communitiesData = await communitiesResponse.json();
+
+
   return (
     <>
-      <Index data={data.data}/>
+      <Index data={data.data} communitiesData={communitiesData.data}/>
     </>
   )
 }

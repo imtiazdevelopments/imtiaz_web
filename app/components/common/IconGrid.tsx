@@ -185,7 +185,7 @@ export default function IconGrid({ data, bgClass }: Props) {
           {data.cards.map((loc, i) => (
             <div
               key={i}
-              className="location-card relative flex flex-col items-center justify-start pb-20 pt-20 first:pt-0 last:pb-0 md:px-4 sm:px-8 text-center"
+              className="location-card relative flex flex-col items-center justify-start pb-20 pt-20 first:pt-0 sm:first:pt-20 last:pb-0 md:px-4 sm:px-8 text-center"
             >
               {/* Desktop divider */}
               {i !== 0 && (

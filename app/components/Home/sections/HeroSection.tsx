@@ -168,7 +168,7 @@ export default function HeroSection({
             </div>
 
             {/* Mouse icon — now below the search pill */}
-            <div className="overflow-hidden">
+            {/* <div className="overflow-hidden">
               <Image
                 ref={scrollRef}
                 className="opacity-0 w-[30px]"
@@ -177,7 +177,7 @@ export default function HeroSection({
                 width={50}
                 height={50}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
