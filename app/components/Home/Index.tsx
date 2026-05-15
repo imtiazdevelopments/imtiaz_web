@@ -27,6 +27,12 @@ type HeroSlide = {
   };
 };
 
+type ComingSoonSlide = {
+  title: string;
+  desktopVideo: string;
+  mobileVideo: string;
+};
+
 type CommunityNamesData = {
   heading: string;
   communities: {
@@ -71,7 +77,7 @@ type AppSectionData = {
 
 type Props = {
   heroSlides: HeroSlide[];
-  heroSlidesComingSoon: HeroSlide[];
+  heroSlidesComingSoon: ComingSoonSlide[];
   promotion: HeroSlide[];
   communityNamesData: CommunityNamesData;
   imtiazPropertiesData: ImtiazPropertiesData;

@@ -110,12 +110,12 @@ const Dropdown = ({
                 onSelect(option.value);
                 onClose();
               }}
-              className={`w-full text-left px-5 py-2.5 text-16 transition-colors duration-150 rounded-sm cursor-pointer ${selected === option.value
+              className={`w-full text-left px-5 py-2.5 text-16 transition-colors capitalize duration-150 rounded-sm cursor-pointer ${selected === option.value
                   ? "text-black  bg-gray-50"
                   : "text-white hover:bg-gray-50 hover:text-black"
                 }`}
             >
-              {option.label}
+              {option.label.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
             </button>
           ))}
         </div>
