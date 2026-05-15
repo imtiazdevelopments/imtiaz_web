@@ -6,7 +6,6 @@ export default async function Page() {
     next: { revalidate: 60 },
   });
   const data = await response.json();
-  console.log(data, "Abt");
 
   return (
     <>
