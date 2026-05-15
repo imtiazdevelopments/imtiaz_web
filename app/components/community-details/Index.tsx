@@ -35,8 +35,8 @@ const amenetiesData = {
       <IconGrid data={everythingWithinData} bgClass="bg-gray" />
       <CommunitySlider images={data.gallery} />
       <Amenities data={amenetiesData} maxTitle="max-w-[74ch]" />
-      <LandpropertyCards title={data.properties_title} items={data.related_property}/>
-      <Map />
+      {data.related_property && data.related_property.length > 0 && <LandpropertyCards title={data.properties_title} items={data.related_property}/>}
+      <Map pt={data.related_property && data.related_property.length > 0 ? true : false} />
       <OtherCommunitySlider data={data.other_cummunities} title={data.other_communities_title}/>
       <Faqsection title={data.faq_title} description={data.faq_caption} data={data.faq}/>
       <RegisterYourInterest />

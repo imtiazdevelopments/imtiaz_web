@@ -63,14 +63,14 @@ export default function HeroSection() {
       <div className="container absolute bottom-10 lg:bottom-[67px] left-0 right-0 z-[9999] flex justify-center px-4 pb-6">
         <div className="w-full">
           <div className="text-center flex justify-center flex-col items-center">
-            <SectionHeading title={"A National Initiative by Imtiaz"} className="text-white mb-[20px] sm:mb-40" />
+            <SectionHeading title={"A National Initiative by Imtiaz"} className="text-white mb-[20px] sm:mb-30" />
 
-                        <SectionDescription
+                        {/* <SectionDescription
               text={
                 "The future is not something we wait for. It is something we build."
               }
               className="text-25 text-white font-[avenirBook] leading-[1] mx-auto uppercase mb-[20px] max-w-[50ch]"
-            />
+            /> */}
 
             <SectionDescription
               text={
