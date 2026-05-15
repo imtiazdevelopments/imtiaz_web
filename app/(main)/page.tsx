@@ -961,6 +961,14 @@ export default async function Page() {
   });
   const data = await response.json();
 
+
+  const communitiesResponse = await fetch(`${process.env.BASE_URL}/api/communities.php?lang=en`, {
+    next: { revalidate: 60 },
+  });
+  const communitiesData = await communitiesResponse.json();
+
+  
+
   return (
     <Index
       heroSlides={heroSlides}
@@ -971,6 +979,7 @@ export default async function Page() {
       ConstructionProgressData={ConstructionProgressData}
       appSectionData={appSectionData}
       data={data.data}
+      communitiesData={communitiesData.data}
     />
   );
 }

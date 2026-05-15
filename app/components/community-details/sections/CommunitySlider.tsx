@@ -155,6 +155,7 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
         />
 
         {/* prev button — z-30 above gradient, pointer-events-auto */}
+        {images.length > 1 && (
         <motion.div
           variants={moveUp(0.2)}
           initial="hidden"
@@ -181,8 +182,10 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
             />
           </button>
         </motion.div>
+        )}
 
         {/* next button — z-30 above gradient, pointer-events-auto */}
+        {images.length > 1 && (
         <motion.div
           variants={moveUp(0.3)}
           initial="hidden"
@@ -209,8 +212,10 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
             />
           </button>
         </motion.div>
+        )}
 
         {/* dots — z-30, pointer-events-auto */}
+        {images.length > 1 && (
         <div className="absolute bottom-[60px] lg:bottom-120 3xl:bottom-130 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center justify-center gap-3">
           {images.map((_, i) => (
             <button
@@ -222,6 +227,7 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
             />
           ))}
         </div>
+        )}
       </div>
     </section>
   );

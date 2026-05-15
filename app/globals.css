@@ -952,7 +952,7 @@ input:-webkit-autofill:active {
 
 .projectCardFontSize {
   @media (min-width: 1140px ) and (max-width: 1300px) {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 }
 

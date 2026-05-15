@@ -514,7 +514,7 @@ const circleStroke = isMobile ? 5  : 7.5;
           {/* LEFT — Building Image */}
           <div ref={ref} className="relative w-full h-[275px] lg:h-auto overflow-hidden">
             <Image
-              src="/images/projects/progress.jpg"
+              src="/images/projects/progress-1.jpg"
               alt="Wynwood Horizon Building"
               fill
               priority

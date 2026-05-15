@@ -15,7 +15,6 @@ import AboutJourneyV3 from "../../components/Home/sections/AboutJourneyV3";
 import SpotlightSlider from "../../components/Home/sections/SpotlightSlider";
 import HeroSection from "./sections/HeroSection";
 import { HomePageResponse } from "./data";
-import { promotion } from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,6 +78,7 @@ type Props = {
   ConstructionProgressData: ConstructionProgressData;
   appSectionData: AppSectionData;
   data:HomePageResponse['data']
+  communitiesData:any
 };
 
 export default function Index({
@@ -86,8 +86,9 @@ export default function Index({
   heroSlidesComingSoon,
   ConstructionProgressData,
   appSectionData,
-  data
-}: Props) {
+  data,
+  communitiesData
+}: Props) { 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
   const searchRef = useRef<HTMLImageElement>(null);
@@ -161,7 +162,7 @@ const communityNamesData = {
 };
 
 const imtiazPropertiesData = {
-  sectionTitle: "IMTIAZ PROPERTIES",
+  sectionTitle: "OFF-PLAN PROPERTIES",
 
   properties: data.properties.map((property, index) => ({
     id: (index + 1).toString(),
@@ -190,7 +191,7 @@ const spotlight = {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} mobsearchRef={mobsearchRef}/>
+      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData}/>
       <AboutJourneyV3 />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       <ProSliderComingSoonV3

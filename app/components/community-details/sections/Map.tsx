@@ -4,14 +4,14 @@ import Image from "next/image";
 import { Map, Marker } from "@vis.gl/react-google-maps";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
-const MapOriginal = () => {
+const MapOriginal = ({pt}: {pt: boolean}) => {
   const latitude = "25.1972";
   const longitude = "55.2744";;
   const lat = parseFloat(latitude);
   const lng = parseFloat(longitude);
 
   return (
-    <section data-header="dark" className="w-full py-[70px] lg:py-120 3xl:py-160">
+    <section data-header="dark" className={`w-full ${!pt ? "pt-0 " : "pt-[70px] lg:pt-120 3xl:pt-160"} pb-[70px] lg:pb-120 3xl:pb-160`}>
       <div className="h-[488px] lg:h-[839px] ">
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}>
       <Map
