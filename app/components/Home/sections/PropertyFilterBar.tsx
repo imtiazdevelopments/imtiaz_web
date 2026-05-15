@@ -126,7 +126,6 @@ const Dropdown = ({
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const PropertySearchBar = ({ communitiesData }: any) => {
-  console.log(communitiesData?.listing, "communitiesData");
   const communityOptions: FilterOption[] = [
     { label: "All Communities", value: "" },
     ...(communitiesData?.listing ?? []).map((item: any) => ({
