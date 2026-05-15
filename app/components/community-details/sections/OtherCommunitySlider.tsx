@@ -38,7 +38,31 @@ type PanelPos = "left" | "center" | "right";
 
 export default function CommunitySlider({data,title}:{title:string,data:OtherCommunity[]}) {
 
-  const slides = data
+const communityTitles = [
+  "JUMEIRAH GARDEN CITY",
+  "JUMEIRAH VILLAGE CIRCLE",
+  "MEYDAN HORIZON",
+  "DUBAI SOUTH",
+  "DUBAILAND RESIDENCE COMPLEX",
+  "DUBAI ISLANDS",
+  "AL FURJAN",
+];
+
+const communitySlugs = [
+  "jumeirah-garden-city",
+  "jvc",
+  "meydan-horizon",
+  "dubai-south",
+  "dubailand-residence-complex",
+  "dubai-islands",
+  "al-furjan",
+];
+
+const slides = data.map((item, index) => ({
+  ...item,
+  slug: communitySlugs[index],
+  title: item.title || communityTitles[index] || "Community",
+}));
 
 const TOTAL = slides.length;
 function mod(n: number, m: number) {
@@ -285,7 +309,7 @@ function mod(n: number, m: number) {
                     }}
                     style={{ opacity: 0 }}
                   >  
-                       <Link href={`${slide.slug}`}  >
+                       {/* <Link href={`${slide.slug}`}  > */}
                       <CustomOutlineButton
                       className="px-[30px] py-2 h-[44px] md:h-[50px]  xl:h-[66px]"
                       text="View Community"
@@ -293,7 +317,7 @@ function mod(n: number, m: number) {
                       textColor="text-white"
                       variant="dark"
                     /> 
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
@@ -372,14 +396,14 @@ function mod(n: number, m: number) {
                       {slide.title}
                     </h2>
                     <div>
-                       <Link href={`${slide.slug}`}  >
+                       {/* <Link href={`${slide.slug}`}  > */}
                       <CustomOutlineButton
                         className="2xl:!px-[41px] 2xl:!py-[22.5px]"
                         text="View Community"
                         borderColor="border-white/80"
                         textColor="text-white"
                       />
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
