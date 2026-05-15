@@ -67,7 +67,7 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
         />
         <SectionDescription
           text={description}
-          className="text-white/80  max-w-[87ch] text-center whitespace-pre-line"
+          className="text-white/80  max-w-[95ch] text-center whitespace-pre-line"
         />
         <div
           className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
