@@ -62,7 +62,8 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
       <div className="container flex flex-col items-center">
         <SectionHeading
           title={title}
-          className="text-white mb-20 text-center max-w-[25ch]"
+          as="h1"
+          className="text-white mb-20 text-center max-w-[35ch]"
         />
         <SectionDescription
           text={description}

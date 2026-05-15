@@ -471,3 +471,435 @@ function YearTimeline({
     </div>
   );
 }
+
+
+
+// "use client";
+
+// import React, { useCallback, useEffect, useRef, useState } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay, Navigation } from "swiper/modules";
+// import type { Swiper as SwiperType } from "swiper";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import Image from "next/image";
+// import { SectionHeading } from "../../animations/SectionHeading";
+// import { SectionDescription } from "../../animations/SectionDescription";
+// import ContainerAnchor from "../../layout/ContainerAnchor";
+// import { useContainerInset } from "@/app/hooks/useContainerInset";
+// import { useParallax } from "@/app/hooks/useParallax";
+
+// const AUTO_INTERVAL = 2500;
+
+// interface HistoryCardAPI {
+//   featured_image: string;
+//   featured_image_alt: string | null;
+//   year: string;
+//   title: string | null;
+//   brief: string;
+// }
+
+// interface CardData {
+//   id: string;
+//   year: number;
+//   title: string;
+//   description: string;
+//   image: string;
+// }
+
+// interface YearData {
+//   year: number;
+//   cards: CardData[];
+// }
+
+// function transformHistory(history: Record<string, HistoryCardAPI[]>): YearData[] {
+//   return Object.entries(history)
+//     .map(([yearKey, cards]) => ({
+//       year: Number(yearKey),
+//       cards: cards.map((card, i) => ({
+//         id: `${yearKey}-${i}`,
+//         year: Number(card.year),
+//         title: card.title ?? "",
+//         description: card.brief,
+//         image: card.featured_image,
+//       })),
+//     }))
+//     .filter((y) => !isNaN(y.year) && y.cards.length > 0)
+//     .sort((a, b) => a.year - b.year);
+// }
+
+// export default function HistorySection({
+//   title,
+//   description,
+//   history,
+// }: {
+//   title: string;
+//   description: string;
+//   history: Record<string, HistoryCardAPI[]>;
+// }) {
+//   const historyData: YearData[] = transformHistory(history ?? {});
+//   const allCards: CardData[] = historyData.flatMap((y) => y.cards);
+//   const years = historyData.map((y) => y.year);
+
+//   const [activeCardIdx, setActiveCardIdx] = useState(0);
+
+//   const cardSwiperRef = useRef<SwiperType | null>(null);
+//   const yearSwiperRef = useRef<SwiperType | null>(null);
+
+//   const activeYear = allCards[activeCardIdx]?.year ?? years[0];
+//   const activeYearData = historyData.find((y) => y.year === activeYear)!;
+//   const activeYearIdx = years.indexOf(activeYear);
+
+//   const cardsInYear = activeYearData?.cards ?? [];
+//   const cardIdxInYear = cardsInYear.findIndex(
+//     (c) => c.id === allCards[activeCardIdx]?.id,
+//   );
+
+//   const progressPct =
+//     cardsInYear.length > 1
+//       ? (cardIdxInYear / (cardsInYear.length - 1)) * 100
+//       : 100;
+
+//   useEffect(() => {
+//     const ys = yearSwiperRef.current;
+//     if (!ys) return;
+//     if (activeYearIdx === 0) {
+//       setTimeout(() => {
+//         ys.translateTo(0, 0);
+//       }, 0);
+//     }
+//   }, [activeYearIdx]);
+
+//   const goToCard = useCallback((realIdx: number) => {
+//     const cs = cardSwiperRef.current;
+//     if (cs && cs.realIndex !== realIdx) {
+//       cs.slideToLoop(realIdx, 700);
+//     }
+//     setActiveCardIdx(realIdx);
+//   }, []);
+
+//   const goToYear = useCallback(
+//     (year: number) => {
+//       const firstIdx = allCards.findIndex((c) => c.year === year);
+//       if (firstIdx !== -1) goToCard(firstIdx);
+//     },
+//     [allCards, goToCard],
+//   );
+
+//   return (
+//     <section
+//       data-header="dark"
+//       className="w-full bg-white py-120 3xl:pt-130 3xl:pb-180 overflow-hidden"
+//     >
+//       <div className="container mx-auto px-6 text-center mb-[90px] md:mb-150 lg:mb-50">
+//         <SectionHeading title={title} className="mb-20 uppercase" />
+//         <SectionDescription
+//           text={description}
+//           className="max-w-[870px] text-foreground-light mx-auto text-center"
+//         />
+//       </div>
+
+//       <CardsSlider
+//         allCards={allCards}
+//         activeCardIdx={activeCardIdx}
+//         swiperRef={cardSwiperRef}
+//         onCardChange={(realIdx) => setActiveCardIdx(realIdx)}
+//       />
+
+//       <YearTimeline
+//         years={years}
+//         activeYearIdx={activeYearIdx}
+//         activeCardIdx={activeCardIdx}
+//         progressPct={progressPct}
+//         swiperRef={yearSwiperRef}
+//         onYearClick={goToYear}
+//       />
+//     </section>
+//   );
+// }
+
+// function CardsSlider({
+//   allCards,
+//   activeCardIdx,
+//   swiperRef,
+//   onCardChange,
+// }: {
+//   allCards: CardData[];
+//   activeCardIdx: number;
+//   swiperRef: React.MutableRefObject<SwiperType | null>;
+//   onCardChange: (realIdx: number) => void;
+// }) {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const paddingInset = useContainerInset(containerRef);
+
+//   return (
+//     <div className="relative">
+//       <ContainerAnchor ref={containerRef} />
+//       <div
+//         style={{ background: "linear-gradient(270deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)" }}
+//         className="hidden lg:block absolute w-200 left-0 top-0 h-full z-10"
+//       />
+//       <div
+//         style={{ background: "linear-gradient(90deg, rgba(235, 235, 236, 0) 0%, #EBEBEC 100%)" }}
+//         className="hidden lg:block absolute w-200 right-0 top-0 h-full z-10"
+//       />
+//       <div className="absolute -top-[70px] lg:top-1/2 lg:-translate-y-1/2 z-30 flex gap-3 min-w-full justify-center lg:justify-between">
+//         <div style={{ paddingLeft: paddingInset }}>
+//           <button
+//             onClick={() => swiperRef.current?.slidePrev()}
+//             className="relative w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer
+//               group border border-foreground rounded-full
+//               flex items-center justify-center overflow-hidden transition-all duration-300"
+//           >
+//             <span className="absolute left-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+//             <Image
+//               width={28}
+//               height={28}
+//               src="/icons/left_arrow_slider_primary.svg"
+//               alt="Previous"
+//               className="relative z-10 object-contain group-hover:invert group-hover:brightness-0
+//                 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] transition-all duration-300"
+//             />
+//           </button>
+//         </div>
+//         <div style={{ paddingRight: paddingInset }}>
+//           <button
+//             onClick={() => swiperRef.current?.slideNext()}
+//             className="relative w-[50px] h-[50px] 3xl:w-[62px] 3xl:h-[62px] cursor-pointer
+//               group border border-foreground rounded-full
+//               flex items-center justify-center overflow-hidden transition-all duration-300"
+//           >
+//             <span className="absolute left-0 top-0 h-full w-0 bg-primary transition-all duration-300 group-hover:w-full z-0" />
+//             <Image
+//               src="/icons/left_arrow_slider_primary.svg"
+//               width={28}
+//               height={28}
+//               alt="Next"
+//               className="relative rotate-180 z-10 object-contain
+//                 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px]
+//                 group-hover:invert group-hover:brightness-0 transition-all duration-300"
+//             />
+//           </button>
+//         </div>
+//       </div>
+//       <div className="relative w-full">
+//         <Swiper
+//           modules={[Navigation, Autoplay]}
+//           loop={true}
+//           centeredSlides={true}
+//           autoplay={{ delay: AUTO_INTERVAL, disableOnInteraction: false, pauseOnMouseEnter: true }}
+//           slidesPerView={1.1}
+//           breakpoints={{
+//             480: { slidesPerView: 1.2 },
+//             640: { slidesPerView: 1.5 },
+//             768: { slidesPerView: 1.8 },
+//             1024: { slidesPerView: 1.4 },
+//             1280: { slidesPerView: 1.6, spaceBetween: 30 },
+//             1440: { slidesPerView: 1.82, spaceBetween: 40 },
+//             1600: { slidesPerView: 2.19, spaceBetween: 50 },
+//           }}
+//           spaceBetween={20}
+//           speed={1000}
+//           grabCursor={true}
+//           onSwiper={(swiper) => { swiperRef.current = swiper; }}
+//           onSlideChange={(swiper) => onCardChange(swiper.realIndex)}
+//           className="w-full !overflow-visible !h-full"
+//         >
+//           {allCards.map((card, idx) => (
+//             <SwiperSlide key={card.id} className="!h-full">
+//               <HistoryCard card={card} isActive={idx === activeCardIdx} />
+//             </SwiperSlide>
+//           ))}
+//         </Swiper>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function HistoryCard({ card, isActive }: { card: CardData; isActive: boolean }) {
+//   const { ref, parallaxY } = useParallax(15);
+//   return (
+//     <div className="flex flex-col lg:flex-row items-stretch rounded-[10px] overflow-hidden lg:h-[371px]">
+//       <div
+//         ref={ref}
+//         className="flex-shrink-0 w-full lg:w-[51.84%] h-[211px] sm:h-[250px] md:h-[300px] lg:h-full overflow-hidden"
+//       >
+//         <Image
+//           width={800}
+//           height={800}
+//           src={card.image}
+//           alt={card.title}
+//           className="w-full h-full object-cover"
+//           style={{ transform: `scale(1.35) translateY(${parallaxY}vh)` }}
+//         />
+//       </div>
+//       <div className="flex flex-col justify-between p-30 flex-1 h-full bg-gray">
+//         <span className="text-heading text-primary mb-50">{card.year}</span>
+//         <div className="mb-[10px]">
+//           <h3 className="text-25 font-[optima] text-foreground-light uppercase mb-[10px]">
+//             {card.title}
+//           </h3>
+//           <p className="text-description">{card.description}</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function YearTimeline({
+//   years,
+//   activeYearIdx,
+//   activeCardIdx,
+//   progressPct,
+//   swiperRef,
+//   onYearClick,
+// }: {
+//   years: number[];
+//   activeYearIdx: number;
+//   activeCardIdx: number;
+//   progressPct: number;
+//   swiperRef: React.MutableRefObject<SwiperType | null>;
+//   onYearClick: (year: number) => void;
+// }) {
+//   const loopedYears = [...years, years[0]];
+//   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+//   const prevYearIdxRef = useRef(activeYearIdx);
+
+//   useEffect(() => {
+//     const swiper = swiperRef.current;
+//     if (!swiper) return;
+
+//     const isLoopingBack =
+//       prevYearIdxRef.current === years.length - 1 && activeYearIdx === 0;
+
+//     prevYearIdxRef.current = activeYearIdx;
+
+//     if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+
+//     scrollTimerRef.current = setTimeout(() => {
+//       const slides = swiper.slides as HTMLElement[];
+//       const wrapperEl = swiper.el as HTMLElement;
+//       if (!slides?.length || !wrapperEl) return;
+
+//       if (isLoopingBack) {
+//         swiper.translateTo(0, 0);
+//         return;
+//       }
+
+//       const wRect = wrapperEl.getBoundingClientRect();
+//       const BUFFER = 24;
+
+//       const activeSlide = slides[activeYearIdx];
+//       const nextSlide =
+//         typeof window !== "undefined" && window.innerWidth < 1024
+//           ? slides[activeYearIdx]
+//           : (slides[activeYearIdx + 1] ?? slides[activeYearIdx]);
+
+//       if (!activeSlide) return;
+
+//       const aRect = activeSlide.getBoundingClientRect();
+//       const nRect = nextSlide.getBoundingClientRect();
+
+//       const activeFits =
+//         aRect.left >= wRect.left + BUFFER && aRect.right <= wRect.right - BUFFER;
+//       const nextFits =
+//         nRect.left >= wRect.left + BUFFER && nRect.right <= wRect.right - BUFFER;
+
+//       if (activeFits && nextFits) return;
+
+//       if (nRect.right > wRect.right - BUFFER) {
+//         swiper.translateTo(swiper.getTranslate() - (nRect.right - wRect.right + BUFFER), 400);
+//       } else if (aRect.left < wRect.left + BUFFER) {
+//         swiper.translateTo(swiper.getTranslate() + (wRect.left - aRect.left + BUFFER), 400);
+//       }
+//     }, 50);
+
+//     return () => {
+//       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+//     };
+//   }, [activeYearIdx, activeCardIdx, years.length, swiperRef]);
+
+//   return (
+//     <div className="w-full mt-50 select-none">
+//       <div className="overflow-y-visible pt-50 pb-2 px-40">
+//         <Swiper
+//           loop={false}
+//           slidesPerView="auto"
+//           spaceBetween={0}
+//           speed={400}
+//           allowTouchMove={true}
+//           freeMode={false}
+//           onSwiper={(s) => { swiperRef.current = s; }}
+//           className="!overflow-visible"
+//         >
+//           {loopedYears.map((year, idx) => {
+//             const isActive = idx === activeYearIdx;
+//             const isNextActive = idx + 1 === activeYearIdx;
+//             const hasLine = idx < loopedYears.length - 1;
+//             const isGhost = idx === loopedYears.length - 1;
+
+//             return (
+//               <SwiperSlide
+//                 key={`${year}-${idx}`}
+//                 style={{ width: "auto" }}
+//                 className="!flex !items-center !overflow-visible"
+//               >
+//                 <button
+//                   onClick={() => !isGhost && onYearClick(year)}
+//                   disabled={isGhost}
+//                   className="relative flex-shrink-0 flex items-center justify-center w-[10px] h-[10px] outline-none z-10 cursor-pointer disabled:cursor-default"
+//                 >
+//                   <span
+//                     className={`absolute whitespace-nowrap text-25 font-[optima] tracking-[2%] pointer-events-none
+//                       bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 transition-colors duration-300
+//                       ${isActive ? "text-primary" : "text-foreground"}`}
+//                   >
+//                     {year}
+//                   </span>
+//                   {isActive && (
+//                     <span className="absolute inset-[-4px] rounded-full ring-1 ring-primary transition-all duration-300" />
+//                   )}
+//                   <span
+//                     className={`block w-[10px] h-[10px] rounded-full bg-primary transition-opacity duration-300 ${
+//                       isGhost ? "opacity-40" : ""
+//                     }`}
+//                   />
+//                 </button>
+
+//                 {hasLine && (
+//                   <div
+//                     className="relative h-[1.5px] w-[120px] md:w-[150px] lg:w-[200px] xl:w-[255px] flex-shrink-0 self-center"
+//                     style={{
+//                       marginLeft: isActive ? 16 : 10,
+//                       marginRight: isNextActive ? 16 : 10,
+//                     }}
+//                   >
+//                     {!isActive && <div className="absolute inset-0 bg-black/50" />}
+//                     {isActive && (
+//                       <>
+//                         <div
+//                           className="absolute inset-0 w-full"
+//                           style={{
+//                             backgroundImage:
+//                               "repeating-linear-gradient(90deg, #5B1A1A 0px, #5B1A1A 6px, transparent 6px, transparent 10px)",
+//                             backgroundSize: "100% 2px",
+//                             backgroundRepeat: "no-repeat",
+//                             backgroundPosition: "center",
+//                           }}
+//                         />
+//                         <div
+//                           className="absolute -top-[1px] left-0 h-[3px] bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+//                           style={{ width: `${progressPct}%` }}
+//                         />
+//                       </>
+//                     )}
+//                   </div>
+//                 )}
+//               </SwiperSlide>
+//             );
+//           })}
+//         </Swiper>
+//       </div>
+//     </div>
+//   );
+// }

@@ -218,7 +218,8 @@ export default function ProjectCard({
   const isMobile =
     typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
 
-  const show = isMobile ? false : (isHovered || isActive);
+  // const show = isMobile ? false : (isHovered || isActive);
+  const show = true
   const breakWord = "by Imtiaz";
 
   const parts = title.split(new RegExp(`(${breakWord})`, "i"));
@@ -406,12 +407,12 @@ export default function ProjectCard({
               alt="Hover Image"
               width={160}
               height={70}
-              className="h-[50px] 2x:h-[70px] w-auto"
+              className="h-[50px] 2xl:h-[70px] w-auto invert brightness-0"
             />
           </div>
 
           <div className="flex flex-col justify-center gap-7 w-full">
-            <div className={`lg:px-5 flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-30 lg:gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
+            <div className={`flex sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-center gap-40 w-full sm:w-fit md:w-full py-1 transition-transform duration-500 delay-100 ${show ? "translate-y-0" : "translate-y-2"}`}>
               <div className="flex items-center gap-[10px]">
                 <div className="xl:w-[49px] xl:h-[49px] w-[44px] h-[44px] rounded-full bg-white/25 backdrop-blur-[18px] will-change-transform transform-gpu flex items-center justify-center shrink-0">
                   {/* <svg className="w-[22px] h-[15px] md:w-[25px] md:h-[18px]" viewBox="0 0 25 18" fill="none">
@@ -426,8 +427,8 @@ export default function ProjectCard({
                   />
                 </div>
                 <div className="flex flex-col items-baseline gap-1">
-                  <span className="text-white text-description text-left">Starting From</span>
-                  <span className="text-white text-description text-left">{startingFrom}</span>
+                  <span className="text-white text-description text-left projectCardFontSize">Starting From</span>
+                  <span className="text-white text-description text-left projectCardFontSize">{startingFrom}</span>
                 </div>
               </div>
 
@@ -443,8 +444,8 @@ export default function ProjectCard({
                   />
                 </div>
                 <div className="flex flex-col items-baseline gap-1">
-                  <span className="text-white text-description text-left">Units</span>
-                  <span className="text-white text-description text-left">{units}</span>
+                  <span className="text-white text-description text-left projectCardFontSize">Units</span>
+                  <span className="text-white text-description text-left projectCardFontSize">{units}</span>
                 </div>
               </div>
             </div>

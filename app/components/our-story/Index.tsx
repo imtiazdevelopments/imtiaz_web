@@ -86,7 +86,11 @@ const otherPageSliderData = {
       <MessageSection data={chairmanMessageData} />
       <MessageSection data={ceoMessageData} />
       <Philosophy title={data.philosophy_title} description={data.philosophy_caption}/>
-      <HistorySection title={data.history_title} description={data.history_caption}/>
+      <HistorySection
+  title={data.history_title}
+  description={data.history_caption}
+  // history={data.history}
+/>
       <AwardSection 
       title={data.medal_title}
       descriptions={data.medal_brief}
