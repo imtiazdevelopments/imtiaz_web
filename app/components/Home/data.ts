@@ -320,7 +320,8 @@ export const heroSlides = [
 export const heroSlidesComingSoon = [
   {
     title: "Cotier House 2 by Imtiaz",
-    video: "/videos/coming-soon.mp4",
+    desktopVideo: "/videos/hero_new_desk.mp4",
+    mobileVideo: "/videos/hero_new_mob.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/cotier.svg",
       features: [
