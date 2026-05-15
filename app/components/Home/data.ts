@@ -278,7 +278,7 @@ export const aboutSectionJourney = {
 
 export const heroSlides = [
   {
-    title: "SEA CLIFF",
+    title: "SEA CLIFF BY IMTIAZ",
     video: "/videos/seaClif-web.mp4",
     pillFeatures: {
       title: "/icons/pro_slider/sunset_bay.svg",

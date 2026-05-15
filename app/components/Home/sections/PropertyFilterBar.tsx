@@ -17,45 +17,6 @@ interface FilterItem {
   options: FilterOption[];
 }
 
-// ── Filter Data ───────────────────────────────────────────────────────────────
-const filters: FilterItem[] = [
-  {
-    id: "propertyType",
-    label: "PROPERTY TYPE",
-    options: [
-      { label: "All Types", value: "" },
-      { label: "Apartment", value: "Apartment" },
-      { label: "Villa", value: "Villa" },
-      { label: "Townhouse", value: "Townhouse" },
-      { label: "Penthouse", value: "Penthouse" },
-
-    ],
-  },
-  {
-    id: "status",
-    label: "STATUS",
-    options: [
-      { label: "Available", value: "Available" },
-      { label: "Off Plan", value: "Off Plan" },
-      { label: "Completed", value: "Completed" },
-      { label: "Under Construction", value: "Under Construction" },
-    ],
-  },
-
-  {
-    id: "community",
-    label: "COMMUNITY",
-    options: [
-      { label: "All Communities", value: "" },
-      { label: "Downtown Dubai", value: "Downtown Dubai" },
-      { label: "Waterfront", value: "Waterfront" },
-      { label: "Suburbs", value: "Suburbs" },
-      { label: "Business Bay", value: "Business Bay" },
-      { label: "Old Town", value: "Old Town" },
-    ],
-  },
-];
-
 // ── Chevron Icon ──────────────────────────────────────────────────────────────
 const ChevronDown = ({ open }: { open: boolean }) => (
   <svg
@@ -136,7 +97,7 @@ const Dropdown = ({
       {/* Dropdown Panel */}
       {isOpen && (
         <div
-          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[180px] ${dropUp
+          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[280px] ${dropUp
               ? "bottom-[calc(100%+24px)]"
               : "top-[calc(100%+24px)]"
             } ${isLast ? "right-0" : "left-1/2 -translate-x-1/2"
@@ -164,7 +125,39 @@ const Dropdown = ({
 };
 
 // ── Main Component ────────────────────────────────────────────────────────────
-const PropertySearchBar = () => {
+const PropertySearchBar = ({ communitiesData }: any) => {
+  console.log(communitiesData?.listing, "communitiesData");
+  const communityOptions: FilterOption[] = [
+    { label: "All Communities", value: "" },
+    ...(communitiesData?.listing ?? []).map((item: any) => ({
+      label: item.title,
+      value: item.title,
+    })),
+  ];
+
+  const filters: FilterItem[] = [
+    {
+      id: "propertyType",
+      label: "PROPERTY TYPE",
+      options: [
+        { label: "Apartment", value: "Apartment" },
+      ],
+    },
+    {
+      id: "status",
+      label: "STATUS",
+      options: [
+        { label: "Off Plan", value: "Off Plan" },
+        { label: "Completed", value: "Completed" },
+      ],
+    },
+    {
+      id: "community",
+      label: "COMMUNITY",
+      options: communityOptions,
+    },
+  ];
+
   const [openId, setOpenId] = useState<string | null>(null);
   const [selected, setSelected] = useState<Record<string, string>>({});
 
