@@ -116,7 +116,7 @@ export default function IconGrid({ data, bgClass }: Props) {
         <div className="mt-[50px] lg:hidden">
           <Swiper
             modules={[Autoplay]}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             speed={700}
             loop={showPaginationPaired}
             grabCursor={true}
@@ -208,7 +208,7 @@ export default function IconGrid({ data, bgClass }: Props) {
         <div className="hidden lg:block mt-60">
           <Swiper
             modules={[Autoplay]}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             speed={700}
             loop={showPaginationSingle}
             grabCursor={true}
