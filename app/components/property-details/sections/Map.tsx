@@ -4,9 +4,9 @@ import { Map, Marker } from "@vis.gl/react-google-maps";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 
-const MapOriginal = () => {
-  const latitude = "25.1972";
-  const longitude = "55.2744";;
+const MapOriginal = ({latitude = "25.1972",longitude = "55.2744"}:{latitude:string;longitude:string;}) => {
+  // const latitude = "25.1972";
+  // const longitude = "55.2744";;
   const lat = parseFloat(latitude);
   const lng = parseFloat(longitude);
 

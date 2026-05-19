@@ -196,7 +196,6 @@ const PropertySearchBar = ({ communitiesData }: any) => {
                 isOpen={openId === filter.id}
                 onToggle={() => handleToggle(filter.id)}
                 onClose={() => setOpenId(null)}
-                isLast={i === filters.length - 1}
               />
               {/* Divider */}
               {i < filters.length - 0 && (

@@ -664,13 +664,13 @@ function SideInfo({ unit }: { unit: Unit }) {
 
 export default function UnitLayout({ data }: {data:UnitLayoutItem[]}) {
 
-  const units = data.map((item, index: number) => ({
-    id: index,
-    label: item.title,
-    area: item.total_area,
-    image: item.image_url,
-    ...item,
-  }));
+const units = (data || []).map((item, index) => ({
+  id: index,
+  label: item.title || "",
+  area: item.total_area || "",
+  image: item.image_url || "",
+  ...item,
+}));
 
   const [activeId, setActiveId] = useState<number | null>(0);
   const activeUnit = units.find((u:{id:number}) => u.id === activeId);

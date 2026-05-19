@@ -1,7 +1,7 @@
 "use client";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { SectionHeading } from "../../animations/SectionHeading";
-import { introData } from "../data";
+// import { introData } from "../data";
 import { useGsapStagger } from "../../../hooks/useGsapStagger";
 
 import CustomIconButton from "../../common/CustomIconButton";
@@ -22,17 +22,17 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
   const pdfdocData = [
   { 
     id: "brochure",
-    image: brochure,
+    image: brochure ?? "",
     label: "Brochure",
   },
   { 
     id: "factsheet",
-    image: fact_sheet,
+    image: fact_sheet ?? "",
     label: "Fact Sheet",
   },
   { 
     id: "unitlayout",
-    image: unit_layout,
+    image: unit_layout ?? "",
     label: "Unit layout",
   }, 
 ];
@@ -60,15 +60,15 @@ function ProjectIntro({ title,description,brochure,fact_sheet,unit_layout }: Pro
       className="w-full py-[70px] lg:py-120 3xl:py-130"
     >
       <div className="container flex flex-col items-center">
-        <SectionHeading
+        {title && <SectionHeading
           title={title}
           as="h1"
           className="text-white mb-20 text-center max-w-[35ch]"
-        />
-        <SectionDescription
+        />}
+        {description && <SectionDescription
           text={description}
           className="text-white/80  max-w-[95ch] text-center whitespace-pre-line"
-        />
+        />}
         <div
           className=" flex  flex-wrap gap-20 md:gap-[15px] justify-center items-center mt-[50px] w-full"
           ref={gridRef}

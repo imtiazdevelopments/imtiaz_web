@@ -78,7 +78,7 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={bgImgRef}
-            src={images[0].image_url}
+            src={images[0].image_url || ""}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
@@ -112,7 +112,7 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
             allowTouchMove={true}
             style={{ cursor: "inherit" }}
           >
-            {images.map((src, i) => (
+            {(images || []).map((src, i) => (
               <SwiperSlide
                 key={i}
                 className="relative w-full h-full"
@@ -122,7 +122,7 @@ const SignatureMomentsSlider = ({ images }: { images: GalleryItem[] }) => {
                   ref={(el) => {
                     slideImageRefs.current[i] = el;
                   }}
-                  src={src.image_url}
+                  src={src.image_url || ""}
                   alt={`Gallery image ${i + 1}`}
                   fill
                   sizes="100vw"

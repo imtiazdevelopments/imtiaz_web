@@ -81,6 +81,9 @@ export interface PropertyDetailsData {
   amenities: AmenityItem[];
   unit_layouts: UnitLayoutItem[];
 
+  property_latitude:string;
+  property_longitude:string;
+
   similar_properties: SimilarProperty[] | null;
 
   faq: FAQItem[];

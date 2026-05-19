@@ -77,7 +77,7 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
       description={data?.community_basic_brief}
       subTitle={data?.community_basic_title}
       />
-      <Map />
+      <Map latitude={data?.property_latitude} longitude={data?.property_longitude}/>
       <Faqsection 
       title={data?.faq_title} 
       description={data?.faq_caption}

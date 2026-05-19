@@ -374,7 +374,7 @@ function SlideContent({
   return (
     <div className="relative w-full h-full">
       <Image
-        src={src}
+        src={src || ""}
         alt={alt}
         fill
         className="object-cover"
@@ -443,7 +443,7 @@ function TabSwiper({
       {slides?.map((slide, index) => (
         <SwiperSlide key={index} className="relative w-full h-full">
           <SlideContent
-            src={slide.image_url}
+            src={slide.image_url || ""}
             alt={slide.caption}
             parallaxY={parallaxY}
           />
@@ -454,11 +454,17 @@ function TabSwiper({
 }
 
 export default function GallerySlider({ data }: { data: any }) {
+  // const safeData: GalleryItem[] = Array.isArray(data)
+  //   ? data
+  //   : Array.isArray(Object.values(data)?.[0])
+  //   ? (Object.values(data)[0] as GalleryItem[])
+  //   : [];
+
   const safeData: GalleryItem[] = Array.isArray(data)
-    ? data
-    : Array.isArray(Object.values(data)?.[0])
-    ? (Object.values(data)[0] as GalleryItem[])
-    : [];
+  ? data
+  : data && typeof data === "object"
+  ? Object.values(data).flat().filter(Boolean) as GalleryItem[]
+  : [];
 
   const INTERIOR_SLIDES = safeData.filter((item) => item.caption === "Interior");
   const EXTERIOR_SLIDES = safeData.filter((item) => item.caption === "Exterior");

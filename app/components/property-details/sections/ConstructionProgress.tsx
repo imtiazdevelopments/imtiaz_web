@@ -501,14 +501,14 @@ const circleStroke = isMobile ? 5  : 7.5;
     <>
       <section data-header="dark" className="pt-[70px] lg:pt-120 2xl:pt-[160px]">
         <div className="text-center container">
-          <SectionHeading
+          {statsData.title && <SectionHeading
             title={statsData.title}
             className="mb-20 text-foreground"
-          />
-          <SectionDescription
+          />}
+          {statsData.description && <SectionDescription
             text={statsData.description}
             className="shrink-0 max-w-[74ch] mx-auto text-foreground-light mb-10 md:mb-50"
-          />
+          />}
         </div>
         <div className="w-full flex flex-col lg:flex-row 3xl:grid 3xl:grid-cols-[auto_920px] overflow-hidden bg-gray">
           {/* LEFT — Building Image */}
@@ -535,14 +535,14 @@ const circleStroke = isMobile ? 5  : 7.5;
                 viewport={{ once: true }}
                 className="flex-shrink-0"
               >
-                <CircularProgress
+                {percent_overall && <CircularProgress
                   percentage={percent_overall}
                   size={circleSize}
                   strokeWidth={strokeWidth}
                   label="overall"
                   isLarge
                   animationDelay={0.3}
-                />
+                />}
               </motion.div>
 
               <motion.div
@@ -557,7 +557,7 @@ const circleStroke = isMobile ? 5  : 7.5;
                   <br />
                   Completion Date
                 </p>
-                <p className="text-heading text-black leading-[1.4]">{estimated_completion}</p>
+                {estimated_completion && <p className="text-heading text-black leading-[1.4]">{estimated_completion}</p>}
               </motion.div>
             </div>
 
@@ -579,14 +579,14 @@ const circleStroke = isMobile ? 5  : 7.5;
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
                   <div className="3xl:px-[20.4px]">
-                    <CircularProgress
+                    {stat.percentage && <CircularProgress
                       percentage={stat.percentage}
                       size={118}
                       strokeWidth={10}
                       label={stat.label}
                       isLarge={false}
                       animationDelay={i * 0.15}
-                    />
+                    />}
                   </div>
                 </Reveal>
               ))}
@@ -597,14 +597,14 @@ const circleStroke = isMobile ? 5  : 7.5;
               {stats.map((stat, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
                   <div className="3xl:px-[20.4px]">
-                    <CircularProgress
+                    {stat.percentage && <CircularProgress
         percentage={stat.percentage}
         size={smallCircleSize}
         strokeWidth={circleStroke}
         label={stat.label}
         isLarge={false}
         animationDelay={i * 0.15}
-      />
+      />}
                   </div>
                 </Reveal>
               ))}
@@ -618,10 +618,10 @@ const circleStroke = isMobile ? 5  : 7.5;
               viewport={{ once: true }}
               className="mt-[10px]"
             >
-              <Link href={construction_button_url}>
+              <Link href={construction_button_url || "#"}>
                 <CustomOutlineButton
                   className="w-fit  mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] "
-                  text={construction_button_text}
+                  text={construction_button_text || "Construction Updates"}
                   borderColor="border-primary"
                   textColor="text-primary"
                   variant="dark"

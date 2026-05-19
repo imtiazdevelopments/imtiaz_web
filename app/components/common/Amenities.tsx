@@ -63,14 +63,14 @@ export default function Amenities({ data, maxTitle }: Props) {
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
-          <SectionHeading
+          {data.title && <SectionHeading
             title={data.title}
             className="mb-20 text-foreground"
-          />
-          <SectionDescription
+          />}
+          {data.description && <SectionDescription
             text={data.description}
             className={`shrink-0  mx-auto text-foreground-light whitespace-pre-line ${maxTitle ? maxTitle : ""}`}
-          />
+          />}
         </div>
         <div>
           <div>
@@ -97,7 +97,7 @@ className="flex flex-wrap justify-center items-start mt-[40px] md:mt-50 gap-y-[3
                   transform group-hover:-translate-y-2  "> */}
                   <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] lg:w-[70px] mb-20 lg:h-[70px] xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center bg-primary/5">
                     <Image
-                      src={item.icon}
+                      src={item.icon || ""}
                       alt={item.label.replace("\n", " ")}
                       width={isXL ? 40 : 23}
                   height={isXL ? 34 : 23}
@@ -106,9 +106,9 @@ className="flex flex-wrap justify-center items-start mt-[40px] md:mt-50 gap-y-[3
                   </div>
 
                   {/* Label */}
-                  <p className="relative z-10 px-2 sm:px-0 font-[optima]  text-19 md:text-25 text-foreground leading-[1.4] uppercase transition-colors duration-300">
+                  {item.label && <p className="relative z-10 px-2 sm:px-0 font-[optima]  text-19 md:text-25 text-foreground leading-[1.4] uppercase transition-colors duration-300">
                     {item.label}
-                  </p>
+                  </p>}
                 </div>
               ))}
             </div>

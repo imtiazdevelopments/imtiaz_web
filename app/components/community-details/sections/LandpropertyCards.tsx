@@ -33,7 +33,7 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const cards = items;
+  const cards = items || [];
   const hasMore = cards?.length > initialCount;
   const visibleCards = showAll ? cards : cards?.slice(0, initialCount);
 
@@ -41,10 +41,10 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
     <section data-header="dark" className="w-full">
       <div className="container flex flex-col justify-center">
         <div className="text-center">
-          <SectionHeading
+          {title && <SectionHeading
             title={title}
             className="text-heading mb-20 lg:mb-50"
-          />
+          />}
 
           {/* 📱 MOBILE to 1140: SWIPER */}
           <div className="block min-[1140px]:hidden relative">
@@ -81,16 +81,16 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
                 640: { slidesPerView: 2 },
               }}
             >
-              {items?.map((project,index) => (
+              {(items || [])?.map((project,index) => (
                 <SwiperSlide key={index}>
                   <ProjectCard 
                   id={index.toString()}
-                  title={project.property_name} 
-                  image={project.featured_image_desktop}
-                  status={project.property_status}
-                   startingFrom={project.icon1_text}
-                   units={project.icon2_text}
-                   hoverImage={project.brand_logo}
+                  title={project?.property_name} 
+                  image={project?.featured_image_desktop}
+                  status={project?.property_status}
+                   startingFrom={project?.icon1_text}
+                   units={project?.icon2_text}
+                   hoverImage={project?.brand_logo}
                   {...project} 
                   isCommunity/>
                 </SwiperSlide>
@@ -163,7 +163,7 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
 
           {/* 💻 DESKTOP 1140+: GRID */}
           <div className="hidden min-[1140px]:grid min-[1140px]:grid-cols-3 min-[1700px]:grid-cols-4 3xl:gap-y-50 gap-y-40 gap-x-30 xl:gap-x-[28px]">
-            {visibleCards?.map((project, index) => (
+            {(visibleCards || [])?.map((project, index) => (
               <Reveal
                 variants={moveUpV2}
                 key={index}
@@ -171,12 +171,12 @@ const LandpropertyCards = ({title,items}:{title:string,items:RelatedProperty[]})
               >
                 <ProjectCard 
                 id={index.toString()}
-                title={project.property_name} 
-                  image={project.featured_image_desktop}
-                  status={project.property_status}
-                   startingFrom={project.icon1_text}
-                   units={project.icon2_text}
-                   hoverImage={project.brand_logo}
+                title={project?.property_name} 
+                  image={project?.featured_image_desktop}
+                  status={project?.property_status}
+                   startingFrom={project?.icon1_text}
+                   units={project?.icon2_text}
+                   hoverImage={project?.brand_logo}
                  {...project} 
                  isCommunity/>
               </Reveal>

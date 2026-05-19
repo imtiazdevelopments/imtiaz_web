@@ -1230,19 +1230,19 @@ function MobileMegaMenu({
     };
   }, []);
 
-const handleNavigate = (href?: string, newTab?: boolean) => {
-  if (!mounted.current) return;
-  if (href && href !== "#") {
-    if (newTab) {
-      window.open(href, "_blank", "noopener,noreferrer");
+  const handleNavigate = (href?: string, newTab?: boolean) => {
+    if (!mounted.current) return;
+    if (href && href !== "#") {
+      if (newTab) {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else {
+        setIsMenuOpen?.(false);
+        router.push(href);
+      }
     } else {
       setIsMenuOpen?.(false);
-      router.push(href);
     }
-  } else {
-    setIsMenuOpen?.(false);
-  }
-};
+  };
 
   const openSubmenu = (item: (typeof menuItems)[0]) => {
     setExpandedChild(null);
@@ -1284,10 +1284,10 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
     collapsed: { height: 0, opacity: 0, transition: { duration: 0.28, ease: "easeInOut" as const } },
     expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
   };
- 
+
   return (
-    <div   className="fixed w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
-     >
+    <div className="fixed w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
+    >
 
       {/* ── PRELOAD ALL BG IMAGES ── */}
       <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
@@ -1551,22 +1551,28 @@ function DesktopMegaMenu({
     }
   };
 
-const handleNavigate = (href?: string, newTab?: boolean) => {
-  if (!mounted.current) return;
-  if (href && href !== "#") {
-    if (newTab) {
-      window.open(href, "_blank", "noopener,noreferrer");
+  const handleNavigate = (href?: string, newTab?: boolean) => {
+    if (!mounted.current) return;
+    if (href && href !== "#") {
+      if (newTab) {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else {
+        setIsMenuOpen?.(false);
+        router.push(href);
+      }
     } else {
       setIsMenuOpen?.(false);
-      router.push(href);
     }
-  } else {
-    setIsMenuOpen?.(false);
-  }
-};
+  };
 
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
+
+  const activeItem = regularItems.find(
+    (item) => item.id === activeCategory
+  );
+
+  const activeChildren = activeItem?.children || [];
 
   return (
     <div className="relative w-full h-screen overflow-hidden z-1000 bg-white flex-col hidden md:flex">
@@ -1707,7 +1713,7 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                     className="text-16 leading-[2.2] flex flex-col"
                   >
                     <a href={`mailto:${contactInfo.emailInfo}`}>{contactInfo.emailInfo}</a>
-                    
+
                   </motion.div>
                   <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
                   <motion.div
@@ -1718,7 +1724,7 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                   >
                     <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
                   </motion.div>
-                  
+
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
                   <motion.div
@@ -1728,7 +1734,7 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
                     className="text-16 leading-[2.2] flex flex-col"
                   >
                     <a href={`mailto:${contactInfo.emailSales}`}>{contactInfo.emailSales}</a>
-                  </motion.div>                  
+                  </motion.div>
                 </div>
                 <div className="flex gap-[5px] w-full mt-[30px]">
                   {socialLinks.map((icon, i) => (
@@ -1766,118 +1772,124 @@ const handleNavigate = (href?: string, newTab?: boolean) => {
           </div>
 
           {/* RIGHT SUBMENU */}
-          <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/2 sm:w-1/3 xl:w-fit mt-[8%] relative">
-            {regularItems.map((item, idx) => (
-              <div
-                key={item.id}
-                onMouseEnter={() => item.children && setActiveCategory(item.id)}
-                onMouseLeave={() => setActiveCategory(null)}
-                className="relative flex flex-col"
+<div
+  className="flex gap-[60px]"
+  onMouseLeave={() => setActiveCategory(null)}
+>
+
+  {/* FIRST COLUMN */}
+  <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/2 sm:w-1/3 xl:w-fit">
+    {regularItems.map((item) => (
+      <div
+        key={item.id}
+        onMouseEnter={() =>
+          item.children && setActiveCategory(item.id)
+        }
+        className="relative flex flex-col"
+      >
+        <div className="relative flex items-center">
+          {item.children && (
+            <motion.div
+              initial={false}
+              animate={
+                activeCategory === item.id
+                  ? { opacity: 1, x: 0 }
+                  : { opacity: 0, x: -10 }
+              }
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="absolute left-0 top-1/2 -translate-y-1/2"
+            >
+              <Image
+                src="/icons/arrow_nav.svg"
+                alt=""
+                width={20}
+                height={16}
+                className="w-[16px] h-[14px] md:w-[20px] md:h-[16px] invert brightness-0"
+              />
+            </motion.div>
+          )}
+
+          <motion.div
+            initial={false}
+            animate={
+              item.children && activeCategory === item.id
+                ? { x: 30 }
+                : { x: 0 }
+            }
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            {item.href ? (
+              <Link
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigate(item.href, item.newTab);
+                }}
+                className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
               >
-                <div className="relative flex items-center">
-                  {item.children && (
-                    <motion.div
-                      initial={false}
-                      animate={
-                        activeCategory === item.id
-                          ? { opacity: 1, x: 0 }
-                          : { opacity: 0, x: -10 }
-                      }
-                      transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2"
-                    >
-                      <Image
-                        src="/icons/arrow_nav.svg"
-                        alt=""
-                        width={20}
-                        height={16}
-                        className="w-[16px] h-[14px] md:w-[20px] md:h-[16px] invert brightness-0"
-                      />
-                    </motion.div>
-                  )}
-
-                  <motion.div
-                    initial={false}
-                    animate={
-                      item.children && activeCategory === item.id ? { x: 30 } : { x: 0 }
-                    }
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  >
-                    {item.href ? (
-                      <Link
-                        href={item.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleNavigate(item.href, item.newTab);
-                        }}
-                        className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <div className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer">
-                        {item.label}
-                      </div>
-                    )}
-                  </motion.div>
-                </div>
-
-                <AnimatePresence>
-                  {item.children && activeCategory === item.id && (
-                    <motion.div
-                      initial={{ x: 10, opacity: 0 }}
-                      animate={{
-                        x: 0,
-                        opacity: 1,
-                        transition: {
-                          x: { duration: 0.3 },
-                          opacity: { duration: 0.2, delay: 0.1 },
-                        },
-                      }}
-                      exit={{
-                        x: 10,
-                        opacity: 0,
-                        transition: {
-                          x: { duration: 0.3 },
-                          opacity: { duration: 0.2 },
-                        },
-                      }}
-                      className="overflow-hidden flex flex-col gap-2 px-2 md:px-4 lg:absolute lg:overflow-visible lg:px-0 lg:left-full lg:top-1/2 lg:-translate-y-1/2 lg:pl-[6%] xl:pl-[20%] lg:py-80 lg:min-w-max"
-                    >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.id}
-                          href={child.href || "#"}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleNavigate(child.href, child.newTab);
-                          }}
-                          className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-
-            {buttonItems.length > 0 && (
-              <div className="flex flex-row gap-5 mt-40 flex-wrap">
-                {buttonItems.map((item) => (
-                  <div key={item.id} onClick={() => handleNavigate(item.href, item.newTab)}>
-                    <CustomOutlineButton
-                      text={item.label}
-                      borderColor="border-white"
-                      textColor="text-white"
-                      px="px-[18px] sm:px-[20px]  md:px-[36px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
-                    />
-                  </div>
-                ))}
+                {item.label}
+              </Link>
+            ) : (
+              <div className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer">
+                {item.label}
               </div>
             )}
+          </motion.div>
+        </div>
+      </div>
+    ))}
+
+    {buttonItems.length > 0 && (
+      <div className="flex flex-row gap-5 mt-40 flex-wrap">
+        {buttonItems.map((item) => (
+          <div
+            key={item.id}
+            onClick={() =>
+              handleNavigate(item.href, item.newTab)
+            }
+          >
+            <CustomOutlineButton
+              text={item.label}
+              borderColor="border-white"
+              textColor="text-white"
+              px="px-[18px] sm:px-[20px] md:px-[36px] h-[44px] md:h-[50px] xl:h-[66px] !leading-[1.58]"
+            />
           </div>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {/* SECOND COLUMN */}
+  <div className="min-w-[250px] text-white">
+    <AnimatePresence mode="wait">
+      {activeChildren.length > 0 && (
+        <motion.div
+          key={activeCategory}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 20 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col gap-2 lg:gap-4"
+        >
+          {activeChildren.map((child) => (
+            <Link
+              key={child.id}
+              href={child.href || "#"}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigate(child.href, child.newTab);
+              }}
+              className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
+            >
+              {child.label}
+            </Link>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+</div>
 
           {/* CLOSE BTN */}
           <button

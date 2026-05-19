@@ -26,19 +26,19 @@ const MeydanHorizon = ({title,description,subTitle}:Props) => {
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center ">
-          <SectionHeading
+          {title && <SectionHeading
             title={title}
             className="text-heading  text-foreground mb-20 max-w-[666px] mx-auto"
-          />
+          />}
 
-          <SectionDescription
+          {subTitle && <SectionDescription
             text={subTitle}
             className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
-          />
-          <SectionDescription
+          />}
+          {description && <SectionDescription
             text={description}
             className="text-description text-foreground-light max-w-[754px] mx-auto"
-          />
+          />}
 
           <div ref={desktopBtnRef} style={{ opacity: 0 }}>
             <Link href="/communities">
