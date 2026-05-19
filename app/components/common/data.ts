@@ -151,6 +151,7 @@ export const footerV2Data: FooterV2Data = {
         { label: "About", link: "/about/our-story" },
         { label: "Careers", link: "/about/careers" },
         { label: "Contact", link: "/contact-us" },
+        { label: "3D View", link: "/3d-tour" }
       ],
     },
     {
@@ -164,7 +165,6 @@ export const footerV2Data: FooterV2Data = {
     {
       heading: "TRENDING SEARCHES",
       items: [{ label: "Off Plan Properties", link: "/off-plan-properties" },
-        { label: "3D View", link: "/3d-tour" }
       ],
     },
   ],

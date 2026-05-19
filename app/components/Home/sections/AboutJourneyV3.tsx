@@ -137,7 +137,7 @@ const AboutJourneyV3 = ({
           </h3>
         </div> */}
 
-          <div className="overflow-hidden">
+          {/* <div className="overflow-hidden">
             <p className="anim-item text-white text-description max-w-[73ch] mx-auto   mb-50">
               At Imtiaz Developments, excellence is never incidental. It is shaped
               through considered design, elevated craftsmanship, and an unwavering
@@ -158,7 +158,7 @@ const AboutJourneyV3 = ({
                 />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="absolute bottom-[67px] w-full flex flex-col gap-10 md:gap-8 lg:gap-50 items-center">
