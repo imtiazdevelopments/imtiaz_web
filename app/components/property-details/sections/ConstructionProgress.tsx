@@ -330,20 +330,21 @@ interface CircularProgressProps {
 }
 
 interface Props {
-  title:string;
-      description:string;
-      estimated_completion:string;
-      percent_overall:number;
-      percent1:number;
-      percent1_label:string;
-      percent2:number;
-      percent2_label:string;
-      percent3:number;
-      percent3_label:string;
-      percent4:number;
-      percent4_label:string;
-      construction_button_text:string;
-      construction_button_url:string;
+  title: string;
+  image: string;
+  description: string;
+  estimated_completion: string;
+  percent_overall: number;
+  percent1: number;
+  percent1_label: string;
+  percent2: number;
+  percent2_label: string;
+  percent3: number;
+  percent3_label: string;
+  percent4: number;
+  percent4_label: string;
+  construction_button_text: string;
+  construction_button_url: string;
 }
 
 function CircularProgress({
@@ -398,11 +399,10 @@ function CircularProgress({
         {/* Percentage text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span
-            className={`font-[optima] text-black ${
-              isLarge
+            className={`font-[optima] text-black ${isLarge
                 ? "text-heading leading-[1.4]"
                 : "text-25 leading-[1.4] tracking-[2%]"
-            }`}
+              }`}
           >
             {percentage}%
           </span>
@@ -422,21 +422,22 @@ function CircularProgress({
 }
 
 export default function WynwoodProgress({
-      title,
-      description,
-      estimated_completion,
-      percent_overall,
-      percent1,
-      percent1_label,
-      percent2,
-      percent2_label,
-      percent3,
-      percent3_label,
-      percent4,
-      percent4_label,
-      construction_button_text,
-      construction_button_url
-}:Props) {
+  title,
+  image,
+  description,
+  estimated_completion,
+  percent_overall,
+  percent1,
+  percent1_label,
+  percent2,
+  percent2_label,
+  percent3,
+  percent3_label,
+  percent4,
+  percent4_label,
+  construction_button_text,
+  construction_button_url
+}: Props) {
   const [circleSize, setCircleSize] = useState(203);
   const [strokeWidth, setStrokeWidth] = useState(15);
   const lineRef = useRef(null);
@@ -455,24 +456,24 @@ export default function WynwoodProgress({
     description
   };
 
-function useWindowSize() {
-  const [width, setWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1024
-  );
-  useEffect(() => {
-    const fn = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
-  }, []);
-  return width;
-}
+  function useWindowSize() {
+    const [width, setWidth] = useState(
+      typeof window !== "undefined" ? window.innerWidth : 1024
+    );
+    useEffect(() => {
+      const fn = () => setWidth(window.innerWidth);
+      window.addEventListener("resize", fn);
+      return () => window.removeEventListener("resize", fn);
+    }, []);
+    return width;
+  }
 
-// Inside your component:
-const windowWidth = useWindowSize();
-const isMobile = windowWidth < 768;
+  // Inside your component:
+  const windowWidth = useWindowSize();
+  const isMobile = windowWidth < 768;
 
-const smallCircleSize   = isMobile ? 67 : 118;
-const circleStroke = isMobile ? 5  : 7.5;
+  const smallCircleSize = isMobile ? 67 : 118;
+  const circleStroke = isMobile ? 5 : 7.5;
 
 
   useEffect(() => {
@@ -514,8 +515,8 @@ const circleStroke = isMobile ? 5  : 7.5;
           {/* LEFT — Building Image */}
           <div ref={ref} className="relative w-full h-[275px] lg:h-auto overflow-hidden">
             <Image
-              src="/images/projects/progress-1.jpg"
-              alt="Wynwood Horizon Building"
+              src={image}
+              alt={title}
               fill
               priority
               className="object-cover object-center"
@@ -598,13 +599,13 @@ const circleStroke = isMobile ? 5  : 7.5;
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
                   <div className="3xl:px-[20.4px]">
                     {stat.percentage && <CircularProgress
-        percentage={stat.percentage}
-        size={smallCircleSize}
-        strokeWidth={circleStroke}
-        label={stat.label}
-        isLarge={false}
-        animationDelay={i * 0.15}
-      />}
+                      percentage={stat.percentage}
+                      size={smallCircleSize}
+                      strokeWidth={circleStroke}
+                      label={stat.label}
+                      isLarge={false}
+                      animationDelay={i * 0.15}
+                    />}
                   </div>
                 </Reveal>
               ))}

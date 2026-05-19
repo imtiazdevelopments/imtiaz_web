@@ -30,6 +30,7 @@ export interface PropertyDetailsData {
 
   construction_title: string;
   construction_brief: string;
+  construction_image:string;
   estimated_completion: string;
 
   percent_overall: number;
