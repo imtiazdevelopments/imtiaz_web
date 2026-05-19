@@ -1782,9 +1782,10 @@ function DesktopMegaMenu({
     {regularItems.map((item) => (
       <div
         key={item.id}
-        onMouseEnter={() =>
-          item.children && setActiveCategory(item.id)
-        }
+        // onMouseEnter={() =>
+        //   item.children && setActiveCategory(item.id)
+        // }
+        onClick={()=>item.children ? setActiveCategory(item.id) : null}
         className="relative flex flex-col"
       >
         <div className="relative flex items-center">
