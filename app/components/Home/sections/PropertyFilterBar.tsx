@@ -84,7 +84,7 @@ const Dropdown = ({
   };
 
   return (
-    <div ref={ref} className="relative flex-1 pt-[12px] py-0 lg:py-[12px] last:pb-[12px] ">
+    <div ref={ref} className="relative flex-1 pt-[12px] py-0 lg:py-[12px] last:pb-[12px]">
       {/* Trigger */}
       <button
         onClick={handleToggle}
@@ -97,10 +97,7 @@ const Dropdown = ({
       {/* Dropdown Panel */}
       {isOpen && (
         <div
-          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[280px] ${dropUp
-              ? "bottom-[calc(100%+24px)]"
-              : "top-[calc(100%+24px)]"
-            } ${isLast ? "right-0" : "left-1/2 -translate-x-1/2"
+          className={`absolute   bg-black/80 backdrop-blur-[30px] rounded-sm shadow-xl  py-2 z-50 min-w-[280px] bottom-[calc(100%+24px)] ${isLast ? "right-0" : "left-1/2 -translate-x-1/2"
             }`}
         >
           {filter.options.map((option) => (

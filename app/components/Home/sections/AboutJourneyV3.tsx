@@ -102,7 +102,7 @@ const AboutJourneyV3 = ({
     <>
       <section
         ref={sectionRef}
-        className="relative min-h-[82vh]  min-h-screen overflow-hidden flex justify-center items-center"
+        className="relative min-h-[82vh]  min-h-screen overflow-hidden flex flex-col justify-center items-center"
       // Added bottom padding like working component so section actually scrolls
       >
         {/* VIDEO */}
@@ -123,7 +123,7 @@ const AboutJourneyV3 = ({
         {/* CONTENT */}
         <div
           ref={textRef}
-          className="relative z-10 container mx-auto text-center px-4 pb-2"
+          className="relative z-0 container mx-auto text-center px-4 pb-2"
         >
           <div className="overflow-hidden">
             <h2 className="anim-item   text-white text-heading mb-[20px] md:mb-30 uppercase">
@@ -159,8 +159,9 @@ const AboutJourneyV3 = ({
               </Link>
             </div>
           </div>
+        </div>
 
-          <div className="relative w-full flex flex-col gap-10 md:gap-8 lg:gap-50 items-center ">
+        <div className="absolute bottom-[67px] w-full flex flex-col gap-10 md:gap-8 lg:gap-50 items-center">
             <div className="hidden lg:block opacity-0" ref={searchRef}>
               <div className="w-full">
                 <PropertyFilterBar communitiesData={communitiesData} />
@@ -205,7 +206,6 @@ const AboutJourneyV3 = ({
             </div>
           </div>
 
-        </div>
       </section>
         <div
           className={`fixed -bottom-1 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out ${isVisible ? "translate-y-0" : "translate-y-full"

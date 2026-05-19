@@ -43,11 +43,11 @@ const InnerFooter = () => {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/footer-logo-inner.svg"
+              src="/images/logo-new.svg"
               alt="logo"
               width={295}
-              height={80}
-              className="w-auto max-w-[291px] 3xl:w-[291px] h-[50px] xl:h-[80px] shrink-0"
+              height={70}
+              className="w-auto max-w-[291px] 3xl:w-[291px] h-[50px] xl:h-[60px] shrink-0 invert brightness-0"
             />
           </motion.div>
 
