@@ -146,7 +146,7 @@ export const footerV2Data: FooterV2Data = {
     //   ],
     // },
     {
-      heading: "WORLD OF IMTIAZ",
+      heading: "ABOUT IMTIAZ",
       items: [
         { label: "About", link: "/about/our-story" },
         { label: "Careers", link: "/about/careers" },
@@ -163,7 +163,9 @@ export const footerV2Data: FooterV2Data = {
     },
     {
       heading: "TRENDING SEARCHES",
-      items: [{ label: "Off Plan Properties", link: "/off-plan-properties" }],
+      items: [{ label: "Off Plan Properties", link: "/off-plan-properties" },
+        { label: "3D View", link: "/3d-tour" }
+      ],
     },
   ],
 
@@ -196,11 +198,11 @@ export interface SubMenuItem {
 
 export const menuItems: MenuItem[] = [
   { id: "about", label: "ABOUT", bgImage: "/images/navpage/about_bg.jpg" },
-  {
-    id: "communities",
-    label: "COMMUNITIES",
-    bgImage: "/images/navpage/2.jpg",
-  },
+  // {
+  //   id: "communities",
+  //   label: "COMMUNITIES",
+  //   bgImage: "/images/navpage/2.jpg",
+  // },
   {
     id: "properties",
     label: "PROPERTIES",
@@ -237,7 +239,7 @@ export const subMenuItems = {
       label: "SUSTAINABILITY",
       href: "/about/sustainability",
     },
-    { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
+    // { id: "expertise", label: "EXPERTISE", href: "/about/expertise" },
     {
       id: "investor",
       label: "INVESTOR RELATIONS",
@@ -268,12 +270,11 @@ export const subMenuItems = {
   ],
 
   properties: [
-    {
-      id: "Alfurjan",
-      label: "Al Furjan",
-      children: [{ id: "res-1", label: "Westwood", href: "#" }],
-    },
-
+    // {
+    //   id: "Alfurjan",
+    //   label: "Al Furjan",
+    //   children: [{ id: "res-1", label: "Westwood", href: "#" }],
+    // },
     {
       id: "dubaiislands",
       label: "Dubai Islands",
@@ -286,6 +287,15 @@ export const subMenuItems = {
     {
       id: "dubai-complex",
       label: "Dubai Land Residence Complex",
+      children: [
+        { id: "lux-1", label: "Cove Edition I", href: "#" },
+        { id: "lux-2", label: "Cove by Imtiaz", href: "#" },
+        { id: "lux-3", label: "Beach Walk III", href: "#" },
+      ],
+    },
+    {
+      id: "al-furjan",
+      label: "Al Furjan",
       children: [
         { id: "lux-1", label: "Cove Edition I", href: "#" },
         { id: "lux-2", label: "Cove by Imtiaz", href: "#" },
@@ -310,12 +320,28 @@ export const subMenuItems = {
       ],
     },
     {
-      id: "all",
+      id: "meydan-horizon",
+      label: "Meydan Horizon",
+      children: [{ id: "jumeirahcity-1", label: "Hyde Walk", href: "#" }],
+    },
+    {
+      id: "dubai-south",
+      label: "Dubai South",
+      children: [{ id: "jumeirahcity-1", label: "Hyde Walk", href: "#" }],
+    },
+    {
+      id: "all-communities",
+      label: "ALL COMMUNITIES",
+      isButton: true,
+      href: "/communities",
+    },
+    {
+      id: "all-properties",
       label: "ALL PROPERTIES",
       isButton: true,
       href: "/properties",
     },
-    { id: "3d-view", label: "3D View", href: "/3d-tour", isButton: true },
+    // { id: "3d-view", label: "3D View", href: "/3d-tour", isButton: true },
   ],
 
   media: [

@@ -40,6 +40,15 @@ export default function Index({data}:{data:InnovationPageResponse['data']}) {
   ],
 };
 
+const spotlightData = (data?.spotlight || []).map((item, index) => ({
+  id: item?.slug || `spotlight-${index + 1}`,
+  date: item?.post_date || "",
+  title: item?.title || "",
+  href: `/media-center/news/${item?.slug || ""}`,
+  image: item?.featured_image_desktop || "",
+  alt: item?.featured_image_alt || "",
+}));
+
   return (
     <>
       <InnerHeroBanner 
@@ -49,7 +58,7 @@ export default function Index({data}:{data:InnovationPageResponse['data']}) {
       maxW="max-w-[816px]" />
       <ImpactAreas data={impactAreas} />
       <SustainablityMoments title={data.moments_title} description={data.moments_caption} data={data.moments}/>
-      <PressSpotlight title={data.spotlight_title}/>
+      <PressSpotlight title={data.spotlight_title} data={spotlightData}/>
     </>
   );
 }

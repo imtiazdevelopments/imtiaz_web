@@ -268,6 +268,22 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                         />
                       </motion.div>
+
+                      <motion.div
+                        variants={fadeUp}
+                        // custom={0.3}
+                        custom={0.23}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                      >
+                        <CustomOutlineButton
+                          text="Explore More"
+                          borderColor="border-white"
+                          textColor="text-white"
+                          px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
+                        />
+                      </motion.div>
+
                     </motion.div>
                   </motion.div>
                 </AnimatePresence>

@@ -123,7 +123,7 @@ const MainContent = ({data}:{data:TourListingItem[]}) => {
   //     ),
   //   [],
   // );
-  const sorted = [...data]
+  const sorted = [...data || []]
 
   const itemsPerPage = itemsPerPageRef.current;
 

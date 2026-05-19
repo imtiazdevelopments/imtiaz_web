@@ -124,7 +124,7 @@ export default function HeroSection({
               </h1>
             </div>
 
-            <div className="hidden lg:block opacity-0" ref={searchRef}>
+            {/* <div className="hidden lg:block opacity-0" ref={searchRef}>
               <div className="w-full">
                 <PropertyFilterBar communitiesData={communitiesData} />
               </div>
@@ -165,10 +165,10 @@ export default function HeroSection({
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Mouse icon — now below the search pill */}
-            {/* <div className="overflow-hidden">
+            <div className="overflow-hidden">
               <Image
                 ref={scrollRef}
                 className="opacity-0 w-[30px]"
@@ -177,11 +177,11 @@ export default function HeroSection({
                 width={50}
                 height={50}
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
-      <div
+      {/* <div
         className={`fixed -bottom-1 left-0 right-0 z-[9999] flex justify-center px-4 pb-6 transition-transform duration-500 ease-out ${
           isVisible ? "translate-y-0" : "translate-y-full"
         }`}
@@ -189,7 +189,7 @@ export default function HeroSection({
         <div className="w-full  " ref={containerRef}>
           <PropertyFilterBar communitiesData={communitiesData} />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

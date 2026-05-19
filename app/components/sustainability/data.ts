@@ -46,6 +46,18 @@ export type InnovationPageResponse = {
       moment_caption: string;
       moment_url: string;
     }[];
+
+    spotlight: {
+      slug: string;
+      title: string;
+      description: string;
+      featured_image_desktop:string;
+      featured_image_mobile:string;
+      featured_image_alt:string;
+      post_date:string;
+      category_name:string;
+    }[];
+
   };
 };
 

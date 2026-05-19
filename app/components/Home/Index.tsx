@@ -197,12 +197,12 @@ const spotlight = {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} scrollRef={scrollRef} searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData}/>
-      <AboutJourneyV3 />
+      <HeroSection titleRef={titleRef} scrollRef={scrollRef}  communitiesData={communitiesData}/>
+      <AboutJourneyV3 searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData}/>
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       <ProSliderComingSoonV3
         slides={heroSlidesComingSoon}
-        RightLabel="Coming Soon"
+        RightLabel="World of IMTIAZ"
       />
       <FpfSection />
       <CommunityNamesSlider slides={communityNamesData} />

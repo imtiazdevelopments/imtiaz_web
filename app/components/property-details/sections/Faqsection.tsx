@@ -117,13 +117,13 @@ export default function Faq({title,description,data}:{title:string,description:s
       <div className="container">
         {/* Header */}
         <div className="w-full flex flex-col items-center text-center mb-[10px]">
-          <SectionHeading title={title} className="mb-20 text-foreground" />
-          <SectionDescription text={description} className="shrink-0 max-w-[407px] text-foreground-light" />
+          {title && <SectionHeading title={title} className="mb-20 text-foreground" />}
+          {description && <SectionDescription text={description} className="shrink-0 max-w-[407px] text-foreground-light" />}
         </div>
 
         {/* Accordion */}
         <div className="max-w-[973px] mx-auto">
-          {data.map((item, index) => (
+          {(data ||  []).map((item, index) => (
             <Reveal variants={moveUpV2} key={index} >
 
             <AccordionItem

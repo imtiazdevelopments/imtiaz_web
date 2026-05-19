@@ -4,10 +4,19 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
-import { sustainabilitySpotlight } from "../data";
+import { InnovationPageResponse, sustainabilitySpotlight } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import SliderArrowButton from "../../common/SliderNavigationButton";
 import { moveUp, itemVariants } from "../../motionVariants";
+
+export type SpotlightCardItem = {
+  id: string;
+  date: string;
+  title: string;
+  href: string;
+  image: string;
+  alt: string;
+};
 
 function ImageTrack({
   slides,
@@ -51,8 +60,8 @@ function ImageTrack({
   );
 }
 
-export default function SustainabilitySpotlight({title}:{title:string}) {
-  const slides = sustainabilitySpotlight.slides;
+export default function SustainabilitySpotlight({title,data}:{title:string;data:SpotlightCardItem[]}) {
+  const slides = data;
 
   const [current, setCurrent] = useState(0);
 
@@ -267,7 +276,7 @@ export default function SustainabilitySpotlight({title}:{title:string}) {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={slide.id}
+              key={slide.title}
               className="flex flex-col items-center text-center mb-50"
             >
               <motion.span
@@ -336,6 +345,7 @@ export default function SustainabilitySpotlight({title}:{title:string}) {
           />
 
           <div className="flex justify-between md:justify-center gap-30 w-full">
+            <Link href={"/media-center/news"}>
             <CustomOutlineButton
               variant="dark"
               text="View All"
@@ -344,6 +354,7 @@ export default function SustainabilitySpotlight({title}:{title:string}) {
               px="px-[12px] sm:px-[26px]"
               className="min-w-[139px] md:w-full"
             />
+            </Link>
             <div className="flex items-center gap-[15px]">
               <SliderArrowButton
                 onClick={() => {
@@ -468,6 +479,7 @@ export default function SustainabilitySpotlight({title}:{title:string}) {
                 viewport={{ once: true }}
                 exit="exit"
               >
+                <Link href={"/media-center/news"}>
                 <CustomOutlineButton
                   variant="dark"
                   text="View All"
@@ -475,6 +487,7 @@ export default function SustainabilitySpotlight({title}:{title:string}) {
                   textColor="text-primary-2"
                   px="px-[12px] lg:px-[20px] 3xl:px-[36.6px]"
                 />
+                </Link>
               </motion.div>
               <div className="flex items-center gap-[10px] 3xl:gap-[15px]">
                 <motion.div

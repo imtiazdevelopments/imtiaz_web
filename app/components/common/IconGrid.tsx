@@ -102,14 +102,14 @@ export default function IconGrid({ data, bgClass }: Props) {
       <div className="container flex flex-col justify-center">
         {/* Header */}
         <div className="text-center">
-          <SectionHeading
+          {data.title && <SectionHeading
             title={data.title}
             className="text-heading leading-[1.4] mb-20 max-w-[45ch] mx-auto"
-          />
-          <SectionDescription
+          />}
+          {data.description && <SectionDescription
             text={data.description}
             className="text-description text-foreground-light max-w-[60ch] mx-auto"
-          />
+          />}
         </div>
 
         {/* ── BELOW lg: 2 cards per slide ── */}
@@ -149,20 +149,20 @@ export default function IconGrid({ data, bgClass }: Props) {
                       <div key={cardIndex} className="relative flex flex-col">
                         <div className="flex flex-col items-center justify-start px-4 sm:px-8 py-[20px] md:py-40 text-center">
                           <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] rounded-full flex items-center justify-center bg-primary/5 mb-20">
-                            <Image
+                            {card.icon_url && <Image
                               src={card.icon_url}
                               alt={card.caption}
                               width={20}
                               height={20}
-                            />
+                            />}
                           </div>
-                          <p
+                          {card.title && <p
                             className="text-foreground font-[optima] text-25 leading-[1.4] uppercase mb-2"
                             dangerouslySetInnerHTML={{ __html: card.title }}
-                          />
-                          <p className="text-description text-foreground-light">
+                          />}
+                          {card.caption && <p className="text-description text-foreground-light">
                             {card.caption}
-                          </p>
+                          </p>}
                         </div>
 
                         {!isLastCard && (
@@ -238,20 +238,20 @@ export default function IconGrid({ data, bgClass }: Props) {
                   <div className="relative flex flex-col">
                     <div className="flex flex-col items-center justify-start px-4 py-40 text-center">
                       <div className="w-[70px] h-[70px] xl:w-[80px] xl:h-[80px] rounded-full flex items-center justify-center bg-primary/5 mb-20">
-                        <Image
+                        {card.icon_url && <Image
                           src={card.icon_url}
                           alt={card.caption}
                           width={isXL ? 34 : 20}
                           height={isXL ? 34 : 20}
-                        />
+                        />}
                       </div>
-                      <p
+                      {card.title && <p
                         className="text-foreground font-[optima] text-25 leading-[1.4] uppercase mb-2"
                         dangerouslySetInnerHTML={{ __html: card.title }}
-                      />
-                      <p className="text-description text-foreground-light">
+                      />}
+                      {card.caption && <p className="text-description text-foreground-light">
                         {card.caption}
-                      </p>
+                      </p>}
                     </div>
 
                     <div

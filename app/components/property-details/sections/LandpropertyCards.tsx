@@ -19,7 +19,7 @@ const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],
   const swiperRef = useRef<SwiperType | null>(null);
   const [slidesPerView, setSlidesPerView] = useState(1);
 
-  const totalSlides = LandpropertyData.cards.slice(-4).length;
+  const totalSlides = data.slice(-4).length;
   const showNav = totalSlides > slidesPerView;
   return (
     <section className="w-full"
@@ -65,11 +65,11 @@ const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],
                   <Reveal variants={moveUpV2} delayRange={i * 0.12}>
                     <ProjectCard 
                     
-                    image={project.featured_image_desktop}
-                    hoverImage={project.brand_logo}
-                    startingFrom={project.icon1_text}
-                    units={project.icon2_text}
-                    location={project.property_location}
+                    image={project?.featured_image_desktop}
+                    hoverImage={project?.brand_logo}
+                    startingFrom={project?.icon1_text}
+                    units={project?.icon2_text}
+                    location={project?.property_location}
                     {...project} />
                   </Reveal>
                 </SwiperSlide>
