@@ -171,12 +171,12 @@ const InnerHeader: React.FC = () => {
               <div className="absolute max-[380px]:left-[44%] left-1/2 -translate-x-1/2 flex flex-col items-center">
                 <Link href="/">
                   <Image
-                    src="/icons/layout_icons/header-logo.svg"
+                    src="/images/logo-new.svg"
                     alt="Imtiaz"
                     width={183}
                     height={50}
                     priority
-                    className="w-[131px] xl:w-[183px] h-[44px] md:h-[30px] lg:h-[45px] 3xl:h-[50px]"
+                    className="w-[131px] xl:w-[183px] h-[44px] md:h-[30px] lg:h-[45px] 3xl:h-[50px] invert brightness-0"
                   />
                 </Link>
               </div>

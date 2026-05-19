@@ -250,7 +250,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                       exit="exit"
                       className="flex gap-4 mt-5 md:mt-15  font-[avenirRoman] overflow-hidden"
                     >
-                      <motion.div
+                      {/* <motion.div
                         variants={fadeUp}
                         // custom={0.3}
                         custom={0.23}
@@ -267,7 +267,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                           textColor="text-white"
                           px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                         />
-                      </motion.div>
+                      </motion.div> */}
 
                       <motion.div
                         variants={fadeUp}
