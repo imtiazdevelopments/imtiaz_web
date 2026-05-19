@@ -55,6 +55,7 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
       <ConstructionProgress
         title={data?.construction_title}
         description={data?.construction_brief}
+        image={data?.construction_image}
         estimated_completion={data?.estimated_completion}
         percent_overall={data?.percent_overall}
         percent1={data?.percent1}
