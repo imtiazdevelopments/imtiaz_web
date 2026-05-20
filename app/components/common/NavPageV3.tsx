@@ -762,9 +762,6 @@
 //   );
 // }
 
-
-
-
 // "use client";
 
 // import Image from "next/image";
@@ -1183,7 +1180,6 @@
 //   );
 // }
 
-
 "use client";
 
 import Image from "next/image";
@@ -1214,7 +1210,9 @@ function MobileMegaMenu({
   const router = useRouter();
   const mounted = useRef(true);
 
-  const [activeMenu, setActiveMenu] = useState<(typeof menuItems)[0] | null>(null);
+  const [activeMenu, setActiveMenu] = useState<(typeof menuItems)[0] | null>(
+    null,
+  );
   const [expandedChild, setExpandedChild] = useState<string | null>(null);
 
   // ── Two permanent BG layers (same as desktop) ─────────────────────────────
@@ -1271,28 +1269,68 @@ function MobileMegaMenu({
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
 
   const mainPanelVariants = {
-    visible: { x: "0%", transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
-    hiddenLeft: { x: "-100%", transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
+    visible: {
+      x: "0%",
+      transition: {
+        duration: 0.38,
+        ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
+      },
+    },
+    hiddenLeft: {
+      x: "-100%",
+      transition: {
+        duration: 0.38,
+        ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
+      },
+    },
   };
 
   const subPanelVariants = {
-    hidden: { x: "100%", transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
-    visible: { x: "0%", transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
+    hidden: {
+      x: "100%",
+      transition: {
+        duration: 0.38,
+        ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
+      },
+    },
+    visible: {
+      x: "0%",
+      transition: {
+        duration: 0.38,
+        ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
+      },
+    },
   };
 
   const accordionVariants = {
-    collapsed: { height: 0, opacity: 0, transition: { duration: 0.28, ease: "easeInOut" as const } },
-    expanded: { height: "auto", opacity: 1, transition: { duration: 0.28, ease: "easeInOut" as const } },
+    collapsed: {
+      height: 0,
+      opacity: 0,
+      transition: { duration: 0.28, ease: "easeInOut" as const },
+    },
+    expanded: {
+      height: "auto",
+      opacity: 1,
+      transition: { duration: 0.28, ease: "easeInOut" as const },
+    },
   };
 
   return (
-    <div className="fixed w-full h-[100dvh] overflow-hidden flex flex-col md:hidden"
-    >
-
+    <div className="fixed w-full h-[100dvh] overflow-hidden flex flex-col md:hidden">
       {/* ── PRELOAD ALL BG IMAGES ── */}
-      <div aria-hidden className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
+      <div
+        aria-hidden
+        className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
+      >
         {menuItems.map((item) => (
-          <Image key={item.id} src={item.bgImage} alt="" width={1} height={1} priority />
+          <Image
+            key={item.id}
+            src={item.bgImage}
+            alt=""
+            width={1}
+            height={1}
+            priority
+          />
         ))}
       </div>
 
@@ -1302,7 +1340,13 @@ function MobileMegaMenu({
         animate={{ opacity: aOnTop ? 1 : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <Image src={bgA} alt="background" fill className="object-cover" priority />
+        <Image
+          src={bgA}
+          alt="background"
+          fill
+          className="object-cover"
+          priority
+        />
       </motion.div>
 
       {/* ── BG LAYER B ── */}
@@ -1311,7 +1355,13 @@ function MobileMegaMenu({
         animate={{ opacity: aOnTop ? 0 : 1 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <Image src={bgB} alt="background" fill className="object-cover" priority />
+        <Image
+          src={bgB}
+          alt="background"
+          fill
+          className="object-cover"
+          priority
+        />
       </motion.div>
 
       {/* BLACK OVERLAY */}
@@ -1360,7 +1410,11 @@ function MobileMegaMenu({
                 stroke="currentColor"
                 strokeWidth={3}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </motion.div>
           ))}
@@ -1379,13 +1433,22 @@ function MobileMegaMenu({
           >
             CONTACT US
           </div>
-          <a href={`mailto:${contactInfo.emailInfo}`} className="font-[avenirRoman] text-[14px] opacity-70 leading-loose">
+          <a
+            href={`mailto:${contactInfo.emailInfo}`}
+            className="font-[avenirRoman] text-[14px] opacity-70 leading-loose"
+          >
             {contactInfo.emailInfo}
           </a>
-          <a href={`mailto:${contactInfo.emailSales}`} className="font-[avenirRoman] text-[14px] opacity-70 leading-loose">
+          <a
+            href={`mailto:${contactInfo.emailSales}`}
+            className="font-[avenirRoman] text-[14px] opacity-70 leading-loose"
+          >
             {contactInfo.emailSales}
           </a>
-          <a href={`tel:${contactInfo.phone}`} className="font-[avenirRoman] text-[15px] opacity-70 leading-loose">
+          <a
+            href={`tel:${contactInfo.phone}`}
+            className="font-[avenirRoman] text-[15px] opacity-70 leading-loose"
+          >
             {contactInfo.phone}
           </a>
           <div className="flex gap-[5px] mt-5">
@@ -1394,7 +1457,13 @@ function MobileMegaMenu({
                 key={i}
                 className="cursor-pointer rounded-full w-[33px] h-[33px] bg-white/25 backdrop-blur-[30px] flex items-center justify-center"
               >
-                <Image src={icon} alt="icon" width={22} height={22} className="w-[16px] h-[16px] opacity-100 hover:opacity-70 transition-opacity duration-300" />
+                <Image
+                  src={icon}
+                  alt="icon"
+                  width={22}
+                  height={22}
+                  className="w-[16px] h-[16px] opacity-100 hover:opacity-70 transition-opacity duration-300"
+                />
               </div>
             ))}
           </div>
@@ -1415,8 +1484,18 @@ function MobileMegaMenu({
             className="flex items-center justify-center w-[36px] h-[36px] rounded-full bg-white/15 flex-shrink-0"
             aria-label="Back to main menu"
           >
-            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
           <span className="text-white font-[optima] uppercase text-[18px] tracking-wide opacity-80">
@@ -1432,7 +1511,10 @@ function MobileMegaMenu({
             const isExpanded = expandedChild === item.id;
 
             return (
-              <div key={item.id} className="border-b border-white/10 last:border-b-0">
+              <div
+                key={item.id}
+                className="border-b border-white/10 last:border-b-0"
+              >
                 <div
                   className="flex items-center justify-between py-3 cursor-pointer group"
                   onClick={() => {
@@ -1451,8 +1533,18 @@ function MobileMegaMenu({
                       animate={{ rotate: isExpanded ? 180 : 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <svg className="w-4 h-4 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      <svg
+                        className="w-4 h-4 text-white/50"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
                       </svg>
                     </motion.div>
                   )}
@@ -1474,7 +1566,9 @@ function MobileMegaMenu({
                             <div
                               key={child.id}
                               className="py-[7px] cursor-pointer border-b border-white/5 last:border-b-0"
-                              onClick={() => handleNavigate(child.href, child.newTab)}
+                              onClick={() =>
+                                handleNavigate(child.href, child.newTab)
+                              }
                             >
                               <span className="text-white/70 font-[avenirRoman] uppercase text-[14px] tracking-wide hover:text-white transition-colors duration-200">
                                 {child.label}
@@ -1493,7 +1587,10 @@ function MobileMegaMenu({
           {buttonItems.length > 0 && (
             <div className="flex flex-row flex-wrap gap-4 mt-8">
               {buttonItems.map((item) => (
-                <div key={item.id} onClick={() => handleNavigate(item.href, item.newTab)}>
+                <div
+                  key={item.id}
+                  onClick={() => handleNavigate(item.href, item.newTab)}
+                >
                   <CustomOutlineButton
                     text={item.label}
                     borderColor="border-white"
@@ -1568,9 +1665,7 @@ function DesktopMegaMenu({
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
 
-  const activeItem = regularItems.find(
-    (item) => item.id === activeCategory
-  );
+  const activeItem = regularItems.find((item) => item.id === activeCategory);
 
   const activeChildren = activeItem?.children || [];
 
@@ -1602,7 +1697,13 @@ function DesktopMegaMenu({
           animate={{ opacity: aOnTop ? 1 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Image src={bgA} alt="background" fill className="object-cover" priority />
+          <Image
+            src={bgA}
+            alt="background"
+            fill
+            className="object-cover"
+            priority
+          />
         </motion.div>
 
         {/* BG LAYER B */}
@@ -1611,7 +1712,13 @@ function DesktopMegaMenu({
           animate={{ opacity: aOnTop ? 0 : 1 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Image src={bgB} alt="background" fill className="object-cover" priority />
+          <Image
+            src={bgB}
+            alt="background"
+            fill
+            className="object-cover"
+            priority
+          />
         </motion.div>
 
         {/* BLACK OVERLAY */}
@@ -1638,7 +1745,9 @@ function DesktopMegaMenu({
                     {/* ARROW */}
                     <motion.div
                       initial={false}
-                      animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                      animate={
+                        isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }
+                      }
                       transition={{ duration: 0.35, ease: "easeOut" }}
                       className="absolute left-0 top-1/2 -translate-y-1/2 pb-1"
                     >
@@ -1712,8 +1821,9 @@ function DesktopMegaMenu({
                     animate="show"
                     className="text-16 leading-[2.2] flex flex-col"
                   >
-                    <a href={`mailto:${contactInfo.emailInfo}`}>{contactInfo.emailInfo}</a>
-
+                    <a href={`mailto:${contactInfo.emailInfo}`}>
+                      {contactInfo.emailInfo}
+                    </a>
                   </motion.div>
                   <div className="hidden lg:block w-[1px] h-[13px] bg-white" />
                   <motion.div
@@ -1724,7 +1834,6 @@ function DesktopMegaMenu({
                   >
                     <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
                   </motion.div>
-
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center font-[avenirRoman] lg:gap-4 text-white opacity-70">
                   <motion.div
@@ -1733,7 +1842,9 @@ function DesktopMegaMenu({
                     animate="show"
                     className="text-16 leading-[2.2] flex flex-col"
                   >
-                    <a href={`mailto:${contactInfo.emailSales}`}>{contactInfo.emailSales}</a>
+                    <a href={`mailto:${contactInfo.emailSales}`}>
+                      {contactInfo.emailSales}
+                    </a>
                   </motion.div>
                 </div>
                 <div className="flex gap-[5px] w-full mt-[30px]">
@@ -1772,125 +1883,123 @@ function DesktopMegaMenu({
           </div>
 
           {/* RIGHT SUBMENU */}
-<div
-  className="flex gap-[60px]"
-  onMouseLeave={() => setActiveCategory(null)}
->
-
-  {/* FIRST COLUMN */}
-  <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/2 sm:w-1/3 xl:w-fit">
-    {regularItems.map((item) => (
-      <div
-        key={item.id}
-        // onMouseEnter={() =>
-        //   item.children && setActiveCategory(item.id)
-        // }
-        onClick={()=>item.children ? setActiveCategory(item.id) : null}
-        className="relative flex flex-col"
-      >
-        <div className="relative flex items-center">
-          {item.children && (
-            <motion.div
-              initial={false}
-              animate={
-                activeCategory === item.id
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: -10 }
-              }
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="absolute left-0 top-1/2 -translate-y-1/2"
-            >
-              <Image
-                src="/icons/arrow_nav.svg"
-                alt=""
-                width={20}
-                height={16}
-                className="w-[16px] h-[14px] md:w-[20px] md:h-[16px] invert brightness-0"
-              />
-            </motion.div>
-          )}
-
-          <motion.div
-            initial={false}
-            animate={
-              item.children && activeCategory === item.id
-                ? { x: 30 }
-                : { x: 0 }
-            }
-            transition={{ duration: 0.25, ease: "easeOut" }}
-          >
-            {item.href ? (
-              <Link
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigate(item.href, item.newTab);
-                }}
-                className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <div className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer">
-                {item.label}
-              </div>
-            )}
-          </motion.div>
-        </div>
-      </div>
-    ))}
-
-    {buttonItems.length > 0 && (
-      <div className="flex flex-row gap-5 mt-40 flex-wrap">
-        {buttonItems.map((item) => (
           <div
-            key={item.id}
-            onClick={() =>
-              handleNavigate(item.href, item.newTab)
-            }
+            className="flex gap-[60px] self-start"
+            onMouseLeave={() => setActiveCategory(null)}
           >
-            <CustomOutlineButton
-              text={item.label}
-              borderColor="border-white"
-              textColor="text-white"
-              px="px-[18px] sm:px-[20px] md:px-[36px] h-[44px] md:h-[50px] xl:h-[66px] !leading-[1.58]"
-            />
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
+            {/* FIRST COLUMN */}
+            <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/2 sm:w-1/3 xl:w-fit">
+              {regularItems.map((item) => (
+                <div key={item.id} className="relative flex flex-col">
+                  <div
+                    className="relative flex items-center w-fit"
+                    onMouseEnter={() =>
+                      item.children && setActiveCategory(item.id)
+                    }
+                    onClick={() =>
+                      item.children ? setActiveCategory(item.id) : null
+                    }
+                  >
+                    {item.children && (
+                      <motion.div
+                        initial={false}
+                        animate={
+                          activeCategory === item.id
+                            ? { opacity: 1, x: 0 }
+                            : { opacity: 0, x: -10 }
+                        }
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        className="absolute left-0 top-1/2 -translate-y-1/2"
+                      >
+                        <Image
+                          src="/icons/arrow_nav.svg"
+                          alt=""
+                          width={20}
+                          height={16}
+                          className="w-[16px] h-[14px] md:w-[20px] md:h-[16px] invert brightness-0"
+                        />
+                      </motion.div>
+                    )}
 
-  {/* SECOND COLUMN */}
-  <div className="min-w-[250px] text-white">
-    <AnimatePresence mode="wait">
-      {activeChildren.length > 0 && (
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 20 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-col gap-2 lg:gap-4"
-        >
-          {activeChildren.map((child) => (
-            <Link
-              key={child.id}
-              href={child.href || "#"}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavigate(child.href, child.newTab);
-              }}
-              className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
-            >
-              {child.label}
-            </Link>
-          ))}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
-</div>
+                    <motion.div
+                      initial={false}
+                      animate={
+                        item.children && activeCategory === item.id
+                          ? { x: 30 }
+                          : { x: 0 }
+                      }
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                    >
+                      {item.href ? (
+                        <Link
+                          href={item.href}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavigate(item.href, item.newTab);
+                          }}
+                          className="block text-description md:text-18 leading-[2.2] uppercase hover:translate-x-2 transition-all duration-300"
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <div className="text-description md:text-18 leading-[2.2] uppercase cursor-pointer">
+                          {item.label}
+                        </div>
+                      )}
+                    </motion.div>
+                  </div>
+                </div>
+              ))}
+
+              {buttonItems.length > 0 && (
+                <div className="flex flex-row gap-5 mt-40 flex-wrap">
+                  {buttonItems.map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => handleNavigate(item.href, item.newTab)}
+                    >
+                      <CustomOutlineButton
+                        text={item.label}
+                        borderColor="border-white"
+                        textColor="text-white"
+                        px="px-[18px] sm:px-[20px] md:px-[36px] h-[44px] md:h-[50px] xl:h-[66px] !leading-[1.58]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* SECOND COLUMN */}
+            <div className="min-w-[250px] text-white flex items-center">
+              <AnimatePresence mode="wait">
+                {activeChildren.length > 0 && (
+                  <motion.div
+                    key={activeCategory}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col gap-2 lg:gap-4"
+                  >
+                    {activeChildren.map((child) => (
+                      <Link
+                        key={child.id}
+                        href={child.href || "#"}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavigate(child.href, child.newTab);
+                        }}
+                        className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
 
           {/* CLOSE BTN */}
           <button
