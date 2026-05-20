@@ -108,7 +108,7 @@ const AboutJourneyV3 = ({
         {/* VIDEO */}
         <video
           ref={videoRef}
-          src="/videos/imtiaz-about.mp4"
+          src="/videos/imitiaz-about2.mp4"
           poster="/images/home/work-progress/progress.jpg"
           autoPlay
           muted
