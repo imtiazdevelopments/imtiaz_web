@@ -60,7 +60,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
-      <div className="container absolute bottom-10 lg:bottom-[67px] left-0 right-0 z-[9999] flex justify-center px-4 pb-6">
+      <div className="container absolute bottom-10 lg:bottom-[67px] left-0 right-0 z-10 flex justify-center px-4 pb-6">
         <div className="w-full">
           <div className="text-center flex justify-center flex-col items-center">
             <SectionHeading title={"A National Initiative by Imtiaz"} className="text-white mb-[20px] sm:mb-30" />
