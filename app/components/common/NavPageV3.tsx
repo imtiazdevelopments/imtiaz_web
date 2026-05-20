@@ -1884,7 +1884,7 @@ function DesktopMegaMenu({
 
           {/* RIGHT SUBMENU */}
           <div
-            className="flex gap-[60px] self-start"
+            className="flex gap-[60px] self-start pt-50"
             onMouseLeave={() => setActiveCategory(null)}
           >
             {/* FIRST COLUMN */}
