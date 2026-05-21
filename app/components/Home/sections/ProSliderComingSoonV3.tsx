@@ -34,6 +34,7 @@ export interface SlideData {
 type HeroSliderProps = {
   slides: SlideData[];
   RightLabel?: string;
+  video:string;
 };
 
 // -----------------------------------------------------
@@ -49,7 +50,7 @@ const fadeUp = {
   exit: moveUpExit.exit,
 };
 
-export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
+export default function HeroSlider({ slides, RightLabel,video }: HeroSliderProps) {
   const [authView, setAuthView] = useState<AuthView | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -200,7 +201,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
               >
                 <video
                   ref={(el) => setImgRef(el as HTMLVideoElement, index)}
-                  src={slide.desktopVideo}
+                  src={video}
                   autoPlay
                   loop
                   muted

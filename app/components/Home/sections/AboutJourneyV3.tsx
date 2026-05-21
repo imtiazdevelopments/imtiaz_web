@@ -13,12 +13,14 @@ type Props = {
   searchRef?: React.RefObject<HTMLDivElement | null>;
   mobsearchRef?: React.RefObject<HTMLDivElement | null>;
   communitiesData: any;
+  video:string;
 };
 
 const AboutJourneyV3 = ({
   searchRef,
   mobsearchRef,
   communitiesData,
+  video
 }: Props) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -108,7 +110,7 @@ const AboutJourneyV3 = ({
         {/* VIDEO */}
         <video
           ref={videoRef}
-          src="/videos/imitiaz-about2.mp4"
+          src={video}
           poster="/images/home/work-progress/progress.jpg"
           autoPlay
           muted

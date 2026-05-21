@@ -967,7 +967,6 @@ export default async function Page() {
   });
   const communitiesData = await communitiesResponse.json();
 
-  
 
   return (
     <Index

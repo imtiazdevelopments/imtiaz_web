@@ -1,26 +1,29 @@
-"use client";
 
-import { useEffect } from "react";
-import { useLenis } from "../contexts/LenisContext";
-import InnerHeader from "../components/layout/InnerHeader";
-import InnerFooter from "../components/layout/InnerFooter";
+import InnerComponents from "../components/layout/InnerComponents";
+
+const menuResponse = await fetch(`${process.env.BASE_URL}/api/menu_communities_properties.php`, {
+  next: { revalidate: 60 },
+})
+
+const menuData = await menuResponse.json();
 
 export default function InnerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { unlock } = useLenis();
+  // const { unlock } = useLenis();
 
-  useEffect(() => {
-    unlock();
-  }, [unlock]);
+  // useEffect(() => {
+  //   unlock();
+  // }, [unlock]);
+  
 
   return (
     <>
-      <InnerHeader />
-      {children}
-      <InnerFooter />
+      <InnerComponents menuData={menuData.data.listing}>
+        {children}
+        </InnerComponents>
     </>
   );
 }

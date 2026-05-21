@@ -56,18 +56,14 @@ import PropertyFilterBar from "./PropertyFilterBar";
 
 type Props = {
   titleRef: React.RefObject<HTMLHeadingElement | null>;
-  scrollRef: React.RefObject<HTMLImageElement | null>;
-  searchRef?: React.RefObject<HTMLDivElement | null>;
-  mobsearchRef?: React.RefObject<HTMLDivElement | null>;
-  communitiesData: any;
+  desktopVideo: string;
+  mobileVideo: string;
 };
 
 export default function HeroSection({
   titleRef,
-  scrollRef,
-  searchRef,
-  mobsearchRef,
-  communitiesData,
+  desktopVideo,
+  mobileVideo
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,7 +90,7 @@ export default function HeroSection({
           {/* Portrait video — mobile only */}
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] block md:hidden"
-            src="/videos/heroBanner-mob.mp4"
+            src={mobileVideo}
             poster="/videos/banner-vid.jpg"
             autoPlay
             loop
@@ -104,7 +100,7 @@ export default function HeroSection({
           {/* Landscape video — tablet and above */}
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] hidden md:block"
-            src="/videos/heroBanner-web.mp4"
+            src={desktopVideo}
             poster="/videos/banner-vid.jpg"
             autoPlay
             loop

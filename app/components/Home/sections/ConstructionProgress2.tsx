@@ -19,10 +19,12 @@ interface ConstructionProgressProps {
       link: string;
     };
   };
+  video:string;
 }
 
 const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   data,
+  video
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -98,7 +100,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
       {/* ---------------- BACKGROUND VIDEO ---------------- */}
       <video
         ref={videoRef}
-        src={data.videoSrc}
+        src={video}
         poster={data.posterSrc}
         autoPlay
         muted
