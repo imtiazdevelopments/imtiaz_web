@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   description: "Imtiaz",
 };
 
+const menuResponse = await fetch(`${process.env.BASE_URL}/api/menu_communities_properties.php`, {
+  next: { revalidate: 60 },
+})
+
+const menuData = await menuResponse.json();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +26,7 @@ export default function RootLayout({
     <>
       <ScrollToTopReload />
       <LenisUnlock />
-      <HeaderWithHamburger />
+      <HeaderWithHamburger menuData={menuData.data.listing}/>
       {children}
       <InnerFooter />
     </>

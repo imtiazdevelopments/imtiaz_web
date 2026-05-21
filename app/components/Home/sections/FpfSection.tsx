@@ -10,7 +10,7 @@ import { SectionDescription } from "@/app/components/animations/SectionDescripti
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection() {
+export default function HeroSection({video}:{video:string}) {
   const rootRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -50,7 +50,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-10 overflow-hidden" ref={wrapRef}>
         <video
           ref={videoRef}
-          src={"/videos/promotion.mp4"}
+          src={video}
           autoPlay
           loop
           muted

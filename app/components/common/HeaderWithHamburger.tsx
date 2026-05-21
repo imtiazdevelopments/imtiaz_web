@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 type AuthView = "login" | "signup";
 
-const HeaderWithHamburger: React.FC = () => {
+const HeaderWithHamburger = ({menuData}:{menuData:any}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [darkHeader, setDarkHeader] = useState(false);
@@ -543,7 +543,7 @@ const HeaderWithHamburger: React.FC = () => {
                   exit={{ y: "-100%" }}
                   transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                 >
-                  <NavPageV3 setIsMenuOpen={setIsMenuOpen} />
+                  <NavPageV3 setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
                 </motion.div>
               </>
             )}

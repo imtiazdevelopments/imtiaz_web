@@ -58,6 +58,7 @@ export type HomePageResponse = {
     meta_title: string;
     meta_description: string;
     page_banner_video: string;
+    page_banner_video_mobile:string;
     page_section1_video: string;
     page_section3_video: string;
     page_section4_video: string;

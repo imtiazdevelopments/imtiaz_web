@@ -84,7 +84,7 @@ type Props = {
   ConstructionProgressData: ConstructionProgressData;
   appSectionData: AppSectionData;
   data:HomePageResponse['data']
-  communitiesData:any
+  communitiesData:any,
 };
 
 export default function Index({
@@ -93,7 +93,7 @@ export default function Index({
   ConstructionProgressData,
   appSectionData,
   data,
-  communitiesData
+  communitiesData,
 }: Props) { 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
@@ -197,17 +197,18 @@ const spotlight = {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} scrollRef={scrollRef}  communitiesData={communitiesData}/>
-      <AboutJourneyV3 searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData}/>
+      <HeroSection titleRef={titleRef} desktopVideo={data?.page_banner_video} mobileVideo={data?.page_banner_video_mobile}/>
+      <AboutJourneyV3 searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData} video={data?.page_section1_video}/>
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" />
       <ProSliderComingSoonV3
         slides={heroSlidesComingSoon}
         RightLabel="World of IMTIAZ"
+        video={data?.page_section3_video}
       />
-      <FpfSection />
+      <FpfSection video={data?.page_section4_video}/>
       <CommunityNamesSlider slides={communityNamesData} />
       <ImtiazProperties data={imtiazPropertiesData} />
-      <ConstructionProgress2 data={ConstructionProgressData} />
+      <ConstructionProgress2 data={ConstructionProgressData} video={data?.page_section7_video}/>
       <SpotlightSlider data={spotlight}/>
       <AppSectionV2 data={appSectionData} />
     </>

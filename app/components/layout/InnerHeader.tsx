@@ -20,7 +20,7 @@ import { createPortal } from "react-dom";
 
 type AuthView = "login" | "signup";
 
-const InnerHeader: React.FC = () => {
+const InnerHeader = ({menuData}:{menuData:any}) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authView, setAuthView] = useState<AuthView | null>(null);
@@ -361,7 +361,7 @@ const InnerHeader: React.FC = () => {
               exit={{ y: "-100%" }}
               transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
             >
-              <NavPageV3 setIsMenuOpen={setIsMenuOpen} />
+              <NavPageV3 setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
             </motion.div>
           </>
         )}

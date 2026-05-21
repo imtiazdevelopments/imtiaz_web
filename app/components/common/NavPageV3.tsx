@@ -1204,8 +1204,10 @@ type MenuItem = {
 
 function MobileMegaMenu({
   setIsMenuOpen,
+  menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
+  menuData:any
 }) {
   const router = useRouter();
   const mounted = useRef(true);
@@ -1261,9 +1263,50 @@ function MobileMegaMenu({
     setActiveMenu(null);
   };
 
-  const currentSubmenu = activeMenu
-    ? (subMenuItems[activeMenu.id as keyof typeof subMenuItems] as MenuItem[])
-    : [];
+    const [dynamicSubMenuItems, setDynamicSubMenuItems] =
+  useState(subMenuItems);
+  
+const currentSubmenu = activeMenu ? dynamicSubMenuItems[
+  activeMenu.id as keyof typeof dynamicSubMenuItems
+] as MenuItem[] : [];
+
+
+  useEffect(() => {
+    if(!menuData) return;
+      const formattedProperties = menuData?.map(
+        (community: any) => ({
+          id: community.community_slug,
+          label: community.community_title,
+          href:`/communities/${community.community_slug}`,
+          children:
+            community.related_property?.map((property: any) => ({
+              id: property.property_slug,
+              label: property.property_name,
+              href: `/properties/${property.property_slug}`,
+            })) || [],
+        })
+      );
+
+      setDynamicSubMenuItems((prev) => ({
+        ...prev,
+        properties: [
+          ...formattedProperties,
+          {
+            id: "all-communities",
+            label: "ALL COMMUNITIES",
+            isButton: true,
+            href: "/communities",
+          },
+          {
+            id: "all-properties",
+            label: "ALL PROPERTIES",
+            isButton: true,
+            href: "/properties",
+          },
+        ],
+      }));
+}, [menuData]);
+
 
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
@@ -1611,8 +1654,10 @@ function MobileMegaMenu({
 
 function DesktopMegaMenu({
   setIsMenuOpen,
+  menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
+  menuData:any
 }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const router = useRouter();
@@ -1620,13 +1665,55 @@ function DesktopMegaMenu({
   const navTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
-  const currentSubmenu = subMenuItems[
-    activeMenu.id as keyof typeof subMenuItems
-  ] as MenuItem[];
+
 
   const [bgA, setBgA] = useState(menuItems[0].bgImage);
   const [bgB, setBgB] = useState(menuItems[0].bgImage);
   const [aOnTop, setAOnTop] = useState(true);
+
+
+  const [dynamicSubMenuItems, setDynamicSubMenuItems] =
+  useState(subMenuItems);
+
+const currentSubmenu = dynamicSubMenuItems[
+  activeMenu.id as keyof typeof dynamicSubMenuItems
+] as MenuItem[];
+
+  useEffect(() => {
+    if(!menuData) return;
+      const formattedProperties = menuData?.map(
+        (community: any) => ({
+          id: community.community_slug,
+          label: community.community_title,
+          href:`/communities/${community.community_slug}`,
+          children:
+            community.related_property?.map((property: any) => ({
+              id: property.property_slug,
+              label: property.property_name,
+              href: `/properties/${property.property_slug}`,
+            })) || [],
+        })
+      );
+
+      setDynamicSubMenuItems((prev) => ({
+        ...prev,
+        properties: [
+          ...formattedProperties,
+          {
+            id: "all-communities",
+            label: "ALL COMMUNITIES",
+            isButton: true,
+            href: "/communities",
+          },
+          {
+            id: "all-properties",
+            label: "ALL PROPERTIES",
+            isButton: true,
+            href: "/properties",
+          },
+        ],
+      }));
+}, [menuData]);
 
   useEffect(() => {
     mounted.current = true;
@@ -2024,15 +2111,17 @@ function DesktopMegaMenu({
 
 export default function MegaMenu({
   setIsMenuOpen,
+  menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
+  menuData:any
 }) {
   return (
     <>
       {/* Mobile: single-col sliding (< md) */}
-      <MobileMegaMenu setIsMenuOpen={setIsMenuOpen} />
+      <MobileMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
       {/* Desktop: original two-col mega menu (≥ md) */}
-      <DesktopMegaMenu setIsMenuOpen={setIsMenuOpen} />
+      <DesktopMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
     </>
   );
 }
