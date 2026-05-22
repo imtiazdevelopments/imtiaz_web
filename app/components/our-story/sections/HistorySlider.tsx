@@ -6,7 +6,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import { historyData } from "../data";
+// import { historyData } from "../data";
 import Image from "next/image";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
@@ -28,11 +28,26 @@ interface CardData {
   image: string;
 }
 
+interface FormattedCard {
+  id: string;
+  year: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+interface FormattedHistory {
+  year: number;
+  cards: FormattedCard[];
+}
+
+
 /* ═══════════════════════════════════════════════════════════════
    HistorySection
 ═══════════════════════════════════════════════════════════════ */
 
-export default function HistorySection({title,description}:{title:string,description:string}) {
+export default function HistorySection({title,description,history}:{title:string,description:string,history:FormattedHistory[];}) {
+  const historyData = history
   const allCards: CardData[] = historyData.flatMap((y) => y.cards);
   const years = historyData.map((y) => y.year);
 
