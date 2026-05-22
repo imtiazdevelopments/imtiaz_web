@@ -1,35 +1,220 @@
+// "use client";
+// import Image from "next/image";
+
+// import { Map, Marker, Polygon } from "@vis.gl/react-google-maps";
+// import { APIProvider } from "@vis.gl/react-google-maps";
+
+// const MapOriginal = ({pt}: {pt: boolean}) => {
+
+//   const communityCoordinates = [
+//   { lat: 25.297627, lng: 55.335884 },
+//   { lat: 25.290180, lng: 55.344875 }, 
+//   { lat: 25.284311, lng: 55.338624 }, 
+//   { lat: 25.292540, lng: 55.328108}, 
+// ];
+
+// const properties = [
+//   {
+//     id: 1,
+//     lat: 25.289696,
+//     lng: 55.338716,
+//   },
+// ];
+
+//   return (
+//     <section data-header="dark" className={`w-full ${!pt ? "pt-0 " : "pt-[70px] lg:pt-120 3xl:pt-160"} pb-[70px] lg:pb-120 3xl:pb-160`}>
+//       <div className="h-[488px] lg:h-[839px] ">
+//       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}>
+//           <Map
+//             defaultCenter={{ lat: 25.291063, lng: 55.337229 }}
+//             defaultZoom={14}
+//             mapId="2567b86b459988d06657407f"
+//             className="w-full h-full"
+//             disableDefaultUI
+//           >
+//             {/* COMMUNITY AREA */}
+//             <Polygon
+//               paths={communityCoordinates}
+//               options={{
+//                 fillColor: "#C9A14A",
+//                 fillOpacity: 0.25,
+//                 strokeColor: "#C9A14A",
+//                 strokeOpacity: 1,
+//                 strokeWeight: 3,
+//               }}
+//             />
+
+//             {/* PROPERTY MARKERS */}
+//             {properties.map((property) => (
+//               <Marker
+//                 key={property.id}
+//                 position={{
+//                   lat: property.lat,
+//                   lng: property.lng,
+//                 }}
+//                 icon={{
+//                   url: "/active-icon.svg",
+//                 }}
+//               />
+//             ))}
+//           </Map>
+//         </APIProvider>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default MapOriginal;
+
+
 "use client";
-import Image from "next/image";
 
-import { Map, Marker } from "@vis.gl/react-google-maps";
-import { APIProvider } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, Marker, Polygon } from "@vis.gl/react-google-maps";
+import { useState } from "react";
 
-const MapOriginal = ({pt}: {pt: boolean}) => {
-  const latitude = "25.1972";
-  const longitude = "55.2744";;
-  const lat = parseFloat(latitude);
-  const lng = parseFloat(longitude);
+interface GeofenceCoordinate {
+  latitude: string;
+  longitude: string;
+}
+
+interface RelatedProperty {
+  slug: string;
+  property_name: string;
+  property_latitude: string;
+  property_longitude: string;
+  property_status: string;
+}
+
+interface MapOriginalProps {
+  pt: boolean;
+  geofenceCoordinates: GeofenceCoordinate[];
+  relatedProperties: RelatedProperty[];
+}
+
+const MapOriginal = ({
+  pt,
+  geofenceCoordinates,
+  relatedProperties,
+}: MapOriginalProps) => {
+  // Convert geofence coordinates
+  const communityCoordinates = geofenceCoordinates?.map((coord) => ({
+    lat: Number(coord.latitude),
+    lng: Number(coord.longitude),
+  }));
+
+  const [zoom, setZoom] = useState(15);
+
+  const BASE_SIZE = 42;
+  const iconSize = Math.max(
+    18,
+    Math.min(BASE_SIZE, (zoom / 15) * BASE_SIZE)
+  );
+
+  // Convert property coordinates
+  const properties = relatedProperties?.filter(
+      (property) =>
+        property.property_latitude && property.property_longitude
+    )
+    .map((property, index) => ({
+      id: index + 1,
+      name: property.property_name,
+      lat: Number(property.property_latitude),
+      lng: Number(property.property_longitude),
+      status: property.property_status,
+    }));
+
+  // Fallback center
+  const defaultCenter =
+    communityCoordinates?.length > 0
+      ? communityCoordinates[0]
+      : { lat: 25.291063, lng: 55.337229 };
 
   return (
-    <section data-header="dark" className={`w-full ${!pt ? "pt-0 " : "pt-[70px] lg:pt-120 3xl:pt-160"} pb-[70px] lg:pb-120 3xl:pb-160`}>
-      <div className="h-[488px] lg:h-[839px] ">
-      <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}>
-      <Map
-        defaultCenter={{ lat, lng }}
-        defaultZoom={15}
-        mapId="2567b86b459988d06657407f"
-        className="w-full h-full"
-        disableDefaultUI={true}
-        
-      >
-        <Marker
-          position={{ lat, lng }}
-          icon={{
-            url: "/active-icon.svg", // always active icon
-          }}
-        />
-      </Map>
-      </APIProvider>
+    <section
+      data-header="dark"
+      className={`w-full ${!pt
+        ? "pt-0"
+        : "pt-[70px] lg:pt-120 3xl:pt-160"
+        } pb-[70px] lg:pb-120 3xl:pb-160`}
+    >
+      <div className="h-[488px] lg:h-[839px]">
+        <APIProvider
+          apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
+        >
+          <Map
+            defaultCenter={defaultCenter}
+            defaultZoom={16}
+
+            className="w-full h-full"
+            gestureHandling={"greedy"}
+            disableDefaultUI={true}
+            onZoomChanged={(e) => setZoom(e.detail.zoom)}
+            styles={[
+              { elementType: "geometry", stylers: [{ saturation: -100 }] },
+              { elementType: "labels.icon", stylers: [{ saturation: -100 }] },
+              {
+                elementType: "labels.text.fill",
+                stylers: [{ saturation: -100 }],
+              },
+              {
+                elementType: "labels.text.stroke",
+                stylers: [{ saturation: -100 }],
+              },
+              {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ saturation: -100 }],
+              },
+              {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ saturation: -100 }],
+              },
+              {
+                featureType: "poi",
+                elementType: "geometry",
+                stylers: [{ saturation: -100 }],
+              },
+            ]}
+          >
+            {/* COMMUNITY POLYGON */}
+            {communityCoordinates?.length > 0 && (
+              <Polygon
+                paths={communityCoordinates}
+                fillColor="#C9A14A"
+                fillOpacity={0.5}
+                strokeColor="#C9A14A"
+                strokeOpacity={1}
+                strokeWeight={3}
+              />
+            )}
+
+            {/* PROPERTY MARKERS */}
+            {properties?.map((property) => (
+              <Marker
+                key={property.id}
+                position={{
+                  lat: property.lat,
+                  lng: property.lng,
+                }}
+                title={property.name}
+                icon={{
+                  url: "/inactive-icon.svg",
+                  scaledSize: {
+                    width: iconSize,
+                    height: iconSize,
+                    equals: () => false,
+                  } as google.maps.Size,
+                  anchor: {
+                    x: iconSize / 2,
+                    y: iconSize / 2,
+                    equals: () => false,
+                  } as google.maps.Point,
+                }}
+              />
+            ))}
+          </Map>
+        </APIProvider>
       </div>
     </section>
   );

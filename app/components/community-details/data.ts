@@ -46,6 +46,10 @@ export interface CommunityPageData {
   related_property: RelatedProperty[];
   other_cummunities: OtherCommunity[];
   faq: FAQItem[];
+  geofence_coordinates:{
+    latitude:string;
+    longitude:string;
+  }[]
 }
 
 export interface ReachItem {
@@ -82,6 +86,8 @@ export interface RelatedProperty {
   property_name: string;
   property_caption: string;
   property_status: string;
+  property_latitude: string;
+  property_longitude: string;
 }
 
 export interface OtherCommunity {
