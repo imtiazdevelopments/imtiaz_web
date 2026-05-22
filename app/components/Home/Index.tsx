@@ -208,7 +208,7 @@ const spotlight = {
         buttonText={data?.page_section3_buttontext}
         url={data?.page_section3_buttonurl}
       />
-      <FpfSection video={data?.page_section4_video} title={data?.page_section4_title} description={data?.page_section4_caption} buttonText={data?.page_section4_buttontext} url={data?.page_section4_buttonurl}/>
+      {/* <FpfSection video={data?.page_section4_video} title={data?.page_section4_title} description={data?.page_section4_caption} buttonText={data?.page_section4_buttontext} url={data?.page_section4_buttonurl}/> */}
       <CommunityNamesSlider slides={communityNamesData} title={data?.page_section5_title}/>
       <ImtiazProperties data={imtiazPropertiesData} title={data?.page_section6_title}/>
       <ConstructionProgress2 data={ConstructionProgressData} video={data?.page_section7_video} title={data?.page_section7_title} description={data?.page_section7_caption} buttonText={data?.page_section7_buttontext} url={data?.page_section7_buttonurl}/>
