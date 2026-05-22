@@ -14,13 +14,15 @@ type Props = {
   mobsearchRef?: React.RefObject<HTMLDivElement | null>;
   communitiesData: any;
   video:string;
+  title:string;
 };
 
 const AboutJourneyV3 = ({
   searchRef,
   mobsearchRef,
   communitiesData,
-  video
+  video,
+  title
 }: Props) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -129,7 +131,8 @@ const AboutJourneyV3 = ({
         >
           <div className="overflow-hidden">
             <h2 className="anim-item   text-white text-heading mb-[20px] md:mb-30 uppercase">
-              A JOURNEY TO PERFECTION
+              {/* A JOURNEY TO PERFECTION */}
+              {title}
             </h2>
           </div>
 

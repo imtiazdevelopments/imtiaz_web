@@ -20,7 +20,7 @@ export type AppSectionData = {
   };
 };
 
-const AppSection = ({ data }: { data: AppSectionData }) => {
+const AppSection = ({ data,title,description }: { data: AppSectionData,title:string,description:string }) => {
   const imageRef = useRef<HTMLDivElement>(null);
   const section5Ref = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -108,7 +108,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 viewport={{ once: true }}
                 className="mb-[20px] text-heading uppercase text-primary-2 text-center"
               >
-                DOWNLOAD THE IMTIAZ APP
+                {title}
               </motion.h2>
             </div>
 
@@ -121,7 +121,7 @@ const AppSection = ({ data }: { data: AppSectionData }) => {
                 viewport={{ once: true }}
                 className="text-description text-[#404040] mb-[30px] md:mb-50 max-w-[58ch] text-center"
               >
-                Experience the Imtiaz difference. Track projects, access updates, and stay connected from development to handover and beyond.
+                {description}
               </motion.p>
             </div>
 

@@ -58,11 +58,30 @@ export type HomePageResponse = {
     meta_title: string;
     meta_description: string;
     page_banner_video: string;
-    page_banner_video_mobile:string;
+    page_banner_video_mobile: string;
     page_section1_video: string;
     page_section3_video: string;
     page_section4_video: string;
     page_section7_video: string;
+    page_banner_title: string;
+    page_section1_title: string;
+    page_section2_title: string;
+    page_section3_title: string;
+    page_section3_buttontext: string;
+    page_section3_buttonurl: string;
+    page_section4_title: string;
+    page_section4_caption: string;
+    page_section4_buttontext: string;
+    page_section4_buttonurl: string;
+    page_section5_title: string;
+    page_section6_title: string;
+    page_section7_title: string;
+    page_section7_caption: string;
+    page_section7_buttontext: string;
+    page_section7_buttonurl: string;
+    page_section8_title: string;
+    page_section9_title: string;
+    page_section9_caption: string;
 
     new_launches: NewLaunchItem[];
 
@@ -618,10 +637,10 @@ export const communityNamesData = {
 };
 export const projectsData = [
   {
-    id:"1",
+    id: "1",
     image: "/images/home/feat-property/property1.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
- location: "Dubai Islands",
+    location: "Dubai Islands",
     title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
     href: "/projects/cove-by-imtiaz",
@@ -629,30 +648,30 @@ export const projectsData = [
     units: "1BR - 3BR",
   },
   {
-    id:"2",
+    id: "2",
     image: "/images/home/feat-property/property2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",
     location: "Dubai Islands",
     title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
-    href: "/projects/azure-residences", 
+    href: "/projects/azure-residences",
     startingFrom: "AED 3.5 M",
     units: "1BR - 3BR",
   },
   {
-    id:"3",
+    id: "3",
     image: "/images/home/feat-property/property3.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
-     location: "Dubai Islands",
+    location: "Dubai Islands",
     title: "Cove Edition I by Imtiaz",
     subtitle: "Spacious Community Living",
-    href: "/projects/skyline-tower", 
+    href: "/projects/skyline-tower",
     startingFrom: "AED 3.5 M",
     units: "1BR - 3BR",
   },
   {
-    id:"4",
+    id: "4",
     image: "/images/home/feat-property/property4.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     location: "Dubai Islands",
@@ -661,21 +680,21 @@ export const projectsData = [
     href: "/projects/palm-villas",
     startingFrom: "AED 3.5 M",
     units: "1BR - 3BR",
-  }, 
+  },
   {
-    id:"5",
+    id: "5",
     image: "/images/home/feat-property/property2.jpg",
     hoverImage: "/images/community-listing/hoverimg.png",
     status: "",
     location: "Dubai Islands",
     title: "COVE by Imtiaz",
     subtitle: "Spacious Community Living",
-    href: "/projects/azure-residences", 
+    href: "/projects/azure-residences",
     startingFrom: "AED 3.5 M",
     units: "1BR - 3BR",
   },
 ];
- 
+
 export const spotlight = {
   title: "Press Spotlight",
   viewAllHref: "/sustainability",

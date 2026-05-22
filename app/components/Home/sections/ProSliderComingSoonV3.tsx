@@ -19,6 +19,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { moveUpExit } from "../../motionVariants";
+import Link from "next/link";
 
 export interface feats {
   icon: string;
@@ -35,6 +36,9 @@ type HeroSliderProps = {
   slides: SlideData[];
   RightLabel?: string;
   video:string;
+  title:string;
+  buttonText:string;
+  url:string;
 };
 
 // -----------------------------------------------------
@@ -50,7 +54,7 @@ const fadeUp = {
   exit: moveUpExit.exit,
 };
 
-export default function HeroSlider({ slides, RightLabel,video }: HeroSliderProps) {
+export default function HeroSlider({ slides, RightLabel,video,title,buttonText,url }: HeroSliderProps) {
   const [authView, setAuthView] = useState<AuthView | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -240,7 +244,7 @@ export default function HeroSlider({ slides, RightLabel,video }: HeroSliderProps
                         animate={inView ? "show" : "hidden"}
                         className="text-white  uppercase text-heading text-center"
                       >
-                        {RightLabel}
+                        {title}
                       </motion.h1>
                     </div>
 
@@ -277,12 +281,14 @@ export default function HeroSlider({ slides, RightLabel,video }: HeroSliderProps
                         initial="hidden"
                         animate={inView ? "show" : "hidden"}
                       >
+                        <Link href={url}>
                         <CustomOutlineButton
-                          text="Explore More"
+                          text={buttonText}
                           borderColor="border-white"
                           textColor="text-white"
                           px="px-[30px] md:px-[25px] h-[44px] md:h-[50px]  xl:h-[66px] !leading-[1.58]"
                         />
+                        </Link>
                       </motion.div>
 
                     </motion.div>

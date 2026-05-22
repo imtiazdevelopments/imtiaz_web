@@ -1207,7 +1207,7 @@ function MobileMegaMenu({
   menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
-  menuData:any
+  menuData: any
 }) {
   const router = useRouter();
   const mounted = useRef(true);
@@ -1263,49 +1263,65 @@ function MobileMegaMenu({
     setActiveMenu(null);
   };
 
-    const [dynamicSubMenuItems, setDynamicSubMenuItems] =
-  useState(subMenuItems);
-  
-const currentSubmenu = activeMenu ? dynamicSubMenuItems[
-  activeMenu.id as keyof typeof dynamicSubMenuItems
-] as MenuItem[] : [];
+  const [dynamicSubMenuItems, setDynamicSubMenuItems] =
+    useState(subMenuItems);
+
+  const currentSubmenu = activeMenu ? dynamicSubMenuItems[
+    activeMenu.id as keyof typeof dynamicSubMenuItems
+  ] as MenuItem[] : [];
 
 
   useEffect(() => {
-    if(!menuData) return;
-      const formattedProperties = menuData?.map(
-        (community: any) => ({
-          id: community.community_slug,
-          label: community.community_title,
-          href:`/communities/${community.community_slug}`,
-          children:
-            community.related_property?.map((property: any) => ({
-              id: property.property_slug,
-              label: property.property_name,
-              href: `/properties/${property.property_slug}`,
-            })) || [],
-        })
-      );
+    if (!menuData) return;
+    const formattedProperties = menuData?.map((community: any) => {
+      const relatedProperties =
+        community.related_property?.map((property: any) => ({
+          id: property.property_slug,
+          label: property.property_name,
+          href: `/properties/${property.property_slug}`,
+        })) || [];
 
-      setDynamicSubMenuItems((prev) => ({
-        ...prev,
-        properties: [
-          ...formattedProperties,
-          {
-            id: "all-communities",
-            label: "ALL COMMUNITIES",
-            isButton: true,
-            href: "/communities",
-          },
-          {
-            id: "all-properties",
-            label: "ALL PROPERTIES",
-            isButton: true,
-            href: "/properties",
-          },
-        ],
-      }));
-}, [menuData]);
+      return {
+        id: community.community_slug,
+        label: community.community_title,
+        href:
+          relatedProperties.length === 0
+            ? `/communities/${community.community_slug}`
+            : undefined,
+
+        children:
+          relatedProperties.length > 0
+            ? [
+              ...relatedProperties,
+              {
+                id: `${community.community_slug}-view-community`,
+                label: "View Community",
+                href: `/communities/${community.community_slug}`,
+              },
+            ]
+            : [],
+      };
+    });
+
+    setDynamicSubMenuItems((prev) => ({
+      ...prev,
+      properties: [
+        ...formattedProperties,
+        {
+          id: "all-communities",
+          label: "ALL COMMUNITIES",
+          isButton: true,
+          href: "/communities",
+        },
+        {
+          id: "all-properties",
+          label: "ALL PROPERTIES",
+          isButton: true,
+          href: "/properties",
+        },
+      ],
+    }));
+  }, [menuData]);
 
 
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
@@ -1657,7 +1673,7 @@ function DesktopMegaMenu({
   menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
-  menuData:any
+  menuData: any
 }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const router = useRouter();
@@ -1673,47 +1689,63 @@ function DesktopMegaMenu({
 
 
   const [dynamicSubMenuItems, setDynamicSubMenuItems] =
-  useState(subMenuItems);
+    useState(subMenuItems);
 
-const currentSubmenu = dynamicSubMenuItems[
-  activeMenu.id as keyof typeof dynamicSubMenuItems
-] as MenuItem[];
+  const currentSubmenu = dynamicSubMenuItems[
+    activeMenu.id as keyof typeof dynamicSubMenuItems
+  ] as MenuItem[];
 
   useEffect(() => {
-    if(!menuData) return;
-      const formattedProperties = menuData?.map(
-        (community: any) => ({
-          id: community.community_slug,
-          label: community.community_title,
-          href:`/communities/${community.community_slug}`,
-          children:
-            community.related_property?.map((property: any) => ({
-              id: property.property_slug,
-              label: property.property_name,
-              href: `/properties/${property.property_slug}`,
-            })) || [],
-        })
-      );
+    if (!menuData) return;
+    const formattedProperties = menuData?.map((community: any) => {
+      const relatedProperties =
+        community.related_property?.map((property: any) => ({
+          id: property.property_slug,
+          label: property.property_name,
+          href: `/properties/${property.property_slug}`,
+        })) || [];
 
-      setDynamicSubMenuItems((prev) => ({
-        ...prev,
-        properties: [
-          ...formattedProperties,
-          {
-            id: "all-communities",
-            label: "ALL COMMUNITIES",
-            isButton: true,
-            href: "/communities",
-          },
-          {
-            id: "all-properties",
-            label: "ALL PROPERTIES",
-            isButton: true,
-            href: "/properties",
-          },
-        ],
-      }));
-}, [menuData]);
+      return {
+        id: community.community_slug,
+        label: community.community_title,
+        href:
+          relatedProperties.length === 0
+            ? `/communities/${community.community_slug}`
+            : undefined,
+
+        children:
+          relatedProperties.length > 0
+            ? [
+              ...relatedProperties,
+              {
+                id: `${community.community_slug}-view-community`,
+                label: "View Community",
+                href: `/communities/${community.community_slug}`,
+              },
+            ]
+            : [],
+      };
+    });
+
+    setDynamicSubMenuItems((prev) => ({
+      ...prev,
+      properties: [
+        ...formattedProperties,
+        {
+          id: "all-communities",
+          label: "ALL COMMUNITIES",
+          isButton: true,
+          href: "/communities",
+        },
+        {
+          id: "all-properties",
+          label: "ALL PROPERTIES",
+          isButton: true,
+          href: "/properties",
+        },
+      ],
+    }));
+  }, [menuData]);
 
   useEffect(() => {
     mounted.current = true;
@@ -2114,14 +2146,14 @@ export default function MegaMenu({
   menuData
 }: {
   setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
-  menuData:any
+  menuData: any
 }) {
   return (
     <>
       {/* Mobile: single-col sliding (< md) */}
-      <MobileMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
+      <MobileMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData} />
       {/* Desktop: original two-col mega menu (≥ md) */}
-      <DesktopMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData}/>
+      <DesktopMegaMenu setIsMenuOpen={setIsMenuOpen} menuData={menuData} />
     </>
   );
 }

@@ -20,11 +20,19 @@ interface ConstructionProgressProps {
     };
   };
   video:string;
+  title:string;
+  description:string;
+  buttonText:string;
+  url:string;
 }
 
 const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   data,
-  video
+  video,
+  title,
+  description,
+  buttonText,
+  url
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -119,19 +127,19 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
       >
         <div className="overflow-hidden">
           <h2 className="anim-item text-white   text-heading mb-5 max-w-[20ch] uppercase mx-auto">
-            {data.title}
+            {title}
           </h2>
         </div>
         <div className="overflow-hidden">
           <p className="anim-item text-white  text-description max-w-[60ch] mx-auto mb-[50px]">
-            {data.description}
+            {description}
           </p>
         </div>
         <div className="overflow-hidden">
           <div className="anim-item">
-            <Link href="/construction-progress-listing">
+            <Link href={url}>
               <CustomOutlineButton
-                text={data.button.label}
+                text={buttonText}
                 px="px-[30px] 3xl:px-[40.4px] mx-auto h-[44px] md:h-[50px]  xl:h-[66px]"
               />
             </Link>

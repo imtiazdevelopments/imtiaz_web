@@ -41,8 +41,10 @@ export type CommunitySection = {
 ------------------------------- */
 export default function HeroFeatureSlider({
   slides,
+  title
 }: {
   slides: CommunitySection;
+  title:string;
 }) {
   const { heading, communities = [] } = slides || {};
 
@@ -275,7 +277,7 @@ export default function HeroFeatureSlider({
                 viewport={{ once: true }}
                 className="text-white font-[optima] text-heading "
               >
-                {heading}
+                {title}
               </motion.h1>
             </div>
           </motion.div>
