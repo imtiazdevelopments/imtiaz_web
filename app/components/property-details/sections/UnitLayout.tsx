@@ -771,7 +771,7 @@ const units = (data || []).map((item, index) => ({
           <div className="w-full lg:w-64 xl:w-[305px] flex-shrink-0">
             <div
               ref={buttonsContainerRef}
-              className="show-scrollbar grid grid-cols-2 gap-x-[10px] gap-y-[16px] lg:flex lg:flex-col lg:gap-[18px] max-h-[500px] overflow-y-auto pr-2"
+              className="show-scrollbar grid grid-cols-2 gap-x-[10px] gap-y-[16px] lg:flex lg:flex-col lg:gap-[18px] max-h-[300px] lg:max-h-[500px] overflow-y-scroll pr-2"
             >
               {units.map((unit) => {
                 const isActive = activeId === unit.id;
