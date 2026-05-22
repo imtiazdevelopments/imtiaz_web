@@ -37,7 +37,10 @@ const amenetiesData = {
       <CommunitySlider images={data?.gallery} />
       <Amenities data={amenetiesData} maxTitle="max-w-[74ch]" />
       {data?.related_property && data?.related_property.length > 0 && <LandpropertyCards title={data?.properties_title} items={data?.related_property}/>}
-      <Map pt={data?.related_property && data?.related_property.length > 0 ? true : false} />
+      <Map pt={data?.related_property && data?.related_property.length > 0 ? true : false} 
+        geofenceCoordinates={data?.geofence_coordinates}
+        relatedProperties={data?.related_property}
+        />
       <OtherCommunitySlider data={communitiesData} title={data?.other_communities_title}/>
       <Faqsection title={data?.faq_title} description={data?.faq_caption} data={data?.faq}/>
       <RegisterYourInterest />
