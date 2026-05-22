@@ -1271,15 +1271,82 @@ function MobileMegaMenu({
   ] as MenuItem[] : [];
 
 
+  // useEffect(() => {
+  //   if (!menuData) return;
+  //   const formattedProperties = menuData?.map((community: any) => {
+  //     const relatedProperties =
+  //       community.related_property?.map((property: any) => ({
+  //         id: property.property_slug,
+  //         label: property.property_name,
+  //         href: `/properties/${property.property_slug}`,
+  //       })) || [];
+
+  //     return {
+  //       id: community.community_slug,
+  //       label: community.community_title,
+  //       href:
+  //         relatedProperties.length === 0
+  //           ? `/communities/${community.community_slug}`
+  //           : undefined,
+
+  //       children:
+  //         relatedProperties.length > 0
+  //           ? [
+  //             ...relatedProperties,
+  //             {
+  //               id: `${community.community_slug}-view-community`,
+  //               label: "View Community",
+  //               href: `/communities/${community.community_slug}`,
+  //             },
+  //           ]
+  //           : [],
+  //     };
+  //   });
+
+  //   setDynamicSubMenuItems((prev) => ({
+  //     ...prev,
+  //     properties: [
+  //       ...formattedProperties,
+  //       {
+  //         id: "all-communities",
+  //         label: "ALL COMMUNITIES",
+  //         isButton: true,
+  //         href: "/communities",
+  //       },
+  //       {
+  //         id: "all-properties",
+  //         label: "ALL PROPERTIES",
+  //         isButton: true,
+  //         href: "/properties",
+  //       },
+  //     ],
+  //   }));
+  // }, [menuData]);
+
+  const [propertyFilter, setPropertyFilter] = useState<
+    "all" | "off-plan" | "ready" | null
+  >("all");
+
   useEffect(() => {
     if (!menuData) return;
+
     const formattedProperties = menuData?.map((community: any) => {
       const relatedProperties =
-        community.related_property?.map((property: any) => ({
+        community.related_property?.map((property: any, index: number) => ({
           id: property.property_slug,
           label: property.property_name,
           href: `/properties/${property.property_slug}`,
+
+          // RANDOM TEMP STATUS
+          status: index % 2 === 0 ? "off-plan" : "ready",
         })) || [];
+
+      const filteredProperties =
+        propertyFilter == "all"
+          ? relatedProperties
+          : relatedProperties.filter(
+            (property: any) => property.status === propertyFilter
+          );
 
       return {
         id: community.community_slug,
@@ -1290,9 +1357,9 @@ function MobileMegaMenu({
             : undefined,
 
         children:
-          relatedProperties.length > 0
+          filteredProperties.length > 0
             ? [
-              ...relatedProperties,
+              ...filteredProperties,
               {
                 id: `${community.community_slug}-view-community`,
                 label: "View Community",
@@ -1321,8 +1388,7 @@ function MobileMegaMenu({
         },
       ],
     }));
-  }, [menuData]);
-
+  }, [menuData, propertyFilter]);
 
   const regularItems = currentSubmenu.filter((item) => !item.isButton);
   const buttonItems = currentSubmenu.filter((item) => item.isButton);
@@ -1620,6 +1686,50 @@ function MobileMegaMenu({
                         exit="collapsed"
                         className="overflow-hidden"
                       >
+                        {
+                           (<div className="flex gap-6 py-[7px] pl-3">
+                            {[
+                              { label: "ALL", value: "all" },
+                              { label: "OFF PLAN", value: "off-plan" },
+                              { label: "READY", value: "ready" },
+                            ].map((filter) => {
+                              const isActive = propertyFilter === filter.value;
+
+                              return (
+                                <button
+                                  key={filter.value}
+                                  onClick={() =>
+                                    setPropertyFilter(
+                                      isActive
+                                        ? null
+                                        : (filter.value as "off-plan" | "ready")
+                                    )
+                                  }
+                                  className={`
+          relative text-[12px] uppercase tracking-[1px]
+          transition-all duration-300 pb-1 cursor-pointer
+          ${isActive
+                                      ? "text-white"
+                                      : "text-white/60 hover:text-white"
+                                    }
+        `}
+                                >
+                                  {filter.label}
+
+                                  <span
+                                    className={`
+            absolute left-0 bottom-0 h-[1px] bg-white
+            transition-all duration-300
+            ${isActive
+                                        ? "w-full opacity-100"
+                                        : "w-0 opacity-0"
+                                      }
+          `}
+                                  />
+                                </button>
+                              );
+                            })}
+                          </div>)}
                         <div className="flex flex-col pb-3 pl-3 gap-0">
                           {item.children!.map((child) => (
                             <div
@@ -1695,15 +1805,82 @@ function DesktopMegaMenu({
     activeMenu.id as keyof typeof dynamicSubMenuItems
   ] as MenuItem[];
 
+  // useEffect(() => {
+  //   if (!menuData) return;
+  //   const formattedProperties = menuData?.map((community: any) => {
+  //     const relatedProperties =
+  //       community.related_property?.map((property: any) => ({
+  //         id: property.property_slug,
+  //         label: property.property_name,
+  //         href: `/properties/${property.property_slug}`,
+  //       })) || [];
+
+  //     return {
+  //       id: community.community_slug,
+  //       label: community.community_title,
+  //       href:
+  //         relatedProperties.length === 0
+  //           ? `/communities/${community.community_slug}`
+  //           : undefined,
+
+  //       children:
+  //         relatedProperties.length > 0
+  //           ? [
+  //             ...relatedProperties,
+  //             {
+  //               id: `${community.community_slug}-view-community`,
+  //               label: "View Community",
+  //               href: `/communities/${community.community_slug}`,
+  //             },
+  //           ]
+  //           : [],
+  //     };
+  //   });
+
+  //   setDynamicSubMenuItems((prev) => ({
+  //     ...prev,
+  //     properties: [
+  //       ...formattedProperties,
+  //       {
+  //         id: "all-communities",
+  //         label: "ALL COMMUNITIES",
+  //         isButton: true,
+  //         href: "/communities",
+  //       },
+  //       {
+  //         id: "all-properties",
+  //         label: "ALL PROPERTIES",
+  //         isButton: true,
+  //         href: "/properties",
+  //       },
+  //     ],
+  //   }));
+  // }, [menuData]);
+
+  const [propertyFilter, setPropertyFilter] = useState<
+    "all" | "off-plan" | "ready" | null
+  >("all");
+
   useEffect(() => {
     if (!menuData) return;
+
     const formattedProperties = menuData?.map((community: any) => {
       const relatedProperties =
-        community.related_property?.map((property: any) => ({
+        community.related_property?.map((property: any, index: number) => ({
           id: property.property_slug,
           label: property.property_name,
           href: `/properties/${property.property_slug}`,
+
+          // RANDOM TEMP STATUS
+          status: index % 2 === 0 ? "off-plan" : "ready",
         })) || [];
+
+      const filteredProperties =
+        propertyFilter == "all"
+          ? relatedProperties
+          : relatedProperties.filter(
+            (property: any) => property.status === propertyFilter
+          );
 
       return {
         id: community.community_slug,
@@ -1714,9 +1891,9 @@ function DesktopMegaMenu({
             : undefined,
 
         children:
-          relatedProperties.length > 0
+          filteredProperties.length > 0
             ? [
-              ...relatedProperties,
+              ...filteredProperties,
               {
                 id: `${community.community_slug}-view-community`,
                 label: "View Community",
@@ -1745,7 +1922,7 @@ function DesktopMegaMenu({
         },
       ],
     }));
-  }, [menuData]);
+  }, [menuData, propertyFilter]);
 
   useEffect(() => {
     mounted.current = true;
@@ -2006,6 +2183,7 @@ function DesktopMegaMenu({
             className="flex gap-[60px] self-start pt-50"
             onMouseLeave={() => setActiveCategory(null)}
           >
+
             {/* FIRST COLUMN */}
             <div className="flex flex-col gap-2 lg:gap-4 text-white w-1/2 sm:w-1/3 xl:w-fit">
               {regularItems.map((item) => (
@@ -2090,33 +2268,82 @@ function DesktopMegaMenu({
             </div>
 
             {/* SECOND COLUMN */}
-            <div className="min-w-[250px] text-white flex items-center">
-              <AnimatePresence mode="wait">
-                {activeChildren.length > 0 && (
-                  <motion.div
-                    key={activeCategory}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex flex-col gap-2 lg:gap-4"
-                  >
-                    {activeChildren.map((child) => (
-                      <Link
-                        key={child.id}
-                        href={child.href || "#"}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleNavigate(child.href, child.newTab);
-                        }}
-                        className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </motion.div>
+            <div>
+              {activeMenu.id === "properties" &&
+                activeChildren.length > 0 && (
+                  <div className="flex gap-6 mb-6 border-b border-white/20">
+                    {[
+                      { label: "ALL", value: "all" },
+                      { label: "OFF PLAN", value: "off-plan" },
+                      { label: "READY", value: "ready" },
+                    ].map((filter) => {
+                      const isActive = propertyFilter === filter.value;
+
+                      return (
+                        <button
+                          key={filter.value}
+                          onClick={() =>
+                            setPropertyFilter(
+                              isActive
+                                ? null
+                                : (filter.value as "off-plan" | "ready")
+                            )
+                          }
+                          className={`
+              relative text-[14px] uppercase tracking-[1px]
+              transition-all duration-300 pb-3 cursor-pointer
+              ${isActive
+                              ? "text-white"
+                              : "text-white/60 hover:text-white"
+                            }
+            `}
+                        >
+                          {filter.label}
+
+                          {/* ACTIVE BORDER */}
+                          <span
+                            className={`
+                absolute left-0 bottom-[-1px] h-[1px]
+                bg-white transition-all duration-300
+                ${isActive
+                                ? "w-full opacity-100"
+                                : "w-full opacity-0"
+                              }
+              `}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
-              </AnimatePresence>
+              <div className="min-w-[250px] text-white flex items-center">
+                <AnimatePresence mode="wait">
+                  {activeChildren.length > 0 && (
+                    <motion.div
+                      key={activeCategory}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex flex-col gap-2 lg:gap-4"
+                    >
+                      {activeChildren.map((child) => (
+                        <Link
+                          key={child.id}
+                          href={child.href || "#"}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavigate(child.href, child.newTab);
+                          }}
+                          className="text-16 text-description uppercase py-1 hover:translate-x-2 transition-all duration-300 block"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
