@@ -10,7 +10,7 @@ import { SectionDescription } from "@/app/components/animations/SectionDescripti
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection({video}:{video:string}) {
+export default function HeroSection({video,title,description,buttonText,url}:{video:string,title:string,description:string,buttonText:string,url:string}) {
   const rootRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -63,7 +63,7 @@ export default function HeroSection({video}:{video:string}) {
       <div className="container absolute bottom-10 lg:bottom-[67px] left-0 right-0 z-10 flex justify-center px-4 pb-6">
         <div className="w-full">
           <div className="text-center flex justify-center flex-col items-center">
-            <SectionHeading title={"A National Initiative by Imtiaz"} className="text-white mb-[20px] sm:mb-30" />
+            <SectionHeading title={title} className="text-white mb-[20px] sm:mb-30" />
 
                         {/* <SectionDescription
               text={
@@ -74,13 +74,13 @@ export default function HeroSection({video}:{video:string}) {
 
             <SectionDescription
               text={
-                "As one of the UAE's leading real estate developer, Imtiaz Developments believes that building is more than creating spaces. It is a responsibility to the country that enables ambition, and to the people who define its future."
+                description
               }
               className="shrink-0 mx-auto text-white whitespace-pre-line mb-40 max-w-[80ch]"
             />
-            <Link href={"https://mustaqbal.imtiaz.ae/"} target="_blank">
+            <Link href={url} target="_blank">
               <CustomOutlineButton
-                text="Explore"
+                text={buttonText}
                 borderColor="border-white"
                 textColor="text-white"
                 px="h-[44px] md:h-[50px]  xl:h-[66px] px-[30px] md:px-[37px]"

@@ -29,9 +29,10 @@ type ImtiazPropertiesData = {
       hoverImage: string;
     }[];
   };
+  title:string;
 };
 
-const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
+const ImtiazProperties = ({ data,title }: ImtiazPropertiesData) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -138,7 +139,7 @@ const ImtiazProperties = ({ data }: ImtiazPropertiesData) => {
             viewport={{ once: true }}
             className="text-center text-heading mb-[20px] sm:mb-50"
           >
-            {data.sectionTitle}
+            {title}
           </motion.h2>
         </div>
         <div className="relative" ref={rootRef}>

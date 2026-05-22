@@ -360,6 +360,7 @@ type HeroSliderProps = {
   slides: SlideData[];
   RightLabel?: string;
   heroBgImage?: string; // static fallback image shown behind all slides
+  title:string;
 };
 
 const fadeUp = {
@@ -372,7 +373,7 @@ const fadeUp = {
   exit: moveUpExit.exit,
 };
 
-export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
+export default function HeroSlider({ slides, RightLabel, title }: HeroSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -588,7 +589,7 @@ export default function HeroSlider({ slides, RightLabel }: HeroSliderProps) {
                         animate={startAnim ? "show" : "hidden"}
                         className="text-white uppercase text-heading text-center"
                       >
-                        {slide.title}
+                        {title}
                       </motion.h1>
                     </div>
                   </motion.div>
