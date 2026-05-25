@@ -213,7 +213,7 @@ const spotlight = {
       <ImtiazProperties data={imtiazPropertiesData} title={data?.page_section6_title}/>
       <ConstructionProgress2 data={ConstructionProgressData} video={data?.page_section7_video} title={data?.page_section7_title} description={data?.page_section7_caption} buttonText={data?.page_section7_buttontext} url={data?.page_section7_buttonurl}/>
       <SpotlightSlider data={spotlight} title={data?.page_section8_title}/>
-      <AppSectionV2 data={appSectionData} title={data?.page_section9_title} description={data?.page_section9_caption}/>
+      <AppSectionV2 data={appSectionData} appStore={data?.apple_store_link} playStore={data?.android_store_link} title={data?.page_section9_title} description={data?.page_section9_caption}/>
     </>
   );
 }   

@@ -8,6 +8,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     { next: { revalidate: 60 } }
   );
   const data = await response.json();
+  console.log(data, " constructor");
 
   const allPropertyResponse = await fetch(`${process.env.BASE_URL}/api/properties.php?lang=en`, {
     next: { revalidate: 60 },

@@ -20,7 +20,7 @@ export type AppSectionData = {
   };
 };
 
-const AppSection = ({ data,title,description }: { data: AppSectionData,title:string,description:string }) => {
+const AppSection = ({ data,title,description, appStore, playStore }: { data: AppSectionData,title:string,description:string, appStore:string, playStore:string }) => {
   const imageRef = useRef<HTMLDivElement>(null);
   const section5Ref = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -155,7 +155,7 @@ const AppSection = ({ data,title,description }: { data: AppSectionData,title:str
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                <a href={appStore} className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
                     src="/images/home/app/appstore1.svg"
                     alt="Download on App Store"
@@ -173,7 +173,7 @@ const AppSection = ({ data,title,description }: { data: AppSectionData,title:str
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <a className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
+                <a href={playStore} className="inline-block bg-black rounded-[11px]  hover:-translate-y-[3px] transition-all duration-300 cursor-pointer">
                   <Image
                     src="/images/home/app/playstore1.svg"
                     alt="Get it on Google Play"

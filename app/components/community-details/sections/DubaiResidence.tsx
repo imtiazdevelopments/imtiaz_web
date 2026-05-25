@@ -1,6 +1,5 @@
 "use client";
 
-import { communitySectionData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { motion } from "framer-motion";
