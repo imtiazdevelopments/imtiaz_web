@@ -1,7 +1,7 @@
 import { SectionDescription } from "../../animations/SectionDescription";
 import { SectionHeading } from "../../animations/SectionHeading";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
-import { expertiseData } from "../data";
+// import { expertiseData } from "../data";
 import Link from "next/link";
 const Expertise = ({title,description}:{title:string;description:string;}) => {
   return (

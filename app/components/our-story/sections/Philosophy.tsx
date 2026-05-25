@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { SectionHeading } from "../../animations/SectionHeading";
-import { philosophyData } from "../data";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

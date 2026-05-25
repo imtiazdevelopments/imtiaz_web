@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { awardData } from "../data";
+// import { awardData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
