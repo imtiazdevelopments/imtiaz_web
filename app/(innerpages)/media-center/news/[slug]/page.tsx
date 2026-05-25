@@ -8,6 +8,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     { next: { revalidate: 60 } }
   );
   const data = await response.json();
+          console.log(data, " our story");
 
   const allNewsResponse = await fetch(
     `${process.env.BASE_URL}/api/news.php?lang=en`,

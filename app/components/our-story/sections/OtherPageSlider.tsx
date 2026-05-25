@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
-import { otherPageSliderData } from "../data";
+// import { otherPageSliderData } from "../data";
 import gsap from "gsap";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import Image from "next/image";

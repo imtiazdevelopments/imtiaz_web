@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { visionSectionData } from "../data";
+// import { visionSectionData } from "../data";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import Reveal from "../../animations/RevealOneByOneAnimation";
-import { moveUp, moveUpV2 } from "../../motionVariants";
+import { moveUpV2 } from "../../motionVariants";
 import { motion } from "framer-motion";
 
 type VisionSectionData = {

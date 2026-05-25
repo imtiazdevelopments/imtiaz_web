@@ -5,6 +5,7 @@ const page = async() => {
     next: { revalidate: 60 },
   });
   const data = await response.json();
+
   return (
     <>
       <Index data={data.data}/>
