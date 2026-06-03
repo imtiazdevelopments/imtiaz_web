@@ -398,93 +398,93 @@ interface YearData {
 }
 
 // Data
-const constructionData: YearData[] = [
-  {
-    year: "2025",
-    months: [
-      {
-        month: "March",
-        date: "MARCH 2025",
-        location: "Sunset Bay 5 by Imtiaz",
-        images: [
-          {
-            src: "/images/construction-progress/slide01.jpg",
-            alt: "March 2025 - 1",
-          },
-          {
-            src: "/images/construction-progress/slide02.jpg",
-            alt: "March 2025 - 2",
-          },
-        ],
-      },
-      {
-        month: "February",
-        date: "FEBRUARY 2025",
-        location: "Sunset Bay 5 by Imtiaz",
-        images: [
-          {
-            src: "/images/construction-progress/slide02.jpg",
-            alt: "February 2025 - 1",
-          },
-          {
-            src: "/images/construction-progress/slide01.jpg",
-            alt: "February 2025 - 2",
-          },
-        ],
-      },
-      {
-        month: "January",
-        date: "JANUARY 2025",
-        location: "Sunset Bay 5 by Imtiaz",
-        images: [
-          {
-            src: "/images/construction-progress/slide03.jpg",
-            alt: "January 2025 - 1",
-          },
-          {
-            src: "/images/construction-progress/slide02.jpg",
-            alt: "January 2025 - 2",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    year: "2026",
-    months: [
-      {
-        month: "March",
-        date: "MARCH 2026",
-        location: "Sunset Bay 5 by Imtiaz",
-        images: [
-          {
-            src: "/images/construction-progress/slide01.jpg",
-            alt: "March 2026 - 1",
-          },
-          {
-            src: "/images/construction-progress/slide03.jpg",
-            alt: "March 2026 - 2",
-          },
-        ],
-      },
-      {
-        month: "February",
-        date: "FEBRUARY 2026",
-        location: "Sunset Bay 5 by Imtiaz",
-        images: [
-          {
-            src: "/images/construction-progress/slide02.jpg",
-            alt: "February 2026 - 1",
-          },
-          {
-            src: "/images/construction-progress/slide01.jpg",
-            alt: "February 2026 - 2",
-          },
-        ],
-      },
-    ],
-  },
-];
+// const constructionData: YearData[] = [
+//   {
+//     year: "2025",
+//     months: [
+//       {
+//         month: "March",
+//         date: "MARCH 2025",
+//         location: "Sunset Bay 5 by Imtiaz",
+//         images: [
+//           {
+//             src: "/images/construction-progress/slide01.jpg",
+//             alt: "March 2025 - 1",
+//           },
+//           {
+//             src: "/images/construction-progress/slide02.jpg",
+//             alt: "March 2025 - 2",
+//           },
+//         ],
+//       },
+//       {
+//         month: "February",
+//         date: "FEBRUARY 2025",
+//         location: "Sunset Bay 5 by Imtiaz",
+//         images: [
+//           {
+//             src: "/images/construction-progress/slide02.jpg",
+//             alt: "February 2025 - 1",
+//           },
+//           {
+//             src: "/images/construction-progress/slide01.jpg",
+//             alt: "February 2025 - 2",
+//           },
+//         ],
+//       },
+//       {
+//         month: "January",
+//         date: "JANUARY 2025",
+//         location: "Sunset Bay 5 by Imtiaz",
+//         images: [
+//           {
+//             src: "/images/construction-progress/slide03.jpg",
+//             alt: "January 2025 - 1",
+//           },
+//           {
+//             src: "/images/construction-progress/slide02.jpg",
+//             alt: "January 2025 - 2",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     year: "2026",
+//     months: [
+//       {
+//         month: "March",
+//         date: "MARCH 2026",
+//         location: "Sunset Bay 5 by Imtiaz",
+//         images: [
+//           {
+//             src: "/images/construction-progress/slide01.jpg",
+//             alt: "March 2026 - 1",
+//           },
+//           {
+//             src: "/images/construction-progress/slide03.jpg",
+//             alt: "March 2026 - 2",
+//           },
+//         ],
+//       },
+//       {
+//         month: "February",
+//         date: "FEBRUARY 2026",
+//         location: "Sunset Bay 5 by Imtiaz",
+//         images: [
+//           {
+//             src: "/images/construction-progress/slide02.jpg",
+//             alt: "February 2026 - 1",
+//           },
+//           {
+//             src: "/images/construction-progress/slide01.jpg",
+//             alt: "February 2026 - 2",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ];
 
 // Tab Button Component
 interface TabButtonProps {
@@ -691,11 +691,11 @@ const MonthCard = ({ monthData, index }: MonthCardProps) => {
 };
 
 // Main Component
-export default function ConstructionProgress() {
-  const [activeYear, setActiveYear] = useState("2025");
+export default function ConstructionProgress({data}:{data:YearData[]}) {
+  const [activeYear, setActiveYear] = useState(data[0]?.year || "");
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const currentYearData = constructionData.find((y) => y.year === activeYear);
+  const currentYearData = data.find((y) => y.year === activeYear);
 
   return (
     <section
@@ -710,7 +710,7 @@ export default function ConstructionProgress() {
           transition={{ duration: 0.6 }}
           className="flex justify-center gap-20 md:gap-4 mb-[40px] lg:mb-50 py-20 border-b border-t border-black/10"
         >
-          {constructionData.map((year) => (
+          {data.map((year) => (
             <TabButton
               key={year.year}
               year={year.year}

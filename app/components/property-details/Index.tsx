@@ -31,6 +31,8 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
   })),
 };
 
+console.log(data?.page_banner_title)
+
 
   return (
     <>
@@ -72,7 +74,8 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
       <IconGrid data={everythingWithinData} />
       <GallerySlider data={data?.gallery}/>
       <Amenities data={amenetiesData} maxTitle="max-w-[90ch]" />
-      <UnitLayout data={data?.unit_layouts}/>
+      {!data.unit_layouts && <hr/>}
+      {data.unit_layouts && <UnitLayout data={data?.unit_layouts}/>}
       <MeydanHorizon 
       title={data?.community_name} 
       description={data?.community_basic_brief}
@@ -84,7 +87,11 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
       description={data?.faq_caption}
       data={data?.faq}
       />
-      <LandpropertyCards data={allPropertyData?.listing} community={data?.community_name}/>
+      {
+      allPropertyData?.listing.filter((item)=>item.property_community == data.community_name 
+      && item.title !==data?.page_banner_title ).length > 0 
+      && <LandpropertyCards data={allPropertyData?.listing} community={data?.community_name} property={data?.page_banner_title}/>
+      }
       <RegBtn />
     </>
   );

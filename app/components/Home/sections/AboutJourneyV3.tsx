@@ -15,6 +15,7 @@ type Props = {
   communitiesData: any;
   video:string;
   title:string;
+  poster:string;
 };
 
 const AboutJourneyV3 = ({
@@ -22,7 +23,8 @@ const AboutJourneyV3 = ({
   mobsearchRef,
   communitiesData,
   video,
-  title
+  title,
+  poster
 }: Props) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -113,7 +115,7 @@ const AboutJourneyV3 = ({
         <video
           ref={videoRef}
           src={video}
-          poster="/images/home/work-progress/progress.jpg"
+          poster={poster}
           autoPlay
           muted
           loop

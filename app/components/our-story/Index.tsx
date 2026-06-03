@@ -42,7 +42,7 @@ const Index = ({ data }: { data: AboutPageResponse['data'] }) => {
     personImageAlt: data?.chairman_image_alt,
 
     bgImage: data?.chairman_image_background,
-    bgImageMobile: "/images/our-story/chairman-bg-mobile.png",
+    bgImageMobile: data?.chairman_image_background_mobile,
   };
 
   const ceoMessageData = {
@@ -57,8 +57,8 @@ const Index = ({ data }: { data: AboutPageResponse['data'] }) => {
     personImageMobile: data?.ceo_image_mobile,
     personImageAlt: data?.ceo_image_alt,
 
-    bgImage: data.ceo_image_background,
-    bgImageMobile: "/images/our-story/ceo-bg-mobile.png",
+    bgImage: data?.ceo_image_background,
+    bgImageMobile: data?.ceo_image_background_mobile,
   };
 
   const otherPageSliderData = {

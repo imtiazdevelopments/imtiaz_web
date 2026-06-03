@@ -24,6 +24,7 @@ interface ConstructionProgressProps {
   description:string;
   buttonText:string;
   url:string;
+  poster:string;
 }
 
 const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
@@ -32,7 +33,8 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
   title,
   description,
   buttonText,
-  url
+  url,
+  poster
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -109,7 +111,7 @@ const ConstructionProgress: React.FC<ConstructionProgressProps> = ({
       <video
         ref={videoRef}
         src={video}
-        poster={data.posterSrc}
+        poster={poster}
         autoPlay
         muted
         loop
