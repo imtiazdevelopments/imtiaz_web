@@ -209,7 +209,7 @@ const spotlight = {
       communitiesData={communitiesData} 
       video={data?.page_section1_video} 
       title={data?.page_section1_title}
-      poster={data?.page_section1_poste}
+      poster={data?.page_section1_poster}
       />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" title={data?.page_section2_title}/>
       <ProSliderComingSoonV3

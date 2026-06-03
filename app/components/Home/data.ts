@@ -84,6 +84,8 @@ export type HomePageResponse = {
     page_section9_caption: string;
     apple_store_link: string;
     android_store_link: string;
+    page_section1_poster:string;
+    page_section7_poster:string;
 
     new_launches: NewLaunchItem[];
 

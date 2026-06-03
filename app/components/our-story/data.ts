@@ -32,6 +32,8 @@ export type AboutPageResponse = {
     chairman_image_background:string;
     chairman_image_mobile: string;
     chairman_image_alt: string;
+    chairman_image_background_mobile:string;
+    ceo_image_background_mobile:string;
 
     ceo_title: string;
     ceo_caption: string;
