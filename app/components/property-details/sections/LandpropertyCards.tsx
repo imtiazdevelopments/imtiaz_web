@@ -15,7 +15,7 @@ import { useRef, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
 import { PropertiesPageData } from "../../property/data";
 
-const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],community:string}) => {
+const LandpropertyCards = ({data,community,property}:{data:PropertiesPageData['listing'],community:string,property:string}) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [slidesPerView, setSlidesPerView] = useState(1);
 
@@ -60,7 +60,7 @@ const LandpropertyCards = ({data,community}:{data:PropertiesPageData['listing'],
                 )
               }
             >
-              {data.filter((item)=>item.property_community == community).slice(-4).map((project, i) => (
+              {data.filter((item)=>item.property_community == community && item.title !== property).slice(-4).map((project, i) => (
                 <SwiperSlide key={i}>
                   <Reveal variants={moveUpV2} delayRange={i * 0.12}>
                     <ProjectCard 

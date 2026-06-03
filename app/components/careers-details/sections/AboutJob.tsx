@@ -22,7 +22,7 @@ interface Props {
   data: jobDetail;
 }
 
-const AboutJob = ({ data }: { data: CareerDetailsResponse['data'] }) => {
+const AboutJob = ({ data,overviewTitle }: { data: CareerDetailsResponse['data'],overviewTitle:string }) => {
   return (
     <section
       className="w-full bg-white py-120 3xl:py-[160px]"
@@ -38,7 +38,7 @@ const AboutJob = ({ data }: { data: CareerDetailsResponse['data'] }) => {
             className="career-details-about"
           >
             <SectionHeading
-              title={"About Job"}
+              title={overviewTitle}
               className=" text-heading   text-foreground   uppercase  mb-20"
             />
             <motion.div

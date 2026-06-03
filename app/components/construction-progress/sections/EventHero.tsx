@@ -9,7 +9,7 @@ import { useParallax } from "@/app/hooks/useParallax";
 
  
 
-const EventHero = () => { 
+const EventHero = ({title}:{title:string}) => { 
 
   return (
     <section className="w-full pt-[170px] lg:!pt-200" data-header="dark">
@@ -26,7 +26,7 @@ const EventHero = () => {
 
         {/* Title */}
         <SectionHeading
-          title={'Construction history Sunset Bay 5 by Imtiaz'}
+          title={title}
           className="max-w-[32ch] text-foreground text-center uppercase mt-[40px] md:mt-100 tracking-[-0.03em] sm:-tracking-normal"
         />
  

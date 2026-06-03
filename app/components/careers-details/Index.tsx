@@ -36,7 +36,7 @@ const jobSpecifications = {
     <>
       <CareerHero jobDescription={jobDescription} />
       <JobSpecifications jobSpecs={jobSpecifications} />
-      <AboutJob data={data} /> 
+      <AboutJob data={data} overviewTitle={data?.job_overview_title}/> 
     </>
   );
 };

@@ -197,8 +197,20 @@ const spotlight = {
 
   return (
     <>
-      <HeroSection titleRef={titleRef} desktopVideo={data?.page_banner_video} mobileVideo={data?.page_banner_video_mobile} title={data?.page_banner_title}/>
-      <AboutJourneyV3 searchRef={searchRef} mobsearchRef={mobsearchRef} communitiesData={communitiesData} video={data?.page_section1_video} title={data?.page_section1_title}/>
+      <HeroSection 
+      titleRef={titleRef} 
+      desktopVideo={data?.page_banner_video} 
+      mobileVideo={data?.page_banner_video_mobile} 
+      title={data?.page_banner_title}
+      />
+      <AboutJourneyV3 
+      searchRef={searchRef} 
+      mobsearchRef={mobsearchRef} 
+      communitiesData={communitiesData} 
+      video={data?.page_section1_video} 
+      title={data?.page_section1_title}
+      poster={data?.page_section1_poste}
+      />
       <ProSliderV3 slides={heroSlides} RightLabel="New Launches" title={data?.page_section2_title}/>
       <ProSliderComingSoonV3
         slides={heroSlidesComingSoon}
@@ -211,7 +223,15 @@ const spotlight = {
       {/* <FpfSection video={data?.page_section4_video} title={data?.page_section4_title} description={data?.page_section4_caption} buttonText={data?.page_section4_buttontext} url={data?.page_section4_buttonurl}/> */}
       <CommunityNamesSlider slides={communityNamesData} title={data?.page_section5_title}/>
       <ImtiazProperties data={imtiazPropertiesData} title={data?.page_section6_title}/>
-      <ConstructionProgress2 data={ConstructionProgressData} video={data?.page_section7_video} title={data?.page_section7_title} description={data?.page_section7_caption} buttonText={data?.page_section7_buttontext} url={data?.page_section7_buttonurl}/>
+      <ConstructionProgress2 
+      data={ConstructionProgressData} 
+      video={data?.page_section7_video} 
+      title={data?.page_section7_title} 
+      description={data?.page_section7_caption} 
+      buttonText={data?.page_section7_buttontext} 
+      url={data?.page_section7_buttonurl}
+      poster={data?.page_section7_poster}
+      />
       <SpotlightSlider data={spotlight} title={data?.page_section8_title}/>
       <AppSectionV2 data={appSectionData} appStore={data?.apple_store_link} playStore={data?.android_store_link} title={data?.page_section9_title} description={data?.page_section9_caption}/>
     </>
