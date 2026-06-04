@@ -58,14 +58,14 @@ type Props = {
   titleRef: React.RefObject<HTMLHeadingElement | null>;
   desktopVideo: string;
   mobileVideo: string;
-  title:string;
+  title: string;
 };
 
 export default function HeroSection({
   titleRef,
   desktopVideo,
   mobileVideo,
-  title
+  title,
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,8 +119,11 @@ export default function HeroSection({
               >
                 {/* BUILDING WITH PURPOSE. <br />
                 DELIVERING WITH PRECISION. */}
-                {title.split(" n").map((item)=>(
-                  <span><>{item}<br/></></span>
+                {title.split(/(?<=\.)/).map((item, index) => (
+                  <span key={index}>
+                    {item.trim()}
+                    <br />
+                  </span>
                 ))}
               </h1>
             </div>
