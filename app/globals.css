@@ -307,7 +307,7 @@ html {
 }
  
 @utility text-heading {
-  @apply font-[optima] font-[550] uppercase leading-[1.252] md:leading-[1.36] lg:leading-[1.2] text-24 md:text-48;
+  @apply font-[optima] font-[550] uppercase leading-[1.252] md:leading-[1.36] lg:leading-[1.2] text-[24px] md:text-50;
 }
  
 @utility text-description {
