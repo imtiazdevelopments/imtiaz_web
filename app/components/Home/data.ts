@@ -5,6 +5,11 @@ export type NewLaunchItem = {
   featured_image_mobile: string;
   featured_image_alt: string;
   property_status: string;
+  banner_video_dektop: string;
+  amenities: {
+    icon_url: string;
+    title: string;
+  }[]
 };
 
 export type CommunityItem = {
@@ -59,6 +64,8 @@ export type HomePageResponse = {
     meta_description: string;
     page_banner_video: string;
     page_banner_video_mobile: string;
+    page_hero_poster_dektop:string;
+    page_hero_poster_mobile:string;
     page_section1_video: string;
     page_section3_video: string;
     page_section4_video: string;
@@ -84,8 +91,8 @@ export type HomePageResponse = {
     page_section9_caption: string;
     apple_store_link: string;
     android_store_link: string;
-    page_section1_poster:string;
-    page_section7_poster:string;
+    page_section1_poster: string;
+    page_section7_poster: string;
 
     new_launches: NewLaunchItem[];
 

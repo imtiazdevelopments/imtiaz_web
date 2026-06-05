@@ -58,14 +58,18 @@ type Props = {
   titleRef: React.RefObject<HTMLHeadingElement | null>;
   desktopVideo: string;
   mobileVideo: string;
-  title:string;
+  title: string;
+  posterDesktop:string;
+  posterMobile:string;
 };
 
 export default function HeroSection({
   titleRef,
   desktopVideo,
   mobileVideo,
-  title
+  title,
+  posterDesktop,
+  posterMobile
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -93,7 +97,7 @@ export default function HeroSection({
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] block md:hidden"
             src={mobileVideo}
-            poster="/videos/banner-vid.jpg"
+            poster={posterMobile}
             autoPlay
             loop
             muted
@@ -103,7 +107,7 @@ export default function HeroSection({
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] hidden md:block"
             src={desktopVideo}
-            poster="/videos/banner-vid.jpg"
+            poster={posterDesktop}
             autoPlay
             loop
             muted
@@ -119,8 +123,8 @@ export default function HeroSection({
               >
                 {/* BUILDING WITH PURPOSE. <br />
                 DELIVERING WITH PRECISION. */}
-                {title.split(" n").map((item)=>(
-                  <span><>{item}<br/></></span>
+                {title.split(" n").map((item) => (
+                  <span><>{item}<br /></></span>
                 ))}
               </h1>
             </div>

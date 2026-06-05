@@ -11,7 +11,7 @@ const Index = ({data}:{data:CareerDetailsResponse['data']}) => {
   }
 
 const jobSpecifications = {
-  title: "Job Specifications",
+  title: data?.job_specification_title,
   specs: [
     {
       key: "Job Title",

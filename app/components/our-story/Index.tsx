@@ -115,6 +115,8 @@ const Index = ({ data }: { data: AboutPageResponse['data'] }) => {
       <Expertise
         title={data.expertise_title}
         description={data.expertise_caption}
+        buttonText={data?.expertise_button_text || ""}
+        buttonLink={data?.expertise_button_url || ""}
       />
       <OtherPageSlider data={otherPageSliderData} />
     </>

@@ -329,7 +329,7 @@ export default function OtherPageSlider({data}:{data:OtherPageSliderData}) {
           <motion.div variants={moveUp(0.2)} initial="hidden" animate="show">
             <Link href={slides[current].link}>
               <CustomOutlineButton
-                text="learn more"
+                text={slides[current].buttonText}
                 className="capitalize"
                 variant="light"
                 px="px-[12px] sm:px-[26px] lg:px-[34px] 3xl:w-[172px] lg:w-auto h-[44px] md:h-[50px]  xl:h-[66px]"

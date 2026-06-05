@@ -51,7 +51,7 @@ const CarouselSlider = ({ features, activeIndex }: CarouselSliderProps) => {
       >
         {looped.map((f, idx) => (
           <div key={idx} className="flex items-center gap-3 flex-shrink-0">
-            <Image src={f.icon} width={20} height={20} alt={f.label} />
+            <Image src={f.icon} width={30} height={30} alt={f.label} className="invert brightness-0"/>
             <span className="text-white text-description uppercase ">
               {f.label}
             </span>

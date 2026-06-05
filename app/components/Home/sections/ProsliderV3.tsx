@@ -589,7 +589,7 @@ export default function HeroSlider({ slides, RightLabel, title }: HeroSliderProp
                         animate={startAnim ? "show" : "hidden"}
                         className="text-white uppercase text-heading text-center"
                       >
-                        {title}
+                        {slide.title}
                       </motion.h1>
                     </div>
                   </motion.div>
@@ -617,9 +617,10 @@ export default function HeroSlider({ slides, RightLabel, title }: HeroSliderProp
                               <motion.div className="flex items-center gap-3">
                                 <Image
                                   src={f.icon}
-                                  width={20}
-                                  height={20}
+                                  width={30}
+                                  height={30}
                                   alt={f.label}
+                                  className="invert brightness-0"
                                 />
                                 <span className="text-white text-16 text-description uppercase">
                                   {f.label}
