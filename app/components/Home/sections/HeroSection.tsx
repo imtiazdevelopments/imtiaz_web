@@ -59,6 +59,8 @@ type Props = {
   desktopVideo: string;
   mobileVideo: string;
   title: string;
+  posterDesktop:string;
+  posterMobile:string;
 };
 
 export default function HeroSection({
@@ -66,6 +68,8 @@ export default function HeroSection({
   desktopVideo,
   mobileVideo,
   title,
+  posterDesktop,
+  posterMobile
 }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -93,7 +97,7 @@ export default function HeroSection({
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] block md:hidden"
             src={mobileVideo}
-            poster="/videos/banner-vid.jpg"
+            poster={posterMobile}
             autoPlay
             loop
             muted
@@ -103,7 +107,7 @@ export default function HeroSection({
           <video
             className="absolute top-0 left-0 w-full object-cover h-[99.9%] hidden md:block"
             src={desktopVideo}
-            poster="/videos/banner-vid.jpg"
+            poster={posterDesktop}
             autoPlay
             loop
             muted

@@ -83,24 +83,23 @@ type Props = {
   imtiazPropertiesData: ImtiazPropertiesData;
   ConstructionProgressData: ConstructionProgressData;
   appSectionData: AppSectionData;
-  data:HomePageResponse['data']
-  communitiesData:any,
+  data: HomePageResponse['data']
+  communitiesData: any,
 };
 
 export default function Index({
-  heroSlides,
   heroSlidesComingSoon,
   ConstructionProgressData,
   appSectionData,
   data,
   communitiesData,
-}: Props) { 
+}: Props) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollRef = useRef<HTMLImageElement>(null);
   const searchRef = useRef<HTMLImageElement>(null);
   const mobsearchRef = useRef<HTMLImageElement>(null);
-  
-  
+
+
   const { unlock } = useLenis();
 
   useEffect(() => {
@@ -111,107 +110,121 @@ export default function Index({
     };
   }, []);
 
-useEffect(() => {
-  let ctx: gsap.Context | null = null;
+  useEffect(() => {
+    let ctx: gsap.Context | null = null;
 
-  const startAnimations = () => {
-    if (ctx) return;
-    document.body.style.overflow = "";
-    unlock();
+    const startAnimations = () => {
+      if (ctx) return;
+      document.body.style.overflow = "";
+      unlock();
 
-    ctx = gsap.context(() => {
-      const t2 = gsap.timeline();
-      t2.fromTo(
-        titleRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2 },
-      ).fromTo(
-        searchRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.3",
-      ).fromTo(
-        scrollRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.3",
-      ).fromTo(
-        mobsearchRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.3",
-      );
-    });
+      ctx = gsap.context(() => {
+        const t2 = gsap.timeline();
+        t2.fromTo(
+          titleRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2 },
+        ).fromTo(
+          searchRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 },
+          "-=0.3",
+        ).fromTo(
+          scrollRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 },
+          "-=0.3",
+        ).fromTo(
+          mobsearchRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 },
+          "-=0.3",
+        );
+      });
 
-    window.dispatchEvent(new Event("homeAnimationsReady"));
-    setTimeout(() => ScrollTrigger.refresh(), 300);
+      window.dispatchEvent(new Event("homeAnimationsReady"));
+      setTimeout(() => ScrollTrigger.refresh(), 300);
+    };
+
+    window.addEventListener("headerAnimationComplete", startAnimations);
+
+    return () => {
+      window.removeEventListener("headerAnimationComplete", startAnimations);
+      ctx?.revert();
+      ctx = null;
+    };
+  }, []);
+
+
+  const communityNamesData = {
+    heading: "IMTIAZ COMMUNITIES",
+    communities: data.communities.map((community, index) => ({
+      id: (index + 1).toString(),
+      name: community.title,
+      bgImage: community.featured_image_desktop,
+      link: `/community/${community.slug}`,
+    })),
   };
 
-  window.addEventListener("headerAnimationComplete", startAnimations);
+  const imtiazPropertiesData = {
+    sectionTitle: "OFF-PLAN PROPERTIES",
 
-  return () => {
-    window.removeEventListener("headerAnimationComplete", startAnimations);
-    ctx?.revert();
-    ctx = null;
+    properties: data.properties.map((property, index) => ({
+      id: (index + 1).toString(),
+      title: property.title,
+      image: property.featured_image_desktop,
+      link: `/property/${property.slug}`,
+      location: property.property_community,
+      hoverImage: property.brand_logo,
+      startingFrom: property.icon1_text,
+      units: property.icon2_text
+    })),
   };
-}, []);
 
+  const spotlight = {
+    title: "Press Spotlight",
+    viewAllHref: "/news",
+    slides: data.news.map((item, index) => ({
+      id: `spotlight-${index + 1}`,
+      date: item.post_date,
+      title: item.title,
+      href: `/news/${item.slug}`,
+      image: item.featured_image_desktop,
+      alt: item.featured_image_alt,
+    })),
+  };
 
-const communityNamesData = {
-  heading: "IMTIAZ COMMUNITIES",
-  communities: data.communities.map((community, index) => ({
-    id: (index + 1).toString(),
-    name: community.title,
-    bgImage: community.featured_image_desktop,
-    link: `/community/${community.slug}`,
-  })),
-};
-
-const imtiazPropertiesData = {
-  sectionTitle: "OFF-PLAN PROPERTIES",
-
-  properties: data.properties.map((property, index) => ({
-    id: (index + 1).toString(),
-    title: property.title,
-    image: property.featured_image_desktop,
-    link: `/property/${property.slug}`,
-    location: property.property_community,
-    hoverImage: property.brand_logo,
-    startingFrom:property.icon1_text,
-    units:property.icon2_text
-  })),
-};
-
-const spotlight = {
-  title: "Press Spotlight",
-  viewAllHref: "/news",
-  slides: data.news.map((item, index) => ({
-    id: `spotlight-${index + 1}`,
-    date: item.post_date,
+  const heroSlides = data.new_launches.map((item) => ({
     title: item.title,
-    href: `/news/${item.slug}`,
-    image: item.featured_image_desktop,
-    alt: item.featured_image_alt,
-  })),
-};
+    video: item.banner_video_dektop,
+    pillFeatures: {
+      title: "/icons/pro_slider/sunset_bay.svg",
+      features: item.amenities.slice(0,4).map((feature) => ({
+        icon: feature.icon_url,
+        label: feature.title,
+      })),
+    },
+  }));
 
   return (
     <>
-      <HeroSection 
-      titleRef={titleRef} 
-      desktopVideo={data?.page_banner_video} 
-      mobileVideo={data?.page_banner_video_mobile} 
-      title={data?.page_banner_title}
+      <HeroSection
+        titleRef={titleRef}
+        desktopVideo={data?.page_banner_video}
+        mobileVideo={data?.page_banner_video_mobile}
+        title={data?.page_banner_title}
+        posterDesktop={data?.page_hero_poster_dektop}
+        posterMobile={data?.page_hero_poster_mobile}
       />
-      <AboutJourneyV3 
-      searchRef={searchRef} 
-      mobsearchRef={mobsearchRef} 
-      communitiesData={communitiesData} 
-      video={data?.page_section1_video} 
-      title={data?.page_section1_title}
-      poster={data?.page_section1_poster}
+      <AboutJourneyV3
+        searchRef={searchRef}
+        mobsearchRef={mobsearchRef}
+        communitiesData={communitiesData}
+        video={data?.page_section1_video}
+        title={data?.page_section1_title}
+        poster={data?.page_section1_poster}
       />
-      <ProSliderV3 slides={heroSlides} RightLabel="New Launches" title={data?.page_section2_title}/>
+      <ProSliderV3 slides={heroSlides} RightLabel="New Launches" title={data?.page_section2_title} />
       <ProSliderComingSoonV3
         slides={heroSlidesComingSoon}
         // RightLabel="World of IMTIAZ"
@@ -221,19 +234,19 @@ const spotlight = {
         url={data?.page_section3_buttonurl}
       />
       {/* <FpfSection video={data?.page_section4_video} title={data?.page_section4_title} description={data?.page_section4_caption} buttonText={data?.page_section4_buttontext} url={data?.page_section4_buttonurl}/> */}
-      <CommunityNamesSlider slides={communityNamesData} title={data?.page_section5_title}/>
-      <ImtiazProperties data={imtiazPropertiesData} title={data?.page_section6_title}/>
-      <ConstructionProgress2 
-      data={ConstructionProgressData} 
-      video={data?.page_section7_video} 
-      title={data?.page_section7_title} 
-      description={data?.page_section7_caption} 
-      buttonText={data?.page_section7_buttontext} 
-      url={data?.page_section7_buttonurl}
-      poster={data?.page_section7_poster}
+      <CommunityNamesSlider slides={communityNamesData} title={data?.page_section5_title} />
+      <ImtiazProperties data={imtiazPropertiesData} title={data?.page_section6_title} />
+      <ConstructionProgress2
+        data={ConstructionProgressData}
+        video={data?.page_section7_video}
+        title={data?.page_section7_title}
+        description={data?.page_section7_caption}
+        buttonText={data?.page_section7_buttontext}
+        url={data?.page_section7_buttonurl}
+        poster={data?.page_section7_poster}
       />
-      <SpotlightSlider data={spotlight} title={data?.page_section8_title}/>
-      <AppSectionV2 data={appSectionData} appStore={data?.apple_store_link} playStore={data?.android_store_link} title={data?.page_section9_title} description={data?.page_section9_caption}/>
+      <SpotlightSlider data={spotlight} title={data?.page_section8_title} />
+      <AppSectionV2 data={appSectionData} appStore={data?.apple_store_link} playStore={data?.android_store_link} title={data?.page_section9_title} description={data?.page_section9_caption} />
     </>
   );
 }   

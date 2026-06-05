@@ -10,9 +10,9 @@ interface Props {
   title?: string;
 }
 
-const MapOriginal = () => {
-  const latitude = "25.1972";
-  const longitude = "55.2744";
+const MapOriginal = ({title,latitude="25.1972",longitude="55.2744"}:{title:string;latitude:string;longitude:string;}) => {
+  // const latitude = "25.1972";
+  // const longitude = "55.2744";
   const lat = parseFloat(latitude);
   const lng = parseFloat(longitude);
 
@@ -20,7 +20,7 @@ const MapOriginal = () => {
     <section data-header="dark" className="w-full pb-120 3xl:pb-160">
       <div className="hidden md:block container">
         <SectionHeading
-          title={"our head office"}
+          title={title}
           className="text-heading  text-foreground mb-50 "
         />
 

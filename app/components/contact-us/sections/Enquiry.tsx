@@ -7,7 +7,7 @@ import CountryCodeSelect from "@/app/components/auth/CountryCodeList";
 import Link from "next/link";
 import ContainerAnchor from "../../layout/ContainerAnchor";
 import { useContainerInset } from "@/app/hooks/useContainerInset";
-import { enquiryData } from "../data";
+// import { enquiryData } from "../data";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 import { SearchableDropdown } from "../sections/CountryNameList";
 import { SectionHeading } from "../../animations/SectionHeading";
@@ -18,6 +18,34 @@ import { motion } from "framer-motion";
 import { useParallax } from "@/app/hooks/useParallax";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+export interface EnquiryData {
+  heading: string;
+  subheading: string;
+
+  contacts: {
+    id: string;
+    icon: string;
+    label: string;
+    href: string;
+  }[];
+
+  selectReasons: string[];
+
+  contactModes: string[];
+
+  checkboxes: {
+    id: string;
+    label: string;
+  }[];
+
+  contactInfo: {
+    icon: string;
+    text: string;
+    href: string;
+    alignment: boolean;
+  }[];
+}
 
 type FormValues = {
   firstName: string;
@@ -54,7 +82,7 @@ const FieldLine = ({ hasError }: { hasError: boolean }) => (
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function EnquirySection() {
+export default function EnquirySection({enquiryData}:{enquiryData:EnquiryData}) {
   const {
     register,
     handleSubmit,

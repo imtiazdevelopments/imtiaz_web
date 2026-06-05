@@ -3,7 +3,7 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
 // import { expertiseData } from "../data";
 import Link from "next/link";
-const Expertise = ({title,description}:{title:string;description:string;}) => {
+const Expertise = ({title,description,buttonText,buttonLink}:{title:string;description:string;buttonText:string;buttonLink:string;}) => {
   return (
     <section data-header="dark" className="w-full py-120 3xl:pt-140 3xl:pb-160">
       <div className="container mx-auto flex flex-col items-center">
@@ -15,9 +15,9 @@ const Expertise = ({title,description}:{title:string;description:string;}) => {
           text={description}
           className="text-foreground-light max-w-[720px] text-center whitespace-pre-line mb-50"
         />
-        <Link href="/about/expertise">
+        <Link href={buttonLink}>
           <CustomOutlineButton
-            text="Learn More"
+            text={buttonText}
             borderColor="border-primary"
             variant="dark"
             textColor="text-primary"

@@ -21,6 +21,7 @@ export type CareerDetailsResponse = {
     job_type: string;
     department: string;
     job_overview_title:string;
+    job_specification_title:string;
   };
 };
 
