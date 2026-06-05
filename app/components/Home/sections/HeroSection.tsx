@@ -123,8 +123,11 @@ export default function HeroSection({
               >
                 {/* BUILDING WITH PURPOSE. <br />
                 DELIVERING WITH PRECISION. */}
-                {title.split(" n").map((item) => (
-                  <span><>{item}<br /></></span>
+                {title.split(/(?<=\.)/).map((item, index) => (
+                  <span key={index}>
+                    {item.trim()}
+                    <br />
+                  </span>
                 ))}
               </h1>
             </div>
