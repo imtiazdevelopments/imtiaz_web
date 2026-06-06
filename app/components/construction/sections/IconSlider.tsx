@@ -8,6 +8,7 @@ import { commitmentSection, commitmentSlides } from "../data";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { SectionHeading } from "../../animations/SectionHeading";
+import { SectionDescription } from "../../animations/SectionDescription";
 
 export default function IconSlider() {
   const swiperRef = useRef<SwiperType | null>(null);
@@ -33,9 +34,7 @@ export default function IconSlider() {
               title={commitmentSection.title}
               className="mb-20 text-foreground max-w-[45ch] mx-auto"
             />
-            <p className="text-description max-w-[105ch] mx-auto">
-              {commitmentSection.description}
-            </p>
+            <SectionDescription text={commitmentSection.description} className="text-description max-w-[105ch] mx-auto" />
           </div>
           {/* Slider */}
           <Swiper

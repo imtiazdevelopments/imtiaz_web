@@ -1,7 +1,7 @@
 export const bannerData = {
     video: "/videos/construction_banner.mp4",
     title: "Design. Build. Deliver. Anywhere",
-    description: "Venco Imtiaz Contracting Co. (VICC) is a global construction and engineering company delivering complex infrastructure, turnkey construction, and mission-critical projects across the Middle East, South Asia, Africa, and North America.",
+    description: "Venco Imtiaz Contracting Co. (VICC) is a global construction and engineering company delivering complex infrastructure, turnkey construction, and mission-critical projects across the \n Middle East, South Asia, Africa, and North America.",
     features: [
         {
             key: "30+",
@@ -34,12 +34,12 @@ export interface TimelineSectionData {
 export const timelineSectionData: TimelineSectionData = {
   title: "Built on Experience, Driven by Innovation",
   description:
-    "Established in 1993, VICC has evolved into a multinational construction and engineering corporation known for delivering projects in some of the world's most demanding environments. From infrastructure development and turnkey construction to logistics and mission support services, VICC combines technical expertise, operational excellence, and an expeditionary mindset to consistently deliver reliable results. With a strong commitment to safety, sustainability, integrity, and quality, VICC continues to shape communities and infrastructure across global markets.",
+    "Established in 1993, VICC has evolved into a multinational construction and engineering corporation known for delivering projects in some of \n the world's most demanding environments. From infrastructure development and turnkey construction to logistics and mission support \n services, VICC combines technical expertise, operational excellence, and an expeditionary mindset to consistently deliver \n reliable results. With a strong commitment to safety, sustainability, integrity, and quality, VICC continues to \n shape communities and infrastructure across global markets.",
   slides: [
     {
       year: 1993,
       title: "Company Founded",
-      image: "/images/construction/time-line-slider/1.jpg",
+      image: "/images/construction/time-line-slider/3.jpg",
     },
     {
       year: 2004,
@@ -49,7 +49,7 @@ export const timelineSectionData: TimelineSectionData = {
     {
       year: 2007,
       title: "Dubai Headquarters Established",
-      image: "/images/construction/time-line-slider/3.jpg",
+      image: "/images/construction/time-line-slider/1.jpg",
     },
     {
       year: 2015,

@@ -136,7 +136,7 @@ const ImtiazProperties = ({ data, title, className }: ImtiazPropertiesData) => {
         <div className="overflow-hidden">
           <motion.h2
             // variants={moveUp(0.35)}
-            variants={moveUp(0.7)}
+            variants={moveUp(0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
