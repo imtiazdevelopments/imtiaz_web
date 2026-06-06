@@ -42,7 +42,6 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
 
   return (
     <div className="overflow-hidden bg-white/10 backdrop-blur-[30px]">
-
       {/* ── Desktop (≥ lg): static row, exact same layout as before ── */}
       <div className="hidden lg:flex items-center justify-center">
         {features.map((feat, idx) => (
@@ -54,9 +53,7 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
               <span className="text-white text-heading mb-[10px]">
                 {feat.key}
               </span>
-              <span className="text-white text-description">
-                {feat.value}
-              </span>
+              <span className="text-white text-description">{feat.value}</span>
             </div>
             {idx < features.length - 1 && <GradientSeparator />}
           </div>
@@ -65,15 +62,9 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
 
       {/* ── Below lg: Swiper slider ── */}
       <div className="lg:hidden">
-        {/*
-          Each slide only gets a LEFT border line.
-          The rightmost visible edge of the swiper container
-          gets a single right border via the wrapping div.
-        */}
         <div className="relative" style={{ borderRight: "none" }}>
-          {/* Single right-edge line for the whole slider */}
           <div
-            className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+            className="hidden sm:block absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
             style={separatorStyle}
           />
 
@@ -81,10 +72,9 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
             modules={[Autoplay]}
             slidesPerView={1}
             breakpoints={{
-                640: { slidesPerView: 2 },
-                800: { slidesPerView: 2.4 },
+              640: { slidesPerView: 2 },
+              800: { slidesPerView: 2.4 },
             }}
-            loop={true}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             centeredSlides={false}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -96,7 +86,7 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
                 <div className="relative flex items-center justify-center py-[30px]">
                   {/* Left separator only — no right separator */}
                   <div
-                    className="absolute left-0 top-0 bottom-0"
+                    className="hidden sm:block absolute left-0 top-0 bottom-0"
                     style={separatorStyle}
                   />
 
@@ -116,7 +106,7 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
         </div>
 
         {/* ── Pagination dots (below lg only) ── */}
-        <div className="flex justify-center pb-[14px] gap-[10px]">
+        <div className="flex justify-center sm:pt-20 lg:pt-0 pb-[14px] gap-[10px]">
           {features.map((_, i) => (
             <button
               key={i}
@@ -128,7 +118,6 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
           ))}
         </div>
       </div>
-
     </div>
   );
 };

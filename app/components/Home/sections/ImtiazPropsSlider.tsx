@@ -130,6 +130,7 @@ const ImtiazProperties = ({ data, title, className }: ImtiazPropertiesData) => {
 
   return (
     <section
+      data-header="dark"
       className={`make-header-black w-full bg-white z-10 relative ${className ?? "py-[70px] lg:py-120 3xl:py-[160px]"}`}
     >
       <div className="container">

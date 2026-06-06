@@ -46,7 +46,7 @@ export default function ExpertiseSlider() {
             }}
             initialSlide={0}
             speed={700}
-            loop
+            // loop
             centeredSlides={false}
             spaceBetween={25}
             breakpoints={{

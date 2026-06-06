@@ -9,7 +9,7 @@ const VideoSection = ({ images }: { images: string[] }) => {
   return (
     <section
       className="w-full bg-white md:pb-50 mt-[50px]"
-      data-header="light"
+      data-header="dark"
     >
       <div
         ref={containerRef}
@@ -35,13 +35,13 @@ const VideoSection = ({ images }: { images: string[] }) => {
         <div className="absolute inset-0 z-20 bg-black/70 pointer-events-none" />
 
         {/* Play Button */}
-        <div className="absolute inset-0 z-[1000] flex items-center justify-center">
+        <div className="absolute inset-0 z-[1000] flex items-center justify-center cursor-pointer">
           <Image
             src="/images/initiative-details/play-video.svg"
-            className="cursor-pointer"
             alt="play-video"
             width={100}
             height={100}
+            className="w-[60px] h-[60px] md:w-[100px] md:h-[100px]"
           />
         </div>
       </div>
