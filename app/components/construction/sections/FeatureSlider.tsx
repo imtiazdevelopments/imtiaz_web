@@ -79,9 +79,9 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
 
           <Swiper
             modules={[Autoplay]}
-            slidesPerView={1.5}
+            slidesPerView={1}
             breakpoints={{
-                528: { slidesPerView: 2 },
+                640: { slidesPerView: 2 },
                 800: { slidesPerView: 2.4 },
             }}
             loop={true}

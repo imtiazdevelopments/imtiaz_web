@@ -32,7 +32,7 @@ const VideoSection = ({ images }: { images: string[] }) => {
         </div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 z-20 bg-black/50 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-black/70 pointer-events-none" />
 
         {/* Play Button */}
         <div className="absolute inset-0 z-[1000] flex items-center justify-center">

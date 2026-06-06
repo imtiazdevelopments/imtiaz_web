@@ -16,7 +16,7 @@ const RelatedInitiative = ({ data }:{data:any}) => {
 
     return (
         <section
-            className="w-full bg-white pb-120 3xl:pb-160"
+            className="w-full bg-white pb-120 2xl:pb-130"
             data-header="dark"
         >
             <div className="container">
