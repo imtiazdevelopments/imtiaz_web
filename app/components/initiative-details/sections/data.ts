@@ -73,7 +73,6 @@ export const details = [
   },
 ];
 
-
 export const images = [
   {
     signatureImages: [
