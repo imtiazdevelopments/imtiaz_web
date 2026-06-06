@@ -48,13 +48,13 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
         {features.map((feat, idx) => (
           <div
             key={idx}
-            className="flex items-center py-[30px] 3xl:py-[35px] gap-x-70"
+            className="flex items-center py-30 3xl:py-[35px] gap-x-70"
           >
             <div className="flex flex-col items-center justify-center text-center pl-70">
               <span className="text-white text-heading mb-[10px]">
                 {feat.key}
               </span>
-              <span className="text-white/70 text-description">
+              <span className="text-white text-description">
                 {feat.value}
               </span>
             </div>
@@ -79,9 +79,9 @@ const FeatureSlider = ({ features }: FeatureSliderProps) => {
 
           <Swiper
             modules={[Autoplay]}
-            slidesPerView={1.5}
+            slidesPerView={1}
             breakpoints={{
-                528: { slidesPerView: 2 },
+                640: { slidesPerView: 2 },
                 800: { slidesPerView: 2.4 },
             }}
             loop={true}

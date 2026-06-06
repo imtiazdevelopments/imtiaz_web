@@ -101,7 +101,7 @@ const ConstructionBanner = ({
 
   return (
     <section
-      className="relative w-full h-[100vh] md:h-[82vh] 2xl:h-screen overflow-hidden"
+      className="relative w-full h-[100dvh] overflow-hidden"
       data-header="light"
     >
       <div className="container">
@@ -120,27 +120,33 @@ const ConstructionBanner = ({
         <div className="absolute inset-0 bg-black/50" />
         {/* ── Main Content (title + description + breadcrumb) ── */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          {/* Title + Description */}
           <div>
-            <div>
-              <AnimatedHeading
-                title={title}
-                className="mb-[8px] md:mb-20 text-white"
-                mode="blade"
-              />
-            </div>
+            <AnimatedHeading
+              title={title}
+              className="mb-[8px] md:mb-20 text-white"
+              mode="blade"
+            />
             {description && (
-              <p
-                className={`text-white/80 text-description mx-auto text-center flex items-center justify-center max-w-[760px] whitespace-pre-line`}
-              >
+              <p className="text-white/80 text-description mx-auto text-center flex items-center justify-center max-w-[760px] whitespace-pre-line">
                 {description}
               </p>
             )}
           </div>
-          {/* Breadcrumb */}
-          <div ref={breadcrumbRef} className="opacity-0 mt-6">
+        </div>
+
+        {/* ── Breadcrumb + Features pinned to bottom ── */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <div
+            ref={breadcrumbRef}
+            className="opacity-0 flex justify-center mb-60 3xl:mb-[64px]"
+          >
             <Breadcrumb />
           </div>
+          {features && features.length > 0 && (
+            <div ref={featuresRef} className="opacity-0">
+              <FeatureSlider features={features} />
+            </div>
+          )}
         </div>
       </div>
 
