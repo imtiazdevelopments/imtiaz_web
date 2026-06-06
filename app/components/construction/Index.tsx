@@ -26,7 +26,7 @@ const Index = ({ data }: any) => {
   return (
     <>
       <ConstructionBanner {...bannerData} />
-      {/* <TimelineSlider /> */}
+      <TimelineSlider />
       <ExpertiseSlider />
       <ImtiazProperties data={imtiazPropertiesData} title={imtiazPropertiesData.sectionTitle} className="py-120 2xl:py-130"/>     
       <IconSlider />

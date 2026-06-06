@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
@@ -9,12 +9,15 @@ import SliderArrowButton from "../../common/SliderNavigationButton";
 
 import "swiper/css";
 import { SectionHeading } from "../../animations/SectionHeading";
+import { Autoplay } from "swiper/modules";
 
 export default function ExpertiseSlider() {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(
-    typeof window !== "undefined" && window.innerWidth < 1280 ? 0 : -1,
-  );
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  useEffect(() => {
+    if (window.innerWidth < 1280) setActiveIndex(0);
+  }, []);
 
   return (
     <section
@@ -22,63 +25,39 @@ export default function ExpertiseSlider() {
       className="bg-gray py-120 2xl:py-130 overflow-hidden"
     >
       <div className="container">
-        {/* Title */}
         <div className="w-full flex items-center justify-center text-center">
           <SectionHeading
             title={coreExpertiseData.title}
             className="mb-[30px] md:mb-50 text-foreground max-w-[35ch]"
           />
         </div>
-        {/* Slider */}
-        <div className="w-full">
+
+        <div className="w-full px-[10px]">
           <Swiper
+            modules={[Autoplay]}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             onActiveIndexChange={(swiper) => {
-              if (window.innerWidth >= 1280) {
-                setActiveIndex(-1);
-              } else {
-                setActiveIndex(swiper.activeIndex);
-              }
+              setActiveIndex(window.innerWidth >= 1280 ? -1 : swiper.realIndex);
             }}
-            slidesPerView={3.6}
-            spaceBetween={25}
-            loop={true}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: false,
+            }}
+            initialSlide={0}
+            speed={700}
+            loop
             centeredSlides={false}
-            slidesOffsetBefore={10}
-            slidesOffsetAfter={10}
+            spaceBetween={25}
             breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 16,
-              },
-              480: {
-                slidesPerView: 1.6,
-                spaceBetween: 20,
-              },
-              640: {
-                slidesPerView: 1.8,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2.2,
-                spaceBetween: 25,
-              },
-              1024: {
-                slidesPerView: 2.8,
-                spaceBetween: 25,
-              },
-              1280: {
-                slidesPerView: 3,
-                spaceBetween: 25,
-              },
-              1400: {
-                slidesPerView: 3.2,
-                spaceBetween: 25,
-              },
-              1580: {
-                slidesPerView: 3.45,
-                spaceBetween: 25,
-              },
+              0: { slidesPerView: 1, spaceBetween: 16 },
+              480: { slidesPerView: 1.6, spaceBetween: 20 },
+              640: { slidesPerView: 1.8, spaceBetween: 20 },
+              768: { slidesPerView: 2.2, spaceBetween: 25 },
+              1024: { slidesPerView: 2.8, spaceBetween: 25 },
+              1280: { slidesPerView: 3, spaceBetween: 25 },
+              1400: { slidesPerView: 3.2, spaceBetween: 25 },
+              1580: { slidesPerView: 3.45, spaceBetween: 25 },
             }}
             className="!overflow-visible"
           >
@@ -90,41 +69,29 @@ export default function ExpertiseSlider() {
                   onClick={() => swiperRef.current?.slideTo(i)}
                 >
                   <div className="group relative aspect-[3/4] 3xl:aspect-auto 3xl:h-[545px] overflow-hidden cursor-pointer">
-                    {/* Image */}
                     <Image
                       src={slide.image}
                       alt={slide.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {/* Default overlay */}
                     <div
-                      className={`absolute inset-0 transition-opacity duration-500 ${
-                        isActive ? "opacity-0" : "opacity-100"
-                      }`}
+                      className={`absolute inset-0 transition-opacity duration-500 ${isActive ? "opacity-0" : "opacity-100"}`}
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(0,0,0,0) -0.01%, rgba(0,0,0,0.8) 100%)",
                       }}
                     />
-                    {/* Active / hover full overlay */}
                     <div
-                      className={`absolute inset-0 transition-opacity duration-500 ${
-                        isActive
-                          ? "opacity-80"
-                          : "opacity-0 group-hover:opacity-80"
-                      }`}
+                      className={`absolute inset-0 transition-opacity duration-500 ${isActive ? "opacity-80" : "opacity-0 group-hover:opacity-80"}`}
                       style={{
                         background: "linear-gradient(0deg, #000000, #000000)",
                       }}
                     />
-                    {/* Content */}
                     <div className="absolute inset-0 flex flex-col justify-end p-[30px] text-white">
-                      {/* Title */}
                       <p className="text-[18px] md:text-25 leading-[1.5] md:leading-[1.4] mb-0 tracking-[-0.02em]">
                         {slide.title}
                       </p>
-                      {/* Divider + description */}
                       <div
                         className={`grid transition-all duration-500 ease-out ${
                           isActive
@@ -153,7 +120,7 @@ export default function ExpertiseSlider() {
             })}
           </Swiper>
         </div>
-        {/* Nav buttons */}
+
         <div className="flex items-center justify-center gap-3 mt-[30px] md:mt-50">
           <SliderArrowButton
             direction="prev"
