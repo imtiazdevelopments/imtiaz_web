@@ -151,6 +151,7 @@ export const footerV2Data: FooterV2Data = {
         { label: "About", link: "/about/our-story" },
         { label: "Careers", link: "/about/careers" },
         { label: "Contact", link: "/contact-us" },
+        { label: "Construction", link: "/about/construction" },
         { label: "3D View", link: "/3d-tour" }
       ],
     },
@@ -160,6 +161,7 @@ export const footerV2Data: FooterV2Data = {
         { label: "News & Press Releases", link: "/media-center/news" },
         { label: "Blogs", link: "/media-center/blog" },
         { label: "Events", link: "/media-center/events" },
+        { label: "Initiatives", link: "/media-center/initiatives" }
       ],
     },
     {
@@ -245,6 +247,7 @@ export const subMenuItems = {
       label: "INVESTOR RELATIONS",
       href: "/media-center/investor-relations",
     },
+    { id: "construction", label: "CONSTRUCTION", href: "/about/construction" },
   ],
 
   communities: [
@@ -348,6 +351,7 @@ export const subMenuItems = {
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
+    { id: "initiatives", label: "INITIATIVES", href: "/media-center/initiatives" },
   ],
 
   partnership: [

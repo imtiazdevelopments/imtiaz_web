@@ -34,7 +34,7 @@ export default function IconSlider() {
               title={commitmentSection.title}
               className="mb-20 text-foreground max-w-[45ch] mx-auto"
             />
-            <SectionDescription text={commitmentSection.description} className="text-description max-w-[105ch] mx-auto" />
+            <SectionDescription text={commitmentSection.description} className="text-description max-w-[105ch] mx-auto 2xl:whitespace-pre-line" />
           </div>
           {/* Slider */}
           <Swiper
