@@ -139,7 +139,7 @@ export const coreExpertiseData = {
 export const commitmentSection = {
   title: "COMMITMENT TO SAFETY, SUSTAINABILITY, AND OPERATIONAL EXCELLENCE",
   description:
-    "At VICC, quality and reliability are embedded into every stage of project execution. Through ISO-certified management systems, advanced engineering methodologies, rigorous safety standards, and sustainable construction practices, VICC consistently delivers projects that meet international benchmarks. Our commitment to innovation and operational excellence enables us to successfully execute complex projects in challenging environments worldwide.",
+    "At VICC, quality and reliability are embedded into every stage of project execution. Through ISO-certified management systems, advanced engineering methodologies, rigorous safety standards, and sustainable construction practices, VICC consistently delivers projects that meet international benchmarks. Our commitment to innovation and operational excellence enables us \n to successfully execute complex projects in challenging environments worldwide.",
 };
 
 export const commitmentSlides = [
