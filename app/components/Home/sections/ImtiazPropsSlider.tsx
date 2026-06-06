@@ -29,10 +29,11 @@ type ImtiazPropertiesData = {
       hoverImage: string;
     }[];
   };
-  title:string;
+  title: string;
+  className?: string;
 };
 
-const ImtiazProperties = ({ data,title }: ImtiazPropertiesData) => {
+const ImtiazProperties = ({ data, title, className }: ImtiazPropertiesData) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -128,7 +129,9 @@ const ImtiazProperties = ({ data,title }: ImtiazPropertiesData) => {
   }, []);
 
   return (
-    <section className="make-header-black w-full py-[70px] lg:py-120 3xl:py-[160px] bg-white z-10 relative">
+    <section
+      className={`make-header-black w-full bg-white z-10 relative ${className ?? "py-[70px] lg:py-120 3xl:py-[160px]"}`}
+    >
       <div className="container">
         <div className="overflow-hidden">
           <motion.h2
