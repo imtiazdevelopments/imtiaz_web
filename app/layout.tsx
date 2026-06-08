@@ -17,11 +17,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           
         </LenisProvider>
         
-        <Script
+        {/* <Script
         id="wotnot-chat"
           src="https://app.wotnot.io/chat-widget/6oLSHVYKARyW052813950292EguttAVa.js"
           strategy="lazyOnload"
-        />
+        /> */}
       </body>
     </html>
   );

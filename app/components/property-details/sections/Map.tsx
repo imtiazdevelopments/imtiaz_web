@@ -27,7 +27,7 @@ const iconSize = zoom >= 15
           defaultCenter={{ lat, lng }}
           defaultZoom={15}
           className="w-full h-full"
-          gestureHandling={"greedy"}
+          gestureHandling={"cooperative"}
           disableDefaultUI={true}
           onZoomChanged={(e) => setZoom(e.detail.zoom)}
           styles={[
