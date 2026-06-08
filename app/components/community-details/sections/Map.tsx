@@ -146,7 +146,7 @@ const MapOriginal = ({
             defaultZoom={16}
 
             className="w-full h-full"
-            gestureHandling={"greedy"}
+            gestureHandling={"cooperative"}
             disableDefaultUI={true}
             onZoomChanged={(e) => setZoom(e.detail.zoom)}
             styles={[
@@ -181,9 +181,9 @@ const MapOriginal = ({
             {communityCoordinates?.length > 0 && (
               <Polygon
                 paths={communityCoordinates}
-                fillColor="#C9A14A"
+                fillColor="#490905"
                 fillOpacity={0.5}
-                strokeColor="#C9A14A"
+                strokeColor="#171717"
                 strokeOpacity={1}
                 strokeWeight={3}
               />
