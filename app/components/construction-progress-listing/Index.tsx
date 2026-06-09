@@ -2,16 +2,18 @@ import InnerHeroBanner from "../common/InnerHeroBanner";
 import { bannerData } from "./data";
 import Main from "./sections/Main";
 
-const Index = () => {
+const Index = ({data}:any) => {
   return (
     <>
       <InnerHeroBanner
-        {...bannerData}
+        image={data?.page_banner_desktop}
+        title={data?.page_banner_title}
+        description={data?.page_banner_caption}
         maxTitle="max-w-[73ch]"
         maxW="max-w-[66ch]"
       />
       <div className="py-120 3xl:pt-[100px] 3xl:pb-160">
-        <Main />
+        <Main data={data?.properties}/>
       </div>
     </>
   );

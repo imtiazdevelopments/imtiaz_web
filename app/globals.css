@@ -313,6 +313,10 @@ html {
 @utility text-description {
   @apply font-[avenirBook] text-16 leading-[1.9] md:leading-[1.54375];
 }
+
+.text-description {
+  opacity: 100 !important;
+}
  
 @utility container-spacing-details-page {
   @apply xl:!px-200 3xl:!px-250;
@@ -1041,4 +1045,68 @@ input:-webkit-autofill:active {
 
 .career-details-qualification p {
   @apply text-description mb-20;
+}
+
+
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.blog-content thead {
+  background-color: #f8fafc;
+}
+
+.blog-content th,
+.blog-content td {
+  padding: 14px 18px;
+  text-align: left;
+  border: 1px solid #e5e7eb;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.blog-content th {
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.blog-content td {
+  color: #4b5563;
+}
+
+.blog-content tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.blog-content tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* Responsive */
+.blog-content .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-content table {
+  min-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .blog-content th,
+  .blog-content td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .blog-content table {
+    min-width: 500px;
+  }
 }
