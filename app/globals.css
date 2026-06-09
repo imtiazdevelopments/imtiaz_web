@@ -150,6 +150,40 @@ html {
 .show-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+
+
+.menu-scrollbar {
+  overflow-y: auto; /* always reserve scrollbar space */
+  scrollbar-width: thin;
+  scrollbar-color: white rgba(255, 255, 255, 0.05);
+}
+
+/* Chrome / Safari / Edge */
+.menu-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  -webkit-appearance: none;
+}
+
+.menu-scrollbar::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.menu-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+.menu-scrollbar::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 999px;
+  min-height: 40px;
+}
+
+.menu-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
  
  
 /* ---------- Variables ---------- */

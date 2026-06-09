@@ -1691,7 +1691,7 @@ function MobileMegaMenu({
                             {[
                               { label: "ALL", value: "all" },
                               { label: "OFF PLAN", value: "off-plan" },
-                              { label: "READY", value: "ready" },
+                              { label: "COMPLETED", value: "ready" },
                             ].map((filter) => {
                               const isActive = propertyFilter === filter.value;
 
@@ -1963,7 +1963,12 @@ function DesktopMegaMenu({
 
   const activeItem = regularItems.find((item) => item.id === activeCategory);
 
+
   const activeChildren = activeItem?.children || [];
+
+  useEffect(() => {
+  setPropertyFilter("all");
+}, [activeCategory]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden z-1000 bg-white flex-col hidden md:flex">
@@ -2275,7 +2280,7 @@ function DesktopMegaMenu({
                     {[
                       { label: "ALL", value: "all" },
                       { label: "OFF PLAN", value: "off-plan" },
-                      { label: "READY", value: "ready" },
+                      { label: "COMPLETED", value: "ready" },
                     ].map((filter) => {
                       const isActive = propertyFilter === filter.value;
 
@@ -2316,7 +2321,7 @@ function DesktopMegaMenu({
                     })}
                   </div>
                 )}
-              <div className="min-w-[250px] text-white flex items-center">
+              <div onWheel={(e) => e.stopPropagation()} className="min-w-[250px] text-white flex items-center max-h-[400px] overflow-y-auto menu-scrollbar pr-2 overflow-x-hidden">
                 <AnimatePresence mode="wait">
                   {activeChildren.length > 0 && (
                     <motion.div
