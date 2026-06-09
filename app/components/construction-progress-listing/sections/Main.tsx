@@ -2,7 +2,7 @@
 
 import { useMemo, useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation"; 
-// import { offPlanProperties } from "../data"; 
+import { offPlanProperties } from "../data"; 
 import Cardconstruction from "../../common/Cardconstruction";
 import { motion } from "framer-motion"; 
 import { moveUp, moveUpV2 } from "../../motionVariants";
@@ -15,8 +15,7 @@ const getItemsPerPage = () =>
   typeof window !== "undefined" && window.innerWidth >= 1600 ? 8 : 6;
 
 // ── Main Content Component ─────────────────────────────────────────────────
-const MainContent = ({data}:any) => {
-  console.log(data)
+const MainContent = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams(); 
@@ -119,7 +118,7 @@ const MainContent = ({data}:any) => {
 
   const sorted = useMemo(
     () =>
-      [...data].sort(
+      [...offPlanProperties].sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       ),
     [],
@@ -145,12 +144,7 @@ const MainContent = ({data}:any) => {
           <div className="project-card-grid">
             {paginated.map((project, i) => (
               <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                <Cardconstruction 
-                id={i.toString()} 
-                hoverImage={""} 
-                title={project.title} 
-                image={project.featured_image_desktop} 
-                />
+                <Cardconstruction {...project} />
               </Reveal>
             ))}
           </div> 
@@ -194,10 +188,10 @@ const LoadingFallback = () => (
 );
 
 // ── Main Component with Suspense ───────────────────────────────────────────
-const Main = ({data}:any) => {
+const Main = () => {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <MainContent data={data}/>
+      <MainContent />
     </Suspense>
   );
 };

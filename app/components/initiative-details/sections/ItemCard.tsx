@@ -16,7 +16,7 @@ const EventCard = ({ item }: { item: any }) => {
     .replace(/\//g, "-");
 
   return (
-    <Link href={`#`} className="group block">
+    <Link href={item.slug} className="group block">
       {/* Image + Category Bar */}
       <div
         ref={ref}

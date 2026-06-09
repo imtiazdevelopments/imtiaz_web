@@ -15,8 +15,18 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 import { moveLeft, moveRight } from "../../motionVariants";
 
-export default function TimelineSlider() {
-  const { title, description, slides } = timelineSectionData;
+type TimeLineSlider = {
+  title:string;
+  description:string;
+  slides:{
+    year:string;
+    title:string;
+    image:string;
+  }[]
+}
+
+export default function TimelineSlider({data}:{data:TimeLineSlider}) {
+  const { title, description, slides } = data;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const mainSwiperRef = useRef<SwiperType | null>(null);

@@ -5,13 +5,22 @@ import Content from "./sections/Content";
 import ImageSlider from "./sections/ImageSlider";
 import RelatedInitiative from "./sections/RelatedInitiative";
 
-const Index = () => {
+const Index = ({data}:any) => {
+
+  const relatedItems = data?.related_initiatives.map((item:any)=>{
+    return {
+      title:item?.title,
+      image:item?.featured_image_desktop,
+      slug:item?.slug
+    }
+  })
+
   return (
     <>
-      <Hero blog={details[0]}/>
-      <VideoSection images={images[0].signatureImages}/>
-      <Content content={details[0].content} />
-      <ImageSlider images={images[0].signatureImages}/>
+      <Hero title={data?.page_banner_title}/>
+      <VideoSection image={data?.page_poster_desktop}/>
+      <Content content={data?.description} sourceUrl={data?.source_url}/>
+      <ImageSlider images={data?.gallery}/>
       <RelatedInitiative data={relatedItems}/>
     </>
   );

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 
-const VideoSection = ({ images }: { images: string[] }) => {
+const VideoSection = ({ image }: { image: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -18,7 +18,7 @@ const VideoSection = ({ images }: { images: string[] }) => {
         {/* Background Image */}
         <div className="absolute inset-0 z-10">
           <Image
-            src={'/images/initiative-details/video-image.png'}
+            src={image}
             alt="Gallery image"
             fill
             priority

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
 import CustomOutlineButton from "../../common/CustomOutlineButton";
+import Link from "next/link";
 
 const decodeHtml = (html: string) => {
   if (typeof document === "undefined") return html;
@@ -11,7 +12,7 @@ const decodeHtml = (html: string) => {
   return txt.value;
 };
 
-const Content = ({ content }: { content: string }) => {
+const Content = ({ content,sourceUrl }: { content: string,sourceUrl:string }) => {
   return (
     <section
       className="w-full bg-white pt-5 md:pt-0 pb-[40px] md:pb-50  "
@@ -29,7 +30,7 @@ const Content = ({ content }: { content: string }) => {
           }}
         />
       </div>
-      <div className="flex justify-center">
+      <Link href={sourceUrl} className="flex justify-center">
         <CustomOutlineButton
           variant="dark"
           text="Source"
@@ -38,7 +39,7 @@ const Content = ({ content }: { content: string }) => {
           px="px-[12px] lg:px-[20px] 3xl:px-[36.6px] h-[47px]"
           readMore
         />
-      </div>
+      </Link>
     </section>
   );
 };
