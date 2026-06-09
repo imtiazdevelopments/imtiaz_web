@@ -7,7 +7,7 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveDown, moveUp } from "../../motionVariants";
 
-const BlogHero = ({ blog }: { blog: any }) => {
+const BlogHero = ({ title }: { title: string }) => {
 
   const [size, setSize] = useState(32);
 
@@ -21,7 +21,6 @@ const BlogHero = ({ blog }: { blog: any }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log(blog);
 
   return (
     <section className="w-full pt-[174px] md:pt-200" data-header="dark">
@@ -38,7 +37,7 @@ const BlogHero = ({ blog }: { blog: any }) => {
 
         {/* Title */}
         <SectionHeading
-          title={blog.title}
+          title={title}
           className="max-w-[55ch] text-foreground text-center uppercase mt-[40px] md:mt-100"
         />
 

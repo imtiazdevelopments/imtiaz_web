@@ -74,8 +74,8 @@ console.log(data?.page_banner_title)
       <IconGrid data={everythingWithinData} />
       <GallerySlider data={data?.gallery}/>
       <Amenities data={amenetiesData} maxTitle="max-w-[90ch]" />
-      {!data.unit_layouts && <hr/>}
-      {data.unit_layouts && <UnitLayout data={data?.unit_layouts}/>}
+      {!data?.unit_layouts && <hr/>}
+      {data?.unit_layouts && <UnitLayout data={data?.unit_layouts}/>}
       <MeydanHorizon 
       title={data?.community_name} 
       description={data?.community_basic_brief}
@@ -88,7 +88,7 @@ console.log(data?.page_banner_title)
       data={data?.faq}
       />
       {
-      allPropertyData?.listing.filter((item)=>item.property_community == data.community_name 
+      allPropertyData?.listing.filter((item)=>item.property_community == data?.community_name 
       && item.title !==data?.page_banner_title ).length > 0 
       && <LandpropertyCards data={allPropertyData?.listing} community={data?.community_name} property={data?.page_banner_title}/>
       }

@@ -47,15 +47,15 @@ export default function IconGrid({ data, bgClass }: Props) {
 
   // Paired slides (2 cards each) — used below lg
   const pairedSlides: (typeof data.cards)[] = [];
-  for (let i = 0; i < data.cards.length; i += 2) {
-    pairedSlides.push(data.cards.slice(i, i + 2));
+  for (let i = 0; i < data?.cards?.length; i += 2) {
+    pairedSlides.push(data?.cards.slice(i, i + 2));
   }
 
   // Single slides (1 card each) — used at lg+
-  const singleSlides: (typeof data.cards)[] = data.cards.map((card) => [card]);
+  const singleSlides: (typeof data.cards)[] = data?.cards?.map((card) => [card]);
 
-  const totalPaired = pairedSlides.length;
-  const totalSingle = singleSlides.length;
+  const totalPaired = pairedSlides?.length;
+  const totalSingle = singleSlides?.length;
 
   const showPaginationPaired = slidesPerViewPaired < totalPaired;
   const showPaginationSingle = slidesPerViewSingle < totalSingle;
@@ -230,7 +230,7 @@ export default function IconGrid({ data, bgClass }: Props) {
               setActiveIndexSingle(s.realIndex);
             }}
           >
-            {singleSlides.map(([card], slideIndex) => {
+            {singleSlides?.map(([card], slideIndex) => {
               const showVerticalLine = innerIndicesSingle.has(slideIndex);
 
               return (

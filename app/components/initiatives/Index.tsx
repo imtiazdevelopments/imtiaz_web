@@ -3,12 +3,24 @@ import InnerHeroBanner from "../common/InnerHeroBanner";
 import { bannerData } from "./data";
 import InitiativeSection from "./sections/InitiativeSection";
 
-const Index = () => {
+const Index = ({data}:any) => {
+
+  const initiatives =
+  data?.listing?.map((item: any) => ({
+    title: item.title,
+    link: `${item.slug}`,
+    image: item.featured_image_desktop,
+  })) || [];
+
   return (
     <>
-      <InnerHeroBanner {...bannerData} maxW="max-w-[81ch]" />
+      <InnerHeroBanner 
+      title={data?.page_banner_title} 
+      image={data?.page_banner_desktop}
+      description={data?.page_banner_caption} 
+      maxW="max-w-[81ch]" />
       <Suspense fallback={<div>Loading...</div>}>
-        <InitiativeSection />
+        <InitiativeSection data={initiatives}/>
       </Suspense>
     </>
   );

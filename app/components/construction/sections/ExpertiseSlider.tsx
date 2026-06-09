@@ -4,14 +4,25 @@ import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
-import { coreExpertiseData } from "../data";
+// import { coreExpertiseData } from "../data";
 import SliderArrowButton from "../../common/SliderNavigationButton";
 
 import "swiper/css";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { Autoplay } from "swiper/modules";
 
-export default function ExpertiseSlider() {
+export interface ExpertiseItem {
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface ExpertiseSection {
+  title: string;
+  slides: ExpertiseItem[];
+}
+
+export default function ExpertiseSlider({data}:{data:ExpertiseSection}) {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -27,7 +38,7 @@ export default function ExpertiseSlider() {
       <div className="container">
         <div className="w-full flex items-center justify-center text-center">
           <SectionHeading
-            title={coreExpertiseData.title}
+            title={data.title}
             className="mb-[30px] md:mb-50 text-foreground max-w-[35ch]"
           />
         </div>
@@ -61,7 +72,7 @@ export default function ExpertiseSlider() {
             }}
             className="!overflow-visible"
           >
-            {coreExpertiseData.slides.map((slide, i) => {
+            {data.slides.map((slide, i) => {
               const isActive = i === activeIndex;
               return (
                 <SwiperSlide

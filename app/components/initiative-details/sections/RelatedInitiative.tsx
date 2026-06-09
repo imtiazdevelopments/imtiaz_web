@@ -57,7 +57,7 @@ const RelatedInitiative = ({ data }:{data:any}) => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
-                        <Link href="#">
+                        <Link href="/media-center/initiatives">
                             <CustomOutlineButton
                                 text="View All"
                                 variant="dark"

@@ -82,7 +82,7 @@ export default function Amenities({ data, maxTitle }: Props) {
               ref={gridRef}
            // Container
 className="flex flex-wrap justify-center items-start mt-[40px] md:mt-50 gap-y-[35px] lg:gap-y-[40px] lg:gap-y-60" >
-              {data.amenities.map((item, i) => (
+              {data?.amenities?.map((item, i) => (
                 <div
                   key={i}
                   className="amenity-card w-[calc(100%/2)] md:w-[calc(100%/3)] xl:w-[calc(100%/5)] group relative   flex flex-col items-center justify-center gap-[10px] md:gap-4 xl:gap-[25px] p-3 md:px-6 md:py-[20px] text-center cursor-default  overflow-hidden"

@@ -4,15 +4,24 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { commitmentSection, commitmentSlides } from "../data";
+// import { commitmentSection, commitmentSlides } from "../data";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { SectionHeading } from "../../animations/SectionHeading";
 import { SectionDescription } from "../../animations/SectionDescription";
 
-export default function IconSlider() {
+type IconSliderData = {
+ title:string;
+ description:string;
+ items:{
+  icon:string;
+  title:string;
+ }[]
+}
+
+export default function IconSlider({data}:{data:IconSliderData}) {
   const swiperRef = useRef<SwiperType | null>(null);
-  const showPagination = commitmentSlides.length > 1;
+  const showPagination = data.items.length > 1;
 
   const [activeSnap, setActiveSnap] = useState(0);
   const [snapCount, setSnapCount] = useState(1);
@@ -30,11 +39,11 @@ export default function IconSlider() {
         {/* Header */}
         <div className="w-full flex-col gap-20 items-center justify-center text-center mb-[30px] md:mb-50">
           <SectionHeading
-            title={commitmentSection.title}
+            title={data.title}
             className="mb-20 text-foreground max-w-[45ch] mx-auto"
           />
           <SectionDescription
-            text={commitmentSection.description}
+            text={data.description}
             className="text-description max-w-[105ch] mx-auto 2xl:whitespace-pre-line"
           />
         </div>
@@ -66,14 +75,14 @@ export default function IconSlider() {
           }}
           className="w-full !overflow-visible"
         >
-          {commitmentSlides.map((slide, index) => (
+          {data.items.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="px-50 py-20 flex flex-col items-center">
                 {/* Icon */}
                 <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] lg:w-[80px] lg:h-[80px] rounded-full flex items-center justify-center bg-primary/5 mb-20">
-                  {slide.icon_url && (
+                  {slide.icon && (
                     <Image
-                      src={slide.icon_url}
+                      src={slide.icon}
                       alt={slide.title}
                       width={32}
                       height={32}

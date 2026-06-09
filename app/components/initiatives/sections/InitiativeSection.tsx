@@ -2,18 +2,24 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { initiatives } from "../data";
+// import { initiatives } from "../data";
 import InitiativeCard from "./InitiativeCard";
 import Pagination from "@/app/components/common/Pagination";
 import { moveUp } from "@/app/components/motionVariants";
 
+type Initiative = {
+  title: string;
+  link: string;
+  image: string;
+}
+
 const ITEMS_PER_PAGE = 4;
 
-export default function InitiativeSection() {
+export default function InitiativeSection({ data }: { data: Initiative[] }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(initiatives.length / ITEMS_PER_PAGE);
-  const paginated = initiatives.slice(
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const paginated = data.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );

@@ -6,7 +6,37 @@ import ImtiazProperties from "../../components/Home/sections/ImtiazPropsSlider";
 import IconSlider from "./sections/IconSlider";
 
 const Index = ({ data }: any) => {
-  console.log(data);
+
+const bannerData = {
+  video: data?.page_banner_video_desktop,
+  title: data?.page_banner_title,
+  description: data?.page_banner_caption,
+  features: [
+    {
+      key: data?.highlight_title_1,
+      value: data?.highlight_caption_1,
+    },
+    {
+      key: data?.highlight_title_2,
+      value: data?.highlight_caption_2,
+    },
+    {
+      key: data?.highlight_title_3,
+      value: data?.highlight_caption_3,
+    },
+  ],
+};
+
+const timelineSectionData = {
+  title: data?.history_title,
+  description: data?.history_brief,
+  slides:
+    data?.history?.map((item: any) => ({
+      year: Number(item.year),
+      title: item.title,
+      image: item.image_desktop,
+    })) || [],
+};
 
   const imtiazPropertiesData = {
   sectionTitle: "PROPERTIES",
@@ -23,13 +53,34 @@ const Index = ({ data }: any) => {
   })),
 };
 
+const coreExpertiseData = {
+  title: data?.expertise_title,
+  slides:
+    data?.expertises?.map((item:any) => ({
+      image: item.image_desktop,
+      title: item.title,
+      description: item.caption,
+    })) || [],
+};
+
+const commitmentSectionData = {
+  title: data?.commitment_title,
+  description: data?.commitment_brief,
+  items: data?.commitments?.map((item: any) => ({
+    icon: item.icon_url,
+    title: item.title,
+  })) || [],
+};
+
   return (
     <>
-      <ConstructionBanner {...bannerData} />
-      <TimelineSlider />
-      <ExpertiseSlider />
+      <ConstructionBanner 
+      {...bannerData}
+      />
+      <TimelineSlider data={timelineSectionData}/>
+      <ExpertiseSlider data={coreExpertiseData}/>
       <ImtiazProperties data={imtiazPropertiesData} title={imtiazPropertiesData.sectionTitle} className="py-120 2xl:py-130"/>     
-      <IconSlider />
+      <IconSlider data={commitmentSectionData}/>
     </>
   );
 };
