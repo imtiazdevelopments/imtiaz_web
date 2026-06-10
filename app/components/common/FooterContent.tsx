@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
 import { SectionHeading } from "../animations/SectionHeading";
 
-const decodeHtml = (html: string) => {
-  if (typeof document === "undefined") {
-    return html;
-  }
+const processContent = (html: string) => {
+  if (typeof document === "undefined") return html;
   const txt = document.createElement("textarea");
   txt.innerHTML = html;
-  return txt.value;
+  const decoded = txt.value;
+  return decoded.replace(
+    /<table/g,
+    '<div class="table-wrapper"><table'
+  ).replace(/<\/table>/g, "</table></div>");
 };
 
 const FooterContent = ({
@@ -22,7 +24,7 @@ const FooterContent = ({
 }) => {
   return (
     <section
-      className="w-full bg-white pt-[20px] md:pt-70 pb-[20px] md:pb-70"
+      className="w-full bg-white pt-[20px] md:pt-70 pb-[20px] md:pb-70 overflow-hidden"
       data-header="dark"
     >
       <div className="container container-spacing-details-page">
@@ -37,7 +39,7 @@ const FooterContent = ({
           viewport={{ once: true }}
           className="blog-content dynamicmn"
           dangerouslySetInnerHTML={{
-            __html: decodeHtml(content),
+            __html: processContent(content),
           }}
         />
       </div>
