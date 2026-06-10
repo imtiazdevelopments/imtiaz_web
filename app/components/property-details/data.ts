@@ -76,6 +76,7 @@ export interface PropertyDetailsData {
   show_communities_section: "true" | "false";
   show_faq_section: "true" | "false";
   show_similar_property_section: "true" | "false";
+  show_community_overview_section: "true" | "false";
 
   reach: ReachItem[];
   gallery: GalleryItem[];
