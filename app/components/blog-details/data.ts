@@ -19,6 +19,7 @@ export interface BlogDetailData {
   page_banner_mobile: string;
   description: string;
   related_blogs: BlogListingItem[] | null;
+  category_name:string;
 }
 
 export interface BlogDetailResponse {
