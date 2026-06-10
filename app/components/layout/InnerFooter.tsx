@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
 import FooterColumns from "./FooterAccordian";
+import Link from "next/link";
 
 const InnerFooter = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +32,10 @@ const InnerFooter = () => {
     console.log("Email:", email);
   };
   return (
-    <footer data-header="dark" className="w-full make-header-black text-white bg-primary-2 relative z-10 overflow-hidden">
+    <footer
+      data-header="dark"
+      className="w-full make-header-black text-white bg-primary-2 relative z-10 overflow-hidden"
+    >
       {/* ================= TOP HERO SECTION ================= */}
       <div className="w-full overflow-hidden py-[40px] lg:py-120 3xl:py-150 bg-primary-2">
         <div className="z-[20] h-full container flex flex-col md:flex-row md:justify-between items-center shrink-0">
@@ -170,12 +174,12 @@ const InnerFooter = () => {
             viewport={{ once: true }}
             className="flex gap-[5px] sm:gap-3 xl:gap-6 3xl:gap-7 text-16 justify-between md:justify-start w-full mb-[9px] md:mb-0"
           >
-            {footerV2Data.bottom.left.map((txt, i) => (
+            {footerV2Data.bottom.left.map((item, i) => (
               <span
                 key={i}
                 className="text-white/45 hover:text-white/70 leading-[1.56] transition-colors duration-300 cursor-pointer"
               >
-                {txt}
+                <Link href={item.href}>{item.label}</Link>
               </span>
             ))}
           </motion.div>
