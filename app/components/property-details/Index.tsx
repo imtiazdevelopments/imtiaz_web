@@ -14,28 +14,32 @@ import ProjectIntro from "./sections/ProjectIntro";
 import RegBtn from "./sections/RegBtn";
 import { PropertiesPageData } from "../property/data";
 
-const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyData:PropertiesPageData}) => {
-
+const Index = ({
+  data,
+  allPropertyData,
+}: {
+  data: PropertyDetailsData;
+  allPropertyData: PropertiesPageData;
+}) => {
   const everythingWithinData = {
     title: data?.reach_title,
     description: data?.reach_caption,
-    cards: data?.reach
-  }
+    cards: data?.reach,
+  };
 
   const amenetiesData = {
-  title: data?.amenities_title,
-  description: data?.amenities_brief,
-  amenities: data?.amenities?.map((item) => ({
-    icon: item.icon_url,
-    label: item.title,
-  })),
-};
-
+    title: data?.amenities_title,
+    description: data?.amenities_brief,
+    amenities: data?.amenities?.map((item) => ({
+      icon: item.icon_url,
+      label: item.title,
+    })),
+  };
 
   return (
     <>
       <InnerHeroBanner
-      video={data?.page_banner_video_desktop}
+        video={data?.page_banner_video_desktop}
         image={data?.page_banner_desktop}
         title={data?.page_banner_title}
         description=""
@@ -45,14 +49,14 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
         starting_price={data?.starting_price}
         delivery_date={data?.delivery_date}
       />
-      <ProjectIntro
+      {data.show_basic_section && <ProjectIntro
         title={data?.basic_title}
         description={data?.basic_brief}
         brochure={data?.brochure}
         fact_sheet={data?.fact_sheet}
         unit_layout={data?.unit_layout}
-      />
-      <ConstructionProgress
+      />}
+      {data.show_construction_section && <ConstructionProgress
         title={data?.construction_title}
         description={data?.construction_brief}
         image={data?.construction_image}
@@ -68,28 +72,40 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
         percent4_label={data?.percent4_label}
         construction_button_text={data?.construction_button_text}
         construction_button_url={data?.construction_button_url}
+      />}
+      {data.show_reach_section && <IconGrid data={everythingWithinData} />}
+      {data.show_gallery_section && <GallerySlider data={data?.gallery} />}
+      {!data.show_gallery_section && <hr />}
+      {data.show_amenities_section && <Amenities data={amenetiesData} maxTitle="max-w-[90ch]" />}
+      {!data?.unit_layouts && <hr />}
+      {data?.unit_layouts && <UnitLayout data={data?.unit_layouts} />}
+      
+      {data.show_community_overview_section && <MeydanHorizon
+        title={data?.community_name}
+        description={data?.community_basic_brief}
+        subTitle={data?.community_basic_title}
+      />}
+      <Map
+        latitude={data?.property_latitude}
+        longitude={data?.property_longitude}
       />
-      <IconGrid data={everythingWithinData} />
-      <GallerySlider data={data?.gallery}/>
-      <Amenities data={amenetiesData} maxTitle="max-w-[90ch]" />
-      {!data?.unit_layouts && <hr/>}
-      {data?.unit_layouts && <UnitLayout data={data?.unit_layouts}/>}
-      <MeydanHorizon 
-      title={data?.community_name} 
-      description={data?.community_basic_brief}
-      subTitle={data?.community_basic_title}
-      />
-      <Map latitude={data?.property_latitude} longitude={data?.property_longitude}/>
-      <Faqsection 
-      title={data?.faq_title} 
-      description={data?.faq_caption}
-      data={data?.faq}
-      />
-      {
-      allPropertyData?.listing.filter((item)=>item.property_community == data?.community_name 
-      && item.title !==data?.page_banner_title ).length > 0 
-      && <LandpropertyCards data={allPropertyData?.listing} community={data?.community_name} property={data?.page_banner_title}/>
-      }
+      {data.show_faq_section && <Faqsection
+        title={data?.faq_title}
+        description={data?.faq_caption}
+        data={data?.faq}
+      />}
+      
+      {data.show_similar_property_section && allPropertyData?.listing.filter(
+        (item) =>
+          item.property_community == data?.community_name &&
+          item.title !== data?.page_banner_title,
+      ).length > 0 && (
+        <LandpropertyCards
+          data={allPropertyData?.listing}
+          community={data?.community_name}
+          property={data?.page_banner_title}
+        />
+      )}
       <RegBtn />
     </>
   );

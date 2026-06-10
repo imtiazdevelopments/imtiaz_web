@@ -15,9 +15,12 @@ const Index = ({data}:any) => {
       buttonText={data?.button_text}
       buttonLink={data?.button_url}
       maxW="max-w-[352px]" />
+
       <Suspense fallback={<div className="h-screen bg-white" />}>
-        <Main />
+        <Main data={data} />
       </Suspense>
+
+
       <WhyInvest />
       <OffplanFaq />
     </>
