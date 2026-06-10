@@ -87,7 +87,7 @@ type FooterV2Data = {
   };
   columns: FooterV2Column[];
   bottom: {
-    left: string[];
+    left: { label: string; href: string }[];
     center: string;
     icons: string[];
   };
@@ -152,7 +152,7 @@ export const footerV2Data: FooterV2Data = {
         { label: "Careers", link: "/about/careers" },
         { label: "Contact", link: "/contact-us" },
         { label: "Construction", link: "/about/construction" },
-        { label: "3D View", link: "/3d-tour" }
+        { label: "3D View", link: "/3d-tour" },
       ],
     },
     {
@@ -161,18 +161,30 @@ export const footerV2Data: FooterV2Data = {
         { label: "News & Press Releases", link: "/media-center/news" },
         { label: "Blogs", link: "/media-center/blog" },
         { label: "Events", link: "/media-center/events" },
-        { label: "Initiatives", link: "/media-center/initiatives" }
+        { label: "Initiatives", link: "/media-center/initiatives" },
       ],
     },
     {
       heading: "TRENDING SEARCHES",
-      items: [{ label: "Off Plan Properties", link: "/off-plan-properties" },
-      ],
+      items: [{ label: "Off Plan Properties", link: "/off-plan-properties" }],
     },
   ],
 
   bottom: {
-    left: ["Privacy Policy", "Terms & Conditions", "Cookie Policy"],
+    left: [
+      {
+        label: "Privacy Policy",
+        href: "/privacy-policy",
+      },
+      {
+        label: "Terms & Conditions",
+        href: "/terms-and-conditions",
+      },
+      {
+        label: "Cookie Policy",
+        href: "/cookie-policy",
+      },
+    ],
     center: "©2025 Imtiaz Development. All Rights Reserved",
     icons: [
       "/icons/footer/instagram.svg",
@@ -351,17 +363,29 @@ export const subMenuItems = {
     { id: "news", label: "NEWS & PRESS", href: "/media-center/news" },
     { id: "events", label: "EVENTS", href: "/media-center/events" },
     { id: "blogs", label: "BLOGS", href: "/media-center/blog" },
-    { id: "initiatives", label: "INITIATIVES", href: "/media-center/initiatives" },
+    {
+      id: "initiatives",
+      label: "INITIATIVES",
+      href: "/media-center/initiatives",
+    },
   ],
 
   partnership: [
-    { id: "Agency", label: "AGENCY", href: "/onboarding?tab=agency", newTab: true },
-    { id: "individual", label: "INDIVIDUAL", href: "/onboarding?tab=individual", newTab: true },
+    {
+      id: "Agency",
+      label: "AGENCY",
+      href: "/onboarding?tab=agency",
+      newTab: true,
+    },
+    {
+      id: "individual",
+      label: "INDIVIDUAL",
+      href: "/onboarding?tab=individual",
+      newTab: true,
+    },
   ],
 
-  paynow: [
-    { id: "online", label: "PAY ONLINE", href: "/pay-now" },
-  ],
+  paynow: [{ id: "online", label: "PAY ONLINE", href: "/pay-now" }],
 };
 // export const subMenuItems: Record<string, SubMenuItem[]> = {
 //   about: [

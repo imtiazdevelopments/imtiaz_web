@@ -5,6 +5,7 @@ import { footerV2Data } from "./data";
 import { moveUp } from "../motionVariants";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 const Footer = () => {
   const heroRef = useRef(null);
@@ -140,16 +141,20 @@ const Footer = () => {
         <div className="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-7">
           {/* LEFT LINKS */}
           <div className="flex gap-3 xl:gap-7 text-16 font-[avenirRoman] text-white opacity-45 justify-center md:justify-start w-full">
-            {footerV2Data.bottom.left.map((txt, i) => (
+            {footerV2Data.bottom.left.map((item, i) => (
               <motion.span
                 variants={moveUp(i * 0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.2, once: true }}
                 key={i}
-                className="hover:text-white/70 transition-colors duration-300 cursor-pointer"
               >
-                {txt}
+                <Link
+                  href={item.href}
+                  className="hover:text-white/70 transition-colors duration-300"
+                >
+                  {item.label}
+                </Link>
               </motion.span>
             ))}
           </div>
