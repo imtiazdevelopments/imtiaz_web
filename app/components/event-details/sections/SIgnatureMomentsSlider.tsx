@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { SectionHeading } from "../../animations/SectionHeading";
 
-const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
+const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_desktop:string}[], title:string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideImageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const bgImgRef = useRef<HTMLImageElement>(null);
@@ -45,7 +45,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
         // Smoothly crossfade bg to previous slide image
         bgImgRef.current.style.transition = "none";
         bgImgRef.current.style.opacity = "1";
-        bgImgRef.current.src = images[prev];
+        bgImgRef.current.src = images[prev].featured_image_desktop;
         // After swiper fade completes, fade bg out too so next slide shows cleanly
         requestAnimationFrame(() => {
           if (bgImgRef.current) {
@@ -71,7 +71,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
     <section className="w-full bg-white md:pb-100  " data-header="light">
       <div className="container">
         <SectionHeading
-          title="Signature Moments"
+          title={title}
           className="text-center mb-5 md:mb-50 text-foreground"
         />
       </div>
@@ -85,7 +85,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={bgImgRef}
-            src={images[0]}
+            src={images[0].featured_image_desktop}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
@@ -129,7 +129,7 @@ const SignatureMomentsSlider = ({ images }: { images: string[] }) => {
                   ref={(el) => {
                     slideImageRefs.current[i] = el;
                   }}
-                  src={src}
+                  src={src.featured_image_desktop}
                   alt={`Gallery image ${i + 1}`}
                   fill
                   sizes="100vw"

@@ -8,6 +8,11 @@ export interface EventDetailData {
   description: string;
   event_location: string | null;
   related_events: any[] | null;
+  gallery: {
+    featured_image_desktop: string;
+    caption: string;
+  }[]
+  gallery_title:string;
 }
 
 export interface EventDetailResponse {
