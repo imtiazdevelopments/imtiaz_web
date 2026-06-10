@@ -99,6 +99,7 @@ export interface ReachItem {
 export interface GalleryItem {
   caption: string;
   image_url: string;
+  type:string;
 }
 
 export interface AmenityItem {

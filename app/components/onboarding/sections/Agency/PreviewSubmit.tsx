@@ -11,6 +11,8 @@ interface Props {
   onAgencyFormDataChange: (updated: AgencyFormData) => void;
   onPrev: () => void;
   onSubmit: () => void;
+  submitLoading: boolean;        // add this
+  submitError: string | null;
 }
 
 /* ─── helpers ─── */
@@ -263,9 +265,11 @@ export default function PreviewSubmit({
   onAgencyFormDataChange,
   onPrev,
   onSubmit,
+  submitLoading,
+  submitError
 }: Props) {
   const { company, signatory, broker, bank, documents } = agencyFormData;
-  const [submitError, setSubmitError] = useState<string[]>([]);
+  // const [submitError, setSubmitError] = useState<string[]>([]);
 
   const patch = <K extends keyof AgencyFormData>(
     section: K,
@@ -330,12 +334,9 @@ export default function PreviewSubmit({
   const hasAnything = missingSections.length < 5; // at least one section filled
 
   const handleSubmit = () => {
-    if (!isComplete) {
-      setSubmitError(missingSections);
-      return;
-    }
-    setSubmitError([]);
-    onSubmit();
+    if (!isComplete) return; // incomplete UI already handled by opacity/disabled
+    console.log("Clickeddd",isComplete)
+    onSubmit(); // just call the parent handler, it owns the loading/error state
   };
 
   return (
@@ -467,10 +468,12 @@ export default function PreviewSubmit({
       <div className="mt-50 flex flex-col">
         {/* Incomplete sections error */}
         <div className="h-[20px] flex items-center">
-          {submitError.length > 0 && (
+          {submitError && (
+            <p className="text-[12px] text-red-400 pb-2">{submitError}</p>
+          )}
+          {!isComplete && (
             <p className="text-[12px] text-red-400 pb-2">
-              Please complete the following sections before submitting:{" "}
-              <span>{submitError.join(", ")}</span>.
+              Please complete: {missingSections.join(", ")}.
             </p>
           )}
         </div>
@@ -493,7 +496,8 @@ export default function PreviewSubmit({
               isComplete ? "text-primary-2" : "text-primary-2/30"
             }
             px="px-[25px] 3xl:px-[64px]"
-            className={`h-[44px] md:h-[50px]  xl:h-[66px] uppercase max-w-[200px] ${!isComplete ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`h-[44px] md:h-[50px] xl:h-[66px] uppercase max-w-[200px] ${!isComplete || submitLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
           />
         </div>
       </div>

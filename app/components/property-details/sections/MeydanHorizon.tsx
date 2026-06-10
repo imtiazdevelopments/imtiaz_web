@@ -28,13 +28,13 @@ const MeydanHorizon = ({title,description,subTitle}:Props) => {
         <div className="text-center ">
           {title && <SectionHeading
             title={title}
-            className="text-heading  text-foreground mb-20 max-w-[666px] mx-auto"
+            className="text-heading  text-foreground mb-[40px] max-w-[666px] mx-auto"
           />}
 
-          {subTitle && <SectionDescription
+          {/* {subTitle && <SectionDescription
             text={subTitle}
             className="text-25 uppercase font-[optima] mb-[40px] text-foreground-light leading-[1.5] md:leading-[1.4] font-normal"
-          />}
+          />} */}
           {description && <SectionDescription
             text={description}
             className="text-description text-foreground-light max-w-[754px] mx-auto"

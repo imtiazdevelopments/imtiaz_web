@@ -31,8 +31,6 @@ const Index = ({ data,allPropertyData }: {data:PropertyDetailsData,allPropertyDa
   })),
 };
 
-console.log(data?.page_banner_title)
-
 
   return (
     <>
