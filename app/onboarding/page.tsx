@@ -3,6 +3,8 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import OnboardingIndex from "@/app/components/onboarding/Index";
+import { useUtm } from "@/hooks/useUtm";
+import { submitOnboardingLead } from "@/lib/submitOnboarding";
 
 export type Tab = "agency" | "individual";
 export type AgencyStep =
@@ -181,6 +183,10 @@ function OnboardingPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const { buildUtmPayload } = useUtm();
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const initialTab =
     (searchParams.get("tab") as Tab) === "individual" ? "individual" : "agency";
   const [tab, setTab] = useState<Tab>(initialTab);
@@ -247,6 +253,70 @@ function OnboardingPageInner() {
     setIndividualFormData((prev) => ({ ...prev, [step]: data }));
   };
 
+
+  const handleAgencySubmit = async () => {
+    console.log("callllelelelelele")
+    const company = agencyFormData.company;
+    const signatory = agencyFormData.signatory;
+
+    console.log(company,signatory)
+    if (!company || !signatory) return;
+
+    setSubmitLoading(true);
+    setSubmitError(null);
+
+    try {
+      const result = await submitOnboardingLead({
+        firstName: signatory.ownerFirstName || "",
+        lastName: signatory.ownerLastName || "",
+        email: signatory.ownerEmail || "",
+        mobile: company.agencyPhone || "",
+        message: `Agency onboarding: ${company.agencyName}`,
+        utm: buildUtmPayload(),
+      });
+
+      if (result.success) {
+        console.log("Submitted successfully", result);
+        // show success UI
+      } else {
+        setSubmitError("Submission failed. Please try again.");
+      }
+    } catch {
+      setSubmitError("Something went wrong.");
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
+  const handleIndividualSubmit = async () => {
+    const agentDetails = individualFormData.agentDetails;
+    if (!agentDetails) return;
+
+    setSubmitLoading(true);
+    setSubmitError(null);
+
+    try {
+      const result = await submitOnboardingLead({
+        firstName: agentDetails.ownerFirstName || "",
+        lastName: agentDetails.ownerLastName || "",
+        email: agentDetails.ownerEmail || "",
+        mobile: agentDetails.ownerMobile || "",
+        message: "Individual agent onboarding",
+        utm: buildUtmPayload(),
+      });
+
+      if (result.success) {
+        console.log("Submitted successfully", result);
+      } else {
+        setSubmitError("Submission failed. Please try again.");
+      }
+    } catch {
+      setSubmitError("Something went wrong.");
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
   return (
     <OnboardingIndex
       tab={tab}
@@ -264,6 +334,10 @@ function OnboardingPageInner() {
       individualFormData={individualFormData}
       onSaveIndividualStepData={saveIndividualStepData}
       onIndividualFormDataChange={handleIndividualFormDataChange}
+      submitLoading={submitLoading}
+      submitError={submitError}
+      onAgencySubmit={handleAgencySubmit}       // replaces console.log in PreviewSubmit
+      onIndividualSubmit={handleIndividualSubmit}
     />
   );
 }

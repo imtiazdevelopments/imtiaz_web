@@ -9,10 +9,12 @@ import { SectionHeading } from "../../animations/SectionHeading";
 import { motion } from "framer-motion";
 import { moveDown, moveUp } from "../../motionVariants";
 import { useParallax } from "@/app/hooks/useParallax";
+import { getReadingTime } from "@/app/utils/readingTime";
 
 
 const BlogHero = ({ blog }: {blog:BlogDetailData}) => {
   const { ref, parallaxY } = useParallax(15);
+  const readingTime = getReadingTime(blog.description);
 
 const [size, setSize] = useState(32);
 
@@ -54,13 +56,13 @@ useEffect(() => {
             className="flex items-center gap-[10px] text-foreground-light font-[avenirBook] text-[14px] md:text-16"
           >
             <div>
-              {/* <span>{blog.category_name}</span> */}
+              <span>{blog.category_name}</span>
               <span> - </span>
               <span>{blog.post_date}</span>
             </div>
             <span>|</span>
             <div>
-              <span>Reading Time: </span>
+              <span>Reading Time: {readingTime}</span>
             </div>
           </motion.div>
 

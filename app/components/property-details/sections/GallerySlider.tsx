@@ -466,8 +466,8 @@ export default function GallerySlider({ data }: { data: any }) {
   ? Object.values(data).flat().filter(Boolean) as GalleryItem[]
   : [];
 
-  const INTERIOR_SLIDES = safeData.filter((item) => item.caption === "Interior");
-  const EXTERIOR_SLIDES = safeData.filter((item) => item.caption === "Exterior");
+  const INTERIOR_SLIDES = safeData.filter((item) => item.caption === "Interior" || item.type === "Interior");
+  const EXTERIOR_SLIDES = safeData.filter((item) => item.caption === "Exterior" || item.type === "Exterior");
 
   const [activeTab, setActiveTab] = useState<TabType>("interior");
   const [mounted, setMounted] = useState(false);
