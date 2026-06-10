@@ -1,13 +1,7 @@
 
 import InnerComponents from "../components/layout/InnerComponents";
 
-const menuResponse = await fetch(`${process.env.BASE_URL}/api/menu_communities_properties.php`, {
-  next: { revalidate: 60 },
-})
-
-const menuData = await menuResponse.json();
-
-export default function InnerLayout({
+export default async function InnerLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -17,13 +11,19 @@ export default function InnerLayout({
   // useEffect(() => {
   //   unlock();
   // }, [unlock]);
-  
+
+  const menuResponse = await fetch(`${process.env.BASE_URL}/api/menu_communities_properties.php`, {
+    next: { revalidate: 60 },
+  })
+
+  const menuData = await menuResponse.json();
+
 
   return (
     <>
       <InnerComponents menuData={menuData.data.listing}>
         {children}
-        </InnerComponents>
+      </InnerComponents>
     </>
   );
 }
