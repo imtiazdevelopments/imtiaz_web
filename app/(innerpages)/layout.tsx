@@ -7,8 +7,6 @@ const menuResponse = await fetch(`${process.env.BASE_URL}/api/menu_communities_p
 
 const menuData = await menuResponse.json();
 
-export const dynamic = "force-dynamic";
-
 export default function InnerLayout({
   children,
 }: {
