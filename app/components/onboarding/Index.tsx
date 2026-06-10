@@ -46,6 +46,10 @@ interface OnboardingIndexProps {
     data: IndividualFormData[K],
   ) => void;
   onIndividualFormDataChange: (updated: IndividualFormData) => void;
+  onAgencySubmit: () => void
+  onIndividualSubmit: () => void
+  submitLoading: boolean;
+  submitError: string | null;
 }
 
 const AGENCY_STEPS: { key: AgencyStep; label: string }[] = [
@@ -107,6 +111,10 @@ export default function OnboardingIndex({
   individualFormData,
   onSaveIndividualStepData,
   onIndividualFormDataChange,
+  onAgencySubmit,
+  onIndividualSubmit,
+  submitError,
+  submitLoading
 }: OnboardingIndexProps) {
   const steps = tab === "agency" ? AGENCY_STEPS : INDIVIDUAL_STEPS;
   const currentStep = tab === "agency" ? agencyStep : individualStep;
@@ -234,9 +242,8 @@ export default function OnboardingIndex({
             <button
               key={t}
               onClick={() => onTabChange(t)}
-              className={`relative z-10 w-1/2 flex items-center justify-center rounded-full px-60 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${
-                tab === t ? "text-white" : "text-foreground"
-              }`}
+              className={`relative z-10 w-1/2 flex items-center justify-center rounded-full px-60 py-[18px] 3xl:px-[94px] font-[optima] leading-[1.4] uppercase -tracking-[0.02em] text-25 transition-colors duration-300 cursor-pointer ${tab === t ? "text-white" : "text-foreground"
+                }`}
             >
               {t === "agency" ? "Agency" : "Individual"}
             </button>
@@ -271,13 +278,12 @@ export default function OnboardingIndex({
                     ? onAgencyStepChange(s.key as AgencyStep)
                     : onIndividualStepChange(s.key as IndividualStep)
                 }
-                className={`flex items-center gap-[10px] pb-[14px] text-description transition-all cursor-pointer ${
-                  isActive
-                    ? "font-bold text-primary"
-                    : isCompleted
-                      ? "text-primary"
-                      : "text-foreground-light"
-                }`}
+                className={`flex items-center gap-[10px] pb-[14px] text-description transition-all cursor-pointer ${isActive
+                  ? "font-bold text-primary"
+                  : isCompleted
+                    ? "text-primary"
+                    : "text-foreground-light"
+                  }`}
               >
                 {s.label}
                 {isCompleted && (
@@ -369,7 +375,9 @@ export default function OnboardingIndex({
               agencyFormData={agencyFormData}
               onAgencyFormDataChange={onAgencyFormDataChange}
               onPrev={() => onAgencyStepChange("documents")}
-              onSubmit={() => console.log("Final submit", agencyFormData)}
+              onSubmit={() => onAgencySubmit()}
+              submitLoading={submitLoading}
+              submitError={submitError}
             />
           )}
 
