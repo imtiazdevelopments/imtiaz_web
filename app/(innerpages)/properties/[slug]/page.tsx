@@ -1,5 +1,7 @@
 import Index from '@/app/components/property-details/Index'
 
+export const dynamic = "force-dynamic";
+
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const slug = (await params).slug;
