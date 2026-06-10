@@ -1324,7 +1324,7 @@ function MobileMegaMenu({
   // }, [menuData]);
 
   const [propertyFilter, setPropertyFilter] = useState<
-    "all" | "off-plan" | "ready" | null
+    "all" | "off-plan" | "completed" | null
   >("all");
 
   useEffect(() => {
@@ -1338,7 +1338,7 @@ function MobileMegaMenu({
           href: `/properties/${property.property_slug}`,
 
           // RANDOM TEMP STATUS
-          status: index % 2 === 0 ? "off-plan" : "ready",
+          status: property.property_status,
         })) || [];
 
       const filteredProperties =
@@ -1675,7 +1675,7 @@ function MobileMegaMenu({
                   )}
                 </div>
 
-                {hasChildren && (
+                {(
                   <AnimatePresence initial={false}>
                     {isExpanded && (
                       <motion.div
@@ -1690,8 +1690,8 @@ function MobileMegaMenu({
                            (<div className="flex gap-6 py-[7px] pl-3">
                             {[
                               { label: "ALL", value: "all" },
-                              { label: "OFF PLAN", value: "off-plan" },
-                              { label: "COMPLETED", value: "ready" },
+                              { label: "OFF PLAN", value: "Off Plan" },
+                              { label: "COMPLETED", value: "Completed" },
                             ].map((filter) => {
                               const isActive = propertyFilter === filter.value;
 
@@ -1702,7 +1702,7 @@ function MobileMegaMenu({
                                     setPropertyFilter(
                                       isActive
                                         ? null
-                                        : (filter.value as "off-plan" | "ready")
+                                        : (filter.value as "off-plan" | "completed")
                                     )
                                   }
                                   className={`
@@ -1858,12 +1858,13 @@ function DesktopMegaMenu({
   // }, [menuData]);
 
   const [propertyFilter, setPropertyFilter] = useState<
-    "all" | "off-plan" | "ready" | null
+    "all" | "off-plan" | "completed" | null
   >("all");
 
   useEffect(() => {
     if (!menuData) return;
 
+    console.log(propertyFilter)
     const formattedProperties = menuData?.map((community: any) => {
       const relatedProperties =
         community.related_property?.map((property: any, index: number) => ({
@@ -1872,7 +1873,7 @@ function DesktopMegaMenu({
           href: `/properties/${property.property_slug}`,
 
           // RANDOM TEMP STATUS
-          status: index % 2 === 0 ? "off-plan" : "ready",
+          status: property.property_status,
         })) || [];
 
       const filteredProperties =
@@ -1894,11 +1895,11 @@ function DesktopMegaMenu({
           filteredProperties.length > 0
             ? [
               ...filteredProperties,
-              {
-                id: `${community.community_slug}-view-community`,
-                label: "View Community",
-                href: `/communities/${community.community_slug}`,
-              },
+              // {
+              //   id: `${community.community_slug}-view-community`,
+              //   label: "View Community",
+              //   href: `/communities/${community.community_slug}`,
+              // },
             ]
             : [],
       };
@@ -1923,6 +1924,10 @@ function DesktopMegaMenu({
       ],
     }));
   }, [menuData, propertyFilter]);
+
+  const activeCommunityHref = activeCategory
+  ? `/communities/${activeCategory}`
+  : undefined;
 
   useEffect(() => {
     mounted.current = true;
@@ -1969,6 +1974,15 @@ function DesktopMegaMenu({
   useEffect(() => {
   setPropertyFilter("all");
 }, [activeCategory]);
+
+
+const childrenScrollRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (childrenScrollRef.current) {
+    childrenScrollRef.current.scrollTop = 0;
+  }
+}, [propertyFilter]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden z-1000 bg-white flex-col hidden md:flex">
@@ -2274,13 +2288,13 @@ function DesktopMegaMenu({
 
             {/* SECOND COLUMN */}
             <div>
-              {activeMenu.id === "properties" &&
-                activeChildren.length > 0 && (
+              {activeMenu.id === "properties" && activeCategory &&
+                 (
                   <div className="flex gap-6 mb-6 border-b border-white/20">
                     {[
                       { label: "ALL", value: "all" },
-                      { label: "OFF PLAN", value: "off-plan" },
-                      { label: "COMPLETED", value: "ready" },
+                      { label: "OFF PLAN", value: "Off Plan" },
+                      { label: "COMPLETED", value: "Completed" },
                     ].map((filter) => {
                       const isActive = propertyFilter === filter.value;
 
@@ -2291,7 +2305,7 @@ function DesktopMegaMenu({
                             setPropertyFilter(
                               isActive
                                 ? null
-                                : (filter.value as "off-plan" | "ready")
+                                : (filter.value as "off-plan" | "completed")
                             )
                           }
                           className={`
@@ -2321,7 +2335,8 @@ function DesktopMegaMenu({
                     })}
                   </div>
                 )}
-              <div onWheel={(e) => e.stopPropagation()} className="min-w-[250px] text-white flex items-center max-h-[400px] overflow-y-auto menu-scrollbar pr-2 overflow-x-hidden">
+                <div className="flex flex-col gap-10">
+              <div ref={childrenScrollRef} onWheel={(e) => e.stopPropagation()} className={`min-w-[250px] text-white flex items-start max-h-[335px] overflow-y-auto menu-scrollbar pr-2 overflow-x-hidden`}>
                 <AnimatePresence mode="wait">
                   {activeChildren.length > 0 && (
                     <motion.div
@@ -2349,6 +2364,16 @@ function DesktopMegaMenu({
                   )}
                 </AnimatePresence>
               </div>
+              
+              {activeCategory && <Link href={activeCommunityHref || ""} className="">
+              <CustomOutlineButton
+                        text={"View Community"}
+                        borderColor="border-white"
+                        textColor="text-white"
+                        px="px-[18px] sm:px-[20px] md:px-[36px] h-[44px] md:h-[50px] xl:h-[66px] !leading-[1.58]"
+                      />
+                      </Link>}
+                      </div>
             </div>
           </div>
 
