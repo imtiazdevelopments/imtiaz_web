@@ -5,6 +5,7 @@ export async function submitOnboardingLead(payload: {
   mobile: string;
   message?: string;
   utm: Record<string, string>;
+  landingPageName:string;
 }) {
   // Fetch geo
   let geo: Record<string, string> = {};
@@ -30,7 +31,7 @@ export async function submitOnboardingLead(payload: {
       ...payload,
       ...payload.utm,
       ...geo,
-      landingPageName: "onboarding",
+      landingPageName: payload.landingPageName || "onboarding",
       website_url: sessionStorage.getItem("landingUrl") || window.location.href,
     }),
   });

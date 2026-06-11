@@ -189,6 +189,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
         mobile: `${data.countryCode}${data.phone}`,
         message: `${data.message}`,
         utm: buildUtmPayload(),
+        landingPageName:"enquiry"
       });
       if (result.success) {
         setSubmitSuccess(true);
@@ -214,6 +215,7 @@ export default function EnquiryForm({ onClose, onSwitch }: CareerFormProps) {
         mobile: "",
         message: `[Book a Viewing] Requested: ${data.appointmentDateTime} - ${data.message}`,
         utm: buildUtmPayload(),
+        landingPageName:"book-a-veiwing"
       });
       if (result.success) setSubmitSuccess(true);
       else setSubmitError("Submission failed. Please try again.");
