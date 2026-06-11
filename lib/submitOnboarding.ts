@@ -32,7 +32,7 @@ export async function submitOnboardingLead(payload: {
       ...payload.utm,
       ...geo,
       landingPageName: payload.landingPageName || "onboarding",
-      website_url: sessionStorage.getItem("landingUrl") || window.location.href,
+      website_url: window.location.href,
     }),
   });
 
