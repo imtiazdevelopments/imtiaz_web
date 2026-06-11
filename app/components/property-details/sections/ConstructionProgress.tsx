@@ -345,6 +345,7 @@ interface Props {
   percent4_label: string;
   construction_button_text: string;
   construction_button_url: string;
+  slug:string;
 }
 
 function CircularProgress({
@@ -436,7 +437,8 @@ export default function WynwoodProgress({
   percent4,
   percent4_label,
   construction_button_text,
-  construction_button_url
+  construction_button_url,
+  slug
 }: Props) {
   const [circleSize, setCircleSize] = useState(203);
   const [strokeWidth, setStrokeWidth] = useState(15);
@@ -619,7 +621,7 @@ export default function WynwoodProgress({
               viewport={{ once: true }}
               className="mt-[10px]"
             >
-              <Link href={construction_button_url || "#"}>
+              <Link href={`/construction-progress-listing/${slug}` || "#"}>
                 <CustomOutlineButton
                   className="w-fit  mx-auto 2xl:!px-[57.1px] 2xl:!py-[22.5px] px-[30px] h-[44px] md:h-[50px]  xl:h-[66px] "
                   text={construction_button_text || "Construction Updates"}

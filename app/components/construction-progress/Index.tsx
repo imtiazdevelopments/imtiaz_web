@@ -2,24 +2,23 @@ import EventHero from "./sections/EventHero";
 import ConstructionProgress from "./sections/ConstructionProgress";
 
 const Index = ({data}:{data:any}) => {
-  console.log(data)
 
-  const transformedData = Object.entries(data.gallery).map(
-  ([year, monthsObj]) => ({
+const transformedData = Object.entries(data?.gallery || {})
+  .sort(([a], [b]) => Number(b) - Number(a)) // newest year first
+  .map(([year, months]) => ({
     year,
-    months: Object.entries(monthsObj as Record<string, any[]>).map(
-      ([monthName, images]) => ({
-        month: monthName,
-        date: `${monthName.toUpperCase()} ${year}`,
+    months: Object.entries(months as Record<string, any[]>).map(
+      ([month, images]) => ({
+        month,
+        date: `${month.toUpperCase()} ${year}`,
         location: data.page_banner_title,
         images: images.map((img) => ({
           src: img.image_url,
-          alt: img.caption || `${monthName} ${year}`,
+          alt: img.caption || `${month} ${year}`,
         })),
       })
     ),
-  })
-);
+  }));
 
   return (
     <>
