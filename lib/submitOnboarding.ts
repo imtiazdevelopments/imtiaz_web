@@ -38,3 +38,4 @@ export async function submitOnboardingLead(payload: {
 
   return res.json();
 }
+
