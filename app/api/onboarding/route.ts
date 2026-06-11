@@ -33,26 +33,25 @@ export async function POST(req: NextRequest) {
 
   console.log(payload);
 
-  return;
-  
+  const muleRes = await fetch(
+    "https://iz-lead-integration-api-j23hh6.gi3bpb.deu-c1.eu1.cloudhub.io/api/form-integration",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        client_id:     process.env.MULE_CLIENT_ID!,
+        client_secret: process.env.MULE_CLIENT_SECRET!,
+      },
+      body: JSON.stringify(payload),
+    }
+  );
 
-//   const muleRes = await fetch(
-//     "https://iz-lead-integration-api-j23hh6.gi3bpb.deu-c1.eu1.cloudhub.io/api/form-integration",
-//     {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         client_id:     process.env.MULE_CLIENT_ID!,
-//         client_secret: process.env.MULE_CLIENT_SECRET!,
-//       },
-//       body: JSON.stringify(payload),
-//     }
-//   );
+  const muleData = await muleRes.json().catch(() => ({}));
 
-//   const muleData = await muleRes.json().catch(() => ({}));
+  console.log("send message")
 
-//   return NextResponse.json(
-//     { success: muleRes.ok, mule_response: muleData },
-//     { status: muleRes.status }
-//   );
+  return NextResponse.json(
+    { success: muleRes.ok, mule_response: muleData },
+    { status: muleRes.status }
+  );
 }
