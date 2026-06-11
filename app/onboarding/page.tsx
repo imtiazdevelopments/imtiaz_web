@@ -318,6 +318,7 @@ function OnboardingPageInner() {
     }
   };
 
+
   return (
     <OnboardingIndex
       tab={tab}
