@@ -2,20 +2,21 @@
 
 import { useMemo, useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation"; 
-import { offPlanProperties } from "../data"; 
+// import { offPlanProperties } from "../data"; 
 import Cardconstruction from "../../common/Cardconstruction";
 import { motion } from "framer-motion"; 
 import { moveUp, moveUpV2 } from "../../motionVariants";
 import Pagination from "../../common/Pagination";  
 import Reveal from "../../animations/RevealOneByOneAnimation";
 import { useLenis } from "@/app/contexts/LenisContext";
+import { Property } from "../data";
 
 // Derive itemsPerPage from window width — no state, no spurious re-renders
 const getItemsPerPage = () =>
   typeof window !== "undefined" && window.innerWidth >= 1600 ? 8 : 6;
 
 // ── Main Content Component ─────────────────────────────────────────────────
-const MainContent = () => {
+const MainContent = ({data}:any) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams(); 
@@ -118,7 +119,7 @@ const MainContent = () => {
 
   const sorted = useMemo(
     () =>
-      [...offPlanProperties].sort(
+      [...data].sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       ),
     [],
@@ -144,7 +145,7 @@ const MainContent = () => {
           <div className="project-card-grid">
             {paginated.map((project, i) => (
               <Reveal variants={moveUpV2} key={i} delayRange={i * 0.11}>
-                <Cardconstruction {...project} />
+                <Cardconstruction image={project.featured_image_desktop} {...project} />
               </Reveal>
             ))}
           </div> 
@@ -188,10 +189,10 @@ const LoadingFallback = () => (
 );
 
 // ── Main Component with Suspense ───────────────────────────────────────────
-const Main = () => {
+const Main = ({data}:{data:Property[]}) => {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <MainContent />
+      <MainContent data={data}/>
     </Suspense>
   );
 };

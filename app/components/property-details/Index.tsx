@@ -17,9 +17,11 @@ import { PropertiesPageData } from "../property/data";
 const Index = ({
   data,
   allPropertyData,
+  slug
 }: {
   data: PropertyDetailsData;
   allPropertyData: PropertiesPageData;
+  slug:string;
 }) => {
   const everythingWithinData = {
     title: data?.reach_title,
@@ -72,6 +74,7 @@ const Index = ({
         percent4_label={data?.percent4_label}
         construction_button_text={data?.construction_button_text}
         construction_button_url={data?.construction_button_url}
+        slug={slug}
       />}
       {data.show_reach_section && <IconGrid data={everythingWithinData} />}
       {data.show_gallery_section && <GallerySlider data={data?.gallery} />}

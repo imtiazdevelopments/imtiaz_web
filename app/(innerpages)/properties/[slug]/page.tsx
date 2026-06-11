@@ -18,7 +18,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
-      <Index data={data.data} allPropertyData={allPropertyData.data}/>
+      <Index data={data.data} allPropertyData={allPropertyData.data} slug={slug}/>
     </>
   )
 }

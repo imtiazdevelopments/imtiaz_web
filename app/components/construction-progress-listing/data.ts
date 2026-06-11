@@ -1,3 +1,37 @@
+export interface Property {
+  slug: string;
+  brand_logo: string;
+  title: string;
+  featured_image_desktop: string;
+  featured_image_mobile: string;
+  featured_image_alt: string;
+  property_caption: string;
+  property_location: string;
+  property_latitude: string;
+  property_longitude: string;
+}
+
+export interface ConstructionProgressData {
+  meta_title: string;
+  meta_description: string | null;
+  page_banner_title: string;
+  page_banner_caption: string;
+  page_banner_desktop: string;
+  page_banner_mobile: string;
+  page_title: string;
+  page_caption: string;
+  listing: Property[];
+}
+
+export interface ConstructionProgressListingResponse {
+  status: string;
+  language: string;
+  code: number;
+  message: string;
+  data: ConstructionProgressData;
+}
+
+
 export const bannerData = {
   image: "/images/construction-progress/bannerprogress.jpg",
   title: "construction progress",
