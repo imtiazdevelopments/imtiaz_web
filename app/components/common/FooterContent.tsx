@@ -24,7 +24,7 @@ const FooterContent = ({
 }) => {
   return (
     <section
-      className="w-full bg-white pt-[20px] md:pt-70 pb-[20px] md:pb-70 overflow-hidden"
+      className="w-full bg-white pt-[70px] pb-[20px] md:pb-70 overflow-hidden"
       data-header="dark"
     >
       <div className="container container-spacing-details-page">
