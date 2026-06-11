@@ -22,7 +22,6 @@ export async function submitOnboardingLead(payload: {
     };
   } catch {}
 
-  console.log(payload,geo)
 
   const res = await fetch("/api/onboarding", {
     method: "POST",

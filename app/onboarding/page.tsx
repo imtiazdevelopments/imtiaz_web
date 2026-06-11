@@ -255,7 +255,6 @@ function OnboardingPageInner() {
 
 
   const handleAgencySubmit = async () => {
-    console.log("callllelelelelele")
     const company = agencyFormData.company;
     const signatory = agencyFormData.signatory;
 
@@ -336,7 +335,7 @@ function OnboardingPageInner() {
       onIndividualFormDataChange={handleIndividualFormDataChange}
       submitLoading={submitLoading}
       submitError={submitError}
-      onAgencySubmit={handleAgencySubmit}       // replaces console.log in PreviewSubmit
+      onAgencySubmit={()=>console.log("Submitted")}       // replaces console.log in PreviewSubmit
       onIndividualSubmit={handleIndividualSubmit}
     />
   );
