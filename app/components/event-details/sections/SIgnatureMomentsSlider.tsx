@@ -104,12 +104,8 @@ const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_des
             effect="fade"
             fadeEffect={{ crossFade: true }}
             speed={500}
-            loop={true}
-            autoplay={{
-              delay: 4500,
-              disableOnInteraction: false,
-              waitForTransition: false, // ← key fix
-            }}
+            loop={images.length > 1}
+            autoplay={images.length > 1 ? { delay: 4500, disableOnInteraction: false, waitForTransition: false } : false}
             onSwiper={handleSwiper}
             onSlideChange={(swiper) => {
               setActiveIndex(swiper.realIndex);
@@ -162,7 +158,7 @@ const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_des
         />
 
         {/* prev button — z-30 above gradient, pointer-events-auto */}
-        <motion.div
+        {images.length > 1 &&<motion.div
           variants={moveUp(0.2)}
           initial="hidden"
           whileInView="show"
@@ -182,10 +178,10 @@ const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_des
               className="relative z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
-        </motion.div>
+        </motion.div>}
 
         {/* next button — z-30 above gradient, pointer-events-auto */}
-        <motion.div
+        {images.length > 0 && <motion.div
           variants={moveUp(0.3)}
           initial="hidden"
           whileInView="show"
@@ -205,10 +201,10 @@ const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_des
               className="relative rotate-180 z-10 object-contain 3xl:w-[28px] 3xl:h-[28px] lg:w-[22px] lg:h-[22px] w-[20px] h-[20px] invert brightness-0 group-hover:invert-0 group-hover:brightness-100 transition-all duration-300"
             />
           </button>
-        </motion.div>
+        </motion.div>}
 
         {/* dots — z-30, pointer-events-auto */}
-        <div className="absolute bottom-120 3xl:bottom-130 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center justify-center gap-3">
+        {images.length > 1 && <div className="absolute bottom-120 3xl:bottom-130 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center justify-center gap-3">
           {images.map((_, i) => (
             <button
               key={i}
@@ -218,7 +214,7 @@ const SignatureMomentsSlider = ({ images, title }: { images: {featured_image_des
               }`}
             />
           ))}
-        </div>
+        </div>}
       </div>
     </section>
   );
