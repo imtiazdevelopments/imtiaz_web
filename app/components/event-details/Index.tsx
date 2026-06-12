@@ -10,7 +10,7 @@ const Index = ({data,allEventsData}:{data:EventDetailData,allEventsData:EventLis
     <>
       <EventHero event={data} />
       <EventContent content={data?.description} />
-      <SignatureMomentsSlider images={data?.gallery} title={data?.gallery_title}/>
+      {data.gallery && <SignatureMomentsSlider images={data?.gallery} title={data?.gallery_title}/>}
       <OtherEvents data={allEventsData}/>
     </>
   );
