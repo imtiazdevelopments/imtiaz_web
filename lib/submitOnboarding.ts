@@ -5,6 +5,7 @@ export async function submitOnboardingLead(payload: {
   mobile: string;
   message?: string;
   utm: Record<string, string>;
+  landingPageName:string;
 }) {
   // Fetch geo
   let geo: Record<string, string> = {};
@@ -22,7 +23,6 @@ export async function submitOnboardingLead(payload: {
     };
   } catch {}
 
-  console.log(payload,geo)
 
   const res = await fetch("/api/onboarding", {
     method: "POST",
@@ -31,10 +31,11 @@ export async function submitOnboardingLead(payload: {
       ...payload,
       ...payload.utm,
       ...geo,
-      landingPageName: "onboarding",
-      website_url: sessionStorage.getItem("landingUrl") || window.location.href,
+      landingPageName: payload.landingPageName || "onboarding",
+      website_url: window.location.href,
     }),
   });
 
   return res.json();
 }
+

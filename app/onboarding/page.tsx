@@ -255,7 +255,6 @@ function OnboardingPageInner() {
 
 
   const handleAgencySubmit = async () => {
-    console.log("callllelelelelele")
     const company = agencyFormData.company;
     const signatory = agencyFormData.signatory;
 
@@ -273,6 +272,7 @@ function OnboardingPageInner() {
         mobile: company.agencyPhone || "",
         message: `Agency onboarding: ${company.agencyName}`,
         utm: buildUtmPayload(),
+        landingPageName:"onboarding"
       });
 
       if (result.success) {
@@ -297,12 +297,13 @@ function OnboardingPageInner() {
 
     try {
       const result = await submitOnboardingLead({
-        firstName: agentDetails.ownerFirstName || "",
-        lastName: agentDetails.ownerLastName || "",
-        email: agentDetails.ownerEmail || "",
-        mobile: agentDetails.ownerMobile || "",
+        firstName: agentDetails?.ownerFirstName || "",
+        lastName: agentDetails?.ownerLastName || "",
+        email: agentDetails?.ownerEmail || "",
+        mobile: agentDetails?.ownerMobile || "",
         message: "Individual agent onboarding",
         utm: buildUtmPayload(),
+        landingPageName:"onboarding"
       });
 
       if (result.success) {
@@ -316,6 +317,7 @@ function OnboardingPageInner() {
       setSubmitLoading(false);
     }
   };
+
 
   return (
     <OnboardingIndex
@@ -336,8 +338,8 @@ function OnboardingPageInner() {
       onIndividualFormDataChange={handleIndividualFormDataChange}
       submitLoading={submitLoading}
       submitError={submitError}
-      onAgencySubmit={handleAgencySubmit}       // replaces console.log in PreviewSubmit
-      onIndividualSubmit={handleIndividualSubmit}
+      onAgencySubmit={()=>console.log("Submitted")}       // replaces console.log in PreviewSubmit
+      onIndividualSubmit={()=>console.log("Submitted")}
     />
   );
 }
