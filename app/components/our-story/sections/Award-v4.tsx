@@ -55,8 +55,9 @@ export default function AwardSection({
         <div className="relative z-10 flex flex-col items-center container pt-[50px] sm:pt-120 3xl:pt-130 mb-250 3xl:mb-[384px]">
           <SectionHeading
             title={title}
-            className="max-[640px]:font-normal max-w-[45ch] text-center min-[450px]:mb-20"
+            className="max-w-[45ch] text-center min-[450px]:mb-20"
           />
+          {/* <h2 className="text-heading text-center text-trim" dangerouslySetInnerHTML={{ __html: title }} /> */}
 
           {/* Divider line */}
           <motion.div
